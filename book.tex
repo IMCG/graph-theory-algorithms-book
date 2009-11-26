@@ -1,0 +1,81 @@
+%%-----------------------------------------------------------------------%%
+%%--- Preamble ----------------------------------------------------------%%
+
+\documentclass[a4paper,twoside,12pt]{book}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{paralist,graphicx}
+
+%% Customized corollary, lemma, theorem, etc. numbering
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+%% \newtheorem{example}{Example}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{Theorem}[section]
+
+%% Package for drawing figures
+\usepackage{pstricks,pst-node}
+\usepackage{tikz}
+\usetikzlibrary{calc,matrix,arrows,decorations.pathreplacing,%
+  decorations.pathmorphing}
+
+\usepackage{listings}
+% For typesetting code listings
+\lstset{language={},
+  keepspaces=true,
+  xleftmargin=5mm,
+  xrightmargin=5mm,
+  basicstyle=\ttfamily,
+  frame=single,
+  framesep=2mm,
+  framerule=0pt,
+  % frameround=tttt,
+  columns=flexible,
+  backgroundcolor=\color[gray]{0.9},
+  rulesepcolor=\color{black},
+  % numbers=left,
+  numberstyle=\footnotesize,
+  language=Pascal
+}
+
+%% Customized page geometry
+\textwidth=450pt
+\textheight=700pt
+\topmargin=-30pt
+\oddsidemargin=0.0pt
+\evensidemargin=0.0pt
+
+%% Format date in the form 12 March 2007, for example.
+\usepackage{datetime}
+\newdateformat{auDateFormat}{%
+  \twodigit{\THEDAY}~\monthname[\THEMONTH]~\THEYEAR
+}
+\auDateFormat
+
+
+%%-----------------------------------------------------------------------%%
+%%--- Document body -----------------------------------------------------%%
+
+\begin{document}
+
+\title{\Huge{\bf{Graph Theory with Sage}}}
+\author{\Large{Minh Van Nguyen}}
+\date{\today}
+\maketitle
+
+
+\frontmatter
+% Setting the TOC depth: only list chapter and sections
+\setcounter{tocdepth}{1}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+
+%% Main document body
+\input{tex/introduction.tex}
+
+\end{document}
