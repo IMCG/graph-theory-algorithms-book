@@ -12,8 +12,8 @@ all:
 #	make latex
 
 latex:
-	pdflatex $(FILE).tex
-	pdflatex $(FILE).tex
+	latex $(FILE).tex
+	latex $(FILE).tex
 #	latex $(FILE).tex
 
 pdf:
