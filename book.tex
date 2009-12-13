@@ -7,13 +7,12 @@
 \usepackage{paralist,graphicx}
 
 %% Customized corollary, lemma, theorem, etc. numbering
-\newtheorem{corollary}{Corollary}[section]
-\newtheorem{definition}{Definition}[section]
-%% \newtheorem{example}{Example}[section]
-\newtheorem{exercise}{Exercise}[section]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
 
 %% Package for drawing figures
 \usepackage{pstricks,pst-node}

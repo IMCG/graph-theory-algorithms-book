@@ -19,10 +19,11 @@ set. The cardinality of $V$ is called the \emph{order} of $G$, and
 $|E|$ is called the \emph{size} of $G$.
 \end{definition}
 
-If $(v_1, v_2) \in E$ is an edge of a graph $G = (V, E)$, we say that
-$v_1$ and $v_2$ are \emph{adjacent} vertices. For ease of notation, we
-write the edge $(v_1, v_2)$ as $v_1 v_2$. The edge $v_1 v_2$ is also
-said to be \emph{incident} with the vertices $v_1$ and $v_2$.
+One can label a graph by attaching labels to its vertices. If $(v_1,
+v_2) \in E$ is an edge of a graph $G = (V, E)$, we say that $v_1$ and
+$v_2$ are \emph{adjacent} vertices. For ease of notation, we write the
+edge $(v_1, v_2)$ as $v_1 v_2$. The edge $v_1 v_2$ is also said to be
+\emph{incident} with the vertices $v_1$ and $v_2$.
 
 \begin{figure}[!htbp]
 \centering
@@ -31,7 +32,7 @@ said to be \emph{incident} with the vertices $v_1$ and $v_2$.
   linedecorate/.style={-,thick}]
 % nodes or vertices
 \node (a) at (0,5) [nodedecorate] {};
-\node [right] at (a.east) {$a$};
+\node [above] at (a.north) {$a$};
 \node (b) at (2,3) [nodedecorate] {};
 \node [right] at (b.east) {$b$};
 \node (e) at (-2,3) [nodedecorate] {};
@@ -200,7 +201,7 @@ Figure~\ref{fig:introduction:directed_triangle_graph}.
 \node (b) at (2,0) [nodedecorate] {};
 \node [right] at (b.east) {$b$};
 \node (a) at (0,2) [nodedecorate] {};
-\node [right] at (a.east) {$a$};
+\node [above] at (a.north) {$a$};
 % edges or lines
 \path
 (a) edge[arrowdecorate] node {} (b)
@@ -282,6 +283,7 @@ Theorem~\ref{thm:introduction:degree_sum} and is captured in the
 following corollary.
 
 \begin{corollary}
+\label{cor:introduction:degree_sum_even}
 If $G$ is a graph, then its total number of degrees is non-negative
 and even.
 \end{corollary}
@@ -447,6 +449,10 @@ sage: g.shortest_path("g", "d")
 ['g', 'f', 'd']
 \end{lstlisting}
 \end{center}
+%
+This shows that $g, f, d$ is a shortest path from $g$ to $d$. In fact,
+any other $g$-$d$ path has length greater than $2$, so we can say that
+$g, f, d$ the shortest path between $g$ and $d$.
 \end{proof}
 
 
@@ -454,15 +460,18 @@ sage: g.shortest_path("g", "d")
 
 \subsection{Subgraphs, complete and bipartite graphs}
 
+\begin{definition}
 Let $G$ be a graph with vertex set $V(G)$ and edge set
 $E(G)$. Consider a graph $H$ such that $V(H) \subseteq V(G)$ and $E(H)
 \subseteq E(G)$. Furthermore, if $uv \in E(H)$ then $u,v \in
 V(H)$. Then $H$ is called a \emph{subgraph} of $G$ and $G$ is referred
-to as a \emph{supergraph} of $H$. Starting from $G$, one can obtain
-its subgraph $H$ by deleting edges and/or vertices from $G$. Note that
-when a vertex $v$ is removed from $G$, then all edges incident with
-$v$ are also removed. If $V(H) = V(G)$, then $H$ is called a
-\emph{spanning} subgraph of $G$. In
+to as a \emph{supergraph} of $H$.
+\end{definition}
+
+Starting from $G$, one can obtain its subgraph $H$ by deleting edges
+and/or vertices from $G$. Note that when a vertex $v$ is removed from
+$G$, then all edges incident with $v$ are also removed. If $V(H) =
+V(G)$, then $H$ is called a \emph{spanning} subgraph of $G$. In
 Figure~\ref{fig:introduction:star_subgraph}, let $G$ be the left-hand
 side graph and let $H$ be the right-hand side graph. Then it is clear
 that $H$ is a spanning subgraph of $G$. To obtain a spanning subgraph
@@ -756,11 +765,13 @@ $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
 \node (e) at (6.5,2.5) [nodedecorate] {};
 \node (f) at (6.5,1.5) [nodedecorate] {};
 \node (g) at (6.5,0.5) [nodedecorate] {};
+\node (h) at (6.5,0) [nodedecorate,color=white] {};
 % edges or lines
 \path
 (a) edge[linedecorate] node {} (e)
 (a) edge[linedecorate] node {} (f)
-(a) edge[linedecorate] node[below] {$K_{4,3}$} (g)
+(a) edge[linedecorate] node {} (g)
+(a) edge[linedecorate,color=white] node[below,color=black] {$K_{4,3}$} (h)
 (b) edge[linedecorate] node {} (e)
 (b) edge[linedecorate] node {} (f)
 (b) edge[linedecorate] node {} (g)
@@ -798,12 +809,14 @@ $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
 \node (c) at (14.5,2) [nodedecorate] {};
 \node (d) at (14.5,1) [nodedecorate] {};
 \node (e) at (14.5,0) [nodedecorate] {};
+\node (f) at (12,0) [nodedecorate,color=white] {};
 % edges or lines
 \path
 (a) edge[linedecorate] node {} (b)
 (a) edge[linedecorate] node {} (c)
 (a) edge[linedecorate] node {} (d)
-(a) edge[linedecorate] node[below] {$K_{1,4}$} (e);
+(a) edge[linedecorate] node {} (e)
+(f) edge[linedecorate,color=white] node[below,color=black] {$K_{1,4}$} (e);
 \end{tikzpicture}
 \caption{Bipartite, complete bipartite and star graphs.}
 \label{fig:introduction:bipartite_complete_bipartite_graphs}
@@ -814,6 +827,217 @@ $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
 %%--- Isomorphic graphs -------------------------------------------------%%
 
 \section{Isomorphic graphs}
+
+\begin{definition}
+\textbf{Isomorphic graphs.}
+Two graphs $G$ and $H$ are \emph{isomorphic} if there is a bijection
+$f: V(G) \longrightarrow V(H)$ such that whenever $uv \in E(G)$ then
+$f(u) f(v) \in E(H)$. The function $f$ is an \emph{isomorphism}
+between $G$ and $H$. Otherwise, $G$ and $H$ are non-isomorphic. If
+$G$ and $H$ are isomorphic, we write $G \cong H$.
+\end{definition}
+
+A graph $G$ is isomorphic to a graph $H$ if these two graphs can be
+labelled in such a way that if $u$ and $v$ are adjacent in $G$, then
+their counterparts in $V(H)$ are also adjacent in $H$. To determine
+whether or not two graphs are isomorphic is to determine if they are
+structurally equivalent. Graphs $G$ and $H$ may be drawn differently
+so that they seem different. However, if $G \cong H$ then the
+isomorphism $f: V(G) \longrightarrow V(H)$ shows that both of these
+graphs are fundamentally the same. In particular, the order and size
+of $G$ are equal to those of $H$, the isomorphism $f$ preserves
+adjacencies, and $\deg(v) = \deg(f(v))$ for all $v \in G$. Since $f$
+preserves adjacencies, then adjacencies along a given geodesic path
+are preserved as well. That is, if $v_1, v_2, v_3, \dots, v_k$ is a
+shortest path between $v_1, v_k \in V(G)$, then
+$f(v_1), f(v_2), f(v_3), \dots, f(v_k)$ is a geodesic path between
+$f(v_1), f(v_k) \in V(H)$.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%%% cycle graph C_6
+% nodes or vertices
+\node (a) at (0,0) [nodedecorate] {};
+\node [below] at (a.south) {$a$};
+\node (b) at (2,0) [nodedecorate] {};
+\node [below] at (b.south) {$b$};
+\node (c) at (-1,1.5) [nodedecorate] {};
+\node [left] at (c.west) {$c$};
+\node (d) at (3,1.5) [nodedecorate] {};
+\node [right] at (d.east) {$d$};
+\node (e) at (0,3) [nodedecorate] {};
+\node [above] at (e.north) {$e$};
+\node (f) at (2,3) [nodedecorate] {};
+\node [above] at (f.north) {$f$};
+% edges or lines
+\path
+(a) edge[linedecorate] node[below] {$C_6$} (b)
+(a) edge[linedecorate] node {} (c)
+(b) edge[linedecorate] node {} (d)
+(c) edge[linedecorate] node {} (e)
+(d) edge[linedecorate] node {} (f)
+(e) edge[linedecorate] node {} (f);
+%
+%%% graph G_1 that is isomorphic to C_6
+% nodes or vertices
+\node (1) at (4.5,3) [nodedecorate] {};
+\node [left] at (1.west) {$1$};
+\node (2) at (7,3) [nodedecorate] {};
+\node [right] at (2.east) {$2$};
+\node (3) at (4.5,1.5) [nodedecorate] {};
+\node [left] at (3.west) {$3$};
+\node (4) at (7,1.5) [nodedecorate] {};
+\node [right] at (4.east) {$4$};
+\node (5) at (4.5,0) [nodedecorate] {};
+\node [left] at (5.west) {$5$};
+\node (6) at (7,0) [nodedecorate] {};
+\node [right] at (6.east) {$6$};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (2)
+(3) edge[linedecorate] node {} (6)
+(5) edge[linedecorate] node {} (4)
+(5) edge[linedecorate] node[below] {$G_1$} (6);
+%
+%%% graph G_2 that is non-isomorphic to C_6
+% nodes or vertices
+\node (a) at (9.5,0) [nodedecorate] {};
+\node [below] at (a.south) {$a$};
+\node (b) at (11.5,0) [nodedecorate] {};
+\node [below] at (b.south) {$b$};
+\node (c) at (8.5,1.5) [nodedecorate] {};
+\node [left] at (c.west) {$c$};
+\node (d) at (12.5,1.5) [nodedecorate] {};
+\node [right] at (d.east) {$d$};
+\node (e) at (9.5,3) [nodedecorate] {};
+\node [above] at (e.north) {$e$};
+\node (f) at (11.5,3) [nodedecorate] {};
+\node [above] at (f.north) {$f$};
+% edges or lines
+\path
+(a) edge[linedecorate] node {} (d)
+(a) edge[linedecorate] node {} (e)
+(b) edge[linedecorate] node {} (c)
+(b) edge[linedecorate] node {} (f)
+(c) edge[linedecorate] node {} (f)
+(d) edge[linedecorate] node {} (e)
+(a) edge[linedecorate,color=white] node[below,color=black] {$G_2$} (b);
+\end{tikzpicture}
+\caption{Isomorphic and non-isomorphic graphs.}
+\label{fig:introduction:isomorphic_graphs}
+\end{figure}
+
+\begin{exercise}
+Consider the graphs in
+Figure~\ref{fig:introduction:isomorphic_graphs}. Which pair of graphs
+are isomorphic, and which two graphs are non-isomorphic?
+\end{exercise}
+
+\begin{proof}[Solution]
+If \verb!G! is a Sage graph, one can use the method
+\verb!G.is_isomorphic()! to determine whether or not the graph
+\verb!G! is isomorphic to another graph. The following Sage session
+illustrates how to use \verb!G.is_isomorphic()!.
+%
+\begin{center}
+\fontsize{10pt}{10pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: C6 = Graph({"a": ["b", "c"], "b": ["a", "d"], "c": ["a", "e"], \
+....: "d": ["b", "f"], "e": ["c", "f"], "f": ["d", "e"]})
+sage: G1 = Graph({1: [2, 4], 2: [1, 3], 3: [2, 6], 4: [1, 5], \
+....: 5: [4, 6], 6: [3, 5]})
+sage: G2 = Graph({"a": ["d", "e"], "b": ["c", "f"], "c": ["b", "f"], \
+....: "d": ["a", "e"], "e": ["a", "d"], "f": ["b", "c"]})
+sage: C6.is_isomorphic(G1)
+True
+sage: C6.is_isomorphic(G2)
+False
+sage: G1.is_isomorphic(G2)
+False
+\end{lstlisting}
+\end{center}
+%
+Thus, for the graphs $C_6$, $G_1$ and $G_2$ in
+Figure~\ref{fig:introduction:isomorphic_graphs}, $C_6$ and $G_1$ are
+isomorphic, but $G_1$ and $G_2$ are not isomorphic.
+\end{proof}
+
+\begin{definition}
+\textbf{Degree sequence.}
+Let $G$ be a graph with $n$ vertices. The \emph{degree sequence} of
+$G$ is the ordered $n$-tuple of the vertex degrees of $G$ arranged in
+non-increasing order.
+\end{definition}
+
+The degree sequence of $G$ may contain the same degrees, repeated as
+often as they occur. For example, the degree sequence of $C_6$ is
+$2, 2, 2, 2, 2, 2$ and the degree sequence of the house graph in
+Figure~\ref{fig:introduction:house_graph} is $3, 3, 2, 2, 2$. If
+$n \geq 3$ then the cycle graph $C_n$ has the degree sequence
+\[
+\underbrace{2, 2, 2, \dots, 2}_{n \text{ copies of } 2}
+\]
+The path $P_n$, for $n \geq 3$, has the degree sequence
+\[
+\underbrace{2, 2, 2, \dots, 2, 1, 1}_{n - 2 \text{ copies of } 2}
+\]
+For positive integer values of $n$ and $m$, the complete graph $K_n$
+has the degree sequence
+\[
+\underbrace{n-1, n-1, n-1, \dots, n-1}_{n \text{ copies of } n-1}
+\]
+and the complete bipartite graph $K_{m,n}$ has the degree sequence
+\[
+\underbrace{n, n, n, \dots, n,}_{m \text{ copies of } n}
+\underbrace{m, m, m, \dots, m}_{n \text{ copies of } m}
+\]
+
+\begin{definition}
+\textbf{Graphical sequence.}
+Let $S$ be a non-increasing sequence of non-negative integers. Then
+$S$ is said to be \emph{graphical} if it is the degree sequence of
+some graph.
+\end{definition}
+
+Let $S = (d_i)_{i=1}^{n}$ be a graphical sequence, i.e. $d_i \geq d_j$
+for all $i \leq j$ such that $1 \leq i, j \leq n$. From
+Corollary~\ref{cor:introduction:degree_sum_even} we see that
+$\sum_{d_i \in S} d_i = 2k$ for some integer $k \geq 0$. In other
+words, the sum of a graphical sequence is non-negative and
+even.
+
+In some cases, one can distinguish non-isomorphic graphs by
+considering graph invariants. A \emph{graph invariant} of a graph $G$
+is a function defined on $G$ such that any graph isomorphic to $G$ has
+the same function value. For instance, the graphs $C_6$ and $G_1$ in
+Figure~\ref{fig:introduction:isomorphic_graphs} are isomorphic so they
+have the same number of vertices and edges. Also, $G_1$ and $G_2$ are
+non-isomorphic because the former is connected, while the latter is
+not connected. To prove that two graphs are non-isomorphic, one could
+show that they have different values for a given graph invariant. The
+following list contains some items to check off when showing that two
+graphs are non-isomorphic:
+
+\begin{enumerate}
+\item the number of vertices
+
+\item the number of edges
+
+\item the degree sequence
+
+\item the length of a geodesic path
+
+\item the length of the longest path
+
+\item the connectivity of a graph
+\end{enumerate}
 
 
 %%-----------------------------------------------------------------------%%
