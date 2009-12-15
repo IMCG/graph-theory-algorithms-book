@@ -161,6 +161,40 @@ sets are empty. This is a special graph known as an \emph{empty} or
 \emph{null} graph.
 \end{proof}
 
+\begin{exercise}
+Consider the illustration in
+Figure~\ref{fig:introduction:self_loop}. Does
+Figure~\ref{fig:introduction:self_loop} represent a graph? Why or why not?
+\end{exercise}
+
+\begin{proof}[Solution]
+If $V = \{ a, b, c \}$ and $E = \{ aa, bc \}$, it is clear that $E
+\subseteq V \times V$. Then $(V, E)$ is a graph. The edge $aa$ is
+called a \emph{self-loop} of the graph. In general, any edge of the
+form $vv$ is a self-loop.
+\end{proof}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={-,thick}]
+% nodes or vertices
+\node (c) at (-2,0) [nodedecorate] {};
+\node [left] at (c.west) {$c$};
+\node (b) at (2,0) [nodedecorate] {};
+\node [right] at (b.east) {$b$};
+\node (a) at (0,2) [nodedecorate] {};
+\node [above] at (a.north) {$a$};
+% edges or lines
+\path
+(a) edge[arrowdecorate,loop below,min distance=10mm,out=310,in=230] node {} (a)
+(b) edge[arrowdecorate] node {} (c);
+\end{tikzpicture}
+\caption{A figure with a self-loop.}
+\label{fig:introduction:self_loop}
+\end{figure}
+
 In Figure~\ref{fig:introduction:house_graph}, the edges $ae$ and $ea$
 represent one and the same edge. If we do not consider the direction
 of the edges in the graph of
