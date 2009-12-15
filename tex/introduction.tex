@@ -1080,19 +1080,90 @@ graphs are non-isomorphic:
 
 
 %%-----------------------------------------------------------------------%%
-%%--- Graph operations --------------------------------------------------%%
+%%--- New graphs from old -----------------------------------------------%%
 
-\section{Graph operations}
+\section{New graphs from old}
+
+Operations on graph to obtain new graphs from old graphs. Such graph
+operations include:
+
+
+%%--- Union, intersection and join --------------------------------------%%
+
+\subsection{Union, intersection and join}
+
+\begin{itemize}
+\item wheel graphs
+
+\item sequential join
+\end{itemize}
+
+
+%%--- Edge or vertex deletion -------------------------------------------%%
+
+\subsection{Edge or vertex deletion}
+
+\begin{itemize}
+\item vertex-deletion subgraph
+
+\item edge-deletion subgraph
+
+\item vertex-cut, cut-vertex or cutpoint
+
+\item edge-cut, cut-edge or bridge
+\end{itemize}
+
+
+%%--- Complements -------------------------------------------------------%%
+
+\subsection{Complements}
+
+\begin{itemize}
+\item edge-complement or complement
+
+\item relative complement
+\end{itemize}
+
+\begin{theorem}
+The complement of a disconnected graph is connected.
+\end{theorem}
+
+\begin{theorem}
+If $G = (V, E)$ is self-complementary, then the order of $G$ is
+$|V| = 4k$ or $|V| = 4k + 1$ for some non-negative integer
+$k$. Furthermore, if $n = |V|$ is the order of $G$, then the size of
+$G$ is $|E| = n(n - 1) / 4$.
+\end{theorem}
+
+
+%%--- Cartesian product -------------------------------------------------%%
+
+\subsection{Cartesian product}
+
+\begin{itemize}
+\item hypercubes
+
+\item meshes
+
+\item circular ladders
+\end{itemize}
 
 
 %%-----------------------------------------------------------------------%%
-%%--- Graph searching ---------------------------------------------------%%
+%%--- Representing graphs as matrices -----------------------------------%%
 
-\section{Graph searching}
+\section{Representing graphs as matrices}
 
 \begin{itemize}
-\item algorithms for breadth-first and depth-first searchs. Explain
-  how these relate to determining a graph's connectivity.
+\item what's a matrix?
 
-\item algorithms for shortest paths.
+\item adjacency matrices for digraphs
+
+\item adjacency matrices for undirected graphs
 \end{itemize}
+
+\begin{theorem}
+Let $G$ be a graph of order $n$ and $\mathbf{A}$ the adjacency matrix
+of $G$. For each positive integer $k$, the $i$-$j$ entry of
+$\mathbf{A}^k$ counts the number of $v_i$-$v_j$ walks of length $k$.
+\end{theorem}
