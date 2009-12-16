@@ -4,7 +4,7 @@
 \documentclass[a4paper,twoside,12pt]{book}
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{paralist,graphicx}
+\usepackage{graphicx,url}
 
 %% Customized corollary, lemma, theorem, etc. numbering
 \newtheorem{theorem}{Theorem}[chapter]
@@ -53,18 +53,30 @@
 }
 \auDateFormat
 
+% Custom commands and shortcuts
+% the latest version of this document
+\newcommand{\documentEdition}{0.1}
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Document body -----------------------------------------------------%%
 
 \begin{document}
 
-\title{\Huge{\bf{Algorithmic Graph Theory \\
-      Using Sage}}}
+\title{\Huge{\bf{Algorithmic Graph Theory}}}
 \author{\Large{Minh Van Nguyen}}
-\date{\today}
+\date{Version~\documentEdition}
 \maketitle
 
+
+%% Copyright page
+
+{\thispagestyle{empty}
+  \input{tex/notice.tex} \\\\
+  \textbf{Edition} \\
+  Version~\documentEdition \\
+  \today
+}
 
 \frontmatter
 % Setting the TOC depth: only list chapter and sections
@@ -95,6 +107,11 @@
 
 \input{tex/random-graphs.tex}
 
+
+%% Appendices
+
+\appendix
+\input{tex/license-gfdl.tex}
 
 %% Back matter
 
