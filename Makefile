@@ -8,8 +8,8 @@ FILE = book
 
 all:
 	make latex
-#	bibtex $(FILE)
-#	make latex
+	bibtex $(FILE)
+	make latex
 
 latex:
 	latex $(FILE).tex
