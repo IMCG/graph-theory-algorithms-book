@@ -29,6 +29,7 @@ clean:
 	rm -rfv *.bbl
 	rm -rfv *.blg
 #	rm -rfv *.dvi
+	rm -rfv *.idx
 	rm -rfv *.lof
 	rm -rfv *.log
 	rm -rfv *.lot
