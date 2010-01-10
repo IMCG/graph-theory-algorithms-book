@@ -3,22 +3,22 @@
 
 \chapter{Introduction to Graph Theory}
 
+To paraphrase what Felix Klein said about curves,\footnote{
+``Everyone knows what a curve is, until he has studied enough
+mathematics to become confused through the countless number of
+possible exceptions.''}
+it is easy to define a graph until you realize the countless number of
+exceptions. There are directed graphs, weighted graphs, multi-graphs,
+simple graphs, and so on. Where do we begin?
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Graphs and digraphs -----------------------------------------------%%
 
-To paraphrase what Felix Klein said about curves\footnote{``Everyone
-  knows what a curve is, 
-until he has studied enough mathematics to become confused through 
-the countless number of possible exceptions.''  }, it is easy to 
-define a graph until you realize the countless number of exceptions.
-There are directed graphs, weighted graphs, multi-graphs, simple
-graphs, and so on. Where do we begin?
-
 \section{Graphs and digraphs}
 
-We start by calling a ``graph'' what some call an ``unweighted, undirected
-graph without multiple edges.''
+We start by calling a ``graph'' what some call an ``unweighted,
+undirected graph without multiple edges.''
 
 \begin{definition}
 \textbf{Graphs.}
@@ -323,33 +323,30 @@ Euler, counts the total number of degrees in any graph.
 
 \begin{theorem}
 \label{thm:introduction:degree_sum}
-\label{thrm:hand-shaking}
+\label{thm:introduction:hand_shaking}
 \textbf{Euler.}
 If $G = (V, E)$ is a graph, then $\sum_{v \in V} \deg(v) = 2 |E|$.
 \end{theorem}
 \index{hand-shaking lemma}
 
-This lemma is sometimes called the ``hand-shaking lemma,''
-due to its interpretation as in the following story.
-Suppose you go into a room. Suppose there are $n$ people in the
-room (including yourself) and some people shake hands with others and
-some don't. Create the graph with $n$ vertices, where 
-each vertex is associated with a different person.
-Draw an edge between two people if they shook hands.
-The degree of a vertex is the number of times that person has shaken
-hands (we asume that there are no multiple edges, i.e., that
-no two people shake hands twice). The theorem above simply says that
-the total number of hand shakes is even. This is ``obvious''
-when you look at it this way since each hand shake is 
-counted twice (A shaking B's hand is counted,
-B shaking A's hand, since the sum in the theorem is over all vertices).
-
-
+This lemma is sometimes called the ``hand-shaking lemma,'' due to its
+interpretation as in the following story. Suppose you go into a
+room. Suppose there are $n$ people in the room (including yourself)
+and some people shake hands with others and some do not. Create the
+graph with $n$ vertices, where each vertex is associated with a
+different person. Draw an edge between two people if they shook
+hands. The degree of a vertex is the number of times that person has
+shaken hands (we assume that there are no multiple edges, i.e. that no
+two people shake hands twice). The theorem above simply says that the
+total number of hand shakes is even. This is ``obvious'' when you look
+at it this way since each hand shake is counted twice ($A$ shaking
+$B$'s hand is counted, $B$ shaking $A$'s hand, since the sum in the
+theorem is over all vertices).
 
 \begin{proof}
 Each edge $e = v_1 v_2 \in E$ is incident with two vertices, so $e$ is
-counted twice towards the total sum of degrees. The first time, we count
-$e$ towards the degree of the vertex $v_1$, and the second time we
+counted twice towards the total sum of degrees. The first time, we
+count $e$ towards the degree of vertex $v_1$ and the second time we
 count $e$ towards the degree of $v_2$.
 \end{proof}
 
@@ -387,7 +384,7 @@ edges, then $m = rn / 2$.
 
 %%-----------------------------------------------------------------------%%
 
-\subsection{Walks, trails and paths}
+\subsection{Walks, trails, and paths}
 
 If $u$ and $v$ are two vertices in a graph $G$, a $u$-$v$ \emph{walk}
 is an alternating sequence of vertices and edges starting with $u$ and
@@ -538,19 +535,17 @@ sage: g.shortest_path("g", "d")
 %
 This shows that $g, f, d$ is a shortest path from $g$ to $d$. In fact,
 any other $g$-$d$ path has length greater than $2$, so we can say that
-$g, f, d$ the shortest path between $g$ and $d$.
+$g, f, d$ is the shortest path between $g$ and $d$.
 \end{proof}
 
-We will explain Dijstra's algorithm in chapter 2, which gives one of
-the best algorithms
-for finding shortest paths between two vertices in a connected graph. 
-What is very remarkable
-is that, at the present state of knowledge, finding the shortest path
-from a vertex $v$ to a {\it particular} (but arbitrarily given) 
-vertex $w$ appears to be as hard as 
-finding the shortest path from a vertex $v$ to {\it all} other
-vertices
-in the graph!
+We will explain Dijkstra's algorithm in
+Chapter~\ref{chap:graph_algorithms}, which gives one of the best
+algorithms for finding shortest paths between two vertices in a
+connected graph. What is very remarkable is that, at the present state
+of knowledge, finding the shortest path from a vertex $v$ to a
+\emph{particular} (but arbitrarily given) vertex $w$ appears to be as
+hard as finding the shortest path from a vertex $v$ to \emph{all}
+other vertices in the graph!
 
 
 %%-----------------------------------------------------------------------%%
@@ -925,16 +920,13 @@ $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
 \label{fig:introduction:bipartite_complete_bipartite_graphs}
 \end{figure}
 
-As an example of $K_{3,3}$, suppose that 
-there are $3$ boys and $3$ girls dancing in a room. 
-The boys and girls naturally partition the set of all people in the
-room. Construct a graph having $6$ vertices,
-each vertex corresponding to a person in the room,
-and draw an edge form one vertex to another if the two people dance
-together. If each girl dances three times, once with 
-with each of the three boys, then the resulting graph is $K_{3,3}$.
-
-
+As an example of $K_{3,3}$, suppose that there are $3$ boys and $3$
+girls dancing in a room. The boys and girls naturally partition the
+set of all people in the room. Construct a graph having $6$ vertices,
+each vertex corresponding to a person in the room, and draw an edge
+form one vertex to another if the two people dance together. If each
+girl dances three times, once with with each of the three boys, then
+the resulting graph is $K_{3,3}$.
 
 
 %%-----------------------------------------------------------------------%%
@@ -942,8 +934,8 @@ with each of the three boys, then the resulting graph is $K_{3,3}$.
 
 \section{Isomorphic graphs}
 
-Determining whether or not two graphs are, in some sense,
-the ``same'' is a hard but important problem.
+Determining whether or not two graphs are, in some sense, the ``same''
+is a hard but important problem.
 
 \begin{definition}
 \textbf{Isomorphic graphs.}
@@ -971,7 +963,7 @@ shortest path between $v_1, v_k \in V(G)$, then
 $f(v_1), f(v_2), f(v_3), \dots, f(v_k)$ is a geodesic path between
 $f(v_1), f(v_k) \in V(H)$.
 
-%% Hopefully later we can discuss ``canonical labeling'' 
+%% Hopefully later we can discuss ``canonical labeling''
 %% and how that gives rise to isomorphism/automorphism
 %% testing methods???
 
@@ -1131,10 +1123,10 @@ some graph.
 \index{degree sequence!graphical}
 
 %% Should this be in another subsection?
-%% Should we mention the work of Erd\"os-Gallai and 
+%% Should we mention the work of Erd\"os-Gallai and
 %% Havel-Hakimi?
 %% Should we give examples of how NetworkX can
-%% take a graphical degree sequence and construct a 
+%% take a graphical degree sequence and construct a
 %% graph having those degrees?
 %% In the bipartite graph case, the Gale-Ryser theorem does this
 %% already (I think) and Sage almost has this implemented (that
@@ -1252,16 +1244,15 @@ $G$ is $|E| = n(n - 1) / 4$.
 
 \section{Representing graphs as matrices}
 
-Representing a graph as a matrix is very ineffiecient in some cases,
-and not so in other cases. For example, if you walk into a large 
-room full of people and you consider the ``hand-shaking graph'' that
-we discuessed in connection with Theorem \ref{thrm:hand-shaking}.
-If not many people shake hands in the room, then it is a waste of time
-to have to record all the hand-shakes and alsoo all the
-``non-hand-shakes''. The is basically what the adjacency matrix does.
-In this situation, it would be much easier to simply record
-the hand-shakes as a Python dictionary.
-
+Representing a graph as a matrix is very ineffiecient in some cases
+and not so in other cases. For example, if you walk into a large room
+full of people and you consider the ``hand-shaking graph'' that we
+discussed in connection with
+Theorem~\ref{thm:introduction:hand_shaking}. If not many people shake
+hands in the room, then it is a waste of time to have to record all
+the hand-shakes and also all the ``non-hand-shakes.'' This is
+basically what the adjacency matrix does. In this situation, it would
+be much easier to simply record the hand-shakes as a Python dictionary.
 
 \begin{itemize}
 \item what's a matrix?
