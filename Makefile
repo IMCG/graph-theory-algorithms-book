@@ -8,6 +8,7 @@ FILE = book
 
 all:
 	make latex
+	makeindex $(FILE)
 	bibtex $(FILE)
 	make latex
 
@@ -30,6 +31,8 @@ clean:
 	rm -rfv *.blg
 #	rm -rfv *.dvi
 	rm -rfv *.idx
+	rm -rfv *.ilg
+	rm -rfv *.ind
 	rm -rfv *.lof
 	rm -rfv *.log
 	rm -rfv *.lot
