@@ -5,6 +5,7 @@
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx,url}
+\usepackage{makeidx}  
 
 %% Customized corollary, lemma, theorem, etc. numbering
 \newtheorem{theorem}{Theorem}[chapter]
@@ -60,6 +61,7 @@
 
 %%-----------------------------------------------------------------------%%
 %%--- Document body -----------------------------------------------------%%
+\makeindex
 
 \begin{document}
 
@@ -118,5 +120,6 @@
 \backmatter
 \bibliographystyle{bibliography.bst}
 \bibliography{bibliography.bib}
+\printindex
 
 \end{document}

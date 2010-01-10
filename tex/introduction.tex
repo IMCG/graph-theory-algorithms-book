@@ -7,7 +7,18 @@
 %%-----------------------------------------------------------------------%%
 %%--- Graphs and digraphs -----------------------------------------------%%
 
+To paraphrase what Felix Klein said about curves\footnote{``Everyone
+  knows what a curve is, 
+until he has studied enough mathematics to become confused through 
+the countless number of possible exceptions.''  }, it is easy to 
+define a graph until you realize the countless number of exceptions.
+There are directed graphs, weighted graphs, multi-graphs, simple
+graphs, and so on. Where do we begin?
+
 \section{Graphs and digraphs}
+
+We start by calling a ``graph'' what some call an ``unweighted, undirected
+graph without multiple edges.''
 
 \begin{definition}
 \textbf{Graphs.}
@@ -18,12 +29,17 @@ refer to $V$ as the vertex set of $G$, with $E$ being the edge
 set. The cardinality of $V$ is called the \emph{order} of $G$, and
 $|E|$ is called the \emph{size} of $G$.
 \end{definition}
+\index{graph}
+\index{vertices}
+\index{edges}
 
 One can label a graph by attaching labels to its vertices. If $(v_1,
 v_2) \in E$ is an edge of a graph $G = (V, E)$, we say that $v_1$ and
 $v_2$ are \emph{adjacent} vertices. For ease of notation, we write the
 edge $(v_1, v_2)$ as $v_1 v_2$. The edge $v_1 v_2$ is also said to be
 \emph{incident} with the vertices $v_1$ and $v_2$.
+\index{edges!incident}
+\index{vertices!adjacent}
 
 \begin{figure}[!htbp]
 \centering
@@ -213,6 +229,8 @@ designated as the tail vertex. A directed edge is said to be directed
 from its tail to its head. A \emph{directed graph} or \emph{digraph} is
 a graph such that each of whose edges is directed.
 \end{definition}
+\index{graphs!directed}
+\index{digraph}
 
 It is important to distinguish a graph $G$ as being directed or
 undirected. If $G$ is undirected and $uv \in E(G)$, then $uv$ and $vu$
@@ -270,6 +288,8 @@ Figure~\ref{fig:introduction:house_graph} then we have $\delta(G) = 2$
 and $\Delta(G) = 3$. In the following Sage session, we construct the
 digraph in Figure~\ref{fig:introduction:directed_triangle_graph} and
 computes its maximum and minimum number of degrees.
+\index{degree of a vertex}
+
 %
 \begin{center}
 \fontsize{10pt}{10pt}
@@ -299,12 +319,32 @@ property are referred to as \emph{regular}. An $r$-\emph{regular}
 graph is a regular graph each of whose vertices has degree $r$. For
 instance, $G$ is a $2$-regular graph. The following result, due to
 Euler, counts the total number of degrees in any graph.
+\index{graphs!regular}
 
 \begin{theorem}
 \label{thm:introduction:degree_sum}
+\label{thrm:hand-shaking}
 \textbf{Euler.}
 If $G = (V, E)$ is a graph, then $\sum_{v \in V} \deg(v) = 2 |E|$.
 \end{theorem}
+\index{hand-shaking lemma}
+
+This lemma is sometimes called the ``hand-shaking lemma,''
+due to its interpretation as in the following story.
+Suppose you go into a room. Suppose there are $n$ people in the
+room (including yourself) and some people shake hands with others and
+some don't. Create the graph with $n$ vertices, where 
+each vertex is associated with a different person.
+Draw an edge between two people if they shook hands.
+The degree of a vertex is the number of times that person has shaken
+hands (we asume that there are no multiple edges, i.e., that
+no two people shake hands twice). The theorem above simply says that
+the total number of hand shakes is even. This is ``obvious''
+when you look at it this way since each hand shake is 
+counted twice (A shaking B's hand is counted,
+B shaking A's hand, since the sum in the theorem is over all vertices).
+
+
 
 \begin{proof}
 Each edge $e = v_1 v_2 \in E$ is incident with two vertices, so $e$ is
@@ -361,6 +401,7 @@ can think of vertices as destinations and edges as footpaths, say. We
 are allowed to have repeated vertices and edges in a walk. The number
 of edges in a walk is called its \emph{length}. For instance, the
 walk $a, b, c, b, e$ has length $4$.
+\index{walk, in a graph}
 
 \begin{figure}[!htbp]
 \centering
@@ -409,6 +450,10 @@ having repeated vertices. Where the start and end vertices of a trail
 are the same, we say that the trail is a \emph{circuit}, otherwise
 known as a \emph{closed} trail. Thus the walk $a, b, e, a$ is a
 circuit.
+\index{trail}
+\index{circuit}
+\index{path}
+\index{cycle}
 
 A walk with no repeating vertices is called a \emph{path}. Without any
 repeating vertices, a path cannot have repeating edges, hence a path
@@ -460,6 +505,8 @@ length. A non-empty graph may have several shortest paths between some
 distinct pair of vertices. For the graph in
 Figure~\ref{fig:introduction:types_of_walks}, both $a,b,c$ and $a,e,c$
 are geodesic paths between $a$ and $c$.
+\index{path!geodesic}
+\index{graph!connected}
 
 \begin{exercise}
 Determine whether or not the graph in
@@ -494,6 +541,17 @@ any other $g$-$d$ path has length greater than $2$, so we can say that
 $g, f, d$ the shortest path between $g$ and $d$.
 \end{proof}
 
+We will explain Dijstra's algorithm in chapter 2, which gives one of
+the best algorithms
+for finding shortest paths between two vertices in a connected graph. 
+What is very remarkable
+is that, at the present state of knowledge, finding the shortest path
+from a vertex $v$ to a {\it particular} (but arbitrarily given) 
+vertex $w$ appears to be as hard as 
+finding the shortest path from a vertex $v$ to {\it all} other
+vertices
+in the graph!
+
 
 %%-----------------------------------------------------------------------%%
 
@@ -506,6 +564,8 @@ $E(G)$. Consider a graph $H$ such that $V(H) \subseteq V(G)$ and $E(H)
 V(H)$. Then $H$ is called a \emph{subgraph} of $G$ and $G$ is referred
 to as a \emph{supergraph} of $H$.
 \end{definition}
+\index{subgraph}
+\index{supergraph}
 
 Starting from $G$, one can obtain its subgraph $H$ by deleting edges
 and/or vertices from $G$. Note that when a vertex $v$ is removed from
@@ -515,6 +575,7 @@ Figure~\ref{fig:introduction:star_subgraph}, let $G$ be the left-hand
 side graph and let $H$ be the right-hand side graph. Then it is clear
 that $H$ is a spanning subgraph of $G$. To obtain a spanning subgraph
 from a given graph, we delete edges from the given graph.
+\index{spanning subgraph}
 
 \begin{figure}[!htbp]
 \centering
@@ -590,6 +651,7 @@ from a given graph, we delete edges from the given graph.
 \label{fig:introduction:star_subgraph}
 \end{figure}
 
+\index{graph!complete}
 We now consider several standard classes of graphs. The \emph{complete}
 graph $K_n$ on $n$ vertices is a graph such that any two distinct
 vertices are adjacent. As $|V(K_n)| = n$, then $|E(K_n)|$ is
@@ -613,6 +675,7 @@ Figure~\ref{fig:introduction:five_complete_graphs} shows complete
 graphs each of whose total number of vertices is bounded by
 $1 \leq n \leq 5$. The complete graph $K_1$ has one vertex with
 no edges. It is also called the \emph{trivial} graph.
+\index{graph!trivial}
 
 \begin{figure}[!htbp]
 \centering
@@ -683,6 +746,7 @@ no edges. It is also called the \emph{trivial} graph.
 \label{fig:introduction:five_complete_graphs}
 \end{figure}
 
+\index{graph!cycle}
 The \emph{cycle} graph on $n \geq 3$ vertices, denoted $C_n$, is the
 connected $2$-regular graph on $n$ vertices. Each vertex in $C_n$ has
 degree exactly $2$ and $C_n$ is
@@ -861,11 +925,25 @@ $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
 \label{fig:introduction:bipartite_complete_bipartite_graphs}
 \end{figure}
 
+As an example of $K_{3,3}$, suppose that 
+there are $3$ boys and $3$ girls dancing in a room. 
+The boys and girls naturally partition the set of all people in the
+room. Construct a graph having $6$ vertices,
+each vertex corresponding to a person in the room,
+and draw an edge form one vertex to another if the two people dance
+together. If each girl dances three times, once with 
+with each of the three boys, then the resulting graph is $K_{3,3}$.
+
+
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Isomorphic graphs -------------------------------------------------%%
 
 \section{Isomorphic graphs}
+
+Determining whether or not two graphs are, in some sense,
+the ``same'' is a hard but important problem.
 
 \begin{definition}
 \textbf{Isomorphic graphs.}
@@ -875,6 +953,7 @@ $f(u) f(v) \in E(H)$. The function $f$ is an \emph{isomorphism}
 between $G$ and $H$. Otherwise, $G$ and $H$ are non-isomorphic. If
 $G$ and $H$ are isomorphic, we write $G \cong H$.
 \end{definition}
+\index{graphs!isomorphic}
 
 A graph $G$ is isomorphic to a graph $H$ if these two graphs can be
 labelled in such a way that if $u$ and $v$ are adjacent in $G$, then
@@ -891,6 +970,10 @@ are preserved as well. That is, if $v_1, v_2, v_3, \dots, v_k$ is a
 shortest path between $v_1, v_k \in V(G)$, then
 $f(v_1), f(v_2), f(v_3), \dots, f(v_k)$ is a geodesic path between
 $f(v_1), f(v_k) \in V(H)$.
+
+%% Hopefully later we can discuss ``canonical labeling'' 
+%% and how that gives rise to isomorphism/automorphism
+%% testing methods???
 
 \begin{figure}[!htbp]
 \centering
@@ -1014,6 +1097,7 @@ Let $G$ be a graph with $n$ vertices. The \emph{degree sequence} of
 $G$ is the ordered $n$-tuple of the vertex degrees of $G$ arranged in
 non-increasing order.
 \end{definition}
+\index{degree sequence}
 
 The degree sequence of $G$ may contain the same degrees, repeated as
 often as they occur. For example, the degree sequence of $C_6$ is
@@ -1044,6 +1128,19 @@ Let $S$ be a non-increasing sequence of non-negative integers. Then
 $S$ is said to be \emph{graphical} if it is the degree sequence of
 some graph.
 \end{definition}
+\index{degree sequence!graphical}
+
+%% Should this be in another subsection?
+%% Should we mention the work of Erd\"os-Gallai and 
+%% Havel-Hakimi?
+%% Should we give examples of how NetworkX can
+%% take a graphical degree sequence and construct a 
+%% graph having those degrees?
+%% In the bipartite graph case, the Gale-Ryser theorem does this
+%% already (I think) and Sage almost has this implemented (that
+%% is, it is still under review and it only returns a matrix
+%% (the graph is the has that matrix as an adjacency matrix I guess?)
+
 
 Let $S = (d_i)_{i=1}^{n}$ be a graphical sequence, i.e. $d_i \geq d_j$
 for all $i \leq j$ such that $1 \leq i, j \leq n$. From
@@ -1063,6 +1160,7 @@ not connected. To prove that two graphs are non-isomorphic, one could
 show that they have different values for a given graph invariant. The
 following list contains some items to check off when showing that two
 graphs are non-isomorphic:
+\index{graph invariant}
 
 \begin{enumerate}
 \item the number of vertices
@@ -1153,6 +1251,17 @@ $G$ is $|E| = n(n - 1) / 4$.
 %%--- Representing graphs as matrices -----------------------------------%%
 
 \section{Representing graphs as matrices}
+
+Representing a graph as a matrix is very ineffiecient in some cases,
+and not so in other cases. For example, if you walk into a large 
+room full of people and you consider the ``hand-shaking graph'' that
+we discuessed in connection with Theorem \ref{thrm:hand-shaking}.
+If not many people shake hands in the room, then it is a waste of time
+to have to record all the hand-shakes and alsoo all the
+``non-hand-shakes''. The is basically what the adjacency matrix does.
+In this situation, it would be much easier to simply record
+the hand-shakes as a Python dictionary.
+
 
 \begin{itemize}
 \item what's a matrix?
