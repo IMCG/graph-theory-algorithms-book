@@ -3,9 +3,20 @@
 
 \documentclass[a4paper,twoside,12pt]{book}
 \usepackage[latin1]{inputenc}
+
+% For typesetting algorithms and pseudocode
+\usepackage[algosection,boxed]{algorithm2e}
+\incmargin{1em}
+\decmargin{1em}
+\restylealgo{boxed}  % a box around the algorithm
+\Setnlsty{}{}{}      % don't bold the line numbers
+\linesnumbered
+\SetAlTitleFnt{}     % don't bold the text "Algorithm" in the caption
+\setalcapskip{5pt}
+
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx,url}
-\usepackage{makeidx}  
+\usepackage{makeidx}
 
 %% Customized corollary, lemma, theorem, etc. numbering
 \newtheorem{theorem}{Theorem}[chapter]

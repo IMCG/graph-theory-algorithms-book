@@ -1279,28 +1279,31 @@ by concatenating the entries of the matrix, row-by-row. For example,
 \end{pmatrix}.
 \]
 
-\vskip .1in
-
-\noindent
-{\bf Isomorphism Algorithm}:
-
-\noindent
-INPUT: Two undirected graphs $G_1$ and $G_2$, each having
-$n$ vertices.
-
-\indent
-OUTPUT: True, if $G_1\cong G_2$, False, otherwise.
-
-\begin{itemize}
-\item
-Compute the adjacency matrix $A_i$ of $G_i$ ($i=1,2$).
-Compute the lexicographically maximal element
-$A_i'$ of the permutation equivalence class
-of $A_i$, $i=1,2$.
-
-\item
-If $A_1'=A_2'$ then return True. Otherwise return False.
-\end{itemize}
+\begin{algorithm}[!htpb]
+\SetLine
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+%% input/output
+\Input{Two undirected graphs $G_1$ and $G_2$, each having $n$
+  vertices.}
+\Output{\True, if $G_1 \cong G_2$; \False, otherwise.}
+\BlankLine
+%% algorithm body
+Compute the adjacency matrix $A_i$ of $G_i$ ($i = 1, 2$).\;
+Compute the lexicographically maximal element $A_i'$ of the
+permutation equivalence class of $A_i$, for $i = 1, 2$.\;
+\eIf{$A_1' = A_2'$}{
+  \Return \True\;
+}{
+  \Return \False\;
+}
+\caption{Computing graph isomorphism using adjacency matrices.}
+\label{alg:introduction:graph_isomorphism_adjacency matrices}
+\end{algorithm}
 
 The lexicographically maximal element of the permutation equivalence
 class of the adjacency matrix of $G$ is called the
