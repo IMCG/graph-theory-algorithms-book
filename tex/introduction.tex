@@ -1301,15 +1301,17 @@ permutation equivalence class of $A_i$, for $i = 1, 2$.\;
 }{
   \Return \False\;
 }
-\caption{Computing graph isomorphism using adjacency matrices.}
-\label{alg:introduction:graph_isomorphism_adjacency matrices}
+\caption{Computing graph isomorphism using canonical labels.}
+\label{alg:introduction:graph_isomorphism_canonical_labels}
 \end{algorithm}
 
 The lexicographically maximal element of the permutation equivalence
 class of the adjacency matrix of $G$ is called the
 \emph{canonical label} of $G$. Thus, to check if two undirected graphs
-are isomorphic, we smply check if their canonical labels are equal.
-\index{graph!canonical label}
+are isomorphic, we simply check if their canonical labels are equal.
+\index{graph!canonical label} This idea for graph isomorphism checking
+is presented in
+Algorithm~\ref{alg:introduction:graph_isomorphism_canonical_labels}.
 
 
 %%--- Degree sequence ---------------------------------------------------%%

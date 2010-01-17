@@ -13,8 +13,10 @@ all:
 	make latex
 
 latex:
-	latex $(FILE).tex
-	latex $(FILE).tex
+#	latex $(FILE).tex
+#	latex $(FILE).tex
+	pdflatex $(FILE).tex
+	pdflatex $(FILE).tex
 #	latex $(FILE).tex
 
 pdf:
@@ -27,9 +29,10 @@ clean:
 	rm -rfv *~
 	rm -rfv *.aux
 	rm -rfv *.bak
+	rm -rfv tex/*.bak
 	rm -rfv *.bbl
 	rm -rfv *.blg
-#	rm -rfv *.dvi
+	rm -rfv *.dvi
 	rm -rfv *.idx
 	rm -rfv *.ilg
 	rm -rfv *.ind
