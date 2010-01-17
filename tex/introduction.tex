@@ -443,12 +443,9 @@ $a$-$b$ walk $a, b, c, d, f, g, b$ in
 Figure~\ref{fig:introduction:types_of_walks} is a trail. It does not
 contain any repeated edges, but it contains one repeated vertex,
 i.e. $b$. Nothing in the definition of a trail restricts a trail from
-having repeated vertices. Where the start and end vertices of a trail
-are the same, we say that the trail is a \emph{circuit}, otherwise
-known as a \emph{closed} trail. Thus the walk $a, b, e, a$ is a
-circuit.
+having repeated vertices. 
 \index{trail}
-\index{circuit}
+%\index{circuit}
 \index{path}
 \index{cycle}
 
@@ -457,6 +454,18 @@ repeating vertices, a path cannot have repeating edges, hence a path
 is also a trail. A path whose start and end vertices are the same is
 called a \emph{cycle}. For example, the walk $a, b, c, e, a$
 in Figure~\ref{fig:introduction:types_of_walks} is a path and a cycle.
+A walk which has no repeated edges and 
+the start and end vertices are the same, but otherwise has no 
+repeated vertices, is 
+%a \emph{circuit}, otherwise known as 
+a \emph{closed path} (with apologies for
+slightly abusing terminology)\footnote{A closed path in a graph is
+ sometimes also called a circuit. Since that terminology 
+unfortunately conflicts with the closely related notion of a circuit
+of a matroid, we do not use it here.}. Thus the walk $a, b, e, a$ 
+in Figure~\ref{fig:introduction:types_of_walks} is a
+closed path. It is easy to see that if you remove any edge
+from a cycle then the resulting walk contains no closed paths.
 
 \begin{exercise}
 Consider the graph in Figure~\ref{fig:introduction:types_of_walks}.
@@ -470,7 +479,11 @@ Consider the graph in Figure~\ref{fig:introduction:types_of_walks}.
 
 \item Find two distinct paths and determine their lengths.
 
-\item Find a circuit that is not a cycle.
+\item Find a closed path that is not a cycle.
+
+\item
+Find a closed path $C$ which has an edge $e$ such that
+$C-e$ contains a cycle.
 \end{enumerate}
 \end{exercise}
 
@@ -487,7 +500,7 @@ $t_1$ is 4 and the length of trail $t_2$ is also 4.
 $p_2: g, b, a, e, f, d$. The length of path $p_1$ is 5 and the length
 of path $p_2$ is also 5.
 
-(4) Here is a circuit that is not a cycle: $d, c, e, b, a, e, f, d$.
+(4) Here is a closed path that is not a cycle: $d, c, e, b, a, e, f, d$.
 \end{proof}
 
 A graph is said to be \emph{connected} if for every pair of distinct
@@ -928,6 +941,165 @@ form one vertex to another if the two people dance together. If each
 girl dances three times, once with with each of the three boys, then
 the resulting graph is $K_{3,3}$.
 
+%%--- Representing graphs as matrices -----------------------------------%%
+
+\section{Representing graphs as matrices}
+
+Representing a graph as a matrix is very inefficient in some cases
+and not so in other cases. For example, if you walk into a large room
+full of people and you consider the ``hand-shaking graph'' that we
+discussed in connection with
+Theorem~\ref{thm:introduction:hand_shaking}. If not many people shake
+hands in the room, then it is a waste of time to have to record all
+the hand-shakes and also all the ``non-hand-shakes.'' This is
+basically what the adjacency matrix does. In this kind of ``sparse
+graph'' situation, it would
+be much easier to simply record the hand-shakes as a Python dictionary.
+
+If $G$ is an undirected graph with vertices $V=\{v_1,\dots, v_n\}$
+and edges $E$ then the 
+{\it adjacency matrix} of $G$ is the $n\times n$ matrix $A=(a_{ij})$ 
+defined by
+
+\[
+a_{ij}=
+\left\{
+\begin{array}{ll}
+1, & {\rm if}\ (v_i,v_j)\in E,\\
+0, &{\rm otherwise}.
+\end{array}
+\right.
+\]
+If $G$ is an undirected graph then $A$ 
+is a symmetric matrix.
+
+If $G$ is a directed graph with vertices $V=\{v_1,\dots, v_n\}$
+and edges $E$ then the $(0,-1,1)$-{\it adjacency matrix} 
+of $G$ is the $n\times n$ matrix $A=(a_{ij})$ 
+defined by
+\index{adjacency matrix} 
+
+\[
+a_{ij}=
+\left\{
+\begin{array}{rl}
+1, & {\rm if}\ (v_i,v_j)\in E,\\
+-1, & {\rm if}\ (v_j,v_i)\in E,\\
+0, &{\rm otherwise}.
+\end{array}
+\right.
+\]
+
+%\begin{itemize}
+%\item what's a matrix?
+%
+%\item adjacency matrices for digraphs
+%
+%\item adjacency matrices for undirected graphs
+%\end{itemize}
+
+%\begin{example}
+For example, Sage allows you to easily compute an adjacency matrix.
+
+%
+\begin{center}
+\fontsize{10pt}{10pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: C6 = Graph({1: [2, 4], 2: [1, 3], 3: [2, 6], 4: [1, 5], \
+....: 5: [4, 6], 6: [3, 5]})
+sage: G1 = Graph({"a": ["b", "c"], "b": ["a", "d"], "c": ["a", "e"], \
+....: "d": ["b", "f"], "e": ["c", "f"], "f": ["d", "e"]})
+sage: G1.adjacency_matrix()
+[0 1 0 1 0 0]
+[1 0 1 0 0 0]
+[0 1 0 0 0 1]
+[1 0 0 0 1 0]
+[0 0 0 1 0 1]
+[0 0 1 0 1 0]
+sage: G2.adjacency_matrix()
+[0 1 1 0 0 0]
+[1 0 0 1 0 0]
+[1 0 0 0 1 0]
+[0 1 0 0 0 1]
+[0 0 1 0 0 1]
+[0 0 0 1 1 0]
+sage: G1.adjacency_matrix()^2
+[2 0 1 0 1 0]
+[0 2 0 1 0 1]
+[1 0 2 0 1 0]
+[0 1 0 2 0 1]
+[1 0 1 0 2 0]
+[0 1 0 1 0 2]
+\end{lstlisting}
+\end{center}
+%
+%\end{example}
+
+
+\begin{theorem}
+Let $G$ be a graph of order $n$ and $\mathbf{A}$ the adjacency matrix
+of $G$. For each positive integer $k$, the $i$-$j$ entry of
+$\mathbf{A}^k$ counts the number of $v_i$-$v_j$ walks of length $k$.
+\end{theorem}
+
+There is an analog of the adjacency matrix for edges.
+If $G$ is an undirected graph with edges $E=\{e_1,\dots, e_m\}$
+and vertices $V=\{v_1,\dots,v_m\}$ then the 
+{\it incidence matrix} of $G$ is the $n\times m$ matrix $B=(b_{ij})$ 
+defined by
+
+\[
+b_{ij}=
+\left\{
+\begin{array}{ll}
+1, & {\rm if}\ v_i\ {\rm incident\ to}\ e_j,\\
+0, &{\rm otherwise}.
+\end{array}
+\right.
+\]
+If $G$ is a directed graph with edges $E=\{e_1,\dots, e_m\}$
+and vertices $V=\{v_1,\dots,v_m\}$ then the 
+{\it incidence matrix} of $G$ is the $n\times m$ matrix $B=(b_{ij})$ 
+defined by
+\index{incidence matrix}
+
+\[
+b_{ij}=
+\left\{
+\begin{array}{rl}
+-1, & {\rm if}\ v_i\ {\rm incident\ to}\ e_j,\ e_j \ {\rm leaves}\
+v_i\\
+1, & {\rm if}\ v_i\ {\rm incident\ to}\ e_j,\ e_j \ {\rm enters}\ v_i\\
+0, &{\rm otherwise}.
+\end{array}
+\right.
+\]
+
+Sage allows you to compute the incidence matrix of a 
+graph.
+
+%\begin{example}
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: G = Graph({1: [2, 4], 2: [1, 3], 3: [2, 6], 4: [1, 5], 5: [4, 6], 6: [3, 5]})
+sage: G.incidence_matrix()
+[-1 -1  0  0  0  0]
+[ 0  1 -1  0  0  0]
+[ 0  0  1 -1  0  0]
+[ 1  0  0  0 -1  0]
+[ 0  0  0  0  1 -1]
+[ 0  0  0  1  0  1]
+\end{lstlisting}
+\end{center}
+%
+%\end{example}
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Isomorphic graphs -------------------------------------------------%%
@@ -1082,6 +1254,84 @@ Thus, for the graphs $C_6$, $G_1$ and $G_2$ in
 Figure~\ref{fig:introduction:isomorphic_graphs}, $C_6$ and $G_1$ are
 isomorphic, but $G_1$ and $G_2$ are not isomorphic.
 \end{proof}
+
+
+
+\subsection{Adjacency matrices}
+
+Two $n\times n$ matrices $A_1$ and $A_2$ are {\it permutation
+equivalent} if there is a permutation matrix $P$ such
+that $A_1=PA_2P^{-1}$. In other words, $A_1$ is the same as $A_2$
+after a suitable reordering of the rows and a corresponding 
+reordiering of the columns.
+\index{permutation equivalent}
+This notion of permutation equivalence is an equivalence relation.
+
+To show two undirected graphs are isomorphic depends on the following result.
+
+\begin{theorem}
+Consider two directed or undirected graphs $G_1$ and $G_2$ with 
+respective adjacency matrices $A_1$ and $A_2$. $G_1$ and $G_2$ 
+are isomorphic if and only if $A_1$ is permutation
+equivalent to $A_2$.
+\end{theorem}
+
+Define an ordering on the set of $n\times n$ 
+$(0,1)$-matrices as follows: we say $A_1<A_2$ if the
+list of entries of $A_1$ is less than or equal to the
+list of entries of $A_2$ in the lexicographical ordering.
+Here the list of entries of a $(0,1)$-matrix
+is obtained by concatenating the entries
+of the matrix, row-by-row. For example,
+
+\[
+\left(
+\begin{array}{cc}
+1 & 1\\
+0 & 1
+\end{array}
+\right)
+<
+\left(
+\begin{array}{cc}
+1 & 1\\
+1 & 1
+\end{array}
+\right).
+\]
+
+\vskip .1in
+
+\noindent
+{\bf Isomorphism Algorithm}:
+
+\noindent
+INPUT: Two undirected graphs $G_1$ and $G_2$, each having
+$n$ vertices.
+
+\indent
+OUTPUT: True, if $G_1\cong G_2$, False, otherwise.
+
+\begin{itemize}
+\item
+Compute the adjacency matrix $A_i$ of $G_i$ ($i=1,2$).
+Compute the lexicographically maximal element 
+$A_i'$ of the permutation equivalence class
+of $A_i$, $i=1,2$. 
+
+\item
+If $A_1'=A_2'$ then return True. Otherwise return False.
+\end{itemize}
+
+The lexicographically maximal element 
+of the permutation equivalence class
+of the adjacency matrix of $G$ is called the
+{\it canonical label} of $G$. Thus, to check if two 
+undirected graphs are isomorphic, we smply check if
+their canonical labels are equal.
+\index{graph!canonical label}
+
+\subsection{Degree sequence}
 
 \begin{definition}
 \textbf{Degree sequence.}
@@ -1240,30 +1490,4 @@ $G$ is $|E| = n(n - 1) / 4$.
 
 
 %%-----------------------------------------------------------------------%%
-%%--- Representing graphs as matrices -----------------------------------%%
 
-\section{Representing graphs as matrices}
-
-Representing a graph as a matrix is very inefficient in some cases
-and not so in other cases. For example, if you walk into a large room
-full of people and you consider the ``hand-shaking graph'' that we
-discussed in connection with
-Theorem~\ref{thm:introduction:hand_shaking}. If not many people shake
-hands in the room, then it is a waste of time to have to record all
-the hand-shakes and also all the ``non-hand-shakes.'' This is
-basically what the adjacency matrix does. In this situation, it would
-be much easier to simply record the hand-shakes as a Python dictionary.
-
-\begin{itemize}
-\item what's a matrix?
-
-\item adjacency matrices for digraphs
-
-\item adjacency matrices for undirected graphs
-\end{itemize}
-
-\begin{theorem}
-Let $G$ be a graph of order $n$ and $\mathbf{A}$ the adjacency matrix
-of $G$. For each positive integer $k$, the $i$-$j$ entry of
-$\mathbf{A}^k$ counts the number of $v_i$-$v_j$ walks of length $k$.
-\end{theorem}
