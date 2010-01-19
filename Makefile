@@ -36,6 +36,7 @@ clean:
 	rm -rfv *.idx
 	rm -rfv *.ilg
 	rm -rfv *.ind
+	rm -rfv *.loa
 	rm -rfv *.lof
 	rm -rfv *.log
 	rm -rfv *.lot

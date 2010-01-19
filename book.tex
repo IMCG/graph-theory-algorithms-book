@@ -5,7 +5,7 @@
 \usepackage[latin1]{inputenc}
 
 % For typesetting algorithms and pseudocode
-\usepackage[algosection,boxed]{algorithm2e}
+\usepackage[algochapter,boxed]{algorithm2e}
 \incmargin{1em}
 \decmargin{1em}
 \restylealgo{boxed}  % a box around the algorithm
@@ -69,10 +69,11 @@
 % the latest version of this document
 \newcommand{\documentEdition}{0.1}
 
+\makeindex
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Document body -----------------------------------------------------%%
-\makeindex
 
 \begin{document}
 
@@ -95,8 +96,12 @@
 % Setting the TOC depth: only list chapter and sections
 \setcounter{tocdepth}{1}
 \tableofcontents
+\listofalgorithms
+\addcontentsline{toc}{chapter}{List of Algorithms}
 \listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
 \listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
 
 \mainmatter
 
