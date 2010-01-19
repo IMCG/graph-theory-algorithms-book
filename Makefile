@@ -40,5 +40,6 @@ clean:
 	rm -rfv *.lof
 	rm -rfv *.log
 	rm -rfv *.lot
+	rm -rfv *.out
 	rm -rfv *.ps
 	rm -rfv *.toc
