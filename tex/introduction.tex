@@ -24,7 +24,7 @@ undirected graph without multiple edges.''
 \textbf{Graphs.}
 A \emph{graph} $G = (V, E)$ is an ordered pair of sets. Elements of
 $V$ are called \emph{vertices} or \emph{nodes}, and elements of
-$E \subseteq V \times V$ are called \emph{edges} or \emph{lines}. We
+$E \subseteq V \times V$ are called \emph{edges} or \emph{arcs}. We
 refer to $V$ as the vertex set of $G$, with $E$ being the edge
 set. The cardinality of $V$ is called the \emph{order} of $G$, and
 $|E|$ is called the \emph{size} of $G$.
@@ -831,7 +831,57 @@ spanning subgraph of $C_n$ obtained by deleting one edge.
 A \emph{bipartite} graph $G$ is a graph with at least two
 vertices such that $V(G)$ can be split into two disjoint subsets $V_1$
 and $V_2$, both non-empty. Every edge $uv \in E(G)$ is such that
-$u \in V_1$ and $v \in V_2$, or $v \in V_1$ and $u \in V_2$. The
+$u \in V_1$ and $v \in V_2$, or $v \in V_1$ and $u \in V_2$. 
+
+If $H$ is an $m\times n$ $(0,1)$-matrix, then the 
+{\it Tanner graph} of $H$ is the bipartite graph $G=(V,E)$
+whose set of vertices $V=V_1\cup V_2$ is partitioned
+into two sets, $V_1$ corresponding to the $m$ rows of $H$
+and $V_2$ corresponding to the $n$ columns of $H$.
+For any $i,j$ with $1\leq i\leq m$ and $1\leq j\leq n$, there 
+is an edge $(i,j)\in E$ if and only if the $(i,j)$-th
+entry of $H$ is $1$. This matrix $H$ is sometimes 
+called the {\it reduced adjacency matrix} 
+of the bipartite graph or the {\it check matrix}
+of the Tanner graph.
+\index{reduced adjacency matrix} 
+Tanner graphs are used in the theory of error-correcting codes.
+%\begin{example}
+For example, Sage allows you to easily compute such
+a bipartite graph from its matrix.
+%
+\begin{center}
+\fontsize{10pt}{10pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: H = Matrix([(1,1,1,0,0), (0,0,1,0,1), (1,0,0,1,1)])
+sage: B = BipartiteGraph(H)
+sage: B.reduced_adjacency_matrix()
+[1 1 1 0 0]
+[0 0 1 0 1]
+[1 0 0 1 1]
+sage: B.plot(graph_border=True)
+\end{lstlisting}
+\end{center}
+%
+%\end{example}
+
+\noindent
+This is plotted in Figure \ref{fig:tanner}.
+
+\begin{figure}[h!]
+%\begin{minipage}{\textwidth}
+\begin{center}
+%\vspace{8.0 cm}
+\includegraphics[height=7cm,width=5cm]{tex/graph-sage-tanner.png}
+\end{center}
+%\end{minipage}
+\caption{Tanner graph for $H$.}
+\label{fig:tanner}
+\end{figure}
+
+The
 \emph{complete bipartite} graph $K_{m,n}$ is the bipartite graph whose
 vertex set is partitioned into two non-empty disjoint sets $V_1$ and
 $V_2$ with $|V_1| = m$ and $|V_2| = n$. Any vertex in $V_1$ is
@@ -941,10 +991,11 @@ girl dances three times, once with with each of the three boys, then
 the resulting graph is $K_{3,3}$.
 
 
+
 %%-----------------------------------------------------------------------%%
 %%--- Representing graphs as matrices -----------------------------------%%
 
-\section{Representing graphs as matrices}
+\section{Representing graphs using matrices}
 
 Representing a graph as a matrix is very inefficient in some cases
 and not so in other cases. For example, if you walk into a large room
@@ -956,6 +1007,8 @@ the hand-shakes and also all the ``non-hand-shakes.'' This is
 basically what the adjacency matrix does. In this kind of
 ``sparse graph'' situation, it would be much easier to simply record
 the hand-shakes as a Python dictionary.
+
+\subsection{Adjacency matrix}
 
 If $G$ is an undirected graph with vertices
 $V = \{ v_1, \dots, v_n \}$ and edges $E$, then the
@@ -974,7 +1027,9 @@ is a symmetric matrix.
 
 If $G$ is a directed graph with vertices $V = \{ v_1, \dots, v_n \}$
 and edges $E$, then the $(0, -1, 1)$-\emph{adjacency matrix} of $G$ is
-the $n \times n$ matrix $A = (a_{ij})$ defined by\index{adjacency matrix}
+the $n \times n$ matrix $A = (a_{ij})$ defined by
+\index{adjacency matrix}
+
 \[
 a_{ij}
 =
@@ -1037,7 +1092,51 @@ of $G$. For each positive integer $k$, the $i$-$j$ entry of
 $\mathbf{A}^k$ counts the number of $v_i$-$v_j$ walks of length $k$.
 \end{theorem}
 
-There is an analog of the adjacency matrix for edges. If $G$ is an
+More generally, if $G$ was an undirected multigraph 
+with edge $e_{ij}=(v_i,v_j)$ having multiplicity $w_{ij}$,
+or a weighted graph 
+with edge $e_{ij}=(v_i,v_j)$ having weight $w_{ij}$,
+then we can define the (weighted) {\it adjacency matrix}
+$A = (a_{ij})$ by
+\[
+a_{ij}
+=
+\begin{cases}
+w_{ij}, & \text{if $(v_i, v_j) \in E$}, \\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+For example, Sage allows you to easily compute a
+weighted adjacency matrix.
+
+%
+\begin{center}
+\fontsize{10pt}{10pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: G = Graph(sparse=True, weighted=True)
+sage: G.add_edges([(0,1,1),(1,2,2),(0,2,3),(0,3,4)])
+sage: M = G.weighted_adjacency_matrix(); M
+[0 1 3 4]
+[1 0 2 0]
+[3 2 0 0]
+[4 0 0 0]
+\end{lstlisting}
+\end{center}
+%
+
+\subsection{Incidence matrix}
+
+The relationship between edges and vertices provides a 
+very strong constraint on the data structure, much like the
+relationship between points and blocks in a combinatorial design
+or points and lines in a finite plane geometry.
+This incidence structure gives rise to another way
+to describe a graph using a matrix.
+
+If $G$ is an
 undirected graph with edges $E = \{ e_1, \dots, e_m \}$ and vertices
 $V = \{ v_1, \dots, v_m \}$, then the \emph{incidence matrix} of $G$
 is the $n \times m$ matrix $B = (b_{ij})$ defined by
@@ -1052,7 +1151,9 @@ b_{ij}
 If $G$ is a directed graph with edges $E = \{ e_1, \dots, e_m \}$
 and vertices $V = \{ v_1, \dots, v_m \}$, then the
 \emph{incidence matrix} of $G$ is the $n \times m$ matrix $B = (b_{ij})$
-defined by\index{incidence matrix}
+defined by
+\index{incidence matrix}
+
 \[
 b_{ij}
 =
@@ -1085,6 +1186,92 @@ sage: G.incidence_matrix()
 %
 %\end{example}
 
+\subsection{Laplacian matrix}
+
+The {\it degree matrix} of a graph $G=(V,E)$ is an $n\times n$ 
+diagonal matrix $D$ whose $i$-th diagonal entry is the degree of the
+$i$-th vertex in $V$.
+\index{degree matrix}
+The {\it Laplacian matrix} $L = L(G)$ 
+of $G$ is the difference between the degree matrix and the adjacency
+matrix,
+\index{Laplacian matrix}
+
+\[
+L = D-A.
+\]
+In other words, for an undirected unweighted simple graph,
+$L = (\ell_{ij})$ is given by by
+\[
+\ell_{ij}
+=
+\begin{cases}
+-1, & \text{if $(v_i, v_j) \in E$}, \\
+d_i, & \text{if}\ i=j,\\
+0, & \text{otherwise},
+\end{cases}
+\]
+where $d_i=\deg(v_i)$ is the degree.
+
+Sage allows you to compute the Laplacian matrix of a
+graph:
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 4: [1, 3], 5: [4, 2], 6: [3, 1]})
+sage: G.laplacian_matrix()
+[ 3 -1  0 -1  0 -1]
+[-1  4 -1 -1 -1  0]
+[ 0 -1  3 -1  0 -1]
+[-1 -1 -1  4 -1  0]
+[ 0 -1  0 -1  2  0]
+[-1  0 -1  0  0  2]
+\end{lstlisting}
+\end{center}
+%
+There were many remarkable properties of the Laplacian matrix.
+It shall be discussed further in chapter 4.
+
+\subsection{Distance matrix}
+
+Recall the distance (or geodesic distance) $d(v,w)$ between two
+vertices $v,w\in V$
+in a connected graph $G=(V,E)$ is the number of
+edges in a shortest path connecting them. 
+The $n\times n$ matrix $\{d(v_i,v_j)\}$ is the
+{\it distance matrix} of $G$.
+\index{distance matrix}
+
+
+Sage helps you to compute the distance matrix of a
+graph:
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 4: [1, 3], 5: [4, 2], 6: [3, 1]})
+sage: d = [[G.distance(i,j) for i in range(1,7)] for j in range(1,7)]
+sage: matrix(d)
+[0 1 2 1 2 1]
+[1 0 1 1 1 2]
+[2 1 0 1 2 1]
+[1 1 1 0 1 2]
+[2 1 2 1 0 3]
+[1 2 1 2 3 0]
+\end{lstlisting}
+\end{center}
+%
+
+The distance matrix is an important quantity which allows one
+to better understand of the ``connectivity'' of a graph.
+Distance and connectivity will be 
+discussed in more detail in chapters 4 and 9 below.
 
 %%-----------------------------------------------------------------------%%
 %%--- Isomorphic graphs -------------------------------------------------%%
@@ -1410,32 +1597,174 @@ graphs are non-isomorphic:
 \section{New graphs from old}
 
 Operations on graph to obtain new graphs from old graphs. Such graph
-operations include:
+operations include unions, products,, edge-additions, edge-deletions, 
+vertex-additions and vertex-deletions. Several of these are briefly
+described below.
 
 
 %%--- Union, intersection and join --------------------------------------%%
 
 \subsection{Union, intersection and join}
 
-\begin{itemize}
-\item wheel graphs
+The {\it disjoint union of graphs} is defined as follows. 
+For two graphs, $G_1=(V_1,E_1)$ and $G_2=(V_2,E_2)$, with disjoint vertex sets,
+their disjoint union is the graph 
 
-\item sequential join
-\end{itemize}
+\[
+G_1\cup G_2 = (V_1 \cup V_2, E1 \cup E2).
+\]
+The adjacency matrix $A$ of the disjoint union of two 
+graphs $G_1$ and $G_2$ is the diagonal block matrix obtained from
+the adjacency matrices, $A_1$ and $A_2$, respectively.
+Namely,
+
+\[
+A = \left(
+\begin{array}{cc}
+A_1 & 0 \\
+0 & A_2
+\end{array}
+\right).
+\]
+\index{graph!union}
+
+Sage can compute graph unions, as the following example shows.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: G1 = Graph({1: [2, 4], 2: [1, 3], 3: [2, 6], 4: [1, 5], 5: [4, 6], 6: [3, 5]})
+sage: G2 = Graph({7: [8, 10], 8: [7, 10], 9: [8, 12], 10: [7, 9], 11: [10, 8], 12: [9, 7]})
+sage: G1u2 = G1.union(G2)
+sage: G1u2.adjacency_matrix()
+[0 1 0 1 0 0 0 0 0 0 0 0]
+[1 0 1 0 0 0 0 0 0 0 0 0]
+[0 1 0 0 0 1 0 0 0 0 0 0]
+[1 0 0 0 1 0 0 0 0 0 0 0]
+[0 0 0 1 0 1 0 0 0 0 0 0]
+[0 0 1 0 1 0 0 0 0 0 0 0]
+[0 0 0 0 0 0 0 1 0 1 0 1]
+[0 0 0 0 0 0 1 0 1 1 1 0]
+[0 0 0 0 0 0 0 1 0 1 0 1]
+[0 0 0 0 0 0 1 1 1 0 1 0]
+[0 0 0 0 0 0 0 1 0 1 0 0]
+[0 0 0 0 0 0 1 0 1 0 0 0]
+\end{lstlisting}
+\end{center}
+%
+
+
+The {\it graph join} of two graphs, $G_1$ and $G_2$,
+is their graph union with all the edges
+that connect the vertices of the first graph with the vertices of the
+second graph.
+
+For example, the graph join of the cycle graph $C_{n-1}$ with a 
+single vertex graph is the wheeel graph $W_n$.
+
+
+%% Sorry Minh - I don't understand how you intended
+%% there topics to be integrated into this subsection:
+%\begin{itemize}
+%\item wheel graphs
+%
+%\item sequential join
+%\end{itemize}
 
 
 %%--- Edge or vertex deletion -------------------------------------------%%
 
-\subsection{Edge or vertex deletion}
+\subsection{Edge or vertex deletion/insertion}
 
 \begin{itemize}
 \item vertex-deletion subgraph
 
+If $G=(V,E)$ is any graph with at least $2$ vertices then the
+{\it vertex-deletion subgraph} is the subgraph obtained form $G$ by
+deleting a vertex $v\in V$ and also all the edges incident to that vertex.
+It is sometimes denoted $G-\{v\}$.
+\index{vertex-deletion subgraph}
+
+
+Sage can compute vertex deletions, as the following example shows.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 4: [1, 3], 5: [4, 2], 6: [3, 1]})
+sage: G.vertices()
+[1, 2, 3, 4, 5, 6]
+sage: G.delete_vertex(4)
+sage: G.vertices()
+[1, 2, 3, 5, 6]
+\end{lstlisting}
+\end{center}
+%
+
 \item edge-deletion subgraph
+
+If $G=(V,E)$ is any graph with at least $1$ edge then the
+{\it edge-deletion subgraph} is the subgraph obtained form $G$ by
+deleting an edge $e\in E$ but not the vertices incident to that edge.
+It is sometimes denoted $G-\{e\}$.
+
+Sage can compute edge deletions, as the following example shows.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 4: [1, 3], 5: [4, 2], 6: [3, 1]})
+sage: G.edges()
+[(1, 2, None), (1, 4, None), (1, 6, None), (2, 3, None), (2, 4, None),
+(2, 5, None), (3, 4, None), (3, 6, None), (4, 5, None)]
+sage: G.delete_edge([1,4])
+sage: G.edges()
+[(1, 2, None), (1, 6, None), (2, 3, None), (2, 4, None), (2, 5, None),
+(3, 4, None), (3, 6, None), (4, 5, None)]
+\end{lstlisting}
+\end{center}
+%
 
 \item vertex-cut, cut-vertex or cutpoint
 
+A {\it vertex cut} (or {\it separating set}) of a connected graph $G$
+is a subset $W\subset V$ of the vertices $V$ of $G$ such that the subgraph
+$G-W$ is disconnected.
+\index{graph!cut}
+%A {\it vertex cut} of a connected graph $G$ is a set of vertices whose
+%removal renders $G$ disconnected. 
+\index{vertex cut}
+
+In fact, if $v_1,v_2\in V$ are two non-adjacent vertices,
+then you can ask for a vertex cut $W$ for which
+$v_1,v_2$ belong to different components of $G-W$.
+Sage's {\tt vertex\_cut} method allows you to compute a 
+minimal cut having this property.
+
+
 \item edge-cut, cut-edge or bridge
+
+If deleting a single, specific edge would
+disconnect the graph, that edge is called a {\it bridge}. More generally,
+the {\it edge cut} (or {\it disconnecting set}) of
+a connected graph $G$ is a set of edges $F\subset E$ whose removal
+yields a subgraph $G-F$ which is disconnected. 
+
+In fact, if $v_1,v_2\in V$ are two vertices,
+then you can ask for an edge cut $F$ for which
+$v_1,v_2$ belong to different components of $G-F$.
+Sage's {\tt edge\_cut} method allows you to compute a 
+minimal cut having this property.
+\index{edge cut}
 \end{itemize}
 
 
@@ -1446,11 +1775,44 @@ operations include:
 \begin{itemize}
 \item edge-complement or complement
 
+The complement of a simple graph has the same vertices, but exactly those
+edges that are not in the original graph. 
+In other words, if $G^c=(V,E^c)$ is the complement of $G=(V,E)$ then 
+two distinct vertices $v,w\in V$ are adjacent in $G^c$ if and only if they are
+not adjacent in $G$. The sum of the 
+adjacency matrix of $G$ and that of $G^c$ is the matrix
+with $1$'s everywhere, except for $0$'s on the diagonal.
+
+A simple graph isomorphic to its complement is called a 
+{\it self-complementary graph}.
+\index{self-complementary graph}
+
+Sage can compute edge complements, as the following example shows.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 4: [1, 3], 5: [4, 2], 6: [3, 1]})
+sage: G.complement()
+complement(): Graph on 6 vertices
+sage: Gc = G.complement()
+sage: Gc.vertices()
+[1, 2, 3, 4, 5, 6]
+sage: Gc.edges()
+[(1, 3, None), (1, 5, None), (2, 6, None), (3, 5, None), (4, 6, None),
+(5, 6, None)]
+\end{lstlisting}
+\end{center}
+%
+
 \item relative complement
 \end{itemize}
 
 \begin{theorem}
-The complement of a disconnected graph is connected.
+The complement of an edgeless graph is a complete graph.
 \end{theorem}
 
 \begin{theorem}
@@ -1465,14 +1827,149 @@ $G$ is $|E| = n(n - 1) / 4$.
 
 \subsection{Cartesian product}
 
+The Cartesian product $G \square H$ of graphs $G$ and $H$ is a graph such that
+
+\begin{itemize}
+\item
+ the vertex set of $G \square H$ is the Cartesian product $V(G) \times V(H)$,
+\item
+ any two vertices $(u,u')$ and $(v,v')$ are adjacent in $G \square H$
+ if and only if either
+\begin{itemize}
+\item
+ $ u = v$ and $u'$ is adjacent with $v'$ , or
+ \item
+$ u' = v'$ and $u$ is adjacent with $v$.
+\end{itemize}
+\end{itemize}
+
+Sage can compute Cartesian products, as the following example shows.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: Z = graphs.CompleteGraph(2); len(Z.vertices()); len(Z.edges())
+2
+1
+sage: C = graphs.CycleGraph(5); len(C.vertices()); len(C.edges())
+5
+5
+sage: P = C.cartesian_product(Z); len(P.vertices()); len(P.edges())
+10
+15
+\end{lstlisting}
+\end{center}
+%
+
+
 \begin{itemize}
 \item hypercubes
 
-\item meshes
+The {\it hypercube graph} $Q_n$ is the graph with vertex set
 
-\item circular ladders
+\[
+V = \{(\epsilon_1,\dots,\epsilon_n)\ |\ \epsilon_j\in \{0,1\}\}
+\]
+of size $2^n$. Two vertices $v,w\in V$
+are connected by an edge if and only if
+$v$ and $w$ differ in exactly one coordinate\footnote{In other words,
+the ``Hamming distance'' between $v$ and $w$
+is equal to $1$.}.
+\index{graph!hypercube}
+
+The Cartesian product of $n$ edge graphs $K_2$ is a hypercube:
+
+\[
+ (K_2)^{\square n} = Q_n.
+\]
+
+\begin{exercise}
+The Cartesian product of two hypercube graphs is another
+hypercube: $Q_i \square Q_j = Q_{i+j}$. 
+\end{exercise}
+
+%% Sorry Minh, I don't know what mesh means. Do you mean median graphs?
+%\item meshes
+
+\item ladder graphs
+
+The {\it path graph} $P_n$ is a tree with $n$ vertices 
+$V=\{v_1,\dots, v_n\}$ and edges
+$E=\{ (v_i,v_{i+1})\ |\ 1\leq i\leq n-1\}$.
+In this case, $\deg(v_1)=\deg(v_n)=1$ and
+$\deg(v_i)=2$, $1<i<n$.
+\index{path graph}
+\index{graph!path}
+
+The {\it ladder graph} $L_n$ is the Cartesian product of path
+graphs, $L_n = P_n \square P_1$.
+\index{ladder graph}
+\index{graph!ladder}
+
 \end{itemize}
 
 
 %%-----------------------------------------------------------------------%%
+
+
+\section{Common applications}
+
+\vskip .15in
+A few other common problems arising in applications of weighted graphs
+are listed below
+
+\begin{itemize}
+\item
+If the edge weights are all non-negative,
+find a ``cheapest'' closed path which contains all the vertices.
+This is related to the famous traveling salesman problem
+and is discussed more in chapters 2 and 5.
+\index{traveling salesman problem}
+
+\item
+Find a walk which visits each vertex but contains as few edges as
+possible and contains no cycles.
+This type of problem is related to ``spanning trees'' and
+is discussed more in chapter 3.
+
+\item
+Determine which vertices are ``more central'' than others.
+This is connected with various applications to ``social network
+analysis'' and is discussed more in chapters 4 and 9.
+\index{social network analysis}
+
+\item
+Can the graph be drawn entirely in the plane, with no crossing edges?
+(For example, this is important for designing computer chips and wiring diagrams.)
+This is discussed further in chapter 6.
+
+\item
+Can you label or ``color'' all the vertices of a graph 
+in such a way that no adjacent vertices have the same color?
+If so, this is called a {\it vertex coloring}.
+Can you label or ``color'' all the edges of a graph 
+in such a way that no incident edges have the same color?
+If so, this is called an {\it edge coloring}.
+Graph coloring has several remarkable applications,
+one of which is to scheduling of jobs relying on a shared resource.
+This is discussed further in chapter 7.
+
+\item
+In some fields, such as operations research, a directed graph 
+with non-negative edge weights is
+called a 
+{\it network}, the vertices are called {\it nodes}, the edges are
+called {\it arcs}, and the weight on an edge is called
+its {\it capacity}. A ``network flow'' must satisfy the restriction 
+that the amount of flow into a node equals the amount of 
+flow out of it, except when it is a ``source node'', which has 
+more outgoing flow, or a ``sink node'', which has more incoming flow.
+Also, the flow along an edge must not exceed the capacity.
+What is the maximum flow on a network and how to you
+find it? This problem, which has 
+many applications, is discussed in chapter 8.
+\end{itemize}
 
