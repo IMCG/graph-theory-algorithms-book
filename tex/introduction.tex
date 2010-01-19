@@ -289,7 +289,6 @@ and $\Delta(G) = 3$. In the following Sage session, we construct the
 digraph in Figure~\ref{fig:introduction:directed_triangle_graph} and
 computes its maximum and minimum number of degrees.
 \index{degree of a vertex}
-
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -382,7 +381,7 @@ edges, then $m = rn / 2$.
 \section{Subgraphs and other graph types}
 
 
-%%-----------------------------------------------------------------------%%
+%%--- Walks, trails, and paths ------------------------------------------%%
 
 \subsection{Walks, trails, and paths}
 
@@ -560,7 +559,7 @@ hard as finding the shortest path from a vertex $v$ to \emph{all}
 other vertices in the graph!
 
 
-%%-----------------------------------------------------------------------%%
+%%--- Subgraphs, complete and bipartite graphs --------------------------%%
 
 \subsection{Subgraphs, complete and bipartite graphs}
 
@@ -1014,7 +1013,6 @@ girl dances three times, once with with each of the three boys, then
 the resulting graph is $K_{3,3}$.
 
 
-
 %%-----------------------------------------------------------------------%%
 %%--- Representing graphs as matrices -----------------------------------%%
 
@@ -1030,6 +1028,9 @@ the hand-shakes and also all the ``non-hand-shakes.'' This is
 basically what the adjacency matrix does. In this kind of
 ``sparse graph'' situation, it would be much easier to simply record
 the hand-shakes as a Python dictionary.
+
+
+%%--- Adjacency matrix --------------------------------------------------%%
 
 \subsection{Adjacency matrix}
 
@@ -1052,7 +1053,6 @@ If $G$ is a directed graph with vertices $V = \{ v_1, \dots, v_n \}$
 and edges $E$, then the $(0, -1, 1)$-\emph{adjacency matrix} of $G$ is
 the $n \times n$ matrix $A = (a_{ij})$ defined by
 \index{adjacency matrix}
-
 \[
 a_{ij}
 =
@@ -1062,7 +1062,6 @@ a_{ij}
 0,  & \text{otherwise}.
 \end{cases}
 \]
-
 %\begin{itemize}
 %\item what's a matrix?
 %
@@ -1146,6 +1145,8 @@ sage: M = G.weighted_adjacency_matrix(); M
 \end{center}
 
 
+%%--- Incidence matrix --------------------------------------------------%%
+
 \subsection{Incidence matrix}
 
 The relationship between edges and vertices provides a very strong
@@ -1203,6 +1204,8 @@ sage: G.incidence_matrix()
 %\end{example}
 
 
+%%--- Laplacian matrix --------------------------------------------------%%
+
 \subsection{Laplacian matrix}
 
 The \emph{degree matrix} of a graph $G = (V,E)$ is an $n \times n$
@@ -1249,6 +1252,8 @@ sage: G.laplacian_matrix()
 There are many remarkable properties of the Laplacian matrix. It shall
 be discussed further in Chapter~\ref{chap:distance_connectivity}.
 
+
+%%--- Distance matrix ---------------------------------------------------%%
 
 \subsection{Distance matrix}
 
@@ -1666,7 +1671,7 @@ sage: G1u2.adjacency_matrix()
 The \emph{graph join} of two graphs $G_1$ and $G_2$ is their graph
 union with all the edges that connect the vertices of the first graph
 with the vertices of the second graph. For example, the graph join of
-the cycle graph $C_{n-1}$ with a single vertex graph is the wheeel
+the cycle graph $C_{n-1}$ with a single vertex graph is the wheel
 graph $W_n$.
 
 %% Sorry Minh - I don't understand how you intended
@@ -1686,7 +1691,7 @@ graph $W_n$.
 \item Vertex-deletion subgraph
 
 If $G = (V,E)$ is any graph with at least $2$ vertices, then the
-\emph{vertex-deletion subgraph} is the subgraph obtained fromm $G$ by
+\emph{vertex-deletion subgraph} is the subgraph obtained from $G$ by
 deleting a vertex $v \in V$ and also all the edges incident to that
 vertex. It is sometimes denoted $G - \{v\}$.
 \index{vertex-deletion subgraph}
@@ -1710,7 +1715,7 @@ sage: G.vertices()
 \item Edge-deletion subgraph
 
 If $G = (V,E)$ is any graph with at least $1$ edge, then the
-\emph{edge-deletion subgraph} is the subgraph obtained fromm $G$ by
+\emph{edge-deletion subgraph} is the subgraph obtained from $G$ by
 deleting an edge $e \in E$, but not the vertices incident to that edge.
 It is sometimes denoted $G - \{e\}$. Sage can compute edge deletions,
 as the following example shows.
