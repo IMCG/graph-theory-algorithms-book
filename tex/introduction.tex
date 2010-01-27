@@ -70,8 +70,8 @@ edge $(v_1, v_2)$ as $v_1 v_2$. The edge $v_1 v_2$ is also said to be
 \label{fig:introduction:house_graph}
 \end{figure}
 
-\begin{exercise}
-\label{ex:introduction:house_graph}
+\begin{example}
+\label{eg:introduction:house_graph}
 Consider the graph in Figure~\ref{fig:introduction:house_graph}.
 %
 \begin{enumerate}
@@ -89,7 +89,7 @@ Consider the graph in Figure~\ref{fig:introduction:house_graph}.
 \item If all vertices of the graph are removed, is the resulting
   figure still a graph? Why or why not?
 \end{enumerate}
-\end{exercise}
+\end{example}
 
 \begin{proof}[Solution]
 (1) Let $G = (V, E)$ denote the graph in
@@ -177,11 +177,11 @@ sets are empty. This is a special graph known as an \emph{empty} or
 \emph{null} graph.
 \end{proof}
 
-\begin{exercise}
+\begin{example}
 Consider the illustration in
 Figure~\ref{fig:introduction:self_loop}. Does
 Figure~\ref{fig:introduction:self_loop} represent a graph? Why or why not?
-\end{exercise}
+\end{example}
 
 \begin{proof}[Solution]
 If $V = \{ a, b, c \}$ and $E = \{ aa, bc \}$, it is clear that $E
@@ -278,7 +278,7 @@ Figure~\ref{fig:introduction:house_graph}, we have $\deg(b) = 3$. For
 the graph in Figure~\ref{fig:introduction:directed_triangle_graph}, we
 have $\deg(b) = 2$. If $V \neq \emptyset$ and $E = \emptyset$, then
 $G$ is a graph consisting entirely of isolated vertices. From
-Exercise~\ref{ex:introduction:house_graph} we know that the vertices
+Example~\ref{eg:introduction:house_graph} we know that the vertices
 $a, c, d$ in Figure~\ref{fig:introduction:house_graph} have the
 smallest degree in the graph of that figure, while $b, e$ have the
 largest degree. The minimum degree among all vertices in $G$ is
@@ -466,7 +466,7 @@ Figure~\ref{fig:introduction:types_of_walks} is a closed path. It is
 easy to see that if you remove any edge from a cycle, then the
 resulting walk contains no closed paths.
 
-\begin{exercise}
+\begin{example}
 Consider the graph in Figure~\ref{fig:introduction:types_of_walks}.
 %
 \begin{enumerate}
@@ -483,7 +483,7 @@ Consider the graph in Figure~\ref{fig:introduction:types_of_walks}.
 \item Find a closed path $C$ which has an edge $e$ such that $C - e$
   contains a cycle.
 \end{enumerate}
-\end{exercise}
+\end{example}
 
 \begin{proof}[Solution]
 (1) Here are two distinct walks that are not trails:
@@ -516,11 +516,11 @@ are geodesic paths between $a$ and $c$.
 \index{path!geodesic}
 \index{graph!connected}
 
-\begin{exercise}
+\begin{example}
 Determine whether or not the graph in
 Figure~\ref{fig:introduction:types_of_walks} is connected. Find a
 shortest path from $g$ to $d$.
-\end{exercise}
+\end{example}
 
 \begin{proof}[Solution]
 In the following Sage session, we first construct the graph in
@@ -1405,11 +1405,11 @@ $f(v_1), f(v_k) \in V(H)$.
 %% and how that gives rise to isomorphism/automorphism
 %% testing methods???
 
-\begin{exercise}
+\begin{example}
 Consider the graphs in
 Figure~\ref{fig:introduction:isomorphic_graphs}. Which pair of graphs
 are isomorphic, and which two graphs are non-isomorphic?
-\end{exercise}
+\end{example}
 
 \begin{proof}[Solution]
 If \verb!G! is a Sage graph, one can use the method
@@ -1877,10 +1877,10 @@ The Cartesian product of $n$ edge graphs $K_2$ is a hypercube:
 (K_2)^{\square n} = Q_n.
 \]
 
-\begin{exercise}
+\begin{example}
 The Cartesian product of two hypercube graphs is another
 hypercube: $Q_i \square Q_j = Q_{i+j}$.
-\end{exercise}
+\end{example}
 
 %% Sorry Minh, I don't know what mesh means. Do you mean median graphs?
 %\item meshes
