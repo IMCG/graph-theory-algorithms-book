@@ -4,43 +4,46 @@
 \chapter{Graph Algorithms}
 \label{chap:graph_algorithms}
 
-Graph algorithms have many applications. For example,
-suppose you are a salesman with a product you would like to sell
-in several cities. To determine the cheapest travel route from
-city-to-city, you must effectively search a graph
-having weighted edges (whose vertices denotes the cities you must
-visit and whose edges have weights
-indicating either the distance from one city to
-another or the cost to travel from one city to another)
-for the ``cheapest'' route visiting all cities once.
+Graph algorithms have many applications. Suppose you are a salesman
+with a product you would like to sell in several cities. To determine
+the cheapest travel route from city-to-city, you must effectively
+search a graph having weighted edges for the ``cheapest'' route
+visiting each city once. Each vertex denotes a city you must visit and
+each edge has a weight indicating either the distance from one city to
+another or the cost to travel from one city to another.
 
 Shortest path algorithms are some of the most important algorithms in
-algorithmic graph theory.
-We chall examine several in this chapter.
+algorithmic graph theory. We shall examine several in this chapter.
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Graph searching ---------------------------------------------------%%
 
 \section{Graph searching}
 
-This section discusses algorithms for 
+This section discusses algorithms for
 
 \begin{itemize}
-\item 
+\item
 breadth-first searches,
 
-\item 
+\item
 depth-first searches, and
 
-\item 
+\item
 we explain how these relate to determining a graph's connectivity.
 \end{itemize}
 
-\subsection{Breadth-first search} 
 
-{\it Breadth-first search} (BFS) is a strategy for running through the
-nodes of a graph. Suppose you want to count the number of
-vertices (or edges) satisfying a property $P$.
+%%--- Breadth-first search ----------------------------------------------%%
+
+\subsection{Breadth-first search}
+
+\emph{Breadth-first search} (BFS) is a strategy for running through
+the nodes of a graph. Suppose you want to count the number of vertices
+(or edges) satisfying a property
+$P$. Algorithm~\ref{alg:graph_algorithms:breadth_first_search}
+presents a technique for finding the number of vertices satisfying $P$.
 
 \begin{algorithm}[!htpb]
 \SetLine
@@ -48,35 +51,36 @@ vertices (or edges) satisfying a property $P$.
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
+\SetKwData{Count}{count}
 \SetKwData{False}{False}
 \SetKwData{True}{True}
 %% input/output
-\Input{A connected graph $G=(V,E)$ (and, optionally, a starting or
-  ``root'' vertex $v_0\in V$).}
+\Input{A connected graph $G = (V, E)$ (and, optionally, a starting or
+  ``root'' vertex $v_0 \in V$). A property $P$ to be tested.}
 \Output{The number of vertices of $G$ satisfying $P$.}
 \BlankLine
 %% algorithm body
-Create a queue $Q$ of ``unseen'' vertices initially
-containing a starting vertex $v_0$. 
+Create a queue $Q$ of ``unseen'' vertices initially containing a
+starting vertex $v_0$.\;
 
-Start a list of ``already seen'' vertices, $T$, initially empty.
+Start a list $T$ of ``already seen'' vertices initially empty.\;
 
-initialize count = 0.
+$\Count \leftarrow 0$\;
 
 \For{$w \in Q$}{
-Test $w$ for $P$. 
-\If{$P(w)$=True}{count = count+1}
-
-Add all neighbors of $w$ not in $T$ to $Q$.
-
-Remove all ``seen'' vertices $w$ from $Q$.
-Add such $w$ to $T$.
-
-\If{$T=V$} 
-{return count (and stop).}
+  Test $w$ for $P$.\;
+  \If{$P(w) = \True$}{
+    $\Count \leftarrow \Count + 1$\label{abc:step:counter}
+  }
+  Add all neighbors of $w$ not in $T$ to $Q$.\;
+  Remove all ``seen'' vertices $w$ from $Q$.\;
+  Add such $w$ to $T$.\;
+  \If{$T = V$}{
+    \Return \Count
+  }
 }
-\caption{Breadth first search.}
-\label{alg:chapter2:BFS}
+\caption{Breadth-first search.}
+\label{alg:graph_algorithms:breadth_first_search}
 \end{algorithm}
 
 %Algorithm to find a vertex satisfying property P.
@@ -95,76 +99,87 @@ Add such $w$ to $T$.
 %and add them to T.
 %(d) If T=V, stop and return False.
 
-Another version of this algorithm is where you are searching the 
-vertex for a vertex (or edge) satisfying a certain property $P$.
-In that situation, you simply quit at the step where
-{\tt count=count+1} is given. Other variations are also possible.
+Another version of
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search} is where you
+are searching the graph for a vertex (or edge) satisfying a certain
+property $P$. In that situation, you simply quit at the step where you
+increment the counter, i.e. line~7 in
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search}. Other
+variations are also possible as well.
 
-
-For the example of the graph in Figure
-\ref{fig:introduction:types_of_walks}, the list of distances from
-vertex {\tt a} to any other vertex is 
-{\tt [['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1], ['f', 2],
-  ['g', 2]]}. To create this list, 
-
+For the example of the graph in
+Figure~\ref{fig:introduction:types_of_walks}, the list of distances
+from vertex \verb!a! to any other vertex is
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+[['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1], ['f', 2], ['g', 2]]
+\end{lstlisting}
+\end{center}
+%
+To create this list,
+%
 \begin{itemize}
 \item
-Start at {\tt a} and compute the distance from {\tt a} to itself. 
+Start at \verb!a! and compute the distance from \verb!a! to itself.
 
 \item
-Move to each neighbor of {\tt a}, namely
-{\tt b} and {\tt e}, and compute the distance form {\tt a}
-to each of them.
+Move to each neighbor of \verb!a!, namely \verb!b! and \verb!e!, and
+compute the distance fromm \verb!a! to each of them.
 
 \item
-Move to each ``unseen'' neighbor of {\tt b}, namely just
-{\tt c}, and compute the distance form {\tt a} to it.
+Move to each ``unseen'' neighbor of \verb!b!, namely just \verb!c!,
+and compute the distance fromm \verb!a! to it.
 
 \item
-Move to each ``unseen'' neighbor of {\tt e}, namely just
-{\tt f}, and compute the distance from {\tt a} to it.
+Move to each ``unseen'' neighbor of \verb!e!, namely just \verb!f!,
+and compute the distance from \verb!a! to it.
 
 \item
-Move to each ``unseen'' neighbor of {\tt c}, namely just
-{\tt d}, and compute the distance form {\tt a} to it.
+Move to each ``unseen'' neighbor of \verb!c!, namely just \verb!d!,
+and compute the distance fromm \verb!a! to it.
 
 \item
-Move to each ``unseen'' neighbor of {\tt f}, namely just
-{\tt g}, and compute the distance form {\tt a} to it.
-
+Move to each ``unseen'' neighbor of \verb!f!, namely just \verb!g!,
+and compute the distance fromm \verb!a! to it.
 \end{itemize}
 
-
-As an example, here is some Sage code which implements BFS to
-compute the list distances form a given vertex.
-
-\begin{verbatim}
-
+As an example, here is some Sage code which implements BFS to compute
+the list distances from a given vertex.
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
 def graph_distance(G, v0):
     """
-    Breadth first search algorithm to find the 
+    Breadth first search algorithm to find the
     distance from a fixed vertex $v_0$ to any
     other vertex.
 
     INPUT:
         G - a connected graph
         v0 - a vertex
-   
-    OUTPUT: 
-        D - a list of distances to 
+
+    OUTPUT:
+        D - a list of distances to
             every other vertex
 
     EXAMPLES:
-        sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 
+        sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6],
                          4: [1, 3], 5: [4, 2], 6: [3, 1]})
         sage: v0 = 1
         sage: graph_distance(G,v0)
         [[1, 0], [2, 1], [3, 2], [4, 1], [5, 2], [6, 1]]
         sage: G = Graph({"a": ["b", "e"], "b": ["c", "e"], \
          "c": ["d", "e"], "d": ["f"], "e": ["f"], "f": ["g"], "g":["b"]})
-        sage: v0 = "a"            
+        sage: v0 = "a"
         sage: graph_distance(G, v0)
-        [['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1], 
+        [['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1],
          ['f', 2], ['g', 2]]
         sage: G = Graph({1: [2,3], 2: [1, 3], 3: [2], 4: [5], 5: [6], 6: [5]})
         sage: v0 = 1
@@ -182,58 +197,59 @@ def graph_distance(G, v0):
             if v in Q:
                 Q.remove(v)
             T.append(v)
-            T = list(Set(T)) 
+            T = list(Set(T))
             Q = Q+[x for x in G.neighbors(v) if not(x in T+Q)]
             if T == V:
                 break
     D.sort()
     print Q, T
     return D
-\end{verbatim}
-
+\end{lstlisting}
+\end{center}
+%
 \begin{exercise}
-Using Sage's {\tt shortest\_path} method, can you modify the 
-above function to return a list of shortest paths from 
-$v_0$ o any other vertex?
+Using Sage's \verb!shortest_path! method, can you modify the above
+function to return a list of shortest paths from $v_0$ to any other
+vertex?
 \end{exercise}
 
 
+%%--- Depth-first search ------------------------------------------------%%
+
 \subsection{Depth-first search}
 
-A depth-first search is a type of algorithm which visits
-each vertex of a graph but proceeds from vertex-to-vertex in this
-search but moving along a spanning tree of that graph.
+A depth-first search is a type of algorithm that visits each vertex of
+a graph, proceeding from vertex-to-vertex in this search but moving
+along a spanning tree of that graph.
 
-Here is an example.
-Suppose you have a normal $8\times 8$ chess board in front
-of you, with a single knight piece on the board. If you can find a
-sequence of knight moves which visits each and every square exactly
-once, then you will have found a so-called {\it complete knight tour}.
+Suppose you have a normal $8 \times 8$ chess board in front of you,
+with a single knight piece on the board. If you can find a sequence of
+knight moves which visits each and every square exactly once, then you
+will have found a so-called \emph{complete knight tour}.
 \index{knight tour}
-Naively, how do you find a complete knight tour? Intuitively, you would make
-one knight move after another, recording each move to insure that
-you did not step on a square you have already visited, 
-until you could not make any more moves.
-It is very, very unlikely that if do this you will have visited every 
-square exactly once
-(if you don't believe me, please try it yourself!). Acknowledging defeat,
-at this stage, it might make sense to ``backtrack'' a few moves and
-try again, hoping you will not get ``stuck'' so soon.
-If you fail again, try ``backtracking'' a few move moves
-and traverse yet another path, hoping to make further progress.
-Repeat this until a compete tour is found.
-This is an example of ``depth-first search'' (also
-sometimes called ``backtracking'').
+Naively, how do you find a complete knight tour? Intuitively, you
+would make one knight move after another, recording each move to
+ensure that you did not step on a square you have already visited,
+until you could not make any more moves. It is very, very unlikely
+that if do this you will have visited every square exactly once (if
+you don't believe me, please try it yourself!). Acknowledging defeat,
+at this stage, it might make sense to \emph{backtrack} a few moves and
+try again, hoping you will not get ``stuck'' so soon. If you fail
+again, try backtracking a few move moves and traverse yet another
+path, hoping to make further progress. Repeat this until a compete
+tour is found. This is an example of \emph{depth-first search}, also
+sometimes called \emph{backtracking}.
 
-More precisely, {\it depth-first search} (DFS) is, like BFS, an algorithm for traversing 
-a graph. One starts at a ``root vertex'' and explores as ``far as possible''
-along each branch before, if necessary, backtracking along a new path. It is easier to see what this 
-means in the case of a rooted tree than for more general graphs, as
-illustrated below.
+Similar to BFS, \emph{depth-first search} (DFS) is an algorithm for
+traversing a graph. One starts at a \emph{root vertex} and explores as
+\emph{far as possible} along each branch before, if necessary,
+backtracking along a new path. It is easier to see what this means in
+the case of a rooted tree than for more general graphs, as illustrated
+below.
 \index{depth-first search}
 
-Suppose you want to count the number of
-vertices (or edges) satisfying a property $P$.
+Suppose you want to count the number of vertices (or edges) satisfying
+a property $P$.
 
 \begin{algorithm}[!htpb]
 \SetLine
@@ -241,38 +257,36 @@ vertices (or edges) satisfying a property $P$.
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
+\SetKwData{Count}{count}
 \SetKwData{False}{False}
 \SetKwData{True}{True}
 %% input/output
-\Input{A rooted tree $G=(V,E)$ with  ``root'' vertex $v_0\in V$.}
-\Output{\True, if $G$ has a vertex satisfying $P$; \False, otherwise.}
+\Input{A rooted tree $G = (V, E)$ with  root vertex $v_0 \in V$.}
+\Output{\True if $G$ has a vertex satisfying $P$; \False otherwise.}
 \BlankLine
 %% algorithm body
-Create a queue $Q$ of ``child'' vertices of the root $v_0$. 
-
-Initialize a list of ``seen'' vertices, $S$.
-
-initialize count = 0.
-
+Create a queue $Q$ of ``child'' vertices of the root $v_0$.\;
+Initialize a list $S$ of ``seen'' vertices.\;
+$\Count \leftarrow 0$\;
 \For{$w \in Q$}{
-
-Test $w$ for $P$. 
-\If{$P(w)$=True}{count = count+1}
-Add $w$ to $S$.
-
-\If{$S=V$} 
-{return count (and stop).}
+  Test $w$ for $P$.\;
+  \If{$P(w) = \True$}{
+    $\Count \leftarrow \Count + 1$
+  }
+  Add $w$ to $S$.\;
+  \If{$S = V$} {
+    \Return \Count
+  }
 }
-
-Call the DFS algorithm iteratively with the
-rooted subtree having $w$ and all its children as
-vertices and $w$ as the rooted vertex.
+Call the DFS algorithm iteratively with the rooted subtree having $w$
+and all its children as vertices and $w$ as the rooted vertex.
 \caption{Depth-first search.}
-\label{alg:chapter2:DFS}
+\label{alg:graph_algorithms:depth_first_search}
 \end{algorithm}
 
-In the case of a graph, you can modify the above algorithm to
-a so-called iterative DFS which applies DFS repeatedly with an
+In the case of a graph, you can modify
+Algorithm~\ref{alg:graph_algorithms:depth_first_search} to a so-called
+iterative DFS. This modification applies DFS repeatedly with an
 increasing depth of search at each step, until the diameter of the
 graph is reached and all vertices are seen.
 
@@ -291,20 +305,19 @@ See Dijkstra~\cite{Dijkstra1959}, section~24.3 of
 Cormen~et~al.~\cite{CormenEtAl2001}, and section~12.6 of Berman and
 Paul~\cite{BermanPaul1997}.
 
-Dijkstra's algorithm, discovered by E. Dijkstra in 1959, is a graph 
-search algorithm that solves the single-source shortest path problem 
-for a graph with nonnegative edge weights. 
-For example, if the vertices of a weighted graph represent cities and edge
-weights represent distances between pairs of cities
-connected by a direct road, Dijkstra's algorithm can be used to find
-the shortest route from a fixed city to all other cities.
+Dijkstra's algorithm, discovered by E.~Dijkstra in 1959, is a graph
+search algorithm that solves the single-source shortest path problem
+for a graph with nonnegative edge weights. For example, if the
+vertices of a weighted graph represent cities and edge weights
+represent distances between pairs of cities connected by a direct
+road, Dijkstra's algorithm can be used to find the shortest route from
+a fixed city to all other cities.
 
-It is remarkable that, at the present state of knowledge, 
-given two distinct vertices $v,w$ of a graph $G$, the
-fastest algorithm determining a shortest path from $v$ to $w$ is 
-no faster (in general) than the fastest algorithm determining a
-shortest path from $v$ to {\it any} other vertex of $G$.
-
+It is remarkable that, at the present state of knowledge, given two
+distinct vertices $v, w$ of a graph $G$, the fastest algorithm
+determining a shortest path from $v$ to $w$ is no faster (in general)
+than the fastest algorithm determining a shortest path from $v$ to
+\emph{any} other vertex of $G$.
 
 
 %%-----------------------------------------------------------------------%%
