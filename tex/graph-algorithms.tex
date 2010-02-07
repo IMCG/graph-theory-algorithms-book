@@ -620,17 +620,36 @@ sage: bellman_ford(G, G.vertices()[0])
 \end{lstlisting}
 \end{center}
 The plot of this graph is given in Figure
-\ref{fig:bellman-ford-algorithm-example1}.
+\ref{fig:graph_algorithms:Bellman_Ford_example}.
 
-% FIXME graphics
 
-%% \begin{figure}[h!]
-%% \begin{center}
-%% \includegraphics[height=9cm,width=7cm]{bellman-ford-algorithm-example1}
-%% \end{center}
-%% \caption{Bellman-Ford algorithm example . }
-%% \label{fig:bellman-ford-algorithm-example1}
-%% \end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (0) at (0,0) [nodedecorate] {};
+\node [below] at (0.south) {$0$};
+\node (2) at (4,0) [nodedecorate] {};
+\node [below] at (2.south) {$2$};
+\node (1) at (1,2.5) [nodedecorate] {};
+\node [above] at (1.north) {$1$};
+\node (3) at (5,2.5) [nodedecorate] {};
+\node [above] at (3.north) {$3$};
+% edges or lines
+\path
+(0) edge[linedecorate] node[left]{$1$} (1)
+(0) edge[linedecorate] node[below]{$4$} (2)
+(1) edge[linedecorate] node[right]{$1$} (2)
+(1) edge[linedecorate] node[above]{$5$} (3)
+(2) edge[linedecorate] node[right]{$3$} (3);
+\end{tikzpicture}
+\caption{Shortest paths in a weighted graph using the Bellman-Ford
+  algorithm.}
+\label{fig:graph_algorithms:Bellman_Ford_example}
+\end{figure}
 %sage: M = matrix([[0,1,4,0],[0,0,1,5],[0,0,0,3],[0,0,0,0]])
 %sage: G = Graph(M, format = "weighted_adjacency_matrix")
 %sage: G.plot(graph_border=True, edge_labels=True).show()
