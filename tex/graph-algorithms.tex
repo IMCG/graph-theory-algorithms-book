@@ -676,15 +676,36 @@ ValueError: Graph contains a negative-weight cycle
 The plot of this graph is given in Figure
 \ref{fig:bellman-ford-algorithm-example1}.
 
-% FIXME graphics
 
-%% \begin{figure}[h!]
-%% \begin{center}
-%% \includegraphics[height=7cm,width=13cm]{bellman-ford-algorithm-example3}
-%% \end{center}
-%% \caption{Bellman-Ford algorithm example with a negative cycle. }
-%% \label{fig:bellman-ford-algorithm-example3}
-%% \end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={->,>=stealth,thick}]
+% nodes or vertices
+\node (0) at (5,0) [nodedecorate] {};
+\node [below] at (0.south) {$0$};
+\node (1) at (1,0) [nodedecorate] {};
+\node [below] at (1.south) {$1$};
+\node (2) at (4,3) [nodedecorate] {};
+\node [above] at (2.north) {$2$};
+\node (3) at (0,3) [nodedecorate] {};
+\node [above] at (3.north) {$3$};
+% edges or lines
+\path
+(0) edge[arrowdecorate,bend left=15] node[below]{$1$} (1)
+(1) edge[arrowdecorate,bend left=10] node[above]{$1$} (0)
+(1) edge[arrowdecorate,bend left=15] node[left]{$-4$} (2)
+(1) edge[arrowdecorate] node[left]{$1$} (3)
+(2) edge[arrowdecorate] node[right]{$1$} (0)
+(2) edge[arrowdecorate,bend left=15] node[right]{$1$} (1)
+(3) edge[arrowdecorate] node[above]{$1$} (2);
+\end{tikzpicture}
+\caption{Searching a digraph with negative weight using the
+  Bellman-Ford algorithm.} 
+\label{fig:bellman-ford-algorithm-example3}
+\end{figure}
 %sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
 %sage: G = Graph(M, format = "weighted_adjacency_matrix")
 %sage: G.plot(graph_border=True, edge_labels=True).show()
