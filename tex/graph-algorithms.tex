@@ -381,7 +381,7 @@ Go to step 1.
 \begin{example}
 {\rm
 Dijkstra's algorithm applied to the graph in Figure
-\ref{fig:dijkstras-algorithm-example2} yields the following
+\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph} yields the following
 table. The steps below explain how this table is created.
 
 \begin{itemize}
@@ -418,12 +418,36 @@ This is the last row of the table.
 
 
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=9cm,width=6cm]{dijkstras-algorithm-example2}
-\end{center}
-\caption{Dijkstra's algorithm example . }
-\label{fig:dijkstras-algorithm-example2}
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={->,>=stealth,thick}]
+% nodes or vertices
+\node (0) at (0,0) [nodedecorate] {};
+\node [below] at (0.south) {$0$};
+\node (2) at (4,0) [nodedecorate] {};
+\node [below] at (2.south) {$2$};
+\node (4) at (8,0) [nodedecorate] {};
+\node [below] at (4.south) {$4$};
+\node (1) at (2,2.5) [nodedecorate] {};
+\node [above] at (1.north) {$1$};
+\node (3) at (6,2.5) [nodedecorate] {};
+\node [above] at (3.north) {$3$};
+% edges or lines
+\path
+(0) edge[arrowdecorate] node[left]{$10$} (1)
+(0) edge[arrowdecorate] node[below]{$3$} (2)
+(1) edge[arrowdecorate,bend left] node[right]{$1$} (2)
+(1) edge[arrowdecorate] node[above]{$2$} (3)
+(2) edge[arrowdecorate,bend left] node[left]{$4$} (1)
+(2) edge[arrowdecorate] node[left]{$8$} (3)
+(2) edge[arrowdecorate] node[below]{$2$} (4)
+(3) edge[arrowdecorate,bend left] node[right]{$7$} (4)
+(4) edge[arrowdecorate,bend left] node[left]{$9$} (3);
+\end{tikzpicture}
+\caption{Searching a digraph using Dijkstra's algorithm.}
+\label{fig:graph_algorithms:Dijkstra_algorithm_digraph}
 \end{figure}
 %sage: M = matrix([[0,10,3,0,0],[0,0,1,2,0],[0,4,0,8,2],[0,0,0,0,7],[0,0,0,9,0]])
 %sage: D = DiGraph(M, format="weighted_adjacency_matrix")
@@ -451,13 +475,15 @@ Dijkstra's algorithm applied to the graph in Figure
 table. We leave it to the reader to verify that 
 the steps to create this table..
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=7cm,width=13cm]{dijkstras-algorithm-example3}
-\end{center}
-\caption{Another Dijkstra's algorithm example . }
-\label{fig:dijkstras-algorithm-example3}
-\end{figure}
+% FIXME graphics
+
+%% \begin{figure}[h!]
+%% \begin{center}
+%% \includegraphics[height=7cm,width=13cm]{dijkstras-algorithm-example3}
+%% \end{center}
+%% \caption{Another Dijkstra's algorithm example . }
+%% \label{fig:dijkstras-algorithm-example3}
+%% \end{figure}
 %sage: M = matrix([[0,1,3,0,6],[0,0,1,3,0],[1,2,0,1,0],[3,0,0,0,2],[0,0,0,1,0]])
 %sage: D = DiGraph(M, format="weighted_adjacency_matrix")
 %sage: D.plot(edge_labels=True, graph_border=True).show()
@@ -570,13 +596,15 @@ sage: bellman_ford(G, G.vertices()[0])
 The plot of this graph is given in Figure
 \ref{fig:bellman-ford-algorithm-example1}.
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=9cm,width=7cm]{bellman-ford-algorithm-example1}
-\end{center}
-\caption{Bellman-Ford algorithm example . }
-\label{fig:bellman-ford-algorithm-example1}
-\end{figure}
+% FIXME graphics
+
+%% \begin{figure}[h!]
+%% \begin{center}
+%% \includegraphics[height=9cm,width=7cm]{bellman-ford-algorithm-example1}
+%% \end{center}
+%% \caption{Bellman-Ford algorithm example . }
+%% \label{fig:bellman-ford-algorithm-example1}
+%% \end{figure}
 %sage: M = matrix([[0,1,4,0],[0,0,1,5],[0,0,0,3],[0,0,0,0]])
 %sage: G = Graph(M, format = "weighted_adjacency_matrix")
 %sage: G.plot(graph_border=True, edge_labels=True).show()
@@ -603,13 +631,15 @@ ValueError: Graph contains a negative-weight cycle
 The plot of this graph is given in Figure
 \ref{fig:bellman-ford-algorithm-example1}.
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=7cm,width=13cm]{bellman-ford-algorithm-example3}
-\end{center}
-\caption{Bellman-Ford algorithm example with a negative cycle. }
-\label{fig:bellman-ford-algorithm-example3}
-\end{figure}
+% FIXME graphics
+
+%% \begin{figure}[h!]
+%% \begin{center}
+%% \includegraphics[height=7cm,width=13cm]{bellman-ford-algorithm-example3}
+%% \end{center}
+%% \caption{Bellman-Ford algorithm example with a negative cycle. }
+%% \label{fig:bellman-ford-algorithm-example3}
+%% \end{figure}
 %sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
 %sage: G = Graph(M, format = "weighted_adjacency_matrix")
 %sage: G.plot(graph_border=True, edge_labels=True).show()
