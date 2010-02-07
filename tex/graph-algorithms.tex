@@ -307,18 +307,173 @@ Paul~\cite{BermanPaul1997}.
 
 Dijkstra's algorithm, discovered by E.~Dijkstra in 1959, is a graph
 search algorithm that solves the single-source shortest path problem
-for a graph with nonnegative edge weights. For example, if the
+for a graph with non-negative edge weights. For example, if the
 vertices of a weighted graph represent cities and edge weights
 represent distances between pairs of cities connected by a direct
 road, Dijkstra's algorithm can be used to find the shortest route from
 a fixed city to all other cities.
 
-It is remarkable that, at the present state of knowledge, given two
-distinct vertices $v, w$ of a graph $G$, the fastest algorithm
-determining a shortest path from $v$ to $w$ is no faster (in general)
-than the fastest algorithm determining a shortest path from $v$ to
-\emph{any} other vertex of $G$.
+%It is remarkable that, at the present state of knowledge, given two
+%distinct vertices $v, w$ of a graph $G=(V,E)$, the fastest algorithm
+%determining a shortest path from $v$ to $w$ appears to be no faster (in general)
+%than the fastest algorithm determining a shortest path from $v$ to
+%\emph{any} other vertex of $G$.
 
+ Let $G=(V,E)$ be a graph with non-negative edge weights,
+$w(e)$ for $e\in E$. Fix a start or source vertex $v_0\in V$.
+The {\it length of a path} $P$ from $v\in V$ to $w\in V$ is
+the sum of the edge weights for each edge in the path $P$,
+denoted $\delta (P)$. We write $\delta(v,w)$ for the smalest value of
+$\delta(P)$ for all paths $P$ from $v$ to $w$.
+\index{path length}
+
+Dijkstra's algorithm performs a number of steps, basically
+one step for each vertex in $V$. We partition the vertices $V$ into
+two subsets, the set $F$ of vertices where we have found the
+shortest path to $v_0$, and the ``queue'' $Q$ where we do not
+yet know for sure the shortest path to $v_0$.
+The vertices $v\in F$ are labeled with $\delta(v,v_0)$.
+The vertices $v\in Q$ are labeled with a temporary label,
+$L(v)$, which is either $\infty$ if no path from $v$ to $v_0$ has
+yet been examined, or an upper bound on $\delta(v,v_0)$
+obtained by computing $\delta(P)$ for a path $P$ from
+$v$ to $v_0$ which has been found (but may not be
+the shortest path).
+
+
+\begin{algorithm}[!htpb]
+\SetLine
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{Count}{count}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+%% input/output
+\Input{A connected graph $G = (V, E)$ having non-negative edge weghts
+and a starting vertex $v_0 \in V$. }
+\Output{A shortest path from $v_0$ to an vertex in $V$.}
+\BlankLine
+%% algorithm body
+Create a queue $Q$ of ``unseen'' vertices initially being
+all of $V$.\;
+
+Start a list $F$ of ``already seen'' vertices initially empty.\;
+
+Initialize labels $L(v_0)=0$ and $L(v)=\infty$ for all
+$v\in V$ with $v\not= v_0$.
+
+(1) FInd $v\in Q$ for which $L(v)$ is finite and minimum.
+If not such $v$ exists, stop. Otherwise, label $v$ with 
+the distance $\delta(v,v_0)=L(v)$, add $v$ to $F$ and 
+remove $v$ from $Q$. Stop if $F=V$.
+
+(2) For all $w\in Q$, replace $L(w)$ by
+${\rm min}(L(w),L(v)+wt(v,w)$ for all $w\in Q$ which are 
+adjacent to the vertex $v$ in (1).
+Go to step 1.
+
+\caption{Dijkstra's algorithm.}
+\label{alg:graph_algorithms:dijkstra}
+\end{algorithm}
+
+\begin{example}
+{\rm
+Dijkstra's algorithm applied to the graph in Figure
+\ref{fig:dijkstras-algorithm-example2} yields the following
+table. The steps below explain how this table is created.
+
+\begin{itemize}
+\item
+Start at $v_0$, let $Q=V$ and $F=\emptyset$.
+Initialize the labels $L(v)$ to be $\infty$ for all
+$v\not= v_0$. This is the first row of the table.
+Take the vertex $v_0$ out of the queue.
+
+\item
+Consider the set of all adjacent nodes to $v_0$.
+Replace the labels in the first row by the weights
+of the associated edges.
+Underline the smallest one and take it's vertex
+($v_2$) out of the queue.
+This is the second row of the table.
+
+\item
+Consider the set of all nodes $w$ which are adjacent 
+to $v_2$. Replace the labels in the second row by 
+${\rm min}(L(w),L(v_2)+wt(v_2,w)$
+Underline the smallest one and take it's vertex
+($v_4$) out of the queue.
+This is the third row of the table.
+
+\item
+First the last row, start from $v_4$ and find 
+the path to the remaining vertex $v_3$ in $Q$.
+Take the smallest distance from $v_0$ to $v_3$.
+This is the last row of the table.
+
+\end{itemize}
+
+
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=9cm,width=6cm]{dijkstras-algorithm-example2}
+\end{center}
+\caption{Dijkstra's algorithm example . }
+\label{fig:dijkstras-algorithm-example2}
+\end{figure}
+%sage: M = matrix([[0,10,3,0,0],[0,0,1,2,0],[0,4,0,8,2],[0,0,0,0,7],[0,0,0,9,0]])
+%sage: D = DiGraph(M, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
+
+
+\[
+\begin{array}{ccccc}
+v_0  & v_1  & v_2     &  v_3     & v_4  \\\
+\underline{0}    & \infty & \infty & \infty & \infty \\
+      & 10      & \underline{3}        & \infty & \infty \\
+      &  7       &            &  11     & \underline{5}       \\
+      &  \underline{7}       &            &  11     &         \\
+      &          &            &   \underline{9}     &         \\
+\end{array}
+\]
+
+}
+\end{example}
+
+\begin{exercise}
+{\rm
+Dijkstra's algorithm applied to the graph in Figure
+\ref{fig:dijkstras-algorithm-example2} yields the following
+table. We leave it to the reader to verify that 
+the steps to create this table..
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=7cm,width=13cm]{dijkstras-algorithm-example3}
+\end{center}
+\caption{Another Dijkstra's algorithm example . }
+\label{fig:dijkstras-algorithm-example3}
+\end{figure}
+%sage: M = matrix([[0,1,3,0,6],[0,0,1,3,0],[1,2,0,1,0],[3,0,0,0,2],[0,0,0,1,0]])
+%sage: D = DiGraph(M, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
+
+\[
+\begin{array}{ccccc}
+v_0  & v_1  & v_2     &  v_3     & v_4  \\\
+\underline{0}    & \infty & \infty & \infty & \infty \\
+      & \underline{1}      & 3        & \infty & 6 \\
+      &     &    \underline{2}    &  4     &    6       \\
+      &     &                            &  \underline{3}     &   6      \\
+      &          &            &           & \underline{5}  \\
+\end{array}
+\]
+}
+\end{exercise}
 
 %%-----------------------------------------------------------------------%%
 %%--- Bellman-Ford algorithm --------------------------------------------%%
@@ -328,6 +483,136 @@ than the fastest algorithm determining a shortest path from $v$ to
 See section~24.1 of Cormen~et~al.~\cite{CormenEtAl2001}, and
 section~8.5 of Berman and Paul~\cite{BermanPaul1997}.
 
+The Bellman-Ford algorithm computes single-source shortest paths in a weighted 
+graph or digraph, where some of the edge weights may be negative.
+Instead of the ``greedy'' approach that Dijkstra's algorithm took, 
+seaching for the ``cheapest'' path, this algorithm searches over all
+edges and keeps track of the shortest one found as it searches.
+
+The implementation below takes in a graph or digraph, and creates Python
+dictionaries dist and predecessor, keyed on the list of vertices, 
+which store the distance and shortest paths. However, if a 
+negative weight cycle exists (in the case of a digraph) then 
+an error is raised.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+def bellman\_ford(Gamma, s):
+    """
+    Computes the shortest distance from s to all other vertices in Gamma.
+    If Gamma has a negative weight cycle then it returns an error.
+
+    INPUT:
+        Gamma - a graph 
+            s - the source vertex.
+
+    OUTPUT:
+        (d,p) - pair of dictionaries keyed on the list 
+                of vertices, which store the distance and 
+                shortest paths.
+
+    REFERENCE:
+        http://en.wikipedia.org/wiki/Bellman-Ford\_algorithm
+
+    """
+    P = []
+    dist = {}
+    predecessor = {}
+    V = Gamma.vertices()
+    E = Gamma.edges()
+    for v in V:
+        if v == s:
+            dist[v] = 0
+        else:
+            dist[v] = infinity
+        predecessor[v] = 0
+    for i in range(1, len(V)):       
+        for e in E: 
+            u = e[0]
+            v = e[1]     
+            wt = e[2]     
+            if dist[u] + wt < dist[v]:
+                dist[v] = dist[u] + wt
+                predecessor[v] = u
+    # check for negative-weight cycles
+    for e in E:
+        u = e[0]
+        v = e[1]     
+        wt = e[2]     
+        if dist[u] + wt < dist[v]:
+            raise ValueError, "Graph contains a negative-weight cycle"
+    return dist, predecessor
+
+\end{lstlisting}
+\end{center}
+
+Here are some examples.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+sage: M = matrix([[0,1,4,0],[0,0,1,5],[0,0,0,3],[0,0,0,0]])
+sage: G = Graph(M, format = "weighted_adjacency_matrix")
+sage: bellman_ford(G, G.vertices()[0])
+  {0: 0, 1: 1, 2: 2, 3: 5}
+
+\end{lstlisting}
+\end{center}
+The plot of this graph is given in Figure
+\ref{fig:bellman-ford-algorithm-example1}.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=9cm,width=7cm]{bellman-ford-algorithm-example1}
+\end{center}
+\caption{Bellman-Ford algorithm example . }
+\label{fig:bellman-ford-algorithm-example1}
+\end{figure}
+%sage: M = matrix([[0,1,4,0],[0,0,1,5],[0,0,0,3],[0,0,0,0]])
+%sage: G = Graph(M, format = "weighted_adjacency_matrix")
+%sage: G.plot(graph_border=True, edge_labels=True).show()
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
+sage: G = DiGraph(M, format = "weighted_adjacency_matrix")
+sage: bellman_ford(G, G.vertices()[0])
+---------------------------------------------------------------------------
+
+...
+
+ValueError: Graph contains a negative-weight cycle
+
+\end{lstlisting}
+\end{center}
+
+The plot of this graph is given in Figure
+\ref{fig:bellman-ford-algorithm-example1}.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=7cm,width=13cm]{bellman-ford-algorithm-example3}
+\end{center}
+\caption{Bellman-Ford algorithm example with a negative cycle. }
+\label{fig:bellman-ford-algorithm-example3}
+\end{figure}
+%sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
+%sage: G = Graph(M, format = "weighted_adjacency_matrix")
+%sage: G.plot(graph_border=True, edge_labels=True).show()
 
 %%-----------------------------------------------------------------------%%
 %%--- Floyd-Warshall algorithm ------------------------------------------%%
