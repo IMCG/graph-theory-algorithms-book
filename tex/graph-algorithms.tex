@@ -128,11 +128,11 @@ Start at \verb!a! and compute the distance from \verb!a! to itself.
 
 \item
 Move to each neighbor of \verb!a!, namely \verb!b! and \verb!e!, and
-compute the distance fromm \verb!a! to each of them.
+compute the distance from \verb!a! to each of them.
 
 \item
 Move to each ``unseen'' neighbor of \verb!b!, namely just \verb!c!,
-and compute the distance fromm \verb!a! to it.
+and compute the distance from \verb!a! to it.
 
 \item
 Move to each ``unseen'' neighbor of \verb!e!, namely just \verb!f!,
@@ -140,11 +140,11 @@ and compute the distance from \verb!a! to it.
 
 \item
 Move to each ``unseen'' neighbor of \verb!c!, namely just \verb!d!,
-and compute the distance fromm \verb!a! to it.
+and compute the distance from \verb!a! to it.
 
 \item
 Move to each ``unseen'' neighbor of \verb!f!, namely just \verb!g!,
-and compute the distance fromm \verb!a! to it.
+and compute the distance from \verb!a! to it.
 \end{itemize}
 
 As an example, here is some Sage code which implements BFS to compute
@@ -333,7 +333,7 @@ subsets: the set $F$ of vertices where we have found the shortest path
 to $v_0$; and the ``queue'' $Q$ where we do not yet know for sure the
 shortest path to $v_0$. The vertices $v \in F$ are labeled with
 $\delta(v, v_0)$. The vertices $v \in Q$ are labeled with a temporary
-label $L(v)$. This temprary label can be either $\infty$ if no path
+label $L(v)$. This temporary label can be either $\infty$ if no path
 from $v$ to $v_0$ has yet been examined, or an upper bound on
 $\delta(v, v_0)$ obtained by computing $\delta(P)$ for a path $P$ from
 $v$ to $v_0$ which has been found (but may not be the shortest path).
@@ -522,7 +522,7 @@ $v_0$         & $v_1$         & $v_2$         & $v_3$         & $v_4$ \\\hline\h
               &               &               & \underline{3} & 6 \\
               &               &               &               & \underline{5} \\\hline
 \end{tabular}
-\caption{Another walkthrough of Dijkstra's algorithm.}
+\caption{Another walk-through of Dijkstra's algorithm.}
 \label{tab:graph_algorithms:another_walkthrough_Dijkstra}
 \end{table}
 
@@ -538,7 +538,7 @@ section~8.5 of Berman and Paul~\cite{BermanPaul1997}.
 The Bellman-Ford algorithm computes single-source shortest paths in a
 weighted graph or digraph, where some of the edge weights may be
 negative. Instead of the ``greedy'' approach that Dijkstra's algorithm
-took, i.e. seaching for the ``cheapest'' path, the Bellman-Ford
+took, i.e. searching for the ``cheapest'' path, the Bellman-Ford
 algorithm searches over all edges and keeps track of the shortest one
 found as it searches.
 
