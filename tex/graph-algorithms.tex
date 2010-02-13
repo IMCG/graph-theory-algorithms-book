@@ -44,6 +44,8 @@ the nodes of a graph. Suppose you want to count the number of vertices
 (or edges) satisfying a property
 $P$. Algorithm~\ref{alg:graph_algorithms:breadth_first_search}
 presents a technique for finding the number of vertices satisfying $P$.
+\index{BFS}
+\index{breadth-first search} 
 
 \begin{algorithm}[!htpb]
 \SetLine
@@ -239,6 +241,7 @@ again, try backtracking a few move moves and traverse yet another
 path, hoping to make further progress. Repeat this until a compete
 tour is found. This is an example of \emph{depth-first search}, also
 sometimes called \emph{backtracking}.
+\index{backtracking}
 
 Similar to BFS, \emph{depth-first search} (DFS) is an algorithm for
 traversing a graph. One starts at a \emph{root vertex} and explores as
@@ -247,6 +250,7 @@ backtracking along a new path. It is easier to see what this means in
 the case of a rooted tree than for more general graphs, as illustrated
 below.
 \index{depth-first search}
+\index{DFS}
 
 Suppose you want to count the number of vertices (or edges) satisfying
 a property $P$.
@@ -290,16 +294,71 @@ iterative DFS. This modification applies DFS repeatedly with an
 increasing depth of search at each step, until the diameter of the
 graph is reached and all vertices are seen.
 
-\subsection{Connectivity of a graph}
+\subsection{Application: connectivity of a graph}
 
 % This subsection is on how the above algorithms can be used
 % to determine a graph's connectivity.
+
+A simple algorithm to determine if a graph is connected 
+might be described as follows:
+\begin{itemize}
+
+\item
+Begin at any arbitrary vertex of the graph, $\Gamma=(V,E)$.
+
+\item
+Proceed from that vertex using either DFS or BFS, counting all
+vertices reached.
+
+\item
+Once the connected component of the graph has been entirely traversed, 
+if the number of vertices counted is equal to $|V|$, 
+the graph is connected and otherwise it is disconnected.
+\end{itemize}
 
 
 %%-----------------------------------------------------------------------%%
 %%--- Dijkstra's algorithm ----------------------------------------------%%
 
-\section{Dijkstra's algorithm}
+\section{Shortest path algorithms}
+
+There are a number of different algorithms for computing a shortest
+path in a weighted graph. Some only work if the graph has
+no negative weight cycles. Some assume that there is a single 
+start or source vertex. Some compute the shortest paths from
+any vertex to any other, and also detect if the graph has
+a negative weight cycle.
+
+No matter what algorithm you use, the length of the shortest path 
+cannot exceed the number of vertices in the graph.
+
+\begin{lemma}
+{\rm
+Fix a vertex $v$ in the connected graph $G=(V,E)$ and let $n$ denote the
+number of vertices of $G$, $n=|V|$.
+If there are no negative weight cycles in $G$ then there 
+exists a shortest path from $v$ 
+to any other vertex $w\in V$ which uses at most $n-1$ edges.
+}
+\end{lemma}
+
+{\bf proof:}
+Suppose that $G$ contains no negative weight cycles. 
+Observe that at most $n-1$ edges are required to construct a 
+path from $v$ to any vertex $w$. Let $P$ denote such a path,
+
+\[
+P = (v_0=v\to v_1 \to v_2 \to \dots \to v_k = w). 
+\]
+Since $G$ has no negative weight cycles, the weight of $P$ is no less 
+than the weight of $P'$, where
+$P'$ is the same as $p$ except that all cycles have been removed. 
+Thus, we can remove all cycles from $P$ and obtain a path $P'$ 
+from $v$ to $w$ of lower weight. Since the
+final path is acyclic, it must have no more than $n-1$ edges.
+\qed
+
+\subsection{Dijkstra's algorithm}
 
 See Dijkstra~\cite{Dijkstra1959}, section~24.3 of
 Cormen~et~al.~\cite{CormenEtAl2001}, and section~12.6 of Berman and
@@ -381,6 +440,12 @@ Find $v \in Q$ for which $L(v)$ is finite and minimum.\;
 \caption{Dijkstra's algorithm.}
 \label{alg:graph_algorithms:dijkstra}
 \end{algorithm}
+
+The simplest implementation of Dijkstra's algorithm has
+running time $O( | V |^2)=O(n^2)$ (where
+$n=|V|$ is the number of vertices of the graph)\footnote{This 
+can be improved, with some clever programming,
+in the case of ``sparse'' graphs to $O(n\log n)$.}.
 
 \begin{figure}[!htbp]
 \centering
@@ -530,7 +595,7 @@ $v_0$         & $v_1$         & $v_2$         & $v_3$         & $v_4$ \\\hline\h
 %%-----------------------------------------------------------------------%%
 %%--- Bellman-Ford algorithm --------------------------------------------%%
 
-\section{Bellman-Ford algorithm}
+\subsection{Bellman-Ford algorithm}
 
 See section~24.1 of Cormen~et~al.~\cite{CormenEtAl2001}, and
 section~8.5 of Berman and Paul~\cite{BermanPaul1997}.
@@ -601,6 +666,9 @@ def bellman_ford(Gamma, s):
     return dist, predecessor
 \end{lstlisting}
 \end{center}
+
+Bellman-Ford runs in $O(|V|\cdot |E|)$-time, which is $O(n^3)$ for 
+``dense'' connected graphs (where $n=|V|$).
 
 Here are some examples.
 
@@ -704,16 +772,289 @@ Figure~\ref{fig:graph_algorithms:Bellman_Ford_negative_weights}.
 %%-----------------------------------------------------------------------%%
 %%--- Floyd-Warshall algorithm ------------------------------------------%%
 
-\section{Floyd-Warshall algorithm}
+\subsection{Floyd-Roy-Warshall algorithm}
 
 See section~25.2 of Cormen~et~al.~\cite{CormenEtAl2001}, and section
 14.4 of Berman and Paul~\cite{BermanPaul1997}.
+
+The {\it Floyd-Roy-Warshall algorithm}, or the Floyd-Warshall algorithm,
+is an algorithm for finding shortest paths in a weighted, directed 
+graph. Like the Bellman-Ford algorithm, it allows for negative
+edge weights and detects a negative weight cycle if one exists.
+Assuming that there are no negative weight cycles, a single 
+execution of the FRW algorithm will find the shortest 
+paths between all pairs of vertices.
+
+It was discovered independently by Bernard Roy in 1959, Robert 
+Floyd in 1962 and by Stephen Warshall in 1962.
+
+In some sense, the above algorithm is an example of 
+``dynamic programming,'' which allows one to break the 
+computation down to simpler steps using some sort of 
+recursive procedure. 
+The rough idea is as follows: Temporarily label the vertices of $G$
+as $V=\{1,2,\dots,n\}$.
+Call $SD(i,j,k)$ a shortest distance from vertex $i$ to 
+vertex $j$ that only uses vertices $1$ through
+$k$. This can be computed using the recursive
+expression
+
+\[
+SD(i,j,k) = \min\{ SD(i,j,k-1), SD(i,k,k-1) + SD(k,j,k-1)\}.
+\]
+The key to the Floyd-Roy-Warshall algorithm 
+lies in exploiting this formula.
+
+If $n=|V|$ then this is a 
+$O(n^3)$-time algorithm.
+For comparison, the Bellman-Ford algorithm has complexity
+$O(|V|\cdot |E|)$, which is $O(n^3)$-time for ``dense''
+graphs. However, Bellman-Ford only yields the shortest
+paths eminating from a {\it single} vertex.
+To achieve comparable output, we would need to iterate
+Bellman-Ford over {\it all} vertices, which would be an
+ $O(n^4)$-time algorithm for ``dense'' graphs. Except
+possibly for ``sparse'' graphs, Floyd-Roy-Warshall is better than
+an interated implementation of Bellman-Ford.
+
+Here is an implementation in Sage.
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+def floyd_roy_warshall(A):
+    """
+    Shortest paths
+
+    INPUT: 
+        A - weighted adjacency matrix 
+
+    OUTPUT
+        dist  - a matrix of distances of shortest paths
+        paths - a matrix of shortest paths
+
+    """
+    G = Graph(A, format="weighted_adjacency_matrix")
+    V = G.vertices()
+    E = [(e[0],e[1]) for e in G.edges()]
+    n = len(V)
+    dist = [[0]*n for i in range(n)]
+    paths = [[-1]*n for i in range(n)]
+    # initialization step
+    for i in range(n):
+        for j in range(n):
+            if (i,j) in E:
+                paths[i][j] = j
+            if i == j:
+                dist[i][j] = 0
+            elif A[i][j]<>0:
+                dist[i][j] = A[i][j]
+            else:
+                dist[i][j] = infinity
+    # iteratively finding the shortest path
+    for j in range(n):
+        for i in range(n):
+            if i <> j:
+                for k in range(n):
+                    if k <> j:
+                        if dist[i][k]>dist[i][j]+dist[j][k]:
+                            paths[i][k] = V[j]
+                        dist[i][k] = min(dist[i][k], dist[i][j] +dist[j][k])
+    for i in range(n):
+        if dist[i][i] < 0:
+            raise ValueError, "A negative edge weight cycle exists."
+    return dist, matrix(paths)   
+
+\end{lstlisting}
+\end{center}
+%
+
+Here are some examples.
+
+%
+%\begin{center}
+%\fontsize{9pt}{9pt}
+%\selectfont
+%\tt
+%\begin{lstlisting}
+%
+%        sage: A = matrix([[0,1,2,3],[0,0,2,1],[20,10,0,3],[11,12,13,0]]); A
+%        sage: floyd_roy_warshall(A)
+%        ([[0, 1, 2, 2], [12, 0, 2, 1], [14, 10, 0, 3], [11, 12, 13, 0]], 
+%          [-1  1  2  1]
+%          [ 3 -1  2  3]
+%          [ 3 -1 -1  3]
+%          [-1 -1 -1 -1])
+%
+%\end{lstlisting}
+%\end{center}
+%
+
+%
+%\begin{center}
+%\fontsize{9pt}{9pt}
+%\selectfont
+%\tt
+%\begin{lstlisting}
+%
+%        sage: A = matrix([[0,1,2,4],[0,0,2,1],[0,0,0,5],[0,0,0,0]])
+%        sage: floyd_roy_warshall(A)
+%        ([[0, 1, 2, 2], [+Infinity, 0, 2, 1], [+Infinity, +Infinity, 0, 5],
+%          [+Infinity, +Infinity, +Infinity, 0]], 
+%          [-1  1  2  1]
+%          [-1 -1  2  3]
+%          [-1 -1 -1  3]
+%          [-1 -1 -1 -1])
+%
+%\end{lstlisting}
+%\end{center}
+%
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+        sage: A = matrix([[0,1,2,3],[0,0,2,1],[-5,0,0,3],[1,0,1,0]]); A
+        sage: floyd_roy_warshall(A)
+        Traceback (click to the left of this block for traceback)
+        ...
+        ValueError: A negative edge weight cycle exists.
+
+\end{lstlisting}
+\end{center}
+%
+
+The plot of this weighted digraph with four vertices appears in 
+Figure \ref{fig:FRW-algorithm-example2}.
+
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=9cm,width=9cm]{FRW-algorithm-example2}
+\end{center}
+\caption{Floyd-Roy-Warshall algorithm example . }
+\label{fig:FRW-algorithm-example2}
+\end{figure}
+%sage: A = matrix([[0,1,2,3],[0,0,2,1],[-5,0,0,3],[1,0,1,0]])
+%sage: D = DiGraph(A, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
+
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+        sage: A = matrix([[0,1,2,3],[0,0,2,1],[-1/2,0,0,3],[1,0,1,0]]); A
+        sage: floyd_roy_warshall(A)
+        ([[0, 1, 2, 2], [3/2, 0, 2, 1], [-1/2, 1/2, 0, 3/2], [1/2, 3/2, 1, 0]],
+          [-1  1  2  1]
+          [ 2 -1  2  3]
+          [-1  0 -1  1]
+          [ 2  2 -1 -1])
+
+\end{lstlisting}
+\end{center}
+%
+
+The plot of this weighted digraph with four vertices appears in 
+Figure \ref{fig:FRW-algorithm-example1}.
+
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=9cm,width=9cm]{FRW-algorithm-example1}
+\end{center}
+\caption{Another Floyd-Roy-Warshall algorithm example . }
+\label{fig:FRW-algorithm-example1}
+\end{figure}
+%sage: A = matrix([[0,1,2,3],[0,0,2,1],[-1/2,0,0,3],[1,0,1,0]])
+%sage: D = DiGraph(A, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
+
 
 
 %%-----------------------------------------------------------------------%%
 %%--- Johnson's algorithm -----------------------------------------------%%
 
-\section{Johnson's algorithm}
+\subsection{Johnson's algorithm}
 
 See section~25.3 of Cormen~et~al.~\cite{CormenEtAl2001} and
 Johnson~\cite{Johnson1977}.
+
+Let $G=(V,E)$ be a graph with edge weights but no negative cycles.
+
+
+{\it Johnson's algorithm} finds a shortest path between all pairs of
+vertices in a ``sparse'' directed graph. 
+\index{Johnson's algorithm} 
+
+%\begin{itemize}
+%\item
+%Add a new vertex $v_0$ with zero weight edges from it to all $v\in V$.
+%
+%\item
+%Run the Bellman-Ford algorithm to check for negative weight cycles
+%and find $h(v)$, 
+%the least weight of a path from the new node $v_0$ to $v\in V$. 
+%If this step detects a negative cycle, the algorithm is terminated.
+%
+%\item
+%Reweight the edges using the vertices' $h(v)$ values: an edge from 
+%$v\in V$ to $w\in V$, having length $wt(v,w)$, is given the new length 
+%$wt(v,w) + h(v) - h(w)$.
+%
+%\item
+%For each $v\in V$, run Dijkstra's algorithm and store the computed 
+%least weight to other vertices. 
+%\end{itemize}
+
+
+
+\begin{algorithm}[!htpb]
+\SetLine
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{Count}{count}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+%% input/output
+\Input{A connected graph $G = (V, E)$ having (possibly negative) edge weights. }
+\Output{A shortest path between all pairs of vertices in $V$
+(or terminate if a negative edge cycle is detected).}
+\BlankLine
+%% algorithm body
+Add a new vertex $v_0$ with zero weight edges from it to all $v\in V$.\;
+
+Run the Bellman-Ford algorithm to check for negative weight cycles
+and find $h(v)$, 
+the least weight of a path from the new node $v_0$ to $v\in V$. 
+If this step detects a negative cycle, the algorithm is terminated.\;
+
+Reweight the edges using the vertices' $h(v)$ values: an edge from 
+$v\in V$ to $w\in V$, having length $wt(v,w)$, is given the new length 
+$wt(v,w) + h(v) - h(w)$.\;
+
+For each $v\in V$, run Dijkstra's algorithm and store the computed 
+least weight to other vertices. \;
+
+\caption{Johnson's algorithm.}
+\label{alg:graph_algorithms:johnson}
+\end{algorithm}
+
+
+The time complexity, for sparse graphs, is $O(|V|^2\log |V| + |V|\cdot
+|E)|=O(n^2\log n)$ (where $n=|V|$ is the number of vertices of the
+original graph$G$).
