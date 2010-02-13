@@ -931,16 +931,38 @@ Here are some examples.
 %
 
 The plot of this weighted digraph with four vertices appears in 
-Figure \ref{fig:FRW-algorithm-example2}.
+Figure \ref{fig:graph_algorithms:Floyd_Roy_Warshall_demo}.
 
 
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=9cm,width=9cm]{FRW-algorithm-example2}
-\end{center}
-\caption{Floyd-Roy-Warshall algorithm example . }
-\label{fig:FRW-algorithm-example2}
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={->,>=stealth,thick}]
+% nodes or vertices
+\node (0) at (0,0) [nodedecorate] {};
+\node [below] at (0.south) {$0$};
+\node (1) at (6,0) [nodedecorate] {};
+\node [below] at (1.south) {$1$};
+\node (2) at (6,5) [nodedecorate] {};
+\node [above] at (2.north) {$2$};
+\node (3) at (0,5) [nodedecorate] {};
+\node [above] at (3.north) {$3$};
+% edges or lines
+\path
+(0) edge[arrowdecorate] node[below]{$1$} (1)
+(0) edge[arrowdecorate,bend left=15] node[below left]{$2$} (2)
+(0) edge[arrowdecorate,bend left=15] node[left]{$3$} (3)
+(1) edge[arrowdecorate] node[right]{$2$} (2)
+(1) edge[arrowdecorate] node[right]{$1$} (3)
+(2) edge[arrowdecorate,bend left=15] node[above right]{$5$} (0)
+(2) edge[arrowdecorate,bend left=10] node[below]{$3$} (3)
+(3) edge[arrowdecorate,bend left=15] node[right]{$1$} (0)
+(3) edge[arrowdecorate,bend left=10] node[above]{$1$} (2);
+\end{tikzpicture}
+\caption{Demonstrating the Floyd-Roy-Warshall algorithm.}
+\label{fig:graph_algorithms:Floyd_Roy_Warshall_demo}
 \end{figure}
 %sage: A = matrix([[0,1,2,3],[0,0,2,1],[-5,0,0,3],[1,0,1,0]])
 %sage: D = DiGraph(A, format="weighted_adjacency_matrix")
@@ -969,15 +991,15 @@ Figure \ref{fig:FRW-algorithm-example2}.
 The plot of this weighted digraph with four vertices appears in 
 Figure \ref{fig:FRW-algorithm-example1}.
 
+% FIXME graphics
 
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=9cm,width=9cm]{FRW-algorithm-example1}
-\end{center}
-\caption{Another Floyd-Roy-Warshall algorithm example . }
-\label{fig:FRW-algorithm-example1}
-\end{figure}
+%% \begin{figure}[h!]
+%% \begin{center}
+%% \includegraphics[height=9cm,width=9cm]{FRW-algorithm-example1}
+%% \end{center}
+%% \caption{Another Floyd-Roy-Warshall algorithm example . }
+%% \label{fig:FRW-algorithm-example1}
+%% \end{figure}
 %sage: A = matrix([[0,1,2,3],[0,0,2,1],[-1/2,0,0,3],[1,0,1,0]])
 %sage: D = DiGraph(A, format="weighted_adjacency_matrix")
 %sage: D.plot(edge_labels=True, graph_border=True).show()
