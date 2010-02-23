@@ -322,6 +322,17 @@ the graph is connected and otherwise it is disconnected.
 
 \section{Shortest path algorithms}
 
+
+Let $G = (V,E)$ be a graph with non-negative edge weights, $w(e)$ for
+$e \in E$. The \emph{length of a path} $P$ from $v \in V$ to $w \in V$ is the sum of
+the edge weights for each edge in the path $P$, denoted
+$\delta(P)$. We write $\delta(v,w)$ for the smallest value of
+$\delta(P)$ for all paths $P$ from $v$ to $w$.
+\index{path length}
+When we regard these weights $w$ as distances,
+a path from $v$ to $w$ which realizes $\delta(v,w)$ is
+sometimes called a {\it shortest path} from $v$ to $w$.
+
 There are a number of different algorithms for computing a shortest
 path in a weighted graph. Some only work if the graph has
 no negative weight cycles. Some assume that there is a single
@@ -333,6 +344,7 @@ No matter what algorithm you use, the length of the shortest path
 cannot exceed the number of vertices in the graph.
 
 \begin{lemma}
+\label{lemma:shortest-path}
 {\rm
 Fix a vertex $v$ in the connected graph $G=(V,E)$ and let $n$ denote the
 number of vertices of $G$, $n=|V|$.
@@ -378,13 +390,8 @@ a fixed city to all other cities.
 %than the fastest algorithm determining a shortest path from $v$ to
 %\emph{any} other vertex of $G$.
 
-Let $G = (V,E)$ be a graph with non-negative edge weights, $w(e)$ for
-$e \in E$. Fix a start or source vertex $v_0 \in V$. The
-\emph{length of a path} $P$ from $v \in V$ to $w \in V$ is the sum of
-the edge weights for each edge in the path $P$, denoted
-$\delta(P)$. We write $\delta(v,w)$ for the smallest value of
-$\delta(P)$ for all paths $P$ from $v$ to $w$.
-\index{path length}
+Let $G = (V,E)$ be a graph with non-negative edge weights, as above. 
+Fix a start or source vertex $v_0 \in V$.
 
 Dijkstra's algorithm performs a number of steps, basically one step
 for each vertex in $V$. We partition the vertex set $V$ into two

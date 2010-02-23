@@ -443,14 +443,14 @@ Figure~\ref{fig:introduction:types_of_walks} is a trail. It does not
 contain any repeated edges, but it contains one repeated vertex,
 i.e. $b$. Nothing in the definition of a trail restricts a trail from
 having repeated vertices.
+A walk with no repeating vertices is called a \emph{path}. Without any
+repeating vertices, a path cannot have repeating edges, hence a path
+is also a trail. 
 \index{trail}
 %\index{circuit}
 \index{path}
-\index{cycle}
 
-A walk with no repeating vertices is called a \emph{path}. Without any
-repeating vertices, a path cannot have repeating edges, hence a path
-is also a trail. A path whose start and end vertices are the same is
+A path whose start and end vertices are the same is
 called a \emph{cycle}. For example, the walk $a, b, c, e, a$
 in Figure~\ref{fig:introduction:types_of_walks} is a path and a cycle.
 A walk which has no repeated edges and the start and end vertices are
@@ -458,13 +458,22 @@ the same, but otherwise has no  repeated vertices, is
 %a \emph{circuit}, otherwise known as
 a \emph{closed path}~(with apologies for slightly abusing
 terminology).\footnote{
-A closed path in a graph is sometimes also called a circuit. Since
+A closed path in a graph is sometimes also called a ``circuit.'' Since
 that terminology unfortunately conflicts with the closely related
 notion of a circuit of a matroid, we do not use it here.}
 Thus the walk $a, b, e, a$ in
 Figure~\ref{fig:introduction:types_of_walks} is a closed path. It is
 easy to see that if you remove any edge from a cycle, then the
 resulting walk contains no closed paths.
+\index{cycle}
+An {\it Euler subgraph} of a graph $G$ is either a cycle or
+an edge-disjoint union of cycles in $G$.
+\index{Euler subgraph}
+
+The length of the shortest cycle in a graph is called
+the {\it girth} of the graph. An acyclic graph is said to have 
+infinite girth, by convention.
+\index{girth}
 
 \begin{example}
 Consider the graph in Figure~\ref{fig:introduction:types_of_walks}.
@@ -515,6 +524,9 @@ Figure~\ref{fig:introduction:types_of_walks}, both $a,b,c$ and $a,e,c$
 are geodesic paths between $a$ and $c$.
 \index{path!geodesic}
 \index{graph!connected}
+The number of connected components of a graph $G$ will be denoted
+$\omega(G)$.
+\index{$\omega$}
 
 \begin{example}
 Determine whether or not the graph in
@@ -1667,6 +1679,42 @@ sage: G1u2.adjacency_matrix()
 [0 0 0 0 0 0 1 0 1 0 0 0]
 \end{lstlisting}
 \end{center}
+In the case when $V_1=V_2$ then $G_1\cup G_2$ is simply
+the graph consisting of all edges in $G_1$ or in $G_2$.
+
+The \emph{intersection} of graphs is defined as follows. For two
+graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ with disjoint vertex
+sets, their disjoint union is the graph
+\[
+G_1 \cap G_2
+=
+(V_1 \cap V_2,\, E1 \cap E2).
+\]
+In the case when $V_1=V_2$ then $G_1\cap G_2$ is simply
+the graph consisting of all edges in $G_1$ and in $G_2$.
+\index{graph!intersection}
+
+The \emph{symmetric difference} (or {\it ring sum})
+of graphs is defined as follows. For two
+graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ with disjoint vertex
+sets, their disjoint union is the graph
+\[
+G_1 \Delta G_2
+=
+(V_1 \Delta V_2,\, E1 \Delta E2).
+\]
+Recall, if $S_1$ and $S_2$ and any sets,
+the {\it symmetric difference} is defined by
+\[
+S_1\Delta S_2 = \{x\in S_1\cup S_2\ |\ x\notin S_1\cap S_2\}.
+\]
+In the case when $V_1=V_2$ then $G_1\Delta G_2$ is simply
+the graph consisting of all edges in $G_1$ or in $G_2$ but not in
+both. In this case, sometimes $G_1\Delta G_2$ is 
+written $G_1\oplus G_2$.
+\index{symmetric difference}
+\index{ring sum}
+\index{graph!symmetric difference}
 
 The \emph{graph join} of two graphs $G_1$ and $G_2$ is their graph
 union with all the edges that connect the vertices of the first graph
@@ -1755,9 +1803,13 @@ compute a minimal cut having this property.
 
 If deleting a single, specific edge would disconnect the graph, that
 edge is called a \emph{bridge}. More generally, the \emph{edge cut}
-(or \emph{disconnecting set}) of a connected graph $G$ is a set of
+(or \emph{disconnecting set} or {\it seg}) of a connected graph $G$ is a set of
 edges $F \subseteq E$ whose removal yields a subgraph $G - F$ which is
-disconnected.
+disconnected. A minimal edge cut is called a {\it cut set} or a {\it bond}.
+\index{bridge}
+\index{disconnecting set}
+\index{cut set}
+\index{bond}
 
 In fact, if $v_1, v_2 \in V$ are two vertices, then you can ask for an
 edge cut $F$ for which $v_1, v_2$ belong to different components of
@@ -1766,6 +1818,11 @@ cut having this property.
 \index{edge cut}
 \end{itemize}
 
+An {\it edge contraction} is an operation which, like edge-deletion,
+removes an edge from a graph. However, unlike edge-deletion,
+edge contraction also merges together the two vertices the edge 
+used to connect. 
+\index{edge contraction}
 
 %%--- Complements -------------------------------------------------------%%
 
@@ -1899,6 +1956,34 @@ graphs, i.e. $L_n = P_n \square P_1$.
 \index{graph!ladder}
 \end{itemize}
 
+\subsection{Graph minors}
+
+A graph $H$ is called a {\it minor} of the graph $G$ if $H$ is isomorphic to a
+graph that can be obtained by a sequence of edge contractions on a
+subgraph of $G$.  The order in which a sequence of such contractions is
+performed on $G$ does not affect the resulting graph $H$. 
+
+A graph minor is not in general a subgraph.
+However, if $G_1$
+is a minor of $G_2$ and $G_2$ is a minor of $G_3$, then $G_1$ is a minor of $G_3$.
+Therefore, the relation``being a minor of'' is a partial ordering on
+the set of graphs.
+
+The following non-intuitive fact about graph minors was proven by
+Neil Robertson and Paul Seymour.
+
+\begin{theorem}
+{\rm
+If an infinite list $G_1$, $G_2$, $\dots$ of finite graphs is given, then there always exist two indices
+$i < j$ such that $G_i$ is a minor of $G_j$. 
+}
+\end{theorem}
+
+Many classes of graphs can be characterized by {\it forbidden minors}: a
+graph belongs to the class if and only if it does not have a minor
+from a certain specified list. 
+\index{forbidden minor}
+We shall see examples of this in the chapter on planar graphs.
 
 %%-----------------------------------------------------------------------%%
 %%--- Common applications -----------------------------------------------%%
@@ -1931,6 +2016,10 @@ are listed below
   edges? (This problem is important for designing computer chips and
   wiring diagrams.) This topic is discussed further in
   Chapter~\ref{chap:planar_graphs}.
+
+A {\it planar graph} is a graph that can 
+be drawn on the plane in such a way that its edges intersect only at their endpoints.
+\index{graph!planar}
 
 \item Can you label or ``color'' all the vertices of a graph in such a
   way that no adjacent vertices have the same color? If so, this is
