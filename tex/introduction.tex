@@ -8,7 +8,7 @@ To paraphrase what Felix Klein said about curves,\footnote{
 mathematics to become confused through the countless number of
 possible exceptions.''}
 it is easy to define a graph until you realize the countless number of
-exceptions. There are directed graphs, weighted graphs, multi-graphs,
+exceptions. There are directed graphs, weighted graphs, multigraphs,
 simple graphs, and so on. Where do we begin?
 
 
@@ -235,7 +235,17 @@ a graph such that each of whose edges is directed.
 It is important to distinguish a graph $G$ as being directed or
 undirected. If $G$ is undirected and $uv \in E(G)$, then $uv$ and $vu$
 represent the same edge. In case $G$ is a digraph, then $uv$ and $vu$
-are different directed edges.
+are different directed edges. Another important class of graphs
+consist of those graphs having multiple edges between pairs of
+vertices.
+
+\begin{definition}
+\textbf{Multigraphs.}
+A \emph{multigraph} is a graph in which there are multiple edges
+between a pair of vertices. A \emph{multi-undirected graph} is a
+multigraph that is undirected. Similarly, a \emph{multidigraph} is a
+directed multigraph.
+\end{definition}
 
 The edges of a digraph can be visually represented as directed arrows,
 similarly to the digraph in
@@ -326,9 +336,9 @@ Euler, counts the total number of degrees in any graph.
 \textbf{Euler.}
 If $G = (V, E)$ is a graph, then $\sum_{v \in V} \deg(v) = 2 |E|$.
 \end{theorem}
-\index{hand-shaking lemma}
+\index{handshaking lemma}
 
-This result is sometimes called the ``hand-shaking lemma,'' due to its
+This result is sometimes called the ``handshaking lemma,'' due to its
 interpretation as in the following story. Suppose you go into a
 room. Suppose there are $n$ people in the room (including yourself)
 and some people shake hands with others and some do not. Create the
@@ -337,8 +347,8 @@ different person. Draw an edge between two people if they shook
 hands. The degree of a vertex is the number of times that person has
 shaken hands (we assume that there are no multiple edges, i.e. that no
 two people shake hands twice). The theorem above simply says that the
-total number of hand shakes is even. This is ``obvious'' when you look
-at it this way since each hand shake is counted twice ($A$ shaking
+total number of handshakes is even. This is ``obvious'' when you look
+at it this way since each handshake is counted twice ($A$ shaking
 $B$'s hand is counted, $B$ shaking $A$'s hand, since the sum in the
 theorem is over all vertices).
 
@@ -445,7 +455,7 @@ i.e. $b$. Nothing in the definition of a trail restricts a trail from
 having repeated vertices.
 A walk with no repeating vertices is called a \emph{path}. Without any
 repeating vertices, a path cannot have repeating edges, hence a path
-is also a trail. 
+is also a trail.
 \index{trail}
 %\index{circuit}
 \index{path}
@@ -471,7 +481,7 @@ an edge-disjoint union of cycles in $G$.
 \index{Euler subgraph}
 
 The length of the shortest cycle in a graph is called
-the {\it girth} of the graph. An acyclic graph is said to have 
+the {\it girth} of the graph. An acyclic graph is said to have
 infinite girth, by convention.
 \index{girth}
 
@@ -1030,112 +1040,193 @@ the resulting graph is $K_{3,3}$.
 
 \section{Representing graphs using matrices}
 
-Representing a graph as a matrix is very inefficient in some cases
-and not so in other cases. For example, if you walk into a large room
-full of people and you consider the ``hand-shaking graph'' that we
-discussed in connection with
-Theorem~\ref{thm:introduction:hand_shaking}. If not many people shake
-hands in the room, then it is a waste of time to have to record all
-the hand-shakes and also all the ``non-hand-shakes.'' This is
+An $m \times n$ matrix $A$ can be represented as
+\[
+A
+=
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\hdotsfor{4} \\
+a_{m1} & a_{m2} & \cdots & a_{mn} \\
+\end{bmatrix}.
+\]
+The positive integers $m$ and $n$ are the row and column dimensions of
+$A$, respectively. The entry in row $i$ column $j$ is denoted
+$a_{ij}$. Where the dimensions of $A$ are clear from context, $A$ is
+also written as $A = [a_{ij}]$.
+
+Representing a graph as a matrix is very inefficient in some cases and
+not so in other cases. Imagine you walk into a large room full of
+people and you consider the ``handshaking graph'' discussed in
+connection with Theorem~\ref{thm:introduction:hand_shaking}. If not
+many people shake hands in the room, it is a waste of time recording
+all the handshakes and also all the ``non-handshakes.'' This is
 basically what the adjacency matrix does. In this kind of
 ``sparse graph'' situation, it would be much easier to simply record
-the hand-shakes as a Python dictionary.
+the handshakes as a Python dictionary. This section requires some
+concepts and techniques from linear algebra, especially matrix
+theory. See introductory texts on linear algebra and matrix
+theory~\cite{Beezer2009} for coverage of such concepts and techniques.
 
 
 %%--- Adjacency matrix --------------------------------------------------%%
 
 \subsection{Adjacency matrix}
 
-If $G$ is an undirected graph with vertices
-$V = \{ v_1, \dots, v_n \}$ and edges $E$, then the
-\emph{adjacency matrix} of $G$ is the $n \times n$ matrix $A = (a_{ij})$
-defined by
+Let $G$ be an undirected graph with vertices
+$V = \{ v_1, \dots, v_n \}$ and edge set $E$. The
+\emph{adjacency matrix} of $G$ is the $n \times n$ matrix
+$A = [a_{ij}]$ defined by
 \[
 a_{ij}
 =
 \begin{cases}
-1, & \text{if $(v_i, v_j) \in E$}, \\
+1, & \text{if $v_i v_j \in E$}, \\
 0, & \text{otherwise}.
 \end{cases}
 \]
-If $G$ is an undirected graph then $A$
-is a symmetric matrix.
+As $G$ is an undirected graph, then $A$ is a symmetric matrix. That
+is, $A$ is a square matrix such that $a_{ij} = a_{ji}$.
 
-If $G$ is a directed graph with vertices $V = \{ v_1, \dots, v_n \}$
-and edges $E$, then the $(0, -1, 1)$-\emph{adjacency matrix} of $G$ is
-the $n \times n$ matrix $A = (a_{ij})$ defined by
+Now let $G$ be a directed graph with vertices
+$V = \{ v_1, \dots, v_n \}$ and edge set $E$. The
+$(0, -1, 1)$-\emph{adjacency matrix} of $G$ is the $n \times n$ matrix
+$A = [a_{ij}]$ defined by
 \index{adjacency matrix}
 \[
 a_{ij}
 =
 \begin{cases}
-1,  & \text{if $(v_i, v_j) \in E$}, \\
--1, & \text{if $(v_j, v_i) \in E$}, \\
+1,  & \text{if $v_i v_j \in E$}, \\
+-1, & \text{if $v_j v_i \in E$}, \\
 0,  & \text{otherwise}.
 \end{cases}
 \]
-%\begin{itemize}
-%\item what's a matrix?
-%
-%\item adjacency matrices for digraphs
-%
-%\item adjacency matrices for undirected graphs
-%\end{itemize}
 
-%\begin{example}
-For example, Sage allows you to easily compute an adjacency matrix.
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={->,>=stealth,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (1) at (2,1) [nodedecorate] {};
+\node [right] at (1.east) {$1$};
+\node (2) at (2,3) [nodedecorate] {};
+\node [right] at (2.east) {$2$};
+\node (3) at (0,4) [nodedecorate] {};
+\node [above] at (3.north) {$3$};
+\node (4) at (0,0) [nodedecorate] {};
+\node [below] at (4.south) {$4$};
+\node (5) at (-2,1) [nodedecorate] {};
+\node [left] at (5.west) {$5$};
+\node (6) at (-2,3) [nodedecorate] {};
+\node [left] at (6.west) {$6$};
+% edges or lines
+\path
+(1) edge[arrowdecorate,bend left] node {} (2)
+(2) edge[arrowdecorate,bend left] node {} (1)
+(3) edge[arrowdecorate] node {} (2)
+(3) edge[arrowdecorate] node {} (6)
+(4) edge[arrowdecorate] node {} (1)
+(4) edge[arrowdecorate] node {} (5)
+(5) edge[arrowdecorate,bend left] node {} (6)
+(6) edge[arrowdecorate,bend left] node {} (5);
+\end{tikzpicture}
+}
+\quad
+\subfigure[]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (c) at (2,1) [nodedecorate] {};
+\node [right] at (c.east) {$c$};
+\node (e) at (2,3) [nodedecorate] {};
+\node [right] at (e.east) {$e$};
+\node (f) at (0,4) [nodedecorate] {};
+\node [above] at (f.north) {$f$};
+\node (a) at (0,0) [nodedecorate] {};
+\node [below] at (a.south) {$a$};
+\node (b) at (-2,1) [nodedecorate] {};
+\node [left] at (b.west) {$b$};
+\node (d) at (-2,3) [nodedecorate] {};
+\node [left] at (d.west) {$d$};
+% edges or lines
+\path
+(c) edge[linedecorate] node {} (e)
+(c) edge[linedecorate] node {} (a)
+(e) edge[linedecorate] node {} (f)
+(f) edge[linedecorate] node {} (d)
+(a) edge[linedecorate] node {} (b)
+(b) edge[linedecorate] node {} (d);
+\end{tikzpicture}
+}
+\caption{Adjacency matrices of directed and undirected graphs.}
+\label{fig:introduction:adjacency_matrices}
+\end{figure}
+
+\begin{example}
+Compute the adjacency matrices of the graphs in
+Figure~\ref{fig:introduction:adjacency_matrices}.
+\end{example}
+
+\begin{proof}[Solution]
+Define the graphs in Figure~\ref{fig:introduction:adjacency_matrices}
+using \verb!DiGraph! and \verb!Graph!. Then call the method
+\verb!adjacency_matrix()!.
 %
 \begin{center}
 \fontsize{9pt}{9pt}
 \selectfont
 \tt
 \begin{lstlisting}
-sage: C6 = Graph({1: [2, 4], 2: [1, 3], 3: [2, 6], 4: [1, 5], \
-....: 5: [4, 6], 6: [3, 5]})
-sage: G1 = Graph({"a": ["b", "c"], "b": ["a", "d"], "c": ["a", "e"], \
+sage: G1 = DiGraph({1: [2], 2: [1], 3: [2, 6], 4: [1, 5], 5: [6], 6: [5]})
+sage: G2 = Graph({"a": ["b", "c"], "b": ["a", "d"], "c": ["a", "e"], \
 ....: "d": ["b", "f"], "e": ["c", "f"], "f": ["d", "e"]})
-sage: G1.adjacency_matrix()
-[0 1 0 1 0 0]
-[1 0 1 0 0 0]
+sage: m1 = G1.adjacency_matrix(); m1
+[0 1 0 0 0 0]
+[1 0 0 0 0 0]
 [0 1 0 0 0 1]
 [1 0 0 0 1 0]
-[0 0 0 1 0 1]
-[0 0 1 0 1 0]
-sage: G2.adjacency_matrix()
+[0 0 0 0 0 1]
+[0 0 0 0 1 0]
+sage: m2 = G2.adjacency_matrix(); m2
 [0 1 1 0 0 0]
 [1 0 0 1 0 0]
 [1 0 0 0 1 0]
 [0 1 0 0 0 1]
 [0 0 1 0 0 1]
 [0 0 0 1 1 0]
-sage: G1.adjacency_matrix()^2
-[2 0 1 0 1 0]
-[0 2 0 1 0 1]
-[1 0 2 0 1 0]
-[0 1 0 2 0 1]
-[1 0 1 0 2 0]
-[0 1 0 1 0 2]
+sage: m1.is_symmetric()
+False
+sage: m2.is_symmetric()
+True
 \end{lstlisting}
 \end{center}
 %
-%\end{example}
+In general, the adjacency matrix of a digraph is not symmetric, while
+that of an undirected graph is symmetric.
+\end{proof}
 
-\begin{theorem}
-Let $G$ be a graph of order $n$ and $\mathbf{A}$ the adjacency matrix
-of $G$. For each positive integer $k$, the $i$-$j$ entry of
-$\mathbf{A}^k$ counts the number of $v_i$-$v_j$ walks of length $k$.
-\end{theorem}
+%% \begin{theorem}
+%% Let $G$ be a graph of order $n$ and $\mathbf{A}$ the adjacency matrix
+%% of $G$. For each positive integer $k$, the $i$-$j$ entry of
+%% $\mathbf{A}^k$ counts the number of $v_i$-$v_j$ walks of length $k$.
+%% \end{theorem}
 
 More generally, if $G$ is an undirected multigraph with edge
-$e_{ij} = (v_i, v_j)$ having multiplicity $w_{ij}$, or a weighted
-graph with edge $e_{ij} = (v_i,v_j)$ having weight $w_{ij}$, then we
-can define the (weighted) \emph{adjacency matrix} $A = (a_{ij})$ by
+$e_{ij} = v_i v_j$ having multiplicity $w_{ij}$, or a weighted
+graph with edge $e_{ij} = v_i v_j$ having weight $w_{ij}$, then we
+can define the (weighted) \emph{adjacency matrix} $A = [a_{ij}]$ by
 \[
 a_{ij}
 =
 \begin{cases}
-w_{ij}, & \text{if $(v_i, v_j) \in E$}, \\
-0, & \text{otherwise}.
+w_{ij}, & \text{if $v_i v_j \in E$}, \\
+0,      & \text{otherwise}.
 \end{cases}
 \]
 For example, Sage allows you to easily compute a weighted adjacency
@@ -1710,7 +1801,7 @@ S_1\Delta S_2 = \{x\in S_1\cup S_2\ |\ x\notin S_1\cap S_2\}.
 \]
 In the case when $V_1=V_2$ then $G_1\Delta G_2$ is simply
 the graph consisting of all edges in $G_1$ or in $G_2$ but not in
-both. In this case, sometimes $G_1\Delta G_2$ is 
+both. In this case, sometimes $G_1\Delta G_2$ is
 written $G_1\oplus G_2$.
 \index{symmetric difference}
 \index{ring sum}
@@ -1820,8 +1911,8 @@ cut having this property.
 
 An {\it edge contraction} is an operation which, like edge-deletion,
 removes an edge from a graph. However, unlike edge-deletion,
-edge contraction also merges together the two vertices the edge 
-used to connect. 
+edge contraction also merges together the two vertices the edge
+used to connect.
 \index{edge contraction}
 
 %%--- Complements -------------------------------------------------------%%
@@ -1961,7 +2052,7 @@ graphs, i.e. $L_n = P_n \square P_1$.
 A graph $H$ is called a {\it minor} of the graph $G$ if $H$ is isomorphic to a
 graph that can be obtained by a sequence of edge contractions on a
 subgraph of $G$.  The order in which a sequence of such contractions is
-performed on $G$ does not affect the resulting graph $H$. 
+performed on $G$ does not affect the resulting graph $H$.
 
 A graph minor is not in general a subgraph.
 However, if $G_1$
@@ -1975,13 +2066,13 @@ Neil Robertson and Paul Seymour.
 \begin{theorem}
 {\rm
 If an infinite list $G_1$, $G_2$, $\dots$ of finite graphs is given, then there always exist two indices
-$i < j$ such that $G_i$ is a minor of $G_j$. 
+$i < j$ such that $G_i$ is a minor of $G_j$.
 }
 \end{theorem}
 
 Many classes of graphs can be characterized by {\it forbidden minors}: a
 graph belongs to the class if and only if it does not have a minor
-from a certain specified list. 
+from a certain specified list.
 \index{forbidden minor}
 We shall see examples of this in the chapter on planar graphs.
 
@@ -2017,7 +2108,7 @@ are listed below
   wiring diagrams.) This topic is discussed further in
   Chapter~\ref{chap:planar_graphs}.
 
-A {\it planar graph} is a graph that can 
+A {\it planar graph} is a graph that can
 be drawn on the plane in such a way that its edges intersect only at their endpoints.
 \index{graph!planar}
 
