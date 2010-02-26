@@ -1303,7 +1303,7 @@ $G$ is the $n \times m$ matrix $B = [b_{ij}]$ defined by
 b_{ij}
 =
 \begin{cases}
-1, & \text{if $v_i$ incident to $e_j$}, \\
+1, & \text{if $v_i$ is incident to $e_j$}, \\
 2, & \text{if $e_j$ is a self-loop at $v_i$}, \\
 0, & \text{otherwise}.
 \end{cases}
@@ -1312,8 +1312,10 @@ An \emph{orientation} of an undirected graph $G$ is an assignment of
 direction to each edge of $G$. The \emph{oriented incidence matrix} of
 $G$ is defined similarly to the case where $G$ is a digraph: it is the
 incidence matrix of any orientation of $G$. For each column of $B$, we
-have $1$ in the row corresponding to one vertex of the edge under
-consideration and $-1$ in the row corresponding to the other edge.
+have $1$ as an entry in the row corresponding to one vertex of the
+edge under consideration and $-1$ as an entry in the row corresponding
+to the other vertex. Similarly, $b_{ij} = 2$ if $e_j$ is a self-loop
+at $v_i$.
 
 %% Sage allows you to compute the incidence matrix of a
 %% graph:
@@ -1420,6 +1422,43 @@ better understand of the ``connectivity'' of a graph. Distance and
 connectivity will be discussed in more detail in
 Chapters~\ref{chap:distance_connectivity}
 and~\ref{chap:random_graphs}.
+
+
+%%--- Problems ----------------------------------------------------------%%
+
+\subsection*{Problems~\ref{sec:introduction:matrix_representation}}
+
+\begin{enumerate}
+\item Let $G$ be an undirected graph whose unoriented incidence matrix
+  is $M_u$ and whose oriented incidence matrix is $M_o$.
+  \begin{enumerate}
+  \item Show that the sum of the entries in any row of $M_u$ is the
+    degree of the corresponding vertex.
+
+  \item Show that the sum of the entries in any column of $M_u$ is
+    equal to $2$.
+
+  \item If $G$ has no self-loops, show that each column of $M_o$ sums
+    to zero.
+  \end{enumerate}
+
+\item Let $G$ be a loopless digraph and let $M$ be its incidence
+  matrix.
+  \begin{enumerate}
+  \item If $r$ is a row of $M$, show that the number of occurrences of
+    $-1$ in $r$ counts the outdegree of the vertex corresponding to
+    $r$. Show that the number of occurrences of $1$ in $r$ counts the
+    indegree of the vertex corresponding to $r$.
+
+  \item Show that each column of $M$ sums to $0$.
+  \end{enumerate}
+
+\item Let $G$ be a digraph and let $M$ be its incidence matrix. For
+  any row $r$ of $M$, let $m$ be the frequency of $-1$ in $r$, let
+  $p$ be the frequency of $1$ in $r$, and let $t$ be twice the
+  frequency of $2$ in $r$. If $v$ is the vertex corresponding to
+  $r$, show that the degree of $v$ is $\deg(v) = m + p + t$.
+\end{enumerate}
 
 
 %%-----------------------------------------------------------------------%%
