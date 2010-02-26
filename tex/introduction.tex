@@ -1273,32 +1273,48 @@ points and blocks in a combinatorial design or points and lines in a
 finite plane geometry. This incidence structure gives rise to another
 way to describe a graph using a matrix.
 
-Let $G$ be an undirected graph with edge set
-$E = \{ e_1, \dots, e_m \}$ and vertex set
-$V = \{ v_1, \dots, v_n \}$. The \emph{incidence matrix} of $G$
-is the $n \times m$ matrix $B = [b_{ij}]$ defined by
-\[
-b_{ij}
-=
-\begin{cases}
-1, & \text{if $v_i$ incident to $e_j$}, \\
-0, & \text{otherwise}.
-\end{cases}
-\]
-On the other hand, let $G$ be a digraph with edge set
-$E = \{ e_1, \dots, e_m \}$ and vertex set
-$V = \{ v_1, \dots, v_n \}$. The \emph{incidence matrix} of $G$ is the
-$n \times m$ matrix $B = [b_{ij}]$ defined by
+Let $G$ be a digraph with edge set $E = \{ e_1, \dots, e_m \}$ and
+vertex set $V = \{ v_1, \dots, v_n \}$. The \emph{incidence matrix} of
+$G$ is the $n \times m$ matrix $B = [b_{ij}]$ defined by
 \index{incidence matrix}
-\[
+%
+\begin{equation}
+\label{eq:introduction:incidence_matrix_digraph}
 b_{ij}
 =
 \begin{cases}
 -1, & \text{if $v_i$ is the tail of $e_j$}, \\
 1,  & \text{if $v_i$ is the head of $e_j$}, \\
+2,  & \text{if $e_j$ is a self-loop at $v_i$}, \\
 0,  & \text{otherwise}.
 \end{cases}
+\end{equation}
+%
+Each column of $B$ corresponds to an edge and each row corresponds to
+a vertex. The definition of incidence matrix of a digraph as contained
+in expression~(\ref{eq:introduction:incidence_matrix_digraph}) is
+applicable to digraphs with self-loops as well as multidigraphs.
+
+For the undirected case, let $G$ be an undirected graph with edge set
+$E = \{ e_1, \dots, e_m \}$ and vertex set
+$V = \{ v_1, \dots, v_n \}$. The \emph{unoriented incidence matrix} of
+$G$ is the $n \times m$ matrix $B = [b_{ij}]$ defined by
+\[
+b_{ij}
+=
+\begin{cases}
+1, & \text{if $v_i$ incident to $e_j$}, \\
+2, & \text{if $e_j$ is a self-loop at $v_i$}, \\
+0, & \text{otherwise}.
+\end{cases}
 \]
+An \emph{orientation} of an undirected graph $G$ is an assignment of
+direction to each edge of $G$. The \emph{oriented incidence matrix} of
+$G$ is defined similarly to the case where $G$ is a digraph: it is the
+incidence matrix of any orientation of $G$. For each column of $B$, we
+have $1$ in the row corresponding to one vertex of the edge under
+consideration and $-1$ in the row corresponding to the other edge.
+
 %% Sage allows you to compute the incidence matrix of a
 %% graph:
 %% %\begin{example}
