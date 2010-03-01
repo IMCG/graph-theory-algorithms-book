@@ -18,6 +18,9 @@
 \usepackage{graphicx,url}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
 \usepackage{makeidx}
+\usepackage{xspace}
+\usepackage{fancyvrb}
+\usepackage{moreverb}
 
 %% Customized corollary, lemma, theorem, etc. numbering
 \newtheorem{theorem}{Theorem}[chapter]
@@ -27,6 +30,11 @@
 \newtheorem{exercise}[theorem]{Exercise}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
+
+%% macros
+\newcommand{\SAGE}{{\sf SAGE}\xspace}
+\newcommand{\sage}{\SAGE}
+\newcommand{\Sage}{\SAGE}
 
 %% Package for drawing figures
 \usepackage{pstricks,pst-node}

@@ -446,10 +446,10 @@ At the end of the for loop, the edges of $T$ have
 been completely found and the algorithm stops.
 
 \begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
+\vskip .15in
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
+
 def kruskal(G):
     """
     Implements Kruskal's algorithm to compute a MST of a graph. 
@@ -517,7 +517,9 @@ def kruskal(G):
         AT.append(rw)
     AT = matrix(AT)
     return Graph(AT, format = "adjacency_matrix", weighted = True)  
-\end{lstlisting}
+
+\end{Verbatim}
+
 \end{center}
 
 Here are some examples.
@@ -582,6 +584,172 @@ Figure~\ref{fig:trees-forests:Kruskal_example}.
 \end{figure}
 
 \subsection{Prim's algorithm}
+
+Prim's algorithm is an algorithm that finds a minimum spanning tree
+for a connected weighted 
+undirected graph $\Gamma=(V,E)$. It is very similar to Kruskal's
+algorithm except that it starts with an empty vertex set, rather than
+a full one.
+
+
+
+\begin{algorithm}[!htpb]
+\SetLine
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{Count}{count}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+%% input/output
+\Input{A connected graph $G = (V, E)$ having edge weights. }
+\Output{A MST $T$ for $G$.}
+\BlankLine
+%% algorithm body
+Initialize: $V(T) = \{v_0\}$, where $v_0$ is an arbitrary vertex, $E(T)=\emptyset$ \;
+
+While $V(T)\not= V$:\;
+{
+\quad Choose edge $(u,v)$ with minimal weight such that $u$ is in $V(T)$
+but $v$ is not,\;
+\quad Add $v$ to $V(T)$, add $(u, v)$ to $E(T)$.\;
+}
+
+\caption{Prim's algorithm.}
+\label{alg:tree-forest:prim}
+\end{algorithm}
+
+
+\begin{center}
+\vskip .15in
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
+
+def prim(G):
+    """
+    Implements Prim's algorithm to compute a MST of a graph. 
+
+    INPUT:
+        G - a connected graph.
+    OUTPUT:
+        T - a minimum weight spanning tree.
+
+    REFERENCES:
+        http://en.wikipedia.org/wiki/Prim's_algorithm
+    """
+    T_vertices = [0] # assumes G.vertices = range(n)
+    T_edges = []
+    E = G.edges() # a list of triples
+    V = G.vertices()
+    # start ugly hack to sort E
+    Er = [list(x) for x in E]
+    E0 = []
+    for x in Er:
+        x.reverse()
+        E0.append(x)
+    E0.sort()
+    E = []
+    for x in E0:
+        x.reverse()
+        E.append(tuple(x)) 
+    # end ugly hack to get E is sorted by weight 
+    for x in E:
+        u = x[0]
+        v = x[1]
+        if u in T_vertices and not(v in T_vertices):
+            T_edges.append([u,v])
+            T_vertices.append(v)
+    # found T_vertices, T_edges
+    # find adj mat of T
+    if G.weighted():
+        AG = G.weighted_adjacency_matrix()
+    else:
+        AG = G.adjacency_matrix()
+    GV = G.vertices()
+    n = len(GV)
+    AT = []
+    for i in GV:
+        rw = [0]*n
+        for j in GV:
+            if [i,j] in T_edges:
+                rw[j] = AG[i][j]
+        AT.append(rw)
+    AT = matrix(AT)
+    return Graph(AT, format = "adjacency_matrix", weighted = True)  
+
+\end{Verbatim}
+
+\end{center}
+
+
+
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+        sage: A = matrix([[0,1,2,3],[3,0,2,1],[2,1,0,3],[1,1,1,0]])
+        sage: G = DiGraph(A, format = "adjacency_matrix", weighted = True)
+        sage: E = G.edges(); E
+        [(0, 1, 1), (0, 2, 2), (0, 3, 3), (1, 0, 3), (1, 2, 2), (1, 3, 1), (2, 0, 2), 
+         (2, 1, 1), (2, 3, 3), (3, 0, 1), (3, 1, 1), (3, 2, 1)]
+        sage: prim(G)
+        Multi-graph on 4 vertices
+        sage: prim(G).edges()
+        [(0, 1, 1), (0, 2, 2), (1, 3, 1)]
+\end{lstlisting}
+\end{center}
+%
+
+
+\begin{figure}[!htbp]
+\begin{tabular}{cc}
+\includegraphics[height=7cm,width=7cm]{prim-algorithm-example1}
+&
+\includegraphics[height=7cm,width=7cm]{prim-algorithm-example2}
+\end{tabular}
+
+\caption{Example of Prim's algorithm. On the left is the original and
+  on the right is the MST produced by Prim's algorithm.}
+
+\label{fig:tree-forests:Prim_algorithm_digraph}
+\end{figure}
+
+
+
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+        sage: A = matrix([[0,7,0,5,0,0,0],[0,0,8,9,7,0,0],[0,0,0,0,5,0,0],
+         [0,0,0,0,15,6,0],[0,0,0,0,0,8,9],[0,0,0,0,0,0,11],[0,0,0,0,0,0,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: E = G.edges(); E
+        [(0, 1, 7), (0, 3, 5), (1, 2, 8), (1, 3, 9), (1, 4, 7), (2, 4, 5), 
+         (3, 4, 15), (3, 5, 6), (4, 5, 8), (4, 6, 9), (5, 6, 11)]
+        sage: prim(G).edges()
+        [(0, 1, 7), (0, 3, 5), (1, 2, 8), (1, 4, 7), (3, 5, 6), (4, 6, 9)]
+\end{lstlisting}
+\end{center}
+%
+
+
+\begin{figure}[!htbp]
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[height=9cm,width=7cm]{prim-algorithm-example3}
+&
+\includegraphics[height=9cm,width=4cm]{prim-algorithm-example4}
+\end{tabular}
+\end{center}
+\caption{Another example of Prim's algorithm. On the left is the original and
+  on the right is the MST produced by Prim's algorithm.}
+
+\label{fig:tree-forests:Prim_algorithm_digraph2}
+\end{figure}
+
 
 \subsection{Bor\r{u}vka's algorithm}
 
