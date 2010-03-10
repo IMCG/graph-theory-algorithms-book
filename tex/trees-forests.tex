@@ -845,6 +845,194 @@ def prim(G):
 
 \subsection{Bor\r{u}vka's algorithm}
 
+Bor\r{u}vka's algorithm algorithm is an algorithm 
+for finding a minimum spanning tree in a connected graph for 
+which all edge weights are distinct.
+
+Pseudocode for Bor\r{u}vka's algorithm is:
+
+\begin{itemize}
+\item
+Begin with a connected graph G containing edges of distinct 
+ weights, and an empty set of edges T
+\item
+While the vertices of G connected by T are disjoint:
+\begin{itemize}
+\item    
+Begin with an empty set of edges E
+\item
+         For each component:
+\begin{itemize}
+\item
+        Begin with an empty set of edges S
+\item
+        For each vertex in the component:
+ \begin{itemize}
+\item           
+Add the cheapest edge from the vertex in 
+             the component to another vertex in a disjoint component to S
+\end{itemize}
+        Add the cheapest edge in S to E
+\end{itemize}
+    Add the resulting set of edges E to T.
+\end{itemize}
+The resulting set of edges T is the minimum spanning tree of G.
+\end{itemize}
+
+\begin{example}
+
+In Figure \ref{fig:tree-forests:Boruvkas-algorithm} , we plot the following example.
+
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+       sage: A = matrix([[0,1,2,5],[0,0,3,6],[0,0,0,4],[0,0,0,0]])
+       sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+       sage: boruvka(G)
+\end{lstlisting}
+\end{center}
+%
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+\includegraphics[height=7cm,width=7cm]{boruvkas-algorithm-example1a}
+}
+\subfigure[]{
+\includegraphics[height=7cm,width=2cm]{boruvkas-algorithm-example1b}
+}
+\caption{An example of Borovka's algorithm. On the left is the
+  original graph. On the right is the MST produced by Boruvka's algorithm.}
+\label{fig:tree-forests:Boruvkas-algorithm}
+\end{figure}
+
+\end{example}
+
+
+
+\begin{center}
+\vskip .15in
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
+
+def which_index(x,L):
+    """
+    L is a list of sublists (or tuple of sets or list 
+    of tuples, etc).
+    
+    Returns the index of the first sublist which x belongs
+    to, or None if x is not in flatten(L).
+
+    The 0-th element in 
+    Lx = [L.index(S) for S in L if x in S] 
+    almost works, but if the list is empty then Lx[0]
+    throws an exception.
+
+    EXAMPLES:
+        sage: L = [[1,2,3],[4,5],[6,7,8]]
+        sage: which_index(3,L)
+        0
+        sage: which_index(4,L)
+        1
+        sage: which_index(7,L)
+        2
+        sage: which_index(9,L)
+        sage: which_index(9,L) == None
+        True
+    """
+    for S in L:
+        if x in S:
+            return L.index(S)
+    return None
+
+def boruvka(G):
+    """
+    Implements Boruvka's algorithm to compute a MST of a graph. 
+
+    INPUT:
+        G - a connected edge-weighted graph with distinct weights.
+    OUTPUT:
+        T - a minimum weight spanning tree.
+
+    REFERENCES:
+        http://en.wikipedia.org/wiki/Boruvka's_algorithm
+    """
+    T_vertices = [] # assumes G.vertices = range(n)
+    T_edges = []
+    T = Graph()
+    E = G.edges() # a list of triples
+    V = G.vertices()
+    # start ugly hack to sort E
+    Er = [list(x) for x in E]
+    E0 = []
+    for x in Er:
+        x.reverse()
+        E0.append(x)
+    E0.sort()
+    E = []
+    for x in E0:
+        x.reverse()
+        E.append(tuple(x)) 
+    # end ugly hack to get E is sorted by weight 
+    for e in E:
+        # create about |V|/2 edges of T "cheaply"
+        TV = T.vertices()
+        if not(e[0] in TV) or not(e[1] in TV):
+           T.add_edge(e)
+    for e in E:
+        # connect the "cheapest" components to get T
+        C = T.connected_components_subgraphs()
+        VC = [S.vertices() for S in C]
+        if not(e in T.edges()) and (which_index(e[0],VC) != which_index(e[1],VC)):  
+           if T.is_connected():
+                break
+            T.add_edge(e)
+    return T
+
+\end{Verbatim}
+
+\end{center}
+
+Some examples using Sage:
+
+
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+        sage: A = matrix([[0,1,2,3],[4,0,5,6],[7,8,0,9],[10,11,12,0]])
+        sage: G = DiGraph(A, format = "adjacency_matrix", weighted = True)
+        sage: boruvka(G)
+        Multi-graph on 4 vertices
+        sage: boruvka(G).edges()
+        [(0, 1, 1), (0, 2, 2), (0, 3, 3)]
+        sage: A = matrix([[0,2,0,5,0,0,0],[0,0,8,9,7,0,0],[0,0,0,0,1,0,0],\
+         [0,0,0,0,15,6,0],[0,0,0,0,0,3,4],[0,0,0,0,0,0,11],[0,0,0,0,0,0,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: E = G.edges(); E
+        [(0, 1, 2), (0, 3, 5), (1, 2, 8), (1, 3, 9), (1, 4, 7), 
+         (2, 4, 1), (3, 4, 15), (3, 5, 6), (4, 5, 3), (4,6, 4), (5, 6, 11)]
+        sage: boruvka(G)
+        Multi-graph on 7 vertices
+        sage: boruvka(G).edges()
+        [(0, 1, 2), (0, 3, 5), (2, 4, 1), (3, 5, 6), (4, 5, 3), (4, 6, 4)]
+        sage: A = matrix([[0,1,2,5],[0,0,3,6],[0,0,0,4],[0,0,0,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: boruvka(G).edges()
+        [(0, 1, 1), (0, 2, 2), (2, 3, 4)]
+        sage: A = matrix([[0,1,5,0,4],[0,0,0,0,3],[0,0,0,2,0],[0,0,0,0,0],[0,0,0,0,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: boruvka(G).edges()
+        [(0, 1, 1), (0, 2, 5), (1, 4, 3), (2, 3, 2)]
+
+\end{lstlisting}
+\end{center}
+%
+
 %%-----------------------------------------------------------------------%%
 %%--- Binary trees ------------------------------------------------------%%
 
@@ -852,14 +1040,770 @@ def prim(G):
 
 See section~3.3 of Gross and Yellen~\cite{GrossYellen1999}.
 
+A binary tree is a rooted tree with at most 2 children per parent.
+
+In this section, we consider 
+
 \begin{itemize}
-\item binary codes
+\item binary codes,
 
-\item Huffman codes
+\item Gray codes, and
 
-\item Huffman algorithm
+\item Huffman codes.
 \end{itemize}
 
+\subsection{Binary codes}
+
+
+\subsubsection{What is a code?}
+
+A {\it code} is a rule for converting data in one
+\index{code}
+\index{codeword}
+\index{alphabet}
+format, or well-defined tangible representation, 
+into sequences of symbols in another format (and the finite set of symbols
+used is called the {\it alphabet}). We shall identify a code
+as a finite set of symbols which are the image
+of the alphabet under this conversion rule. The elements of this set
+are referred to as {\it codewords}. For example, using the ASCII code,
+the letters in the English alphabet get converted into numbers
+$\{0, 1, \dots, 255\}$. If these numbers are written in binary
+then each codeword of a letter has length 8. In this way, we can
+reformat, or encode, a ``string'' into a sequence of binary symbols (i.e., 
+$0$'s and $1$'s). 
+{\it Encoding} is the conversion process one way.
+{\it Decoding} is the reverse
+\index{encode}
+\index{decode}
+process, converting these sequences of code-symbols back into information
+in the original format.
+
+
+Codes are used for
+
+\begin{itemize}
+\item
+{\it Economy}. Sometimes this is called ``entropy encoding''
+since there is an entropy function which describes how much information
+a channel (with a given error rate) can carry and such
+codes are designed to maximize entropy as best as possible.
+In this case, in addition to simply being given an alphabet $A$, one 
+might be given a ``weighted alphabet,'' i.e., an alphabet for which each 
+symbol $a\in A$ is associated with a non-negative number 
+$w_a\geq 0$ (in practice, the probability that the
+symbol $a$ occurs in a typical word).
+
+\item
+{\it Reliability}. Such codes are called ``error-correcting codes,''
+since such codes are designed to communicate information
+over a noisy channel in such a way that the errors in transmission are
+likely to be correctable.
+
+\item
+{\it Security}. Such codes ae called ``cryptosystems.''
+In this case, the inverse of the coding function $c:A\to B^*$ is designed to be
+computationally infeasible. In other words, the coding function
+$c$ is designed to be a ``trapdoor function.''
+
+\end{itemize}
+
+Other codes are merely simpler ways to communicate information
+(flag semaphores, color codes, genetic codes, braille codes, musical scores, chess
+notation, football diagrams, and so on), and have little or no
+mathematical structure. We shall not study them.
+
+
+
+\subsubsection{Basic definitions}
+
+If every word in the code has the same length, the code is called 
+a {\it block code}. If a code is not a block code then it is called
+a {\it variable-length} code.
+\index{code!block}
+\index{code!variable-length}
+A {\it prefix-free} code is a code (typically one of variable-length)
+with the property that there is no valid codeword in the code that
+is a prefix (start) of any other codeword\footnote{In other words, 
+a codeword $s=s_1 \dots s_m$ is a {\it prefix} of a codeword
+$t=t_1\dots t_n$ if and only if $m\leq n$ and
+$s_1=t_1$, \dots, $s_m=t_m$. Codes which are prefix-free are easier
+to decode than codes which are not prefix-free.}.
+This is the {\it prefix-free condition}.
+\index{code!prefix-free}
+
+One example of a prefix-free code is the ASCII code. 
+Another example is
+
+\[
+00, 01, 100.
+\]
+On the other hand, a non-example is the code
+
+\[
+00, 01, 010, 100
+\]
+since the second codeword is a prefix of the third one.
+Another non-example is Morse code recalled in
+Figure \ref{fig:Morse} (we use $0$ for 
+$\cdot$ (``dit'') and $1$ for $-$ (``dah'')).
+\index{code!Morse}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{c|c|| c | c}
+A & 01     & N & 10 \\
+B & 1000 &O & 111\\
+C & 1010 & P & 0110\\
+D & 100  & Q & 1101\\
+E & 0       & R & 010\\
+F & 0010  & S & 000\\
+G & 110   & T & 1\\
+H & 0000   & U & 001\\
+I & 00        & V & 0001\\
+J & 0111   & W & 011\\
+K & 101    & X & 1001\\
+L & 0100   & Y & 1011\\
+M & 11      & Z 1100\\
+\end{tabular}
+\end{center}
+\caption{Morse code}
+\label{fig:Morse}
+\end{figure}
+%\end{center}
+For example, look at the Morse code for {\tt a} and the Morse code for
+{\tt w}. These codewords violate the prefix-free condition.
+
+\subsubsection{Gray codes}
+
+History\footnote{This 
+history comes from an unpublished section 7.2.1.1
+(``Generating all $n$-tuples'')
+in volume 4 of Donald Knuth's {\bf The Art of Computer Programming}.
+}
+: Frank Gray (1887-1969) wrote about the so-called Gray codes in a 
+1951 paper published in the Bell System Technical Journal,
+and then patented a device (used for television sets)
+based on it in 1953. However, the idea of a binary Gray code
+appeared earlier. In fact, it appeared in an earlier patent
+(one by Stibitz in 1943). It was also used in E. Baudot's 
+(a French engineer) telegraph machine of 1878 and in 
+a French booklet by L. Gros on the solution to the
+``Chinese ring puzzle'' published in 1872.
+
+The term ``Gray code'' is ambiguous. It is actually a 
+large family of sequences of $n$-tuples. Let
+${\mathbb{Z}}_m=\{0,1,\dots,m-1\}$. More precisely, an
+{\it $m$-ary Gray code of length $n$} (called a {\it binary
+Gray code} when $m=2$) is a sequence of 
+all possible (namely, $N=m^n$) $n$-tuples
+\index{Gray code!binary}
+\index{Gray code!$m$-ary}
+
+\[
+g_1,g_2,\dots, g_N,
+\]
+where 
+\begin{itemize}
+\item
+each $g_i\in {\mathbb{Z}}_m^n$,
+\item
+$g_i$ and $g_{i+1}$ differ by $1$ in exactly one
+coordinate.
+\end{itemize}
+In other words, an $m$-ary Gray code of length
+$n$ is a particular way to order the set of all
+$m^n$ $n$-tuples whose coordinates are taken from
+${\mathbb{Z}}_m$. From the transmission/communication
+perspective, this sequence has two advantages:
+
+\begin{itemize}
+\item
+It is easy and fast to produce the sequence, since 
+successive entries differ in only one coordinate.
+
+\item
+An error is relatively easy to detect, since you can 
+compare an $n$-tuple with the previous one. If they
+difer in more than one coordinate, you know an error
+was made.
+
+\end{itemize}
+
+\begin{example} 
+{\rm
+Here is a $3$-ary Gray code of length $2$:
+
+\[
+[0, 0], [1, 0], [2, 0], [2, 1], [1, 1], [0, 1], [0, 2], [1, 2], [2, 2]
+\]
+and here is a binary Gray code of length $3$:
+
+\[
+[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0], [0, 1, 1], [1, 1, 1], [1, 0, 1], [0, 0, 1].
+\]
+}
+\end{example}
+
+Gray codes have applications to engineering,
+recreational mathematics (solving the Tower of Hanoi
+puzzle, ``The Brain'' puzzle, the ``Chinese ring puzzle'',
+and others), and to mathematics (for example, aspects of 
+combinatorics, computational group theory
+and the computational aspects of linear codes).
+
+\subsubsection{Binary Gray codes}
+
+Consider the so-called $n$-hypercube graph
+$Q_n$. This can be envisioned as the graph whose
+vertices are the vertices of a cube in 
+$n$-space
+\index{graph!hypercube}
+
+\[
+\{(x_1,\dots,x_n)\ |\ 0\leq x_i\leq 1\},
+\]
+and whose edges are those line segments in
+${\mathbb{R}}^n$ connecting two ``neighboring''
+vertices (namely, two vertices which differ
+in exactly one coordinate).
+A binary Gray code of length $n$ can be regarded as a
+path on the hypercube graph $Q_n$ which visits 
+each vertex of the cube exactly once.
+In other words, a binary Gray code of length $n$ 
+may be identified with a
+Hamiltonian cycle on the graph $Q_n$
+(see Figure \ref{fig:Q3bw} for an example).
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=8cm,width=8cm]{Q3bw}
+\end{center}
+\caption{{\bf Plot of $\Gamma_3$ viewed as a Hamiltonian path on $Q_3$ .} }
+\label{fig:Q3bw}
+\end{figure}
+
+
+How do you efficiently compute a Gray code?
+
+Perhaps the simplest way to state the idea of
+quickly constructing
+the {\it reflected binary Gray code} $\Gamma_n$ 
+of length $n$ is as follows:
+
+\[
+\Gamma_0=[],\ \ \ \ 
+\Gamma_{n}=[0,\Gamma_{n-1}],[1,\Gamma_{n-1}^{rev}],
+\]
+where $\Gamma_m^{rev}$ means the Gray code in
+reverse order. For instance, we have
+
+\[
+\Gamma_0=[],
+\]
+\[
+\Gamma_1 = [0], [1],
+\]
+\[
+\Gamma_2=[[0,0],[0,1],[1,1],[1,0],
+\]
+and so on. This is a nice procedure if you want to create 
+the entire list at once (which, by the way, gets very long
+very fast). 
+
+An implementation of the reflected Gray code using Python is given below.
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=Python
+  3.0]
+
+def graycode(length,modulus):
+    """
+    Returns the n-tuple reflected Gray code mod m.
+
+
+    EXAMPLES:
+        sage: graycode(2,4)
+        
+        [[0, 0],
+         [1, 0],
+         [2, 0],
+         [3, 0],
+         [3, 1],
+         [2, 1],
+         [1, 1],
+         [0, 1],
+         [0, 2],
+         [1, 2],
+         [2, 2],
+         [3, 2],
+         [3, 3],
+         [2, 3],
+         [1, 3],
+         [0, 3]]
+
+    """
+    n,m = length,modulus
+    F = range(m)
+    if n == 1:
+        return [[i] for i in F]
+    L = graycode(n-1, m)
+    M = []
+    for j in F:
+        M = M+[ll+[j] for ll in L]
+    k = len(M)
+    Mr = [0]*m
+    for i in range(m-1):
+        i1 = i*int(k/m)       # this requires Python 3.0 or Sage
+        i2 = (i+1)*int(k/m)
+        Mr[i] = M[i1:i2]
+    Mr[m-1] = M[(m-1)*int(k/m):]
+    for i in range(m):
+        if is_odd(i):
+            Mr[i].reverse()
+    M0 = []
+    for i in range(m):
+        M0 = M0+Mr[i]
+    return M0
+
+\end{Verbatim}
+
+\vskip .2in
+Consider the reflected binary code
+of length $8$, $\Gamma_8$. This has $2^8=256$ codewords.
+\sage can easily create the list plot of the coordinates
+$(x,y)$, where $x$ is an integer $j \in {\mathbb{Z}}_{256}$ 
+which indexes the codewords in $\Gamma_8$
+and the corresponding $y$ is the $j$-th
+codeword in $\Gamma_8$ converted to decimal.
+This will give us some idea of how the Gray code 
+``looks'' in some sense. The plot is given in Figure \ref{fig:Gamma8}.
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=8cm,width=8cm]{graycode-binary-length8}
+\end{center}
+\caption{{\bf List plot of $\Gamma_8$ created using \sage .} }
+\label{fig:Gamma8}
+\end{figure}
+
+
+What if you only want to compute the 
+$i$-th Gray codeword in the Gray code of length $n$?
+Can it be computed quickly as well without computing the
+entire list?
+At least in the case of the reflected binary Gray code, there
+is a very simple way to do this. The $k$-th element in the
+above-described reflected binary Gray code of length $n$ 
+is obtained by simply adding the binary representation of
+$k$ to the binary representation of the integer part of
+$k/2$.
+
+An example using \sage is given below.
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
+
+def int2binary(m, n):
+    '''
+    returns GF(2) vector of length n obtained 
+    from the binary repr of m, padded by 0's 
+    (on the left) to length n.
+
+    EXAMPLES:
+        sage: for j in range(8):
+        ....:     print int2binary(j,3)+int2binary(int(j/2),3) 
+        ....:     
+        (0, 0, 0)
+        (0, 0, 1)
+        (0, 1, 1)
+        (0, 1, 0)
+        (1, 1, 0)
+        (1, 1, 1)
+        (1, 0, 1)
+        (1, 0, 0)
+    '''
+    s = bin(m)
+    k = len(s)
+    F = GF(2)
+    b = [F(0)]*n
+    for i in range(2,k):
+        b[n-k+i] = F(int(s[i]))
+    return vector(b)
+
+def graycodeword(m, n):
+    '''
+    returns the kth codeword in the reflected binary Gray code
+    of length n.
+
+    EXAMPLES:
+        sage: graycodeword(3,3) 
+        (0, 1, 0)
+    '''
+    return int2binary(m,n)+int2binary(int(m/2),n) 
+
+\end{Verbatim}
+
+\begin{exercise}
+Convert the above function {\tt graycodeword} into a pure Python
+function.
+\end{exercise}
+
+
+\subsection{Huffman codes and Huffman's algorithm}
+
+
+An {\it alphabet} $A$ is a finite set, whose elements are referred to as {\it symbols}.
+
+A {\it word} (or  {\it string} or {\it message}) in $A$ is a finite sequence of symbols in $A$, usually written by simply
+concatenating them together: $a_1a_2\dots a_k$ ($a_i\in A$) is a
+message of {\it length} $k$. 
+\index{word}
+\index{string}
+\index{message}
+\index{alphabet}
+A commonly occurring alphabet in practice is the {\it binary alphabet}
+$\{0,1\}$, in which case a word is simply a finite sequence of $0$'s and $1$'s.
+If $A$ is an alphabet, let 
+
+\[
+A^*
+\]
+denote the set of all words in $A$.
+The length of a word is denoted by vertical bars: 
+if $w=a_1\dots a_k$ is a word
+in $A$ then define $|\dots |:A^*\to {\mathbb{R}}$ by
+
+\[
+|a_1\dots a_k|=k.
+\]
+
+Let $A$ and $B$ be two alphabets. A {\it code} for $A$ using $B$ is
+an injection $c:A\to B^*$. By abuse of notation, we often denote the code simply by
+the set
+
+\[
+C = c(A) = \{ c(a)\ |\ a\in A\}.
+\]
+The elements of $C$ are called {\it codewords}.
+\index{code}
+\index{codeword}
+If $B$ is the binary alphabet then $C$ is called a {\it binary code}.
+\index{code!binary}
+
+\subsubsection{Tree representation}
+
+Any binary code can be represented by a tree.
+
+\begin{example}
+{\rm
+Here is how to represent the code ${\mathbb B}_\ell$ consisting of all
+binary strings of length $\leq \ell$. Start with the 
+``root node'' $v_\emptyset$ being the empty string. The 
+two children of this node, $v_0$ and $v_1$, correspond to the 
+two strings of length $1$. Label $v_0$ with a ``$0$'' and
+$v_1$ with a ``$1$.'' The two children of 
+$v_0$, $v_{00}$ and $v_{01}$, correspond to the 
+strings of length $2$ which start with a $0$,
+and the  two children of 
+$v_1$, $v_{10}$ and $v_{11}$, correspond to the 
+strings of length $2$ which start with a $1$.
+Continue creating child nodes until you reach length $\ell$ 
+then stop. There are a total of $2^{\ell+1}-1$ nodes
+in this tree and $2^\ell$ of them are 
+``leaves'' (vertices of a tree with degree $1$, i.e., childless nodes).
+Note that the parent of any node is a prefix to that
+node. Label each node $v_s$ with the string ``$s$,''
+where $s$ is a binary sequence of length $\leq \ell$.
+
+See Figure \ref{fig:tree} for an example when $\ell = 2$.
+
+\begin{figure}[h!]
+\begin{picture}(200,150)(-20,20)
+
+\put(92,104){$0$}
+\put(183,183){$\bullet$}
+\put(103,103){$\bullet$}
+\put(105,106){\line(1,1){80}}
+\put(185,188){\line(1,-1){80}}
+\put(263,103){$\bullet$}
+\put(272,104){$1$}
+\put(265,107){\line(1,-1){40}}
+\put(303,63){$\bullet$}
+\put(285,64){$11$}
+\put(265,107){\line(-1,-1){40}}
+\put(223,63){$\bullet$}
+\put(207,64){$10$}
+
+\put(105,107){\line(1,-1){40}}
+\put(143,63){$\bullet$}
+\put(125,64){$01$}
+\put(105,107){\line(-1,-1){40}}
+\put(63,63){$\bullet$}
+\put(47,64){$00$}
+
+\end{picture}
+\caption{Example of a tree representation of a binary code}
+\label{fig:tree}
+\end{figure}
+
+
+}
+\end{example}
+
+In general, if $C$ is a code contained in ${\mathbb B}_\ell$
+then to create the tree for $C$, start with the tree for
+ ${\mathbb B}_\ell$. First,
+remove all nodes associated to a binary string for which 
+it and all of its descendents are not in $C$.
+Next, remove all labels which do not
+correspond with codewords in $C$. 
+The resulting labeled graph is the {\it tree associated
+to the binary code $C$}.
+\index{code!tree}
+
+For ``visualizing'' the construction of Huffman codes later,
+it is important to see that one can {\it reverse}
+this construction to start from such a binary tree
+and recover a binary code from it. (The codewords are determined by
+the following rules
+
+\begin{itemize}
+\item
+The root node gets the empty codeword.
+\item
+Each left-ward
+branch gets a $0$ appended to the end of its 
+parent and each
+right-ward branch gets a $1$ appended to the end.
+\end{itemize}
+
+\subsubsection{Uniquely decodable codes}
+
+
+If $c:A\to B^*$ is a code then we can extend $c$ to $A^*$ by 
+{\it concatenation}:
+
+\[
+c(a_1a_2\dots a_k)=c(a_1)c(a_2)\dots c(a_k).
+\]
+If the extension $c:A^*\to T^*$ is also an injection then $c$ 
+is called {\it uniquely decodable}.
+\index{code!uniquely decodable}
+
+\begin{example}
+{\rm
+Recall the Morse code in Table \ref{table:Morse}.
+Note these Morse codewords all have length less than or equal to $4$.
+Other commonly occurring symbols used (the digits $0$ 
+through $9$, punctuation symbols,
+and some others), are also encodable in Morse code 
+but they use longer codewords.
+
+Let $A$ denote the English alphabet, $B=\{0,1\}$ the
+binary alphabet and $C:A\to B^*$ the Morse code.
+Since $c(ET)=01=c(A)$, it is clear that the Morse
+code is {\it not} uniquely decodable.
+
+\begin{exercise}
+Show by giving an example that the Morse code is not prefix-free.
+\end{exercise}
+}
+\index{code!Morse}
+\end{example}
+
+
+In fact, prefix-free implies uniquely decodable.
+
+\begin{theorem}
+{\rm
+If a code $c:A\to B^*$ is prefix-free then it is uniquely decodable.
+}
+\end{theorem}
+
+\begin{proof}[Solution]
+The proof is by induction on the length of a message.
+We want to show that if $x_1\dots x_k$ and $y_1\dots y_\ell$ are
+messages with $c(x_1)\dots c(x_k)=c(y_1)\dots c(y_\ell)$
+then  $x_1\dots x_k=y_1\dots y_\ell$ (which in turn implies
+$k=\ell$ and $x_i=y_i$ for all $i$).
+
+The case of length $1$ follows from the fact that
+$c:A\to B^*$ is injective (by the definition of a code).
+
+Suppose that the statement of the theorem holds for all
+codes of length $<m$. We must show that the length $m$
+case is true.
+Suppose $c(x_1)\dots c(x_k)=c(y_1)\dots c(y_\ell)$ where
+$m={\rm max}(k,\ell)$. These strings are equal, so the
+substring $c(x_1)$ of the left-hand side and the substring $c(y_1)$
+of the right-hand side are either equal or one is contained in the other.
+If (for instance) $c(x_1)$ is properly contained in $c(y_1)$ then 
+$c$ is not prefix-free. Likewise, if $c(y_1)$ is properly contained in 
+$c(x_1)$. Therefore, $c(x_1)=c(y_1)$. This implies $x_1=y_1$.
+Now remove this 
+codeword from both sides, so $c(x_2)\dots c(x_k)=c(y_2)\dots c(y_\ell)$.
+By the induction hypothesis, $x_2\dots x_k=y_2\dots y_\ell$.
+These facts together imply $k=\ell$ and $x_i=y_i$ for all $i$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Consider now a weighted alphabet $(A,p)$, where 
+$p:A\to [0,1]$ satisfies $\sum_{a\in A}p(a)=1$,
+and a code $c:A\to B^*$.
+In other words, $p$ is a probability distribution on $A$.
+Think of $p(a)$ as the probability that the symbol $a$
+arises in an typical message.
+
+The {\it average word length} $L(c)$ is\footnote{In probability terminology, 
+this is the expected value $E(X)$ of the
+random variable $X$ which assigns to a randomly selected 
+symbol in $A$, the length of the associated codeword in $C$.}:
+
+\[
+L(c) = \sum_{a\in A} p(a)\cdot |c(a)|,
+\]
+where $|\dots |$ denotes the {\it length} of a codeword.
+\index{length of codeword}.
+
+Given a weighted alphabet $(A,p)$ as above,
+a code $c:A\to B^*$ is called {\it optimal} if there
+is no such code with a smaller average word length.
+\index{code!optimal}
+
+Optimal codes satisfy the following amazing property.
+
+\begin{lemma}
+{\rm
+Suppose $c:A\to B^*$ is a binary optimal prefix-free code
+and let $\ell = {\rm max}_{a\in A} |c(a)|$ denote
+the maximum length of a codeword. 
+The following statements hold.
+\begin{itemize}
+\item
+If $|c(a')|>|c(a)|$ then $p(a')\leq p(a)$.
+\item
+The subset of codewords of length $\ell$,
+
+\[
+C_\ell = \{c\in c(A)\ |\ |c(a)|=\ell\},
+\]
+contains two codewords of the form
+$b0$ and $b1$, for some $b\in B^*$.
+
+\end{itemize}
+}
+\end{lemma}
+
+For the proof (which is very easy and highly recommended for the
+student who is curious to see more), see Biggs\S 3.6, \cite{Biggs2009}.
+
+The Huffman code construction is based on the 
+amazing second property in the above lemma 
+yields an optimal prefix-free binary code.
+
+{\it Huffman code construction}: Here is the recursive/inductive
+construction. We shall regard the binary Huffman code as a tree,
+as described above.
+
+Suppose that the weighted alphabet $(A,p)$ has $n$ symbols.
+We assume inductively that there is an optimal prefix-free 
+binary code for any weighted alphabet $(A',p')$ having 
+$<n$ symbols. 
+
+\noindent
+{\it Huffman's rule 1}:
+Let $a,a'\in A$ be symbols with the smallest weights.
+Construct a new weighted alphabet with
+$a,a'$ replaced by the single symbol $a*=aa'$
+and having weight $p(a*)=p(a)+p(a')$.
+All other symbols and weights remain unchanged.
+
+\noindent
+{\it Huffman's rule 2}:
+For the code $(A',p')$ above, if $a*$ is encoded 
+as the binary string $s$ then the encoded binary string for 
+$a$ is $s0$ and the encoded binary string for
+$a'$ is $s1$.
+
+These two rules tell us how to inductively built 
+the tree representation for the Huffman code of $(A,p)$ up
+from its leaves (associated to the low weight symbols).
+
+\begin{itemize}
+\item
+Find two different symbols of lowest weight, $a$ and $a'$.
+If two such symbols don't exist, stop.
+Replace the weighted alphabet with the new weighted alphabet 
+as in Huffman's rule 1.
+
+\item
+Add two nodes (labeled with $a$ and $a'$, resp.)
+to the tree, with parent $a^*$ (see Huffman's rule 1).
+
+\item
+If there are no remaining symbols in $A$, label the parent
+$a^*$ with the empty set and stop. Otherwise, go to the
+first step.
+
+\end{itemize}
+
+An example of this is below.
+
+\begin{example}
+{\rm
+A very simple of this makes Huffman's ingenious 
+construction easier to understand.
+
+Suppse $A=\{a,b,c\}$ and 
+$p(a)=0.5$, $p(b)=0.3$, $p(c)=0.2$.
+
+A Huffman code for this is 
+$C=\{0,10,11\}$, as is depicted in Figure \ref{fig:huffman1}.
+
+\begin{figure}[h!]
+\begin{picture}(200,150)(-20,20)
+
+\put(114,103){$a$}
+\put(92,104){$0$}
+\put(143,143){$\bullet$}
+\put(103,103){$\bullet$}
+\put(105,106){\line(1,1){40}}
+\put(145,148){\line(1,-1){40}}
+\put(183,103){$\bullet$}
+\put(192,104){$1$}
+\put(185,107){\line(1,-1){40}}
+\put(223,63){$\bullet$}
+\put(205,64){$11$}
+\put(235,63){$c$}
+\put(185,107){\line(-1,-1){40}}
+\put(143,63){$\bullet$}
+\put(127,64){$10$}
+\put(157,63){$b$}
+
+\end{picture}
+\caption{Huffman code example}
+\label{fig:huffman1}
+\end{figure}
+
+\begin{exercise} 
+Verify
+that $C=\{1,00,01\}$ is another Huffman code for this 
+weighted alphabet and to draw its tree representation.
+\end{exercise}
+}
+\end{example}
+
+
+
+\begin{exercise}
+Find the Huffman code for the letters of the English alphabet weighted
+by the frequency of common American usage\footnote{You can find this 
+on the internet or in the literature.
+Part of this exercise is finding this frequency distribution
+yourself.}.
+\end{exercise}
 
 %%-----------------------------------------------------------------------%%
 %%--- Tree traversals ---------------------------------------------------%%
