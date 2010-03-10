@@ -868,78 +868,6 @@ vertices such that $V(G)$ can be split into two disjoint subsets $V_1$
 and $V_2$, both non-empty. Every edge $uv \in E(G)$ is such that
 $u \in V_1$ and $v \in V_2$, or $v \in V_1$ and $u \in V_2$.
 
-If $H$ is an $m \times n$ $(0,1)$-matrix, then the \emph{Tanner graph}
-of $H$ is the bipartite graph $G = (V,E)$ whose set of vertices
-$V = V_1 \cup V_2$ is partitioned into two sets: $V_1$ corresponding
-to the $m$ rows of $H$ and $V_2$ corresponding to the $n$ columns of $H$.
-For any $i,j$ with $1 \leq i \leq m$ and $1 \leq j \leq n$, there is
-an edge $(i,j) \in E$ if and only if the $(i,j)$-th entry of $H$ is
-$1$. This matrix $H$ is sometimes called the
-\emph{reduced adjacency matrix} of the bipartite graph or the
-\emph{check matrix} of the Tanner graph.
-\index{reduced adjacency matrix}
-Tanner graphs are used in the theory of error-correcting codes.
-%\begin{example}
-For example, Sage allows you to easily compute such
-a bipartite graph from its matrix.
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
-sage: H = Matrix([(1,1,1,0,0), (0,0,1,0,1), (1,0,0,1,1)])
-sage: B = BipartiteGraph(H)
-sage: B.reduced_adjacency_matrix()
-[1 1 1 0 0]
-[0 0 1 0 1]
-[1 0 0 1 1]
-sage: B.plot(graph_border=True)
-\end{lstlisting}
-\end{center}
-%
-%\end{example}
-%
-The corresponding graph is similar to that in
-Figure~\ref{fig:introduction:tanner_graph}.
-
-\begin{figure}[!htbp]
-\centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (c1) at (0,4) [nodedecorate] {};
-\node [left] at (c1.west) {$1$};
-\node (c2) at (0,3) [nodedecorate] {};
-\node [left] at (c2.west) {$2$};
-\node (c3) at (0,2) [nodedecorate] {};
-\node [left] at (c3.west) {$3$};
-\node (c4) at (0,1) [nodedecorate] {};
-\node [left] at (c4.west) {$4$};
-\node (c5) at (0,0) [nodedecorate] {};
-\node [left] at (c5.west) {$5$};
-\node (r1) at (4,4) [nodedecorate] {};
-\node [right] at (r1.east) {$1$};
-\node (r2) at (4,2) [nodedecorate] {};
-\node [right] at (r2.east) {$2$};
-\node (r3) at (4,0) [nodedecorate] {};
-\node [right] at (r3.east) {$3$};
-% edges or lines
-\path
-(r1) edge[linedecorate] (c1)
-(r1) edge[linedecorate] (c2)
-(r1) edge[linedecorate] (c3)
-(r2) edge[linedecorate] (c3)
-(r2) edge[linedecorate] (c5)
-(r3) edge[linedecorate] (c1)
-(r3) edge[linedecorate] (c4)
-(r3) edge[linedecorate] (c5);
-\end{tikzpicture}
-\caption{Tanner graph for $H$.}
-\label{fig:introduction:tanner_graph}
-\end{figure}
-
 The \emph{complete bipartite} graph $K_{m,n}$ is the bipartite graph
 whose vertex set is partitioned into two non-empty disjoint sets $V_1$
 and $V_2$ with $|V_1| = m$ and $|V_2| = n$. Any vertex in $V_1$ is
@@ -949,6 +877,9 @@ $n$-regular. Where $m = 1$ then $K_{1,n}$ is called the \emph{star}
 graph. Figure~\ref{fig:introduction:bipartite_complete_bipartite_graphs}
 shows a bipartite graph together with the complete bipartite graphs
 $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
+\index{graph!bipartite}
+\index{graph!complete bipartite}
+\index{graph!star}
 
 \begin{figure}[!htbp]
 \centering
@@ -1261,6 +1192,100 @@ sage: M = G.weighted_adjacency_matrix(); M
 [4 0 0 0]
 \end{lstlisting}
 \end{center}
+
+\subsubsection{Bipartite case}
+
+Suppose $G=(V,E)$ is an undirected bipartite graph and $V=V_1\cup V_2$ is 
+the partition of the vertices into $n_1$ vertices
+in $V_1$ and $n_2$ vertices in $V_2$, so $|V|=n_1+n_2$.
+Then the adjacency matrix $A$ of $G$ can be realized as 
+a block diagonal matrix 
+$A  = 
+\left(
+\begin{array}{cc} A_1 & 0 \\ 0 & A_2 \end{array} 
+\right)$, where $A_1$ is an $n_1\times n_2$ matrix
+and $A_2$ is an $n_2\times n_1$ matrix. Since
+$G$ is undirected, $A_2 = \, ^tA_1$.
+The matrix are called a \emph{reduced adjacency matrix} 
+or a \emph{bi-adjacency matrix} (the literature also uses
+the terms ``transfer matrix'' or the ambiguous term
+``adjacency matrix'').
+\index{adjacency matrix!reduced}
+\index{bi-adjacency matrix}
+
+\subsubsection{Tanner graphs}
+
+If $H$ is an $m \times n$ $(0,1)$-matrix, then the \emph{Tanner graph}
+of $H$ is the bipartite graph $G = (V,E)$ whose set of vertices
+$V = V_1 \cup V_2$ is partitioned into two sets: $V_1$ corresponding
+to the $m$ rows of $H$ and $V_2$ corresponding to the $n$ columns of $H$.
+For any $i,j$ with $1 \leq i \leq m$ and $1 \leq j \leq n$, there is
+an edge $(i,j) \in E$ if and only if the $(i,j)$-th entry of $H$ is
+$1$. This matrix $H$ is sometimes called the
+reduced adjacency matrix or the
+\emph{check matrix} of the Tanner graph.
+\index{check matrix}
+Tanner graphs are used in the theory of error-correcting codes.
+%\begin{example}
+For example, Sage allows you to easily compute such
+a bipartite graph from its matrix.
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: H = Matrix([(1,1,1,0,0), (0,0,1,0,1), (1,0,0,1,1)])
+sage: B = BipartiteGraph(H)
+sage: B.reduced_adjacency_matrix()
+[1 1 1 0 0]
+[0 0 1 0 1]
+[1 0 0 1 1]
+sage: B.plot(graph_border=True)
+\end{lstlisting}
+\end{center}
+%
+%\end{example}
+%
+The corresponding graph is similar to that in
+Figure~\ref{fig:introduction:tanner_graph}.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (c1) at (0,4) [nodedecorate] {};
+\node [left] at (c1.west) {$1$};
+\node (c2) at (0,3) [nodedecorate] {};
+\node [left] at (c2.west) {$2$};
+\node (c3) at (0,2) [nodedecorate] {};
+\node [left] at (c3.west) {$3$};
+\node (c4) at (0,1) [nodedecorate] {};
+\node [left] at (c4.west) {$4$};
+\node (c5) at (0,0) [nodedecorate] {};
+\node [left] at (c5.west) {$5$};
+\node (r1) at (4,4) [nodedecorate] {};
+\node [right] at (r1.east) {$1$};
+\node (r2) at (4,2) [nodedecorate] {};
+\node [right] at (r2.east) {$2$};
+\node (r3) at (4,0) [nodedecorate] {};
+\node [right] at (r3.east) {$3$};
+% edges or lines
+\path
+(r1) edge[linedecorate] (c1)
+(r1) edge[linedecorate] (c2)
+(r1) edge[linedecorate] (c3)
+(r2) edge[linedecorate] (c3)
+(r2) edge[linedecorate] (c5)
+(r3) edge[linedecorate] (c1)
+(r3) edge[linedecorate] (c4)
+(r3) edge[linedecorate] (c5);
+\end{tikzpicture}
+\caption{Tanner graph for $H$.}
+\label{fig:introduction:tanner_graph}
+\end{figure}
 
 
 %%--- Incidence matrix --------------------------------------------------%%
@@ -1620,6 +1645,17 @@ Figure~\ref{fig:introduction:isomorphic_graphs}, $C_6$ and $G_1$ are
 isomorphic, but $G_1$ and $G_2$ are not isomorphic.
 \end{proof}
 
+An important notion in graph theory is the idea of an ``invariant''.
+An \emph{invariant} is an object $f=f(G)$ associated to a
+graph $G$ which has the property:
+
+\[
+G\cong H \implies f(G)=f(H).
+\]
+For example, the number of vertices of a graph,
+$f(G)=|V(G)|$, is an invariant.
+\index{invariant}
+\index{graph invariant}
 
 %%--- Adjacency matrices ------------------------------------------------%%
 
@@ -1636,11 +1672,15 @@ To show two undirected graphs are isomorphic depends on the following
 result.
 
 \begin{theorem}
+\label{thrm:adj-mat-invariant}
 Consider two directed or undirected graphs $G_1$ and $G_2$ with
 respective adjacency matrices $A_1$ and $A_2$. Then $G_1$ and $G_2$
 are isomorphic if and only if $A_1$ is permutation equivalent to
 $A_2$.
 \end{theorem}
+
+This says that the permutaton equivalence class of the adjacency
+matrix is an invariant.
 
 Define an ordering on the set of $n \times n$ $(0, 1)$-matrices as
 follows: we say $A_1 < A_2$ if the list of entries of $A_1$ is less
@@ -1668,7 +1708,7 @@ by concatenating the entries of the matrix, row-by-row. For example,
 \SetKwData{False}{False}
 \SetKwData{True}{True}
 %% input/output
-\Input{Two undirected graphs $G_1$ and $G_2$, each having $n$
+\Input{Two undirected simple graphs $G_1$ and $G_2$, each having $n$
   vertices.}
 \Output{\True, if $G_1 \cong G_2$; \False, otherwise.}
 \BlankLine
@@ -1756,12 +1796,13 @@ $\sum_{d_i \in S} d_i = 2k$ for some integer $k \geq 0$. In other
 words, the sum of a graphical sequence is non-negative and
 even.
 
+\subsection{Invariants, revisited}
+
 In some cases, one can distinguish non-isomorphic graphs by
-considering graph invariants. A \emph{graph invariant} of a graph $G$
-is a function defined on $G$ such that any graph isomorphic to $G$ has
-the same function value. For instance, the graphs $C_6$ and $G_1$ in
+considering graph invariants. For instance, the graphs $C_6$ and $G_1$ in
 Figure~\ref{fig:introduction:isomorphic_graphs} are isomorphic so they
-have the same number of vertices and edges. Also, $G_1$ and $G_2$ are
+have the same number of vertices and edges. Also, $G_1$ and $G_2$ in
+Figure~\ref{fig:introduction:isomorphic_graphs}  are
 non-isomorphic because the former is connected, while the latter is
 not connected. To prove that two graphs are non-isomorphic, one could
 show that they have different values for a given graph invariant. The
@@ -1770,19 +1811,27 @@ graphs are non-isomorphic:
 \index{graph invariant}
 
 \begin{enumerate}
-\item the number of vertices
+\item the number of vertices,
 
-\item the number of edges
+\item the number of edges,
 
-\item the degree sequence
+\item the degree sequence,
 
-\item the length of a geodesic path
+\item the length of a geodesic path,
 
-\item the length of the longest path
+\item the length of the longest path,
 
-\item the connectivity of a graph
+\item the number of connected components of a graph.
 \end{enumerate}
 
+\begin{exercise}
+Let $J_1$ denote the incidence matrix of $G_1$ and
+let $J_2$ denote the incidence matrix of $G_2$. Find 
+matrix-theoretic criteria on $J_1$ and $J_2$
+which hold if and only if $G_1\cong G_2$.
+(In other words, find the analog of 
+Theorem \ref{thrm:adj-mat-invariant} for incidence matrices.)
+\end{exercise}
 
 %%-----------------------------------------------------------------------%%
 %%--- New graphs from old -----------------------------------------------%%
