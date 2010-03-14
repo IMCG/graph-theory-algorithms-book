@@ -897,10 +897,48 @@ In Figure \ref{fig:tree-forests:Boruvkas-algorithm} , we plot the following exam
 \begin{figure}[!htbp]
 \centering
 \subfigure[]{
-\includegraphics[height=7cm,width=7cm]{boruvkas-algorithm-example1a}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (0) at (0,0) [nodedecorate] {};
+\node [left] at (0.west) {$0$};
+\node (1) at (4,0) [nodedecorate] {};
+\node [right] at (1.east) {$1$};
+\node (2) at (4,4) [nodedecorate] {};
+\node [right] at (2.east) {$2$};
+\node (3) at (0,4) [nodedecorate] {};
+\node [left] at (3.west) {$3$};
+% edges or lines
+\path
+(0) edge[linedecorate] node[below]{$1$} (1)
+(0) edge[linedecorate] node {} (2)
+(0) edge[linedecorate] node[left]{$5$} (3)
+(1) edge[linedecorate] node[right]{$3$} (2)
+(1) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node[above]{$4$} (3);
+\end{tikzpicture}
 }
+\qquad
 \subfigure[]{
-\includegraphics[height=7cm,width=2cm]{boruvkas-algorithm-example1b}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (3) at (0,0) [nodedecorate] {};
+\node [right] at (3.east) {$3$};
+\node (2) at (1,2) [nodedecorate] {};
+\node [right] at (2.east) {$2$};
+\node (0) at (2,4) [nodedecorate] {};
+\node [right] at (0.east) {$0$};
+\node (1) at (3,6) [nodedecorate] {};
+\node [right] at (1.east) {$1$};
+% edges or lines
+\path
+(3) edge[linedecorate] node[left]{$4$} (2)
+(2) edge[linedecorate] node[left]{$2$} (0)
+(0) edge[linedecorate] node[left]{$1$} (1);
+\end{tikzpicture}
 }
 \caption{An example of Borovka's algorithm. On the left is the
   original graph. On the right is the MST produced by Boruvka's algorithm.}
@@ -1275,13 +1313,13 @@ Hamiltonian cycle on the graph $Q_n$
 (see Figure \ref{fig:Q3bw} for an example).
 
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=8cm,width=8cm]{Q3bw}
-\end{center}
-\caption{{\bf Plot of $\Gamma_3$ viewed as a Hamiltonian path on $Q_3$ .} }
-\label{fig:Q3bw}
-\end{figure}
+%% \begin{figure}[h!]
+%% \begin{center}
+%% \includegraphics[height=8cm,width=8cm]{Q3bw}
+%% \end{center}
+%% \caption{{\bf Plot of $\Gamma_3$ viewed as a Hamiltonian path on $Q_3$ .} }
+%% \label{fig:Q3bw}
+%% \end{figure}
 
 
 How do you efficiently compute a Gray code?
@@ -1379,13 +1417,13 @@ This will give us some idea of how the Gray code
 ``looks'' in some sense. The plot is given in Figure \ref{fig:Gamma8}.
 
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=8cm,width=8cm]{graycode-binary-length8}
-\end{center}
-\caption{{\bf List plot of $\Gamma_8$ created using \sage .} }
-\label{fig:Gamma8}
-\end{figure}
+%% \begin{figure}[h!]
+%% \begin{center}
+%% \includegraphics[height=8cm,width=8cm]{graycode-binary-length8}
+%% \end{center}
+%% \caption{{\bf List plot of $\Gamma_8$ created using \sage .} }
+%% \label{fig:Gamma8}
+%% \end{figure}
 
 
 What if you only want to compute the
