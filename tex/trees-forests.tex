@@ -4,48 +4,47 @@
 \chapter{Trees and Forests}
 \label{chap:trees_forests}
 
-Recall, a path in a graph $G=(V,E)$ whose start and end vertices are the same is
-called a cycle. We say $G$ is {\it acyclic}, or a {\it forest}, if it
-has no cycles.
-A vertex of a forest of degree one is called an {\it endpoint} or a {\it leaf}.
+Recall, a path in a graph $G = (V, E)$ whose start and end vertices
+are the same is called a cycle. We say $G$ is \emph{acyclic}, or a
+\emph{forest}, if it has no cycles. A vertex of a forest of degree one
+is called an \emph{endpoint} or a \emph{leaf}.
 \index{acyclic}
 \index{forest}
 \index{endpoint}
 \index{leaf}
-A connected forest is a {\it tree}.
+A connected forest is a \emph{tree}.
 \index{tree}
 
-A {\it rooted tree} is a tree with a specified {\it root} vertex $v_0$. (However,
-if $G$ is a rooted tree with root vertex $v_0$ and if the degree of
-$v_0$ is one then, by convention, we do not call $v_0$ an endpoint or
-a leaf.)
+A \emph{rooted tree} is a tree with a specified \emph{root} vertex
+$v_0$. (However, if $G$ is a rooted tree with root vertex $v_0$ and if
+the degree of $v_0$ is one then, by convention, we do not call $v_0$
+an endpoint or a leaf.)
 \index{tree!rooted}
-A {\it directed tree} is a directed graph which would be a tree if the
-directions on the edges were ignored.
+A \emph{directed tree} is a directed graph which would be a tree if
+the directions on the edges were ignored.
 \index{tree!directed}
-A rooted tree can be regarded as a directed tree since you image an
-edge $E=\{u,v\}$, for $u,v\in V$, being directed from $u$ to $v$,
-$e=(u,v)$, if and only if $v$ is further away from $v_0$ that $u$ is.
-If $e=(u,v)$ is an edge in a rooted tree then we call $v$
-a {\it child} vertex with {\it parent} $u$.
-An {\it ordered tree} is a rooted tree for which an ordering is specified
-for the children of each vertex.
+A rooted tree can be regarded as a directed tree since you imagine an
+edge $E = \{u, v\}$, for $u, v \in V$, being directed from $u$ to $v$,
+$e = (u, v)$, if and only if $v$ is further away from $v_0$ than $u$
+is. If $e = (u, v)$ is an edge in a rooted tree, then we call $v$ a
+\emph{child} vertex with \emph{parent} $u$. An \emph{ordered tree} is
+a rooted tree for which an ordering is specified for the children of
+each vertex.
 \index{tree!ordered}
 \index{parent}
 \index{child}
-An {\it $n$-ary tree} is a rooted tree for which each vertex
-which is not a leaf has at most $n$ children. The case $n=2$
-are called {\it binary trees}.
+An $n$-\emph{ary tree} is a rooted tree for which each vertex that is
+not a leaf has at most $n$ children. The case $n = 2$ are called
+\emph{binary trees}.
 \index{tree!binary}
 \index{tree!$n$-ary}
 
-Directed trees are pervasive in theoretical computer science, as they are
-useful structures for describing algorithms and relationships between
-objects in certain data sets.
+Directed trees are pervasive in theoretical computer science, as they
+are useful structures for describing algorithms and relationships
+between objects in certain data sets.
 
-A {\it spanning tree} $T$ of a connected, undirected graph $G$ is a
+A \emph{spanning tree} $T$ of a connected, undirected graph $G$ is a
 subgraph containing all vertices of $G$ which is a tree.
-
 
 \begin{example}
 \label{example:span-tree}
@@ -845,20 +844,20 @@ def prim(G):
 
 \subsection{Bor\r{u}vka's algorithm}
 
-Bor\r{u}vka's algorithm algorithm is an algorithm 
-for finding a minimum spanning tree in a connected graph for 
+Bor\r{u}vka's algorithm algorithm is an algorithm
+for finding a minimum spanning tree in a connected graph for
 which all edge weights are distinct.
 
 Pseudocode for Bor\r{u}vka's algorithm is:
 
 \begin{itemize}
 \item
-Begin with a connected graph G containing edges of distinct 
+Begin with a connected graph G containing edges of distinct
  weights, and an empty set of edges T
 \item
 While the vertices of G connected by T are disjoint:
 \begin{itemize}
-\item    
+\item
 Begin with an empty set of edges E
 \item
          For each component:
@@ -868,8 +867,8 @@ Begin with an empty set of edges E
 \item
         For each vertex in the component:
  \begin{itemize}
-\item           
-Add the cheapest edge from the vertex in 
+\item
+Add the cheapest edge from the vertex in
              the component to another vertex in a disjoint component to S
 \end{itemize}
         Add the cheapest edge in S to E
@@ -919,14 +918,14 @@ In Figure \ref{fig:tree-forests:Boruvkas-algorithm} , we plot the following exam
 
 def which_index(x,L):
     """
-    L is a list of sublists (or tuple of sets or list 
+    L is a list of sublists (or tuple of sets or list
     of tuples, etc).
-    
+
     Returns the index of the first sublist which x belongs
     to, or None if x is not in flatten(L).
 
-    The 0-th element in 
-    Lx = [L.index(S) for S in L if x in S] 
+    The 0-th element in
+    Lx = [L.index(S) for S in L if x in S]
     almost works, but if the list is empty then Lx[0]
     throws an exception.
 
@@ -949,7 +948,7 @@ def which_index(x,L):
 
 def boruvka(G):
     """
-    Implements Boruvka's algorithm to compute a MST of a graph. 
+    Implements Boruvka's algorithm to compute a MST of a graph.
 
     INPUT:
         G - a connected edge-weighted graph with distinct weights.
@@ -974,8 +973,8 @@ def boruvka(G):
     E = []
     for x in E0:
         x.reverse()
-        E.append(tuple(x)) 
-    # end ugly hack to get E is sorted by weight 
+        E.append(tuple(x))
+    # end ugly hack to get E is sorted by weight
     for e in E:
         # create about |V|/2 edges of T "cheaply"
         TV = T.vertices()
@@ -985,7 +984,7 @@ def boruvka(G):
         # connect the "cheapest" components to get T
         C = T.connected_components_subgraphs()
         VC = [S.vertices() for S in C]
-        if not(e in T.edges()) and (which_index(e[0],VC) != which_index(e[1],VC)):  
+        if not(e in T.edges()) and (which_index(e[0],VC) != which_index(e[1],VC)):
            if T.is_connected():
                 break
             T.add_edge(e)
@@ -1014,7 +1013,7 @@ Some examples using Sage:
          [0,0,0,0,15,6,0],[0,0,0,0,0,3,4],[0,0,0,0,0,0,11],[0,0,0,0,0,0,0]])
         sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
         sage: E = G.edges(); E
-        [(0, 1, 2), (0, 3, 5), (1, 2, 8), (1, 3, 9), (1, 4, 7), 
+        [(0, 1, 2), (0, 3, 5), (1, 2, 8), (1, 3, 9), (1, 4, 7),
          (2, 4, 1), (3, 4, 15), (3, 5, 6), (4, 5, 3), (4,6, 4), (5, 6, 11)]
         sage: boruvka(G)
         Multi-graph on 7 vertices
@@ -1042,7 +1041,7 @@ See section~3.3 of Gross and Yellen~\cite{GrossYellen1999}.
 
 A binary tree is a rooted tree with at most 2 children per parent.
 
-In this section, we consider 
+In this section, we consider
 
 \begin{itemize}
 \item binary codes,
@@ -1061,7 +1060,7 @@ A {\it code} is a rule for converting data in one
 \index{code}
 \index{codeword}
 \index{alphabet}
-format, or well-defined tangible representation, 
+format, or well-defined tangible representation,
 into sequences of symbols in another format (and the finite set of symbols
 used is called the {\it alphabet}). We shall identify a code
 as a finite set of symbols which are the image
@@ -1070,8 +1069,8 @@ are referred to as {\it codewords}. For example, using the ASCII code,
 the letters in the English alphabet get converted into numbers
 $\{0, 1, \dots, 255\}$. If these numbers are written in binary
 then each codeword of a letter has length 8. In this way, we can
-reformat, or encode, a ``string'' into a sequence of binary symbols (i.e., 
-$0$'s and $1$'s). 
+reformat, or encode, a ``string'' into a sequence of binary symbols (i.e.,
+$0$'s and $1$'s).
 {\it Encoding} is the conversion process one way.
 {\it Decoding} is the reverse
 \index{encode}
@@ -1088,9 +1087,9 @@ Codes are used for
 since there is an entropy function which describes how much information
 a channel (with a given error rate) can carry and such
 codes are designed to maximize entropy as best as possible.
-In this case, in addition to simply being given an alphabet $A$, one 
-might be given a ``weighted alphabet,'' i.e., an alphabet for which each 
-symbol $a\in A$ is associated with a non-negative number 
+In this case, in addition to simply being given an alphabet $A$, one
+might be given a ``weighted alphabet,'' i.e., an alphabet for which each
+symbol $a\in A$ is associated with a non-negative number
 $w_a\geq 0$ (in practice, the probability that the
 symbol $a$ occurs in a typical word).
 
@@ -1117,14 +1116,14 @@ mathematical structure. We shall not study them.
 
 \subsubsection{Basic definitions}
 
-If every word in the code has the same length, the code is called 
+If every word in the code has the same length, the code is called
 a {\it block code}. If a code is not a block code then it is called
 a {\it variable-length} code.
 \index{code!block}
 \index{code!variable-length}
 A {\it prefix-free} code is a code (typically one of variable-length)
 with the property that there is no valid codeword in the code that
-is a prefix (start) of any other codeword\footnote{In other words, 
+is a prefix (start) of any other codeword\footnote{In other words,
 a codeword $s=s_1 \dots s_m$ is a {\it prefix} of a codeword
 $t=t_1\dots t_n$ if and only if $m\leq n$ and
 $s_1=t_1$, \dots, $s_m=t_m$. Codes which are prefix-free are easier
@@ -1132,7 +1131,7 @@ to decode than codes which are not prefix-free.}.
 This is the {\it prefix-free condition}.
 \index{code!prefix-free}
 
-One example of a prefix-free code is the ASCII code. 
+One example of a prefix-free code is the ASCII code.
 Another example is
 
 \[
@@ -1145,7 +1144,7 @@ On the other hand, a non-example is the code
 \]
 since the second codeword is a prefix of the third one.
 Another non-example is Morse code recalled in
-Figure \ref{fig:Morse} (we use $0$ for 
+Figure \ref{fig:Morse} (we use $0$ for
 $\cdot$ (``dit'') and $1$ for $-$ (``dah'')).
 \index{code!Morse}
 
@@ -1176,26 +1175,26 @@ For example, look at the Morse code for {\tt a} and the Morse code for
 
 \subsubsection{Gray codes}
 
-History\footnote{This 
+History\footnote{This
 history comes from an unpublished section 7.2.1.1
 (``Generating all $n$-tuples'')
 in volume 4 of Donald Knuth's {\bf The Art of Computer Programming}.
 }
-: Frank Gray (1887-1969) wrote about the so-called Gray codes in a 
+: Frank Gray (1887-1969) wrote about the so-called Gray codes in a
 1951 paper published in the Bell System Technical Journal,
 and then patented a device (used for television sets)
 based on it in 1953. However, the idea of a binary Gray code
 appeared earlier. In fact, it appeared in an earlier patent
-(one by Stibitz in 1943). It was also used in E. Baudot's 
-(a French engineer) telegraph machine of 1878 and in 
+(one by Stibitz in 1943). It was also used in E. Baudot's
+(a French engineer) telegraph machine of 1878 and in
 a French booklet by L. Gros on the solution to the
 ``Chinese ring puzzle'' published in 1872.
 
-The term ``Gray code'' is ambiguous. It is actually a 
+The term ``Gray code'' is ambiguous. It is actually a
 large family of sequences of $n$-tuples. Let
 ${\mathbb{Z}}_m=\{0,1,\dots,m-1\}$. More precisely, an
 {\it $m$-ary Gray code of length $n$} (called a {\it binary
-Gray code} when $m=2$) is a sequence of 
+Gray code} when $m=2$) is a sequence of
 all possible (namely, $N=m^n$) $n$-tuples
 \index{Gray code!binary}
 \index{Gray code!$m$-ary}
@@ -1203,7 +1202,7 @@ all possible (namely, $N=m^n$) $n$-tuples
 \[
 g_1,g_2,\dots, g_N,
 \]
-where 
+where
 \begin{itemize}
 \item
 each $g_i\in {\mathbb{Z}}_m^n$,
@@ -1219,18 +1218,18 @@ perspective, this sequence has two advantages:
 
 \begin{itemize}
 \item
-It is easy and fast to produce the sequence, since 
+It is easy and fast to produce the sequence, since
 successive entries differ in only one coordinate.
 
 \item
-An error is relatively easy to detect, since you can 
+An error is relatively easy to detect, since you can
 compare an $n$-tuple with the previous one. If they
 difer in more than one coordinate, you know an error
 was made.
 
 \end{itemize}
 
-\begin{example} 
+\begin{example}
 {\rm
 Here is a $3$-ary Gray code of length $2$:
 
@@ -1248,7 +1247,7 @@ and here is a binary Gray code of length $3$:
 Gray codes have applications to engineering,
 recreational mathematics (solving the Tower of Hanoi
 puzzle, ``The Brain'' puzzle, the ``Chinese ring puzzle'',
-and others), and to mathematics (for example, aspects of 
+and others), and to mathematics (for example, aspects of
 combinatorics, computational group theory
 and the computational aspects of linear codes).
 
@@ -1256,7 +1255,7 @@ and the computational aspects of linear codes).
 
 Consider the so-called $n$-hypercube graph
 $Q_n$. This can be envisioned as the graph whose
-vertices are the vertices of a cube in 
+vertices are the vertices of a cube in
 $n$-space
 \index{graph!hypercube}
 
@@ -1268,9 +1267,9 @@ ${\mathbb{R}}^n$ connecting two ``neighboring''
 vertices (namely, two vertices which differ
 in exactly one coordinate).
 A binary Gray code of length $n$ can be regarded as a
-path on the hypercube graph $Q_n$ which visits 
+path on the hypercube graph $Q_n$ which visits
 each vertex of the cube exactly once.
-In other words, a binary Gray code of length $n$ 
+In other words, a binary Gray code of length $n$
 may be identified with a
 Hamiltonian cycle on the graph $Q_n$
 (see Figure \ref{fig:Q3bw} for an example).
@@ -1289,11 +1288,11 @@ How do you efficiently compute a Gray code?
 
 Perhaps the simplest way to state the idea of
 quickly constructing
-the {\it reflected binary Gray code} $\Gamma_n$ 
+the {\it reflected binary Gray code} $\Gamma_n$
 of length $n$ is as follows:
 
 \[
-\Gamma_0=[],\ \ \ \ 
+\Gamma_0=[],\ \ \ \
 \Gamma_{n}=[0,\Gamma_{n-1}],[1,\Gamma_{n-1}^{rev}],
 \]
 where $\Gamma_m^{rev}$ means the Gray code in
@@ -1308,9 +1307,9 @@ reverse order. For instance, we have
 \[
 \Gamma_2=[[0,0],[0,1],[1,1],[1,0],
 \]
-and so on. This is a nice procedure if you want to create 
+and so on. This is a nice procedure if you want to create
 the entire list at once (which, by the way, gets very long
-very fast). 
+very fast).
 
 An implementation of the reflected Gray code using Python is given below.
 
@@ -1324,7 +1323,7 @@ def graycode(length,modulus):
 
     EXAMPLES:
         sage: graycode(2,4)
-        
+
         [[0, 0],
          [1, 0],
          [2, 0],
@@ -1372,11 +1371,11 @@ def graycode(length,modulus):
 Consider the reflected binary code
 of length $8$, $\Gamma_8$. This has $2^8=256$ codewords.
 \sage can easily create the list plot of the coordinates
-$(x,y)$, where $x$ is an integer $j \in {\mathbb{Z}}_{256}$ 
+$(x,y)$, where $x$ is an integer $j \in {\mathbb{Z}}_{256}$
 which indexes the codewords in $\Gamma_8$
 and the corresponding $y$ is the $j$-th
 codeword in $\Gamma_8$ converted to decimal.
-This will give us some idea of how the Gray code 
+This will give us some idea of how the Gray code
 ``looks'' in some sense. The plot is given in Figure \ref{fig:Gamma8}.
 
 
@@ -1389,13 +1388,13 @@ This will give us some idea of how the Gray code
 \end{figure}
 
 
-What if you only want to compute the 
+What if you only want to compute the
 $i$-th Gray codeword in the Gray code of length $n$?
 Can it be computed quickly as well without computing the
 entire list?
 At least in the case of the reflected binary Gray code, there
 is a very simple way to do this. The $k$-th element in the
-above-described reflected binary Gray code of length $n$ 
+above-described reflected binary Gray code of length $n$
 is obtained by simply adding the binary representation of
 $k$ to the binary representation of the integer part of
 $k/2$.
@@ -1406,14 +1405,14 @@ An example using \sage is given below.
 
 def int2binary(m, n):
     '''
-    returns GF(2) vector of length n obtained 
-    from the binary repr of m, padded by 0's 
+    returns GF(2) vector of length n obtained
+    from the binary repr of m, padded by 0's
     (on the left) to length n.
 
     EXAMPLES:
         sage: for j in range(8):
-        ....:     print int2binary(j,3)+int2binary(int(j/2),3) 
-        ....:     
+        ....:     print int2binary(j,3)+int2binary(int(j/2),3)
+        ....:
         (0, 0, 0)
         (0, 0, 1)
         (0, 1, 1)
@@ -1437,10 +1436,10 @@ def graycodeword(m, n):
     of length n.
 
     EXAMPLES:
-        sage: graycodeword(3,3) 
+        sage: graycodeword(3,3)
         (0, 1, 0)
     '''
-    return int2binary(m,n)+int2binary(int(m/2),n) 
+    return int2binary(m,n)+int2binary(int(m/2),n)
 
 \end{Verbatim}
 
@@ -1457,20 +1456,20 @@ An {\it alphabet} $A$ is a finite set, whose elements are referred to as {\it sy
 
 A {\it word} (or  {\it string} or {\it message}) in $A$ is a finite sequence of symbols in $A$, usually written by simply
 concatenating them together: $a_1a_2\dots a_k$ ($a_i\in A$) is a
-message of {\it length} $k$. 
+message of {\it length} $k$.
 \index{word}
 \index{string}
 \index{message}
 \index{alphabet}
 A commonly occurring alphabet in practice is the {\it binary alphabet}
 $\{0,1\}$, in which case a word is simply a finite sequence of $0$'s and $1$'s.
-If $A$ is an alphabet, let 
+If $A$ is an alphabet, let
 
 \[
 A^*
 \]
 denote the set of all words in $A$.
-The length of a word is denoted by vertical bars: 
+The length of a word is denoted by vertical bars:
 if $w=a_1\dots a_k$ is a word
 in $A$ then define $|\dots |:A^*\to {\mathbb{R}}$ by
 
@@ -1498,19 +1497,19 @@ Any binary code can be represented by a tree.
 \begin{example}
 {\rm
 Here is how to represent the code ${\mathbb B}_\ell$ consisting of all
-binary strings of length $\leq \ell$. Start with the 
-``root node'' $v_\emptyset$ being the empty string. The 
-two children of this node, $v_0$ and $v_1$, correspond to the 
+binary strings of length $\leq \ell$. Start with the
+``root node'' $v_\emptyset$ being the empty string. The
+two children of this node, $v_0$ and $v_1$, correspond to the
 two strings of length $1$. Label $v_0$ with a ``$0$'' and
-$v_1$ with a ``$1$.'' The two children of 
-$v_0$, $v_{00}$ and $v_{01}$, correspond to the 
+$v_1$ with a ``$1$.'' The two children of
+$v_0$, $v_{00}$ and $v_{01}$, correspond to the
 strings of length $2$ which start with a $0$,
-and the  two children of 
-$v_1$, $v_{10}$ and $v_{11}$, correspond to the 
+and the  two children of
+$v_1$, $v_{10}$ and $v_{11}$, correspond to the
 strings of length $2$ which start with a $1$.
-Continue creating child nodes until you reach length $\ell$ 
+Continue creating child nodes until you reach length $\ell$
 then stop. There are a total of $2^{\ell+1}-1$ nodes
-in this tree and $2^\ell$ of them are 
+in this tree and $2^\ell$ of them are
 ``leaves'' (vertices of a tree with degree $1$, i.e., childless nodes).
 Note that the parent of any node is a prefix to that
 node. Label each node $v_s$ with the string ``$s$,''
@@ -1554,10 +1553,10 @@ See Figure \ref{fig:tree} for an example when $\ell = 2$.
 In general, if $C$ is a code contained in ${\mathbb B}_\ell$
 then to create the tree for $C$, start with the tree for
  ${\mathbb B}_\ell$. First,
-remove all nodes associated to a binary string for which 
+remove all nodes associated to a binary string for which
 it and all of its descendents are not in $C$.
 Next, remove all labels which do not
-correspond with codewords in $C$. 
+correspond with codewords in $C$.
 The resulting labeled graph is the {\it tree associated
 to the binary code $C$}.
 \index{code!tree}
@@ -1573,7 +1572,7 @@ the following rules
 The root node gets the empty codeword.
 \item
 Each left-ward
-branch gets a $0$ appended to the end of its 
+branch gets a $0$ appended to the end of its
 parent and each
 right-ward branch gets a $1$ appended to the end.
 \end{itemize}
@@ -1581,13 +1580,13 @@ right-ward branch gets a $1$ appended to the end.
 \subsubsection{Uniquely decodable codes}
 
 
-If $c:A\to B^*$ is a code then we can extend $c$ to $A^*$ by 
+If $c:A\to B^*$ is a code then we can extend $c$ to $A^*$ by
 {\it concatenation}:
 
 \[
 c(a_1a_2\dots a_k)=c(a_1)c(a_2)\dots c(a_k).
 \]
-If the extension $c:A^*\to T^*$ is also an injection then $c$ 
+If the extension $c:A^*\to T^*$ is also an injection then $c$
 is called {\it uniquely decodable}.
 \index{code!uniquely decodable}
 
@@ -1595,9 +1594,9 @@ is called {\it uniquely decodable}.
 {\rm
 Recall the Morse code in Table \ref{table:Morse}.
 Note these Morse codewords all have length less than or equal to $4$.
-Other commonly occurring symbols used (the digits $0$ 
+Other commonly occurring symbols used (the digits $0$
 through $9$, punctuation symbols,
-and some others), are also encodable in Morse code 
+and some others), are also encodable in Morse code
 but they use longer codewords.
 
 Let $A$ denote the English alphabet, $B=\{0,1\}$ the
@@ -1638,10 +1637,10 @@ Suppose $c(x_1)\dots c(x_k)=c(y_1)\dots c(y_\ell)$ where
 $m={\rm max}(k,\ell)$. These strings are equal, so the
 substring $c(x_1)$ of the left-hand side and the substring $c(y_1)$
 of the right-hand side are either equal or one is contained in the other.
-If (for instance) $c(x_1)$ is properly contained in $c(y_1)$ then 
-$c$ is not prefix-free. Likewise, if $c(y_1)$ is properly contained in 
+If (for instance) $c(x_1)$ is properly contained in $c(y_1)$ then
+$c$ is not prefix-free. Likewise, if $c(y_1)$ is properly contained in
 $c(x_1)$. Therefore, $c(x_1)=c(y_1)$. This implies $x_1=y_1$.
-Now remove this 
+Now remove this
 codeword from both sides, so $c(x_2)\dots c(x_k)=c(y_2)\dots c(y_\ell)$.
 By the induction hypothesis, $x_2\dots x_k=y_2\dots y_\ell$.
 These facts together imply $k=\ell$ and $x_i=y_i$ for all $i$.
@@ -1649,16 +1648,16 @@ These facts together imply $k=\ell$ and $x_i=y_i$ for all $i$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Consider now a weighted alphabet $(A,p)$, where 
+Consider now a weighted alphabet $(A,p)$, where
 $p:A\to [0,1]$ satisfies $\sum_{a\in A}p(a)=1$,
 and a code $c:A\to B^*$.
 In other words, $p$ is a probability distribution on $A$.
 Think of $p(a)$ as the probability that the symbol $a$
 arises in an typical message.
 
-The {\it average word length} $L(c)$ is\footnote{In probability terminology, 
+The {\it average word length} $L(c)$ is\footnote{In probability terminology,
 this is the expected value $E(X)$ of the
-random variable $X$ which assigns to a randomly selected 
+random variable $X$ which assigns to a randomly selected
 symbol in $A$, the length of the associated codeword in $C$.}:
 
 \[
@@ -1678,7 +1677,7 @@ Optimal codes satisfy the following amazing property.
 {\rm
 Suppose $c:A\to B^*$ is a binary optimal prefix-free code
 and let $\ell = {\rm max}_{a\in A} |c(a)|$ denote
-the maximum length of a codeword. 
+the maximum length of a codeword.
 The following statements hold.
 \begin{itemize}
 \item
@@ -1699,8 +1698,8 @@ $b0$ and $b1$, for some $b\in B^*$.
 For the proof (which is very easy and highly recommended for the
 student who is curious to see more), see Biggs\S 3.6, \cite{Biggs2009}.
 
-The Huffman code construction is based on the 
-amazing second property in the above lemma 
+The Huffman code construction is based on the
+amazing second property in the above lemma
 yields an optimal prefix-free binary code.
 
 {\it Huffman code construction}: Here is the recursive/inductive
@@ -1708,9 +1707,9 @@ construction. We shall regard the binary Huffman code as a tree,
 as described above.
 
 Suppose that the weighted alphabet $(A,p)$ has $n$ symbols.
-We assume inductively that there is an optimal prefix-free 
-binary code for any weighted alphabet $(A',p')$ having 
-$<n$ symbols. 
+We assume inductively that there is an optimal prefix-free
+binary code for any weighted alphabet $(A',p')$ having
+$<n$ symbols.
 
 \noindent
 {\it Huffman's rule 1}:
@@ -1722,12 +1721,12 @@ All other symbols and weights remain unchanged.
 
 \noindent
 {\it Huffman's rule 2}:
-For the code $(A',p')$ above, if $a*$ is encoded 
-as the binary string $s$ then the encoded binary string for 
+For the code $(A',p')$ above, if $a*$ is encoded
+as the binary string $s$ then the encoded binary string for
 $a$ is $s0$ and the encoded binary string for
 $a'$ is $s1$.
 
-These two rules tell us how to inductively built 
+These two rules tell us how to inductively built
 the tree representation for the Huffman code of $(A,p)$ up
 from its leaves (associated to the low weight symbols).
 
@@ -1735,7 +1734,7 @@ from its leaves (associated to the low weight symbols).
 \item
 Find two different symbols of lowest weight, $a$ and $a'$.
 If two such symbols don't exist, stop.
-Replace the weighted alphabet with the new weighted alphabet 
+Replace the weighted alphabet with the new weighted alphabet
 as in Huffman's rule 1.
 
 \item
@@ -1753,13 +1752,13 @@ An example of this is below.
 
 \begin{example}
 {\rm
-A very simple of this makes Huffman's ingenious 
+A very simple of this makes Huffman's ingenious
 construction easier to understand.
 
-Suppse $A=\{a,b,c\}$ and 
+Suppse $A=\{a,b,c\}$ and
 $p(a)=0.5$, $p(b)=0.3$, $p(c)=0.2$.
 
-A Huffman code for this is 
+A Huffman code for this is
 $C=\{0,10,11\}$, as is depicted in Figure \ref{fig:huffman1}.
 
 \begin{figure}[h!]
@@ -1787,9 +1786,9 @@ $C=\{0,10,11\}$, as is depicted in Figure \ref{fig:huffman1}.
 \label{fig:huffman1}
 \end{figure}
 
-\begin{exercise} 
+\begin{exercise}
 Verify
-that $C=\{1,00,01\}$ is another Huffman code for this 
+that $C=\{1,00,01\}$ is another Huffman code for this
 weighted alphabet and to draw its tree representation.
 \end{exercise}
 }
@@ -1799,7 +1798,7 @@ weighted alphabet and to draw its tree representation.
 
 \begin{exercise}
 Find the Huffman code for the letters of the English alphabet weighted
-by the frequency of common American usage\footnote{You can find this 
+by the frequency of common American usage\footnote{You can find this
 on the internet or in the literature.
 Part of this exercise is finding this frequency distribution
 yourself.}.
