@@ -1310,16 +1310,46 @@ each vertex of the cube exactly once.
 In other words, a binary Gray code of length $n$
 may be identified with a
 Hamiltonian cycle on the graph $Q_n$
-(see Figure \ref{fig:Q3bw} for an example).
+(see Figure \ref{fig:trees_forests:gray_code_cube} for an example).
 
-
-%% \begin{figure}[h!]
-%% \begin{center}
-%% \includegraphics[height=8cm,width=8cm]{Q3bw}
-%% \end{center}
-%% \caption{{\bf Plot of $\Gamma_3$ viewed as a Hamiltonian path on $Q_3$ .} }
-%% \label{fig:Q3bw}
-%% \end{figure}
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  darkline/.style={-,ultra thick},
+  lightline/.style={-,ultra thick,color=gray!30}]
+% nodes or vertices
+% foreground square
+\node (1) at (0,0) [nodedecorate] {};
+\node (2) at (4,0) [nodedecorate] {};
+\node (3) at (4,4) [nodedecorate] {};
+\node (4) at (0,4) [nodedecorate] {};
+% background square
+\node (5) at (1.5,1.5) [nodedecorate] {};
+\node (6) at (5.5,1.5) [nodedecorate] {};
+\node (7) at (5.5,5.5) [nodedecorate] {};
+\node (8) at (1.5,5.5) [nodedecorate] {};
+% edges or lines
+\path
+% foreground square
+(1) edge[darkline] node {} (2)
+(2) edge[lightline] node {} (3)
+(3) edge[lightline] node {} (4)
+(4) edge[lightline] node {} (1)
+% background square
+(5) edge[lightline] node {} (6)
+(6) edge[darkline] node {} (7)
+(7) edge[lightline] node {} (8)
+(8) edge[darkline] node {} (5)
+% joining foreground and background squares
+(1) edge[darkline] node {} (5)
+(2) edge[darkline] node {} (6)
+(3) edge[darkline] node {} (7)
+(4) edge[darkline] node {} (8);
+\end{tikzpicture}
+\caption{Viewing $\Gamma_3$ as a Hamiltonian path on $Q_3$.}
+\label{fig:trees_forests:gray_code_cube}
+\end{figure}
 
 
 How do you efficiently compute a Gray code?
@@ -1417,6 +1447,7 @@ This will give us some idea of how the Gray code
 ``looks'' in some sense. The plot is given in Figure \ref{fig:Gamma8}.
 
 
+%% FIXME
 %% \begin{figure}[h!]
 %% \begin{center}
 %% \includegraphics[height=8cm,width=8cm]{graycode-binary-length8}
