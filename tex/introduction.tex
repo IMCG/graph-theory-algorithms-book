@@ -1427,7 +1427,7 @@ be discussed further in Chapter~\ref{chap:distance_connectivity}.
 Recall that the distance (or geodesic distance) $d(v,w)$ between two
 vertices $v,w \in V$ in a connected graph $G = (V,E)$ is the number of
 edges in a shortest path connecting them. The $n \times n$ matrix
-$\{ d(v_i, v_j) \}$ is the \emph{distance matrix} of $G$.
+$[d(v_i, v_j)]$ is the \emph{distance matrix} of $G$.
 \index{distance matrix}
 Sage helps you to compute the distance matrix of a graph:
 %
@@ -1436,7 +1436,7 @@ Sage helps you to compute the distance matrix of a graph:
 \selectfont
 \tt
 \begin{lstlisting}
-sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 4: [1, 3], 5: [4, 2], 6: [3, 1]})
+sage: G = Graph({1: [2,4], 2: [1,4], 3: [2,6], 4: [1,3], 5: [4,2], 6: [3,1]})
 sage: d = [[G.distance(i,j) for i in range(1,7)] for j in range(1,7)]
 sage: matrix(d)
 [0 1 2 1 2 1]
@@ -1449,7 +1449,7 @@ sage: matrix(d)
 \end{center}
 
 The distance matrix is an important quantity which allows one to
-better understand of the ``connectivity'' of a graph. Distance and
+better understand the ``connectivity'' of a graph. Distance and
 connectivity will be discussed in more detail in
 Chapters~\ref{chap:distance_connectivity}
 and~\ref{chap:random_graphs}.
