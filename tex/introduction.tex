@@ -1669,13 +1669,14 @@ invariant.
 
 Two $n \times n$ matrices $A_1$ and $A_2$ are
 \emph{permutation equivalent} if there is a permutation matrix $P$
-such that $A_1 = PA_2P^{-1}$. In other words, $A_1$ is the same as
-$A_2$ after a suitable reordering of the rows and a corresponding
-reordering of the columns.\index{permutation equivalent} This notion
-of permutation equivalence is an equivalence relation.
+such that $A_1 = P A_2 P^{-1}$. In other words, $A_1$ is the same as
+$A_2$ after a suitable re-ordering of the rows and a corresponding
+re-ordering of the columns.
+\index{permutation equivalent}
+This notion of permutation equivalence is an equivalence relation.
 
-To show two undirected graphs are isomorphic depends on the following
-result.
+To show that two undirected graphs are isomorphic depends on the
+following result.
 
 \begin{theorem}
 \label{thrm:adj-mat-invariant}
@@ -1685,7 +1686,7 @@ are isomorphic if and only if $A_1$ is permutation equivalent to
 $A_2$.
 \end{theorem}
 
-This says that the permutaton equivalence class of the adjacency
+This says that the permutation equivalence class of the adjacency
 matrix is an invariant.
 
 Define an ordering on the set of $n \times n$ $(0, 1)$-matrices as
@@ -1694,15 +1695,15 @@ than or equal to the list of entries of $A_2$ in the lexicographical
 ordering. Here, the list of entries of a $(0, 1)$-matrix is obtained
 by concatenating the entries of the matrix, row-by-row. For example,
 \[
-\begin{pmatrix}
+\begin{bmatrix}
 1 & 1 \\
 0 & 1
-\end{pmatrix}
+\end{bmatrix}
 <
-\begin{pmatrix}
+\begin{bmatrix}
 1 & 1 \\
 1 & 1
-\end{pmatrix}.
+\end{bmatrix}.
 \]
 
 \begin{algorithm}[!htpb]
