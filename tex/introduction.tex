@@ -1501,6 +1501,7 @@ and~\ref{chap:random_graphs}.
 %%--- Isomorphic graphs -------------------------------------------------%%
 
 \section{Isomorphic graphs}
+\label{chap:introduction:isomorphic_graphs}
 
 Determining whether or not two graphs are, in some sense, the ``same''
 is a hard but important problem.
@@ -1610,10 +1611,6 @@ shortest path between $v_1, v_k \in V(G)$, then
 $f(v_1), f(v_2), f(v_3), \dots, f(v_k)$ is a geodesic path between
 $f(v_1), f(v_k) \in V(H)$.
 
-%% Hopefully later we can discuss ``canonical labeling''
-%% and how that gives rise to isomorphism/automorphism
-%% testing methods???
-
 \begin{example}
 Consider the graphs in
 Figure~\ref{fig:introduction:isomorphic_graphs}. Which pair of graphs
@@ -1679,7 +1676,7 @@ To show that two undirected graphs are isomorphic depends on the
 following result.
 
 \begin{theorem}
-\label{thrm:adj-mat-invariant}
+\label{thm:introduction:adjoint_matrix_invariant}
 Consider two directed or undirected graphs $G_1$ and $G_2$ with
 respective adjacency matrices $A_1$ and $A_2$. Then $G_1$ and $G_2$
 are isomorphic if and only if $A_1$ is permutation equivalent to
@@ -1834,14 +1831,20 @@ non-isomorphic:
 \item the number of connected components of a graph.
 \end{enumerate}
 
-\begin{exercise}
-Let $J_1$ denote the incidence matrix of $G_1$ and
-let $J_2$ denote the incidence matrix of $G_2$. Find
-matrix-theoretic criteria on $J_1$ and $J_2$
-which hold if and only if $G_1\cong G_2$.
-(In other words, find the analog of
-Theorem \ref{thrm:adj-mat-invariant} for incidence matrices.)
-\end{exercise}
+
+%%--- Problems ----------------------------------------------------------%%
+
+\subsection*{Problems~\ref{chap:introduction:isomorphic_graphs}}
+
+\begin{enumerate}
+\item Let $J_1$ denote the incidence matrix of $G_1$ and let $J_2$
+  denote the incidence matrix of $G_2$. Find matrix theoretic criteria
+  on $J_1$ and $J_2$ which hold if and only if $G_1 \cong G_2$. In
+  other words, find the analog of
+  Theorem~\ref{thm:introduction:adjoint_matrix_invariant} for
+  incidence matrices.)
+\end{enumerate}
+
 
 %%-----------------------------------------------------------------------%%
 %%--- New graphs from old -----------------------------------------------%%
