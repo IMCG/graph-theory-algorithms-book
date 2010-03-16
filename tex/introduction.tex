@@ -1947,19 +1947,193 @@ $G_1 \oplus G_2$.
 \index{ring sum}
 \index{graph!symmetric difference}
 
-The \emph{join} of two disjoint graphs $G_1$ and $G_2$, denoted 
+The \emph{join} of two disjoint graphs $G_1$ and $G_2$, denoted
 $G_1 + G_2$, is their graph union, with each vertex of one graph
 connecting to each vertex of the other graph. For example, the join of
 the cycle graph $C_{n-1}$ with a single vertex graph is the wheel
-graph $W_n$.
+graph $W_n$. Figure~\ref{fig:introduction:wheel_graphs} shows various
+wheel graphs.
 
-%% Sorry Minh - I don't understand how you intended
-%% there topics to be integrated into this subsection:
-%\begin{itemize}
-%\item wheel graphs
-%
-%\item sequential join
-%\end{itemize}
+\begin{figure}[!htbp]
+\centering
+%% wheel graph W_4
+\subfigure[$W_4$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (0.8660,-0.5) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-0.8660,-0.5) [nodedecorate] {};
+\node (4) at (0,0) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (4)
+(1) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (4);
+\end{tikzpicture}
+}
+\quad
+%% wheel graph W_5
+\subfigure[$W_5$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (1,0) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-1,0) [nodedecorate] {};
+\node (4) at (0,-1) [nodedecorate] {};
+\node (5) at (0,0) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (4)
+(1) edge[linedecorate] node {} (5)
+(2) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (5)
+(3) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (5)
+(4) edge[linedecorate] node {} (5);
+\end{tikzpicture}
+}
+\quad
+%% wheel graph W_6
+\subfigure[$W_6$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (0.9510,0.3090) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-0.9510,0.3090) [nodedecorate] {};
+\node (4) at (-0.5877,-0.8090) [nodedecorate] {};
+\node (5) at (0.5877,-0.8090) [nodedecorate] {};
+\node (6) at (0,0) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (5)
+(1) edge[linedecorate] node {} (6)
+(2) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (6)
+(3) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (6)
+(4) edge[linedecorate] node {} (5)
+(4) edge[linedecorate] node {} (6)
+(5) edge[linedecorate] node {} (6);
+\end{tikzpicture}
+}
+%% wheel graph W_7
+\subfigure[$W_7$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (0.8660,0.5) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-0.8660,0.5) [nodedecorate] {};
+\node (4) at (-0.8660,-0.5) [nodedecorate] {};
+\node (5) at (0,-1) [nodedecorate] {};
+\node (6) at (0.8660,-0.5) [nodedecorate] {};
+\node (7) at (0,0) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (6)
+(1) edge[linedecorate] node {} (7)
+(2) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (7)
+(3) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (7)
+(4) edge[linedecorate] node {} (5)
+(4) edge[linedecorate] node {} (7)
+(5) edge[linedecorate] node {} (6)
+(5) edge[linedecorate] node {} (7)
+(6) edge[linedecorate] node {} (7);
+\end{tikzpicture}
+}
+\quad
+%% wheel graph W_8
+\subfigure[$W_8$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (0.7818,0.6234) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-0.7818,0.6234) [nodedecorate] {};
+\node (4) at (-0.9749,-0.2225) [nodedecorate] {};
+\node (5) at (-0.4338,-0.9009) [nodedecorate] {};
+\node (6) at (0.4338,-0.9009) [nodedecorate] {};
+\node (7) at (0.9749,-0.2225) [nodedecorate] {};
+\node (8) at (0,0) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (7)
+(1) edge[linedecorate] node {} (8)
+(2) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (8)
+(3) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (8)
+(4) edge[linedecorate] node {} (5)
+(4) edge[linedecorate] node {} (8)
+(5) edge[linedecorate] node {} (6)
+(5) edge[linedecorate] node {} (8)
+(6) edge[linedecorate] node {} (7)
+(6) edge[linedecorate] node {} (8)
+(7) edge[linedecorate] node {} (8);
+\end{tikzpicture}
+}
+\quad
+%% wheel graph W_9
+\subfigure[$W_9$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (1,0) [nodedecorate] {};
+\node (2) at (0.7071,0.7071) [nodedecorate] {};
+\node (3) at (0,1) [nodedecorate] {};
+\node (4) at (-0.7071,0.7071) [nodedecorate] {};
+\node (5) at (-1,0) [nodedecorate] {};
+\node (6) at (-0.7071,-0.7071) [nodedecorate] {};
+\node (7) at (0,-1) [nodedecorate] {};
+\node (8) at (0.7071,-0.7071) [nodedecorate] {};
+\node (9) at (0,0) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (8)
+(1) edge[linedecorate] node {} (9)
+(2) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (9)
+(3) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (9)
+(4) edge[linedecorate] node {} (5)
+(4) edge[linedecorate] node {} (9)
+(5) edge[linedecorate] node {} (6)
+(5) edge[linedecorate] node {} (9)
+(6) edge[linedecorate] node {} (7)
+(6) edge[linedecorate] node {} (9)
+(7) edge[linedecorate] node {} (8)
+(7) edge[linedecorate] node {} (9)
+(8) edge[linedecorate] node {} (9);
+\end{tikzpicture}
+}
+\caption{The wheel graphs $W_n$ for $n = 4,\dots,9$.}
+\label{fig:introduction:wheel_graphs}
+\end{figure}
 
 
 %%--- Edge or vertex deletion -------------------------------------------%%
