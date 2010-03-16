@@ -1219,6 +1219,9 @@ the terms ``transfer matrix'' or the ambiguous term
 \index{adjacency matrix!reduced}
 \index{bi-adjacency matrix}
 
+
+%%--- Tanner graphs -----------------------------------------------------%%
+
 \subsubsection{Tanner graphs}
 
 If $H$ is an $m \times n$ $(0,1)$-matrix, then the \emph{Tanner graph}
@@ -1226,15 +1229,14 @@ of $H$ is the bipartite graph $G = (V,E)$ whose set of vertices
 $V = V_1 \cup V_2$ is partitioned into two sets: $V_1$ corresponding
 to the $m$ rows of $H$ and $V_2$ corresponding to the $n$ columns of $H$.
 For any $i,j$ with $1 \leq i \leq m$ and $1 \leq j \leq n$, there is
-an edge $(i,j) \in E$ if and only if the $(i,j)$-th entry of $H$ is
+an edge $ij \in E$ if and only if the $(i,j)$-th entry of $H$ is
 $1$. This matrix $H$ is sometimes called the
 reduced adjacency matrix or the
 \emph{check matrix} of the Tanner graph.
 \index{check matrix}
 Tanner graphs are used in the theory of error-correcting codes.
-%\begin{example}
-For example, Sage allows you to easily compute such
-a bipartite graph from its matrix.
+For example, Sage allows you to easily compute such a bipartite graph
+from its matrix.
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -1250,8 +1252,6 @@ sage: B.reduced_adjacency_matrix()
 sage: B.plot(graph_border=True)
 \end{lstlisting}
 \end{center}
-%
-%\end{example}
 %
 The corresponding graph is similar to that in
 Figure~\ref{fig:introduction:tanner_graph}.
