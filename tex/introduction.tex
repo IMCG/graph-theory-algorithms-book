@@ -837,65 +837,89 @@ spanning subgraph of $C_n$ obtained by deleting one edge.
 
 \begin{figure}[!htbp]
 \centering
+%% cycle graph C_6
+\subfigure[$C_6$]{
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-%%% cycle graph C_6
+  linedecorate/.style={-,thick},%
+  scale=2]
 % nodes or vertices
-\node (a) at (-6,0) [nodedecorate] {};
-\node (b) at (-4,0) [nodedecorate] {};
-\node (c) at (-7,1.5) [nodedecorate] {};
-\node (d) at (-3,1.5) [nodedecorate] {};
-\node (e) at (-6,3) [nodedecorate] {};
-\node (f) at (-4,3) [nodedecorate] {};
+\node (1) at (0.8660,0.5) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-0.8660,0.5) [nodedecorate] {};
+\node (4) at (-0.8660,-0.5) [nodedecorate] {};
+\node (5) at (0,-1) [nodedecorate] {};
+\node (6) at (0.8660,-0.5) [nodedecorate] {};
 % edges or lines
 \path
-(a) edge[linedecorate] node[below] {$C_6$} (b)
-(a) edge[linedecorate] node {} (c)
-(b) edge[linedecorate] node {} (d)
-(c) edge[linedecorate] node {} (e)
-(d) edge[linedecorate] node {} (f)
-(e) edge[linedecorate] node {} (f);
-%
-%%% cycle graph C_5
-% nodes or vertices
-\node (a) at (-1,0) [nodedecorate] {};
-\node (b) at (1,0) [nodedecorate] {};
-\node (c) at (-2,1.5) [nodedecorate] {};
-\node (d) at (2,1.5) [nodedecorate] {};
-\node (e) at (0,2.5) [nodedecorate] {};
-% edges or lines
-\path
-(a) edge[linedecorate] node[below] {$C_5$} (b)
-(a) edge[linedecorate] node {} (c)
-(b) edge[linedecorate] node {} (d)
-(c) edge[linedecorate] node {} (e)
-(d) edge[linedecorate] node {} (e);
-%
-%%% cycle graph C_4
-% nodes or vertices
-\node (a) at (3,0) [nodedecorate] {};
-\node (b) at (5,0) [nodedecorate] {};
-\node (c) at (3,2.5) [nodedecorate] {};
-\node (d) at (5,2.5) [nodedecorate] {};
-% edges or lines
-\path
-(a) edge[linedecorate] node[below] {$C_4$} (b)
-(a) edge[linedecorate] node {} (c)
-(b) edge[linedecorate] node {} (d)
-(c) edge[linedecorate] node {} (d);
-%
-%%% cycle graph C_3
-% nodes or vertices
-\node (a) at (6,0) [nodedecorate] {};
-\node (b) at (9,0) [nodedecorate] {};
-\node (c) at (7.5,2.5) [nodedecorate] {};
-% edges or lines
-\path
-(a) edge[linedecorate] node[below] {$C_3$} (b)
-(a) edge[linedecorate] node {} (c)
-(b) edge[linedecorate] node {} (c);
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (6)
+(2) edge[linedecorate] node {} (3)
+(3) edge[linedecorate] node {} (4)
+(4) edge[linedecorate] node {} (5)
+(5) edge[linedecorate] node {} (6);
 \end{tikzpicture}
+}
+\quad
+%% cycle graph C_5
+\subfigure[$C_5$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (0.9510,0.3090) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-0.9510,0.3090) [nodedecorate] {};
+\node (4) at (-0.5877,-0.8090) [nodedecorate] {};
+\node (5) at (0.5877,-0.8090) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (5)
+(2) edge[linedecorate] node {} (3)
+(3) edge[linedecorate] node {} (4)
+(4) edge[linedecorate] node {} (5);
+\end{tikzpicture}
+}
+\quad
+%% cycle graph C_4
+\subfigure[$C_4$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (1,0) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-1,0) [nodedecorate] {};
+\node (4) at (0,-1) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (4)
+(2) edge[linedecorate] node {} (3)
+(3) edge[linedecorate] node {} (4);
+\end{tikzpicture}
+}
+\quad
+%% cycle graph C_3
+\subfigure[$C_3$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=2]
+% nodes or vertices
+\node (1) at (0.8660,-0.5) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-0.8660,-0.5) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (3);
+\end{tikzpicture}
+}
 \caption{Cycle graphs $C_n$ for $3 \leq n \leq 6$.}
 \label{fig:introduction:four_cycle_graphs}
 \end{figure}
