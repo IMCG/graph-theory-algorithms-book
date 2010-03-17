@@ -732,69 +732,95 @@ no edges. It is also called the \emph{trivial} graph.
 
 \begin{figure}[!htbp]
 \centering
+%% complete graph K_5
+\subfigure[$K_5$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.6]
+% nodes or vertices
+\node (1) at (0.9510,0.3090) [nodedecorate] {};
+\node (2) at (0,1) [nodedecorate] {};
+\node (3) at (-0.9510,0.3090) [nodedecorate] {};
+\node (4) at (-0.5877,-0.8090) [nodedecorate] {};
+\node (5) at (0.5877,-0.8090) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (3)
+(1) edge[linedecorate] node {} (4)
+(1) edge[linedecorate] node {} (5)
+(2) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (4)
+(2) edge[linedecorate] node {} (5)
+(3) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (5)
+(4) edge[linedecorate] node {} (5);
+\end{tikzpicture}
+}
+\quad
+%% complete graph K_4
+\subfigure[$K_4$]{
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
   linedecorate/.style={-,thick}]
-%%% complete graph K_5
 % nodes or vertices
-\node (a) at (-1,0) [nodedecorate] {};
-\node (b) at (1,0) [nodedecorate] {};
-\node (c) at (-2,1.5) [nodedecorate] {};
-\node (d) at (2,1.5) [nodedecorate] {};
-\node (e) at (0,2.5) [nodedecorate] {};
+\node (1) at (0,0) [nodedecorate] {};
+\node (2) at (2,0) [nodedecorate] {};
+\node (3) at (2,3) [nodedecorate] {};
+\node (4) at (0,3) [nodedecorate] {};
 % edges or lines
 \path
-(a) edge[linedecorate] node[below] {$K_5$} (b)
-(a) edge[linedecorate] node {} (c)
-(a) edge[linedecorate] node {} (d)
-(a) edge[linedecorate] node {} (e)
-(b) edge[linedecorate] node {} (c)
-(b) edge[linedecorate] node {} (d)
-(b) edge[linedecorate] node {} (e)
-(c) edge[linedecorate] node {} (d)
-(c) edge[linedecorate] node {} (e)
-(d) edge[linedecorate] node {} (e);
-%
-%%% complete graph K_4
-% nodes or vertices
-\node (a) at (3,0) [nodedecorate] {};
-\node (b) at (5,0) [nodedecorate] {};
-\node (c) at (3,2.5) [nodedecorate] {};
-\node (d) at (5,2.5) [nodedecorate] {};
-% edges or lines
-\path
-(a) edge[linedecorate] node[below] {$K_4$} (b)
-(a) edge[linedecorate] node {} (c)
-(a) edge[linedecorate] node {} (d)
-(b) edge[linedecorate] node {} (c)
-(b) edge[linedecorate] node {} (d)
-(c) edge[linedecorate] node {} (d);
-%
-%%% complete graph K_3
-% nodes or vertices
-\node (a) at (6,0) [nodedecorate] {};
-\node (b) at (9,0) [nodedecorate] {};
-\node (c) at (7.5,2.5) [nodedecorate] {};
-% edges or lines
-\path
-(a) edge[linedecorate] node[below] {$K_3$} (b)
-(a) edge[linedecorate] node {} (c)
-(b) edge[linedecorate] node {} (c);
-%
-%%% complete graph K_2
-% nodes or vertices
-\node (a) at (10,0) [nodedecorate] {};
-\node [below] at (a.south) {$K_2$};
-\node (b) at (10,2.5) [nodedecorate] {};
-% edges or lines
-\path
-(a) edge[linedecorate] node {} (b);
-%
-%%% complete graph K_1
-% nodes or vertices
-\node (a) at (11,0) [nodedecorate] {};
-\node [below] at (a.south) {$K_1$};
+(1) edge[linedecorate] node {} (1)
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (3)
+(1) edge[linedecorate] node {} (4)
+(2) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (4)
+(3) edge[linedecorate] node {} (4);
 \end{tikzpicture}
+}
+\quad
+%% complete graph K_3
+\subfigure[$K_3$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (1) at (0,0) [nodedecorate] {};
+\node (2) at (3,0) [nodedecorate] {};
+\node (3) at (1.5,3) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2)
+(1) edge[linedecorate] node {} (3)
+(2) edge[linedecorate] node {} (3);
+\end{tikzpicture}
+}
+\quad
+%% complete graph K_2
+\subfigure[$K_2$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (1) at (0,0) [nodedecorate] {};
+\node (2) at (0,3) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2);
+\end{tikzpicture}
+}
+\quad
+%% complete graph K_1
+\subfigure[$K_1$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (1) at (0,0) [nodedecorate] {};
+\end{tikzpicture}
+}
 \caption{Complete graphs $K_n$ for $1 \leq n \leq 5$.}
 \label{fig:introduction:five_complete_graphs}
 \end{figure}
