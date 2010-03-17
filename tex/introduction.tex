@@ -2232,31 +2232,37 @@ True
 \end{lstlisting}
 \end{center}
 
-\begin{itemize}
-\item Edge-deletion subgraph
+
+\subsubsection{Edge deletion subgraph}
 
 If $G = (V,E)$ is any graph with at least $1$ edge, then the
-\emph{edge-deletion subgraph} is the subgraph obtained from $G$ by
+\emph{edge deletion subgraph} is the subgraph obtained from $G$ by
 deleting an edge $e \in E$, but not the vertices incident to that edge.
-It is sometimes denoted $G - \{e\}$. Sage can compute edge deletions,
-as the following example shows.
+The edge deletion subgraph of $G$ is sometimes denoted $G - \{e\}$.
+Sage can compute edge deletions, as the following example shows.
 %
 \begin{center}
 \fontsize{9pt}{9pt}
 \selectfont
 \tt
 \begin{lstlisting}
-sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 4: [1, 3], 5: [4, 2], 6: [3, 1]})
-sage: G.edges()
-[(1, 2, None), (1, 4, None), (1, 6, None), (2, 3, None), (2, 4, None),
-(2, 5, None), (3, 4, None), (3, 6, None), (4, 5, None)]
+sage: G = Graph({1: [2,4], 2: [1,4], 3: [2,6], 4: [1,3], 5: [4,2], 6: [3,1]})
+sage: E1 = Set(G.edges(labels=False)); E1
+{(1, 2), (4, 5), (1, 4), (2, 3), (3, 6), (1, 6), (2, 5), (3, 4), (2, 4)}
+sage: V1 = G.vertices(); V1
+[1, 2, 3, 4, 5, 6]
+sage: E14 = Set([(1,4)]); E14
+{(1, 4)}
 sage: G.delete_edge([1,4])
-sage: G.edges()
-[(1, 2, None), (1, 6, None), (2, 3, None), (2, 4, None), (2, 5, None),
-(3, 4, None), (3, 6, None), (4, 5, None)]
+sage: E2 = Set(G.edges(labels=False)); E2
+{(1, 2), (4, 5), (2, 3), (3, 6), (1, 6), (2, 5), (3, 4), (2, 4)}
+sage: E1.difference(E2) == E14
+True
 \end{lstlisting}
 \end{center}
 
+
+\begin{itemize}
 \item Vertex-cut, cut-vertex or cutpoint
 
 A \emph{vertex cut} (or \emph{separating set}) of a connected graph
