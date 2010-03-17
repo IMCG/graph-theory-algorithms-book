@@ -710,13 +710,16 @@ graph $K_n$ on $n$ vertices is a graph such that any two distinct
 vertices are adjacent. As $|V(K_n)| = n$, then $|E(K_n)|$ is
 equivalent to the total number of 2-combinations from a set of $n$
 objects:
-\[
+%
+\begin{equation}
+\label{eq:introduction:size_of_K_n}
 |E(K_n)|
 =
 \binom{n}{2}
 =
 \frac{n(n-1)}{2}.
-\]
+\end{equation}
+%
 Thus for any graph $G$ with $n$ vertices, its total number of edges
 $|E(G)|$ is bounded above by
 \[
@@ -1910,6 +1913,7 @@ non-isomorphic:
 %%--- New graphs from old -----------------------------------------------%%
 
 \section{New graphs from old}
+\label{sec:new_graphs_from_old}
 
 This section provides a brief survey of operations on graphs to obtain
 new graphs from old graphs. Such graph operations include unions,
@@ -2307,20 +2311,20 @@ connect.
 
 \subsection{Complements}
 
-\begin{itemize}
-\item Edge-complement or complement
-
-The complement of a simple graph has the same vertices, but exactly those
-edges that are not in the original graph. In other words, if
-$G^c = (V, E^c)$ is the complement of $G = (V,E)$, then two distinct
-vertices $v,w \in V$ are adjacent in $G^c$ if and only if they are not
-adjacent in $G$. The sum of the adjacency matrix of $G$ and that of
-$G^c$ is the matrix with $1$'s everywhere, except for $0$'s on the
-diagonal.
-
-A simple graph isomorphic to its complement is called a
-\emph{self-complementary graph}.
+The \emph{complement} of a simple graph has the same vertices, but
+exactly those edges that are not in the original graph. In other
+words, if $G^c = (V, E^c)$ is the complement of $G = (V,E)$, then two
+distinct vertices $v,w \in V$ are adjacent in $G^c$ if and only if
+they are not adjacent in $G$. The sum of the adjacency matrix of $G$
+and that of $G^c$ is the matrix with $1$'s everywhere, except for
+$0$'s on the main diagonal. A simple graph that is isomorphic to its
+complement is called a \emph{self-complementary graph}. Let $H$ be a
+subgraph of $G$. The \emph{relative complement} of $G$ and $H$ is the
+edge deletion subgraph $G - E(H)$. That is, we delete from $G$ all
+edges in $H$.
+\index{complement}
 \index{self-complementary graph}
+\index{relative complement}
 Sage can compute edge complements, as the following example shows.
 %
 \begin{center}
@@ -2328,24 +2332,20 @@ Sage can compute edge complements, as the following example shows.
 \selectfont
 \tt
 \begin{lstlisting}
-sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6], 4: [1, 3], 5: [4, 2], 6: [3, 1]})
-sage: G.complement()
-complement(): Graph on 6 vertices
+sage: G = Graph({1: [2,4], 2: [1,4], 3: [2,6], 4: [1,3], 5: [4,2], 6: [3,1]})
 sage: Gc = G.complement()
-sage: Gc.vertices()
-[1, 2, 3, 4, 5, 6]
-sage: Gc.edges()
-[(1, 3, None), (1, 5, None), (2, 6, None), (3, 5, None), (4, 6, None),
-(5, 6, None)]
+sage: EG = Set(G.edges(labels=False)); EG
+{(1, 2), (4, 5), (1, 4), (2, 3), (3, 6), (1, 6), (2, 5), (3, 4), (2, 4)}
+sage: EGc = Set(Gc.edges(labels=False)); EGc
+{(1, 5), (2, 6), (4, 6), (1, 3), (5, 6), (3, 5)}
+sage: EG.difference(EGc) == EG
+True
+sage: EGc.difference(EG) == EGc
+True
+sage: EG.intersection(EGc)
+{}
 \end{lstlisting}
 \end{center}
-
-\item Relative complement
-\end{itemize}
-
-\begin{theorem}
-The complement of an edgeless graph is a complete graph.
-\end{theorem}
 
 \begin{theorem}
 If $G = (V, E)$ is self-complementary, then the order of $G$ is
@@ -2353,6 +2353,27 @@ $|V| = 4k$ or $|V| = 4k + 1$ for some non-negative integer
 $k$. Furthermore, if $n = |V|$ is the order of $G$, then the size of
 $G$ is $|E| = n(n - 1) / 4$.
 \end{theorem}
+
+\begin{proof}
+Let $G$ be a self-complementary graph of order $n$. Each of $G$ and
+$G^c$ contains half the number of edges in
+$K_n$. From~(\ref{eq:introduction:size_of_K_n}), we have
+\[
+|E(G)|
+=
+|E(G^c)|
+=
+\frac{1}{2} \cdot \frac{n(n - 1)}{2}
+=
+\frac{n(n - 1)}{4}.
+\]
+Then $n \;|\; n(n - 1)$, with one of $n$ and $n - 1$ being even and
+the other odd. If $n$ is even, $n - 1$ is odd so $\gcd(4, n-1) = 1$,
+hence by~\cite[Theorem~1.9]{Shoup2008} we have $4 \;|\; n$ and so
+$n = 4k$ for some non-negative $k \in \ZZ$. If $n - 1$ is even, use a
+similar argument to conclude that $n = 4k + 1$ for some non-negative
+$k \in \ZZ$.
+\end{proof}
 
 
 %%--- Cartesian product -------------------------------------------------%%
@@ -2463,6 +2484,17 @@ graph belongs to the class if and only if it does not have a minor
 from a certain specified list.
 \index{forbidden minor}
 We shall see examples of this in the chapter on planar graphs.
+
+
+%%--- Problems ----------------------------------------------------------%%
+
+\subsection*{Problems~\ref{sec:new_graphs_from_old}}
+
+\begin{enumerate}
+\item Show that the complement of an edgeless graph is a complete
+  graph.
+\end{enumerate}
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Common applications -----------------------------------------------%%
