@@ -2262,22 +2262,19 @@ True
 \end{center}
 
 
-\begin{itemize}
-\item Vertex-cut, cut-vertex or cutpoint
+\subsubsection{Vertex cut, cut vertex, or cutpoint}
 
 A \emph{vertex cut} (or \emph{separating set}) of a connected graph
-$G$ is a subset $W \subseteq V$ of the vertices $V$ of $G$ such that
-the subgraph $G - W$ is disconnected.
+$G = (V, E)$ is a subset $W \subseteq V$ such that the vertex deletion
+subgraph $G - W$ is disconnected.
 \index{graph!cut}
-%A {\it vertex cut} of a connected graph $G$ is a set of vertices whose
-%removal renders $G$ disconnected.
 \index{vertex cut}
-
 In fact, if $v_1, v_2 \in V$ are two non-adjacent vertices, then you
 can ask for a vertex cut $W$ for which $v_1, v_2$ belong to different
 components of $G - W$. Sage's \verb!vertex_cut! method allows you to
 compute a minimal cut having this property.
 
+\begin{itemize}
 \item Edge-cut, cut-edge or bridge
 
 If deleting a single, specific edge would disconnect the graph, that
