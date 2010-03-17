@@ -2274,25 +2274,24 @@ can ask for a vertex cut $W$ for which $v_1, v_2$ belong to different
 components of $G - W$. Sage's \verb!vertex_cut! method allows you to
 compute a minimal cut having this property.
 
-\begin{itemize}
-\item Edge-cut, cut-edge or bridge
 
-If deleting a single, specific edge would disconnect the graph, that
+\subsubsection{Edge cut, cut edge, or bridge}
+
+If deleting a single, specific edge would disconnect a graph $G$, that
 edge is called a \emph{bridge}. More generally, the \emph{edge cut}
-(or \emph{disconnecting set} or {\it seg}) of a connected graph $G$ is a set of
-edges $F \subseteq E$ whose removal yields a subgraph $G - F$ which is
-disconnected. A minimal edge cut is called a {\it cut set} or a {\it bond}.
+(or \emph{disconnecting set} or \emph{seg}) of a connected graph
+$G = (V, E)$ is a set of edges $F \subseteq E$ whose removal yields an
+edge deletion subgraph $G - F$ that is disconnected. A minimal edge
+cut is called a \emph{cut set} or a \emph{bond}.
 \index{bridge}
 \index{disconnecting set}
 \index{cut set}
 \index{bond}
-
 In fact, if $v_1, v_2 \in V$ are two vertices, then you can ask for an
 edge cut $F$ for which $v_1, v_2$ belong to different components of
 $G - F$. Sage's \verb!edge_cut! method allows you to compute a minimal
 cut having this property.
 \index{edge cut}
-\end{itemize}
 
 An {\it edge contraction} is an operation which, like edge-deletion,
 removes an edge from a graph. However, unlike edge-deletion,
