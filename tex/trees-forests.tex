@@ -50,7 +50,7 @@ subgraph containing all vertices of $G$ which is a tree.
 \label{example:span-tree}
 {\rm
 Consider the $3\times 3$ grid graph with $16$ vertices and
-$18$ edged. Two example of a spanning tree are given in Figure
+$18$ edges. Two examples of a spanning tree are given in Figure
 \ref{fig:span-tree1} by using thicker line width for its edges.
 
 
@@ -239,13 +239,13 @@ $k+1$ vertices. Remove an edge (but not the vertices
 it is incident to). This
 disconnects
 $T$ into $T_1=(V_1, E_1)$ union $T_2 = (V_2, E_2)$,
-where $|E|=|E_1|+E_2|+1$ and $|V|=|V_1|+|V_2|$
+where $|E|=|E_1|+|E_2|+1$ and $|V|=|V_1|+|V_2|$
 (and possibly one of the $E_i$ is empty),
 each of which is a tree satisfying the conditions of the induction
 hypothesis. Therefore,
 
 \[
-|E|=|E_1|+E_2|+1 = |V_1| - 1 + |V_2| - 1 + 1 =|V|-1.
+|E|=|E_1|+|E_2|+1 = |V_1| - 1 + |V_2| - 1 + 1 =|V|-1.
 \]
 
 \noindent
@@ -262,7 +262,7 @@ so
 \[
 |E|=\sum_{i=1}^k |E_i|
 =\sum_{i=1}^k |V_i| -k
-=|V|=k.
+=|V|-k.
 \]
 This contradicts (2) unless $k=1$.
 Therefore, $T$ is connected.
