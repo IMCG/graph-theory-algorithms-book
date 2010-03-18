@@ -11,6 +11,7 @@ possible exceptions.''}
 it is easy to define a graph until you realize the countless number of
 exceptions. There are directed graphs, weighted graphs, multigraphs,
 simple graphs, and so on. Where do we begin?
+\index{Klein, Felix}
 
 
 %%-----------------------------------------------------------------------%%
@@ -30,9 +31,11 @@ refer to $V$ as the vertex set of $G$, with $E$ being the edge
 set. The cardinality of $V$ is called the \emph{order} of $G$, and
 $|E|$ is called the \emph{size} of $G$.
 \end{definition}
-\index{graph}
-\index{vertices}
 \index{edges}
+\index{graph}
+\index{order}
+\index{size}
+\index{vertices}
 
 One can label a graph by attaching labels to its vertices. If $(v_1,
 v_2) \in E$ is an edge of a graph $G = (V, E)$, we say that $v_1$ and
@@ -70,6 +73,7 @@ edge $(v_1, v_2)$ as $v_1 v_2$. The edge $v_1 v_2$ is also said to be
 \caption{A house graph.}
 \label{fig:introduction:house_graph}
 \end{figure}
+\index{house graph}
 
 \begin{example}
 \label{eg:introduction:house_graph}
@@ -127,6 +131,7 @@ same as the edge $ba$. That is why \texttt{G.edges()} returns six
 edges instead of the 12 edges listed
 in~(\ref{eq:introduction:edges_of_house_graph}).
 
+\index{$\text{adj}(v)$}
 (2) Let $\text{adj}(v)$ be the set of all vertices that are adjacent
 to $v$. Then we have
 %
@@ -177,6 +182,8 @@ are removed as well. The result is that both of the vertex and edge
 sets are empty. This is a special graph known as an \emph{empty} or
 \emph{null} graph.
 \end{proof}
+\index{graph!null}
+\index{null graph}
 
 \begin{example}
 Consider the illustration in
@@ -190,6 +197,7 @@ If $V = \{ a, b, c \}$ and $E = \{ aa, bc \}$, it is clear that $E
 called a \emph{self-loop} of the graph. In general, any edge of the
 form $vv$ is a self-loop.
 \end{proof}
+\index{self-loop}
 
 \begin{figure}[!htbp]
 \centering
@@ -236,6 +244,9 @@ that $v$ is the tail of those edges.
 \end{definition}
 \index{graphs!directed}
 \index{digraph}
+\index{directed edge}
+\index{indegree}
+\index{outdegree}
 
 It is important to distinguish a graph $G$ as being directed or
 undirected. If $G$ is undirected and $uv \in E(G)$, then $uv$ and $vu$
@@ -246,21 +257,23 @@ vertices.
 
 \begin{definition}
 \textbf{Multigraphs.}
-\index{graphs!multigraphs}
-\index{multigraphs}
 A \emph{multigraph} is a graph in which there are multiple edges
 between a pair of vertices. A \emph{multi-undirected graph} is a
 multigraph that is undirected. Similarly, a \emph{multidigraph} is a
 directed multigraph.
 \end{definition}
+\index{graphs!multigraphs}
+\index{multidigraph}
+\index{multigraphs}
+\index{multi-undirected graph}
 
 \begin{definition}
 \textbf{Simple graphs.}
-\index{graphs!simple}
-\index{simple graphs}
 A \emph{simple graph} is a graph with no self-loops and no multiple
 edges.
 \end{definition}
+\index{graphs!simple}
+\index{simple graph}
 
 The edges of a digraph can be visually represented as directed arrows,
 similarly to the digraph in
@@ -313,7 +326,13 @@ Figure~\ref{fig:introduction:house_graph} then we have $\delta(G) = 2$
 and $\Delta(G) = 3$. In the following Sage session, we construct the
 digraph in Figure~\ref{fig:introduction:directed_triangle_graph} and
 computes its maximum and minimum number of degrees.
+\index{$\deg(v)$}
+\index{$\delta$}
+\index{$\Delta$}
+\index{degree!maximum}
+\index{degree!minimum}
 \index{degree of a vertex}
+\index{isolated vertex}
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -344,6 +363,8 @@ graph is a regular graph each of whose vertices has degree $r$. For
 instance, $G$ is a $2$-regular graph. The following result, due to
 Euler, counts the total number of degrees in any graph.
 \index{graphs!regular}
+\index{$r$-regular}
+\index{regular graph}
 
 \begin{theorem}
 \label{thm:introduction:degree_sum}
@@ -351,21 +372,8 @@ Euler, counts the total number of degrees in any graph.
 \textbf{Euler.}
 If $G = (V, E)$ is a graph, then $\sum_{v \in V} \deg(v) = 2 |E|$.
 \end{theorem}
+\index{Euler, Leonhard}
 \index{handshaking lemma}
-
-This result is sometimes called the ``handshaking lemma,'' due to its
-interpretation as in the following story. Suppose you go into a
-room. Suppose there are $n$ people in the room (including yourself)
-and some people shake hands with others and some do not. Create the
-graph with $n$ vertices, where each vertex is associated with a
-different person. Draw an edge between two people if they shook
-hands. The degree of a vertex is the number of times that person has
-shaken hands (we assume that there are no multiple edges, i.e. that no
-two people shake hands twice). The theorem above simply says that the
-total number of handshakes is even. This is ``obvious'' when you look
-at it this way since each handshake is counted twice ($A$ shaking
-$B$'s hand is counted, $B$ shaking $A$'s hand, since the sum in the
-theorem is over all vertices).
 
 \begin{proof}
 Each edge $e = v_1 v_2 \in E$ is incident with two vertices, so $e$ is
@@ -373,6 +381,20 @@ counted twice towards the total sum of degrees. The first time, we
 count $e$ towards the degree of vertex $v_1$ and the second time we
 count $e$ towards the degree of $v_2$.
 \end{proof}
+
+Theorem~\ref{thm:introduction:hand_shaking} is sometimes called the
+``handshaking lemma,'' due to its interpretation as in the following
+story. Suppose you go into a room. Suppose there are $n$ people in the
+room (including yourself) and some people shake hands with others and
+some do not. Create the graph with $n$ vertices, where each vertex is
+associated with a different person. Draw an edge between two people if
+they shook hands. The degree of a vertex is the number of times that
+person has shaken hands (we assume that there are no multiple edges,
+i.e. that no two people shake hands twice). The theorem above simply
+says that the total number of handshakes is even. This is ``obvious''
+when you look at it this way since each handshake is counted twice
+($A$ shaking $B$'s hand is counted, $B$ shaking $A$'s hand, since the
+sum in the theorem is over all vertices).
 
 As $E \subseteq V \times V$, then $E$ can be the empty set, in which
 case the total degree of $G = (V, E)$ is zero. Where $E \neq
@@ -422,7 +444,8 @@ can think of vertices as destinations and edges as footpaths, say. We
 are allowed to have repeated vertices and edges in a walk. The number
 of edges in a walk is called its \emph{length}. For instance, the
 walk $a, b, c, b, e$ has length $4$.
-\index{walk, in a graph}
+\index{walk}
+\index{walk!length}
 
 \begin{figure}[!htbp]
 \centering
@@ -489,15 +512,17 @@ notion of a circuit of a matroid, we do not use it here.}
 Thus the walk $a, b, e, a$ in
 Figure~\ref{fig:introduction:types_of_walks} is a closed path. It is
 easy to see that if you remove any edge from a cycle, then the
-resulting walk contains no closed paths.
+resulting walk contains no closed paths. An \emph{Euler subgraph} of a
+graph $G$ is either a cycle or an edge-disjoint union of cycles in
+$G$.
+\index{closed path}
 \index{cycle}
-An {\it Euler subgraph} of a graph $G$ is either a cycle or
-an edge-disjoint union of cycles in $G$.
+\index{path!closed}
 \index{Euler subgraph}
 
-The length of the shortest cycle in a graph is called
-the {\it girth} of the graph. An acyclic graph is said to have
-infinite girth, by convention.
+The length of the shortest cycle in a graph is called the \emph{girth}
+of the graph. An acyclic graph is said to have infinite girth, by
+convention.
 \index{girth}
 
 \begin{example}
@@ -546,12 +571,15 @@ distinct vertices $u,v$ of a graph is a $u$-$v$ path of minimum
 length. A non-empty graph may have several shortest paths between some
 distinct pair of vertices. For the graph in
 Figure~\ref{fig:introduction:types_of_walks}, both $a,b,c$ and $a,e,c$
-are geodesic paths between $a$ and $c$.
-\index{path!geodesic}
-\index{graph!connected}
-The number of connected components of a graph $G$ will be denoted
-$\omega(G)$.
+are geodesic paths between $a$ and $c$. The number of connected
+components of a graph $G$ will be denoted $\omega(G)$.
 \index{$\omega$}
+\index{connected graph}
+\index{disconnected graph}
+\index{geodesic path}
+\index{graph!connected}
+\index{path!geodesic}
+\index{shortest path}
 
 \begin{example}
 Determine whether or not the graph in
@@ -594,6 +622,7 @@ of knowledge, finding the shortest path from a vertex $v$ to a
 \emph{particular} (but arbitrarily given) vertex $w$ appears to be as
 hard as finding the shortest path from a vertex $v$ to \emph{all}
 other vertices in the graph!
+\index{Dijkstra's algorithm}
 
 
 %%--- Subgraphs, complete and bipartite graphs --------------------------%%
@@ -704,6 +733,8 @@ from a given graph, we delete edges from the given graph.
 \label{fig:introduction:star_subgraph}
 \end{figure}
 
+\index{$K_n$}
+\index{complete graph}
 \index{graph!complete}
 We now consider several standard classes of graphs. The \emph{complete}
 graph $K_n$ on $n$ vertices is a graph such that any two distinct
@@ -732,6 +763,7 @@ graphs each of whose total number of vertices is bounded by
 $1 \leq n \leq 5$. The complete graph $K_1$ has one vertex with
 no edges. It is also called the \emph{trivial} graph.
 \index{graph!trivial}
+\index{trivial graph}
 
 \begin{figure}[!htbp]
 \centering
@@ -828,15 +860,18 @@ no edges. It is also called the \emph{trivial} graph.
 \label{fig:introduction:five_complete_graphs}
 \end{figure}
 
-\index{graph!cycle}
 The \emph{cycle} graph on $n \geq 3$ vertices, denoted $C_n$, is the
 connected $2$-regular graph on $n$ vertices. Each vertex in $C_n$ has
 degree exactly $2$ and $C_n$ is
 connected. Figure~\ref{fig:introduction:four_cycle_graphs} shows
-cycles graphs $C_n$ where $3 \leq n \leq 6$. The \emph{path} on
+cycles graphs $C_n$ where $3 \leq n \leq 6$. The \emph{path} graph on
 $n \geq 1$ vertices is denoted $P_n$. For $n = 1, 2$ we have
 $P_1 = K_1$ and $P_2 = K_2$. Where $n \geq 3$, then $P_n$ is a
 spanning subgraph of $C_n$ obtained by deleting one edge.
+\index{$C_n$}
+\index{$P_n$}
+\index{cycle graph}
+\index{path graph}
 
 \begin{figure}[!htbp]
 \centering
@@ -941,9 +976,13 @@ $n$-regular. Where $m = 1$ then $K_{1,n}$ is called the \emph{star}
 graph. Figure~\ref{fig:introduction:bipartite_complete_bipartite_graphs}
 shows a bipartite graph together with the complete bipartite graphs
 $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
+\index{$K_{m,n}$}
+\index{bipartite graph}
+\index{complete bipartite graph}
 \index{graph!bipartite}
 \index{graph!complete bipartite}
 \index{graph!star}
+\index{star graph}
 
 \begin{figure}[!htbp]
 \centering
@@ -1065,6 +1104,7 @@ The positive integers $m$ and $n$ are the row and column dimensions of
 $A$, respectively. The entry in row $i$ column $j$ is denoted
 $a_{ij}$. Where the dimensions of $A$ are clear from context, $A$ is
 also written as $A = [a_{ij}]$.
+\index{matrix}
 
 Representing a graph as a matrix is very inefficient in some cases and
 not so in other cases. Imagine you walk into a large room full of
@@ -1294,12 +1334,12 @@ to the $m$ rows of $H$ and $V_2$ corresponding to the $n$ columns of $H$.
 For any $i,j$ with $1 \leq i \leq m$ and $1 \leq j \leq n$, there is
 an edge $ij \in E$ if and only if the $(i,j)$-th entry of $H$ is
 $1$. This matrix $H$ is sometimes called the
-reduced adjacency matrix or the
-\emph{check matrix} of the Tanner graph.
+reduced adjacency matrix or the \emph{check matrix} of the Tanner
+graph. Tanner graphs are used in the theory of error-correcting
+codes. For example, Sage allows you to easily compute such a bipartite
+graph from its matrix.
 \index{check matrix}
-Tanner graphs are used in the theory of error-correcting codes.
-For example, Sage allows you to easily compute such a bipartite graph
-from its matrix.
+\index{Tanner graph}
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -1410,6 +1450,7 @@ have $1$ as an entry in the row corresponding to one vertex of the
 edge under consideration and $-1$ as an entry in the row corresponding
 to the other vertex. Similarly, $b_{ij} = 2$ if $e_j$ is a self-loop
 at $v_i$.
+\index{orientation}
 
 %% Sage allows you to compute the incidence matrix of a
 %% graph:
@@ -1440,11 +1481,8 @@ at $v_i$.
 
 The \emph{degree matrix} of a graph $G = (V,E)$ is an $n \times n$
 diagonal matrix $D$ whose $i$-th diagonal entry is the degree of the
-$i$-th vertex in $V$.
-\index{degree matrix}
-The \emph{Laplacian matrix} $\mathcal{L}$ of $G$ is the difference
-between the degree matrix and the adjacency matrix:
-\index{Laplacian matrix}
+$i$-th vertex in $V$. The \emph{Laplacian matrix} $\mathcal{L}$ of $G$
+is the difference between the degree matrix and the adjacency matrix:
 \[
 \mathcal{L} = D - A.
 \]
@@ -1460,6 +1498,9 @@ d_i, & \text{if $i = j$}, \\
 \end{cases}
 \]
 where $d_i = \deg(v_i)$ is the degree of vertex $v_i$.
+\index{$\mathcal{L}$}
+\index{degree matrix}
+\index{Laplacian matrix}
 
 Sage allows you to compute the Laplacian matrix of a graph:
 %
@@ -1487,12 +1528,12 @@ be discussed further in Chapter~\ref{chap:distance_connectivity}.
 
 \subsection{Distance matrix}
 
+\index{distance matrix}
 Recall that the distance (or geodesic distance) $d(v,w)$ between two
 vertices $v,w \in V$ in a connected graph $G = (V,E)$ is the number of
 edges in a shortest path connecting them. The $n \times n$ matrix
-$[d(v_i, v_j)]$ is the \emph{distance matrix} of $G$.
-\index{distance matrix}
-Sage helps you to compute the distance matrix of a graph:
+$[d(v_i, v_j)]$ is the \emph{distance matrix} of $G$. Sage helps you
+to compute the distance matrix of a graph:
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -1577,7 +1618,9 @@ $f(u) f(v) \in E(H)$. The function $f$ is an \emph{isomorphism}
 between $G$ and $H$. Otherwise, $G$ and $H$ are non-isomorphic. If
 $G$ and $H$ are isomorphic, we write $G \cong H$.
 \end{definition}
+\index{$\cong$}
 \index{graphs!isomorphic}
+\index{graph isomorphism}
 
 \begin{figure}[!htbp]
 \centering
@@ -1731,9 +1774,9 @@ Two $n \times n$ matrices $A_1$ and $A_2$ are
 \emph{permutation equivalent} if there is a permutation matrix $P$
 such that $A_1 = P A_2 P^{-1}$. In other words, $A_1$ is the same as
 $A_2$ after a suitable re-ordering of the rows and a corresponding
-re-ordering of the columns.
+re-ordering of the columns. This notion of permutation equivalence is
+an equivalence relation.
 \index{permutation equivalent}
-This notion of permutation equivalence is an equivalence relation.
 
 To show that two undirected graphs are isomorphic depends on the
 following result.
@@ -1796,9 +1839,10 @@ The lexicographically maximal element of the permutation equivalence
 class of the adjacency matrix of $G$ is called the
 \emph{canonical label} of $G$. Thus, to check if two undirected graphs
 are isomorphic, we simply check if their canonical labels are equal.
-\index{graph!canonical label} This idea for graph isomorphism checking
-is presented in
+This idea for graph isomorphism checking is presented in
 Algorithm~\ref{alg:introduction:graph_isomorphism_canonical_labels}.
+\index{graph!canonical label}
+\index{canonical label}
 
 
 %%--- Degree sequence ---------------------------------------------------%%
@@ -1989,15 +2033,15 @@ consisting of all edges in $G_1$ and in $G_2$.
 
 The \emph{symmetric difference} (or \emph{ring sum}) of graphs is
 defined as follows. For two graphs $G_1 = (V_1, E_1)$ and
-$G_2 = (V_2, E_2)$ with disjoint vertex sets, their disjoint union is
-the graph
+$G_2 = (V_2, E_2)$ with disjoint vertex sets, their symmetric
+difference is the graph
 \[
 G_1 \Delta G_2
 =
 (V_1 \Delta V_2,\, E1 \Delta E2).
 \]
-Recall that if $S_1$ and $S_2$ are any sets, the
-\emph{symmetric difference} of $S_1$ and $S_2$ is defined by
+Recall that the \emph{symmetric difference} of two sets $S_1$ and
+$S_2$ is defined by
 \[
 S_1 \Delta S_2
 =
@@ -2007,6 +2051,8 @@ In the case where $V_1 = V_2$, then $G_1 \Delta G_2$ is simply the
 graph consisting of all edges in $G_1$ or in $G_2$, but not in
 both. In this case, sometimes $G_1 \Delta G_2$ is written as
 $G_1 \oplus G_2$.
+\index{$\Delta$}
+\index{$\oplus$}
 \index{symmetric difference}
 \index{ring sum}
 \index{graph!symmetric difference}
@@ -2014,9 +2060,11 @@ $G_1 \oplus G_2$.
 The \emph{join} of two disjoint graphs $G_1$ and $G_2$, denoted
 $G_1 + G_2$, is their graph union, with each vertex of one graph
 connecting to each vertex of the other graph. For example, the join of
-the cycle graph $C_{n-1}$ with a single vertex graph is the wheel
-graph $W_n$. Figure~\ref{fig:introduction:wheel_graphs} shows various
-wheel graphs.
+the cycle graph $C_{n-1}$ with a single vertex graph is the
+\emph{wheel graph} $W_n$. Figure~\ref{fig:introduction:wheel_graphs}
+shows various wheel graphs.
+\index{graph!join}
+\index{wheel graph}
 
 \begin{figure}[!htbp]
 \centering
@@ -2206,12 +2254,12 @@ wheel graphs.
 
 \subsubsection{Vertex deletion subgraph}
 
+\index{vertex deletion subgraph}
 If $G = (V,E)$ is any graph with at least $2$ vertices, then the
 \emph{vertex deletion subgraph} is the subgraph obtained from $G$ by
 deleting a vertex $v \in V$ and also all the edges incident to that
 vertex. The vertex deletion subgraph of $G$ is sometimes denoted
 $G - \{v\}$.
-\index{vertex deletion subgraph}
 Sage can compute vertex deletions, as the following example shows.
 %
 \begin{center}
@@ -2239,6 +2287,7 @@ True
 
 \subsubsection{Edge deletion subgraph}
 
+\index{edge deletion subgraph}
 If $G = (V,E)$ is any graph with at least $1$ edge, then the
 \emph{edge deletion subgraph} is the subgraph obtained from $G$ by
 deleting an edge $e \in E$, but not the vertices incident to that edge.
@@ -2277,6 +2326,8 @@ In fact, if $v_1, v_2 \in V$ are two non-adjacent vertices, then you
 can ask for a vertex cut $W$ for which $v_1, v_2$ belong to different
 components of $G - W$. Sage's \verb!vertex_cut! method allows you to
 compute a minimal cut having this property.
+\index{vertex cut}
+\index{separating set}
 
 
 \subsubsection{Edge cut, cut edge, or bridge}
@@ -2287,14 +2338,14 @@ edge is called a \emph{bridge}. More generally, the \emph{edge cut}
 $G = (V, E)$ is a set of edges $F \subseteq E$ whose removal yields an
 edge deletion subgraph $G - F$ that is disconnected. A minimal edge
 cut is called a \emph{cut set} or a \emph{bond}.
-\index{bridge}
-\index{disconnecting set}
-\index{cut set}
-\index{bond}
 In fact, if $v_1, v_2 \in V$ are two vertices, then you can ask for an
 edge cut $F$ for which $v_1, v_2$ belong to different components of
 $G - F$. Sage's \verb!edge_cut! method allows you to compute a minimal
 cut having this property.
+\index{bond}
+\index{bridge}
+\index{cut set}
+\index{disconnecting set}
 \index{edge cut}
 
 
@@ -2311,6 +2362,10 @@ connect.
 
 \subsection{Complements}
 
+\index{$G^c$}
+\index{complement}
+\index{self-complementary graph}
+\index{relative complement}
 The \emph{complement} of a simple graph has the same vertices, but
 exactly those edges that are not in the original graph. In other
 words, if $G^c = (V, E^c)$ is the complement of $G = (V,E)$, then two
@@ -2321,11 +2376,8 @@ $0$'s on the main diagonal. A simple graph that is isomorphic to its
 complement is called a \emph{self-complementary graph}. Let $H$ be a
 subgraph of $G$. The \emph{relative complement} of $G$ and $H$ is the
 edge deletion subgraph $G - E(H)$. That is, we delete from $G$ all
-edges in $H$.
-\index{complement}
-\index{self-complementary graph}
-\index{relative complement}
-Sage can compute edge complements, as the following example shows.
+edges in $H$. Sage can compute edge complements, as the following
+example shows.
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -2380,6 +2432,8 @@ $k \in \ZZ$.
 
 \subsection{Cartesian product}
 
+\index{$\square$}
+\index{Cartesian product}
 The \emph{Cartesian product} $G \square H$ of graphs $G$ and $H$ is a
 graph such that the vertex set of $G \square H$ is the Cartesian
 product $V(G) \times V(H)$. Any two vertices $(u, u')$ and $(v, v')$
@@ -2428,15 +2482,16 @@ of cardinality $2^n$. That is, each vertex of $Q_n$ is a bit string of
 length $n$. Two vertices $v,w \in V$ are connected by an edge if and
 only if $v$ and $w$ differ in exactly one coordinate.\footnote{
 In other words, the ``Hamming distance'' between $v$ and $w$ is equal
-to $1$.}
+to $1$.\index{Hamming distance}}
 The Cartesian product of $n$ edge graphs $K_2$ is a hypercube:
 \[
 (K_2)^{\square n} = Q_n.
 \]
 Figure~\ref{fig:introduction:hypercube_graphs} illustrates the
 hypercube graphs $Q_n$ for $n = 1,\dots,4$.
+\index{$Q_n$}
 \index{graph!hypercube}
-\index{hypercube}
+\index{hypercube graph}
 
 \begin{figure}[!htbp]
 \centering
@@ -2531,10 +2586,11 @@ $\deg(v_1) = \deg(v_n) = 1$ and $\deg(v_i) = 2$ for $1 < i < n$. The
 path graph $P_n$ can be obtained from the cycle graph $C_n$ by
 deleting one edge of $C_n$. The \emph{ladder graph} $L_n$ is the
 Cartesian product of path graphs, i.e. $L_n = P_n \square P_1$.
-\index{path graph}
+\index{$L_n$}
+\index{graph!ladder}
 \index{graph!path}
 \index{ladder graph}
-\index{graph!ladder}
+\index{path graph}
 
 
 %%--- Graph minors ------------------------------------------------------%%
@@ -2549,12 +2605,16 @@ minor is not in general a subgraph. However, if $G_1$ is a minor of
 $G_2$ and $G_2$ is a minor of $G_3$, then $G_1$ is a minor of
 $G_3$. Therefore, the relation``being a minor of'' is a partial
 ordering on the set of graphs.
+\index{graph minor}
 
 The following non-intuitive fact about graph minors was proven by
 Neil Robertson and Paul Seymour in a series of 20 papers spanning 1983
 to 2004. This result is known by various names including the
 Robertson-Seymour theorem, the graph minor theorem, or Wagner's
 conjecture (named after Klaus Wagner).
+\index{Robertson, Neil}
+\index{Seymour, Paul}
+\index{Wagner, Klaus}
 
 \begin{theorem}
 \textbf{Robertson \& Seymour 1983--2004.}
@@ -2562,6 +2622,8 @@ If an infinite list $G_1$, $G_2$, $\dots$ of finite graphs is given,
 then there always exist two indices $i < j$ such that $G_i$ is a minor
 of $G_j$.
 \end{theorem}
+\index{Robertson-Seymour theorem}
+\index{Wagner's conjecture}
 
 Many classes of graphs can be characterized by
 \emph{forbidden minors}: a graph belongs to the class if and only if
@@ -2591,6 +2653,7 @@ examples of this in Chapter~\ref{chap:planar_graphs}.
 
 A few other common problems arising in applications of weighted graphs
 are listed below.
+\index{graph!applications}
 
 \begin{itemize}
 \item If the edge weights are all non-negative, find a ``cheapest''
