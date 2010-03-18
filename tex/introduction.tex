@@ -2590,35 +2590,34 @@ examples of this in Chapter~\ref{chap:planar_graphs}.
 \section{Common applications}
 
 A few other common problems arising in applications of weighted graphs
-are listed below
+are listed below.
 
 \begin{itemize}
 \item If the edge weights are all non-negative, find a ``cheapest''
   closed path which contains all the vertices. This is related to the
-  famous traveling salesman problem and is discussed more in
+  famous traveling salesman problem and is further discussed in
   Chapters~\ref{chap:graph_algorithms} and~\ref{chap:optimal_traversals}.
   \index{traveling salesman problem}
 
-\item Find a walk which visits each vertex but contains as few edges
+\item Find a walk that visits each vertex, but contains as few edges
   as possible and contains no cycles. This type of problem is related
-  to ``spanning trees'' and is discussed more in
+  to ``spanning trees'' and is discussed in further details in
   Chapter~\ref{chap:trees_forests}.
 
 \item Determine which vertices are ``more central'' than others. This
   is connected with various applications to
-  ``social network analysis'' and is discussed more in
+  ``social network analysis'' and is covered in more details in
   Chapters~\ref{chap:distance_connectivity}
   and~\ref{chap:random_graphs}.
-\index{social network analysis}
+  \index{social network analysis}
 
-\item Can the graph be drawn entirely in the plane, with no crossing
-  edges? (This problem is important for designing computer chips and
-  wiring diagrams.) This topic is discussed further in
-  Chapter~\ref{chap:planar_graphs}.
-
-A {\it planar graph} is a graph that can
-be drawn on the plane in such a way that its edges intersect only at their endpoints.
-\index{graph!planar}
+\item A \emph{planar graph} is a graph that can be drawn on the plane
+  in such a way that its edges intersect only at their endpoints. Can
+  a graph be drawn entirely in the plane, with no crossing edges? In
+  other words, is a given graph planar? This problem is important for
+  designing computer chips and wiring diagrams. Further discussion is
+  contained in Chapter~\ref{chap:planar_graphs}.
+  \index{graph!planar}
 
 \item Can you label or ``color'' all the vertices of a graph in such a
   way that no adjacent vertices have the same color? If so, this is
@@ -2636,8 +2635,8 @@ be drawn on the plane in such a way that its edges intersect only at their endpo
   ``network flow'' must satisfy the restriction that the amount of
   flow into a node equals the amount of flow out of it, except when it
   is a ``source node'', which has more outgoing flow, or a ``sink
-  node'', which has more incoming flow. Also, the flow along an edge
-  must not exceed the capacity. What is the maximum flow on a network
+  node'', which has more incoming flow. The flow along an edge must
+  not exceed the capacity. What is the maximum flow on a network
   and how to you find it? This problem, which has many industrial
   applications, is discussed in Chapter~\ref{chap:network_flows}.
 \end{itemize}
