@@ -2537,34 +2537,37 @@ Cartesian product of path graphs, i.e. $L_n = P_n \square P_1$.
 \index{graph!ladder}
 
 
+%%--- Graph minors ------------------------------------------------------%%
+
 \subsection{Graph minors}
 
-A graph $H$ is called a {\it minor} of the graph $G$ if $H$ is isomorphic to a
-graph that can be obtained by a sequence of edge contractions on a
+A graph $H$ is called a \emph{minor} of a graph $G$ if $H$ is
+isomorphic to a graph obtained by a sequence of edge contractions on a
 subgraph of $G$.  The order in which a sequence of such contractions is
-performed on $G$ does not affect the resulting graph $H$.
-
-A graph minor is not in general a subgraph.
-However, if $G_1$
-is a minor of $G_2$ and $G_2$ is a minor of $G_3$, then $G_1$ is a minor of $G_3$.
-Therefore, the relation``being a minor of'' is a partial ordering on
-the set of graphs.
+performed on $G$ does not affect the resulting graph $H$. A graph
+minor is not in general a subgraph. However, if $G_1$ is a minor of
+$G_2$ and $G_2$ is a minor of $G_3$, then $G_1$ is a minor of
+$G_3$. Therefore, the relation``being a minor of'' is a partial
+ordering on the set of graphs.
 
 The following non-intuitive fact about graph minors was proven by
-Neil Robertson and Paul Seymour.
+Neil Robertson and Paul Seymour in a series of 20 papers spanning 1983
+to 2004. This result is known by various names including the
+Robertson-Seymour theorem, the graph minor theorem, or Wagner's
+conjecture (named after Klaus Wagner).
 
 \begin{theorem}
-{\rm
-If an infinite list $G_1$, $G_2$, $\dots$ of finite graphs is given, then there always exist two indices
-$i < j$ such that $G_i$ is a minor of $G_j$.
-}
+\textbf{Robertson \& Seymour 1983--2004.}
+If an infinite list $G_1$, $G_2$, $\dots$ of finite graphs is given,
+then there always exist two indices $i < j$ such that $G_i$ is a minor
+of $G_j$.
 \end{theorem}
 
-Many classes of graphs can be characterized by {\it forbidden minors}: a
-graph belongs to the class if and only if it does not have a minor
-from a certain specified list.
+Many classes of graphs can be characterized by
+\emph{forbidden minors}: a graph belongs to the class if and only if
+it does not have a minor from a certain specified list. We shall see
+examples of this in Chapter~\ref{chap:planar_graphs}.
 \index{forbidden minor}
-We shall see examples of this in the chapter on planar graphs.
 
 
 %%--- Problems ----------------------------------------------------------%%
