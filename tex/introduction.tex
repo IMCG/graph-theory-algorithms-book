@@ -2380,20 +2380,23 @@ $k \in \ZZ$.
 
 \subsection{Cartesian product}
 
-The Cartesian product $G \square H$ of graphs $G$ and $H$ is a graph such that
+The \emph{Cartesian product} $G \square H$ of graphs $G$ and $H$ is a
+graph such that the vertex set of $G \square H$ is the Cartesian
+product $V(G) \times V(H)$. Any two vertices $(u, u')$ and $(v, v')$
+are adjacent in $G \square H$ if and only if either
 %
-\begin{itemize}
-\item the vertex set of $G \square H$ is the Cartesian product
-  $V(G) \times V(H)$;
+\begin{enumerate}
+\item $u = v$ and $u'$ is adjacent with $v'$ in $H$; or
 
-\item any two vertices $(u, u')$ and $(v, v')$ are adjacent in
-  $G \square H$ if and only if either
-  \begin{itemize}
-  \item $ u = v$ and $u'$ is adjacent with $v'$, or
-
-  \item $u' = v'$ and $u$ is adjacent with $v$.
-  \end{itemize}
-\end{itemize}
+\item $u' = v'$ and $u$ is adjacent with $v$ in $G$.
+\end{enumerate}
+The vertex set of $G \square H$ is $V(G \square H) = V(G) \times V(H)$
+and the edge set of $G \square H$ is the union
+\[
+E(G \square H)
+=
+\big(V(G) \times E(H)\big) \cup \big(E(G) \times V(H)\big).
+\]
 %
 Sage can compute Cartesian products, as the following example shows.
 %
@@ -2414,47 +2417,125 @@ sage: P = C.cartesian_product(Z); len(P.vertices()); len(P.edges())
 \end{lstlisting}
 \end{center}
 
-\begin{itemize}
-\item Hypercubes
-
-The \emph{hypercube graph} $Q_n$ is the graph with vertex set
+The \emph{hypercube graph} $Q_n$ is the $n$-regular graph with vertex
+set
 \[
 V
 =
-\big\{ (\epsilon_1,\dots,\epsilon_n)\ |\ \epsilon_j \in \{0,1\} \big\}
+\big\{ (\epsilon_1,\dots,\epsilon_n) \;|\; \epsilon_i \in \{0,1\} \big\}
 \]
-of size $2^n$. Two vertices $v,w \in V$ are connected by an edge if
-and only if $v$ and $w$ differ in exactly one
-coordinate.\footnote{
+of cardinality $2^n$. That is, each vertex of $Q_n$ is a bitstring of
+length $n$. Two vertices $v,w \in V$ are connected by an edge if and
+only if $v$ and $w$ differ in exactly one coordinate.\footnote{
 In other words, the ``Hamming distance'' between $v$ and $w$ is equal
 to $1$.}
-\index{graph!hypercube}
 The Cartesian product of $n$ edge graphs $K_2$ is a hypercube:
 \[
 (K_2)^{\square n} = Q_n.
 \]
+Figure~\ref{fig:introduction:hypercube_graphs} illustrates the
+hypercube graphs $Q_n$ for $n = 1,\dots,4$.
+\index{graph!hypercube}
+\index{hypercube}
+
+\begin{figure}[!htbp]
+\centering
+%%
+%% hypercube graph Q_1
+\subfigure[$Q_1$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\node (1) at (0,0) [nodedecorate] {};
+\node (2) at (1,0) [nodedecorate] {};
+% edges or lines
+\path
+(1) edge[linedecorate] node {} (2);
+\end{tikzpicture}
+}
+%%
+%% hypercube graph Q_2
+\subfigure[$Q_2$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\foreach \nodename/\x/\y in {1/0/0, 2/2/0, 3/2/2, 4/0/2} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 2/3, 3/4, 4/1} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%% hypercube graph Q_3
+\subfigure[$Q_3$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\foreach \nodename/\x/\y in {1/0/0, 2/2/0, 3/2/2, 4/0/2, 5/0.5/0.5,
+  6/2.5/0.5, 7/2.5/2.5, 8/0.5/2.5} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 2/3, 3/4, 4/1, 5/6, 6/7, 7/8,
+  8/5, 1/5, 2/6, 3/7, 4/8} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%% hypercube graph Q_4
+\subfigure[$Q_4$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=3.5]
+% nodes or vertices
+\foreach \nodename/\x/\y in {1/1/0, 2/0.7071/0.7071, 3/0/1,
+  4/-0.7071/0.7071, 5/-1/0, 6/-0.7071/-0.7071, 7/0/-1,
+  8/0.7071/-0.7071, 9/0.4142/0, 10/0.2928/0.2928, 11/0/0.4142,
+  12/-0.2928/0.2928, 13/-0.4142/0, 14/-0.2928/-0.2928, 15/0/-0.4142,
+  16/0.2928/-0.2928} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/8, 1/10, 1/16, 2/3, 2/9, 2/11,
+  3/4, 3/10, 3/12, 4/5, 4/11, 4/13, 5/6, 5/12, 5/14, 6/7, 6/13, 6/15,
+  7/8, 7/14, 7/16, 8/9, 8/15, 9/12, 9/14, 10/13, 10/15, 11/14, 11/16,
+  12/15, 13/16} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\caption{Hypercube graphs $Q_n$ for $n = 1,\dots,4$.}
+\label{fig:introduction:hypercube_graphs}
+\end{figure}
 
 \begin{example}
 The Cartesian product of two hypercube graphs is another
 hypercube: $Q_i \square Q_j = Q_{i+j}$.
 \end{example}
 
-%% Sorry Minh, I don't know what mesh means. Do you mean median graphs?
-%\item meshes
-
-\item Ladder graphs
-
 The \emph{path graph} $P_n$ is a tree with $n$ vertices
 $V = \{ v_1,\dots, v_n \}$ and edges
-$E = \{ (v_i, v_{i+1})\ |\ 1 \leq i \leq n-1 \}$. In this case,
-$\deg(v_1) = \deg(v_n) = 1$ and $\deg(v_i) = 2$ for $1 < i < n$.
+$E = \{ (v_i, v_{i+1}) \;|\; 1 \leq i \leq n-1 \}$. In this case,
+$\deg(v_1) = \deg(v_n) = 1$ and $\deg(v_i) = 2$ for $1 < i < n$. The
+path graph $P_n$ can be obtained from the cycle graph $C_n$ by
+deleting one edge of $C_n$. The \emph{ladder graph} $L_n$ is the
+Cartesian product of path graphs, i.e. $L_n = P_n \square P_1$.
 \index{path graph}
 \index{graph!path}
-The \emph{ladder graph} $L_n$ is the Cartesian product of path
-graphs, i.e. $L_n = P_n \square P_1$.
 \index{ladder graph}
 \index{graph!ladder}
-\end{itemize}
+
 
 \subsection{Graph minors}
 
@@ -2493,6 +2574,10 @@ We shall see examples of this in the chapter on planar graphs.
 \begin{enumerate}
 \item Show that the complement of an edgeless graph is a complete
   graph.
+
+\item Let $G \square H$ be the Cartesian product of two graphs $G$ and
+  $H$. Show that
+  $|E(G \square H)| = |V(G)| \cdot |E(H)| + |E(G)| \cdot |V(H)|$.
 \end{enumerate}
 
 
