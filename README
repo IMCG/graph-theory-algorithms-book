@@ -1,0 +1,35 @@
+Algorithmic Graph Theory
+http://code.google.com/p/graph-theory-algorithms-book/
+
+A GNU-FDL [1] book on algorithmic graph theory by David Joyner [2],
+Minh Van Nguyen [3], and Nathann Cohen [4]. This is an introductory
+book on algorithmic graph theory. Theory and algorithms are
+illustrated using the Sage [5] open source mathematics software. See
+the file LICENSE for the licensing terms of the book.
+
+The book is written using LaTeX [6] and TikZ/PGF [7]. It uses
+Mercurial [8] as its version control system. To clone the latest
+revision of the book, ensure you have Mercurial installed on your
+system. Then issue any of the following commands from your command
+line:
+
+$ hg clone https://graph-theory-algorithms-book.googlecode.com/hg/ graph-theory
+$ hg clone http://graph-theory-algorithms-book.googlecode.com/hg/ graph-theory
+
+To compile a PDF version of the book, run the command
+
+$ make
+
+To delete junk files resulting from the compilation process, run
+
+$ make clean
+
+
+[1] http://www.gnu.org/copyleft/fdl.html
+[2] http://www.wdjoyner.org
+[3] http://sites.google.com/site/nguyenminh2
+[4] http://www-sop.inria.fr/members/Nathann.Cohen
+[5] http://www.sagemath.org
+[6] http://www.latex-project.org
+[7] http://sourceforge.net/projects/pgf
+[8] http://mercurial.selenic.com
