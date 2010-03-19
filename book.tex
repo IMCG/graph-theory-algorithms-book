@@ -4,7 +4,7 @@
 \documentclass[a4paper,twoside,12pt]{book}
 \usepackage[latin1]{inputenc}
 
-% For typesetting algorithms and pseudocode
+%% For typesetting algorithms and pseudocode
 \usepackage[algochapter,boxed]{algorithm2e}
 \incmargin{1em}
 \decmargin{1em}
@@ -31,19 +31,14 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 
-%% macros
-\newcommand{\SAGE}{{\sf SAGE}\xspace}
-\newcommand{\sage}{\SAGE}
-\newcommand{\Sage}{\SAGE}
-
 %% Package for drawing figures
 \usepackage{tikz}
 \usetikzlibrary{calc,matrix,arrows,decorations.pathreplacing,%
   decorations.pathmorphing}
 \usepackage{subfigure}
 
+%% For typesetting code listings
 \usepackage{listings}
-% For typesetting code listings
 \lstset{language={},
   keepspaces=true,
   xleftmargin=5mm,
@@ -61,9 +56,6 @@
   language=Pascal
 }
 
-%% Custom commands and shortcuts
-\newcommand{\ZZ}{\mathbf{Z}}            % set of integers
-
 %% Customized page geometry
 \textwidth=450pt
 \textheight=700pt
@@ -78,9 +70,14 @@
 }
 \auDateFormat
 
-% Custom commands and shortcuts
-% the latest version of this document
+%% Custom commands and shortcuts
+%% the latest version of this document
 \newcommand{\documentEdition}{0.3}
+%% set of integers
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\SAGE}{{\sf SAGE}\xspace}
+\newcommand{\sage}{\SAGE}
+\newcommand{\Sage}{\SAGE}
 
 \makeindex
 
@@ -95,9 +92,7 @@
 \date{Version~\documentEdition}
 \maketitle
 
-
 %% Copyright page
-
 {\thispagestyle{empty}
   \input{tex/notice.tex} \\\\
   \textbf{Edition} \\
@@ -105,8 +100,9 @@
   \today
 }
 
+%% front matter
 \frontmatter
-% Setting the TOC depth: only list chapter and sections
+% Setting the TOC depth: only list chapters and sections
 \setcounter{tocdepth}{1}
 \tableofcontents
 \input{tex/acknowledgements.tex}
@@ -120,7 +116,6 @@
 \mainmatter
 
 %% Main document body
-
 \input{tex/introduction.tex}
 \input{tex/graph-algorithms.tex}
 \input{tex/trees-forests.tex}
@@ -133,12 +128,10 @@
 \input{tex/lp-formulations.tex}
 
 %% Appendices
-
 \appendix
 \input{tex/license-gfdl.tex}
 
 %% Back matter
-
 \backmatter
 \bibliographystyle{bibliography.bst}
 \bibliography{bibliography.bib}
