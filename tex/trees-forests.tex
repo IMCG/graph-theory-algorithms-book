@@ -1919,33 +1919,119 @@ Part of this exercise is finding this frequency distribution
 yourself.}.
 \end{exercise}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Applications to computer science}
+
+
 %%-----------------------------------------------------------------------%%
 %%--- Tree traversals ---------------------------------------------------%%
 
-\section{Tree traversals}
+\subsection{Tree traversals}
 
 See section~3.5 of Gross and Yellen~\cite{GrossYellen1999}.
+See also \url{http://en.wikipedia.org/wiki/Tree_traversal}.
 
 \begin{itemize}
 \item stacks and queues
 
-\item level-order traversal
+\item breadth-first, or level-order, traversal
 
-\item pre-order traversal
+\item depth-first, or pre-order, traversal
 
 \item post-order traversal
 
-\item in-order traversal
+\item symmetric, or in-order, traversal
 \end{itemize}
 
+In computer science, {\it tree traversal} refers to the process of 
+examining each node in a tree data structure exactly once.
+\index{tree traversal}
+We restrict our discussion to binary rooted trees.
+
+Starting at the root of a binary tree, there are three main steps that
+can be performed and the order in which they are performed defines the
+traversal type. 
+
+\noindent
+{\it Depth-first traversal}:
+\index{tree traversal!depth-first}
+\index{tree traversal!pre-order}
+\begin{itemize}
+\item
+Visit the root vertex.
+
+\item
+Traverse the left subtree recursively.
+
+\item
+Traverse the right subtree recursively.
+
+\end{itemize}
+
+
+\noindent
+{\it Breadth-first traversal}:
+\index{tree traversal!breadth-first}
+\index{tree traversal!level-order}
+\begin{itemize}
+\item
+Initialize $i=0$ and set $N$ equal to the maximum depth
+of the tree (i.e., the maximum distance from the root vertex
+to any other vertex in the tree).
+\index{tree!depth}
+
+\item
+Visit the vertices of depth $i$.
+
+\item
+Increment $i=i+1$. If $i>N$ then stop. Otherwise, go to
+the previous step.
+
+\end{itemize}
+
+
+\noindent
+{\it post-order traversal}:
+\index{tree traversal!post-order}
+\begin{itemize}
+\item
+Traverse the left subtree recursively.
+
+\item
+Visit the root vertex.
+
+\item
+Traverse the right subtree recursively.
+
+\end{itemize}
+
+
+\noindent
+{\it symmetric traversal}:
+\index{tree traversal!symmetric}
+\index{tree traversal!in-order}
+\begin{itemize}
+\item
+Traverse the left subtree recursively.
+
+\item
+Visit the root vertex.
+
+\item
+Traverse the right subtree recursively.
+
+\end{itemize}
 
 %%-----------------------------------------------------------------------%%
 %%--- Binary search trees -----------------------------------------------%%
 
-\section{Binary search trees}
+\subsection{Binary search trees}
 
 See section~3.6 of Gross and Yellen~\cite{GrossYellen1999}, and
-chapter~12 of Cormen~et~al.~\cite{CormenEtAl2001}.
+chapter~12 of Cormen~et~al.~\cite{CormenEtAl2001}. See also
+\url{http://en.wikipedia.org/wiki/Binary_search_tree}.
+
 
 \begin{itemize}
 \item records and keys
@@ -1960,3 +2046,92 @@ chapter~12 of Cormen~et~al.~\cite{CormenEtAl2001}.
 
 \item sorting using BST
 \end{itemize}
+
+A {\it binary search tree} (BST) is a rooted binary tree 
+$T=(V,E)$ having weighted vertices ${\rm wt}:V\to {\mathbb{R}}$ satisfying:
+
+\begin{itemize}
+\item
+ The left subtree of a vertex $v$ contains only vertices whose label
+(or ``key'') is less than the label of $v$.
+\item
+The right subtree of a vertex $v$ contains only vertices whose label
+  is greater than the label of $v$.
+\item
+Both the left and right subtrees must also be binary search trees.
+\end{itemize}
+
+From the above properties it naturally follows that:
+{\it Each vertex has a distinct label.}
+
+Generally, the information represented by each vertex is a 
+record (or list or dictionary), rather than a single data element. However, 
+for sequencing purposes, vertices are compared according to their
+labels rather than any part of their associated records.
+
+\subsubsection{Traversal}
+
+The vertices of a BST $T$ can be visited retrieved in-order of the
+weights of the vertices (i.e.,
+using a symmetric search type) by recursively  traversing the left subtree of the
+root vertex, then accessing the root vertex itself, then recursively traversing the
+right subtree of the root node.
+
+\subsubsection{Searching}
+
+We are given a BST (i.e., a binary rooted tree with weighted vertices
+having distinct weights satisfying the above criteria) $T$ and a
+label $\ell$. For this search, we are looking for a vertex in $T$
+whose label is $\ell$, if one exists.
+
+We begin by examining the root vertex, $v_0$. If $\ell={\rm wt}(v_0)$, 
+the search is successful. If the $\ell<{\rm wt}(v_0)$,  
+search the left subtree. Similarly, if $\ell>{\rm wt}(v_0)$,  
+search the right subtree. This process is repeated until a vertex
+$v\in V$ is found for which $\ell={\rm wt}(v)$, 
+or the indicated subtree is empty.
+
+
+\subsubsection{Insertion}
+
+We are given a BST (i.e., a binary rooted tree with weighted vertices
+having distinct weights satisfying the above criteria) $T$ and a
+label $\ell$. We assume $\ell$ is between the
+lowest weight of $T$ and the highest weight. 
+For this procedure, we are looking for a ``parent'' 
+vertex in $T$ which can ``adopt'' a new vertex $v$ having weight $\ell$
+and for which this augmented tree $T\cup v$ satisfies
+the criteria above.
+
+Insertion proceeds as a search does. However, in this case, you are 
+searching for vertices $v_1,v_2\in V$ for which 
+${\rm wt}(v_1)<\ell < {\rm wt}(v_2)$. Once found, these
+vertices will tell you where to insert $v$.
+
+\subsubsection{Deletion}
+
+As above, we are given a BST $T$ and a
+label $\ell$. We assume $\ell$ is between the
+lowest weight of $T$ and the highest weight. 
+For this procedure, we are looking for a vertex $v$ of
+$T$ which has weight $\ell$. We want to remove $v$ from 
+$T$ (and therefore also the weight $\ell$ from the list of weights),
+thereby creating a ``smaller'' tree $T- v$ satisfying
+the criteria above.
+
+Deletion proceeds as a search does. However, in this case, you are 
+searching for vertix $v\in V$ for which 
+${\rm wt}(v)=\ell$. Once found, we remove $v$ from $V$
+and any edge $(u,v)\in E$ is replaced by $(u,w_1)$
+and $(u,w_2)$, where $w_1.w_2\in V$ were the children of $v$
+in $T$.
+
+\subsubsection{Sorting}
+
+A binary search tree can be used to implement a simple but efficient
+sorting algorithm. Suppose we wish to sort a list of numbers
+$L = [\ell_1, \ell_2,\dots, \ell_n]$. First, let $V=\{1,2,\dots,n\}$ 
+be the vertices of a tree and weight vertex $i$ with $\ell_i$,
+for $1\leq i\leq n$. In this case, we can traverse this tree
+in order of its weights, thereby building a BST recursively.
+This BST represents the sorting of the list $L$.
