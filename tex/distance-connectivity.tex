@@ -22,6 +22,130 @@
 \item distance in self-complementary graphs
 \end{itemize}
 
+\subsection{Distance and metrics on graphs}
+
+Consider an edge-weighted graph $G=(V,E)$ without negative weight
+cycles. Let ${\rm wt}:E\to {\mathbb{R}}$ be the weight function.
+(if $G$ is not provided with a weight function on the edges,
+then assume that ${\rm wt}(e)=1$, for all $e\in E$.)
+If $v_1,v_2\in V$ are two vertices and $P=(e_1,\dots,e_m)$ is
+a path from $v_1$ to $v_2$ (so $v_1$ is incident to $e_1$
+nd $v_2$ is incident to $e_m$), we define the {\it weight of $P$}
+to be the sum of the weights of the edges in $P$:
+
+\[
+{\rm wt}(P)=\sum_{i=1}^m {\rm wt}(e_i).
+\]
+The {\it distance function} $\partial:V\times V\to  {\mathbb{R}}\cup
+\{\infty\}$ on 
+\index{distance function}
+$G$ is defined by $\partial(v_1,v_2) = \infty$,
+if $v_1$ and $v_2$ lie in distinct connected
+components of $G$, and by
+
+\[
+\partial(v_1,v_2) = 
+\min_P {\rm wt}(P),
+\]
+otherwise, where the minimum is taken over all paths $P$
+from $v_1$ to $v_2$ (this minimum exists since 
+$G$ has no negative weight cycles. 
+
+This distance function is not in general a metric
+(that is, the triagle inequality is not true in general).
+However, when the distance function is a 
+metric then $G$ is called a {\it metric graph}.
+\index{graph!metric}
+The theory of metric graphs, thanks to their close
+connection with tropical curves, is a very active
+research area at the present (see the work of 
+M. Baker et al, e.g., \cite{BakerFaber2006}).
+
+\begin{exercise}
+Show that the vertex set $V$ (of an undirected unweighted simple graph) 
+and the distance function form
+a metric space, if and only if the graph is connected.
+\end{exercise}
+
+The {\it eccentricity} $\epsilon:V\to  {\mathbb{R}}$ is defined as follows:
+$\epsilon (v)$ (for a vertex $v$) is the greatest distance between $v$
+and any other vertex in $G$.
+\index{eccentricity}
+
+The {\it diameter} of $G$, $\partial(G)$, is the maximum 
+eccentricity of any vertex in the graph. To compute
+$\partial(G)$, first find the shortest path (see Chapter
+\ref{chap:graph_algorithms}) between each pair of 
+vertices. The maximum weight of any of
+these paths is the diameter of the graph:
+
+\[
+\partial(G) = \max_{v_1,v_2\in V} \partial(v_1,v_2).
+\]
+\index{diameter}
+
+\subsection{Distance matrix}
+
+There are two uses of this term in the literature.
+
+Consider an edge-weighted graph $G=(V,E)$ without negative weight
+cycles with distance function $\partial$. Let $d=\partial(G)$
+denote the diameter of $G$ and index the
+set of vertices in some arbitrary but fixed way,
+$V=\{v_1,v_2,\dots, v_n\}$. 
+The {\it distance matrices} of $G$ are a sequence of $n\times n$ matrices
+$\{A_1,\dots, A_d)$, where
+
+\[
+(A_k)_{ij} = 
+\left\{
+\begin{array}{ll}
+1,& {\rm if}\ \partial(v_i,v_j)=k,\\
+0,& {\rm otherwise}.
+\end{array}
+\right.
+\]
+In particular, $A_1$ is the usual adjacency matrix $A$.
+
+The {\it distance matrix} $D(G)$ of $G$ is
+the $n\times n$ matrix
+
+\[
+D(G)=(\partial(v_j,v_j))_{1\leq i,j\leq n}.
+\]
+The distance matrix arises in several applications, including
+communication network design (see for example
+\cite{GrahamPollak1971})
+and network flow algorithms (see for example \cite{Dijkstra1959}).
+
+% R. L. Graham and H. O. Pollak, {\it on the addressing problem for
+% loop switching}, Bell Tech J 50(1971)2495-2519.
+% and
+% E. W. Dijkstra, {\it A note on two problems in connection with
+% graphs}, Numer. Math. 1 (1959)269-271.
+% [(this is [Dijkstra1959] )!
+\begin{remark}
+{\rm
+Thanks to R. Graham and H. Pollak, the following unusual fact is
+known:
+If $T$ is any tree then 
+
+\[
+\det D(T)=(-1)^{n-1}(n-1)2^{n-2}, 
+\]
+where $n$ denotes the number of vertices of $T$.
+In particular, the determinant of the distance matrix of a tree is
+independent of the structure of the tree.  This fact is proven in the
+paper \cite{GrahamPollak1971}, but see also 
+\cite{EdelbergEtAl1976}.
+}
+\end{remark}
+% this lemma is proven in the above paper by Graham-Pollak
+% see however:
+% M. Edelberg, M. R. Garey, R. L. Graham, {\it On the
+% distance matrix of a tree}, Discrete Math. 14 (1976)23-39.
+
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Vertex and edge connectivity --------------------------------------%%
