@@ -10,15 +10,36 @@
 
 \section{Vertex coloring}
 
+Vertex coloring is a widespread center of interest in graph theory, which has many variants. Formally speaking, a coloring of the vertex set of a graph $G$ is any function $f:V(G)\mapsto \{1,\dots,k\}$ giving to each vertex a color among a set of cardinal $k$. Things get much more difficult when we add to it the constraint under which a coloring becomes a {\it proper} coloring : a coloring with $k$ colors of a graph $G$ is said to be {\it proper} if there are no edges between any two vertices colored with the same color. This can be rephrased in many different ways :
 \begin{itemize}
-\item vertex coloring
+\item $\forall i\in \{1,\dots,k\}, G[f^{-1}(i)]$ is a stable set
+\item $\forall u,v\in G,u\neq v, f(u)=f(v)\Rightarrow uv\not \in E(G)$
+\item A proper coloring of $G$ with $k$ colors is a partition of $V(G)$ into $k$ independent sets
+\end{itemize}
 
-\item chromatic numbers
+{\bf Chromatic numbers} : quite clearly, it is always possible to find a proper coloring of a graph $G$ using one color per vertex. For this reason, the Coloring Problem is an optimisation problem which amounts to finding the least number $k$ of colors such that $G$ can be properly colored with $k$ colors -- is $k$-colorable. This integer, written $\chi(G)$, is called the chromatic number of $G$.
 
-\item algorithm for sequential vertex coloring
+{\bf Greedy coloring, and an easy upper bound} : the simple fact that Graph Coloring is a NP-complete problem must not prevent one from trying to color it greedily. One such method would be to iteratively pick, in a graph $G$, an uncolored vertex $v$, and to color it with the smallest color available which is not yet used by one of its neighbors (in order to keep it proper). Such a coloring will obviously stay proper until the whole vertex set is colored, and never use more than $\Delta(G)+1$ different colors (where $\Delta(G)$ is the maximal degree of $G$), as in the procedure no vertex will ever exclude more than $\Delta(G)$ colors. 
 
+Such an algorithm can be written in Sage in a few lines :
+
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+sage: g = graphs.RandomGNP(100,5/100)
+sage: C = Set(xrange(100))
+sage: color = {}
+sage: for u in g:
+...      interdits = Set([color[v] for v in g.neighbors(u) if color.has_key(v)])
+...      color[u] = min(C-interdits)
+\end{lstlisting}
+\end{center}
+
+
+\begin{itemize}
 \item Brook's Theorem
-
 \item heuristics for vertex coloring
 \end{itemize}
 
@@ -28,18 +49,17 @@
 
 \section{Edge coloring}
 
+Edge coloring is the direct application of vertex coloring to the line graph of a graph $G$, written $L(G)$, which is the graph whose vertices are the edges of $G$, two vertices being adjacent if and only if their corresponding edges share an endpoint. We write $\chi(L(G)) = \chi'(G)$ the chromatic {\it index} of $G$. In this special case, however, the optimization problem defined above, though still NP-Complete, is much better understood through Vizing's theorem.
+
+\begin{theorem}[Vizing]
+The edges of a graph $G$ can be properly colored using at least $\Delta(G)$ colors and at most $\Delta(G)+1$
+\end{theorem}
+Notice that the lower bound can be easily proved : if a vertex $v$ has a degree $d(v)$, then at least $d(v)$ colors are requied to color $G$ as all the edges incident to $v$ must receive different colors. Besides, the upper bound of $\Delta(G)+1$ can not be deduced from the greedy algorithm given in the previous section, as the maximal degree of $L(G)$ is not equal to $\Delta(G)$ but to $\displaystyle \max_{u\sim v}d(u)+d(v)-2$, which can reach $2\Delta(G)-2$ in regular graphs.
+
+
 \begin{itemize}
-\item edge coloring
-
-\item edge chromatic numbers
-
-\item chromatic incidence
-
 \item algorithm for edge coloring by maximum matching
-
 \item algorithm for sequential edge coloring
-
-\item Vizing's Theorem
 \end{itemize}
 
 
