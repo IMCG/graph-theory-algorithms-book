@@ -253,6 +253,31 @@ A \emph{multigraph} is a graph in which there are multiple edges
 between a pair of vertices. A \emph{multi-undirected graph} is a
 multigraph that is undirected. Similarly, a \emph{multidigraph} is a
 directed multigraph.
+
+More precisely, we are given
+
+\begin{itemize}
+\item
+$V$ - a finite set whose elements are called {\it vertices}, 
+\item
+$E$ - a finite set whose elements are called {\it edges}
+(we do not necessarily assume $E\subset V^{(2)}$,
+where $V^{(2)}$ is the set of unordered pairs of
+vertices), and 
+\item
+an incidence function $i:E\to V^{(2)}$.
+\end{itemize}
+Such a multigraph is denoted $G=(V,E,i)$.
+An {\it orientation} on $G$ is a function
+$h:E\to V$, where $h(e)\in i(e)$ ($v=h(e)$ is called the
+{\it head} of $i(e)$) for all $e\in E$. If $G$ has no loops,
+then $i(e)$ is a set having exactly two elements, denoted
+$i(e)=\{h(e),t(e)\}$ ($v=t(e)$ is called the
+{\it tail} of $i(e)$); otherwise, we set $t(e)=h(e)$.
+A multigraph with an orientation can therefore be described
+as the $4$-tuple $(V,E,i,h)$.
+In other words, $G=(V,E,i,h)$ is a multidigraph.
+
 \end{definition}
 \index{graphs!multigraphs}
 \index{multidigraph}
