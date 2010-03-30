@@ -84,6 +84,12 @@ these paths is the diameter of the graph:
 \]
 \index{diameter}
 
+To compute the diameter of a graph, use the Floyd-Roy-Warshall
+algorithm to compute the shortest distance between any
+two pairs of vertices. The maximum of these distances is the
+diameter.
+
+
 \subsection{Distance matrix}
 
 There are two uses of this term in the literature.
@@ -107,6 +113,71 @@ $\{A_1,\dots, A_d)$, where
 \]
 In particular, $A_1$ is the usual adjacency matrix $A$.
 
+To compute the distance matrices of a graph, use the Floyd-Roy-Warshall
+algorithm to compute the shortest distance 
+$\partial(v_i,v_j)$ between any two pairs of vertices,
+$v_i,v_j\in V$. This data determines the entries of
+the distance matrices.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+def distance_matrices(Gamma):
+    """
+    Returns the distance matrices of a graph.
+
+    INPUT:
+        Gamma is a graph.
+    OUTPUT:
+        The sequence of distance matrices
+
+    EXAMPLES:
+        sage: A = matrix([[0,1,1,0,0],[1,0,1,0,0],[1,1,0,1,0],[0,0,1,0,1],[0,0,0,1,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: print distance_matrices(G)
+        [[1 0 0 0 0]
+         [0 1 0 0 0]
+         [0 0 1 0 0]
+         [0 0 0 1 0]
+         [0 0 0 0 1], 
+         [0 1 1 0 0]
+         [1 0 1 0 0]
+         [1 1 0 1 0]
+         [0 0 1 0 1]
+         [0 0 0 1 0],
+         [0 0 0 1 0]
+         [0 0 0 1 0]
+         [0 0 0 0 1]
+         [1 1 0 0 0]
+         [0 0 1 0 0],
+         [0 0 0 0 1]
+         [0 0 0 0 1]
+         [0 0 0 0 0]
+         [0 0 0 0 0]
+         [1 1 0 0 0]]
+    """
+    g = Gamma.diameter()
+    V = Gamma.vertices()
+    n = len(V)
+    D = G.distance_all_pairs()
+    dist_mats = []
+    for i in range(g+1):
+        dist_mati = [[0 for j in range(n)] for k in range(n)]
+        for v1 in V:
+            for v2 in V:
+                if D[v1][v2]==i:
+                    dist_mati[v1][v2] = 1
+        dist_mats.append(matrix(dist_mati))
+    return dist_mats
+
+\end{lstlisting}
+\end{center}
+%
+
 The {\it distance matrix} $D(G)$ of $G$ is
 the $n\times n$ matrix
 
@@ -117,6 +188,14 @@ The distance matrix arises in several applications, including
 communication network design (see for example
 \cite{GrahamPollak1971})
 and network flow algorithms (see for example \cite{Dijkstra1959}).
+
+To compute the distance matrix of a graph, is very 
+similar to computing the distance matrices.
+Again, use the Floyd-Roy-Warshall
+algorithm to compute the shortest distance 
+$\partial(v_i,v_j)$ between any two pairs of vertices,
+$v_i,v_j\in V$. This data determines the entries of
+the distance matrix.
 
 % R. L. Graham and H. O. Pollak, {\it on the addressing problem for
 % loop switching}, Bell Tech J 50(1971)2495-2519.
@@ -146,6 +225,46 @@ paper \cite{GrahamPollak1971}, but see also
 % distance matrix of a tree}, Discrete Math. 14 (1976)23-39.
 
 
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+def distance_matrix(Gamma):
+    """
+    Returns the distance matrix of a graph.
+
+    INPUT:
+        Gamma is a graph.
+    OUTPUT:
+        The distance matrix
+
+    EXAMPLES:
+        sage: A = matrix([[0,1,1,0,0],[1,0,1,0,0],[1,1,0,1,0],[0,0,1,0,1],[0,0,0,1,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: distance_matrix(G)
+        [0 1 1 2 3]
+        [1 0 1 2 3]
+        [1 1 0 1 2]
+        [2 2 1 0 1]
+        [3 3 2 1 0]
+    """
+    g = Gamma.diameter()
+    V = Gamma.vertices()
+    n = len(V)
+    D = G.distance_all_pairs()
+    for i in range(g+1):
+        dist_mat = [[0 for j in range(n)] for k in range(n)]
+        for v1 in V:
+            for v2 in V:
+                dist_mat[v1][v2] = D[v1][v2]
+    return matrix(dist_mat)
+
+\end{lstlisting}
+\end{center}
+%
 
 %%-----------------------------------------------------------------------%%
 %%--- Vertex and edge connectivity --------------------------------------%%
