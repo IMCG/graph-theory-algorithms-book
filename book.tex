@@ -5,13 +5,12 @@
 \usepackage[latin1]{inputenc}
 
 %% For typesetting algorithms and pseudocode
-\usepackage[algochapter,boxed]{algorithm2e}
+\usepackage[algochapter,boxed,linesnumbered,vlined]{algorithm2e}
 \incmargin{1em}
 \decmargin{1em}
-\restylealgo{boxed}  % a box around the algorithm
-\Setnlsty{}{}{}      % don't bold the line numbers
-\linesnumbered
-\SetAlTitleFnt{}     % don't bold the text "Algorithm" in the caption
+\restylealgo{boxed}  %% a box around the algorithm
+\Setnlsty{}{}{}  %% don't bold the line numbers
+\SetAlTitleFnt{}  %% don't bold the text "Algorithm" in the caption
 \setalcapskip{5pt}
 
 \usepackage{amsmath,amssymb,amsthm}
@@ -19,6 +18,7 @@
 \usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
 \usepackage{makeidx}
 \usepackage{xspace}
+\usepackage{enumerate}
 \usepackage{fancyvrb}
 \usepackage{moreverb}
 
@@ -72,13 +72,12 @@
 \auDateFormat
 
 %% Custom commands and shortcuts
-%% the latest version of this document
-\newcommand{\documentEdition}{0.3}
-%% set of integers
-\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\documentEdition}{0.3}  %% the latest version of this document
+\newcommand{\ZZ}{\mathbf{Z}}  %% set of integers
 \newcommand{\SAGE}{{\sf SAGE}\xspace}
 \newcommand{\sage}{\SAGE}
 \newcommand{\Sage}{\SAGE}
+\DeclareMathOperator*{\length}{length}
 
 \makeindex
 
