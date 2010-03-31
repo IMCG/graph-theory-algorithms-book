@@ -64,13 +64,19 @@ else
     VERSION="$1"
     NAME="graph-theory-"
     echo "$1" > "$GRAPH_ROOT"/tex/version.tex
-    make 2>&1 > /dev/null
-    make clean 2>&1 > /dev/null
     hg diff
     hg status
     hg tag "$VERSION"
     hg commit -m "$VERSION"
 fi
+
+# Compile the whole book first, before actually doing the wrapping up.
+# At this stage, it is assumed that the whole source tree of the book
+# compiles OK without any errors. It is up to you to ensure this. If the book
+# does not compile OK, the following command would seem to hang. In that
+# case, pressing the Enter key should return you to the command prompt.
+make 2>&1 > /dev/null
+make clean 2>&1 > /dev/null
 
 # Test if there is a file called "book.pdf". That file results from
 # running the command "make" from GRAPH_ROOT.
