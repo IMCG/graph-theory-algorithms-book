@@ -1994,14 +1994,14 @@ property of simple graphs: If $G$ is a simple graph, then the degree
 of each vertex of $G$ is less than the order of $G$. By the time we
 reach line~\ref{alg:Havel_Hakimi:reduce_S_to_S_prime}, we know that
 $S$ has $n$ terms, $\max(S) > 0$, and $0 \leq d_i \leq n - 1$ for all
-$d_i \in S$. After applying
+$i = 1, 2, \dots, n$. After applying
 line~\ref{alg:Havel_Hakimi:reduce_S_to_S_prime}, $S$ is now a sequence
 of $n - 1$ terms with $\max(S) > 0$ and $0 \leq d_i \leq n - 2$ for all
-$d_i \in S$. In general, after $k$ rounds of the while loop, $S$ is a
-sequence of $n - k$ terms with $\max(S) > 0$ and
-$0 \leq d_i \leq n - k - 1$ for all $d_i \in S$. And after $n - 1$
-rounds of the while loop, the resulting sequence has one term whose
-value is zero. In other words, eventually
+$i = 1, 2, \dots, n-1$. In general, after $k$ rounds of the while
+loop, $S$ is a sequence of $n - k$ terms with $\max(S) > 0$ and
+$0 \leq d_i \leq n - k - 1$ for all $i = 1, 2, \dots, n-k$. And after
+$n - 1$ rounds of the while loop, the resulting sequence has one term
+whose value is zero. In other words, eventually
 Algorithm~\ref{alg:introduction:Havel_Hakimi_degree_sequence} produces
 a sequence with a negative term or a sequence of zeros.
 
