@@ -4,6 +4,66 @@
 \chapter{Introduction to Graph Theory}
 \label{chap:introduction}
 
+Our journey into graph theory starts with a puzzle that was solved
+over 250 years ago by Leonhard Euler~(1707--1783). The Pregel River
+flowed through the town of K\"onigsberg, which is present day
+Kaliningrad in Russia. Two islands protruded from the river. On either
+side of the mainland, two bridges joined one side of the mainland with
+one island and a third bridge joined the same side of the mainland
+with the other island. A bridge connected the two islands. In total,
+seven bridges connected the two islands with both sides of the
+mainland. A popular exercise among the citizens of K\"onigsberg was
+determine if it was possible to cross each bridge exactly once during
+a single walk. To visualize this puzzle in a slightly different way,
+consider
+Figure~\ref{fig:introduction:seven_bridges_Konigsberg}. Imagine that
+points $a$ and $c$ are either sides of the mainland, with points $b$
+and $d$ being the two islands. Place the tip of your pencil on any of
+the points $a,b,c,d$. Can you trace all the lines in the figure
+exactly once, without lifting your pencil? Known as the seven bridges
+of K\"onigsberg puzzle, Euler solved this problem in 1735 and with his
+solution he laid the foundation of what is now known as graph theory.
+\index{Euler, Leonhard}
+\index{K\"onigsberg, seven bridges puzzle}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\foreach \nodename/\x/\y in {a/0/0, b/0/2, c/0/4, d/4/2} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+\foreach \nodename/\direction/\navigate in {a/left/west, b/left/west,
+  c/left/west} {
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node [right] at (d.east) {$d$};
+% edges or lines
+\path
+\foreach \startnode/\endnode in {a/d, b/d, c/d} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\path
+\foreach \startnode/\endnode in {a/b, b/c} {
+  (\startnode) edge[linedecorate,bend left] node {} (\endnode)
+};
+\path
+\foreach \startnode/\endnode in {c/b, b/a} {
+  (\startnode) edge[linedecorate,bend left] node {} (\endnode)
+};
+\end{tikzpicture}
+\caption{The seven bridges of K\"onigsberg puzzle.}
+\label{fig:introduction:seven_bridges_Konigsberg}
+\end{figure}
+
+
+%%-----------------------------------------------------------------------%%
+%%--- Graphs and digraphs -----------------------------------------------%%
+
+\section{Graphs and digraphs}
+
 To paraphrase what Felix Klein said about curves,\footnote{
 ``Everyone knows what a curve is, until he has studied enough
 mathematics to become confused through the countless number of
@@ -12,12 +72,6 @@ it is easy to define a graph until you realize the countless number of
 exceptions. There are directed graphs, weighted graphs, multigraphs,
 simple graphs, and so on. Where do we begin?
 \index{Klein, Felix}
-
-
-%%-----------------------------------------------------------------------%%
-%%--- Graphs and digraphs -----------------------------------------------%%
-
-\section{Graphs and digraphs}
 
 We start by calling a ``graph'' what some call an ``unweighted,
 undirected graph without multiple edges.''
