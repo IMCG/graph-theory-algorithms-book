@@ -382,7 +382,7 @@ Euler, counts the total number of degrees in any graph.
 \begin{theorem}
 \label{thm:introduction:degree_sum}
 \label{thm:introduction:hand_shaking}
-\textbf{Euler.}
+\textbf{Euler 1736.}
 If $G = (V, E)$ is a graph, then $\sum_{v \in V} \deg(v) = 2 |E|$.
 \end{theorem}
 \index{Euler, Leonhard}
@@ -406,8 +406,42 @@ person has shaken hands (we assume that there are no multiple edges,
 i.e. that no two people shake hands twice). The theorem above simply
 says that the total number of handshakes is even. This is ``obvious''
 when you look at it this way since each handshake is counted twice
-($A$ shaking $B$'s hand is counted, $B$ shaking $A$'s hand, since the
-sum in the theorem is over all vertices).
+($A$ shaking $B$'s hand is counted, and $B$ shaking $A$'s hand is
+counted as well, since the sum in the theorem is over all
+vertices). To interpret Theorem~\ref{thm:introduction:hand_shaking} in
+a slightly different way within the context of the same room of
+people, there is an even number of people who shook hands with an odd
+number of other people. This consequence of
+Theorem~\ref{thm:introduction:hand_shaking} is recorded in the
+following corollary.
+
+\begin{corollary}
+A graph $G = (V, E)$ contains an even number of vertices with odd
+degrees.
+\end{corollary}
+
+\begin{proof}
+Partition $V$ into two disjoint subsets: $V_e$ is the subset of $V$
+that contains only vertices with even degrees; and $V_o$ is the subset
+of $V$ with only vertices of odd degrees. That is, $V = V_e \cup V_o$
+and $V_e \cap V_o = \emptyset$. From
+Theorem~\ref{thm:introduction:hand_shaking}, we have
+\[
+\sum_{v \in V} \deg(v)
+=
+\sum_{v \in V_e} \deg(v) + \sum_{v \in V_o} \deg(v)
+=
+2 |E|
+\]
+which can be re-arranged as
+\[
+\sum_{v \in V_o} \deg(v)
+=
+\sum_{v \in V} \deg(v) - \sum_{v \in V_e} \deg(v).
+\]
+As $\sum_{v \in V} \deg(v)$ and $\sum_{v \in V_e} \deg(v)$ are both
+even, their difference is also be even.
+\end{proof}
 
 As $E \subseteq V \times V$, then $E$ can be the empty set, in which
 case the total degree of $G = (V, E)$ is zero. Where $E \neq
