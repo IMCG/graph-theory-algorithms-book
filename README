@@ -24,6 +24,9 @@ To delete junk files resulting from the compilation process, run
 
 $ make clean
 
+The file graph.sh is a script that interfaces with utilities under the
+directory bin/.
+
 
 [1] http://www.gnu.org/copyleft/fdl.html
 [2] http://www.wdjoyner.org
