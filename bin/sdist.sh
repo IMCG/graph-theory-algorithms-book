@@ -63,6 +63,13 @@ else
     echo "Wrap up version release..."
     VERSION="$1"
     NAME="graph-theory-"
+    echo "$1" > "$GRAPH_ROOT"/tex/version.tex
+    make 2>&1 > /dev/null
+    make clean 2>&1 > /dev/null
+    hg diff
+    hg status
+    hg tag "$VERSION"
+    hg commit -m "$VERSION"
 fi
 
 # Test if there is a file called "book.pdf". That file results from
