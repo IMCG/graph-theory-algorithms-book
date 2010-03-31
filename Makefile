@@ -19,10 +19,10 @@ latex:
 	pdflatex $(FILE).tex
 #	latex $(FILE).tex
 
-pdf:
-	make all
-	dvips -t a4 -o $(FILE).ps $(FILE).dvi
-	ps2pdf $(FILE).ps
+# pdf:
+# 	make all
+# 	dvips -t a4 -o $(FILE).ps $(FILE).dvi
+# 	ps2pdf $(FILE).ps
 
 clean:
 	rm -rfv *#
