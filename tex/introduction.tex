@@ -2858,6 +2858,11 @@ vertex is sufficient for the graph to be disconnected
 %%--- Edge cut, cut edge, or bridge -------------------------------------%%
 
 \subsubsection{Edge cut, cut edge, or bridge}
+\index{bond}
+\index{bridge}
+\index{cut set}
+\index{disconnecting set}
+\index{edge cut}
 
 If deleting a single, specific edge would disconnect a graph $G$, that
 edge is called a \emph{bridge}. More generally, the \emph{edge cut}
@@ -2868,12 +2873,10 @@ cut is called a \emph{cut set} or a \emph{bond}.
 In fact, if $v_1, v_2 \in V$ are two vertices, then you can ask for an
 edge cut $F$ for which $v_1, v_2$ belong to different components of
 $G - F$. Sage's \verb!edge_cut! method allows you to compute a minimal
-cut having this property.
-\index{bond}
-\index{bridge}
-\index{cut set}
-\index{disconnecting set}
-\index{edge cut}
+cut having this property. For example, any of the three edges in
+Figure~\ref{fig:introduction:skeleton_subgraph_via_edge_deletion}
+qualifies as a bridge and those three edges form an edge cut for the
+graph in question.
 
 
 %%--- Edge contraction --------------------------------------------------%%
