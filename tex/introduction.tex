@@ -721,11 +721,25 @@ different types of graphs.
 
 If $u$ and $v$ are two vertices in a graph $G$, a $u$-$v$ \emph{walk}
 is an alternating sequence of vertices and edges starting with $u$ and
-ending at $v$. Consecutive vertices and edges are incident. For the
-graph in Figure~\ref{fig:introduction:types_of_walks}, an example of a
-walk is an $a$-$e$ walk: $a, b, c, b, e$. In other words, we
-start at vertex $a$ and travel to vertex $b$. From $b$, we go to $c$
-and then back to $b$ again. Then we end our journey at $e$. Notice
+ending at $v$. Consecutive vertices and edges are incident. Formally,
+a walk $W$ of length $n \geq 0$ can be defined as
+\[
+W: v_0, e_1, v_1, e_2, v_2, \dots, v_{n-1}, e_n, v_n
+\]
+where each edge $e_i = v_{i-1} v_i$ and the length $n$ refers to the
+number of~(not necessarily distinct) edges in the walk. The vertex
+$v_0$ is the starting vertex of the walk and $v_n$ is the end vertex,
+so we refer to $W$ as a $v_0$-$v_n$ walk. The \emph{trivial walk} is
+the walk of length $n = 0$ in which the start and end vertices are one
+and the same vertex. For brevity, we omit the edges in a walk and
+usually write the walk as the following sequence of vertices:
+\[
+W: v_0, v_1, v_2, \dots, v_{n-1}, v_n.
+\]
+For the graph in Figure~\ref{fig:introduction:types_of_walks}, an
+example of a walk is an $a$-$e$ walk: $a, b, c, b, e$. In other words,
+we start at vertex $a$ and travel to vertex $b$. From $b$, we go to
+$c$ and then back to $b$ again. Then we end our journey at $e$. Notice
 that consecutive vertices in a walk are adjacent to each other. One
 can think of vertices as destinations and edges as footpaths, say. We
 are allowed to have repeated vertices and edges in a walk. The number
