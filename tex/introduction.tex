@@ -315,7 +315,7 @@ directed multigraph.
 
 The illustration in
 Figure~\ref{fig:introduction:seven_bridges_Konigsberg} is actually a
-multigraph called the K\"onisberg graph. For a multigraph $G$, we are
+multigraph called the K\"onigsberg graph. For a multigraph $G$, we are
 given:
 %
 \begin{itemize}
@@ -2850,7 +2850,7 @@ $v_1, v_2$ belong to different components of $G - W$. Sage's
 \verb!vertex_cut! method allows you to compute a minimal cut having
 this property. For many connected graphs, the removal of a single
 vertex is sufficient for the graph to be disconnected
-(cf. Figure~\ref{fig:introduction:skeleton_subgraph_via_edge_deletion}).
+(see Figure~\ref{fig:introduction:skeleton_subgraph_via_edge_deletion}).
 %% What about the case where a graph is already disconnected? How would
 %% you define a vertex cut in a disconnected graph? That would involve
 %% defining "graph components", so that a vertex cut is a single vertex
@@ -2888,8 +2888,182 @@ graph in question.
 An \emph{edge contraction} is an operation which, like edge deletion,
 removes an edge from a graph. However, unlike edge deletion, edge
 contraction also merges together the two vertices the edge used to
-connect.
+connect. For a graph $G = (V, E)$ and an edge $uv = e \in E$, the edge
+contraction $G/e$ is the graph obtained as follows:
+%
+\begin{enumerate}
+\item Delete the vertices $u,v$ from $G$.
+
+\item In place of $u,v$ is a new vertex $v_e$.
+
+\item The vertex $v_e$ is adjacent to vertices that were adjacent
+  to $u$, $v$, or both $u$ and $v$.
+\end{enumerate}
 \index{edge contraction}
+The vertex set of $G/e = (V', E')$ is defined as
+$V' = \big(V \backslash \{u,v\}\big) \cup \{v_e\}$ and its edge set is
+\[
+E'
+=
+\big\{
+wx \in E \;\left.\right|\; \{w,x\} \cap \{u,v\} = \emptyset
+\big\}
+\cup
+\big\{
+v_e w
+\;\left.\right|\;
+uw \in E \backslash \{e\} \;\text{or}\; vw \in E \backslash \{e\}
+\big\}.
+\]
+Make the substitutions
+%
+\begin{align*}
+E_1 &= \big\{
+wx \in E \;\left.\right|\; \{w,x\} \cap \{u,v\} = \emptyset \big\} \\
+E_2 &= \big\{
+v_e w \;\left.\right|\;
+uw \in E \backslash \{e\} \;\text{or}\; vw \in E \backslash \{e\} \big\}.
+\end{align*}
+%
+Let $G$ be the wheel graph $W_6$ in
+Figure~\ref{fig:introduction:contracting_wheel_graph_W6} and consider
+the edge contraction $G/ab$, where $ab$ is the gray colored edge in
+that figure. Then the edge set $E_1$ denotes all those edges in $G$
+each of which is not incident on $a$, $b$, or both $a$ and $b$. These
+are precisely those edges that are colored red. The edge set $E_2$
+means that we consider those edges in $G$ each of which is incident on
+exactly one of $a$ or $b$, but not both. The blue colored edges in
+Figure~\ref{fig:introduction:contracting_wheel_graph_W6} are precisely
+those edges that $E_2$ suggests for consideration. The result of the
+edge contraction $G/ab$ is the wheel graph $W_5$ in
+Figure~\ref{fig:introduction:contracting_wheel_graph_W5}.
+Figures~\ref{fig:introduction:contracting_wheel_graph_W6}
+to~\ref{fig:introduction:wheel_graph_W6_contracted_to_K1} present a
+sequence of edge contractions that starts with $W_6$ and repeatedly
+contracts it to the trivial graph $K_1$.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[$G_1$]{
+\label{fig:introduction:contracting_wheel_graph_W6}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,very thick},%
+  scale=1.7]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  a/-0.5877/-0.8090/left/west, b/0.5877/-0.8090/right/east,
+  c/0.9510/0.3090/right/east, d/0/1/above/north,
+  e/-0.9510/0.3090/left/west, f/0/0/above right/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode/\color in {c/d/red, c/b/blue, c/f/red,
+  d/e/red, d/f/red, e/a/blue, e/f/red, a/b/gray, a/f/blue, b/f/blue} {
+  (\startnode) edge[linedecorate,color=\color] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%
+\subfigure[$G_2 = G_1/ab$]{
+\label{fig:introduction:contracting_wheel_graph_W5}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {c/1/0/right/east,
+  d/0/1/above/north, e/-1/0/left/west, f/0/0/above right/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node (ab) at (0,-1) [nodedecorate] {};
+\node [right] at (ab.east) {$v_{ab} = g$};
+% edges or lines
+\path
+\foreach \startnode/\endnode in {c/d, c/ab, c/f, d/e, d/f, e/ab, e/f,
+  ab/f} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%
+\subfigure[$G_3 = G_2/cg$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {d/0/1/above/north,
+  e/-0.8660/-0.5/left/west, f/0/0/above right/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node (cg) at (0.8660,-0.5) [nodedecorate] {};
+\node [right] at (cg.east) {$v_{cg} = h$};
+% edges or lines
+\path
+\foreach \startnode/\endnode in {cg/d, cg/e, cg/f, d/e, d/f, e/f} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%
+\subfigure[$G_4 = G_3/dh$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {f/0/1/above/north,
+  e/-0.8660/-0.5/left/west} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node (dh) at (0.8660,-0.5) [nodedecorate] {};
+\node [right] at (dh.east) {$v_{dh} = i$};
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {dh/f, dh/e, e/f} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%
+\subfigure[$G_5 = G_4/fi$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+%% nodes or vertices
+\node (e) at (-0.8660,-0.5) [nodedecorate] {};
+\node [left] at (e.west) {$e$};
+\node (fi) at (0.8660,-0.5) [nodedecorate] {};
+\node [right] at (fi.east) {$v_{fi} = j$};
+%% edges or lines
+\path (e) edge[linedecorate] node {} (fi);
+\end{tikzpicture}
+}
+%
+\subfigure[$G_6 = G_5/ej$]{
+\label{fig:introduction:wheel_graph_W6_contracted_to_K1}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+%% nodes or vertices
+\node (ej) at (0,0) [nodedecorate] {};
+\node [right] at (ej.east) {$v_{ej}$};
+%% stub node that should not be visible
+\node (stub1) at (1,0) [] {};
+\node (stub2) at (-1,0) [] {};
+\end{tikzpicture}
+}
+\caption{Contracting the wheel graph $W_6$ to the trivial graph $K_1$.}
+\label{fig:introduction:edge_contraction_W6_to_K1}
+\end{figure}
 
 
 %%--- Complements -------------------------------------------------------%%
