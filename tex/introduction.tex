@@ -313,7 +313,10 @@ directed multigraph.
 \index{multigraphs}
 \index{multi-undirected graph}
 
-For a multigraph $G$, we are given:
+The illustration in
+Figure~\ref{fig:introduction:seven_bridges_Konigsberg} is actually a
+multigraph called the K\"onisberg graph. For a multigraph $G$, we are
+given:
 %
 \begin{itemize}
 \item A finite set $V$ whose elements are called \emph{vertices}.
@@ -343,24 +346,48 @@ edges.
 \index{graphs!simple}
 \index{simple graph}
 
-The edges of a digraph can be visually represented as directed arrows,
-similarly to the digraph in
-Figure~\ref{fig:introduction:directed_triangle_graph}. The graph in
-Figure~\ref{fig:introduction:directed_triangle_graph} has the vertex
-set $\{ a, b, c \}$ and the edge set $\{ ab, bc, ca \}$. There is an
-arrow from vertex $a$ to vertex $b$, hence $ab$ is in the edge
-set. However, there is no arrow from $b$ to $a$, so $ba$ is not in the
-edge set of the graph in
-Figure~\ref{fig:introduction:directed_triangle_graph}.
+Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}
+illustrates a simple graph and its digraph version, together with a
+multidigraph version of the K\"onigsberg graph. The edges of a digraph
+can be visually represented as directed arrows, similar to the digraph
+in
+Figure~\ref{fig:introduction:triangle_digraph} and the multidigraph in
+Figure~\ref{fig:introduction:Konigsberg_multidigraph}. The digraph in
+Figure~\ref{fig:introduction:triangle_digraph} has the vertex set
+$\{a, b, c\}$ and the edge set $\{ab, bc, ca\}$. There is an arrow
+from vertex $a$ to vertex $b$, hence $ab$ is in the edge set. However,
+there is no arrow from $b$ to $a$, so $ba$ is not in the edge set of
+the graph in Figure~\ref{fig:introduction:triangle_digraph}.
 
 \begin{figure}[!htbp]
 \centering
+\subfigure[Simple graph.]{
+\label{fig:introduction:triangle_simple_graph}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {c/-1.5/0/left/west,
+  b/1.5/0/right/east, a/0/1.5/above/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+% edges or lines
+\path
+\foreach \startnode/\endnode in {a/b, b/c, c/a} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%
+\subfigure[Digraph.]{
+\label{fig:introduction:triangle_digraph}
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
   arrowdecorate/.style={->,>=stealth,thick}]
 % nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {c/-2/0/left/west,
-  b/2/0/right/east, a/0/2/above/north} {
+\foreach \nodename/\x/\y/\direction/\navigate in {c/-1.5/0/left/west,
+  b/1.5/0/right/east, a/0/1.5/above/north} {
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -370,8 +397,41 @@ Figure~\ref{fig:introduction:directed_triangle_graph}.
   (\startnode) edge[arrowdecorate] node {} (\endnode)
 };
 \end{tikzpicture}
-\caption{A triangle as a directed graph.}
-\label{fig:introduction:directed_triangle_graph}
+}
+%
+\subfigure[Multidigraph.]{
+\label{fig:introduction:Konigsberg_multidigraph}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={->,>=stealth,thick}]
+% nodes or vertices
+\foreach \nodename/\x/\y in {a/0/0, b/0/2, c/0/4, d/4/2} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+\foreach \nodename/\direction/\navigate in {a/left/west, b/left/west,
+  c/left/west} {
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node [right] at (d.east) {$d$};
+% edges or lines
+\path
+\foreach \startnode/\endnode in {a/b, b/c} {
+  (\startnode) edge[arrowdecorate,bend left] node {} (\endnode)
+};
+\path
+\foreach \startnode/\endnode in {c/b, b/a} {
+  (\startnode) edge[arrowdecorate,bend left] node {} (\endnode)
+};
+% multiple directed edges
+\path
+(a) edge[arrowdecorate,bend left=10] node {} (d)
+(c) edge[arrowdecorate,bend left] node {} (d)
+(a) edge[arrowdecorate,bend right] node {} (d)
+(c) edge[arrowdecorate,bend right=10] node {} (d);
+\end{tikzpicture}
+}
+\caption{A simple graph, its digraph version, and a multidigraph.}
+\label{fig:introduction:simple_graph_digraph_multidigraph}
 \end{figure}
 
 For any vertex $v$ in a graph $G = (V, E)$, the cardinality of
@@ -380,8 +440,8 @@ $\deg(v) = |\text{adj}(v)|$. The degree of $v$ counts the number of
 vertices in $G$ that are adjacent to $v$. If $\deg(v) = 0$, we say
 that $v$ is an \emph{isolated} vertex. For example, in the graph in
 Figure~\ref{fig:introduction:house_graph}, we have $\deg(b) = 3$. For
-the graph in Figure~\ref{fig:introduction:directed_triangle_graph}, we
-have $\deg(b) = 2$. If $V \neq \emptyset$ and $E = \emptyset$, then
+the graph in Figure~\ref{fig:introduction:triangle_digraph}, we have
+$\deg(b) = 2$. If $V \neq \emptyset$ and $E = \emptyset$, then
 $G$ is a graph consisting entirely of isolated vertices. From
 Example~\ref{eg:introduction:house_graph} we know that the vertices
 $a, c, d$ in Figure~\ref{fig:introduction:house_graph} have the
@@ -391,8 +451,8 @@ denoted $\delta(G)$, whereas the maximum degree is written as
 $\Delta(G)$. Thus, if $G$ denotes the graph in
 Figure~\ref{fig:introduction:house_graph} then we have $\delta(G) = 2$
 and $\Delta(G) = 3$. In the following Sage session, we construct the
-digraph in Figure~\ref{fig:introduction:directed_triangle_graph} and
-computes its maximum and minimum number of degrees.
+digraph in Figure~\ref{fig:introduction:triangle_digraph} and computes
+its maximum and minimum number of degrees.
 \index{$\deg(v)$}
 \index{$\delta$}
 \index{$\Delta$}
@@ -400,6 +460,7 @@ computes its maximum and minimum number of degrees.
 \index{degree!minimum}
 \index{degree of a vertex}
 \index{isolated vertex}
+\index{K\"onigsberg, seven bridges puzzle}
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -419,10 +480,10 @@ sage: G.degree("c")
 \end{center}
 %
 So for the graph $G$ in
-Figure~\ref{fig:introduction:directed_triangle_graph}, we have
+Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}, we have
 $\delta(G) = \Delta(G) = 2$.
 
-The graph $G$ in Figure~\ref{fig:introduction:directed_triangle_graph}
+The graph $G$ in Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}
 has the special property that its minimum degree is the same as its
 maximum degree, i.e. $\delta(G) = \Delta(G)$. Graphs with this
 property are referred to as \emph{regular}. An $r$-\emph{regular}
@@ -656,7 +717,7 @@ vertices $u, v$ there is a $u$-$v$ path joining them. A graph that is
 not connected is referred to as \emph{disconnected}. The empty graph
 is disconnected and so is any non-empty graph with an isolated
 vertex. However, the graph in
-Figure~\ref{fig:introduction:directed_triangle_graph} is
+Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph} is
 connected. A \emph{geodesic path} or \emph{shortest path} between two
 distinct vertices $u,v$ of a graph is a $u$-$v$ path of minimum
 length. A non-empty graph may have several shortest paths between some
