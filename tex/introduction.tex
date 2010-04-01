@@ -846,6 +846,28 @@ of path $p_2$ is also 5.
 (4) Here is a closed path that is not a cycle: $d, c, e, b, a, e, f, d$.
 \end{proof}
 
+\begin{theorem}
+Every $u$-$v$ walk in a graph contains a $u$-$v$ path.
+\end{theorem}
+
+\begin{proof}
+A walk of length $n = 0$ is the trivial path. So assume that $W$ is a
+$u$-$v$ walk of length $n > 0$ in a graph $G$:
+\[
+W: u = v_0, v_1, \dots, v_n = v.
+\]
+It is possible that a vertex in $W$ is assigned two different
+labels. If $W$ has no repeated vertices, then $W$ is already a
+path. Otherwise $W$ has at least one repeated vertex. Let
+$0 \leq i,j \leq n$ be two distinct integers with $i < j$ such that
+$v_i = v_j$. Deleting the vertices $v_i, v_{i+1}, \dots, v_{j-1}$ from
+$W$ results in a $u$-$v$ walk $W_1$ whose length is less than $n$. If
+$W_1$ is a path, then we are done. Otherwise we repeat the above
+process to obtain a $u$-$v$ walk shorter than $W_1$. As $W$ is a
+finite sequence, we only need to apply the above process a finite
+number of times to arrive at a $u$-$v$ path.
+\end{proof}
+
 A graph is said to be \emph{connected} if for every pair of distinct
 vertices $u, v$ there is a $u$-$v$ path joining them. A graph that is
 not connected is referred to as \emph{disconnected}. The empty graph
