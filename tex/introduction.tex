@@ -2808,6 +2808,7 @@ intact.
 }
 %
 \subfigure[$G - \{ab, ac, bc\}$]{
+\label{fig:introduction:skeleton_subgraph_via_edge_deletion}
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
   linedecorate/.style={-,thick}, scale=1.6]
@@ -2835,18 +2836,23 @@ intact.
 %%--- Vertex cut, cut vertex, or cutpoint -------------------------------%%
 
 \subsubsection{Vertex cut, cut vertex, or cutpoint}
+\index{graph!cut}
+\index{separating set}
+\index{vertex cut}
 
 A \emph{vertex cut} (or \emph{separating set}) of a connected graph
 $G = (V, E)$ is a subset $W \subseteq V$ such that the vertex deletion
-subgraph $G - W$ is disconnected.
-\index{graph!cut}
-\index{vertex cut}
-In fact, if $v_1, v_2 \in V$ are two non-adjacent vertices, then you
-can ask for a vertex cut $W$ for which $v_1, v_2$ belong to different
-components of $G - W$. Sage's \verb!vertex_cut! method allows you to
-compute a minimal cut having this property.
-\index{vertex cut}
-\index{separating set}
+subgraph $G - W$ is disconnected. In fact, if $v_1, v_2 \in V$ are two
+non-adjacent vertices, then you can ask for a vertex cut $W$ for which
+$v_1, v_2$ belong to different components of $G - W$. Sage's
+\verb!vertex_cut! method allows you to compute a minimal cut having
+this property. For many connected graphs, the removal of a single
+vertex is sufficient for the graph to be disconnected
+(cf. Figure~\ref{fig:introduction:skeleton_subgraph_via_edge_deletion}).
+%% What about the case where a graph is already disconnected? How would
+%% you define a vertex cut in a disconnected graph? That would involve
+%% defining "graph components", so that a vertex cut is a single vertex
+%% or a set of vertices that would result in more components.
 
 
 %%--- Edge cut, cut edge, or bridge -------------------------------------%%
