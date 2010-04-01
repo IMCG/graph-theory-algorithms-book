@@ -2752,6 +2752,79 @@ sage: E1.difference(E2) == E14
 True
 \end{lstlisting}
 \end{center}
+%
+Figure~\ref{fig:introduction:edge_deletion_subgraphs} shows a sequence
+of graphs resulting from edge deletion. Unlike vertex deletion, when
+an edge is deleted the vertices incident on that edge are left
+intact.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[$G$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}, scale=1.6]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {a/0.8660/-0.5, b/0/1, c/-0.8660/-0.5,
+  d/0/0} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+\foreach \nodename/\direction/\navigate in {a/right/east, b/above/north,
+  c/left/west} {
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/b, a/c, a/d, b/c, b/d, c/d} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%
+\subfigure[$G - \{ac\}$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}, scale=1.6]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {a/0.8660/-0.5, b/0/1, c/-0.8660/-0.5,
+  d/0/0} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+\foreach \nodename/\direction/\navigate in {a/right/east, b/above/north,
+  c/left/west} {
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/b, a/d, b/c, b/d, c/d} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%
+\subfigure[$G - \{ab, ac, bc\}$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}, scale=1.6]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {a/0.8660/-0.5, b/0/1, c/-0.8660/-0.5,
+  d/0/0} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+\foreach \nodename/\direction/\navigate in {a/right/east, b/above/north,
+  c/left/west} {
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/d, b/d, c/d} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\caption{Obtaining subgraphs via repeated edge deletion.}
+\label{fig:introduction:edge_deletion_subgraphs}
+\end{figure}
 
 
 \subsubsection{Vertex cut, cut vertex, or cutpoint}
