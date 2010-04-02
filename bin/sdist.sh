@@ -55,10 +55,30 @@ cd "$GRAPH_ROOT"
 NAME=""
 VERSION=""
 
+build() {
+    # Compile the whole book first, before actually doing the wrapping up.
+    # At this stage, it is assumed that the whole source tree of the book
+    # compiles OK without any errors. It is up to you to ensure this. If the
+    # book does not compile OK, the following command would seem to hang. In
+    # that case, pressing the Enter key should return you to the command
+    # prompt.
+    make 2>&1 > /dev/null
+    make clean 2>&1 > /dev/null
+}
+
+# Determine whether we want to do a revision release or a version release.
 if [ "$1" = "--revision" ]; then
     echo "Wrap up revision release..."
     VERSION=`hg tip | head -1 | awk '{split($2, array, ":"); print array[1]}'`
     NAME="latest-r"
+    STABLE=`cat "$GRAPH_ROOT"/tex/version.tex`
+    echo "$STABLE-r$VERSION" > "$GRAPH_ROOT"/tex/version.tex
+    build
+    # We do not want to save the revision number in the version.tex file. So
+    # restore the stable release number in that file. That way, Mercurial
+    # would not complain about version.tex being modified. The file
+    # version.tex essentially stores the latest stable version number.
+    echo "$STABLE" > "$GRAPH_ROOT"/tex/version.tex
 else
     echo "Wrap up version release..."
     VERSION="$1"
@@ -68,15 +88,8 @@ else
     hg status
     hg tag "$VERSION"
     hg commit -m "$VERSION"
+    build
 fi
-
-# Compile the whole book first, before actually doing the wrapping up.
-# At this stage, it is assumed that the whole source tree of the book
-# compiles OK without any errors. It is up to you to ensure this. If the book
-# does not compile OK, the following command would seem to hang. In that
-# case, pressing the Enter key should return you to the command prompt.
-make 2>&1 > /dev/null
-make clean 2>&1 > /dev/null
 
 # Test if there is a file called "book.pdf". That file results from
 # running the command "make" from GRAPH_ROOT.
