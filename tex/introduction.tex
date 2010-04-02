@@ -2442,11 +2442,14 @@ sets, their disjoint union is the graph
 \[
 G_1 \cup G_2
 =
-(V_1 \cup V_2,\, E1 \cup E2).
+(V_1 \cup V_2,\, E_1 \cup E_2).
 \]
-The adjacency matrix $A$ of the disjoint union of two graphs $G_1$ and
-$G_2$ is the diagonal block matrix obtained from the adjacency
-matrices $A_1$ and $A_2$, respectively. Namely,
+For example,
+Figure~\ref{fig:introduction:vertex_disjoint_union_K15_W4} shows the
+vertex disjoint union of the complete bipartite graph $K_{1,5}$ with
+the wheel graph $W_4$. The adjacency matrix $A$ of the disjoint union
+of two graphs $G_1$ and $G_2$ is the diagonal block matrix obtained
+from the adjacency matrices $A_1$ and $A_2$, respectively. Namely,
 \[
 A
 =
@@ -2484,7 +2487,126 @@ sage: G1u2.adjacency_matrix()
 \end{center}
 %
 In the case where $V_1 = V_2$, then $G_1 \cup G_2$ is simply the graph
-consisting of all edges in $G_1$ or in $G_2$.
+consisting of all edges in $G_1$ or in $G_2$. In general, the union of
+two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ is defined as
+\[
+G_1 \cup G_2
+=
+(V_1 \cup V_2,\, E_1 \cup E_2)
+\]
+where $V_1 \subseteq V_2$, $V_2 \subseteq V_1$, $V_1 = V_2$, or
+$V_1 \cap V_2 = \emptyset$.
+Figure~\ref{fig:introduction:union_graphs_overlapping_vertex_sets}
+illustrates the graph union where one vertex set is a proper subset of
+the other.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.5]
+%%
+%% complete bipartite graph K_{1,5}
+%% nodes or vertices
+\foreach \nodename/\x/\y in {1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090,
+  4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/0/0} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/6, 2/6, 3/6, 4/6, 5/6} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+%%
+%% wheel graph W_4
+%% nodes or vertices
+\foreach \nodename/\x/\y in {1/3.866/-0.809, 2/3/0.691, 3/2.134/-0.809,
+  4/3/-0.309} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/3, 1/4, 2/3, 2/4, 3/4} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+\caption{The vertex disjoint union $K_{1,5} \cup W_4$.}
+\label{fig:introduction:vertex_disjoint_union_K15_W4}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+%%
+%% graph G_1
+\subfigure[$G_1$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.5]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  1/-0.8660/-0.5/left/west, 2/0.8660/-0.5/right/east,
+  3/0/1/above/north, 4/0/0/below/south} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/3, 1/4, 2/3, 2/4, 3/4} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\quad
+%%
+%% graph G_2
+\subfigure[$G_2$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.5]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  1/-0.9510/0.3090/left/west, 2/0.9510/0.3090/right/east,
+  3/0/1/above/north, 4/0/0/below/south, 5/-0.5877/-0.8090/left/west,
+  6/0.5877/-0.8090/right/east} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/4, 2/4, 3/4, 4/5, 4/6, 5/6} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\quad
+%%
+%% graph G_1 union G_2
+\subfigure[$G_1 \cup G_2$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.5]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  1/-0.9510/0.3090/left/west, 2/0.9510/0.3090/right/east,
+  3/0/1/above/north, 4/0/0/below/south, 5/-0.5877/-0.8090/left/west,
+  6/0.5877/-0.8090/right/east} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/4, 1/3, 2/3, 2/4, 3/4, 4/5, 4/6, 5/6} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\caption{The union of graphs with overlapping vertex sets.}
+\label{fig:introduction:union_graphs_overlapping_vertex_sets}
+\end{figure}
 
 The \emph{intersection} of graphs is defined as follows. For two
 graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ with disjoint vertex
