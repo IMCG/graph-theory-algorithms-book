@@ -2641,31 +2641,108 @@ Figure~\ref{fig:introduction:intersection_graphs_overlapping_vertex_sets}
 illustrates the intersection of two graphs whose vertex sets overlap.
 \index{graph!intersection}
 
-The \emph{symmetric difference} (or \emph{ring sum}) of graphs is
-defined as follows. For two graphs $G_1 = (V_1, E_1)$ and
-$G_2 = (V_2, E_2)$ with disjoint vertex sets, their symmetric
+The \emph{symmetric difference} of graphs is defined as follows. For
+two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$, their symmetric
 difference is the graph
 \[
 G_1 \Delta G_2
 =
-(V_1 \Delta V_2,\, E1 \Delta E2).
+(V, E)
 \]
-Recall that the \emph{symmetric difference} of two sets $S_1$ and
-$S_2$ is defined by
+where $V = V_1 \Delta V_2$ and the edge set is given by
+\[
+E
+=
+(E_1 \Delta E_2) \backslash
+\{
+uv \;|\; u \in V_1 \cap V_2 \quad\text{or}\quad v \in V_1 \cap V_2
+\}.
+\]
+Recall that the symmetric difference of two sets $S_1$ and $S_2$ is
+defined by
 \[
 S_1 \Delta S_2
 =
 \{x \in S_1 \cup S_2 \;|\; x \notin S_1 \cap S_2\}.
 \]
 In the case where $V_1 = V_2$, then $G_1 \Delta G_2$ is simply the
-graph consisting of all edges in $G_1$ or in $G_2$, but not in
-both. In this case, sometimes $G_1 \Delta G_2$ is written as
-$G_1 \oplus G_2$.
+empty graph. See Figure~\ref{fig:introduction:symmetric_difference}
+for an illustration of the symmetric difference of two graphs.
 \index{$\Delta$}
-\index{$\oplus$}
 \index{symmetric difference}
-\index{ring sum}
 \index{graph!symmetric difference}
+
+\begin{figure}[!htbp]
+\centering
+%%
+%% graph G_1
+\subfigure[$G_1$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.5]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  1/-0.8660/-0.5/left/west, 2/0.8660/-0.5/right/east,
+  3/0/1/above/north, 4/0/0/below/south} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) [] {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/3, 1/4, 2/3, 2/4, 3/4} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\quad
+%%
+%% graph G_2
+\subfigure[$G_2$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.5]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  1/0/-1/right/east, 3/1/0/right/east, 5/0/1/above/north,
+  7/-1/0/left/west, 9/0/0/above right/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) [] {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/3, 1/7, 1/9, 3/5, 3/9, 5/7, 5/9, 7/9} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\quad
+%%
+%% graph G_1 symmetric difference G_2
+\subfigure[$G_1 \Delta G_2$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.5]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  2/-0.5877/-0.8090/left/west, 4/0.5877/-0.8090/right/east,
+  5/0/1/above/north, 7/0.9510/0.3090/right/east,
+  9/-0.9510/0.3090/left/west} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {2/4, 5/7, 5/9, 7/9} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\caption{The symmetric difference of graphs.}
+\label{fig:introduction:symmetric_difference}
+\end{figure}
 
 The \emph{join} of two disjoint graphs $G_1$ and $G_2$, denoted
 $G_1 + G_2$, is their graph union, with each vertex of one graph
