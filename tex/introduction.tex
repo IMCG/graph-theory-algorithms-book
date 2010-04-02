@@ -847,6 +847,7 @@ of path $p_2$ is also 5.
 \end{proof}
 
 \begin{theorem}
+\label{thm:introduction:every_walk_has_a_path}
 Every $u$-$v$ walk in a graph contains a $u$-$v$ path.
 \end{theorem}
 
@@ -2915,6 +2916,48 @@ cut having this property. For example, any of the three edges in
 Figure~\ref{fig:introduction:skeleton_subgraph_via_edge_deletion}
 qualifies as a bridge and those three edges form an edge cut for the
 graph in question.
+
+\begin{theorem}
+Let $G$ be a connected graph. An edge $e \in E(G)$ is a bridge of $G$
+if and only if $e$ does not lie on a cycle of $G$.
+\end{theorem}
+
+\begin{proof}
+First, assume that $e = uv$ is a bridge of $G$. Suppose for
+contradiction that $e$ lies on a cycle
+\[
+C: u, v, w_1, w_2, \dots, w_k, u.
+\]
+Then $G - e$ contains a $u$-$v$ path
+$u, w_k, \dots, w_2, w_1, v$. Let $u_1, v_1$ be any two vertices in
+$G - e$. By hypothesis, $G$ is connected so there is a $u_1$-$v_1$
+path $P$ in $G$. If $e$ does not lie on $P$, then $P$ is also a path
+in $G - e$ so that $u_1, v_1$ are connected, which contradicts our
+assumption of $e$ being a bridge. On the other hand, if $e$ lies on
+$P$, then express $P$ as
+\[
+u_1, \dots, u, v, \dots, v_1
+\quad\text{or}\quad
+u_1, \dots, v, u, \dots, v_1.
+\]
+Now
+\[
+u_1, \dots, u, w_k, \dots, w_2, w_1, v, \dots, v_1
+\quad\text{or}\quad
+u_1, \dots, v, w_1, w_2, \dots, w_k, u, \dots, v_1
+\]
+respectively is a $u_1$-$v_1$ walk in $G - e$. By
+Theorem~\ref{thm:introduction:every_walk_has_a_path}, $G - e$
+contains a $u_1$-$v_1$ path, which contradicts our assumption about
+$e$ being a bridge.
+
+Conversely, let $e = uv$ be an edge that does not lie on any cycles of
+$G$. If $G - e$ has no $u$-$v$ paths, then we are done. Otherwise,
+assume for contradiction that $G - e$ has a $u$-$v$ path $P$. Then $P$
+with $uv$ produces a cycle in $G$. This cycle contains $e$, in
+contradiction of our assumption that $e$ does not lie on any cycles of
+$G$.
+\end{proof}
 
 
 %%--- Edge contraction --------------------------------------------------%%
