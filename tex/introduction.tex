@@ -1648,6 +1648,40 @@ Figure~\ref{fig:introduction:tanner_graph}.
 \label{fig:introduction:tanner_graph}
 \end{figure}
 
+\begin{theorem}
+Let $A$ be the adjacency matrix of a graph $G$ with vertex set
+$V = \{v_1, v_2, \dots, v_p\}$. For each positive integer $n$, the
+$ij$-th entry of $A^n$ counts the number of $v_i$-$v_j$ walks of
+length $n$ in $G$.
+\end{theorem}
+
+\begin{proof}
+We shall prove by induction on $n$. For the base case $n = 1$, the
+$ij$-th entry of $A^1$ counts the number of walks of length 1 from
+$v_i$ to $v_j$. This is obvious because $A^1$ is merely the adjacency
+matrix $A$.
+
+Suppose for induction that for some positive integer $k \geq 1$, the
+$ij$-th entry of $A^k$ counts the number of walks of length $k$ from
+$v_i$ to $v_j$. We need to show that the $ij$-th entry of $A^{k+1}$
+counts the number of $v_i$-$v_j$ walks of length $k + 1$. Let
+$A = [a_{ij}]$, $A^k = [b_{ij}]$, and $A^{k+1} = [c_{ij}]$. Since
+$A^{k+1} = A A^k$, then
+\[
+c_{ij}
+=
+\sum_{r=1}^p a_{ir} b_{rj}
+\]
+for $i,j = 1, 2, \dots, p$. Note that $a_{ir}$ is the number of edges
+from $v_i$ to $v_r$, and $b_{rj}$ is the number of $v_r$-$v_j$ walks
+of length $k$. Any edge from $v_i$ to $v_r$ can be joined with any
+$v_r$-$v_j$ walk to create a walk $v_i, v_r, \dots, v_j$ of length
+$k + 1$. Then for each $r = 1, 2, \dots, p$, the value $a_{ir} b_{rj}$
+counts the number of $v_i$-$v_j$ walks of length $k + 1$ with $v_r$
+being the second vertex in the walk. Thus $c_{ij}$ counts the total
+number of $v_i$-$v_j$ walks of length $k + 1$.
+\end{proof}
+
 
 %%--- Incidence matrix --------------------------------------------------%%
 
