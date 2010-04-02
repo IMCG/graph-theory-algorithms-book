@@ -1118,27 +1118,35 @@ no edges. It is also called the \emph{trivial} graph.
 \end{tikzpicture}
 }
 \quad
+%%
 %% complete graph K_2
 \subfigure[$K_2$]{
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
   linedecorate/.style={-,thick}]
-% nodes or vertices
+%% nodes or vertices
 \node (1) at (0,0) [nodedecorate] {};
 \node (2) at (0,3) [nodedecorate] {};
-% edges or lines
+%% stub nodes that should not be visible
+\node () at (-0.5,0) [] {};
+\node () at (0.5,0) [] {};
+%% edges or lines
 \path
 (1) edge[linedecorate] node {} (2);
 \end{tikzpicture}
 }
 \quad
+%%
 %% complete graph K_1
 \subfigure[$K_1$]{
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
   linedecorate/.style={-,thick}]
-% nodes or vertices
+%% nodes or vertices
 \node (1) at (0,0) [nodedecorate] {};
+%% stub nodes that should not be visible
+\node () at (-0.5,0) [] {};
+\node () at (0.5,0) [] {};
 \end{tikzpicture}
 }
 \caption{Complete graphs $K_n$ for $1 \leq n \leq 5$.}
