@@ -63,6 +63,7 @@ solution he laid the foundation of what is now known as graph theory.
 %%--- Graphs and digraphs -----------------------------------------------%%
 
 \section{Graphs and digraphs}
+\label{sec:introduction:graphs_digraphs}
 
 To paraphrase what Felix Klein said about curves,\footnote{
 ``Everyone knows what a curve is, until he has studied enough
@@ -283,16 +284,18 @@ is designated as the head vertex and the other incident vertex is
 designated as the tail vertex. A directed edge $uv$ is said to be
 directed from its tail $u$ to its head $v$. A \emph{directed graph} or
 \emph{digraph} $G$ is a graph such that each of whose edges is
-directed. The \emph{indegree} of a vertex $v \in V(G)$ counts the
-number of edges such that $v$ is the head of those edges. The
-\emph{outdegree} of a vertex $v \in V(G)$ is the number of edges such
-that $v$ is the tail of those edges.
+directed. The \emph{indegree} $\id(v)$ of a vertex $v \in V(G)$ counts
+the number of edges such that $v$ is the head of those edges. The
+\emph{outdegree} $\od(v)$ of a vertex $v \in V(G)$ is the number of
+edges such that $v$ is the tail of those edges.
 \end{definition}
 \index{graphs!directed}
 \index{digraph}
 \index{directed edge}
 \index{indegree}
 \index{outdegree}
+\index{$\id$}
+\index{$\od$}
 
 It is important to distinguish a graph $G$ as being directed or
 undirected. If $G$ is undirected and $uv \in E(G)$, then $uv$ and $vu$
@@ -603,7 +606,8 @@ So for the graph $G$ in
 Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}, we have
 $\delta(G) = \Delta(G) = 2$.
 
-The graph $G$ in Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}
+The graph $G$ in
+Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}
 has the special property that its minimum degree is the same as its
 maximum degree, i.e. $\delta(G) = \Delta(G)$. Graphs with this
 property are referred to as \emph{regular}. An $r$-\emph{regular}
@@ -702,6 +706,22 @@ the following corollary.
 If $G = (V, E)$ is an $r$-regular graph having $n$ vertices and $m$
 edges, then $m = rn / 2$.
 \end{corollary}
+
+
+%%--- Problems ----------------------------------------------------------%%
+
+\subsection*{Problems~\ref{sec:introduction:graphs_digraphs}}
+
+\begin{enumerate}
+\item Let $D = (V, E)$ be a digraph of size $q$. Show that
+  \[
+  \sum_{v \in V} \id(v)
+  =
+  \sum_{v \in V} \od(v)
+  =
+  q.
+  \]
+\end{enumerate}
 
 
 %%-----------------------------------------------------------------------%%
