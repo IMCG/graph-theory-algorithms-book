@@ -3492,9 +3492,9 @@ $k \in \ZZ$.
 %%--- Cartesian product -------------------------------------------------%%
 
 \subsection{Cartesian product}
-
 \index{$\square$}
 \index{Cartesian product}
+
 The \emph{Cartesian product} $G \square H$ of graphs $G$ and $H$ is a
 graph such that the vertex set of $G \square H$ is the Cartesian
 product $V(G) \times V(H)$. Any two vertices $(u, u')$ and $(v, v')$
@@ -3532,8 +3532,109 @@ sage: P = C.cartesian_product(Z); len(P.vertices()); len(P.edges())
 \end{lstlisting}
 \end{center}
 
-The \emph{hypercube graph} $Q_n$ is the $n$-regular graph with vertex
-set
+The \emph{path graph} $P_n$ is a tree with $n$ vertices
+$V = \{v_1, v_2, \dots, v_n\}$ and edges
+$E = \{ (v_i, v_{i+1}) \;|\; 1 \leq i \leq n-1 \}$. In this case,
+$\deg(v_1) = \deg(v_n) = 1$ and $\deg(v_i) = 2$ for $1 < i < n$. The
+path graph $P_n$ can be obtained from the cycle graph $C_n$ by
+deleting one edge of $C_n$. The \emph{ladder graph} $L_n$ is the
+Cartesian product of path graphs, i.e. $L_n = P_n \square P_1$.
+\index{$L_n$}
+\index{graph!ladder}
+\index{graph!path}
+\index{ladder graph}
+\index{path graph}
+
+The Cartesian product of two graphs $G_1$ and $G_2$ can be visualized
+as follows. Let $V_1 = \{u_1, u_2, \dots, u_m\}$ and
+$V_2 = \{v_1, v_2, \dots, v_n\}$ be the vertex sets of $G_1$ and
+$G_2$, respectively. Let $H_1, H_2, \dots, H_n$ be $n$ copies of
+$G_1$. Place each $H_i$ at the location of $v_i$ in $G_2$. Then
+$u_i \in V(H_j)$ is adjacent to $u_i \in V(H_k)$ if and only if
+$v_{jk} \in E(G_2)$. See
+Figure~\ref{fig:introduction:Cartesian_product_K3_P3} for an
+illustration of obtaining the Cartesian product of $K_3$ and $P_3$.
+
+\begin{figure}[!htbp]
+\centering
+%%
+%% graph K_3
+\subfigure[$K_3$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {1/0.8660/-0.5, 2/0/1, 3/-0.8660/-0.5} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/3, 2/3} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\qquad
+%%
+%% graph P_3
+\subfigure[$P_3$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {1/0/0, 2/0/1, 3/0/2} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% stub nodes that should not be visible
+\node () at (-0.5,0) [] {};
+\node () at (0.5,0) [] {};
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 2/3} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\qquad
+%%
+%% K_3 Cartesian product P_3
+\subfigure[$K_3 \square P_3$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  %% bottom K_3
+  1/0.8660/-0.5, 2/0/1, 3/-0.8660/-0.5,
+  %% middle K_3
+  4/0.8660/0.5, 5/0/2, 6/-0.8660/0.5,
+  %% top K_3
+  7/0.8660/1.5, 8/0/3, 9/-0.8660/1.5} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {
+  %% bottom K_3
+  1/2, 1/3, 2/3,
+  %% middle K_3
+  4/5, 4/6, 5/6,
+  %% top K_3
+  7/8, 7/9, 8/9,
+  %% connecting the K_3 with each other
+  1/4, 4/7, 2/5, 5/8, 3/6, 6/9} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\caption{The Cartesian product of $K_3$ and $P_3$.}
+\label{fig:introduction:Cartesian_product_K3_P3}
+\end{figure}
+
+The \emph{hypercube graph} $Q_n$ is the $n$-regular graph having
+vertex set
 \[
 V
 =
@@ -3640,18 +3741,86 @@ The Cartesian product of two hypercube graphs is another
 hypercube: $Q_i \square Q_j = Q_{i+j}$.
 \end{example}
 
-The \emph{path graph} $P_n$ is a tree with $n$ vertices
-$V = \{ v_1,\dots, v_n \}$ and edges
-$E = \{ (v_i, v_{i+1}) \;|\; 1 \leq i \leq n-1 \}$. In this case,
-$\deg(v_1) = \deg(v_n) = 1$ and $\deg(v_i) = 2$ for $1 < i < n$. The
-path graph $P_n$ can be obtained from the cycle graph $C_n$ by
-deleting one edge of $C_n$. The \emph{ladder graph} $L_n$ is the
-Cartesian product of path graphs, i.e. $L_n = P_n \square P_1$.
-\index{$L_n$}
-\index{graph!ladder}
-\index{graph!path}
-\index{ladder graph}
-\index{path graph}
+Another family of graphs that can be constructed via Cartesian product
+is the \emph{mesh}. Such a graph is also referred to as \emph{grid} or
+\emph{lattice}. The $2$-mesh is denoted $M(m,n)$ and is defined as the
+Cartesian product $M(m,n) = P_m \square P_n$. Similarly, the $3$-mesh
+is defined as $M(k,m,n) = P_k \square P_m \square P_n$. In general,
+for a sequence $a_1, a_2, \dots, a_n$ of $n > 0$ positive integers,
+the $n$-mesh is given by
+\[
+M(a_1, a_2, \dots, a_n)
+=
+P_{a_1} \square P_{a_2} \square \cdots \square P_{a_n}
+\]
+where the $1$-mesh is simply the path graph $M(k) = P_k$ for some
+positive integer $k$. Figure~\ref{fig:introduction:2_mesh_M34}
+illustrates the $2$-mesh $M(3,4) = P_3 \square P_4$, while the
+$3$-mesh $M(3,2,3) = P_3 \square P_2 \square P_3$ is presented in
+Figure~\ref{fig:introduction:3_mesh_M323}.
+\index{grid}
+\index{lattice}
+\index{mesh}
+
+\begin{figure}[!htbp]
+\centering
+%%
+\subfigure[$M(3, 4)$]{
+\label{fig:introduction:2_mesh_M34}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  1/0/0,  2/1.5/0,  3/3/0,
+  4/0/1,  5/1.5/1,  6/3/1,
+  7/0/2,  8/1.5/2,  9/3/2,
+  10/0/3, 11/1.5/3, 12/3/3} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {
+  1/4, 4/7, 7/10,
+  2/5, 5/8, 8/11,
+  3/6, 6/9, 9/12,
+  1/2, 2/3, 4/5, 5/6, 7/8, 8/9, 10/11, 11/12} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\qquad
+%%
+\subfigure[$M(3, 2, 3)$]{
+\label{fig:introduction:3_mesh_M323}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  1/0/0,      2/1.5/0,  3/3/0,
+  4/0/2,      5/1.5/2,  6/3/2,
+  7/0/4,      8/1.5/4,  9/3/4,
+  10/0.5/0.5, 11/2/0.5, 12/3.5/0.5,
+  13/0.5/2.5, 14/2/2.5, 15/3.5/2.5,
+  16/0.5/4.5, 17/2/4.5, 18/3.5/4.5} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {
+  1/2, 2/3, 4/5, 5/6, 7/8, 8/9,
+  10/11, 11/12, 13/14, 14/15, 16/17, 17/18,
+  1/10, 2/11, 3/12, 4/13, 5/14, 6/15, 7/16, 8/17, 9/18,
+  1/4, 4/7, 2/5, 5/8, 3/6, 6/9,
+  10/13, 13/16, 11/14, 14/17, 12/15, 15/18} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\caption{The $2$-mesh $M(3, 4)$ and the $3$-mesh $M(3, 2, 3)$.}
+\label{fig:introduction:mesh_grid_lattice}
+\end{figure}
 
 
 %%--- Graph minors ------------------------------------------------------%%
