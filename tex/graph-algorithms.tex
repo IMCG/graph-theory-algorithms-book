@@ -17,6 +17,92 @@ algorithmic graph theory. We shall examine several in this chapter.
 
 
 %%-----------------------------------------------------------------------%%
+%%--- Representing graphs in a computer ---------------------------------%%
+
+\section{Representing graphs in a computer}
+
+In section~\ref{sec:introduction:matrix_representation}, we discussed
+how to use matrices for representing graphs and digraphs. If
+$A = [a_{ij}]$ is an $m \times n$ matrix, the adjacency matrix
+representation of a graph would require representing all the $mn$
+entries of $A$. Alternative graph representations exist that are much
+more efficient than representing all entries of a matrix.
+
+
+%%--- Adjacency lists ---------------------------------------------------%%
+
+\subsection{Adjacency lists}
+
+A \emph{list} is a sequence of objects. Unlike sets, a list may
+contain multiple copies of the same object. Each object of a list is
+referred to as an \emph{element} of the list. Similar to matrices, we
+can index the $i$-th element of a list as $a_i$. A list $L$ of
+$n \geq 0$ elements is then written as
+$L = [a_1, a_2, \dots, a_n]$. In case $n = 0$, the list $L = [\,]$ is
+referred to as the \emph{empty list}. Two lists are equivalent if they
+both contain the same elements at exactly the same positions.
+
+Define the adjacency lists of a graph as follows. Let $G$ be a graph
+with vertex set $V = \{v_1, v_2, \dots, v_n\}$. Assign to each vertex
+$v_i$ a list $L_i$ containing all the vertices that are adjacent to
+$v_i$. The list $L_i$ associated with $v_i$ is referred to as the
+\emph{adjacency list} of $v_i$. Then $L_i = [\,]$ if and only if $v_i$
+is an isolated vertex. We say that $L_i$ is \emph{the} adjacency list
+of $v_i$ because any permutation of the elements of $L_i$ results in a
+list that contains the same vertices adjacent to $v_i$. If each
+adjacency list $L_i$ contains $s_i$ elements where
+$0 \leq s_i \leq n$, we say that $L_i$ has \emph{length} $s_i$. The
+adjacency list representation of the graph $G$ requires that we
+represent $\sum_i s_i = 2 \cdot |E(G)| \leq n^2$ elements in a
+computer's memory, since each edge appears twice in the adjacency list
+representation. An adjacency list is explicit about which vertices are
+adjacent to a vertex, and implicit about which vertices are not
+adjacent to that same vertex. Without knowing the graph $G$, given the
+adjacency lists $L_1, L_2, \dots, L_n$, we can reconstruct $G$. For
+example, Figure~\ref{fig:graph_algorithms:graph_adjacency_lists} shows
+a graph and its adjacency list representation.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  1/0/0/left/west, 2/4/0/right/east, 3/4/3.5/right/east,
+  4/0/3.5/left/west, 5/2/1/below/south, 6/3/2/above/north,
+  7/2/3/below/south, 8/1/2/above/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% adjacency lists
+\node (L1) at (5,2.1) [] {};
+\node [right] at (L1.east) {$L_1 = [2,8]$};
+\node (L2) at (5,1.4) [] {};
+\node [right] at (L2.east) {$L_2 = [1,6]$};
+\node (L3) at (5,0.7) [] {};
+\node [right] at (L3.east) {$L_3 = [4]$};
+\node (L4) at (5,0) [] {};
+\node [right] at (L4.east) {$L_4 = [3]$};
+\node (L5) at (8,2.1) [] {};
+\node [right] at (L5.east) {$L_5 = [6,8]$};
+\node (L6) at (8,1.4) [] {};
+\node [right] at (L6.east) {$L_6 = [2,5,8]$};
+\node (L7) at (8,0.7) [] {};
+\node [right] at (L7.east) {$L_7 = [\,]$};
+\node (L8) at (8,0) [] {};
+\node [right] at (L8.east) {$L_8 = [1,5,6]$};
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/8, 2/6, 3/4, 5/6, 5/8, 6/8} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+\caption{A graph and its adjacency lists.}
+\label{fig:graph_algorithms:graph_adjacency_lists}
+\end{figure}
+
+%%-----------------------------------------------------------------------%%
 %%--- Graph searching ---------------------------------------------------%%
 
 \section{Graph searching}
@@ -388,7 +474,7 @@ a fixed city to all other cities.
 %than the fastest algorithm determining a shortest path from $v$ to
 %\emph{any} other vertex of $G$.
 
-Let $G = (V,E)$ be a graph with non-negative edge weights, as above. 
+Let $G = (V,E)$ be a graph with non-negative edge weights, as above.
 Fix a start or source vertex $v_0 \in V$.
 
 Dijkstra's algorithm performs a number of steps, basically one step
