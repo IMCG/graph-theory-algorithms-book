@@ -286,6 +286,9 @@ n + 63, & \text{if $0 \leq n \leq 62$}, \\
 %% $N(n) = 126 \, R(v)$. Finally, if $258048 \leq n \leq 2^{36} - 1$,
 %% again we let $v$ be the big-endian binary representation of $n$ and
 %% write $N(n) = 126 \, 126 \, R(v)$.
+Note that $n + 63$ requires one byte of storage memory, while
+$126 \, R(v)$ and $126 \, 126 \, R(v)$ require 4 and 8 bytes,
+respectively.
 
 
 %%--- The graph6 format -------------------------------------------------%%
