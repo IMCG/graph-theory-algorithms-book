@@ -4,6 +4,12 @@
 \chapter{Planar Graphs}
 \label{chap:planar_graphs}
 
+A {\it planar graph} is a graph that can be drawn on a sheet of paper without any overlapping between its edges.
+
+It is a property of many ``natural'' graphs drawn on the earth's surface, like for instance the graph of roads, or the graph of internet fibers. It is also a necessary property of graphs we want to build, like VLSI layouts.
+
+Of course, the property of being planar does not prevent one from finding a drawing with many overlapping between edges, as this property only asserts that there exists a drawing (or {\it embedding}) of the graph avoiding it. Planarity can be characterized in many different ways, one of the most satiating being Kuratowski's theorem.
+
 See chapter~9 of Gross and Yellen~\cite{GrossYellen1999}.
 
 
@@ -40,12 +46,18 @@ $f$ faces. Then $n - e + f = 2$.
 
 The objective of this section is to prove the following theorem.
 
-\begin{theorem}
-\textbf{Kuratowski's Theorem.}
+\begin{theorem}\cite{kuratowski1930}
+\label{thm:kuratowski}
+{\bf Kuratowski's Theorem.}
 A graph is planar if and only if it contains no subgraph homeomorphic
-to $K_5$ or $K_{3,3}$.
+to a subdivision of $K_5$ or $K_{3,3}$.
 \end{theorem}
 
+{\bf Graph Minors :} The reader may find interesting to notice that the previous result, first proved in 1930 as purely topological (there is no mention of graphs in Kuratowski's original paper), can be seen as a very special case of the Graph Minor Theorem (Thm\ref{thm:introduction:graph_minor}).
+
+It can easily be seen that if a graph $G$ is planar, any of its subgraph is also planar. Besides, planarity is still preserved under edge contraction. These two facts mean together that any minor of a planar graph is still planar graph, which makes of planarity a {\it minor-closed} property. If we let $\bar{\mathcal P}$ denote the Poset of all non-planar graph, ordered with the minor partial order, we can now consider the set $\bar{\mathcal P}_{min}$ of its minimal elements which, by the Graph Minor Theorem, is a finit set.
+
+Actually, Kuratowski's theorem asserts that $\bar{\mathcal P}_{min}=\{K_5,K_{3,3}\}$.
 
 %%-----------------------------------------------------------------------%%
 %%--- Planarity algorithms ----------------------------------------------%%
