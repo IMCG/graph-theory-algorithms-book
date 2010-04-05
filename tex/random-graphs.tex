@@ -1,16 +1,76 @@
 %%-----------------------------------------------------------------------%%
 %%--- Random Graphs -----------------------------------------------------%%
 
+
+
 \chapter{Random Graphs}
 \label{chap:random_graphs}
 
+
 See Bollob{\'a}s~\cite{Bollobas2001}.
 
+Random graphs are both highly predictable and easily built, and these are the reasons why they are so interesting. The most common way to generate them is given by Erdos-Renyi.
 
 %%-----------------------------------------------------------------------%%
 %%--- Erdos-Renyi graph -------------------------------------------------%%
 
 \section{Erd\H{o}s-R{\'e}nyi graphs}
+
+
+\begin{definition}[Random Graph] A random graph $G_{n,p}$ can be build the following way : take a vertex set of cardinality $n$, and for each pair of vertices draw an edge between them with probability $p$.
+
+Formally, $G_{n,p}$ is the random variable equal to $G$ with probability $p^{|E(G)|}(1-p)^{|E(\bar{G})|}$, for each graph $G$ on $n$ vertices.
+\end{definition}
+
+One of the first properties of random graphs which makes them so pleasent to work with is the following
+
+\begin{theorem}
+  Let $H$ be any graph, and $0<p<1$. Then
+$$\lim_{n\rightarrow +\infty}P\left[H\text{ is an induced subgraph of }G_{n,p}\right]=1$$
+\end{theorem}
+\begin{proof}[Sketch]
+Instinctively, we would like to find a copy of $H$ in $G_{n,p}$ by iteratively finding an acceptable representant $h(v_i)$ in $G_{n,p}$ of every vertex $v_i$ of $V(H) = \{v_1, \dots, v_k\}$. How could such a strategy work ?
+\begin{itemize}
+\item Pick for $v_1$ any vertex $h(v_1)\in G_{n,p}$ 
+\item Pick for $v_2$ any vertex $h(v_2)\in G_{n,p}$ such that $h(v_1)h(v_2)\in E(G_{n,p})$ if $v_1v_2\in E(H)$, and such that $h(v_1)h(v_2)\not \in E(G_{n,p})$ otherwise
+\item \dots
+\item Assuming you have found, for all $i\leq j\leq k$, a representant $h(v_i)$ for each vertex $v_i$, and such that $H[\{v_1,\dots,v_{j-1}\}]$ is isomorphic to $G_{n,p}[\{h(v_1),\dots,h(v_{j-1})\}]$, try to find a new vertex $h(v_j)$ such that $\forall i<j,h(v_i)h(v_j)\in E(G_{n,p})$ if  and only if $v_iv_j\in E(H)$.
+
+  When $n$ is growing large, such a vertex will exist with high probability.
+\end{itemize}
+\end{proof}
+
+\begin{proof}
+  Formally, let us write $H_i = H[\{v_1,\dots,v_{j-1}\}]$, and denote the probability that $H$ is an induced subgraph of $G_{n,p}$ by $P[H\mapsto_{ind} G_{n,p}]$. We can roughly bound the probability that $H_i$, but not $H_{i+1}$, is an induced subgraph of $G_{n,p}$ the following way :
+
+  \begin{itemize}
+  \item We put a copy of $H_i$ at any of the $\binom n i$ different $i$-subsets of $V(G_{n,p})$. 
+
+    This can be done, each time, in $i!$ different ways as the vertices $\{v_1, \dots, v_i\}$ can be permuted
+
+  \item We compute the probability that no other vertex of $G_{n,p}$ can be used to complete our current copy of $H_i$ into a copy of $H_{i+1}$. The probability that such a vertex is acceptable being
+    $$p^{d_{h_{i+1}}(v_{i+1})(1-p)^{i-d_{h_{i+1}}(v_{i+1})}}\geq min(p, 1-p)^i$$ 
+    the property that none of the $n-i$ vertices left is acceptable is at most
+    $$\left({ 1- min(p, 1-p)^i )} \right)^(n-i)$$
+  \end{itemize}
+  
+  As $0<p<1$, we can write $0<\epsilon = min(p, 1-p)$ and thus, the probability that $H_i$, but not $H_{i+1}$, is a induced subgraph of $G_{n,p}$ is at most $$i!\binom n i (1-\epsilon^i)^{n-i}\leq i! n^i (1-\epsilon^i)^{n-i} = o(1/n)$$
+Which is asymptotically equal to 0 as $n$ grows.
+
+Thus
+
+\begin{align*}
+  P[H\mapsto_{ind} G_{n,p}]&=1 - P[H_2\mapsto_{ind} G_{n,p}, H_3\not \mapsto_{ind} G_{n,p}]\\
+  &-P[H_3\mapsto_{ind} G_{n,p}, H_4\not \mapsto_{ind} G_{n,p}]\\
+  &\dots\\
+  &-P[H_{i-1}\mapsto_{ind} G_{n,p}, H_i\not \mapsto_{ind} G_{n,p}]\\
+  P[H\mapsto_{ind} G_{n,p}]&\geq 1-\sum_{l\leq i}l!n^l(1-\epsilon^l)^{n-l}\\
+  &\geq 1-k\times o(1/n)\\
+\end{align*}
+
+Which proves the result.
+
+\end{proof}
 
 Describe the random graph model of Erd\H{o}s and
 R{\'e}nyi~\cite{ErdosRenyi1959}. Algorithms for efficient generation
