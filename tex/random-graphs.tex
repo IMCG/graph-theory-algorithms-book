@@ -17,7 +17,7 @@ Random graphs are both highly predictable and easily built, and these are the re
 \section{Erd\H{o}s-R{\'e}nyi graphs}
 
 
-\begin{definition}[Random Graph] A random graph $G_{n,p}$ can be build the following way : take a vertex set of cardinality $n$, and for each pair of vertices draw an edge between them with probability $p$.
+\begin{definition}[Random Graph] A random graph $G_{n,p}$ can be built by taking a vertex set of cardinality $n$ and, for each pair of vertices, draw an edge between them with probability $p$.
 
 Formally, $G_{n,p}$ is the random variable equal to $G$ with probability $p^{|E(G)|}(1-p)^{|E(\bar{G})|}$, for each graph $G$ on $n$ vertices.
 \end{definition}
@@ -49,9 +49,9 @@ Instinctively, we would like to find a copy of $H$ in $G_{n,p}$ by iteratively f
     This can be done, each time, in $i!$ different ways as the vertices $\{v_1, \dots, v_i\}$ can be permuted
 
   \item We compute the probability that no other vertex of $G_{n,p}$ can be used to complete our current copy of $H_i$ into a copy of $H_{i+1}$. The probability that such a vertex is acceptable being
-    $$p^{d_{h_{i+1}}(v_{i+1})(1-p)^{i-d_{h_{i+1}}(v_{i+1})}}\geq min(p, 1-p)^i$$ 
+    $$p^{d_{H_{i+1}}(v_{i+1})}(1-p)^{i-d_{H_{i+1}}(v_{i+1})}\geq min(p, 1-p)^i$$ 
     the property that none of the $n-i$ vertices left is acceptable is at most
-    $$\left({ 1- min(p, 1-p)^i )} \right)^(n-i)$$
+    $$\left({ 1- min(p, 1-p)^i } \right)^{(n-i)}$$
   \end{itemize}
   
   As $0<p<1$, we can write $0<\epsilon = min(p, 1-p)$ and thus, the probability that $H_i$, but not $H_{i+1}$, is a induced subgraph of $G_{n,p}$ is at most $$i!\binom n i (1-\epsilon^i)^{n-i}\leq i! n^i (1-\epsilon^i)^{n-i} = o(1/n)$$
@@ -63,8 +63,8 @@ Thus
   P[H\mapsto_{ind} G_{n,p}]&=1 - P[H_2\mapsto_{ind} G_{n,p}, H_3\not \mapsto_{ind} G_{n,p}]\\
   &-P[H_3\mapsto_{ind} G_{n,p}, H_4\not \mapsto_{ind} G_{n,p}]\\
   &\dots\\
-  &-P[H_{i-1}\mapsto_{ind} G_{n,p}, H_i\not \mapsto_{ind} G_{n,p}]\\
-  P[H\mapsto_{ind} G_{n,p}]&\geq 1-\sum_{l\leq i}l!n^l(1-\epsilon^l)^{n-l}\\
+  &-P[H_{k-1}\mapsto_{ind} G_{n,p}, H_k\not \mapsto_{ind} G_{n,p}]\\
+  P[H\mapsto_{ind} G_{n,p}]&\geq 1-\sum_{i\leq k}i!n^i(1-\epsilon^i)^{n-i}\\
   &\geq 1-k\times o(1/n)\\
 \end{align*}
 
