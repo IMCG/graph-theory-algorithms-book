@@ -158,6 +158,136 @@ binary         & decimal   & glyph    & binary & decimal & glyph \\\hline\hline
 \end{table}
 
 
+%%--- Bit vectors -------------------------------------------------------%%
+
+\subsubsection{Bit vectors}
+
+Before discussing how graph6 and sparse6 represent graphs using
+printable ASCII characters, we first present encoding schemes used by
+these two formats. A \emph{bit vector} is, as its name suggests, a
+vector whose elements are 1's and 0's. It can be represented as a list
+of bits, e.g. \verb!E! can be represented as the ASCII bit vector
+$[\texttt{1}, \texttt{0}, \texttt{0}, \texttt{0}, \texttt{1},
+  \texttt{0}, \texttt{1}]$. For brevity, we write a bit vector in a
+compact form such as \texttt{1000101}. The \emph{length} of a bit
+vector is its number of bits. The \emph{most significant bit}
+of a bit vector $v$ is the bit position with the largest value among
+all the bit positions in $v$. Similarly, the
+\emph{least significant bit} is the bit position in $v$ having the
+least value among all the bit positions in $v$. The least significant
+bit of $v$ is usually called the parity bit because when $v$
+interpreted as an integer the parity bit determines whether the
+integer is even or odd. Reading \texttt{1000101} from left to right,
+the first bit \texttt{1} is the most significant bit, followed by the
+second bit \texttt{0} which is the second most significant bit, and so
+on all the way down to the seventh bit \texttt{1} which is the least
+significant bit.
+
+The order in which we process the bits of a bit vector is referred to
+as \emph{endianness}. Processing $v$ in \emph{big-endian} order means
+that we first process the most significant bit of $v$, followed by the
+second most significant bit, and so on all the way down to the least
+significant bit of $v$. \emph{Little-endian} order means that we first
+process the least significant bit, followed by the second least
+significant bit, and so on all the way up to the most significant
+bit. In big-endian order, the ASCII binary representation of
+\texttt{E} is written \texttt{1000101}~(see
+Table~\ref{tab:graph_algorithms:big_endian_ASCII_binary_E}), while
+the little-ending order is written \texttt{1010001}~(see
+Table~\ref{tab:graph_algorithms:little_endian_ASCII_binary_E}). To
+determine the integer representation of a bit vector, multiply each
+bit value by its corresponding position value, then add up all the
+results. In general, if the bit vector $v = b_1 b_2 \cdots b_k$ is the
+big-endian binary representation of a positive integer, then the
+integer representation of $v$ is
+%
+\begin{equation}
+\label{eq:graph_algorithms:big_endian_binary_to_integer}
+\sum_{i=1}^k 2^{k-i} b_i
+=
+2^{k-1} b_1 + 2^{k-2} b_2 + 2^{k-3} b_3 + \cdots + 2^0 b_k.
+\end{equation}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|l|ccccccc|} \hline
+position       & 1          & 2          & 3          & 4          & 5          & 6          & 7 \\\hline
+bit value      & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\\hline
+position value & $2^6$      & $2^5$      & $2^4$      & $2^3$      & $2^2$      & $2^1$      & $2^0$ \\\hline
+\end{tabular}
+\caption{Big-endian order of the ASCII binary code of \texttt{E}.}
+\label{tab:graph_algorithms:big_endian_ASCII_binary_E}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|l|ccccccc|} \hline
+position       & 1          & 2          & 3          & 4          & 5          & 6          & 7 \\\hline
+bit value      & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} \\\hline
+position value & $2^0$      & $2^1$      & $2^2$      & $2^3$      & $2^4$      & $2^5$      & $2^6$ \\\hline
+\end{tabular}
+\caption{Little-endian order of the ASCII binary code of \texttt{E}.}
+\label{tab:graph_algorithms:little_endian_ASCII_binary_E}
+\end{table}
+
+In graph6 and sparse6 formats, the length of a bit vector must be a
+multiple of 6. Suppose $v$ is a bit vector of length $k$ such that
+$6 \nmid k$. To transform $v$ into a bit vector having length a
+multiple of 6, let $r = k \mod 6$ be the remainder upon dividing $k$
+by 6, and pad $6 - r$ zeros to the right of $v$.
+
+Supose $v = b_1 b_2 \cdots b_k$ is a bit vector of length $k$, where
+$6 \;|\; k$. We split $v$ into $k/6$ bit vectors $v_i$, each of length
+6. For $0 \leq i \leq k/6$, the $i$-th bit vector is given by
+\[
+v_i
+=
+b_{6i-5} b_{6i-4} b_{6i-3} b_{6i-2} b_{6i-1} b_{6i}.
+\]
+Consider each $v_i$ as the big-endian binary representation of a
+positive
+integer. Use~(\ref{eq:graph_algorithms:big_endian_binary_to_integer})
+to obtain the integer representation $N_i$ of each $v_i$. Then add 63
+to each $N_i$ to obtain $N_i'$ and store $N_i'$ in one byte of
+memory. That is, each $N_i'$ can be represented as a bit vector of
+length $8$. Thus the required number of bytes to store $v$ is
+$\lceil k/6 \rceil$. Let $B_i$ be the byte representation of $N_i'$ so
+that
+%
+\begin{equation}
+\label{eq:graph_algorithms:byte_representation_bit_vector}
+R(v)
+=
+B_1 B_2 \cdots B_{\lceil k/6 \rceil}
+\end{equation}
+%
+denotes the representation of $v$ as a sequence of $\lceil k/6 \rceil$
+bytes.
+
+We now discuss how to encode an integer $n$ in the range
+$0 \leq n \leq 2^{36} - 1$
+using~(\ref{eq:graph_algorithms:byte_representation_bit_vector}) and
+denote such an encoding of $n$ as $N(n)$. Let $v$ be the big-endian
+binary representation of $n$. Then $N(n)$ is given by
+%
+\begin{equation}
+\label{eq:graph_algorithms:graph6_sparse6_graph_orders}
+N(n)
+=
+\begin{cases}
+n + 63, & \text{if $0 \leq n \leq 62$}, \\
+126 \, R(v), & \text{if $63 \leq n \leq 258047$}, \\
+126 \, 126 \, R(v), & \text{if $258048 \leq n \leq 2^{36}-1$}.
+\end{cases}
+\end{equation}
+%% If $0 \leq n \leq 62$, then
+%% we write $N(n) = n + 63$. If $63 \leq n \leq 258047$, let $v$ be the
+%% big-endian binary representation of $n$ and write
+%% $N(n) = 126 \, R(v)$. Finally, if $258048 \leq n \leq 2^{36} - 1$,
+%% again we let $v$ be the big-endian binary representation of $n$ and
+%% write $N(n) = 126 \, 126 \, R(v)$.
+
+
 %%-----------------------------------------------------------------------%%
 %%--- Graph searching ---------------------------------------------------%%
 
