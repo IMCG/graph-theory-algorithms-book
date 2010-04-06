@@ -970,6 +970,42 @@ hard as finding the shortest path from a vertex $v$ to \emph{all}
 other vertices in the graph!
 \index{Dijkstra's algorithm}
 
+Trees are a special type of graphs that are used in modelling
+structures that have some form of hierarchy. For example, the
+hierarchy within an organization can be drawn as a tree
+structure, similar to the family tree in
+Figure~\ref{fig:introduction:family_tree}. Formally, a \emph{tree} is
+an undirected graph that is connected and has no cycles. If one vertex
+of a tree is designated as the root vertex, then the tree is called a
+\emph{rooted tree}. Chapter~\ref{chap:trees_forests} covers trees in
+more details.
+\index{family tree}
+\index{tree}
+\index{tree!rooted}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {me/0/0, sister/2/0, brother/4/0,
+  mum/2/1.5, cousin1/6/0, cousin2/8/0, uncle/6/1.5, aunt/8/1.5,
+  grandma/4/3} {
+  \node (\nodename) at (\x,\y) [] {\nodename};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {grandma/mum, grandma/uncle,
+  grandma/aunt, mum/me, mum/sister, mum/brother, uncle/cousin1,
+  aunt/cousin2} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+\caption{A family tree.}
+\label{fig:introduction:family_tree}
+\end{figure}
+
 
 %%--- Subgraphs, complete and bipartite graphs --------------------------%%
 
