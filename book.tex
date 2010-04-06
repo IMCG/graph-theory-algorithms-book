@@ -34,8 +34,12 @@
 
 %% Package for drawing figures
 \usepackage{tikz}
-\usetikzlibrary{calc,matrix,arrows,decorations.pathreplacing,%
-  decorations.pathmorphing}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{matrix}
 \usepackage{subfigure}
 
 %% For typesetting code listings
@@ -79,6 +83,9 @@
 \newcommand{\sage}{\SAGE}
 \newcommand{\Sage}{\SAGE}
 \DeclareMathOperator*{\adj}{adj}  %% adjacency list of a vertex
+\DeclareMathOperator*{\append}{append} %% append an element to a list
+\DeclareMathOperator*{\dequeue}{dequeue} %% remove front element of a queue
+\DeclareMathOperator*{\enqueue}{enqueue} %% append element to end of a queue
 \DeclareMathOperator*{\iadj}{iadj}  %% set of in-neighbors
 \DeclareMathOperator*{\id}{id}  %% indegree of a vertex
 \DeclareMathOperator*{\length}{length}

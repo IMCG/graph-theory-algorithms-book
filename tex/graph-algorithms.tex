@@ -35,12 +35,12 @@ more efficient than representing all entries of a matrix.
 
 A \emph{list} is a sequence of objects. Unlike sets, a list may
 contain multiple copies of the same object. Each object of a list is
-referred to as an \emph{element} of the list. Similar to matrices, we
-can index the $i$-th element of a list as $a_i$. A list $L$ of
-$n \geq 0$ elements is then written as
-$L = [a_1, a_2, \dots, a_n]$. In case $n = 0$, the list $L = [\,]$ is
-referred to as the \emph{empty list}. Two lists are equivalent if they
-both contain the same elements at exactly the same positions.
+referred to as an \emph{element} of the list. A list $L$ of
+$n \geq 0$ elements is written as $L = [a_1, a_2, \dots, a_n]$, where
+the $i$-th element $a_i$ can be indexed as $L[i]$. In case $n = 0$,
+the list $L = [\,]$ is referred to as the \emph{empty list}. Two lists
+are equivalent if they both contain the same elements at exactly the
+same positions.
 
 Define the adjacency lists of a graph as follows. Let $G$ be a graph
 with vertex set $V = \{v_1, v_2, \dots, v_n\}$. Assign to each vertex
@@ -356,11 +356,17 @@ purposes.
 
 \subsection{Breadth-first search}
 
-\emph{Breadth-first search} (BFS) is a strategy for running through
-the nodes of a graph. Suppose you want to count the number of vertices
-(or edges) satisfying a property
-$P$. Algorithm~\ref{alg:graph_algorithms:breadth_first_search}
-presents a technique for finding the number of vertices satisfying $P$.
+Breadth-first search (BFS) is a strategy for running through the
+vertices of a graph. It was suggested by Edward F. Moore in
+1959~\cite{Moore1959}. Starting from a given vertex $v$ of a graph
+$G$, we first explore the neighborhood of $v$ by visiting all vertices
+that are adjacent to $v$. We then apply the same strategy to each of
+the neighbors of $v$. The strategy of exploring the neighborhood of a
+vertex is applied to all vertices of $G$. The result is a tree rooted
+at $v$ and this tree is a subgraph of
+$G$. Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
+presents a general template for the BFS strategy. The tree resulting
+from the BFS algorithm is called a \emph{breadth-first search tree}.
 \index{BFS}
 \index{breadth-first search}
 
@@ -369,167 +375,263 @@ presents a technique for finding the number of vertices satisfying $P$.
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{Count}{count}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
 %% input/output
-\Input{A connected graph $G = (V, E)$ (and, optionally, a starting or
-  ``root'' vertex $v_0 \in V$). A property $P$ to be tested.}
-\Output{The number of vertices of $G$ satisfying $P$.}
+\Input{A directed or undirected graph $G = (V, E)$ of order $n > 0$. A
+  vertex $s$ from which to start the search. The vertices are numbered
+  from $1$ to  $n = |V|$, i.e. $V = \{1, 2, \dots, n\}$.}
+\Output{A list $D$ of distances of all vertices from $s$. A tree $T$
+  rooted at $s$.}
 \BlankLine
-%% algorithm body
-Create a queue $Q$ of ``unseen'' vertices initially containing a
-starting vertex $v_0$.\;
-
-Start a list $T$ of ``already seen'' vertices initially empty.\;
-
-$\Count \leftarrow 0$\;
-
-\For{$w \in Q$}{
-  Test $w$ for $P$.\;
-  \If{$P(w) = \True$}{
-    $\Count \leftarrow \Count + 1$\label{abc:step:counter}
-  }
-  Add all neighbors of $w$ not in $T$ to $Q$.\;
-  Remove all ``seen'' vertices $w$ from $Q$.\;
-  Add such $w$ to $T$.\;
-  \If{$T = V$}{
-    \Return \Count
+$Q \leftarrow [s]$ \tcc*[f]{queue of nodes to visit}\;
+$D \leftarrow [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
+$D[s] \leftarrow 0$\;
+$T \leftarrow [\,]$\;
+\While{$\length(Q) > 0$}{
+  $v \leftarrow \dequeue(Q)$\;
+  \For{\emph{each} $w \in \adj(v)$~\nllabel{alg:BFS:explore_neighborhood}}{
+    \If{$D[w] = \infty$}{
+      $D[w] \leftarrow D[v] + 1$\;
+      $\enqueue(Q, w)$\;
+      $\append(T, vw)$\;
+    }
   }
 }
-\caption{Breadth-first search.}
-\label{alg:graph_algorithms:breadth_first_search}
+\Return $(D, T)$\;
+\caption{A general breadth-first search template.}
+\label{alg:graph_algorithms:breadth_first_search_template}
 \end{algorithm}
 
-%Algorithm to find a vertex satisfying property P.
-%INPUT: Connected graph $G=(V,E)$ and a fixed
-%starting vertex $v\in V$.
-%OUTPUT:
-%True if a vertex is found satisfying P,
-%False otherwise.
-%1. Start a queue Q containing $v$. Start a
-%list of tested vertices, T, initially empty.
-%2. For each element w of the queue:
-%(a) Test w for P (stop if True).
-%(b) Add all neighbors of w not yet tested
-%to the queue.
-%(c) Remove all tested vertices from the queue
-%and add them to T.
-%(d) If T=V, stop and return False.
+The breadth-first search algorithm makes use of a special type of list
+called a \emph{queue}. This is analogous to a queue of people waiting
+in line to be served. A person may enter the queue by joining the rear
+of the queue. The person who is in the queue the longest amount of
+time is served first, followed by the person who has waited the second
+longest time, and so on. Formally, a queue $Q$ is a list of
+elements. At any time, we only have access to the first element of
+$Q$, known as the \emph{front} or \emph{start} of the queue. We insert
+a new element into $Q$ by appending the new element to the \emph{rear}
+or \emph{end} of the queue. The operation of removing the front of $Q$
+is referred to as \emph{dequeue}, while the operation of appending to
+the rear of $Q$ is called \emph{enqueue}. As with lists, the
+\emph{length} of a queue is its total number of elements.
 
-Another version of
-Algorithm~\ref{alg:graph_algorithms:breadth_first_search} is where you
-are searching the graph for a vertex (or edge) satisfying a certain
-property $P$. In that situation, you simply quit at the step where you
-increment the counter, i.e. line~7 in
-Algorithm~\ref{alg:graph_algorithms:breadth_first_search}. Other
-variations are also possible as well.
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
+  1/0/4/above/north, 3/6/3/right/east, 4/6/1/right/east,
+  5/4/0/below/south, 7/-2/2/left/west, 6/0/0/below/south} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/5, 2/7, 3/4, 3/5,
+  4/6, 5/6, 6/7} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+\qquad
+\subfigure[]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.6]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {4/0/0/left/west,
+  3/0/1/left/west, 7/1/1/below/south, 6/2/1/below/south,
+  2/0.5/2/left/west, 5/2/2/left/west, 1/1.25/3/above/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/7, 3/4, 5/6} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%%
+\subfigure[]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={->,>=stealth,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
+  1/0/4/above/north, 3/6/3/right/east, 4/6/1/right/east,
+  5/4/0/below/south, 7/-2/2/left/west, 6/0/0/below/south} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {2/5, 3/2, 3/5, 4/3, 5/1, 6/7, 7/2} {
+  (\startnode) edge[arrowdecorate] node {} (\endnode)
+}
+\foreach \startnode/\endnode/\benddirection/\angle in {
+  1/2/bend left/12, 4/6/bend right/12, 6/5/bend right/12} {
+  (\startnode) edge[arrowdecorate,\benddirection=\angle] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+\qquad
+\subfigure[]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={->,>=stealth,thick},
+  scale=1.6]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {2/0/1/left/west,
+  1/1/0/below/south, 5/1/1/left/west, 7/2/1/below/south,
+  6/2/2/left/west, 3/0.5/2/left/west, 4/1.25/3/above/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {4/3, 4/6, 3/2, 3/5, 6/7, 5/1} {
+  (\startnode) edge[arrowdecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\caption{Breadth-first search trees for undirected and directed graphs.}
+\label{fig:graph_algorithms:bread_first_search_undirected}
+\end{figure}
 
-For the example of the graph in
-Figure~\ref{fig:introduction:types_of_walks}, the list of distances
-from vertex \verb!a! to any other vertex is
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
-[['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1], ['f', 2], ['g', 2]]
-\end{lstlisting}
-\end{center}
-%
-To create this list,
-%
-\begin{itemize}
-\item
-Start at \verb!a! and compute the distance from \verb!a! to itself.
+Note that the BFS
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
+works on both undirected and directed graphs. For an undirected graph,
+line~\ref{alg:BFS:explore_neighborhood} means that we explore all
+the neighbors of vertex $v$, i.e. the set $\adj(v)$ of vertices
+adjacent to $v$. In the case of a digraph, we replace $w \in \adj(v)$
+in line~\ref{alg:BFS:explore_neighborhood} with $w \in \oadj(v)$
+because we only want to explore all vertices that are out-neighbors of
+$v$. Figure~\ref{fig:graph_algorithms:bread_first_search_undirected}
+presents BFS trees resulting from applying
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
+an undirected graph and a digraph.
 
-\item
-Move to each neighbor of \verb!a!, namely \verb!b! and \verb!e!, and
-compute the distance from \verb!a! to each of them.
+%% Another version of
+%% Algorithm~\ref{alg:graph_algorithms:breadth_first_search} is where you
+%% are searching the graph for a vertex (or edge) satisfying a certain
+%% property $P$. In that situation, you simply quit at the step where you
+%% increment the counter, i.e. line~7 in
+%% Algorithm~\ref{alg:graph_algorithms:breadth_first_search}. Other
+%% variations are also possible as well.
 
-\item
-Move to each ``unseen'' neighbor of \verb!b!, namely just \verb!c!,
-and compute the distance from \verb!a! to it.
+%% For the example of the graph in
+%% Figure~\ref{fig:introduction:types_of_walks}, the list of distances
+%% from vertex \verb!a! to any other vertex is
+%% %
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% [['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1], ['f', 2], ['g', 2]]
+%% \end{lstlisting}
+%% \end{center}
+%% %
+%% To create this list,
+%% %
+%% \begin{itemize}
+%% \item
+%% Start at \verb!a! and compute the distance from \verb!a! to itself.
 
-\item
-Move to each ``unseen'' neighbor of \verb!e!, namely just \verb!f!,
-and compute the distance from \verb!a! to it.
+%% \item
+%% Move to each neighbor of \verb!a!, namely \verb!b! and \verb!e!, and
+%% compute the distance from \verb!a! to each of them.
 
-\item
-Move to each ``unseen'' neighbor of \verb!c!, namely just \verb!d!,
-and compute the distance from \verb!a! to it.
+%% \item
+%% Move to each ``unseen'' neighbor of \verb!b!, namely just \verb!c!,
+%% and compute the distance from \verb!a! to it.
 
-\item
-Move to each ``unseen'' neighbor of \verb!f!, namely just \verb!g!,
-and compute the distance from \verb!a! to it.
-\end{itemize}
+%% \item
+%% Move to each ``unseen'' neighbor of \verb!e!, namely just \verb!f!,
+%% and compute the distance from \verb!a! to it.
 
-As an example, here is some Sage code which implements BFS to compute
-the list distances from a given vertex.
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
-def graph_distance(G, v0):
-    """
-    Breadth first search algorithm to find the
-    distance from a fixed vertex $v_0$ to any
-    other vertex.
+%% \item
+%% Move to each ``unseen'' neighbor of \verb!c!, namely just \verb!d!,
+%% and compute the distance from \verb!a! to it.
 
-    INPUT:
-        G - a connected graph
-        v0 - a vertex
+%% \item
+%% Move to each ``unseen'' neighbor of \verb!f!, namely just \verb!g!,
+%% and compute the distance from \verb!a! to it.
+%% \end{itemize}
 
-    OUTPUT:
-        D - a list of distances to
-            every other vertex
+%% As an example, here is some Sage code which implements BFS to compute
+%% the list distances from a given vertex.
+%% %
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% def graph_distance(G, v0):
+%%     """
+%%     Breadth first search algorithm to find the
+%%     distance from a fixed vertex $v_0$ to any
+%%     other vertex.
 
-    EXAMPLES:
-        sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6],
-                         4: [1, 3], 5: [4, 2], 6: [3, 1]})
-        sage: v0 = 1
-        sage: graph_distance(G,v0)
-        [[1, 0], [2, 1], [3, 2], [4, 1], [5, 2], [6, 1]]
-        sage: G = Graph({"a": ["b", "e"], "b": ["c", "e"], \
-         "c": ["d", "e"], "d": ["f"], "e": ["f"], "f": ["g"], "g":["b"]})
-        sage: v0 = "a"
-        sage: graph_distance(G, v0)
-        [['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1],
-         ['f', 2], ['g', 2]]
-        sage: G = Graph({1: [2,3], 2: [1, 3], 3: [2], 4: [5], 5: [6], 6: [5]})
-        sage: v0 = 1
-        sage: graph_distance(G, v0) # note G is disconnected
-        [[1, 0], [2, 1], [3, 1]]
-    """
-    V = G.vertices()
-    Q = [v0]
-    T = []
-    D = []
-    while Q<>[] and T<>V:
-        for v in Q:
-            if not(v in T):
-                D.append([v,G.distance(v0,v)])
-            if v in Q:
-                Q.remove(v)
-            T.append(v)
-            T = list(Set(T))
-            Q = Q+[x for x in G.neighbors(v) if not(x in T+Q)]
-            if T == V:
-                break
-    D.sort()
-    print Q, T
-    return D
-\end{lstlisting}
-\end{center}
-%
-\begin{exercise}
-Using Sage's \verb!shortest_path! method, can you modify the above
-function to return a list of shortest paths from $v_0$ to any other
-vertex?
-\end{exercise}
+%%     INPUT:
+%%         G - a connected graph
+%%         v0 - a vertex
+
+%%     OUTPUT:
+%%         D - a list of distances to
+%%             every other vertex
+
+%%     EXAMPLES:
+%%         sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6],
+%%                          4: [1, 3], 5: [4, 2], 6: [3, 1]})
+%%         sage: v0 = 1
+%%         sage: graph_distance(G,v0)
+%%         [[1, 0], [2, 1], [3, 2], [4, 1], [5, 2], [6, 1]]
+%%         sage: G = Graph({"a": ["b", "e"], "b": ["c", "e"], \
+%%          "c": ["d", "e"], "d": ["f"], "e": ["f"], "f": ["g"], "g":["b"]})
+%%         sage: v0 = "a"
+%%         sage: graph_distance(G, v0)
+%%         [['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1],
+%%          ['f', 2], ['g', 2]]
+%%         sage: G = Graph({1: [2,3], 2: [1, 3], 3: [2], 4: [5], 5: [6], 6: [5]})
+%%         sage: v0 = 1
+%%         sage: graph_distance(G, v0) # note G is disconnected
+%%         [[1, 0], [2, 1], [3, 1]]
+%%     """
+%%     V = G.vertices()
+%%     Q = [v0]
+%%     T = []
+%%     D = []
+%%     while Q<>[] and T<>V:
+%%         for v in Q:
+%%             if not(v in T):
+%%                 D.append([v,G.distance(v0,v)])
+%%             if v in Q:
+%%                 Q.remove(v)
+%%             T.append(v)
+%%             T = list(Set(T))
+%%             Q = Q+[x for x in G.neighbors(v) if not(x in T+Q)]
+%%             if T == V:
+%%                 break
+%%     D.sort()
+%%     print Q, T
+%%     return D
+%% \end{lstlisting}
+%% \end{center}
+%% %
+%% \begin{exercise}
+%% Using Sage's \verb!shortest_path! method, can you modify the above
+%% function to return a list of shortest paths from $v_0$ to any other
+%% vertex?
+%% \end{exercise}
 
 
 %%--- Depth-first search ------------------------------------------------%%
