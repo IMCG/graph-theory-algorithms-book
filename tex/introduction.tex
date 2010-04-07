@@ -75,17 +75,12 @@ simple graphs, and so on. Where do we begin?
 \index{Klein, Felix}
 
 We start by calling a ``graph'' what some call an ``unweighted,
-undirected graph without multiple edges.''
-
-\begin{definition}
-\textbf{Graphs.}
-A \emph{graph} $G = (V, E)$ is an ordered pair of sets. Elements of
-$V$ are called \emph{vertices} or \emph{nodes}, and elements of
-$E \subseteq V \times V$ are called \emph{edges} or \emph{arcs}. We
-refer to $V$ as the vertex set of $G$, with $E$ being the edge
-set. The cardinality of $V$ is called the \emph{order} of $G$, and
-$|E|$ is called the \emph{size} of $G$.
-\end{definition}
+undirected graph without multiple edges.'' A \emph{graph} $G = (V, E)$
+is an ordered pair of sets. Elements of $V$ are called \emph{vertices}
+or \emph{nodes}, and elements of $E \subseteq V \times V$ are called
+\emph{edges} or \emph{arcs}. We refer to $V$ as the vertex set of $G$,
+with $E$ being the edge set. The cardinality of $V$ is called the
+\emph{order} of $G$, and $|E|$ is called the \emph{size} of $G$.
 \index{edges}
 \index{graph}
 \index{order}
@@ -277,8 +272,6 @@ in~(\ref{eq:introduction:edges_of_house_graph}). The following
 definition captures the situation where the direction of the edges are
 taken into account.
 
-\begin{definition}
-\textbf{Directed graphs.}
 A \emph{directed edge} is an edge such that one vertex incident with it
 is designated as the head vertex and the other incident vertex is
 designated as the tail vertex. A directed edge $uv$ is said to be
@@ -288,7 +281,6 @@ directed. The \emph{indegree} $\id(v)$ of a vertex $v \in V(G)$ counts
 the number of edges such that $v$ is the head of those edges. The
 \emph{outdegree} $\od(v)$ of a vertex $v \in V(G)$ is the number of
 edges such that $v$ is the tail of those edges.
-\end{definition}
 \index{graphs!directed}
 \index{digraph}
 \index{directed edge}
@@ -317,15 +309,11 @@ $\adj(v) = \iadj(v) \cup \oadj(v)$.
 \index{out-neighbor}
 
 Another important class of graphs consist of those graphs having
-multiple edges between pairs of vertices.
-
-\begin{definition}
-\textbf{Multigraphs.}
-A \emph{multigraph} is a graph in which there are multiple edges
-between a pair of vertices. A \emph{multi-undirected graph} is a
-multigraph that is undirected. Similarly, a \emph{multidigraph} is a
-directed multigraph.
-\end{definition}
+multiple edges between pairs of vertices. A \emph{multigraph} is a
+graph in which there are multiple edges between a pair of vertices. A
+\emph{multi-undirected graph} is a multigraph that is
+undirected. Similarly, a \emph{multidigraph} is a directed
+multigraph.
 \index{graphs!multigraphs}
 \index{multidigraph}
 \index{multigraphs}
@@ -356,15 +344,10 @@ $t(e) = h(e)$. A multigraph with an orientation can therefore be
 described as the $4$-tuple $(V, E, i, h)$. In other words,
 $G = (V,E,i,h)$ is a multidigraph.
 
-\begin{definition}
-\textbf{Simple graphs.}
-A \emph{simple graph} is a graph with no self-loops and no multiple
-edges.
-\end{definition}
 \index{graphs!simple}
 \index{simple graph}
-
-Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}
+A \emph{simple graph} is a graph with no self-loops and no multiple
+edges. Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}
 illustrates a simple graph and its digraph version, together with a
 multidigraph version of the K\"onigsberg graph. The edges of a digraph
 can be visually represented as directed arrows, similar to the digraph
@@ -1026,13 +1009,11 @@ more details.
 
 \subsection{Subgraphs, complete and bipartite graphs}
 
-\begin{definition}
 Let $G$ be a graph with vertex set $V(G)$ and edge set
 $E(G)$. Consider a graph $H$ such that $V(H) \subseteq V(G)$ and $E(H)
 \subseteq E(G)$. Furthermore, if $uv \in E(H)$ then $u,v \in
 V(H)$. Then $H$ is called a \emph{subgraph} of $G$ and $G$ is referred
 to as a \emph{supergraph} of $H$.
-\end{definition}
 \index{subgraph}
 \index{supergraph}
 
@@ -1975,16 +1956,12 @@ and~\ref{chap:random_graphs}.
 \label{chap:introduction:isomorphic_graphs}
 
 Determining whether or not two graphs are, in some sense, the ``same''
-is a hard but important problem.
-
-\begin{definition}
-\textbf{Isomorphic graphs.}
-Two graphs $G$ and $H$ are \emph{isomorphic} if there is a bijection
+is a hard but important problem. Two graphs $G$ and $H$ are
+\emph{isomorphic} if there is a bijection
 $f: V(G) \longrightarrow V(H)$ such that whenever $uv \in E(G)$ then
 $f(u) f(v) \in E(H)$. The function $f$ is an \emph{isomorphism}
 between $G$ and $H$. Otherwise, $G$ and $H$ are non-isomorphic. If
 $G$ and $H$ are isomorphic, we write $G \cong H$.
-\end{definition}
 \index{$\cong$}
 \index{graphs!isomorphic}
 \index{graph isomorphism}
@@ -2205,12 +2182,9 @@ Algorithm~\ref{alg:introduction:graph_isomorphism_canonical_labels}.
 
 \subsection{Degree sequence}
 
-\begin{definition}
-\textbf{Degree sequence.}
 Let $G$ be a graph with $n$ vertices. The \emph{degree sequence} of
 $G$ is the ordered $n$-tuple of the vertex degrees of $G$ arranged in
 non-increasing order.
-\end{definition}
 \index{degree sequence}
 
 The degree sequence of $G$ may contain the same degrees, repeated as
@@ -2236,13 +2210,10 @@ and the complete bipartite graph $K_{m,n}$ has the degree sequence
 \underbrace{m, m, m, \dots, m}_{n \text{ copies of } m}.
 \]
 
-\begin{definition}
-\textbf{Graphical sequence.}
 Let $S$ be a non-increasing sequence of non-negative integers. Then
 $S$ is said to be \emph{graphical} if it is the degree sequence of
 some graph. If $G$ is a graph with degree sequence $S$, we say that
 $G$ \emph{realizes} $S$.
-\end{definition}
 \index{degree sequence!graphical}
 
 %% Should we give examples of how NetworkX can
