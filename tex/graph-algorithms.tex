@@ -328,18 +328,28 @@ encodes the edges of $G$.
 
 \section{Graph searching}
 
-This section discusses algorithms for
+%% This section discusses algorithms for
+%%
+%% \begin{itemize}
+%% \item
+%% breadth-first searches,
+%%
+%% \item
+%% depth-first searches, and
+%%
+%% \item
+%% we explain how these relate to determining a graph's connectivity.
+%% \end{itemize}
 
-\begin{itemize}
-\item
-breadth-first searches,
-
-\item
-depth-first searches, and
-
-\item
-we explain how these relate to determining a graph's connectivity.
-\end{itemize}
+This section discusses two fundamental algorithms for graph traversal:
+breadth-first search and depth-first search. The word ``search'' used
+in describing these two algorithms is rather misleading. It would be
+more accurate to describe them as algorithms for constructing trees
+using the adjacency information of a given graph. However, the names
+``breadth-first search'' and ``depth-first search'' are entrenched in
+literature on graph theory and computer science. From hereon, we use
+these two names as given above, bearing in mind their intended
+purposes.
 
 
 %%--- Breadth-first search ----------------------------------------------%%
