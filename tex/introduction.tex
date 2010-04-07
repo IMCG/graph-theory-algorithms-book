@@ -179,8 +179,8 @@ same as the edge $ba$. That is why \texttt{G.edges()} returns six
 edges instead of the 12 edges listed
 in~(\ref{eq:introduction:edges_of_house_graph}).
 
-\index{$\text{adj}(v)$}
-(2) Let $\text{adj}(v)$ be the set of all vertices that are adjacent
+\index{$\adj$}
+(2) Let $\adj(v)$ be the set of all vertices that are adjacent
 to $v$. Then we have
 %
 \begin{align*}
@@ -192,8 +192,8 @@ to $v$. Then we have
 \end{align*}
 %
 The vertices adjacent to $v$ are also referred to as its
-neighbours. We can use the function \texttt{G.neighbors()} to list all
-the neighbours of each vertex.
+\emph{neighbors}. We can use the function \texttt{G.neighbors()} to
+list all the neighbors of each vertex.
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -300,9 +300,24 @@ edges such that $v$ is the tail of those edges.
 It is important to distinguish a graph $G$ as being directed or
 undirected. If $G$ is undirected and $uv \in E(G)$, then $uv$ and $vu$
 represent the same edge. In case $G$ is a digraph, then $uv$ and $vu$
-are different directed edges. Another important class of graphs
-consist of those graphs having multiple edges between pairs of
-vertices.
+are different directed edges. For a digraph $G = (V, E)$ and a vertex
+$v \in V$, all the neighbors of $v$ in $G$ are contained in $\adj(v)$,
+i.e. the set of all neighbors of $v$. Just as we distinguish between
+indegree and outdegree for a vertex in a digraph, we also distinguish
+between in-neighbors and out-neighbors. The set of \emph{in-neighbors}
+$\iadj(v) \subseteq \adj(v)$ of $v \in V$ consists of all those
+vertices that contribute to the indegree of $v$. Similarly, the set
+of \emph{out-neighbors} $\oadj(v) \subseteq \adj(v)$ of $v \in V$ are
+those vertices that contribute to the outdegree of $v$. Then
+$\iadj(v) \cap \oadj(v) = \emptyset$ and
+$\adj(v) = \iadj(v) \cup \oadj(v)$.
+\index{$\iadj$}
+\index{$\oadj$}
+\index{in-neighbor}
+\index{out-neighbor}
+
+Another important class of graphs consist of those graphs having
+multiple edges between pairs of vertices.
 
 \begin{definition}
 \textbf{Multigraphs.}
@@ -593,7 +608,7 @@ Figure~\ref{fig:introduction:house_graph} then we have $\delta(G) = 2$
 and $\Delta(G) = 3$. In the following Sage session, we construct the
 digraph in Figure~\ref{fig:introduction:triangle_digraph} and computes
 its maximum and minimum number of degrees.
-\index{$\deg(v)$}
+\index{$\deg$}
 \index{$\delta$}
 \index{$\Delta$}
 \index{degree!maximum}
