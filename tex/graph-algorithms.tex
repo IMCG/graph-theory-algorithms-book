@@ -327,6 +327,7 @@ encodes the edges of $G$.
 %%--- Graph searching ---------------------------------------------------%%
 
 \section{Graph searching}
+\label{sec:graph_algorithms:graph_searching}
 
 %% This section discusses algorithms for
 %%
@@ -810,6 +811,19 @@ Once the connected component of the graph has been entirely traversed,
 if the number of vertices counted is equal to $|V|$,
 the graph is connected and otherwise it is disconnected.
 \end{itemize}
+
+
+%%--- Problems ----------------------------------------------------------%%
+
+\subsection*{Problems~\ref{sec:graph_algorithms:graph_searching}}
+
+\begin{enumerate}
+\item Let $G = (V, E)$ be an undirected graph, let $s \in V$, and $D$
+  is the list of distances resulting from running
+  Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
+  with $G$ and $s$ as input. Show that $G$ is connected if and only if
+  $D[v]$ is defined for each $v \in V$.
+\end{enumerate}
 
 
 %%-----------------------------------------------------------------------%%
