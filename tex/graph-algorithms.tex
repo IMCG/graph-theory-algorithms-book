@@ -514,7 +514,26 @@ the neighbors of vertex $v$, i.e. the set $\adj(v)$ of vertices
 adjacent to $v$. In the case of a digraph, we replace $w \in \adj(v)$
 in line~\ref{alg:BFS:explore_neighborhood} with $w \in \oadj(v)$
 because we only want to explore all vertices that are out-neighbors of
-$v$. Figure~\ref{fig:graph_algorithms:bread_first_search_undirected}
+$v$. The algorithm returns two lists $D$ and $T$. The list $T$
+contains a subset of edges in $E(G)$ that make up a tree rooted at the
+given start vertex $s$. As trees are connected graphs without cycles,
+we may take the vertices compising the edges of $T$ to be the vertex
+set of the tree. The list $D$ has the same number of elements as the
+order of $G = (V, E)$, i.e. $\length(D) = |V|$. The $i$-th element
+$D[i]$ counts the number of edges in $T$ between the vertices $s$ and
+$v_i$. In other words, $D[i]$ is the length of the $s$-$v_i$ path. It
+can be shown that $D[i] = \infty$ if and only if $G$ is
+disconnected. After one application of
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}, it
+may happen that $D[i] = \infty$ for at least one vertex
+$v_i \in V$. To traverse those vertices that are unreachable from $s$,
+again we apply
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
+$G$ with starting vertex $v_i$. Repeat this algorithm as often as
+necessary until all vertices of $G$ are visited. The result may be a
+tree that contains all the vertices of $G$ or a collection of trees,
+each of which contains a subset of $V(G)$.
+Figure~\ref{fig:graph_algorithms:bread_first_search_undirected}
 presents BFS trees resulting from applying
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
 an undirected graph and a digraph.
