@@ -721,9 +721,17 @@ $D[u] = k + 1$ and therefore $d(s,u) = D[u] = k + 1$.
 
 \subsection{Depth-first search}
 
-A depth-first search is a type of algorithm that visits each vertex of
-a graph, proceeding from vertex-to-vertex in this search but moving
-along a spanning tree of that graph.
+A depth-first search~(DFS) is a graph traversal strategy similar to
+breadth-first search. Both BFS and DFS differ in how they explore each
+vertex. Whereas BFS explores the neighborhood of a vertex $v$ before
+moving on to explore the neighborhoods of the neighbors, DFS explores
+as deep as possible a path starting at $v$. One can think of BFS as
+exploring the immediate surrounding, while DFS prefers to see what is
+on the other side of the hill. In the 19th century,
+Lucas~\cite{Lucas1884.1894} and Tarry~\cite{Tarry1895} investigated
+DFS as a strategy for traversing mazes. Fundamental properties of DFS
+were discovered in the early 1970s by Hopcroft and
+Tarjan~\cite{HopcroftTarjan1973,Tarjan1972}.
 
 Suppose you have a normal $8 \times 8$ chess board in front of you,
 with a single knight piece on the board. If you can find a sequence of
