@@ -386,13 +386,13 @@ $Q \leftarrow [s]$~\nllabel{alg:BFS:initialize_queue_visit_nodes} \tcc*[f]{queue
 $D \leftarrow [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
 $D[s] \leftarrow 0$\;
 $T \leftarrow [\,]$~\nllabel{alg:BFS:initialize_empty_tree}\;
-\While{$\length(Q) > 0$}{
+\While{$\length(Q) > 0$~\nllabel{alg:BFS:while_loop:non_empty_queue}}{
   $v \leftarrow \dequeue(Q)$\;
   \For{\emph{each} $w \in \adj(v)$~\nllabel{alg:BFS:explore_neighborhood}}{
     \If{$D[w] = \infty$~\nllabel{alg:BFS:marking_vertex_as_visited}}{
       $D[w] \leftarrow D[v] + 1$\;
       $\enqueue(Q, w)$\;
-      $\append(T, vw)$\;
+      $\append(T, vw)$~\nllabel{alg:BFS:while_loop:append_to_tree}\;
     }
   }
 }
@@ -563,6 +563,38 @@ of the adjacency list under consideration. Like queue operations,
 appending to a list takes constant time, hence we require $O(|E|)$
 time to build the list $T$. Therefore, BFS runs in $O(|V| + |E|)$
 time.
+\end{proof}
+
+\begin{theorem}
+For the list $D$ resulting from
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template},
+let $s$ be a starting vertex and let $v$ be a vertex such that
+$D[v] \neq \infty$. Then $D[v]$ is the length of any shortest path
+from $s$ to $v$.
+\end{theorem}
+
+\begin{proof}
+It is clear that $D[v] = \infty$ if and only if there are no paths
+from $s$ to $v$. Let $v$ be a vertex such that $D[v] \neq \infty$. As
+$v$ can be reached from $s$ by a path of length $D[v]$, the length
+$d(s,v)$ of any shortest $s$-$v$ path satisfies $d(s,v) \leq
+D[v]$. Use induction on $d(s,v)$ to show that equality holds. For the
+base case $s = v$, we have $d(s,v) = D[v] = 0$ since the trivial path
+has length zero. Assume for induction that if $d(s,v) = k$, then
+$d(s,v) = D[v]$.
+%% We need to show that if $d(s,u)$ is the length of any
+%% shortest $s$-$u$ path, then $d(s,u) = D[u]$.
+Let $d(s,u) = k + 1$ with the corresponding shortest $s$-$u$ path
+being $(s, v_1, v_2, \dots, v_k, u)$. Then by our induction
+hypothesis, $(s, v_1, v_2, \dots, v_k)$ is a shortest path from $s$ to
+$v_k$ of length $d(s, v_k) = D[v_k] = k$. In other words, $D[v_k] <
+D[u]$ and the while loop spanning
+lines~\ref{alg:BFS:while_loop:non_empty_queue}
+to~\ref{alg:BFS:while_loop:append_to_tree} processes $v_k$ before
+processing $u$. The graph under consideration has the edge $v_k
+u$. When examining the adjacency list of $v_k$, BFS reaches $u$~(if
+$u$ is not reached earlier) and so $D[u] \leq k + 1$. Hence,
+$D[u] = k + 1$ and therefore $d(s,u) = D[u] = k + 1$.
 \end{proof}
 
 %% Another version of
