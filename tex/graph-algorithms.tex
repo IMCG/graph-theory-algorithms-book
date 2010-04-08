@@ -382,14 +382,14 @@ from the BFS algorithm is called a \emph{breadth-first search tree}.
 \Output{A list $D$ of distances of all vertices from $s$. A tree $T$
   rooted at $s$.}
 \BlankLine
-$Q \leftarrow [s]$ \tcc*[f]{queue of nodes to visit}\;
+$Q \leftarrow [s]$~\nllabel{alg:BFS:initialize_queue_visit_nodes} \tcc*[f]{queue of nodes to visit}\;
 $D \leftarrow [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
 $D[s] \leftarrow 0$\;
-$T \leftarrow [\,]$\;
+$T \leftarrow [\,]$~\nllabel{alg:BFS:initialize_empty_tree}\;
 \While{$\length(Q) > 0$}{
   $v \leftarrow \dequeue(Q)$\;
   \For{\emph{each} $w \in \adj(v)$~\nllabel{alg:BFS:explore_neighborhood}}{
-    \If{$D[w] = \infty$}{
+    \If{$D[w] = \infty$~\nllabel{alg:BFS:marking_vertex_as_visited}}{
       $D[w] \leftarrow D[v] + 1$\;
       $\enqueue(Q, w)$\;
       $\append(T, vw)$\;
@@ -537,6 +537,33 @@ Figure~\ref{fig:graph_algorithms:bread_first_search_undirected}
 presents BFS trees resulting from applying
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
 an undirected graph and a digraph.
+
+\begin{theorem}
+The worst-case time complexity of
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} is
+$O(|V| + |E|)$.
+\end{theorem}
+
+\begin{proof}
+Without loss of generality, we can assume that $G = (V, E)$ is
+connected. The initialization steps in
+lines~\ref{alg:BFS:initialize_queue_visit_nodes}
+to~\ref{alg:BFS:initialize_empty_tree} take $O(|V|)$ time. After
+initialization, all but one vertex are labelled
+$\infty$. Line~\ref{alg:BFS:marking_vertex_as_visited} ensures that
+each vertex is enqueued at most once and hence dequeued at most
+once. Each of enqueuing and dequeuing takes constant time. The total
+time devoted to queue operations is $O(|V|)$. The adjacency list of a
+vertex is scanned after dequeuing that vertex, so each adjacency list
+is scanned at most once. Summing the lengths of the adjacency lists,
+we have $\Theta(|E|)$ and therefore we require $O(|E|)$ time to scan
+the adjacency lists. After the adjacency list of a vertex is scanned,
+at most $k$ edges are added to the list $T$, where $k$ is the length
+of the adjacency list under consideration. Like queue operations,
+appending to a list takes constant time, hence we require $O(|E|)$
+time to build the list $T$. Therefore, BFS runs in $O(|V| + |E|)$
+time.
+\end{proof}
 
 %% Another version of
 %% Algorithm~\ref{alg:graph_algorithms:breadth_first_search} is where you
