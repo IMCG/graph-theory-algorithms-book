@@ -358,13 +358,17 @@ purposes.
 \subsection{Breadth-first search}
 
 Breadth-first search (BFS) is a strategy for running through the
-vertices of a graph. It was suggested by Edward F. Moore in
-1959~\cite{Moore1959}. Starting from a given vertex $v$ of a graph
-$G$, we first explore the neighborhood of $v$ by visiting all vertices
-that are adjacent to $v$. We then apply the same strategy to each of
-the neighbors of $v$. The strategy of exploring the neighborhood of a
-vertex is applied to all vertices of $G$. The result is a tree rooted
-at $v$ and this tree is a subgraph of
+vertices of a graph. It was presented by Moore~\cite{Moore1959} in
+1959 within the context of traversing mazes. Lee~\cite{Lee1961}
+independently discovered the same algorithm in 1961 in his work on
+routing wires on circuit boards.
+
+The basic BFS algorithm can be described as follows. Starting from a
+given vertex $v$ of a graph $G$, we first explore the neighborhood of
+$v$ by visiting all vertices that are adjacent to $v$. We then apply
+the same strategy to each of the neighbors of $v$. The strategy of
+exploring the neighborhood of a vertex is applied to all vertices of
+$G$. The result is a tree rooted at $v$ and this tree is a subgraph of
 $G$. Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
 presents a general template for the BFS strategy. The tree resulting
 from the BFS algorithm is called a \emph{breadth-first search tree}.
