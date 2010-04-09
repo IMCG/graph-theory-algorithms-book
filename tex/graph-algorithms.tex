@@ -771,10 +771,10 @@ $S \leftarrow [s]$ \tcc*[f]{stack of nodes to visit}\;
 $D \leftarrow [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
 $D[s] \leftarrow 0$\;
 $T \leftarrow [\,]$\;
-\While{$\length(S) > 0$}{
+\While{$\length(S) > 0$~\nllabel{alg:DFS:while_loop_tests_non_empty_stack}}{
   $v \leftarrow \pop(S)$\;
-  \For{\emph{each} $w \in \adj(v)$}{
-    \If{$D[w] = \infty$}{
+  \For{\emph{each} $w \in \adj(v)$~\nllabel{alg:DFS:for_loop_visit_neighbors}}{
+    \If{$D[w] = \infty$~\nllabel{alg:DFS:if_test_unvisited_neighbors}}{
       $D[w] \leftarrow D[v] + 1$\;
       $\push(S, w)$\;
       $\append(T, vw)$\;
@@ -808,6 +808,40 @@ the element onto the stack. In other words, a stack implements a
 last-in first-out~(LIFO) protocol for element insertion and removal,
 in contrast to the FIFO policy of a queue. We also use the term
 \emph{length} to refer to the number of elements in the stack.
+
+The depth-first search
+Algorithm~\ref{alg:graph_algorithms:depth_first_search_template} can
+be analyzed similar to how we analyzed
+Algorithm~\ref{fig:graph_algorithms:bread_first_search_undirected}. Just
+as BFS is applicable to both directed and undirected graphs, we can
+also have undirected graphs and digraphs as input to DFS. For the case
+of an undirected graph, line~\ref{alg:DFS:for_loop_visit_neighbors} of
+Algorithm~\ref{alg:graph_algorithms:depth_first_search_template}
+considers all vertices adjacent to the current vertex $v$. In case the
+input graph is directed, we replace ``$w \in \adj(v)$'' on
+line~\ref{alg:DFS:for_loop_visit_neighbors} with ``$w \in \oadj(v)$''
+to signify that we only want to consider the out-neighbors of $v$. If
+any neighbors (respectively, out-neighbors) of $v$ are labelled as
+$\infty$, we know that we have not explored any paths starting from
+any of those vertices. So we label each of those unexplored vertices
+with a positive integer and push them onto the stack $S$, where they
+will wait for later processing. We also record the paths leading from
+$v$ to each of those unvisited neighbors, i.e. the edges $vw$ for each
+vertex $w \in \adj(v)$ (respectively, $w \in \oadj(v)$) are appended
+to the list $T$. The test on
+line~\ref{alg:DFS:if_test_unvisited_neighbors} ensures that we do not
+push onto $S$ any vertices on the path that lead to $v$. When we
+resume another round of the while loop that starts on
+line~\ref{alg:DFS:while_loop_tests_non_empty_stack}, the previous
+vertex $v$ have been popped off $S$ and the neighbors (respectively,
+out-neighbors) of $v$ have been pushed onto $S$. To explore a path
+starting at $v$, we choose any unexplored neighbors of $v$ by popping
+an element off $S$ and repeat the for loop starting on
+line~\ref{alg:DFS:for_loop_visit_neighbors}. Repeat the DFS algorithm
+as often as required in order to traverse all vertices of the input
+graph. The output of DFS consists of two lists $D$ and $T$: $T$ is a
+tree rooted at the starting vertex $s$; and each $D[i]$ counts the
+length of the $s$-$v_i$ path in $T$.
 
 
 %%--- Application: connectivity of a graph ------------------------------%%
