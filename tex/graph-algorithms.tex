@@ -758,31 +758,30 @@ knight's tour is an example of depth-first search, sometimes called
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{Count}{count}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
 %% input/output
-\Input{A rooted tree $G = (V, E)$ with  root vertex $v_0 \in V$.}
-\Output{\True if $G$ has a vertex satisfying $P$; \False otherwise.}
+\Input{A directed or undirected graph $G = (V, E)$ of order $n > 0$. A
+  vertex $s$ from which to start the search. The vertices are numbered
+  from $1$ to  $n = |V|$, i.e. $V = \{1, 2, \dots, n\}$.}
+\Output{A list $D$ of distances of all vertices from $s$. A tree $T$
+  rooted at $s$.}
 \BlankLine
-%% algorithm body
-Create a queue $Q$ of ``child'' vertices of the root $v_0$.\;
-Initialize a list $S$ of ``seen'' vertices.\;
-$\Count \leftarrow 0$\;
-\For{$w \in Q$}{
-  Test $w$ for $P$.\;
-  \If{$P(w) = \True$}{
-    $\Count \leftarrow \Count + 1$
-  }
-  Add $w$ to $S$.\;
-  \If{$S = V$} {
-    \Return \Count
+$S \leftarrow [s]$ \tcc*[f]{stack of nodes to visit}\;
+$D \leftarrow [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
+$D[s] \leftarrow 0$\;
+$T \leftarrow [\,]$\;
+\While{$\length(S) > 0$}{
+  $v \leftarrow \pop(S)$\;
+  \For{\emph{each} $w \in \adj(v)$}{
+    \If{$D[w] = \infty$}{
+      $D[w] \leftarrow D[v] + 1$\;
+      $\push(S, w)$\;
+      $\append(T, vw)$\;
+    }
   }
 }
-Call the DFS algorithm iteratively with the rooted subtree having $w$
-and all its children as vertices and $w$ as the rooted vertex.
-\caption{Depth-first search.}
-\label{alg:graph_algorithms:depth_first_search}
+\Return $(D, T)$\;
+\caption{A general depth-first search template.}
+\label{alg:graph_algorithms:depth_first_search_template}
 \end{algorithm}
 
 In the case of a graph, you can modify
