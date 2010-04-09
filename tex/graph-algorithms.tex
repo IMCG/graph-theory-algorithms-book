@@ -239,7 +239,7 @@ $6 \nmid k$. To transform $v$ into a bit vector having length a
 multiple of 6, let $r = k \mod 6$ be the remainder upon dividing $k$
 by 6, and pad $6 - r$ zeros to the right of $v$.
 
-Supose $v = b_1 b_2 \cdots b_k$ is a bit vector of length $k$, where
+Suppose $v = b_1 b_2 \cdots b_k$ is a bit vector of length $k$, where
 $6 \;|\; k$. We split $v$ into $k/6$ bit vectors $v_i$, each of length
 6. For $0 \leq i \leq k/6$, the $i$-th bit vector is given by
 \[
@@ -522,7 +522,7 @@ because we only want to explore all vertices that are out-neighbors of
 $v$. The algorithm returns two lists $D$ and $T$. The list $T$
 contains a subset of edges in $E(G)$ that make up a tree rooted at the
 given start vertex $s$. As trees are connected graphs without cycles,
-we may take the vertices compising the edges of $T$ to be the vertex
+we may take the vertices comprising the edges of $T$ to be the vertex
 set of the tree. The list $D$ has the same number of elements as the
 order of $G = (V, E)$, i.e. $\length(D) = |V|$. The $i$-th element
 $D[i]$ counts the number of edges in $T$ between the vertices $s$ and
@@ -1314,11 +1314,11 @@ The key to the Floyd-Roy-Warshall algorithm lies in exploiting this
 formula. If $n = |V|$, then this is a $O(n^3)$ time algorithm. For
 comparison, the Bellman-Ford algorithm has complexity
 $O(|V| \cdot |E|)$, which is $O(n^3)$ time for ``dense''
-graphs. However, Bellman-Ford only yields the shortest paths eminating
+graphs. However, Bellman-Ford only yields the shortest paths emanating
 from a \emph{single} vertex. To achieve comparable output, we would
 need to iterate Bellman-Ford over \emph{all} vertices, which would be
 an  $O(n^4)$ time algorithm for ``dense'' graphs. Except possibly for
-``sparse'' graphs, Floyd-Roy-Warshall is better than an interated
+``sparse'' graphs, Floyd-Roy-Warshall is better than an iterated
 implementation of Bellman-Ford.
 
 Here is an implementation in Sage.
@@ -1573,7 +1573,7 @@ $v \in V$.
 
 If the last step detects a negative cycle, the algorithm is terminated.\;
 
-Reweight the edges using the vertices' $h(v)$ values: an edge from
+Re-weight the edges using the vertices' $h(v)$ values: an edge from
 $v \in V$ to $w \in V$, having length $wt(v,w)$, is given the new length
 $wt(v,w) + h(v) - h(w)$.\;
 
