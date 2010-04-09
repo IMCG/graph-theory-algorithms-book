@@ -733,36 +733,25 @@ DFS as a strategy for traversing mazes. Fundamental properties of DFS
 were discovered in the early 1970s by Hopcroft and
 Tarjan~\cite{HopcroftTarjan1973,Tarjan1972}.
 
-Suppose you have a normal $8 \times 8$ chess board in front of you,
-with a single knight piece on the board. If you can find a sequence of
-knight moves which visits each and every square exactly once, then you
-will have found a so-called \emph{complete knight tour}.
-\index{knight tour}
-Naively, how do you find a complete knight tour? Intuitively, you
-would make one knight move after another, recording each move to
-ensure that you did not step on a square you have already visited,
-until you could not make any more moves. It is very, very unlikely
-that if do this you will have visited every square exactly once (if
-you don't believe me, please try it yourself!). Acknowledging defeat,
-at this stage, it might make sense to \emph{backtrack} a few moves and
-try again, hoping you will not get ``stuck'' so soon. If you fail
-again, try backtracking a few move moves and traverse yet another
-path, hoping to make further progress. Repeat this until a compete
-tour is found. This is an example of \emph{depth-first search}, also
-sometimes called \emph{backtracking}.
+To get an intuitive appreciation for DFS, suppose we have an
+$8 \times 8$ chessboard in front of us. We place a single knight
+piece on a fixed square of the board. Our objective is to find a
+sequence of knight moves that visits each and every square exactly
+once, while obeying the rules of chess that govern the movement of the
+knight piece. Such a sequence of moves, if one exists, is called a
+\emph{knight's tour}. How do we find such a tour? We could make one
+knight move after another, recording each move to ensure that we do
+not step on a square that is already visited, until we could not make
+any more moves. Acknowledging defeat when encountering a dead end, it
+might make sense to \emph{backtrack} a few moves and try again, hoping
+we would not get stuck. If we fail again, we try backtracking a few
+more moves and traverse yet another path, hoping to make further
+progress. Repeat this strategy until a tour is found or until we have
+exhausted all possible moves. The above strategy for finding a
+knight's tour is an example of depth-first search, sometimes called
+\emph{backtracking}.
 \index{backtracking}
-
-Similar to BFS, \emph{depth-first search} (DFS) is an algorithm for
-traversing a graph. One starts at a \emph{root vertex} and explores as
-\emph{far as possible} along each branch before, if necessary,
-backtracking along a new path. It is easier to see what this means in
-the case of a rooted tree than for more general graphs, as illustrated
-below.
-\index{depth-first search}
-\index{DFS}
-
-Suppose you want to count the number of vertices (or edges) satisfying
-a property $P$.
+\index{knight's tour}
 
 \begin{algorithm}[!htpb]
 \dontprintsemicolon  % no semicolon at end of pseudocode statements
