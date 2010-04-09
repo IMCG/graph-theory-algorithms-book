@@ -417,8 +417,10 @@ $Q$, known as the \emph{front} or \emph{start} of the queue. We insert
 a new element into $Q$ by appending the new element to the \emph{rear}
 or \emph{end} of the queue. The operation of removing the front of $Q$
 is referred to as \emph{dequeue}, while the operation of appending to
-the rear of $Q$ is called \emph{enqueue}. As with lists, the
-\emph{length} of a queue is its total number of elements.
+the rear of $Q$ is called \emph{enqueue}. That is, a queue implements
+a first-in first-out~(FIFO) protocol for adding and moving
+elements. As with lists, the \emph{length} of a queue is its total
+number of elements.
 
 \begin{figure}[!htbp]
 \centering
@@ -783,6 +785,29 @@ $T \leftarrow [\,]$\;
 \caption{A general depth-first search template.}
 \label{alg:graph_algorithms:depth_first_search_template}
 \end{algorithm}
+
+Algorithm~\ref{alg:graph_algorithms:depth_first_search_template}
+formalizes the above description of depth-first search. The tree
+resulting from applying DFS on a graph is called a
+\emph{depth-first search tree}. The general structure of this
+algorithm bears close resemblance to
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}. A
+significant difference is that instead of using a queue to structure
+and organize vertices to be visited, DFS uses another special type of
+list called a \emph{stack}. To understand how elements of a stack are
+organized, we use the analogy of a stack of cards. A new card is added
+to the stack by placing it on top of the stack. Any time we want to
+remove a card, we are only allowed to remove the top-most card that is
+on the top of the stack. A list $L = [a_1, a_2, \dots, a_k]$ of $k$
+elements is a stack when we impose the same rules for element
+insertion and removal. The top and bottom of the stack are $L[k]$ and
+$L[1]$, respectively. The operation of removing the top element of the
+stack is referred to as \emph{popping} the element off the
+stack. Inserting an element into the stack is called \emph{pushing}
+the element onto the stack. In other words, a stack implements a
+last-in first-out~(LIFO) protocol for element insertion and removal,
+in contrast to the FIFO policy of a queue. We also use the term
+\emph{length} to refer to the number of elements in the stack.
 
 
 %%--- Application: connectivity of a graph ------------------------------%%
