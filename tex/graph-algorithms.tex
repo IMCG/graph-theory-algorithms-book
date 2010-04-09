@@ -430,8 +430,8 @@ number of elements.
   linedecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
-  1/0/4/above/north, 3/6/3/right/east, 4/6/1/right/east,
-  5/4/0/below/south, 7/-2/2/left/west, 6/0/0/below/south} {
+  1/0/4/above/north, 3/6/3/above/north, 4/6/1/below/south,
+  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south} {
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -451,7 +451,7 @@ number of elements.
   linedecorate/.style={-,thick},%
   scale=1.6]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {4/0/0/left/west,
+\foreach \nodename/\x/\y/\direction/\navigate in {4/0/0/below/south,
   3/0/1/left/west, 7/1/1/below/south, 6/2/1/below/south,
   2/0.5/2/left/west, 5/2/2/left/west, 1/1.25/3/above/north} {
   \node (\nodename) at (\x,\y) [nodedecorate] {};
@@ -472,8 +472,8 @@ number of elements.
   arrowdecorate/.style={->,>=stealth,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
-  1/0/4/above/north, 3/6/3/right/east, 4/6/1/right/east,
-  5/4/0/below/south, 7/-2/2/left/west, 6/0/0/below/south} {
+  1/0/4/above/north, 3/6/3/above/north, 4/6/1/below/south,
+  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south} {
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -496,7 +496,7 @@ number of elements.
   arrowdecorate/.style={->,>=stealth,thick},
   scale=1.6]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {2/0/1/left/west,
+\foreach \nodename/\x/\y/\direction/\navigate in {2/0/1/below/south,
   1/1/0/below/south, 5/1/1/left/west, 7/2/1/below/south,
   6/2/2/left/west, 3/0.5/2/left/west, 4/1.25/3/above/north} {
   \node (\nodename) at (\x,\y) [nodedecorate] {};
@@ -510,7 +510,7 @@ number of elements.
 \end{tikzpicture}
 }
 \caption{Breadth-first search trees for undirected and directed graphs.}
-\label{fig:graph_algorithms:bread_first_search_undirected}
+\label{fig:graph_algorithms:breadth_first_search_undirected}
 \end{figure}
 
 Note that the BFS
@@ -543,7 +543,7 @@ $G$ with starting vertex $v_i$. Repeat this algorithm as often as
 necessary until all vertices of $G$ are visited. The result may be a
 tree that contains all the vertices of $G$ or a collection of trees,
 each of which contains a subset of $V(G)$.
-Figure~\ref{fig:graph_algorithms:bread_first_search_undirected}
+Figure~\ref{fig:graph_algorithms:breadth_first_search_undirected}
 presents BFS trees resulting from applying
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
 an undirected graph and a digraph.
@@ -815,7 +815,7 @@ in contrast to the FIFO policy of a queue. We also use the term
 The depth-first search
 Algorithm~\ref{alg:graph_algorithms:depth_first_search_template} can
 be analyzed similar to how we analyzed
-Algorithm~\ref{fig:graph_algorithms:bread_first_search_undirected}. Just
+Algorithm~\ref{fig:graph_algorithms:breadth_first_search_undirected}. Just
 as BFS is applicable to both directed and undirected graphs, we can
 also have undirected graphs and digraphs as input to DFS. For the case
 of an undirected graph, line~\ref{alg:DFS:for_loop_visit_neighbors} of
