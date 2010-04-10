@@ -549,6 +549,7 @@ Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
 an undirected graph and a digraph.
 
 \begin{theorem}
+\label{thm:graph_algorithms:BFS:worst_case_time_complexity}
 The worst-case time complexity of
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} is
 $O(|V| + |E|)$.
@@ -576,6 +577,7 @@ time.
 \end{proof}
 
 \begin{theorem}
+\label{thm:graph_algorithms:BFS:list_D_length_shortest_paths}
 For the list $D$ resulting from
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template},
 let $s$ be a starting vertex and let $v$ be a vertex such that
@@ -848,7 +850,14 @@ length of the $s$-$v_i$ path in $T$.
 Figure~\ref{fig:graph_algorithms:depth_first_search_undirected}
 shows the DFS trees resulting from running
 Algorithm~\ref{alg:graph_algorithms:depth_first_search_template} on an
-undirected graph and a digraph.
+undirected graph and a digraph. The worst-case time complexity of DFS
+can be analyzed using an argument similar to that in
+Theorem~\ref{thm:graph_algorithms:BFS:worst_case_time_complexity}. Arguing
+along the same lines as in the proof of
+Theorem~\ref{thm:graph_algorithms:BFS:list_D_length_shortest_paths},
+we can also show that the list $D$ returned by DFS contains lengths of
+any shortest paths from the starting vertex $s$ to any other vertex in
+the tree $T$.
 
 \begin{figure}[!htbp]
 \centering
@@ -979,6 +988,16 @@ the graph is connected and otherwise it is disconnected.
   Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
   with $G$ and $s$ as input. Show that $G$ is connected if and only if
   $D[v]$ is defined for each $v \in V$.
+
+\item Show that the worst-case time complexity of depth-first search
+  Algorithm~\ref{alg:graph_algorithms:depth_first_search_template} is
+  $O(|V| + |E|)$.
+
+\item Let $D$ be the list of distances returned by
+  Algorithm~\ref{alg:graph_algorithms:depth_first_search_template},
+  let $s$ be a starting vertex, and let $v$ be a vertex such that
+  $D[v] \neq \infty$. Show that $D[v]$ is the length of any shortest
+  path from $s$ to $v$.
 \end{enumerate}
 
 
