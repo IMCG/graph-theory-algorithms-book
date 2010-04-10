@@ -329,19 +329,6 @@ encodes the edges of $G$.
 \section{Graph searching}
 \label{sec:graph_algorithms:graph_searching}
 
-%% This section discusses algorithms for
-%%
-%% \begin{itemize}
-%% \item
-%% breadth-first searches,
-%%
-%% \item
-%% depth-first searches, and
-%%
-%% \item
-%% we explain how these relate to determining a graph's connectivity.
-%% \end{itemize}
-
 This section discusses two fundamental algorithms for graph traversal:
 breadth-first search and depth-first search. The word ``search'' used
 in describing these two algorithms is rather misleading. It would be
@@ -953,29 +940,76 @@ the tree $T$.
 \end{figure}
 
 
-%%--- Application: connectivity of a graph ------------------------------%%
+%%--- Connectivity of a graph -------------------------------------------%%
 
-\subsection{Application: connectivity of a graph}
+\subsection{Connectivity of a graph}
 
-% This subsection is on how the above algorithms can be used
-% to determine a graph's connectivity.
+Both BFS and DFS can be used to determine if an undirected graph is
+connected. Let $G = (V, E)$ be an undirected graph of order $n > 0$
+and let $s$ be an arbitrary vertex of $G$. We initialize a counter
+$c \leftarrow 1$ to mean that we are starting our exploration at $s$,
+hence we have already visited $s$. We apply either BFS or DFS,
+treating $G$ and $s$ as input to any of these algorithms. Each time we
+visit a vertex that was previously unvisited, we increment the counter
+$c$. At the end of the algorithm, we compare $c$ with $n$. If $c = n$,
+we know that we have visited all vertices of $G$ and conclude that $G$
+is connected. Otherwise, we conclude that $G$ is disconnected. This
+procedure is summarized in
+Algorithm~\ref{alg:graph_algorithms:graph_connectivity}.
 
-A simple algorithm to determine if a graph is connected
-might be described as follows:
-\begin{itemize}
+\begin{algorithm}[!htpb]
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+%% input/output
+\Input{An undirected graph $G = (V, E)$ of order $n > 0$. A vertex $s$
+  from which to start the search. The vertices are numbered from $1$
+  to  $n = |V|$, i.e. $V = \{1, 2, \dots, n\}$.}
+\Output{$\True$ if $G$ is connected; $\False$ otherwise.}
+\BlankLine
+$Q \leftarrow [s]$~\tcc*[f]{queue of nodes to visit}\;
+$D \leftarrow [0, 0, \dots, 0]$~\tcc*[f]{$n$ copies of $0$}\;
+$D[s] \leftarrow 1$\;
+$c \leftarrow 1$\;
+\While{$\length(Q) > 0$}{
+  $v \leftarrow \dequeue(Q)$\;
+  \For{\emph{each} $w \in \adj(v)$}{
+    \If{$D[w] = 0$}{
+      $D[w] \leftarrow 1$\;
+      $c \leftarrow c + 1$\;
+      $\enqueue(Q, w)$\;
+    }
+  }
+}
+\If{$c = |V|$~\nllabel{alg:BFS:connectivity_test}}{
+  \Return \True\;
+} \Else{
+  \Return \False\;
+}
+\caption{Determining whether an undirected graph is connected.}
+\label{alg:graph_algorithms:graph_connectivity}
+\end{algorithm}
 
-\item
-Begin at any arbitrary vertex of the graph, $\Gamma=(V,E)$.
-
-\item
-Proceed from that vertex using either DFS or BFS, counting all
-vertices reached.
-
-\item
-Once the connected component of the graph has been entirely traversed,
-if the number of vertices counted is equal to $|V|$,
-the graph is connected and otherwise it is disconnected.
-\end{itemize}
+Note that Algorithm~\ref{alg:graph_algorithms:graph_connectivity} uses
+the BFS template of
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template},
+with some minor changes. Instead of initializing the list $D$ with
+$n = |V|$ copies of $\infty$, we use $n$ copies of $0$. Each time we
+have visited a vertex $w$, we make the assignment $D[w] \leftarrow 1$,
+instead of incrementing the value $D[v]$ of $w$'s parent vertex and
+assign that value to $D[w]$. At the end of the while loop, we have the
+equality $c = \sum_{d \in D} d$. The value of this sum could be used
+in the test starting from line~\ref{alg:BFS:connectivity_test}.
+However, the value of the counter $c$ is incremented immediately after
+we have visited an unvisited vertex. An advantage is that we do not
+need to perform a separate summation outside of the while loop. To use
+the DFS template for determining graph connectivity, we simply replace
+the queue implementation in
+Algorithm~\ref{alg:graph_algorithms:graph_connectivity} with a stack
+implementation.
 
 
 %%--- Problems ----------------------------------------------------------%%
