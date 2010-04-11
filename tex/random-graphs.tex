@@ -72,6 +72,50 @@ Which proves the result.
 
 \end{proof}
 
+This proof also gives us a simple algorithm to find a copy of a graph $H$ into a random graph $G_{n,p}$. While obviously such an algorithm will not always find the copy of $H$ if it exists, the probability of a successful run will tend toward $1$ as proved immediately above.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+def find_induced(H, G):
+
+    # f is the function from V(H) to V(G) we
+    # are attempting to define
+    f = {}
+
+    # leftovers is the set of vertices of G which have not yet
+    # been used by f
+    G_leftovers = G.vertices()
+
+    # Set of vertices for which no representant has been found yet
+    H_leftovers = H.vertices()
+
+    # While the function is not complete
+    while H_leftovers:
+
+        # We look for the next vertex of H
+        v = H_leftovers.pop(0)
+
+        # ... and look for its possible image
+        candidates = [u for u in G_leftovers if 
+          all([ H.has_edge(h,v) == G.has_edge(f_h,u) 
+            for h,f_h in f.iteritems()])]
+
+        if not candidates:
+            raise ValueError("No copy of H has been found in G")
+
+        # We pick the first of them
+        f[v] = candidates[0]
+        G_leftovers.remove(f[v])
+
+    return f
+\end{lstlisting}
+\end{center}
+
+
 Describe the random graph model of Erd\H{o}s and
 R{\'e}nyi~\cite{ErdosRenyi1959}. Algorithms for efficient generation
 of random networks; see Batagelj and
