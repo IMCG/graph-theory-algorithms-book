@@ -819,6 +819,38 @@ is also a trail.
 %\index{circuit}
 \index{path}
 
+\begin{corollary}
+\label{cor:introduction:any_path_has_length_at_most_n_minus_1}
+Let $G = (V, E)$ be a (di)graph of order $n = |V|$. Any path in $G$
+has length at most $n - 1$.
+\end{corollary}
+
+\begin{proof}
+Let $V = \{v_1, v_2, \dots, v_n\}$ be the vertex set of $G$. Without
+loss of generality, we can assume that each pair of vertices in $G$ is
+connected by an edge, giving a total of $n^2$ possible edges for
+$E = V \times V$. We can remove self-loops from $E$, which now leaves
+us with an edge set $E_1$ that consists of $n^2 - n$ edges. Start our
+path from any vertex, say, $v_1$. To construct a path of length $1$,
+choose an edge $v_1 v_{j_1} \in E_1$ such that
+$v_{j_1} \notin \{v_1\}$. Remove from $E_1$ all $v_1 v_k$ such that
+$v_{j_1} \neq v_k$. This results in a reduced edge set $E_2$ of
+$n^2 - n - (n - 2)$ elements and we now have the path
+$P_1: v_1, v_{j_1}$ of length $1$. Repeat the same process for
+$v_{j_1} v_{j_2} \in E_2$ to obtain a reduced edge set $E_3$ of
+$n^2 - n - 2(n - 2)$ elements and a path $P_2: v_1, v_{j_1}, v_{j_2}$
+of length $2$. In general, let
+$P_r: v_1, v_{j_1}, v_{j_2}, \dots, v_{j_r}$ be a path of length
+$r < n$ and let $E_{r+1}$ be our reduced edge set of
+$n^2 - n - r(n - 2)$ elements. Repeat the above process until we have
+constructed a path
+$P_{n-1}: v_1, v_{j_1}, v_{j_2}, \dots, v_{j_{n-1}}$ of length $n - 1$
+with reduced edge set $E_n$ of $n^2 - n - (n - 1)(n - 2)$
+elements. Adding another vertex to $P_{n-1}$ means going back to a
+vertex that was previously visited, because $P_{n-1}$ already contains
+all vertices of $V$.
+\end{proof}
+
 A path of length $n \geq 3$ whose start and end vertices are the same
 is called a \emph{cycle}. For example, the walk $a, b, c, e, a$
 in Figure~\ref{fig:introduction:types_of_walks} is a path and a cycle.
