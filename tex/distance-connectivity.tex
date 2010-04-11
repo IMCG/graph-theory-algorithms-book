@@ -279,12 +279,139 @@ def distance_matrix(Gamma):
 \item vertex and edge connectivity
 \end{itemize}
 
+Let $G=(V,E)$ be a connected graph and $u,v\in V$ be distinct non-adjacent
+vertices. A path form $u$ to $v$ is caled a 
+{\it $u$-$v$ path}.
+\index{path!$u$-$v$}
+Two paths $P_1$, $P_2$ from $u$ to $v$ are called {\it independent}
+(or {\it internally disjoint}) if there are no vertices
+in common between $P_1$ and $P_2$ except $u$ and $v$.
+\index{internally disjoint paths}
+\index{independent paths}
+
+Let $W$ be a set of vertices or a set of edges.
+If $W\subset V$ then we define $G-W$ to be the subgraph 
+of $G$ which has all the vertices in $W$ and all incident
+edges in $E$ removed.  If $W\subset E$ then we define $G-W$ to be the subgraph 
+of $G$ which has all the edges in $W$ removed
+(but not the incident vertices).
+If $G-W$ is not connected then we call $W$ a 
+{\it separating set} and we say $W$ {\it separates} $G$.
+\index{separating set}
+
+
+\section{Menger's Theorem}
+
+Menger's theorem has a number of different versions
+(a undirected, vertex-connectivity version,
+a directed, vertex-connectivity version,
+undirected, edge-connectivity version, and 
+a directed, edge-connectivity version). The following statement 
+is the undirected, vertex-connectivity version.
+
 \begin{theorem}
 \textbf{Menger's Theorem.}
-Let $u$ and $v$ be distinct, non-adjacent vertices in a graph
+Let $u$ and $v$ be distinct, non-adjacent vertices in an undirected
+connected graph
 $G$. Then the maximum number of internally disjoint $u$-$v$ paths in
 $G$ equals the minimum number of vertices needed to separate $u$ and $v$.
 \end{theorem}
+
+\begin{proof}[Solution]
+Suppose that the maximum number of internally disjoint $u$-$v$ paths in
+$G$ is attained by $u$-$v$ paths $P_1$, \dots, $P_k$.
+To obtain a separating set $W\subset V$, we must at least remove
+one point in each path $P_i$. This implies
+the minimum number of vertices needed to separate $u$ and $v$
+is at least $k$. Therefore, we have an upper bound:
+
+\[
+\#\{ {\rm internally\ disjoint}\ u-v\ {\rm paths}\}
+\leq
+\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate}\ u\ 
+{\rm and}\  v\}.
+\]
+
+We show that equality holds. Let $n$ denote the number
+of edges of $G$. The proof is by induction on $n$. By hypothesis,
+$n\geq 2$.
+If $n=2$ the statement holds by inspection, since in that case 
+$G$ is a line graph with $3$ vertices 
+$V=\{u,v,w\}$ and $2$ edges, $E=\{uw.wv\}$. In that situation,
+there is only $1$ $u$-$v$ path 
+(namely, $uwv$) and only one vertex separating $u$ and $v$
+(namely, $w$).
+
+Suppose now $n>3$ and assume the statement holds for each
+graph with $<n$ edges. Let
+
+\[
+k = \#\{ {\rm internally\ disjoint}\ u-v\ {\rm paths}\}
+\]
+and let
+\[
+\ell = 
+\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate}\ 
+u\ {\rm and}\  v\},
+\]
+so that $k\leq \ell$. Let $e\in E$ and let $G/e$ be the 
+contraction graph having edges $E-\{e\}$ and 
+vertices the same as those of $G$, except that
+the endpoints of $e$ have been identified.
+
+Suppose that $k<\ell$ and $G$ does not have $\ell$
+independent $u$-$v$ paths. The contraction
+graph $G/e$ does not have $\ell$
+independent $u$-$v$ paths either (where
+now, if $e$ contains $u$ or $v$ then we must 
+appropriately redefine $u$ or $v$, if needed).
+However, by the induction hypothesis
+$G/e$ does have the property that
+the maximum number of internally disjoint $u$-$v$ paths 
+equals the minimum number of vertices needed to separate $u$ and $v$.
+Therefore,
+
+\[
+\begin{array}{c}
+\#\{ {\rm internally\ disjoint}\ u-v\ {\rm paths\ in}\ G/e\}\\
+< 
+\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate}
+\ u\ {\rm and}\  v\ {\rm in}\ G\}.
+\end{array}
+\]
+By induction,
+
+\[
+\begin{array}{c}
+\#\{ {\rm internally\ disjoint\ }u-v{\rm \ paths\ in\ }G/e\}\\
+=
+\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate\
+}u{\rm \ and}\  v\ {\rm in\ }G/e\}.
+\end{array}
+\]
+
+Now, we {\it claim} we can pick $e$ such that $e$ does contain $u$ or $v$
+and in such a way that
+
+\[
+\begin{array}{c}
+\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate\ }u\
+{\rm and\  }v\ {\rm in\ }G\}\\
+\geq
+\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate\ }u\ 
+{\rm and\  }v\ {\rm in}\ G/e\}.
+\end{array}
+\]
+Proof: Indeed, since $n>3$ any separating set realizing
+the minimum number  of vertices needed to separate $u$ and 
+$v$ in $G$ cannot contain both a vertex in $G$ adjacent to $u$ and a vertex in
+$G$ adjacent to $v$. Therefore, we may pick $e$ accordingly.
+(Q.E.D. claim)
+
+The result follows form the claim and the above inequalities.
+\end{proof}
+
+\section{Whitney's Theorem}
 
 \begin{theorem}
 \textbf{Whitney's Theorem.}
