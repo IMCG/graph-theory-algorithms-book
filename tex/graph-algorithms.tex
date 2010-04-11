@@ -1074,33 +1074,30 @@ what algorithm is used for the special case where each weight is $1$,
 the length of the shortest path cannot exceed the number of edges in
 the graph.
 
-
 \begin{lemma}
 \label{lemma:shortest-path}
-{\rm
-Fix a vertex $v$ in the connected graph $G=(V,E)$ and let $n$ denote the
-number of vertices of $G$, $n=|V|$.
-If there are no negative weight cycles in $G$ then there
-exists a shortest path from $v$
-to any other vertex $w\in V$ which uses at most $n-1$ edges.
-}
+{\color{red}{Check up on this lemma and its proof.}}
+Fix a vertex $v$ in the connected graph $G = (V,E)$ and let $n$ denote
+the number of vertices of $G$, i.e. $n=|V|$. If there are no negative
+weight cycles in $G$, then there exists a shortest path from $v$ to
+any other vertex $w \in V$ which uses at most $n - 1$ edges.
 \end{lemma}
 
-{\bf proof:}
-Suppose that $G$ contains no negative weight cycles.
-Observe that at most $n-1$ edges are required to construct a
-path from $v$ to any vertex $w$. Let $P$ denote such a path,
-
+\begin{proof}
+Suppose that $G$ contains no negative weight cycles. Observe that at
+most $n - 1$ edges are required to construct a path from $v$ to any
+vertex $w$. Let $P$ denote such a path:
 \[
-P = (v_0=v\to v_1 \to v_2 \to \dots \to v_k = w).
+P
+=
+v_0 = v,\, v_1,\, v_2, \dots, v_k = w.
 \]
 Since $G$ has no negative weight cycles, the weight of $P$ is no less
-than the weight of $P'$, where
-$P'$ is the same as $p$ except that all cycles have been removed.
-Thus, we can remove all cycles from $P$ and obtain a path $P'$
-from $v$ to $w$ of lower weight. Since the
-final path is acyclic, it must have no more than $n-1$ edges.
-\qed
+than the weight of $P'$, where $P'$ is the same as $P$ except that all
+cycles have been removed. Thus, we can remove all cycles from $P$ and
+obtain a path $P'$ from $v$ to $w$ of lower weight. Since the final
+path is acyclic, it must have no more than $n - 1$ edges.
+\end{proof}
 
 \subsection{Dijkstra's algorithm}
 
