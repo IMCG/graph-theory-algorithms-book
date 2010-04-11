@@ -1036,30 +1036,44 @@ implementation.
 
 
 %%-----------------------------------------------------------------------%%
-%%--- Dijkstra's algorithm ----------------------------------------------%%
+%%--- Shortest path algorithms ------------------------------------------%%
 
 \section{Shortest path algorithms}
 
+In Chapter~\ref{chap:introduction}, we briefly mentioned some
+applications of weighted graphs, but we did not define the concept of
+weighted graphs. A graph is said to be
+\emph{weighted}\index{weighted graph} when we assign a numeric label
+or weight to each of its edges. Depending on the application, we can
+let the vertices represent physical locations and interpret the weight
+of an edge as the distance separating two adjacent vertices. There
+might be a cost involved in travelling from a vertex to one of its
+neighbors, in which case the weight assigned to the corresponding edge
+can represent such a cost. The concept of
+\emph{weighted digraphs}\index{weighted digraph} can be similarly
+defined. When no explicit weights are assigned to the edges of an
+undirected graph or digraph, it is usually convenient to consider each
+edge as having a weight of one.
 
-Let $G = (V,E)$ be a graph with non-negative edge weights, $w(e)$ for
-$e \in E$. The \emph{length of a path} $P$ from $v \in V$ to $w \in V$ is the sum of
-the edge weights for each edge in the path $P$, denoted
-$\delta(P)$. We write $\delta(v,w)$ for the smallest value of
-$\delta(P)$ for all paths $P$ from $v$ to $w$.
-\index{path length}
-When we regard these weights $w$ as distances,
-a path from $v$ to $w$ which realizes $\delta(v,w)$ is
-sometimes called a {\it shortest path} from $v$ to $w$.
+Based on the concept of weighted graphs, we now define what it means
+for a path to be a shortest path. Let $G = (V,E)$ be a (di)graph with
+non-negative edge weights $w(e)$ for each edge $e \in E$. The
+\emph{length}\index{path!length} $d(P)$ of a path $P$ from $v \in V$
+to $w \in V$ is the sum of the edge weights for edges in $P$. Denote
+by $d(v,w)$ the smallest value of $d(P)$ for all paths $P$ from $v$
+to $w$. When we regard edge weights as physical distances, a $v$-$w$
+path that realizes $d(v,w)$ is sometimes called a
+\emph{shortest path}\index{path!shortest} from $v$ to $w$.
 
-There are a number of different algorithms for computing a shortest
-path in a weighted graph. Some only work if the graph has
-no negative weight cycles. Some assume that there is a single
-start or source vertex. Some compute the shortest paths from
-any vertex to any other, and also detect if the graph has
-a negative weight cycle.
+Many different algorithms exist for computing a shortest path in a
+weighted graph. Some only work if the graph has no negative weight
+cycles. Some assume that there is a single start or source
+vertex. Some compute the shortest paths from any vertex to any other,
+and also detect if the graph has a negative weight cycle. No matter
+what algorithm is used for the special case where each weight is $1$,
+the length of the shortest path cannot exceed the number of edges in
+the graph.
 
-No matter what algorithm you use, the length of the shortest path
-cannot exceed the number of vertices in the graph.
 
 \begin{lemma}
 \label{lemma:shortest-path}
