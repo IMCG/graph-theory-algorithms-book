@@ -1070,33 +1070,32 @@ weighted graph. Some only work if the graph has no negative weight
 cycles. Some assume that there is a single start or source
 vertex. Some compute the shortest paths from any vertex to any other,
 and also detect if the graph has a negative weight cycle. No matter
-what algorithm is used for the special case where each weight is $1$,
-the length of the shortest path cannot exceed the number of edges in
-the graph.
+what algorithm is used for the special case of non-negative weights,
+the length of the shortest path can neither equal nor exceed the order
+of the graph.
 
 \begin{lemma}
-\label{lemma:shortest-path}
-{\color{red}{Check up on this lemma and its proof.}}
-Fix a vertex $v$ in the connected graph $G = (V,E)$ and let $n$ denote
-the number of vertices of $G$, i.e. $n=|V|$. If there are no negative
-weight cycles in $G$, then there exists a shortest path from $v$ to
-any other vertex $w \in V$ which uses at most $n - 1$ edges.
+\label{lem:graph_algorithms:shortest_path_length}
+Fix a vertex $v$ in a connected graph $G = (V,E)$ of order
+$n = |V|$. If there are no negative weight cycles in $G$, then there
+exists a shortest path from $v$ to any other vertex $w \in V$ that
+uses at most $n - 1$ edges.
 \end{lemma}
 
 \begin{proof}
 Suppose that $G$ contains no negative weight cycles. Observe that at
 most $n - 1$ edges are required to construct a path from $v$ to any
-vertex $w$. Let $P$ denote such a path:
+vertex $w$
+(Corollary~\ref{cor:introduction:any_path_has_length_at_most_n_minus_1}).
+Let $P$ denote such a path:
 \[
-P
-=
-v_0 = v,\, v_1,\, v_2, \dots, v_k = w.
+P: v_0 = v,\, v_1,\, v_2, \dots, v_k = w.
 \]
 Since $G$ has no negative weight cycles, the weight of $P$ is no less
 than the weight of $P'$, where $P'$ is the same as $P$ except that all
 cycles have been removed. Thus, we can remove all cycles from $P$ and
-obtain a path $P'$ from $v$ to $w$ of lower weight. Since the final
-path is acyclic, it must have no more than $n - 1$ edges.
+obtain a $v$-$w$ path $P'$ of lower weight. Since the final path is
+acyclic, it must have no more than $n - 1$ edges.
 \end{proof}
 
 \subsection{Dijkstra's algorithm}
