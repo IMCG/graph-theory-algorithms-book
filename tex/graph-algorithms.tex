@@ -1098,6 +1098,9 @@ obtain a $v$-$w$ path $P'$ of lower weight. Since the final path is
 acyclic, it must have no more than $n - 1$ edges.
 \end{proof}
 
+
+%%--- Dijkstra's algorithm ----------------------------------------------%%
+
 \subsection{Dijkstra's algorithm}
 
 See Dijkstra~\cite{Dijkstra1959}, section~24.3 of
@@ -1137,42 +1140,33 @@ $v$ to $v_0$ which has been found (but may not be the shortest path).
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{Count}{count}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
 %% input/output
-\Input{A connected graph $G = (V, E)$ having non-negative edge weights
-and a starting vertex $v_0 \in V$. }
-\Output{A shortest path from $v_0$ to a vertex in $V$.}
+\Input{An undirected or directed graph $G = (V, E)$ that is weighted
+  and has no self-loops. The order of $G$ is $n > 0$. A vertex $s \in V$
+  from which to start the search. Vertices are numbered from 1 to $n$,
+  i.e. $V = \{1, 2, \dots, n\}$.}
+\Output{A list $D$ of distances such that $D[v]$ is the distance of a
+  shortest path from $s$ to $v$. A list $P$ of vertex parents such
+  that $P[v]$ is the parent of $v$, i.e. $v$ is adjacent from $P[v]$.}
 \BlankLine
 %% algorithm body
-Create a queue $Q$ of ``unseen'' vertices initially being
-all of $V$.\;
-
-Start a list $F$ of ``already seen'' vertices initially empty.\;
-
-Initialize labels $L(v_0) = 0$ and $L(v) = \infty$ for all
-$v \in V$ with $v \neq v_0$.\;
-
-Find $v \in Q$ for which $L(v)$ is finite and minimum.\;
-
-\eIf{\emph{no such $v$ exists}}{
-  \Return
-}{
-  Label $v$ with the distance $\delta(v, v_0) = L(v)$.\;
-  Add $v$ to $F$.\;
-  Remove $v$ from $Q$.\;
-  \If{$F = V$}{
-    \Return
+$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+$D[s] \leftarrow 0$\;
+$P \leftarrow [\,]$\;
+$Q \leftarrow V$~\tcc*[f]{queue of nodes to visit}\;
+\While{$\length(Q) > 0$}{
+  find $v \in Q$ such that $D[v]$ is minimal\;
+  $Q \leftarrow \remove(Q, v)$\;
+  \For{\emph{each} $u \in \adj(v) \cap Q$}{
+    \If{$D[u] > D[v] + w(vu)$}{
+      $D[u] \leftarrow D[v] + w(vu)$\;
+      $P[u] \leftarrow v$\;
+    }
   }
 }
-
-\For{\emph{$w \in Q$ such that $w$ is adjacent to $v$}}{
-  Replace $L(w)$ by $\min(L(w),\, L(v) + wt(v,w))$.\;
-  Go to step 4.
-}
-\caption{Dijkstra's algorithm.}
-\label{alg:graph_algorithms:dijkstra}
+\Return $(D, P)$\;
+\caption{A general template for Dijkstra's algorithm.}
+\label{alg:graph_algorithms:dijkstra_general}
 \end{algorithm}
 
 The simplest implementation of Dijkstra's algorithm has
