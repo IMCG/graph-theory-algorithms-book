@@ -1286,45 +1286,47 @@ in the case of ``sparse'' graphs to $O(n\log n)$.}.
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
   arrowdecorate/.style={->,>=stealth,thick}]
-% nodes or vertices
-\node (0) at (0,0) [nodedecorate] {};
-\node [below] at (0.south) {$0$};
-\node (2) at (4,0) [nodedecorate] {};
-\node [below] at (2.south) {$2$};
-\node (4) at (8,0) [nodedecorate] {};
-\node [below] at (4.south) {$4$};
-\node (1) at (2,2.5) [nodedecorate] {};
-\node [above] at (1.north) {$1$};
-\node (3) at (6,2.5) [nodedecorate] {};
-\node [above] at (3.north) {$3$};
-% edges or lines
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  v_1/0/0/below/south, v_2/2/2.5/above/north, v_3/4/0/below/south,
+  v_4/6/2.5/above/north, v_5/8/0/below/south} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
 \path
-(0) edge[arrowdecorate] node[left]{$10$} (1)
-(0) edge[arrowdecorate] node[below]{$3$} (2)
-(1) edge[arrowdecorate,bend left] node[right]{$1$} (2)
-(1) edge[arrowdecorate] node[above]{$2$} (3)
-(2) edge[arrowdecorate,bend left] node[left]{$4$} (1)
-(2) edge[arrowdecorate] node[left]{$8$} (3)
-(2) edge[arrowdecorate] node[below]{$2$} (4)
-(3) edge[arrowdecorate,bend left] node[right]{$7$} (4)
-(4) edge[arrowdecorate,bend left] node[left]{$9$} (3);
+\foreach \startnode/\endnode/\direction/\weight in {
+  v_1/v_2/left/10, v_1/v_3/below/3, v_2/v_4/above/2, v_3/v_4/left/8,
+  v_3/v_5/below/2} {
+  (\startnode) edge[arrowdecorate] node[\direction]{$\weight$} (\endnode)
+}
+\foreach \startnode/\endnode/\direction/\weight in {
+  v_3/v_2/left/4, v_2/v_3/right/1, v_4/v_5/right/7, v_5/v_4/left/9} {
+  (\startnode) edge[arrowdecorate,bend left] node[\direction]{$\weight$} (\endnode)
+};
 \end{tikzpicture}
 \caption{Searching a weighted digraph using Dijkstra's algorithm.}
 \label{fig:graph_algorithms:Dijkstra_algorithm_digraph}
 \end{figure}
-%sage: M = matrix([[0,10,3,0,0],[0,0,1,2,0],[0,4,0,8,2],[0,0,0,0,7],[0,0,0,9,0]])
-%sage: D = DiGraph(M, format="weighted_adjacency_matrix")
-%sage: D.plot(edge_labels=True, graph_border=True).show()
+%% sage: M = matrix([[0,10,3,0,0],[0,0,1,2,0],[0,4,0,8,2],[0,0,0,0,7],[0,0,0,9,0]])
+%% sage: D = DiGraph(M, format="weighted_adjacency_matrix")
+%% sage: D.plot(edge_labels=True, graph_border=True).show()
+%%
+%% sage: G = DiGraph({1: {2:10, 3:3},
+%% ....: 2: {3:1, 4:2},
+%% ....: 3: {2:4, 4:8, 5:2},
+%% ....: 4: {5:7},
+%% ....: 5: {4:9}}, implementation=''c_graph'')
+%% sage: G.shortest_paths(1, by_weight=True)
+%% {1: [1], 2: [1, 3, 2], 3: [1, 3], 4: [1, 3, 2, 4], 5: [1, 3, 5]}
 
 \begin{table}[!htbp]
 \centering
 \begin{tabular}{|ccccc|} \hline
-$v_0$         & $v_1$         & $v_2$         & $v_3$         & $v_4$ \\\hline\hline
-\underline{0} & $\infty$      & $\infty$      & $\infty$      & $\infty$ \\
-              & 10            & \underline{3} & $\infty$      & $\infty$ \\
-              & 7             &               & 11            & \underline{5} \\
-              & \underline{7} &               & 11            & \\
-              &               &               & \underline{9} & \\\hline
+$v_1$               & $v_2$                 & $v_3$                 & $v_4$                 & $v_5$ \\\hline\hline
+\underline{$(0,-)$} & $(\infty,-)$          & $(\infty,-)$          & $(\infty,-)$          & $(\infty,-)$ \\
+                    & $(10,v_1)$            & \underline{$(3,v_1)$} & $(11,v_3)$            & \underline{$(5,v_3)$} \\
+                    & \underline{$(7,v_3)$} &                       & \underline{$(9,v_2)$} & \\\hline
 \end{tabular}
 \caption{Stepping through Dijkstra's algorithm.}
 \label{tab:graph_algorithms:working_through_Dijkstra_algorithm}
@@ -1332,38 +1334,34 @@ $v_0$         & $v_1$         & $v_2$         & $v_3$         & $v_4$ \\\hline\h
 
 \begin{example}
 Apply Dijkstra's algorithm to the graph in
-Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph}.
+Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph}, with
+starting vertex $v_1$.
 \end{example}
 
 \begin{proof}[Solution]
-Dijkstra's algorithm applied to the graph in
+Dijkstra's Algorithm~\ref{alg:graph_algorithms:dijkstra_general}
+applied to the graph in
 Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph} yields
-Table~\ref{tab:graph_algorithms:working_through_Dijkstra_algorithm}. The
-steps below explain how this table is created.
-%
-\begin{enumerate}
-\item
-Start at $v_0$, let $Q = V$ and $F = \emptyset$. Initialize the labels
-$L(v)$ to be $\infty$ for all $v \neq v_0$. This is the first row of
-the table. Take the vertex $v_0$ out of the queue.
-
-\item
-Consider the set of all adjacent nodes to $v_0$. Replace the labels in
-the first row by the weights of the associated edges. Underline the
-smallest one and take its vertex (i.e. $v_2$) out of the queue. This
-is the second row of the table.
-
-\item
-Consider the set of all nodes $w$ which are adjacent to $v_2$. Replace
-the labels in the second row by $\min(L(w),\, L(v_2) + wt(v_2, w))$.
-Underline the smallest one and take its vertex (i.e. $v_4$) out of the
-queue. This is the third row of the table.
-
-\item
-Finally, start from $v_4$ and find the path to the remaining vertex
-$v_3$ in $Q$. Take the smallest distance from $v_0$ to $v_3$. This is
-the last row of the table.
-\end{enumerate}
+Table~\ref{tab:graph_algorithms:working_through_Dijkstra_algorithm}. For
+any column $v_i$ in the table, each 2-tuple represents the distance
+and parent vertex of $v_i$. As we move along the graph, processing
+vertices according to Dijkstra's algorithm, the distance and parent
+vertex of a column are updated. The underlined 2-tuple represents the
+final distance and parent vertex produced by Dijkstra's
+algorithm. From
+Table~\ref{tab:graph_algorithms:working_through_Dijkstra_algorithm},
+we have the following shortest paths and distances:
+\[
+\begin{array}{ll}
+v_1\text{-}v_2: v_1, v_3, v_2      &\quad d(v_1, v_2) = 7 \\[4pt]
+v_1\text{-}v_3: v_1, v_3           &\quad d(v_1, v_3) = 3 \\[4pt]
+v_1\text{-}v_4: v_1, v_3, v_2, v_4 &\quad d(v_1, v_4) = 9 \\[4pt]
+v_1\text{-}v_5: v_1, v_3, v_5      &\quad d(v_1, v_5) = 5
+\end{array}
+\]
+Intermediary vertices for a $u$-$v$ path are obtained by starting from
+$v$ and work backward using the parent of $v$, then the parent of the
+parent, and so on.
 \end{proof}
 
 \begin{exercise}
