@@ -1036,9 +1036,9 @@ implementation.
 
 
 %%-----------------------------------------------------------------------%%
-%%--- Shortest path algorithms ------------------------------------------%%
+%%--- Weights and distances ---------------------------------------------%%
 
-\section{Shortest path algorithms}
+\section{Weights and distances}
 
 In Chapter~\ref{chap:introduction}, we briefly mentioned some
 applications of weighted graphs, but we did not define the concept of
@@ -1058,12 +1058,59 @@ edge as having a weight of one.
 Based on the concept of weighted graphs, we now define what it means
 for a path to be a shortest path. Let $G = (V,E)$ be a (di)graph with
 non-negative edge weights $w(e)$ for each edge $e \in E$. The
-\emph{length}\index{path!length} $d(P)$ of a path $P$ from $v \in V$
-to $w \in V$ is the sum of the edge weights for edges in $P$. Denote
-by $d(v,w)$ the smallest value of $d(P)$ for all paths $P$ from $v$
-to $w$. When we regard edge weights as physical distances, a $v$-$w$
-path that realizes $d(v,w)$ is sometimes called a
+\emph{length}\index{path!length} or
+\emph{distance}\index{path!distance} $d(P)$ of a path $P$ from
+$v \in V$ to $w \in V$ is the sum of the edge weights for edges in
+$P$. Denote by $d(v,w)$ the smallest value of $d(P)$ for all paths $P$
+from $v$ to $w$. When we regard edge weights as physical distances, a
+$v$-$w$ path that realizes $d(v,w)$ is sometimes called a
 \emph{shortest path}\index{path!shortest} from $v$ to $w$.
+
+The distance function $d$ on a graph with nonnegative edge weights is
+known as a \emph{metric function}. Intuitively, the distance between
+two physical locations is greater than zero. When these two locations
+coincide, i.e. they are one and the same location, the distance
+separating them is zero. Regardless of whether we are measuring the
+distance from location $a$ to $b$ or from $b$ to $a$, we would obtain
+the same distance. Imagine now a third location $c$. The distance from
+$a$ to $b$ plus the distance from $b$ to $c$ is greater than or equal
+to the distance from $a$ to $c$. The latter principle is known as the
+\emph{triangle inequality}. In summary, given three vertices $u,v,w$
+in a connected graph $G$, the distance function $d$ on $G$ satisfies
+the following property.
+
+\begin{lemma}
+Let $G = (V,E)$ be a connected graph with a positive weight function
+$w: E \longrightarrow \RR^{+}$. Define a distance function
+$d: V \times V \longrightarrow \RR$ given by
+\[
+d(u,v)
+=
+\begin{cases}
+\infty, & \text{if there are no paths from $u$ to $v$}, \\
+\min\{w(W) \;|\; \text{$W$ is a $u$-$v$ walk}\}, & \text{otherwise}.
+\end{cases}
+\]
+Then $d$ satisfies the following properties:
+%
+\begin{enumerate}
+\item Nonnegativity: $d(u,v) \geq 0$ with $d(u,v) = 0$ if and only if
+  $u = v$.
+
+\item Symmetry: $d(u,v) = d(v,u)$.
+
+\item Triangle inequality: $d(u,v) + d(v,w) \geq d(u,w)$.
+\end{enumerate}
+\end{lemma}
+
+The pair $(V, d)$ is called a \emph{metric space}, where the word
+``metric'' refers to the distance function $d$. Any graphs we consider
+are assumed to have finite sets of vertices. For this reason, $(V,d)$
+is also known as a \emph{finite metric space}. The distance matrix
+$D = [d(v_i, v_j)]$ of a connected graph is the distance matrix of its
+finite metric space. The topic of metric space is covered in further
+details in topology texts such as Runde~\cite{Runde2005} and Shirali
+and Vasudeva~\cite{ShiraliVasudeva2006}.
 
 Many different algorithms exist for computing a shortest path in a
 weighted graph. Some only work if the graph has no negative weight
@@ -1097,6 +1144,24 @@ cycles have been removed. Thus, we can remove all cycles from $P$ and
 obtain a $v$-$w$ path $P'$ of lower weight. Since the final path is
 acyclic, it must have no more than $n - 1$ edges.
 \end{proof}
+
+Having defined weights and distances, we are now ready to discuss
+shortest path algorithms for weighted graphs. The breadth-first search
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} can
+be applied where each edge has unit weight. Moving on to the general
+case of graphs with positive edge weights, algorithms for determining
+shortest paths in such graphs can be classified as
+\emph{weight-setting} or
+\emph{weight-corrrecting}~\cite{GalloPallottino1986}. A weight-setting
+method traverses a graph and assigns weights that, once assigned,
+remain unchanged for the duration of the algorithm. Weight-setting
+algorithms cannot deal with negative weights. On the other hand, a
+weight-correcting method is able to change the value of a weight many
+times while traversing a graph. In contrast to a weight-setting
+algorithm, a weight-correcting algorithm is able to deal with negative
+weights, provided that the weight sum of any cycle is
+nonnegative. The term \emph{negative cycle} refers to the weight sum $s$
+of a cycle such that $s < 0$.
 
 
 %%--- Dijkstra's algorithm ----------------------------------------------%%
