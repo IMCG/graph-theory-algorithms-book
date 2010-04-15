@@ -1207,31 +1207,20 @@ follows the same pattern as depth-first and breadth-first searches.
 
 %%--- Dijkstra's algorithm ----------------------------------------------%%
 
-\subsection{Dijkstra's algorithm}
+\section{Dijkstra's algorithm}
 
-See Dijkstra~\cite{Dijkstra1959}, section~24.3 of
-Cormen~et~al.~\cite{CormenEtAl2001}, and section~12.6 of Berman and
-Paul~\cite{BermanPaul1997}.
+Dijkstra's algorithm~\cite{Dijkstra1959}, discovered by E. W.~Dijkstra
+in 1959, is a graph search algorithm that solves the single-source
+shortest path problem for a graph with nonnegative edge
+weights. Imagine that the vertices of a weighted graph represent
+cities and edge weights represent distances between pairs of cities
+connected by a direct road. Dijkstra's algorithm can be used to find a
+shortest route from a fixed city to any other city.
 
-Dijkstra's algorithm, discovered by E.~Dijkstra in 1959, is a graph
-search algorithm that solves the single-source shortest path problem
-for a graph with non-negative edge weights. For example, if the
-vertices of a weighted graph represent cities and edge weights
-represent distances between pairs of cities connected by a direct
-road, Dijkstra's algorithm can be used to find the shortest route from
-a fixed city to all other cities.
-
-%It is remarkable that, at the present state of knowledge, given two
-%distinct vertices $v, w$ of a graph $G=(V,E)$, the fastest algorithm
-%determining a shortest path from $v$ to $w$ appears to be no faster (in general)
-%than the fastest algorithm determining a shortest path from $v$ to
-%\emph{any} other vertex of $G$.
-
-Let $G = (V,E)$ be a graph with non-negative edge weights, as above.
-Fix a start or source vertex $v_0 \in V$.
-
-Dijkstra's algorithm performs a number of steps, basically one step
-for each vertex in $V$. We partition the vertex set $V$ into two
+Let $G = (V,E)$ be a (di)graph with nonnegative edge weights. Fix a
+start or source vertex $s \in V$. Dijkstra's algorithm performs a
+number of steps, basically one step for each vertex in $V$. We
+partition the vertex set $V$ into two 
 subsets: the set $F$ of vertices where we have found the shortest path
 to $v_0$; and the ``queue'' $Q$ where we do not yet know for sure the
 shortest path to $v_0$. The vertices $v \in F$ are labeled with
