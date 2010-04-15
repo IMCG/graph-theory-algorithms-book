@@ -279,8 +279,393 @@ def distance_matrix(Gamma):
 \item vertex and edge connectivity
 \end{itemize}
 
+If $G=(V,E)$ is a graph and $v\in V$ is a vertex with the property
+that $G-v$ has more connected components than $G$ then
+we call $v$ a {\it cut-vertex} (or {\it articulation point} or {\it vertex-cut}).
+\index{cut-vertex} 
+\index{vertex-cut} 
+\index{articulation point}
+A {\it non-separable graph} is one having no cut-vertex.
+\index{non-separable graph}
+\index{graph!non-separable}
+Otherwise, the graph is called {\it separable}.
+\index{graph!separable}
+A {\it block} of a graph is a maximal non-separable subgraph.
+\index{block}
+
+\begin{example}
+{\rm
+The cut-vertex of the graph in Figure \ref{fig:clawgraph}
+is the vertex $0$, as the following Sage example 
+demonstrates.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+sage: G = graphs.clawgraph()
+sage: G.blocks_and_cut_vertices()
+([[1, 0], [2, 0], [3, 0]], [0])
+
+\end{lstlisting}
+\end{center}
+%
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[height=5cm,width=6cm]{image/clawgraph}
+\end{center}
+\caption{{\bf A graph with $4$ vertices .} }
+\label{fig:clawgraph}
+\end{figure}
+}
+\end{example}
+
+If $G$ has at least $3$ vertices and there is a $v\in V$
+which is a cut-vertex then we say $G$ is {\it $1$-connected}.
+\index{graph!$1$-connected}
+ In general, we say $G$ is {\it $k$-vertex-connected} (or
+{\it $k$-connected})
+\index{vertex-connected} 
+if the graph $G-X$ is connected for each $X\subset V$
+such that $|X|\leq k-1$.
+In other words, $G$ is $k$-vertex-connected
+if the graph remains connected even after removing 
+any $k-1$ or fewer vertices from $G$.
+
+\begin{theorem}
+(Dirac's theorem)
+{\rm
+If $G=(V,E)$ is a $k$-vertex-connected graph with
+$|V|\geq 3$ then for every subset $S\subset V$ with
+$|S|\leq k$ there is a cycle $C=C_S\subset G$ which contains
+the vertices of $S$.
+}
+\end{theorem}
+\index{Dirac's theorem}
+
+The converse to this is false.
+
+\begin{proof}[Solution]
+
+...
+\end{proof}
+
+
+\begin{theorem}
+(Bondy's theorem)
+{\rm
+Suppose 
+
+\begin{itemize}
+\item
+$G=(V,E)$ is a simple graph with $n=|V|$, 
+\item
+$0<k<n$,
+\item
+the (non-decreasing) degree sequence 
+$[d_1,d_2,\dots, d_n]$ satisfies
+$d_j\geq j+k-1$, for $1\leq j\leq n-1-d_{n-k+1}$,
+\end{itemize}
+then $G$ is $k$-vertex-connected.
+}
+\end{theorem}
+\index{Bondy's theorem}
+
+\begin{proof}[Solution]
+
+...
+\end{proof}
+
+
+If $G$ is $k$-vertex-connected, but not
+$k-1$-vertex-connected, then we write $\kappa(G)=k$
+(some use $\kappa_0$ instead of $\kappa$).
+\index{$\kappa_0(G)$}
+\index{$\kappa(G)$}
+
+Here is a Sage example concerning 
+$\kappa(G)$ using the Petersen graph 
+depicted in Figure \ref{fig:petersen-graph}.
+(You must install an optional linear programming
+Sage package such as GLPK for the commands below to work.)
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+sage: G = graphs.PetersenGraph()
+sage: len(G.vertices())
+10
+sage: G.vertex_connectivity()
+3.0
+sage: G.delete_vertex(0)
+sage: len(G.vertices())
+9
+sage: G.vertex_connectivity()
+2.0
+
+\end{lstlisting}
+\end{center}
+%
+
+\begin{lemma}
+{\rm
+If $v\in V$ then we have
+
+\[
+\kappa(G)-1\leq \kappa(G-v)\leq \kappa(G).
+\]
+}
+\end{lemma}
+
+\begin{proof}[Solution]
+
+...
+\end{proof}
+
+
+If $G=(V,E)$ is a graph and $e\in E$ is an edge with the property
+that $G-e$ has more connected components than $G$ then
+we call $e$ a {\it cut-edge} (or an {\it isthmus} or an {\it edge-cut}).
+\index{cut-edge} 
+\index{edge-cut} 
+\index{isthmus}
+A graph having no cut-edge is called {\it bridgeless}.
+\index{bridgeless}
+An open question at the time of this writing
+(in 2010) involving bridges is the 
+{\it cycle double cover conjecture}, due to P. Seymour and G. Szekeres, 
+which states that every bridgeless graph admits a set
+of cycles which contains each edge exactly twice.
+\index{cycle double cover conjecture}
+We say that a connected graph $G$ is {\it $k$-edge-connected}
+if
+$G$ has at least two vertices and no set of $k-1$ edges separates $G$.
+By convention, a $1$-edge-connected graph is simply a connected
+graph. In other words, a $G$ is $k$-edge-connected if and only if 
+it remains connected even after removing $k-1$ or fewer edges
+from $G$. The {\it edge-connectivity}
+\index{edge-connectivity}
+$\lambda(G)$ is equal to the maximum $k$ such that
+$G$ is $k$-edge-connected. (Some use
+$\kappa_1$ in place of $\lambda$.)
+\index{$\lambda(G)$}
+\index{$\kappa_1(G)$}
+
+Here is a Sage example concerning 
+$\lambda(G)$ using the Petersen graph 
+depicted in Figure \ref{fig:petersen-graph}.
+(You must install an optional linear programming
+Sage package such as GLPK for the commands below to work.)
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+sage: G = graphs.PetersenGraph()
+sage: len(G.vertices())
+10
+sage: E = G.edges(); len(E)
+15
+sage: G.edge_connectivity()
+3.0
+sage: G.delete_edge(E[0])
+sage: len(G.edges())
+14
+sage: G.edge_connectivity()
+2.0
+
+\end{lstlisting}
+\end{center}
+%
+
+\begin{lemma}
+{\rm
+If $e\in E$ then
+
+\[
+\lambda(G)-1\leq \lambda(G-e)\leq \lambda(G).
+\]
+}
+\end{lemma}
+
+\begin{proof}[Solution]
+
+...
+
+\end{proof}
+
+\begin{example}
+{\rm
+Sage can compute the edge-connectivity and the vertex-connectivity,
+provided an optional linear programming package
+(such as GLPK) is installed.
+
+%
+\begin{center}
+\fontsize{9pt}{9pt}
+\selectfont
+\tt
+\begin{lstlisting}
+
+sage: G = graphs.PetersenGraph()
+sage: G.vertex_connectivity() 
+3.0 
+sage: G.edge_connectivity()
+3.0
+sage: min(G.degree_sequence())
+3
+
+\end{lstlisting}
+\end{center}
+%
+This graph is depicted in Figure \ref{fig:petersen-graph}.
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=5cm,width=6cm]{image/petersen-graph}
+\end{center}
+\caption{{\bf The Petersen graph with $10$ vertices .} }
+\label{fig:petersen-graph}
+\end{figure}
+}
+\end{example}
+The the minimum degree of a graph $G=(V,E)$ is
+denoted
+
+\[
+\delta(G) = \min_{v\in V} \deg(v).
+\]
+\index{$\delta(G)$}
+
+\begin{proposition}
+{\rm
+In general,
+
+\[
+\kappa(G)\leq \lambda(G)\leq \delta(G).
+\]
+}
+\end{proposition}
+
+This is called {\it Whitney's inequality}.
+\index{Whitney's inequality}
+
+\begin{proof}[Solution]
+
+...
+
+\end{proof}
+
+\begin{theorem}
+{\rm
+If $G=(V,E)$ is a connected graph with $n=|V|$ and if
+$\deg(v)\geq (n+k-2)/2$, for all $v\in V$, then 
+$G$ is $k$-vertex-connected.
+}
+\end{theorem}
+
+\begin{proof}[Solution]
+
+...
+
+\end{proof}
+
+\begin{theorem} (Whitney's theorem, vertex version)
+{\rm
+Suppose $G=(V,E)$ is a graph with $|V|\geq k+1$. The following are
+equivalent:
+\begin{itemize}
+\item
+$G$ is $k$-vertex-connected,
+\item
+Any pair of distinct vertices $v,w\in V$ are connected by
+at least $k$ independent paths.
+\end{itemize}
+}
+\end{theorem}
+
+\begin{proof}[Solution]
+
+...
+
+\end{proof}
+
+\begin{corollary} (Harary)
+{\rm
+A graph $G=(V,E)$ having $|V|\geq 3$ is a block if anly only if
+every pair of vertices lie on a common 
+cycle.
+}
+\end{corollary}
+
+
+\begin{theorem}
+(Whitney's theorem, edge version)
+{\rm
+A graph is $k$-edge-connected if and only if any pair of
+vertices are connected by at least $k$ edge-disjoint paths.
+}
+\end{theorem}
+
+\begin{proof}[Solution]
+
+...
+
+\end{proof}
+
+Recall that a {\it cut-set} or {\it bond}
+or {\it cocycle} is a disconnecting set $F$ of a graph $G$ such that
+no proper subset of $F$ is also a disconnecting set.
+A {\it cut} of $G=(V,E)$ is a subset $C\subset E$ of the form
+
+\[
+C=\{e\in E\ \ | e=(x,y), \ x\in S,\ y\in T\}.
+\]
+where $V=S\cup T$ is a fixed partition.
+This cut set is denoted $cut(S,T)$.
+\index{$cut(S,T)$}
+
+\begin{lemma}
+{\rm
+Every cut set is a cut.
+}
+\end{lemma}
+
+\begin{proof}[Solution]
+Let $H$ be a connected subgraph of $G$ obtained after removing from
+$G$ all the edges in a cut set $F$. Let $W$ be the set of vertices
+of $H$. Then $F=cut(V,V-W)$.
+\end{proof}
+
+The converse of this lemma is false.
+
+\begin{theorem}
+{\rm
+A graph is $k$-edge-connected if and only if the number of
+edges in any cut is $\geq k$.
+}
+\end{theorem}
+
+\begin{proof}[Solution]
+
+...
+
+\end{proof}
+
+
 Let $G=(V,E)$ be a connected graph and $u,v\in V$ be distinct non-adjacent
-vertices. A path form $u$ to $v$ is caled a 
+vertices. A path from $u$ to $v$ is called a 
 {\it $u$-$v$ path}.
 \index{path!$u$-$v$}
 Two paths $P_1$, $P_2$ from $u$ to $v$ are called {\it independent}
