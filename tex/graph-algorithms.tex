@@ -1145,6 +1145,35 @@ obtain a $v$-$w$ path $P'$ of lower weight. Since the final path is
 acyclic, it must have no more than $n - 1$ edges.
 \end{proof}
 
+\begin{algorithm}[!htpb]
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%% input/output
+\Input{A weighted graph or digraph $G = (V, E)$, where the vertices
+  are numbered as $V = \{1, 2, \dots, n\}$. A starting vertex $s$.}
+\Output{A list $D$ of distances from $s$ to all other vertices. A list
+  $P$ of parent vertices such that $P[v]$ is the parent of $v$.}
+\BlankLine
+$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+let $C$ be a list of candidate vertices to visit\;
+\While{$\length(C) > 0$}{
+  select $v \in C$\;
+  $C \leftarrow \remove(C, v)$\;
+  \For{\emph{each} $u \in \adj(v)$~\nllabel{alg:generic_shortest_path:neighbors}}{
+    \If{$D[u] > D[v] + w(vu)$}{
+      $D[u] \leftarrow D[v] + w(vu)$\;
+      $P[u] \leftarrow v$\;
+      if $u$ is not in $C$, add $u$ to $C$\;
+    }
+  }
+}
+\Return $(D,P)$\;
+\caption{A template for shortest path algorithms.}
+\label{alg:graph_algorithms:generic_shortest_path_algorithm}
+\end{algorithm}
+
 Having defined weights and distances, we are now ready to discuss
 shortest path algorithms for weighted graphs. The breadth-first search
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} can
@@ -1162,6 +1191,18 @@ algorithm, a weight-correcting algorithm is able to deal with negative
 weights, provided that the weight sum of any cycle is
 nonnegative. The term \emph{negative cycle} refers to the weight sum $s$
 of a cycle such that $s < 0$.
+
+Algorithm~\ref{alg:graph_algorithms:generic_shortest_path_algorithm}
+is a general template for many shortest path algorithms. With a tweak
+here and there, one could modify it to suit the problem at hand. Note
+that $w(vu)$ is the weight of the edge $vu$. If the input graph is
+undirected, line~\ref{alg:generic_shortest_path:neighbors} considers
+all the neighbors of $v$. For digraphs, we are interested in
+out-neighbors of $v$ and accordingly we replace ``$u \in \adj(v)$'' in
+line~\ref{alg:generic_shortest_path:neighbors} with
+``$u \in \oadj(v)$''. The general flow of
+Algorithm~\ref{alg:graph_algorithms:generic_shortest_path_algorithm}
+follows the same pattern as depth-first and breadth-first searches.
 
 
 %%--- Dijkstra's algorithm ----------------------------------------------%%
