@@ -1287,12 +1287,6 @@ $Q \leftarrow V$~\tcc*[f]{queue of nodes to visit}\;
 \label{alg:graph_algorithms:dijkstra_general}
 \end{algorithm}
 
-The simplest implementation of Dijkstra's algorithm has
-running time $O( | V |^2)=O(n^2)$ (where
-$n=|V|$ is the number of vertices of the graph)\footnote{This
-can be improved, with some clever programming,
-in the case of ``sparse'' graphs to $O(n\log n)$.}.
-
 \begin{figure}[!htbp]
 \centering
 \begin{tikzpicture}
@@ -1414,14 +1408,14 @@ Let $G = (V, E)$ be a weighted (di)graph with a nonnegative weight
 function $w$. When Dijkstra's algorithm is applied to $G$ with source
 vertex $s \in V$, the algorithm terminates with $D[u] = d(s,u)$ for
 all $u \in V$. Furthermore, if $D[v] \neq \infty$ and $v \neq s$, then
-$s=u_1, u_2, \dots, u_k = v$ is a shortest $s$-$v$ path such that 
+$s=u_1, u_2, \dots, u_k = v$ is a shortest $s$-$v$ path such that
 $u_{i-1} = P[u_i]$ for $i = 2,3,\dots,k$.
 \end{theorem}
 
 \begin{proof}
 If $G$ is disconnected, then any $v \in V$ that cannot be reached from
 $s$ has distance $D[v] = \infty$ upon algorithm termination. Hence, it
-suffices to consider the case where $G$ is connected. Let 
+suffices to consider the case where $G$ is connected. Let
 $V = \{s=v_1, v_2, \dots, v_n\}$ and use induction on $i$ to show that
 after visiting $v_i$ we have
 %
@@ -1462,13 +1456,26 @@ if $G$ is directed. Therefore, $D[v_{i+1}] = d(s, v_{i+1})$.
 Let $v \in V$ such that $D[v] \neq \infty$ and $v \neq s$. We now
 construct an $s$-$v$ path. When
 Algorithm~\ref{alg:graph_algorithms:dijkstra_general} terminates, we
-have $D[v] = D[v_1] + w(v_1 v)$, where $P[v] = v_1$ and 
+have $D[v] = D[v_1] + w(v_1 v)$, where $P[v] = v_1$ and
 $d(s,v) = d(s, v_1) + w(v_1 v)$. This means that $v_1$ is the
 second-to-last vertex in a shortest $s$-$v$ path. Repeated application
 of this process using the parent list $P$, we eventually produce a
-shortest $s$-$v$ path $s=v_m, v_{m-1}, \dots, v_1, v$, where 
+shortest $s$-$v$ path $s=v_m, v_{m-1}, \dots, v_1, v$, where
 $P[v_i] = v_{i+1}$ for $i = 1, 2, \dots, m - 1$.
 \end{proof}
+
+To analyze the worst case time complexity of
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general}, note that
+initializing $D$ takes $O(n + 1)$ and initializing $Q$ takes $O(n)$,
+for a total of $O(n)$ devoted to initialization. Each extraction of a
+vertex $v$ with minimal $D[v]$ requires $O(n)$ since we search through
+the entire list $Q$ to determine the minimum value, for a total of
+$O(n^2)$. Each insertion into $D$ requires constant time and the same
+holds for insertion into $P$. Thus, insertion into $D$ and $P$ takes
+$O(|E| + |E|) = O(|E|)$, which require at most $O(n)$ time. In the
+worst case, Dijkstra's
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} has running time
+$O(n^2 + n) = O(n^2)$.
 
 
 %%--- Problems ----------------------------------------------------------%%
