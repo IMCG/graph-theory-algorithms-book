@@ -1271,7 +1271,7 @@ returns the lists $D$ and $P$.
 $D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
 $D[s] \leftarrow 0$\;
 $P \leftarrow [\,]$\;
-$Q \leftarrow V$~\tcc*[f]{queue of nodes to visit}\;
+$Q \leftarrow V$~\tcc*[f]{list of nodes to visit}\;
 \While{$\length(Q) > 0$~\nllabel{alg:dijkstra_general:while_loop}}{
   find $v \in Q$ such that $D[v]$ is minimal~\nllabel{alg:dijkstra_general:find_vertex_minimal_distance}\;
   $Q \leftarrow \remove(Q, v)$\;
