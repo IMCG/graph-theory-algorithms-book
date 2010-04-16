@@ -1220,17 +1220,38 @@ connected by a direct road. Dijkstra's algorithm can be used to find a
 shortest route from a fixed city to any other city.
 
 Let $G = (V,E)$ be a (di)graph with nonnegative edge weights. Fix a
-start or source vertex $s \in V$. Dijkstra's algorithm performs a
-number of steps, basically one step for each vertex in $V$. We
-partition the vertex set $V$ into two
-subsets: the set $F$ of vertices where we have found the shortest path
-to $v_0$; and the ``queue'' $Q$ where we do not yet know for sure the
-shortest path to $v_0$. The vertices $v \in F$ are labeled with
-$\delta(v, v_0)$. The vertices $v \in Q$ are labeled with a temporary
-label $L(v)$. This temporary label can be either $\infty$ if no path
-from $v$ to $v_0$ has yet been examined, or an upper bound on
-$\delta(v, v_0)$ obtained by computing $\delta(P)$ for a path $P$ from
-$v$ to $v_0$ which has been found (but may not be the shortest path).
+start or source vertex $s \in V$. Dijkstra's
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} performs a
+number of steps, basically one step for each vertex in $V$. First, we
+initialize a list $D$ with $n$ copies of $\infty$ and then assign $0$
+to $D[s]$. The purpose of the symbol $\infty$ is to denote the largest
+possible value. The list $D$ is to store the distances of all shortest
+paths from $s$ to any other vertices in $G$, where we take the
+distance of $s$ to itself to be zero. The list $P$ of parent vertices
+is initially empty and the queue $Q$ is initialized to all vertices in
+$G$. We now consider each vertex in $Q$, removing any vertex after we
+have visited it. The while loop starting on
+line~\ref{alg:dijkstra_general:while_loop} runs until we have visited
+all
+vertices. Line~\ref{alg:dijkstra_general:find_vertex_minimal_distance}
+chooses which vertex to visit, preferring a vertex $v$ whose distance
+value $D[v]$ from $s$ is minimal. After we have determined such a
+vertex $v$, we remove it from the queue $Q$ to signify that we have
+visited $v$. The for loop starting on
+line~\ref{alg:dijkstra_general:for_loop} adjusts the distance values
+of each neighbor $u$ of $v$ such that $u$ is also in $Q$. If $G$ is
+directed, we only consider out-neighbors of $v$ that are also in
+$Q$. The conditional starting on
+line~\ref{alg:dijkstra_general:if_relaxation} is where the adjustment
+takes place. The expression $D[v] + w(vu)$ sums the distance from $s$
+to $v$ and the distance from $v$ to $u$. If this total sum is less
+than the distance $D[u]$ from $s$ to $u$, we assign this lesser
+distance to $D[u]$ and let $v$ be the parent vertex of $u$. In this
+way, we are choosing a neighbor vertex that results in minimal
+distance from $s$. Each pass through the while loop decreases the
+number of elements in $Q$ by one without adding any elements to
+$Q$. Eventually, we would exit the while loop and the algorithm
+returns the lists $D$ and $P$.
 
 \begin{algorithm}[!htpb]
 \dontprintsemicolon  % no semicolon at end of pseudocode statements
@@ -1251,11 +1272,11 @@ $D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\
 $D[s] \leftarrow 0$\;
 $P \leftarrow [\,]$\;
 $Q \leftarrow V$~\tcc*[f]{queue of nodes to visit}\;
-\While{$\length(Q) > 0$}{
-  find $v \in Q$ such that $D[v]$ is minimal\;
+\While{$\length(Q) > 0$~\nllabel{alg:dijkstra_general:while_loop}}{
+  find $v \in Q$ such that $D[v]$ is minimal~\nllabel{alg:dijkstra_general:find_vertex_minimal_distance}\;
   $Q \leftarrow \remove(Q, v)$\;
-  \For{\emph{each} $u \in \adj(v) \cap Q$}{
-    \If{$D[u] > D[v] + w(vu)$}{
+  \For{\emph{each} $u \in \adj(v) \cap Q$~\nllabel{alg:dijkstra_general:for_loop}}{
+    \If{$D[u] > D[v] + w(vu)$~\nllabel{alg:dijkstra_general:if_relaxation}}{
       $D[u] \leftarrow D[v] + w(vu)$\;
       $P[u] \leftarrow v$\;
     }
