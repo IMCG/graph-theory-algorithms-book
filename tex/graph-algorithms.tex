@@ -1407,6 +1407,69 @@ parent, and so on.
 %sage: D = DiGraph(M, format="weighted_adjacency_matrix")
 %sage: D.plot(edge_labels=True, graph_border=True).show()
 
+\begin{theorem}
+\textbf{Correctness of
+  Algorithm~\ref{alg:graph_algorithms:dijkstra_general}.}
+Let $G = (V, E)$ be a weighted (di)graph with a nonnegative weight
+function $w$. When Dijkstra's algorithm is applied to $G$ with source
+vertex $s \in V$, the algorithm terminates with $D[u] = d(s,u)$ for
+all $u \in V$. Furthermore, if $D[v] \neq \infty$ and $v \neq s$, then
+$s=u_1, u_2, \dots, u_k = v$ is a shortest $s$-$v$ path such that 
+$u_{i-1} = P[u_i]$ for $i = 2,3,\dots,k$.
+\end{theorem}
+
+\begin{proof}
+If $G$ is disconnected, then any $v \in V$ that cannot be reached from
+$s$ has distance $D[v] = \infty$ upon algorithm termination. Hence, it
+suffices to consider the case where $G$ is connected. Let 
+$V = \{s=v_1, v_2, \dots, v_n\}$ and use induction on $i$ to show that
+after visiting $v_i$ we have
+%
+\begin{equation}
+\label{eq:graph_algorithms:Dijkstra:shortest_distance}
+D[v]
+=
+d(s,v)
+\qquad
+\text{for all $v \in V_i = \{v_1, v_2, \dots, v_i\}$}.
+\end{equation}
+%
+For $i = 1$, equality holds. Assume for induction
+that~(\ref{eq:graph_algorithms:Dijkstra:shortest_distance}) holds for
+some $1 \leq i \leq n - 1$, so that now our task is to show
+that~(\ref{eq:graph_algorithms:Dijkstra:shortest_distance}) holds for
+$i + 1$. To verify $D[v_{i+1}] = d(s, v_{i+1})$, note that by our
+inductive hypothesis,
+\[
+D[v_{i+1}]
+=
+\min \left\{
+\left. d(s,v) + w(vu) \;\right|\;
+v \in V_i \text{ and } u \in \adj(v) \cap (Q \backslash V_i)
+\right\}
+\]
+and respectively
+\[
+D[v_{i+1}]
+=
+\min \left\{
+\left. d(s,v) + w(vu) \;\right|\;
+v \in V_i \text{ and } u \in \oadj(v) \cap (Q \backslash V_i)
+\right\}
+\]
+if $G$ is directed. Therefore, $D[v_{i+1}] = d(s, v_{i+1})$.
+
+Let $v \in V$ such that $D[v] \neq \infty$ and $v \neq s$. We now
+construct an $s$-$v$ path. When
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} terminates, we
+have $D[v] = D[v_1] + w(v_1 v)$, where $P[v] = v_1$ and 
+$d(s,v) = d(s, v_1) + w(v_1 v)$. This means that $v_1$ is the
+second-to-last vertex in a shortest $s$-$v$ path. Repeated application
+of this process using the parent list $P$, we eventually produce a
+shortest $s$-$v$ path $s=v_m, v_{m-1}, \dots, v_1, v$, where 
+$P[v_i] = v_{i+1}$ for $i = 1, 2, \dots, m - 1$.
+\end{proof}
+
 
 %%--- Problems ----------------------------------------------------------%%
 
