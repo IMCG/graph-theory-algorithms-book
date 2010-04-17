@@ -4,6 +4,12 @@
 \chapter{Trees and Forests}
 \label{chap:trees_forests}
 
+\begin{itemize}
+\item Discuss heaps and how these relate to realizing efficient
+  implementations of Dijkstra's
+  Algorithm~\ref{alg:graph_algorithms:dijkstra_general}.
+\end{itemize}
+
 Recall, a path in a graph $G = (V, E)$ whose start and end vertices
 are the same is called a cycle. We say $G$ is \emph{acyclic}, or a
 \emph{forest}, if it has no cycles. A vertex of a forest of degree one
@@ -1943,14 +1949,14 @@ See also \url{http://en.wikipedia.org/wiki/Tree_traversal}.
 \item symmetric, or in-order, traversal
 \end{itemize}
 
-In computer science, {\it tree traversal} refers to the process of 
+In computer science, {\it tree traversal} refers to the process of
 examining each node in a tree data structure exactly once.
 \index{tree traversal}
 We restrict our discussion to binary rooted trees.
 
 Starting at the root of a binary tree, there are three main steps that
 can be performed and the order in which they are performed defines the
-traversal type. 
+traversal type.
 
 \noindent
 {\it Depth-first traversal}:
@@ -2046,7 +2052,7 @@ chapter~12 of Cormen~et~al.~\cite{CormenEtAl2001}. See also
 \item sorting using BST
 \end{itemize}
 
-A {\it binary search tree} (BST) is a rooted binary tree 
+A {\it binary search tree} (BST) is a rooted binary tree
 $T=(V,E)$ having weighted vertices ${\rm wt}:V\to {\mathbb{R}}$ satisfying:
 
 \begin{itemize}
@@ -2063,8 +2069,8 @@ Both the left and right subtrees must also be binary search trees.
 From the above properties it naturally follows that:
 {\it Each vertex has a distinct label.}
 
-Generally, the information represented by each vertex is a 
-record (or list or dictionary), rather than a single data element. However, 
+Generally, the information represented by each vertex is a
+record (or list or dictionary), rather than a single data element. However,
 for sequencing purposes, vertices are compared according to their
 labels rather than any part of their associated records.
 
@@ -2083,11 +2089,11 @@ having distinct weights satisfying the above criteria) $T$ and a
 label $\ell$. For this search, we are looking for a vertex in $T$
 whose label is $\ell$, if one exists.
 
-We begin by examining the root vertex, $v_0$. If $\ell={\rm wt}(v_0)$, 
-the search is successful. If the $\ell<{\rm wt}(v_0)$,  
-search the left subtree. Similarly, if $\ell>{\rm wt}(v_0)$,  
+We begin by examining the root vertex, $v_0$. If $\ell={\rm wt}(v_0)$,
+the search is successful. If the $\ell<{\rm wt}(v_0)$,
+search the left subtree. Similarly, if $\ell>{\rm wt}(v_0)$,
 search the right subtree. This process is repeated until a vertex
-$v\in V$ is found for which $\ell={\rm wt}(v)$, 
+$v\in V$ is found for which $\ell={\rm wt}(v)$,
 or the indicated subtree is empty.
 
 
@@ -2096,14 +2102,14 @@ or the indicated subtree is empty.
 We are given a BST (i.e., a binary rooted tree with weighted vertices
 having distinct weights satisfying the above criteria) $T$ and a
 label $\ell$. We assume $\ell$ is between the
-lowest weight of $T$ and the highest weight. 
-For this procedure, we are looking for a ``parent'' 
+lowest weight of $T$ and the highest weight.
+For this procedure, we are looking for a ``parent''
 vertex in $T$ which can ``adopt'' a new vertex $v$ having weight $\ell$
 and for which this augmented tree $T\cup v$ satisfies
 the criteria above.
 
-Insertion proceeds as a search does. However, in this case, you are 
-searching for vertices $v_1,v_2\in V$ for which 
+Insertion proceeds as a search does. However, in this case, you are
+searching for vertices $v_1,v_2\in V$ for which
 ${\rm wt}(v_1)<\ell < {\rm wt}(v_2)$. Once found, these
 vertices will tell you where to insert $v$.
 
@@ -2111,15 +2117,15 @@ vertices will tell you where to insert $v$.
 
 As above, we are given a BST $T$ and a
 label $\ell$. We assume $\ell$ is between the
-lowest weight of $T$ and the highest weight. 
+lowest weight of $T$ and the highest weight.
 For this procedure, we are looking for a vertex $v$ of
-$T$ which has weight $\ell$. We want to remove $v$ from 
+$T$ which has weight $\ell$. We want to remove $v$ from
 $T$ (and therefore also the weight $\ell$ from the list of weights),
 thereby creating a ``smaller'' tree $T- v$ satisfying
 the criteria above.
 
-Deletion proceeds as a search does. However, in this case, you are 
-searching for vertix $v\in V$ for which 
+Deletion proceeds as a search does. However, in this case, you are
+searching for vertix $v\in V$ for which
 ${\rm wt}(v)=\ell$. Once found, we remove $v$ from $V$
 and any edge $(u,v)\in E$ is replaced by $(u,w_1)$
 and $(u,w_2)$, where $w_1.w_2\in V$ were the children of $v$
@@ -2129,12 +2135,12 @@ in $T$.
 
 A binary search tree can be used to implement a simple but efficient
 sorting algorithm. Suppose we wish to sort a list of numbers
-$L = [\ell_1, \ell_2,\dots, \ell_n]$. First, let $V=\{1,2,\dots,n\}$ 
+$L = [\ell_1, \ell_2,\dots, \ell_n]$. First, let $V=\{1,2,\dots,n\}$
 be the vertices of a tree and weight vertex $i$ with $\ell_i$,
 for $1\leq i\leq n$. In this case, we can traverse this tree
 in order of its weights, thereby building a BST recursively.
 This BST represents the sorting of the list $L$.
-A {\it binary search tree} (BST) is a rooted binary tree 
+A {\it binary search tree} (BST) is a rooted binary tree
 $T=(V,E)$ having weighted vertices ${\rm wt}:V\to {\mathbb{R}}$ satisfying:
 
 \begin{itemize}
@@ -2151,8 +2157,8 @@ Both the left and right subtrees must also be binary search trees.
 From the above properties it naturally follows that:
 {\it Each vertex has a distinct label.}
 
-Generally, the information represented by each vertex is a 
-record (or list or dictionary), rather than a single data element. However, 
+Generally, the information represented by each vertex is a
+record (or list or dictionary), rather than a single data element. However,
 for sequencing purposes, vertices are compared according to their
 labels rather than any part of their associated records.
 
@@ -2171,11 +2177,11 @@ having distinct weights satisfying the above criteria) $T$ and a
 label $\ell$. For this search, we are looking for a vertex in $T$
 whose label is $\ell$, if one exists.
 
-We begin by examining the root vertex, $v_0$. If $\ell={\rm wt}(v_0)$, 
-the search is successful. If the $\ell<{\rm wt}(v_0)$,  
-search the left subtree. Similarly, if $\ell>{\rm wt}(v_0)$,  
+We begin by examining the root vertex, $v_0$. If $\ell={\rm wt}(v_0)$,
+the search is successful. If the $\ell<{\rm wt}(v_0)$,
+search the left subtree. Similarly, if $\ell>{\rm wt}(v_0)$,
 search the right subtree. This process is repeated until a vertex
-$v\in V$ is found for which $\ell={\rm wt}(v)$, 
+$v\in V$ is found for which $\ell={\rm wt}(v)$,
 or the indicated subtree is empty.
 
 
@@ -2184,14 +2190,14 @@ or the indicated subtree is empty.
 We are given a BST (i.e., a binary rooted tree with weighted vertices
 having distinct weights satisfying the above criteria) $T$ and a
 label $\ell$. We assume $\ell$ is between the
-lowest weight of $T$ and the highest weight. 
-For this procedure, we are looking for a ``parent'' 
+lowest weight of $T$ and the highest weight.
+For this procedure, we are looking for a ``parent''
 vertex in $T$ which can ``adopt'' a new vertex $v$ having weight $\ell$
 and for which this augmented tree $T\cup v$ satisfies
 the criteria above.
 
-Insertion proceeds as a search does. However, in this case, you are 
-searching for vertices $v_1,v_2\in V$ for which 
+Insertion proceeds as a search does. However, in this case, you are
+searching for vertices $v_1,v_2\in V$ for which
 ${\rm wt}(v_1)<\ell < {\rm wt}(v_2)$. Once found, these
 vertices will tell you where to insert $v$.
 
@@ -2199,15 +2205,15 @@ vertices will tell you where to insert $v$.
 
 As above, we are given a BST $T$ and a
 label $\ell$. We assume $\ell$ is between the
-lowest weight of $T$ and the highest weight. 
+lowest weight of $T$ and the highest weight.
 For this procedure, we are looking for a vertex $v$ of
-$T$ which has weight $\ell$. We want to remove $v$ from 
+$T$ which has weight $\ell$. We want to remove $v$ from
 $T$ (and therefore also the weight $\ell$ from the list of weights),
 thereby creating a ``smaller'' tree $T- v$ satisfying
 the criteria above.
 
-Deletion proceeds as a search does. However, in this case, you are 
-searching for vertix $v\in V$ for which 
+Deletion proceeds as a search does. However, in this case, you are
+searching for vertix $v\in V$ for which
 ${\rm wt}(v)=\ell$. Once found, we remove $v$ from $V$
 and any edge $(u,v)\in E$ is replaced by $(u,w_1)$
 and $(u,w_2)$, where $w_1.w_2\in V$ were the children of $v$
@@ -2217,7 +2223,7 @@ in $T$.
 
 A binary search tree can be used to implement a simple but efficient
 sorting algorithm. Suppose we wish to sort a list of numbers
-$L = [\ell_1, \ell_2,\dots, \ell_n]$. First, let $V=\{1,2,\dots,n\}$ 
+$L = [\ell_1, \ell_2,\dots, \ell_n]$. First, let $V=\{1,2,\dots,n\}$
 be the vertices of a tree and weight vertex $i$ with $\ell_i$,
 for $1\leq i\leq n$. In this case, we can traverse this tree
 in order of its weights, thereby building a BST recursively.

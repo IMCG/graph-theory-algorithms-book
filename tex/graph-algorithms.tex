@@ -1477,6 +1477,35 @@ worst case, Dijkstra's
 Algorithm~\ref{alg:graph_algorithms:dijkstra_general} has running time
 $O(n^2 + n) = O(n^2)$.
 
+Can we improve the run time of Dijkstra's algorithm? The time
+complexity of Dijkstra's algorithm depends on its implementation. With
+a simple list implementation as presented in
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general}, we have a worst
+case time complexity of $O(n^2)$, where $n$ is the order of the graph
+under consideration. Let $m$ be the size of the
+graph. Table~\ref{tab:graph_algorithms:worst_case_time_complexity_Dijkstra}
+presents time complexities of Dijkstra's algorithm for various
+implementations. Out of all the four implementations in this table,
+the heap implementations are much more efficient than the list
+implementation presented in
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general}. A heap is a type
+of tree, a topic which will be covered in
+Chapter~\ref{chap:trees_forests}.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|ll|} \hline
+Implementation & Time complexity \\\hline\hline
+list           & $O(n^2)$ \\
+binary heap    & $O \big( \log(n) \cdot (n + m) \big)$ \\
+$k$-ary heap   & $O \big( (kn + m) \frac{\log(n)}{\log(k)} \big)$ \\
+Fibonacci heap & $O(n \cdot \log(n) + m)$ \\\hline
+\end{tabular}
+\caption{Implementation specific worst case time complexity of
+  Dijkstra's algorithm.}
+\label{tab:graph_algorithms:worst_case_time_complexity_Dijkstra}
+\end{table}
+
 
 %%--- Problems ----------------------------------------------------------%%
 
