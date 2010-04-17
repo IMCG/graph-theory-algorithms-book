@@ -1370,37 +1370,6 @@ $v$ and work backward using the parent of $v$, then the parent of the
 parent, and so on.
 \end{proof}
 
-\begin{figure}[!htbp]
-\centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick}]
-%% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {v_1/4/0/below/south,
-  v_2/0/0/below/south, v_3/0/3/above/north, v_4/4/3/above/north,
-  v_5/7/1.5/right/east} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode/\direction/\weight in {v_1/v_2/below/1,
-  v_1/v_5/below/6, v_2/v_4/right/3, v_3/v_4/above/1, v_4/v_1/right/3} {
-  (\startnode) edge[arrowdecorate] node[\direction]{$\weight$} (\endnode)
-}
-\foreach \startnode/\endnode/\direction/\angle/\weight in {
-  v_3/v_2/right/20/2, v_3/v_1/above left/15/1, v_2/v_3/left/20/1,
-  v_1/v_3/below right/15/3, v_4/v_5/above/15/2, v_5/v_4/below/15/1} {
-  (\startnode) edge[arrowdecorate,bend left=\angle] node[\direction]{$\weight$} (\endnode)
-};
-\end{tikzpicture}
-\caption{Searching a directed house graph using Dijkstra's algorithm.}
-\label{fig:graph_algorithms:Dijkstra_directed_house_graph}
-\end{figure}
-%sage: M = matrix([[0,1,3,0,6],[0,0,1,3,0],[1,2,0,1,0],[3,0,0,0,2],[0,0,0,1,0]])
-%sage: D = DiGraph(M, format="weighted_adjacency_matrix")
-%sage: D.plot(edge_labels=True, graph_border=True).show()
-
 \begin{theorem}
 \textbf{Correctness of
   Algorithm~\ref{alg:graph_algorithms:dijkstra_general}.}
@@ -1516,6 +1485,37 @@ Fibonacci heap & $O(n \cdot \log(n) + m)$ \\\hline
   Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph} as
   undirected. Run this undirected version through Dijkstra's algorithm
   with starting vertex $v_1$.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  arrowdecorate/.style={->,>=stealth,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {v_1/4/0/below/south,
+  v_2/0/0/below/south, v_3/0/3/above/north, v_4/4/3/above/north,
+  v_5/7/1.5/right/east} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode/\direction/\weight in {v_1/v_2/below/1,
+  v_1/v_5/below/6, v_2/v_4/right/3, v_3/v_4/above/1, v_4/v_1/right/3} {
+  (\startnode) edge[arrowdecorate] node[\direction]{$\weight$} (\endnode)
+}
+\foreach \startnode/\endnode/\direction/\angle/\weight in {
+  v_3/v_2/right/20/2, v_3/v_1/above left/15/1, v_2/v_3/left/20/1,
+  v_1/v_3/below right/15/3, v_4/v_5/above/15/2, v_5/v_4/below/15/1} {
+  (\startnode) edge[arrowdecorate,bend left=\angle] node[\direction]{$\weight$} (\endnode)
+};
+\end{tikzpicture}
+\caption{Searching a directed house graph using Dijkstra's algorithm.}
+\label{fig:graph_algorithms:Dijkstra_directed_house_graph}
+\end{figure}
+%sage: M = matrix([[0,1,3,0,6],[0,0,1,3,0],[1,2,0,1,0],[3,0,0,0,2],[0,0,0,1,0]])
+%sage: D = DiGraph(M, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
 
 \item Consider the graph in
   Figure~\ref{fig:graph_algorithms:Dijkstra_directed_house_graph}. Choose
