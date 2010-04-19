@@ -1534,17 +1534,19 @@ Fibonacci heap & $O(n \cdot \log(n) + m)$ \\\hline
 %%-----------------------------------------------------------------------%%
 %%--- Bellman-Ford algorithm --------------------------------------------%%
 
-\subsection{Bellman-Ford algorithm}
+\section{Bellman-Ford algorithm}
 
-See section~24.1 of Cormen~et~al.~\cite{CormenEtAl2001}, and
-section~8.5 of Berman and Paul~\cite{BermanPaul1997}.
-
-The Bellman-Ford algorithm computes single-source shortest paths in a
-weighted graph or digraph, where some of the edge weights may be
-negative. Instead of the ``greedy'' approach that Dijkstra's algorithm
-took, i.e. searching for the ``cheapest'' path, the Bellman-Ford
-algorithm searches over all edges and keeps track of the shortest one
-found as it searches.
+A disadvantage of Dijkstra's
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} is that it
+cannot handle graphs with negative edge weights. The Bellman-Ford
+algorithm computes single-source shortest paths in a weighted graph or
+digraph, where some of the edge weights may be negative. This
+algorithm is a modification of the one published in 1957 by Richard E.
+Bellman~\cite{Bellman1957} and that by Lester Randolph Ford,
+Jr.~\cite{Ford1956} in 1956. In contrast to the ``greedy'' approach
+that Dijkstra's algorithm takes, i.e. searching for the ``cheapest''
+path, the Bellman-Ford algorithm searches over all edges and keeps
+track of the shortest one found as it searches.
 
 The implementation below takes in a graph or digraph, and creates two
 Python dictionaries \verb!dist! and \verb!predecessor!, keyed on the
