@@ -1370,6 +1370,12 @@ $v$ and work backward using the parent of $v$, then the parent of the
 parent, and so on.
 \end{proof}
 
+Dijkstra's algorithm is an example of a \emph{greedy algorithm}.
+Whenever it tries to find the next vertex, it chooses only that vertex
+that minimizes the total weight so far. Greedy algorithms may not
+produce the best possible result. However, as the following theorem
+shows, Dijkstra's algorithm does indeed produce shortest paths.
+
 \begin{theorem}
 \textbf{Correctness of
   Algorithm~\ref{alg:graph_algorithms:dijkstra_general}.}
