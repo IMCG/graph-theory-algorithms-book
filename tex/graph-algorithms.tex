@@ -1567,10 +1567,10 @@ track of the shortest one found as it searches.
   \False. Otherwise, return $D$ and $P$.}
 \BlankLine
 %% algorithm body
-$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}~\nllabel{alg:Bellman_Ford:init_infinity}\;
 $D[s] \leftarrow 0$\;
-$P \leftarrow [\,]$\;
-\For{$i \leftarrow 1, 2, \dots, n-1$}{
+$P \leftarrow [\,]$~\nllabel{alg:Bellman_Ford:init_parent_list}\;
+\For{$i \leftarrow 1, 2, \dots, n-1$~\nllabel{alg:Bellman_Ford:for_loop:relax}}{
   \For{\emph{each edge} $uv \in E$}{
     \If{$D[v] > D[u] + w(uv)$}{
       $D[v] \leftarrow D[u] + w(uv)$\;
@@ -1578,7 +1578,7 @@ $P \leftarrow [\,]$\;
     }
   }
 }
-\For{\emph{each edge} $uv \in E$}{
+\For{\emph{each edge} $uv \in E$~\nllabel{alg:Bellman_Ford:for_loop:check_negative_weight_cycles}}{
   \If{$D[v] > D[u] + w(uv)$}{
     \Return \False\;
   }
@@ -1587,6 +1587,17 @@ $P \leftarrow [\,]$\;
 \caption{The Bellman-Ford algorithm.}
 \label{alg:graph_algorithms:Bellman_Ford}
 \end{algorithm}
+
+The Bellman-Ford Algorithm~\ref{alg:graph_algorithms:Bellman_Ford}
+runs in time $O(mn)$, where $m$ and $n$ are the size and order of an
+input graph, respectively. To see this, note that the initialization
+on lines~\ref{alg:Bellman_Ford:init_infinity}
+to~\ref{alg:Bellman_Ford:init_parent_list} takes $O(n)$. Each of the
+$n - 1$ rounds of the for loop starting on
+line~\ref{alg:Bellman_Ford:for_loop:relax} takes $O(m)$, for a total
+of $O(mn)$ time. Finally, the for loop starting on
+line~\ref{alg:Bellman_Ford:for_loop:check_negative_weight_cycles}
+takes $O(m)$.
 
 The implementation below takes in a graph or digraph, and creates two
 Python dictionaries \verb!dist! and \verb!predecessor!, keyed on the
@@ -1647,9 +1658,6 @@ def bellman_ford(Gamma, s):
     return dist, predecessor
 \end{lstlisting}
 \end{center}
-
-Bellman-Ford runs in $O(|V|\cdot |E|)$-time, which is $O(n^3)$ for
-``dense'' connected graphs (where $n=|V|$).
 
 Here are some examples.
 
