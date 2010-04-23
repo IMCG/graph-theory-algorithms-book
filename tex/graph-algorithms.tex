@@ -1599,163 +1599,163 @@ of $O(mn)$ time. Finally, the for loop starting on
 line~\ref{alg:Bellman_Ford:for_loop:check_negative_weight_cycles}
 takes $O(m)$.
 
-The implementation below takes in a graph or digraph, and creates two
-Python dictionaries \verb!dist! and \verb!predecessor!, keyed on the
-list of vertices, which store the distance and shortest
-paths. However, if a negative weight cycle exists~(in the case of a
-digraph), then an error is raised.
+%% The implementation below takes in a graph or digraph, and creates two
+%% Python dictionaries \verb!dist! and \verb!predecessor!, keyed on the
+%% list of vertices, which store the distance and shortest
+%% paths. However, if a negative weight cycle exists~(in the case of a
+%% digraph), then an error is raised.
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
-def bellman_ford(Gamma, s):
-    """
-    Computes the shortest distance from s to all other vertices in Gamma.
-    If Gamma has a negative weight cycle, then return an error.
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% def bellman_ford(Gamma, s):
+%%     """
+%%     Computes the shortest distance from s to all other vertices in Gamma.
+%%     If Gamma has a negative weight cycle, then return an error.
 
-    INPUT:
+%%     INPUT:
 
-    - Gamma -- a graph.
-    - s -- the source vertex.
+%%     - Gamma -- a graph.
+%%     - s -- the source vertex.
 
-    OUTPUT:
+%%     OUTPUT:
 
-    - (d,p) -- pair of dictionaries keyed on the list of vertices,
-      which store the distance and shortest paths.
+%%     - (d,p) -- pair of dictionaries keyed on the list of vertices,
+%%       which store the distance and shortest paths.
 
-    REFERENCE:
+%%     REFERENCE:
 
-    http://en.wikipedia.org/wiki/Bellman-Ford_algorithm
-    """
-    P = []
-    dist = {}
-    predecessor = {}
-    V = Gamma.vertices()
-    E = Gamma.edges()
-    for v in V:
-        if v == s:
-            dist[v] = 0
-        else:
-            dist[v] = infinity
-        predecessor[v] = 0
-    for i in range(1, len(V)):
-        for e in E:
-            u = e[0]
-            v = e[1]
-            wt = e[2]
-            if dist[u] + wt < dist[v]:
-                dist[v] = dist[u] + wt
-                predecessor[v] = u
-    # check for negative-weight cycles
-    for e in E:
-        u = e[0]
-        v = e[1]
-        wt = e[2]
-        if dist[u] + wt < dist[v]:
-            raise ValueError("Graph contains a negative-weight cycle")
-    return dist, predecessor
-\end{lstlisting}
-\end{center}
+%%     http://en.wikipedia.org/wiki/Bellman-Ford_algorithm
+%%     """
+%%     P = []
+%%     dist = {}
+%%     predecessor = {}
+%%     V = Gamma.vertices()
+%%     E = Gamma.edges()
+%%     for v in V:
+%%         if v == s:
+%%             dist[v] = 0
+%%         else:
+%%             dist[v] = infinity
+%%         predecessor[v] = 0
+%%     for i in range(1, len(V)):
+%%         for e in E:
+%%             u = e[0]
+%%             v = e[1]
+%%             wt = e[2]
+%%             if dist[u] + wt < dist[v]:
+%%                 dist[v] = dist[u] + wt
+%%                 predecessor[v] = u
+%%     # check for negative-weight cycles
+%%     for e in E:
+%%         u = e[0]
+%%         v = e[1]
+%%         wt = e[2]
+%%         if dist[u] + wt < dist[v]:
+%%             raise ValueError("Graph contains a negative-weight cycle")
+%%     return dist, predecessor
+%% \end{lstlisting}
+%% \end{center}
 
-Here are some examples.
+%% Here are some examples.
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
-sage: M = matrix([[0,1,4,0], [0,0,1,5], [0,0,0,3], [0,0,0,0]])
-sage: G = Graph(M, format="weighted_adjacency_matrix")
-sage: bellman_ford(G, G.vertices()[0])
-  {0: 0, 1: 1, 2: 2, 3: 5}
-\end{lstlisting}
-\end{center}
-%
-The plot of this graph is given in
-Figure~\ref{fig:graph_algorithms:Bellman_Ford_example}.
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% sage: M = matrix([[0,1,4,0], [0,0,1,5], [0,0,0,3], [0,0,0,0]])
+%% sage: G = Graph(M, format="weighted_adjacency_matrix")
+%% sage: bellman_ford(G, G.vertices()[0])
+%%   {0: 0, 1: 1, 2: 2, 3: 5}
+%% \end{lstlisting}
+%% \end{center}
+%% %
+%% The plot of this graph is given in
+%% Figure~\ref{fig:graph_algorithms:Bellman_Ford_example}.
 
-\begin{figure}[!htbp]
-\centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (0) at (0,0) [nodedecorate] {};
-\node [below] at (0.south) {$0$};
-\node (2) at (4,0) [nodedecorate] {};
-\node [below] at (2.south) {$2$};
-\node (1) at (1,2.5) [nodedecorate] {};
-\node [above] at (1.north) {$1$};
-\node (3) at (5,2.5) [nodedecorate] {};
-\node [above] at (3.north) {$3$};
-% edges or lines
-\path
-(0) edge[linedecorate] node[left]{$1$} (1)
-(0) edge[linedecorate] node[below]{$4$} (2)
-(1) edge[linedecorate] node[right]{$1$} (2)
-(1) edge[linedecorate] node[above]{$5$} (3)
-(2) edge[linedecorate] node[right]{$3$} (3);
-\end{tikzpicture}
-\caption{Shortest paths in a weighted graph using the Bellman-Ford
-  algorithm.}
-\label{fig:graph_algorithms:Bellman_Ford_example}
-\end{figure}
-%sage: M = matrix([[0,1,4,0],[0,0,1,5],[0,0,0,3],[0,0,0,0]])
-%sage: G = Graph(M, format = "weighted_adjacency_matrix")
-%sage: G.plot(graph_border=True, edge_labels=True).show()
+%% \begin{figure}[!htbp]
+%% \centering
+%% \begin{tikzpicture}
+%% [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+%%   linedecorate/.style={-,thick}]
+%% % nodes or vertices
+%% \node (0) at (0,0) [nodedecorate] {};
+%% \node [below] at (0.south) {$0$};
+%% \node (2) at (4,0) [nodedecorate] {};
+%% \node [below] at (2.south) {$2$};
+%% \node (1) at (1,2.5) [nodedecorate] {};
+%% \node [above] at (1.north) {$1$};
+%% \node (3) at (5,2.5) [nodedecorate] {};
+%% \node [above] at (3.north) {$3$};
+%% % edges or lines
+%% \path
+%% (0) edge[linedecorate] node[left]{$1$} (1)
+%% (0) edge[linedecorate] node[below]{$4$} (2)
+%% (1) edge[linedecorate] node[right]{$1$} (2)
+%% (1) edge[linedecorate] node[above]{$5$} (3)
+%% (2) edge[linedecorate] node[right]{$3$} (3);
+%% \end{tikzpicture}
+%% \caption{Shortest paths in a weighted graph using the Bellman-Ford
+%%   algorithm.}
+%% \label{fig:graph_algorithms:Bellman_Ford_example}
+%% \end{figure}
+%% %sage: M = matrix([[0,1,4,0],[0,0,1,5],[0,0,0,3],[0,0,0,0]])
+%% %sage: G = Graph(M, format = "weighted_adjacency_matrix")
+%% %sage: G.plot(graph_border=True, edge_labels=True).show()
 
-The following example illustrates the case of a negative-weight cycle.
+%% The following example illustrates the case of a negative-weight cycle.
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
-sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
-sage: G = DiGraph(M, format = "weighted_adjacency_matrix")
-sage: bellman_ford(G, G.vertices()[0])
----------------------------------------------------------------------------
-...
-ValueError: Graph contains a negative-weight cycle
-\end{lstlisting}
-\end{center}
-%
-The plot of this graph is given in
-Figure~\ref{fig:graph_algorithms:Bellman_Ford_negative_weights}.
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
+%% sage: G = DiGraph(M, format = "weighted_adjacency_matrix")
+%% sage: bellman_ford(G, G.vertices()[0])
+%% ---------------------------------------------------------------------------
+%% ...
+%% ValueError: Graph contains a negative-weight cycle
+%% \end{lstlisting}
+%% \end{center}
+%% %
+%% The plot of this graph is given in
+%% Figure~\ref{fig:graph_algorithms:Bellman_Ford_negative_weights}.
 
-\begin{figure}[!htbp]
-\centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick}]
-% nodes or vertices
-\node (0) at (5,0) [nodedecorate] {};
-\node [below] at (0.south) {$0$};
-\node (1) at (1,0) [nodedecorate] {};
-\node [below] at (1.south) {$1$};
-\node (2) at (4,3) [nodedecorate] {};
-\node [above] at (2.north) {$2$};
-\node (3) at (0,3) [nodedecorate] {};
-\node [above] at (3.north) {$3$};
-% edges or lines
-\path
-(0) edge[arrowdecorate,bend left=15] node[below]{$1$} (1)
-(1) edge[arrowdecorate,bend left=10] node[above]{$1$} (0)
-(1) edge[arrowdecorate,bend left=15] node[left]{$-4$} (2)
-(1) edge[arrowdecorate] node[left]{$1$} (3)
-(2) edge[arrowdecorate] node[right]{$1$} (0)
-(2) edge[arrowdecorate,bend left=15] node[right]{$1$} (1)
-(3) edge[arrowdecorate] node[above]{$1$} (2);
-\end{tikzpicture}
-\caption{Searching a digraph with negative weight using the
-  Bellman-Ford algorithm.}
-\label{fig:graph_algorithms:Bellman_Ford_negative_weights}
-\end{figure}
-%sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
-%sage: G = Graph(M, format = "weighted_adjacency_matrix")
-%sage: G.plot(graph_border=True, edge_labels=True).show()
+%% \begin{figure}[!htbp]
+%% \centering
+%% \begin{tikzpicture}
+%% [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+%%   arrowdecorate/.style={->,>=stealth,thick}]
+%% % nodes or vertices
+%% \node (0) at (5,0) [nodedecorate] {};
+%% \node [below] at (0.south) {$0$};
+%% \node (1) at (1,0) [nodedecorate] {};
+%% \node [below] at (1.south) {$1$};
+%% \node (2) at (4,3) [nodedecorate] {};
+%% \node [above] at (2.north) {$2$};
+%% \node (3) at (0,3) [nodedecorate] {};
+%% \node [above] at (3.north) {$3$};
+%% % edges or lines
+%% \path
+%% (0) edge[arrowdecorate,bend left=15] node[below]{$1$} (1)
+%% (1) edge[arrowdecorate,bend left=10] node[above]{$1$} (0)
+%% (1) edge[arrowdecorate,bend left=15] node[left]{$-4$} (2)
+%% (1) edge[arrowdecorate] node[left]{$1$} (3)
+%% (2) edge[arrowdecorate] node[right]{$1$} (0)
+%% (2) edge[arrowdecorate,bend left=15] node[right]{$1$} (1)
+%% (3) edge[arrowdecorate] node[above]{$1$} (2);
+%% \end{tikzpicture}
+%% \caption{Searching a digraph with negative weight using the
+%%   Bellman-Ford algorithm.}
+%% \label{fig:graph_algorithms:Bellman_Ford_negative_weights}
+%% \end{figure}
+%% %sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
+%% %sage: G = Graph(M, format = "weighted_adjacency_matrix")
+%% %sage: G.plot(graph_border=True, edge_labels=True).show()
 
 
 %%-----------------------------------------------------------------------%%
