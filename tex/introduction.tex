@@ -301,8 +301,15 @@ $\iadj(v) \subseteq \adj(v)$ of $v \in V$ consists of all those
 vertices that contribute to the indegree of $v$. Similarly, the set
 of \emph{out-neighbors} $\oadj(v) \subseteq \adj(v)$ of $v \in V$ are
 those vertices that contribute to the outdegree of $v$. Then
-$\iadj(v) \cap \oadj(v) = \emptyset$ and
-$\adj(v) = \iadj(v) \cup \oadj(v)$.
+\[
+\iadj(v) \cap \oadj(v)
+=
+\begin{cases}
+\emptyset, & \text{if there are no self-loops at $v$}, \\
+\{v\}, & \text{if there is a self-loop at $v$}
+\end{cases}
+\]
+and $\adj(v) = \iadj(v) \cup \oadj(v)$.
 \index{$\iadj$}
 \index{$\oadj$}
 \index{in-neighbor}
