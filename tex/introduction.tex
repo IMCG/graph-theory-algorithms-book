@@ -304,10 +304,7 @@ those vertices that contribute to the outdegree of $v$. Then
 \[
 \iadj(v) \cap \oadj(v)
 =
-\begin{cases}
-\emptyset, & \text{if there are no self-loops at $v$}, \\
-\{v\}, & \text{if there is a self-loop at $v$}
-\end{cases}
+\{u \;|\; uv \in E \text{ and } vu \in E\}
 \]
 and $\adj(v) = \iadj(v) \cup \oadj(v)$.
 \index{$\iadj$}
