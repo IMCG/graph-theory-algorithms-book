@@ -1569,46 +1569,44 @@ function.
 \end{exercise}
 
 
-\subsection{Huffman codes and Huffman's algorithm}
+%%--- Huffman codes -----------------------------------------------------%%
 
+\subsection{Huffman codes}
 
-An {\it alphabet} $A$ is a finite set, whose elements are referred to as {\it symbols}.
+An \emph{alphabet}\index{alphabet} $A$ is a finite set whose elements
+are referred to as \emph{symbols}. A \emph{word}\index{word} (or
+\emph{string}\index{string} or \emph{message}\index{message}) over $A$
+is a finite sequence of symbols in $A$ and the \emph{length} of the
+word is the number of symbols it contains. A word is usually written
+by concatenating symbols together: $a_1 a_2 \cdots a_k$ ($a_i \in A$)
+is a word of length $k$.
 
-A {\it word} (or  {\it string} or {\it message}) in $A$ is a finite sequence of symbols in $A$, usually written by simply
-concatenating them together: $a_1a_2\dots a_k$ ($a_i\in A$) is a
-message of {\it length} $k$.
-\index{word}
-\index{string}
-\index{message}
-\index{alphabet}
-A commonly occurring alphabet in practice is the {\it binary alphabet}
-$\{0,1\}$, in which case a word is simply a finite sequence of $0$'s and $1$'s.
-If $A$ is an alphabet, let
-
+A commonly occurring alphabet in practice is the \emph{binary alphabet}
+$\{0,1\}$. A word over the binary alphabet is a finite sequence of
+$0$'s and $1$'s. If $A$ is an alphabet, let $A^*$ denote the set of
+all words in $A$. The length of a word is denoted by vertical
+bars. That is, if $w = a_1 \cdots a_k$ is a word over $A$, then define
+$|w|: A^* \longrightarrow \ZZ$ by
 \[
-A^*
+|w|
+=
+|a_1 \cdots a_k|
+=
+k.
 \]
-denote the set of all words in $A$.
-The length of a word is denoted by vertical bars:
-if $w=a_1\dots a_k$ is a word
-in $A$ then define $|\dots |:A^*\to {\mathbb{R}}$ by
-
+Let $A$ and $B$ be two alphabets. A \emph{code}\index{code} for $A$
+using $B$ is an injection $c: A \longrightarrow B^*$. By abuse of
+notation, we often denote the code simply by the set
 \[
-|a_1\dots a_k|=k.
+C
+=
+c(A)
+=
+\{c(a) \;|\; a \in A\}.
 \]
-
-Let $A$ and $B$ be two alphabets. A {\it code} for $A$ using $B$ is
-an injection $c:A\to B^*$. By abuse of notation, we often denote the code simply by
-the set
-
-\[
-C = c(A) = \{ c(a)\ |\ a\in A\}.
-\]
-The elements of $C$ are called {\it codewords}.
-\index{code}
-\index{codeword}
-If $B$ is the binary alphabet then $C$ is called a {\it binary code}.
-\index{code!binary}
+The elements of $C$ are called \emph{codewords}\index{codeword}. If
+$B$ is the binary alphabet, then $C$ is called a
+\emph{binary code}\index{code!binary}.
 
 \subsubsection{Tree representation}
 
