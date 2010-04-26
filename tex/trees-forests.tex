@@ -1608,65 +1608,65 @@ The elements of $C$ are called \emph{codewords}\index{codeword}. If
 $B$ is the binary alphabet, then $C$ is called a
 \emph{binary code}\index{code!binary}.
 
+
+%%--- Tree representation -----------------------------------------------%%
+
 \subsubsection{Tree representation}
 
-Any binary code can be represented by a tree.
+Any binary code can be represented by a tree, as
+Example~\ref{eg:tree_forests:binary_code_tree_representation} shows.
 
 \begin{example}
-{\rm
-Here is how to represent the code ${\mathbb B}_\ell$ consisting of all
-binary strings of length $\leq \ell$. Start with the
-``root node'' $v_\emptyset$ being the empty string. The
-two children of this node, $v_0$ and $v_1$, correspond to the
-two strings of length $1$. Label $v_0$ with a ``$0$'' and
-$v_1$ with a ``$1$.'' The two children of
-$v_0$, $v_{00}$ and $v_{01}$, correspond to the
-strings of length $2$ which start with a $0$,
-and the  two children of
-$v_1$, $v_{10}$ and $v_{11}$, correspond to the
-strings of length $2$ which start with a $1$.
-Continue creating child nodes until you reach length $\ell$
-then stop. There are a total of $2^{\ell+1}-1$ nodes
-in this tree and $2^\ell$ of them are
-``leaves'' (vertices of a tree with degree $1$, i.e., childless nodes).
-Note that the parent of any node is a prefix to that
-node. Label each node $v_s$ with the string ``$s$,''
-where $s$ is a binary sequence of length $\leq \ell$.
-
-See Figure \ref{fig:tree} for an example when $\ell = 2$.
-
-\begin{figure}[h!]
-\begin{picture}(200,150)(-20,20)
-
-\put(92,104){$0$}
-\put(183,183){$\bullet$}
-\put(103,103){$\bullet$}
-\put(105,106){\line(1,1){80}}
-\put(185,188){\line(1,-1){80}}
-\put(263,103){$\bullet$}
-\put(272,104){$1$}
-\put(265,107){\line(1,-1){40}}
-\put(303,63){$\bullet$}
-\put(285,64){$11$}
-\put(265,107){\line(-1,-1){40}}
-\put(223,63){$\bullet$}
-\put(207,64){$10$}
-
-\put(105,107){\line(1,-1){40}}
-\put(143,63){$\bullet$}
-\put(125,64){$01$}
-\put(105,107){\line(-1,-1){40}}
-\put(63,63){$\bullet$}
-\put(47,64){$00$}
-
-\end{picture}
-\caption{Example of a tree representation of a binary code}
-\label{fig:tree}
-\end{figure}
-
-
-}
+\label{eg:tree_forests:binary_code_tree_representation}
+Let $\BB_\ell$ be the binary code of length $\leq \ell$. Represent
+codewords of $\BB_\ell$ using trees.
 \end{example}
+
+\begin{proof}[Solution]
+Here is how to represent the code $\BB_\ell$ consisting of all binary
+strings of length $\leq \ell$. Start with the
+\emph{root node}\index{node!root} $\varepsilon$\index{$\varepsilon$}
+being the empty string. The two children of this node, $v_0$ and
+$v_1$, correspond to the two strings of length $1$. Label $v_0$ with a
+``$0$'' and $v_1$ with a ``$1$''. The two children of $v_0$,
+i.e. $v_{00}$ and $v_{01}$, correspond to the strings of length $2$
+which start with a $0$. Similarly, the  two children of $v_1$,
+i.e. $v_{10}$ and $v_{11}$, correspond to the strings of length $2$
+that each starts with a $1$. Continue creating child nodes until we
+reach length $\ell$, at which point we stop. There are a total of
+$2^{\ell + 1} - 1$ nodes in this tree and $2^\ell$ of them are
+\emph{leaves}\index{leaf}~(vertices of a tree with degree $1$,
+i.e. childless nodes). Note that the parent of any node is a prefix to
+that node. Label each node $v_s$ with the string ``$s$'', where $s$ is
+a binary sequence of length $\leq \ell$. See
+Figure~\ref{fig:trees_forests:tree_representation_B_2} for an example
+when $\ell = 2$.
+\end{proof}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.5]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  00/0/0/below/south, 01/2/0/below/south, 10/4/0/below/south,
+  11/6/0/below/south, 0/1/1/above/north, 1/5/1/above/north} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node (e) at (3,2) [nodedecorate] {};
+\node [above] at (e.north) {$\varepsilon$};
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {0/00, 0/01, 1/10, 1/11, e/0, e/1} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+\caption{Tree representation of the binary code $\BB_2$.}
+\label{fig:trees_forests:tree_representation_B_2}
+\end{figure}
 
 In general, if $C$ is a code contained in ${\mathbb B}_\ell$
 then to create the tree for $C$, start with the tree for
