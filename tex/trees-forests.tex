@@ -1726,35 +1726,34 @@ uniquely decodable.
 In fact, prefix-free implies uniquely decodable.
 
 \begin{theorem}
-{\rm
-If a code $c:A\to B^*$ is prefix-free then it is uniquely decodable.
-}
+If a code $c: A \longrightarrow B^*$ is prefix-free, then it is
+uniquely decodable.
 \end{theorem}
 
-\begin{proof}[Solution]
-The proof is by induction on the length of a message.
-We want to show that if $x_1\dots x_k$ and $y_1\dots y_\ell$ are
-messages with $c(x_1)\dots c(x_k)=c(y_1)\dots c(y_\ell)$
-then  $x_1\dots x_k=y_1\dots y_\ell$ (which in turn implies
-$k=\ell$ and $x_i=y_i$ for all $i$).
+\begin{proof}
+We use induction on the length of a message. We want to show that if
+$x_1 \cdots x_k$ and $y_1 \cdots y_\ell$ are messages with
+$c(x_1) \cdots c(x_k) = c(y_1) \cdots c(y_\ell)$, then
+$x_1 \cdots x_k = y_1 \cdots y_\ell$. This in turn implies $k = \ell$
+and $x_i = y_i$ for all $i$.
 
 The case of length $1$ follows from the fact that
-$c:A\to B^*$ is injective (by the definition of a code).
+$c: A \longrightarrow B^*$ is injective~(by the definition of a
+code).
 
 Suppose that the statement of the theorem holds for all
-codes of length $<m$. We must show that the length $m$
-case is true.
-Suppose $c(x_1)\dots c(x_k)=c(y_1)\dots c(y_\ell)$ where
-$m={\rm max}(k,\ell)$. These strings are equal, so the
-substring $c(x_1)$ of the left-hand side and the substring $c(y_1)$
-of the right-hand side are either equal or one is contained in the other.
-If (for instance) $c(x_1)$ is properly contained in $c(y_1)$ then
-$c$ is not prefix-free. Likewise, if $c(y_1)$ is properly contained in
-$c(x_1)$. Therefore, $c(x_1)=c(y_1)$. This implies $x_1=y_1$.
-Now remove this
-codeword from both sides, so $c(x_2)\dots c(x_k)=c(y_2)\dots c(y_\ell)$.
-By the induction hypothesis, $x_2\dots x_k=y_2\dots y_\ell$.
-These facts together imply $k=\ell$ and $x_i=y_i$ for all $i$.
+codes of length $< m$. We must show that the length $m$ case is
+true. Suppose $c(x_1) \cdots c(x_k) = c(y_1) \cdots c(y_\ell)$, where
+$m = \max(k, \ell)$. These strings are equal, so the substring
+$c(x_1)$ of the left-hand side and the substring $c(y_1)$ of the
+right-hand side are either equal or one is contained in the other. If,
+say, $c(x_1)$ is properly contained in $c(y_1)$, then $c$ is not
+prefix-free. Likewise if $c(y_1)$ is properly contained in
+$c(x_1)$. Therefore, $c(x_1) = c(y_1)$, which implies $x_1 = y_1$. Now
+remove this codeword from both sides, so
+$c(x_2) \cdots c(x_k) = c(y_2) \cdots c(y_\ell)$. By the induction
+hypothesis, $x_2 \cdots x_k = y_2 \cdots y_\ell$. These facts together
+imply $k = \ell$ and $x_i = y_i$ for all $i$.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
