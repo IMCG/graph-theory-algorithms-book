@@ -1782,6 +1782,7 @@ which is very easy and highly recommended for anyone who is curious to
 see more, refer to section~3.6 of Biggs~\cite{Biggs2009}.
 
 \begin{lemma}
+\label{lem:trees_forests:binary_optimal_prefix_free_code}
 Suppose $c: A \longrightarrow B^*$ is a binary optimal prefix-free
 code and let $\ell = \max_{a \in A} \big(|c(a)|\big)$ denote the
 maximum length of a codeword. The following statements hold.
@@ -1799,54 +1800,49 @@ contains two codewords of the form $b0$ and $b1$ for some $b \in B^*$.
 \end{enumerate}
 \end{lemma}
 
-The Huffman code construction is based on the
-amazing second property in the above lemma
-yields an optimal prefix-free binary code.
 
-{\it Huffman code construction}: Here is the recursive/inductive
-construction. We shall regard the binary Huffman code as a tree,
-as described above.
+%%--- Huffman coding ----------------------------------------------------%%
 
-Suppose that the weighted alphabet $(A,p)$ has $n$ symbols.
-We assume inductively that there is an optimal prefix-free
-binary code for any weighted alphabet $(A',p')$ having
-$<n$ symbols.
+\subsection{Huffman coding}
 
-\noindent
-{\it Huffman's rule 1}:
-Let $a,a'\in A$ be symbols with the smallest weights.
-Construct a new weighted alphabet with
-$a,a'$ replaced by the single symbol $a*=aa'$
-and having weight $p(a*)=p(a)+p(a')$.
-All other symbols and weights remain unchanged.
+The Huffman code construction is based on the second property in
+Lemma~\ref{lem:trees_forests:binary_optimal_prefix_free_code}. Using
+this property, in 1952 David Huffman~\cite{Huffman1952} presented an
+optimal prefix-free binary code, which has since been named Huffman
+code.
 
-\noindent
-{\it Huffman's rule 2}:
-For the code $(A',p')$ above, if $a*$ is encoded
-as the binary string $s$ then the encoded binary string for
-$a$ is $s0$ and the encoded binary string for
-$a'$ is $s1$.
+Here is the recursive/inductive construction of a Huffman code. We
+shall regard the binary Huffman code as a tree, as described
+above. Suppose that the weighted alphabet $(A,p)$ has $n$ symbols. We
+assume inductively that there is an optimal prefix-free binary code
+for any weighted alphabet $(A',p')$ having $<n$ symbols.
 
-These two rules tell us how to inductively built
-the tree representation for the Huffman code of $(A,p)$ up
-from its leaves (associated to the low weight symbols).
+\begin{description}
+\item[Huffman's rule 1] Let $a,a' \in A$ be symbols with the smallest
+  weights. Construct a new weighted alphabet with $a,a'$ replaced by
+  the single symbol $a^* = aa'$ and having weight
+  $p(a^*) = p(a) + p(a')$. All other symbols and weights remain
+  unchanged.
+
+\item[Huffman's rule 2] For the code $(A',p')$ above, if $a^*$ is
+  encoded as the binary string $s$, then the encoded binary string for
+  $a$ is $s0$ and the encoded binary string for $a'$ is $s1$.
+\end{description}
+
+The above two rules tell us how to inductively build the tree
+representation for the Huffman code of $(A,p)$ up from its
+leaves~(associated to the low weight symbols).
 
 \begin{itemize}
-\item
-Find two different symbols of lowest weight, $a$ and $a'$.
-If two such symbols don't exist, stop.
-Replace the weighted alphabet with the new weighted alphabet
-as in Huffman's rule 1.
+\item Find two different symbols of lowest weight, $a$ and $a'$. If
+  two such symbols do not exist, stop. Replace the weighted alphabet
+  with the new weighted alphabet as in Huffman's rule 1.
 
-\item
-Add two nodes (labeled with $a$ and $a'$, resp.)
-to the tree, with parent $a^*$ (see Huffman's rule 1).
+\item Add two nodes~(labeled with $a$ and $a'$, respectively) to the
+  tree, with parent $a^*$ (see Huffman's rule 1).
 
-\item
-If there are no remaining symbols in $A$, label the parent
-$a^*$ with the empty set and stop. Otherwise, go to the
-first step.
-
+\item If there are no remaining symbols in $A$, label the parent $a^*$
+  with the empty set and stop. Otherwise, go to the first step.
 \end{itemize}
 
 An example of this is below.
