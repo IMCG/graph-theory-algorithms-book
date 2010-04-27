@@ -1667,31 +1667,24 @@ when $\ell = 2$.
 \label{fig:trees_forests:tree_representation_B_2}
 \end{figure}
 
-In general, if $C$ is a code contained in ${\mathbb B}_\ell$
-then to create the tree for $C$, start with the tree for
- ${\mathbb B}_\ell$. First,
-remove all nodes associated to a binary string for which
-it and all of its descendents are not in $C$.
-Next, remove all labels which do not
-correspond with codewords in $C$.
-The resulting labeled graph is the {\it tree associated
-to the binary code $C$}.
+In general, if $C$ is a code contained in $\BB_\ell$, then to create
+the tree for $C$, start with the tree for $\BB_\ell$. First, remove
+all nodes associated to a binary string for which it and all of its
+descendents are not in $C$. Next, remove all labels which do not
+correspond to codewords in $C$. The resulting labeled graph is the
+tree associated to the binary code $C$.
 \index{code!tree}
 
-For ``visualizing'' the construction of Huffman codes later,
-it is important to see that one can {\it reverse}
-this construction to start from such a binary tree
-and recover a binary code from it. (The codewords are determined by
-the following rules
-
+For visualizing the construction of Huffman codes later, it is
+important to see that one can \emph{reverse} this construction to
+start from such a binary tree and recover a binary code from it. The
+codewords are determined by the following rules:
+%
 \begin{itemize}
-\item
-The root node gets the empty codeword.
-\item
-Each left-ward
-branch gets a $0$ appended to the end of its
-parent and each
-right-ward branch gets a $1$ appended to the end.
+\item The root node gets the empty codeword.
+
+\item Each left-ward branch gets a $0$ appended to the end of its
+  parent. Each right-ward branch gets a $1$ appended to the end.
 \end{itemize}
 
 \subsubsection{Uniquely decodable codes}
