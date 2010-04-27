@@ -1572,6 +1572,7 @@ function.
 %%--- Huffman codes -----------------------------------------------------%%
 
 \section{Huffman codes}
+\label{sec:trees_forests:Huffman_codes}
 
 An \emph{alphabet}\index{alphabet} $A$ is a finite set whose elements
 are referred to as \emph{symbols}. A \emph{word}\index{word} (or
@@ -1722,11 +1723,6 @@ $c(ET) = 01 = c(A)$, it is clear that the Morse code is \emph{not}
 uniquely decodable.
 \end{proof}
 
-\begin{exercise}
-Show by giving an example that the Morse code is not prefix-free.
-\end{exercise}
-
-
 In fact, prefix-free implies uniquely decodable.
 
 \begin{theorem}
@@ -1866,6 +1862,7 @@ first step.
 An example of this is below.
 
 \begin{example}
+\label{eg:trees_forests:simple_Huffman_code}
 {\rm
 A very simple of this makes Huffman's ingenious
 construction easier to understand.
@@ -1875,6 +1872,8 @@ $p(a)=0.5$, $p(b)=0.3$, $p(c)=0.2$.
 
 A Huffman code for this is
 $C=\{0,10,11\}$, as is depicted in Figure \ref{fig:huffman1}.
+}
+\end{example}
 
 \begin{figure}[h!]
 \begin{picture}(200,150)(-20,20)
@@ -1901,23 +1900,27 @@ $C=\{0,10,11\}$, as is depicted in Figure \ref{fig:huffman1}.
 \label{fig:huffman1}
 \end{figure}
 
-\begin{exercise}
-Verify
-that $C=\{1,00,01\}$ is another Huffman code for this
-weighted alphabet and to draw its tree representation.
-\end{exercise}
-}
-\end{example}
 
+%%-----------------------------------------------------------------------%%
+%%--- Problems ----------------------------------------------------------%%
 
+\subsection*{Problems~\ref{sec:trees_forests:Huffman_codes}}
 
-\begin{exercise}
-Find the Huffman code for the letters of the English alphabet weighted
-by the frequency of common American usage\footnote{You can find this
-on the internet or in the literature.
-Part of this exercise is finding this frequency distribution
-yourself.}.
-\end{exercise}
+\begin{enumerate}
+\item Show by giving an example that the Morse code is not
+  prefix-free.
+
+\item Verify that $C = \{1, 00, 01\}$ is another Huffman code for the
+  weighted alphabet in
+  Example~\ref{eg:trees_forests:simple_Huffman_code}. Draw the tree
+  representation of $C$.
+
+\item Find the Huffman code for the letters of the English alphabet
+  weighted by the frequency of common American usage.\footnote{
+    You can find this on the Internet or in the literature. Part of
+    this exercise is finding this frequency distribution yourself.}
+\end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
