@@ -1756,57 +1756,48 @@ hypothesis, $x_2 \cdots x_k = y_2 \cdots y_\ell$. These facts together
 imply $k = \ell$ and $x_i = y_i$ for all $i$.
 \end{proof}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Consider now a weighted alphabet $(A,p)$, where
-$p:A\to [0,1]$ satisfies $\sum_{a\in A}p(a)=1$,
-and a code $c:A\to B^*$.
-In other words, $p$ is a probability distribution on $A$.
-Think of $p(a)$ as the probability that the symbol $a$
-arises in an typical message.
-
-The {\it average word length} $L(c)$ is\footnote{In probability terminology,
-this is the expected value $E(X)$ of the
-random variable $X$ which assigns to a randomly selected
-symbol in $A$, the length of the associated codeword in $C$.}:
-
+$p: A \longrightarrow [0,1]$ satisfies $\sum_{a \in A}p(a) = 1$, and a
+code $c: A \longrightarrow B^*$. In other words, $p$ is a probability
+distribution on $A$. Think of $p(a)$ as the probability that the
+symbol $a$ arises in an typical message. The
+\emph{average word length} $L(c)$ is\footnote{
+  In probability terminology, this is the expected value $E(X)$ of the
+  random variable $X$ which assigns to a randomly selected symbol in
+  $A$, the length of the associated codeword in $C$.
+}
 \[
-L(c) = \sum_{a\in A} p(a)\cdot |c(a)|,
+L(c)
+=
+\sum_{a \in A} p(a) \cdot |c(a)|
 \]
-where $|\dots |$ denotes the {\it length} of a codeword.
-\index{length of codeword}.
-
-Given a weighted alphabet $(A,p)$ as above,
-a code $c:A\to B^*$ is called {\it optimal} if there
-is no such code with a smaller average word length.
+where $|\cdot|$ denotes the \emph{length} of a codeword.
+\index{length of codeword}
+Given a weighted alphabet $(A,p)$ as above, a code
+$c: A \longrightarrow B^*$ is called \emph{optimal} if there is no
+such code with a smaller average word length.
 \index{code!optimal}
-
-Optimal codes satisfy the following amazing property.
+Optimal codes satisfy the following amazing property. For a proof,
+which is very easy and highly recommended for anyone who is curious to
+see more, refer to section~3.6 of Biggs~\cite{Biggs2009}.
 
 \begin{lemma}
-{\rm
-Suppose $c:A\to B^*$ is a binary optimal prefix-free code
-and let $\ell = {\rm max}_{a\in A} |c(a)|$ denote
-the maximum length of a codeword.
-The following statements hold.
-\begin{itemize}
-\item
-If $|c(a')|>|c(a)|$ then $p(a')\leq p(a)$.
-\item
-The subset of codewords of length $\ell$,
+Suppose $c: A \longrightarrow B^*$ is a binary optimal prefix-free
+code and let $\ell = \max_{a \in A} \big(|c(a)|\big)$ denote the
+maximum length of a codeword. The following statements hold.
+%
+\begin{enumerate}
+\item If $|c(a')|>|c(a)|$, then $p(a')\leq p(a)$.
 
+\item The subset of codewords of length $\ell$,
 \[
-C_\ell = \{c\in c(A)\ |\ |c(a)|=\ell\},
+C_\ell
+=
+\{c \in c(A) \;|\; \ell = |c(a)|\},
 \]
-contains two codewords of the form
-$b0$ and $b1$, for some $b\in B^*$.
-
-\end{itemize}
-}
+contains two codewords of the form $b0$ and $b1$ for some $b \in B^*$.
+\end{enumerate}
 \end{lemma}
-
-For the proof (which is very easy and highly recommended for the
-student who is curious to see more), see Biggs\S 3.6, \cite{Biggs2009}.
 
 The Huffman code construction is based on the
 amazing second property in the above lemma
