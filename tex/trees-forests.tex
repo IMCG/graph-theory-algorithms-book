@@ -1911,6 +1911,59 @@ minimum heap, can lower the running time of
 Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} down to
 $O(n \log_2(n))$.
 
+Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} represents
+the Huffman code of an alphabet as a binary tree $T$ rooted at $r$. To
+determine the actual encoding of each symbol in the alphabet, we feed
+$T$ and $r$ to
+Algorithm~\ref{alg:trees_forests:Huffman_encoding_alphabet} to obtain
+the encoding of each symbol. Starting from the root $r$ whose
+designated label is the empty string $\varepsilon$, the algorithm
+traverses the vertices of $T$ in a breadth-first search fashion. If
+$v$ is an internal vertex with label \verb!e!, the label of its left
+child is the concatenation \verb!e0! and for the rigth child of $v$ we
+assign the label \verb!e1!. If $v$ happens to be a leaf vertex, we
+take its label to be its Huffman encoding. Any Huffman encoding
+assigned to a symbol of an alphabet is not unique. Either of the two
+children of an internal vertex can be designated as the left
+(resp. right) vertex. The running time of
+Algorithm~\ref{alg:trees_forests:Huffman_encoding_alphabet} is
+$O(|V|)$, where $V$ is the vertex set of $T$.
+
+\begin{algorithm}[!htpb]
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{treeRoot}{root}
+\SetKwData{one}{1}
+\SetKwData{zero}{0}
+%% input/output
+\Input{A binary tree $T$ representing the Huffman code of an alphabet
+  $A$. The root $r$ of $T$.}
+\Output{A list $H$ representing a Huffman code of $A$, where $H[a_i]$
+  corresponds to a Huffman encoding of $a_i \in A$.}
+\BlankLine
+%% algorithm body
+$H \leftarrow [\,]$~\tcc*[f]{list of Huffman encodings}\;
+$Q \leftarrow [r]$~\tcc*[f]{queue of vertices}\;
+\While{$\length(Q) > 0$}{
+  $\treeRoot \leftarrow \dequeue(Q)$\;
+  \eIf{\treeRoot \emph{is a leaf}}{
+    $H[\treeRoot] \leftarrow$ label of \treeRoot\;
+  }{
+    $a \leftarrow$ left child of \treeRoot\;
+    $b \leftarrow$ right child of \treeRoot\;
+    $\enqueue(Q, a)$\;
+    $\enqueue(Q, b)$\;
+    label of $a \leftarrow$ label of \treeRoot $+$ \zero\;
+    label of $b \leftarrow$ label of \treeRoot $+$ \one\;
+  }
+}
+\Return $H$\;
+\caption{Huffman encoding of an alphabet.}
+\label{alg:trees_forests:Huffman_encoding_alphabet}
+\end{algorithm}
+
 An example of this is below.
 
 \begin{example}
