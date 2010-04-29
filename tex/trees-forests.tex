@@ -1895,6 +1895,22 @@ $r \leftarrow \extractMin(Q)$~\nllabel{alg:Huffman_tree:extract_tree_root}\;
 \label{alg:trees_forests:binary_tree_Huffman_codes}
 \end{algorithm}
 
+The running time analysis of
+Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} depends on
+the implementation of the priority queue $Q$. Suppose $Q$ is a simple
+unsorted list. The initialization on
+line~\ref{alg:Huffman_tree:initialize_priority_queue} requires $O(n)$
+time. The for loop from line~\ref{alg:Huffman_tree:for_loop:start}
+to~\ref{alg:Huffman_tree:insert_into_queue} is executed exactly
+$n - 1$ times. Searching $Q$ to determine the element of minimum
+weight requires time at most $O(n)$. Determining two elements of
+minimum weights requires time $O(2n)$. The for loop requires time
+$O(2n^2)$, which is also the time requirement for the algorithm. An
+efficient implementation of the priority queue $Q$, e.g. as a binary
+minimum heap, can lower the running time of
+Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} down to
+$O(n \log_2(n))$.
+
 An example of this is below.
 
 \begin{example}
