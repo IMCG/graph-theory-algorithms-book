@@ -1832,7 +1832,7 @@ for any weighted alphabet $(A',p')$ having $<n$ symbols.
 The above two rules tell us how to inductively build the tree
 representation for the Huffman code of $(A,p)$ up from its
 leaves~(associated to the low weight symbols).
-
+%
 \begin{itemize}
 \item Find two different symbols of lowest weight, $a$ and $a'$. If
   two such symbols do not exist, stop. Replace the weighted alphabet
@@ -1844,6 +1844,40 @@ leaves~(associated to the low weight symbols).
 \item If there are no remaining symbols in $A$, label the parent $a^*$
   with the empty set and stop. Otherwise, go to the first step.
 \end{itemize}
+%
+These ideas are captured in
+Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes}, which
+outlines steps to construct a binary tree representation corresponding
+to the Huffman code of an alphabet.
+
+\begin{algorithm}[!htpb]
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%% input/output
+\Input{An alphabet $A$ of $n$ symbols. A weight list $W$ of size $n$
+  such that $W[i]$ is the weight of $a_i \in A$.}
+\Output{A binary tree $T$ representing the Huffman code of $A$ and the
+  root $r$ of $T$.}
+\BlankLine
+%% algorithm body
+$n \leftarrow |A|$\;
+$Q \leftarrow A$~\tcc*[f]{minimum priority queue}\;
+$T \leftarrow \text{empty tree}$\;
+\For{$i \leftarrow 1, 2, \dots, n-1$}{
+  $a \leftarrow \extractMin(Q)$\;
+  $b \leftarrow \extractMin(Q)$\;
+  $z \leftarrow$ node with left child $a$ and right child $b$\;
+  add the edges $za$ and $zb$ to $T$\;
+  $W[z] \leftarrow W[a] + W[b]$\;
+  insert $z$ into priority queue $Q$\;
+}
+$r \leftarrow \extractMin(Q)$\;
+\Return $(T, r)$\;
+\caption{Binary tree representation of Huffman codes.}
+\label{alg:trees_forests:binary_tree_Huffman_codes}
+\end{algorithm}
 
 An example of this is below.
 
