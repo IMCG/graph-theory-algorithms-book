@@ -1844,11 +1844,27 @@ leaves~(associated to the low weight symbols).
 \item If there are no remaining symbols in $A$, label the parent $a^*$
   with the empty set and stop. Otherwise, go to the first step.
 \end{itemize}
-%
+
 These ideas are captured in
 Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes}, which
-outlines steps to construct a binary tree representation corresponding
-to the Huffman code of an alphabet.
+outlines steps to construct a binary tree corresponding to the Huffman
+code of an alphabet.
+Line~\ref{alg:Huffman_tree:initialize_priority_queue} initializes a
+minimum priority queue $Q$ with the symbols in the alphabet $A$.
+Line~\ref{alg:Huffman_tree:empty_binary_tree} creates an empty binary
+tree that will be used to represent the Huffman code corresponding to
+$A$. The for loop from lines~\ref{alg:Huffman_tree:for_loop:start}
+to~\ref{alg:Huffman_tree:insert_into_queue} repeatedly extracts from
+$Q$ two elements $a$ and $b$ of minimum weights. We then create a new
+vertex $z$ for the tree $T$ and also let $a$ and $b$ be vertices of
+$T$. The weight $W[z]$ of $z$ is the sum of the weights of $a$ and
+$b$. We let $z$ be the parent of $a$ and $b$, and insert the new edges
+$za$ and $zb$ into $T$. The newly created vertex $z$ is now inserted
+into $Q$ with priority $W[z]$. After $n - 1$ rounds of the for loop,
+the priority queue has only one element in it, namely the root $r$ of
+the binary tree $T$. We extract $r$ from
+$Q$~(line~\ref{alg:Huffman_tree:extract_tree_root}) and return it
+together with $T$~(line~\ref{alg:Huffman_tree:return_tree_and_root}).
 
 \begin{algorithm}[!htpb]
 \dontprintsemicolon  % no semicolon at end of pseudocode statements
@@ -1863,18 +1879,18 @@ to the Huffman code of an alphabet.
 \BlankLine
 %% algorithm body
 $n \leftarrow |A|$\;
-$Q \leftarrow A$~\tcc*[f]{minimum priority queue}\;
-$T \leftarrow \text{empty tree}$\;
-\For{$i \leftarrow 1, 2, \dots, n-1$}{
+$Q \leftarrow A$~\nllabel{alg:Huffman_tree:initialize_priority_queue}~\tcc*[f]{minimum priority queue}\;
+$T \leftarrow \text{empty tree}$~\nllabel{alg:Huffman_tree:empty_binary_tree}\;
+\For{$i \leftarrow 1, 2, \dots, n-1$~\nllabel{alg:Huffman_tree:for_loop:start}}{
   $a \leftarrow \extractMin(Q)$\;
   $b \leftarrow \extractMin(Q)$\;
   $z \leftarrow$ node with left child $a$ and right child $b$\;
   add the edges $za$ and $zb$ to $T$\;
   $W[z] \leftarrow W[a] + W[b]$\;
-  insert $z$ into priority queue $Q$\;
+  insert $z$ into priority queue $Q$~\nllabel{alg:Huffman_tree:insert_into_queue}\;
 }
-$r \leftarrow \extractMin(Q)$\;
-\Return $(T, r)$\;
+$r \leftarrow \extractMin(Q)$~\nllabel{alg:Huffman_tree:extract_tree_root}\;
+\Return $(T, r)$~\nllabel{alg:Huffman_tree:return_tree_and_root}\;
 \caption{Binary tree representation of Huffman codes.}
 \label{alg:trees_forests:binary_tree_Huffman_codes}
 \end{algorithm}
