@@ -1964,47 +1964,6 @@ $Q \leftarrow [r]$~\tcc*[f]{queue of vertices}\;
 \label{alg:trees_forests:Huffman_encoding_alphabet}
 \end{algorithm}
 
-An example of this is below.
-
-\begin{example}
-\label{eg:trees_forests:simple_Huffman_code}
-{\rm
-A very simple of this makes Huffman's ingenious
-construction easier to understand.
-
-Suppse $A=\{a,b,c\}$ and
-$p(a)=0.5$, $p(b)=0.3$, $p(c)=0.2$.
-
-A Huffman code for this is
-$C=\{0,10,11\}$, as is depicted in Figure \ref{fig:huffman1}.
-}
-\end{example}
-
-\begin{figure}[h!]
-\begin{picture}(200,150)(-20,20)
-
-\put(114,103){$a$}
-\put(92,104){$0$}
-\put(143,143){$\bullet$}
-\put(103,103){$\bullet$}
-\put(105,106){\line(1,1){40}}
-\put(145,148){\line(1,-1){40}}
-\put(183,103){$\bullet$}
-\put(192,104){$1$}
-\put(185,107){\line(1,-1){40}}
-\put(223,63){$\bullet$}
-\put(205,64){$11$}
-\put(235,63){$c$}
-\put(185,107){\line(-1,-1){40}}
-\put(143,63){$\bullet$}
-\put(127,64){$10$}
-\put(157,63){$b$}
-
-\end{picture}
-\caption{Huffman code example}
-\label{fig:huffman1}
-\end{figure}
-
 
 %%-----------------------------------------------------------------------%%
 %%--- Problems ----------------------------------------------------------%%
@@ -2015,10 +1974,10 @@ $C=\{0,10,11\}$, as is depicted in Figure \ref{fig:huffman1}.
 \item Show by giving an example that the Morse code is not
   prefix-free.
 
-\item Verify that $C = \{1, 00, 01\}$ is another Huffman code for the
-  weighted alphabet in
-  Example~\ref{eg:trees_forests:simple_Huffman_code}. Draw the tree
-  representation of $C$.
+\item Consider the alphabet $A = \{a,b,c\}$ with corresponding
+  probabilities~(or weights) $p(a) = 0.5$, $p(b) = 0.3$, and
+  $p(c) = 0.2$. Generate two different Huffman codes for $A$ and
+  illustrate the tree representations of those codes.
 
 \item Find the Huffman code for the letters of the English alphabet
   weighted by the frequency of common American usage.\footnote{
