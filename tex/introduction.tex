@@ -335,11 +335,22 @@ given:
   not necessarily assume $E \subseteq V^{(2)}$, where $V^{(2)}$ is the
   set of unordered pairs of vertices.
 
-\item An incidence function $i: E \longrightarrow V^{(2)}$.
+\item An incidence function 
+
+\begin{equation}
+\label{eqn:edge-incidence}
+i: E \longrightarrow V^{(2)}. 
+\end{equation}
 \end{itemize}
 %
 Such a multigraph is denoted $G = (V,E,i)$. An \emph{orientation} on
-$G$ is a function $h: E \longrightarrow V$, where $h(e) \in i(e)$ for
+$G$ is a function 
+
+\begin{equation}
+\label{eqn:edge-orientation}
+h: E \longrightarrow V, 
+\end{equation}
+where $h(e) \in i(e)$ for
 all $e \in E$. The element $v = h(e)$ is called the \emph{head} of
 $i(e)$. If $G$ has no self-loops, then $i(e)$ is a set having exactly
 two elements denoted $i(e) = \{h(e),\, t(e)\}$. The element $v = t(e)$
@@ -347,6 +358,9 @@ is called the \emph{tail} of $i(e)$. For self-loops, we set
 $t(e) = h(e)$. A multigraph with an orientation can therefore be
 described as the $4$-tuple $(V, E, i, h)$. In other words,
 $G = (V,E,i,h)$ is a multidigraph.
+\index{orientation}
+\index{edge!head}
+\index{edge!tail}
 
 \index{graph!simple}
 \index{simple graph}
@@ -1817,7 +1831,9 @@ applicable to digraphs with self-loops as well as multidigraphs.
 For the undirected case, let $G$ be an undirected graph with edge set
 $E = \{ e_1, \dots, e_m \}$ and vertex set
 $V = \{ v_1, \dots, v_n \}$. The \emph{unoriented incidence matrix} of
+\index{incidence matrix!unoriented}
 $G$ is the $n \times m$ matrix $B = [b_{ij}]$ defined by
+
 \[
 b_{ij}
 =
@@ -1836,6 +1852,8 @@ edge under consideration and $-1$ as an entry in the row corresponding
 to the other vertex. Similarly, $b_{ij} = 2$ if $e_j$ is a self-loop
 at $v_i$.
 \index{orientation}
+\index{oriented incidence matrix}
+\index{incidence matrix!oriented}
 
 %% Sage allows you to compute the incidence matrix of a
 %% graph:
@@ -1978,6 +1996,10 @@ and~\ref{chap:random_graphs}.
   $p$ be the frequency of $1$ in $r$, and let $t$ be twice the
   frequency of $2$ in $r$. If $v$ is the vertex corresponding to
   $r$, show that the degree of $v$ is $\deg(v) = m + p + t$.
+%%%%
+%%%% Has ``the frequency'' been defined yet? American English
+%%%% usage of this term might be different from Australian usage?
+%%%%
 
 \item Let $G$ be an undirected graph without self-loops and let $M$
   and its oriented incidence matrix. Show that the Laplacian matrix
@@ -2312,6 +2334,8 @@ algorithmic approach that allows for constructing a simple graph with
 a given degree sequence. See Sierksma and
 Hoogeveen~\cite{SierksmaHoogeveen1991} for a coverage of seven
 criteria for a sequence of integers to be graphic.
+See \cite{ErdosEtal} for an extension of the Havel-Hakimi theorem to
+digraphs.
 %% The proof of
 %% Theorem~\ref{thm:introduction:Havel1955_Hakimi1962:graphical_sequence}
 %% and an algorithmic version of that proof are adapted from section~1.5

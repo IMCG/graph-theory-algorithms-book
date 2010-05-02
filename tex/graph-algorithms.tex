@@ -105,18 +105,18 @@ a graph and its adjacency list representation.
 
 %%--- The graph6 format -------------------------------------------------%%
 
-\subsection{The graph6 format}
+\subsection{The {\tt graph6} format}
 
-The graph formats graph6 and sparse6 were developed by Brendan
+The graph formats {\tt graph6} and {\tt sparse6} were developed by Brendan
 McKay~\cite{McKay2010} at The Australian National University as a
 compact way to represent graphs. These two formats use bit vectors and
 printable characters of the American Standard Code for Information
 Interchange~(ASCII) encoding scheme. The 64 printable ASCII characters
-used in graph6 and sparse6 are those ASCII characters with decimal
+used in {\tt graph6} and {\tt sparse6} are those ASCII characters with decimal
 codes from 63 to 126, inclusive, as shown in
 Table~\ref{tab:graph_algorithms:graph6_sparse6_ASCII_printable_characters}.
-This section shall only cover the graph6 format. For full
-specification on both of the graph6 and sparse6 formats, see
+This section shall only cover the {\tt graph6} format. For full
+specification on both of the {\tt graph6} and {\tt sparse6} formats, see
 McKay~\cite{McKay2010}.
 
 \begin{table}[!htbp]
@@ -165,7 +165,7 @@ binary         & decimal   & glyph    & binary & decimal & glyph \\\hline\hline
 
 \subsubsection{Bit vectors}
 
-Before discussing how graph6 and sparse6 represent graphs using
+Before discussing how {\tt graph6} and {\tt sparse6} represent graphs using
 printable ASCII characters, we first present encoding schemes used by
 these two formats. A \emph{bit vector} is, as its name suggests, a
 vector whose elements are 1's and 0's. It can be represented as a list
@@ -188,6 +188,8 @@ significant bit.
 
 The order in which we process the bits of a bit vector is referred to
 as \emph{endianness}. Processing $v$ in \emph{big-endian} order means
+\index{big-endian order}
+\index{endianness}
 that we first process the most significant bit of $v$, followed by the
 second most significant bit, and so on all the way down to the least
 significant bit of $v$. \emph{Little-endian} order means that we first
@@ -233,7 +235,7 @@ position value & $2^0$      & $2^1$      & $2^2$      & $2^3$      & $2^4$      
 \label{tab:graph_algorithms:little_endian_ASCII_binary_E}
 \end{table}
 
-In graph6 and sparse6 formats, the length of a bit vector must be a
+In {\tt graph6} and {\tt sparse6} formats, the length of a bit vector must be a
 multiple of 6. Suppose $v$ is a bit vector of length $k$ such that
 $6 \nmid k$. To transform $v$ into a bit vector having length a
 multiple of 6, let $r = k \mod 6$ be the remainder upon dividing $k$
@@ -294,14 +296,15 @@ $126 \, R(v)$ and $126 \, 126 \, R(v)$ require 4 and 8 bytes,
 respectively.
 
 
-%%--- The graph6 format -------------------------------------------------%%
+%%--- The {\tt graph6} format -------------------------------------------------%%
 
-\subsubsection{The graph6 format}
+\subsubsection{The {\tt graph6} format}
+\index{graph6}
 
-The graph6 format is used to represent simple, undirected graphs of
+The {\tt graph6} format is used to represent simple, undirected graphs of
 order from $0$ to $2^{36} - 1$, inclusive. Let $G$ be a simple,
 undirected graph of order $0 \leq n \leq 2^{36} - 1$. If $n = 0$, then
-$G$ is represented in graph6 format as ``\verb!?!''. Suppose $n >
+$G$ is represented in {\tt graph6} format as ``\verb!?!''. Suppose $n >
 0$. Let $M = [a_{ij}]$ be the adjacency matrix of $G$. Consider the
 upper triangle of $M$, excluding the main diagonal, and write that
 upper triangle as the bit vector
@@ -315,7 +318,7 @@ v
 \underbrace{a_{0,n} a_{1,n} \cdots a_{n-1,n}}_{c_n}
 \]
 where $c_i$ denotes the entries $a_{0,i} a_{1,i} \cdots a_{i-1,i}$ in
-column $i$ of $M$. Then the graph6 representation of $G$ is
+column $i$ of $M$. Then the {\tt graph6} representation of $G$ is
 $N(n) R(v)$, where $R(v)$ and $N(n)$ are as
 in~(\ref{eq:graph_algorithms:byte_representation_bit_vector})
 and~(\ref{eq:graph_algorithms:graph6_sparse6_graph_orders}),

@@ -24,8 +24,14 @@
 
 \subsection{Distance and metrics on graphs}
 
-Consider an edge-weighted graph $G=(V,E)$ without negative weight
-cycles. Let ${\rm wt}:E\to {\mathbb{R}}$ be the weight function.
+Consider an edge-weighted simple 
+graph $G=(V,E,i,h)$ without negative weight
+cycles. Here $E\subset V^{(2)}$,
+$i$ is an incidence function as in 
+(\ref{eqn:edge-incidence}), which we regard as the identity function,
+and $h$ is an
+orientation function as in (\ref{eqn:edge-orientation}).
+Let ${\rm wt}:E\to {\mathbb{R}}$ be the weight function.
 (if $G$ is not provided with a weight function on the edges,
 then assume that ${\rm wt}(e)=1$, for all $e\in E$.)
 If $v_1,v_2\in V$ are two vertices and $P=(e_1,\dots,e_m)$ is
@@ -336,6 +342,16 @@ In other words, $G$ is $k$-vertex-connected
 if the graph remains connected even after removing 
 any $k-1$ or fewer vertices from $G$.
 
+\begin{example}
+The $1$-skeleton of any $k$-dimensional convex polytope forms 
+a $k$-vertex-connected graph 
+(\cite{Balinski1961}). As a partial converse, Steinitz's theorem 
+states that any $3$-vertex-connected planar graph forms 
+the skeleton of a convex polyhedron.
+
+\end{example}
+
+
 \begin{theorem}
 (Dirac's theorem)
 {\rm
@@ -581,25 +597,6 @@ $G$ is $k$-vertex-connected.
 
 \end{proof}
 
-\begin{theorem} (Whitney's theorem, vertex version)
-{\rm
-Suppose $G=(V,E)$ is a graph with $|V|\geq k+1$. The following are
-equivalent:
-\begin{itemize}
-\item
-$G$ is $k$-vertex-connected,
-\item
-Any pair of distinct vertices $v,w\in V$ are connected by
-at least $k$ independent paths.
-\end{itemize}
-}
-\end{theorem}
-
-\begin{proof}[Solution]
-
-...
-
-\end{proof}
 
 \begin{corollary} (Harary)
 {\rm
@@ -609,20 +606,6 @@ cycle.
 }
 \end{corollary}
 
-
-\begin{theorem}
-(Whitney's theorem, edge version)
-{\rm
-A graph is $k$-edge-connected if and only if any pair of
-vertices are connected by at least $k$ edge-disjoint paths.
-}
-\end{theorem}
-
-\begin{proof}[Solution]
-
-...
-
-\end{proof}
 
 Recall that a {\it cut-set} or {\it bond}
 or {\it cocycle} is a disconnecting set $F$ of a graph $G$ such that
@@ -669,10 +652,20 @@ vertices. A path from $u$ to $v$ is called a
 {\it $u$-$v$ path}.
 \index{path!$u$-$v$}
 Two paths $P_1$, $P_2$ from $u$ to $v$ are called {\it independent}
-(or {\it internally disjoint}) if there are no vertices
+(or {\it vertex-disjoint} or {\it internally disjoint} or
+{\it vertex-independent}) if there are no vertices
 in common between $P_1$ and $P_2$ except $u$ and $v$.
 \index{internally disjoint paths}
+\index{vertex-disjoint paths}
 \index{independent paths}
+\index{vertex-independent paths}
+Two paths $P_1$, $P_2$ from $u$ to $v$ are called 
+{\it edge-independent}
+{\it edge-disjoint}
+if there are no edges
+in common between $P_1$ and $P_2$.
+\index{edge-disjoint paths}
+\index{edge-independent paths}
 
 Let $W$ be a set of vertices or a set of edges.
 If $W\subset V$ then we define $G-W$ to be the subgraph 
@@ -683,6 +676,7 @@ of $G$ which has all the edges in $W$ removed
 If $G-W$ is not connected then we call $W$ a 
 {\it separating set} and we say $W$ {\it separates} $G$.
 \index{separating set}
+\index{separates}
 
 \section{Ford-Fulkerson Theorem}
 
@@ -693,17 +687,27 @@ So it should be called the
 ``Elias-Feinstein-Ford-Fulkerson-Shannon Theorem,''
 to be precise about the authorship.
 
-To explain the meaning, we need to intoduce some terminology.
+To explain the meaning of this theorem, we need to intoduce some
+notation and  terminology.
 
-Let $G = (V, E)$ be a directed graph, or {\it network}, 
+Consider an edge-weighted simple 
+digraph $G=(V,E,i,h)$ without negative weight
+cycles. Here $E\subset V^{(2)}$,
+$i$ is an incidence function as in 
+(\ref{eqn:edge-incidence}), which we regard as the identity function,
+and $h$ is an
+orientation function as in (\ref{eqn:edge-orientation}).
+Let $G$ be a {\it network}, 
 \index{network}
 with two distinguished vertices, the ``source'' and the ``sink.'' 
 Let $s$ and $t$ denote the source and the sink of $G$, respectively.
 The {\it capacity} (or {\it edge capacity})
 \index{capacity}
+\index{edge capacity})
 is a mapping $c: E\to {\mathbf{R}}$, denoted by $c_{uv}$ 
-or $c(u,v)$, for $(u,v)\in E$. If $(v,u)\notin E$ but
-$(U,v)\in E$ then we set, by convention, $c(v,u)=-c(u,v)$.
+or $c(u,v)$, for $(u,v)\in E$ and $h(e)= u$. 
+If $(u,v)\in E$ and $h(e)= v$
+then we set, by convention, $c(v,u)=-c(u,v)$.
 Thinking of a graph as a network of pipes (representing the edges)
 transporting water with various junctions (representing vertices), 
 the capacity function represents the maximum amount 
@@ -853,7 +857,7 @@ c(S,T) = \sum_{(s,t)\in (S,T)} c(u,v).
 \]
 The {\it minimum cut problem} 
 \index{minimum cut problem} 
-is tominimize the amount of capacity of an $s-t$ cut.
+is to minimize the amount of capacity of an $s-t$ cut.
 
 The following theorem is due to P. Elias, A. Feinstein, L.R. Ford,
 Jr.,  D.R. Fulkerson, C.E. Shannon.
@@ -861,13 +865,31 @@ Jr.,  D.R. Fulkerson, C.E. Shannon.
 \begin{theorem}
 (max-flow min-cut theorem)
 {\rm
-The maximum value of an s-t flow is equal to the minimum capacity of
-an s-t cut.
+The maximum value of an $s$-$t$ flow is equal to the minimum capacity of
+an $s$-$t$ cut.
 }
 \end{theorem}
 \index{max-flow min-cut theorem}
 
+The intuitive explanation of this result is as follows.
+
+Suppose that $G=(V,E)$ is a graph where each edge has capacity $1$.
+Let $s\in V$ be the source and $t\in V$ be the sink.
+The maximum flow from $s$ to $t$ is the maximum number of 
+independent paths from $s$ to $t$.
+Denote this maximum flow by $m$.
+Each $s$-$t$ cut must intersect each $s$-$t$ path at least once.
+In fact, if $S$ is a mimimal $s$-$t$ cut then for each 
+edge $e$ in $S$ there is an $s$-$t$ path containing
+$e$. Therefore, $|S|\leq e$.
+
+On the other hand, since each edge has unit capacity,
+the maximum flow vlaue can't exceed the number of 
+edges separating $s$ from $t$, so $m\leq |S|$.
+
+
 \begin{remark}
+\label{remark:GMCMF}
 {\rm
 This theorem can be generalized as follows.
 In addition to edge capacity, suppose there is capacity at each {\it vertex}, 
@@ -948,7 +970,7 @@ be a maximum. This contradiction proves the ``only if'' direction.
 Now, suppose there is no $f$-augmenting path in the network.
 Let $S$ be the set of vertices $v$ such that there is an $f$-unsaturated path from
 the source $s$ to $v$. We know $s\in S$ and (by hypothesis)
-$t\notin S$. Thus there is a cut of the form $S,T)$ in the network.
+$t\notin S$. Thus there is a cut of the form $(S,T)$ in the network.
 Let $e=(v,w)$ be any edge in this cut, $v\in S$ and $w\in T$. Since
 there is no $f$-unsaturated path from $s$ to $w$,
 $e$ is $f$-saturated. Likewise, any edge in the cut
@@ -973,8 +995,8 @@ $f$-saturated.
 
 \end{proof}
 
-Here is some Python code (from
-\verb+http://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm+)
+Here is some Python code\footnote{Please see
+\url{http://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm}.}
 which implements this. The class {\tt FlowNetwork} is basically a Sage
 Graph class with edge weights and an extra data structure representing
 the flow on the graph.
@@ -1063,6 +1085,7 @@ class FlowNetwork(object):
 %
 
 \section{Menger's Theorem}
+\index{Menger's theorem}
 
 Menger's theorem has a number of different versions
 (a undirected, vertex-connectivity version,
@@ -1080,7 +1103,7 @@ $G$ equals the minimum number of vertices needed to separate $u$ and $v$.
 \end{theorem}
 
 \begin{proof}[Solution]
-Suppose that the maximum number of internally disjoint $u$-$v$ paths in
+Suppose that the maximum number of independent $u$-$v$ paths in
 $G$ is attained by $u$-$v$ paths $P_1$, \dots, $P_k$.
 To obtain a separating set $W\subset V$, we must at least remove
 one point in each path $P_i$. This implies
@@ -1088,9 +1111,9 @@ the minimum number of vertices needed to separate $u$ and $v$
 is at least $k$. Therefore, we have an upper bound:
 
 \[
-\#\{ {\rm internally\ disjoint}\ u-v\ {\rm paths}\}
+\#\{ {\rm indep.}\ u-v\ {\rm paths}\}
 \leq
-\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate}\ u\ 
+\# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate}\ u\ 
 {\rm and}\  v\}.
 \]
 
@@ -1108,12 +1131,12 @@ Suppose now $n>3$ and assume the statement holds for each
 graph with $<n$ edges. Let
 
 \[
-k = \#\{ {\rm internally\ disjoint}\ u-v\ {\rm paths}\}
+k = \#\{ {\rm independent}\ u-v\ {\rm paths}\}
 \]
 and let
 \[
 \ell = 
-\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate}\ 
+\# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate}\ 
 u\ {\rm and}\  v\},
 \]
 so that $k\leq \ell$. Let $e\in E$ and let $G/e$ be the 
@@ -1135,9 +1158,9 @@ Therefore,
 
 \[
 \begin{array}{c}
-\#\{ {\rm internally\ disjoint}\ u-v\ {\rm paths\ in}\ G/e\}\\
+\#\{ {\rm independent}\ u-v\ {\rm paths\ in}\ G/e\}\\
 < 
-\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate}
+\# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate}
 \ u\ {\rm and}\  v\ {\rm in}\ G\}.
 \end{array}
 \]
@@ -1145,9 +1168,9 @@ By induction,
 
 \[
 \begin{array}{c}
-\#\{ {\rm internally\ disjoint\ }u-v{\rm \ paths\ in\ }G/e\}\\
+\#\{ {\rm independent\ }u-v{\rm \ paths\ in\ }G/e\}\\
 =
-\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate\
+\# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate\
 }u{\rm \ and}\  v\ {\rm in\ }G/e\}.
 \end{array}
 \]
@@ -1170,10 +1193,78 @@ $v$ in $G$ cannot contain both a vertex in $G$ adjacent to $u$ and a vertex in
 $G$ adjacent to $v$. Therefore, we may pick $e$ accordingly.
 (Q.E.D. claim)
 
-The result follows form the claim and the above inequalities.
+The result follows from the claim and the above inequalities.
 \end{proof}
 
+The following statement 
+is the undirected, edge-connectivity version of
+Menger's theorem.
+
+\begin{theorem}
+\textbf{Menger's theorem (edge-connectivity form).}
+{\rm
+Let $G$ be an undirected graph, and let $s$ and $t$ be vertices in
+$G$. 
+Then, the maximum number of edge-disjoint $(s,t)$-paths in
+$G$ 
+equals the minimum number of edges from $E(G)$ whose
+deletion separates $s$ and $t$.
+}
+\end{theorem}
+
+This is proven the same way as the previous version
+but using the generalized min-cut/max-flow theorem (see 
+Remark \ref{remark:GMCMF} above).
+
+
 \section{Whitney's Theorem}
+\index{Whitney's Theorem}
+
+\begin{theorem} 
+\textbf{Whitney's theorem (vertex version).}
+{\rm
+Suppose $G=(V,E)$ is a graph with $|V|\geq k+1$. The following are
+equivalent:
+\begin{itemize}
+\item
+$G$ is $k$-vertex-connected,
+\item
+Any pair of distinct vertices $v,w\in V$ are connected by
+at least $k$ independent paths.
+\end{itemize}
+}
+\end{theorem}
+
+\begin{proof}[Solution]
+
+...
+
+\end{proof}
+
+
+
+\begin{theorem}
+\textbf{Whitney's theorem (edge version).}
+{\rm
+Suppose $G=(V,E)$ is a graph with $|V|\geq k+1$. The following are
+equivalent:
+\begin{itemize}
+\item
+the graph $G$ is $k$-edge-connected,
+
+\item
+any pair of
+vertices are connected by at least $k$ edge-disjoint paths.
+\end{itemize}
+}
+\end{theorem}
+
+\begin{proof}[Solution]
+
+...
+
+\end{proof}
+
 
 \begin{theorem}
 \textbf{Whitney's Theorem.}

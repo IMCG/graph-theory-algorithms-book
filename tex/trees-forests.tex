@@ -166,6 +166,7 @@ survey ({\it What is a matroid?'} ... add reference later ... ).
 
 Recall a minimal edge cut of a graph is also called a bond of the graph.
 \index{bond}
+\index{edge-tagging game}
 
 The following two-person game is played on a connected graph $G = (V,E)$.
 Two players Alice and Bob alternately tag elements of $E$.
@@ -229,7 +230,7 @@ As in (6) we see adding just one edge in $E_1-E_2$ to $T$ will create a
 unique cycle in $G$. Such a cycle is called a {\it fundamental cycle}
 of $G$. (The set of such fundamental cycles of $G$ depends on $T$.)
 \index{fundamental cycle}
-
+\index{tree}
 
 \begin{proof}[Solution]
 \noindent
@@ -390,7 +391,8 @@ Both of these argorithms are discussed in more detail below.
 A {\it minimum spanning tree} (MST) is a spanning
 tree of an edge weighted graph having lowest total weight
 among all possible spanning trees.
-
+\index{tree!minimum spanning}
+\index{MST}
 
 \item Kruskal's algorithm~\cite{Kruskal1956}; see also section~23.2 of
   Cormen~et~al.~\cite{CormenEtAl2001}.
@@ -526,6 +528,7 @@ def kruskal(G):
 \end{Verbatim}
 
 \end{center}
+\index{Kruskal's algorithm}
 
 Here are some examples.
 
@@ -623,7 +626,7 @@ but $v$ is not,\;
 \caption{Prim's algorithm.}
 \label{alg:tree-forest:prim}
 \end{algorithm}
-
+\index{Prim's algorithm}
 
 \begin{center}
 \vskip .15in
@@ -852,6 +855,7 @@ def prim(G):
 Bor\r{u}vka's algorithm algorithm is an algorithm
 for finding a minimum spanning tree in a connected graph for
 which all edge weights are distinct.
+\index{Bor\r{u}vka's algorithm}
 
 Pseudocode for Bor\r{u}vka's algorithm is:
 
@@ -2187,6 +2191,8 @@ chapter~12 of Cormen~et~al.~\cite{CormenEtAl2001}. See also
 
 A {\it binary search tree} (BST) is a rooted binary tree
 $T=(V,E)$ having weighted vertices ${\rm wt}:V\to {\mathbb{R}}$ satisfying:
+\index{binary search tree} 
+\index{BST}
 
 \begin{itemize}
 \item
@@ -2202,10 +2208,6 @@ Both the left and right subtrees must also be binary search trees.
 From the above properties it naturally follows that:
 {\it Each vertex has a distinct label.}
 
-Generally, the information represented by each vertex is a
-record (or list or dictionary), rather than a single data element. However,
-for sequencing purposes, vertices are compared according to their
-labels rather than any part of their associated records.
 
 \subsubsection{Traversal}
 
@@ -2273,23 +2275,6 @@ be the vertices of a tree and weight vertex $i$ with $\ell_i$,
 for $1\leq i\leq n$. In this case, we can traverse this tree
 in order of its weights, thereby building a BST recursively.
 This BST represents the sorting of the list $L$.
-A {\it binary search tree} (BST) is a rooted binary tree
-$T=(V,E)$ having weighted vertices ${\rm wt}:V\to {\mathbb{R}}$ satisfying:
-
-\begin{itemize}
-\item
- The left subtree of a vertex $v$ contains only vertices whose label
-(or ``key'') is less than the label of $v$.
-\item
-The right subtree of a vertex $v$ contains only vertices whose label
-  is greater than the label of $v$.
-\item
-Both the left and right subtrees must also be binary search trees.
-\end{itemize}
-
-From the above properties it naturally follows that:
-{\it Each vertex has a distinct label.}
-
 Generally, the information represented by each vertex is a
 record (or list or dictionary), rather than a single data element. However,
 for sequencing purposes, vertices are compared according to their
