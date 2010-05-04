@@ -335,29 +335,30 @@ given:
   not necessarily assume $E \subseteq V^{(2)}$, where $V^{(2)}$ is the
   set of unordered pairs of vertices.
 
-\item An incidence function 
+\item An incidence function
 
 \begin{equation}
 \label{eqn:edge-incidence}
-i: E \longrightarrow V^{(2)}. 
+i: E \longrightarrow V^{(2)}.
 \end{equation}
 \end{itemize}
 %
 Such a multigraph is denoted $G = (V,E,i)$. An \emph{orientation} on
-$G$ is a function 
-
+$G$ is a function
+%
 \begin{equation}
 \label{eqn:edge-orientation}
-h: E \longrightarrow V, 
+h: E \longrightarrow V
 \end{equation}
-where $h(e) \in i(e)$ for
-all $e \in E$. The element $v = h(e)$ is called the \emph{head} of
-$i(e)$. If $G$ has no self-loops, then $i(e)$ is a set having exactly
-two elements denoted $i(e) = \{h(e),\, t(e)\}$. The element $v = t(e)$
-is called the \emph{tail} of $i(e)$. For self-loops, we set
-$t(e) = h(e)$. A multigraph with an orientation can therefore be
-described as the $4$-tuple $(V, E, i, h)$. In other words,
-$G = (V,E,i,h)$ is a multidigraph.
+%
+where $h(e) \in i(e)$ for all $e \in E$. The element $v = h(e)$ is
+called the \emph{head} of $i(e)$. If $G$ has no self-loops, then
+$i(e)$ is a set having exactly two elements denoted
+$i(e) = \{h(e),\, t(e)\}$. The element $v = t(e)$ is called the
+\emph{tail} of $i(e)$. For self-loops, we set $t(e) = h(e)$. A
+multigraph with an orientation can therefore be described as the
+$4$-tuple $(V, E, i, h)$. In other words, $G = (V,E,i,h)$ is a
+multidigraph.
 \index{orientation}
 \index{edge!head}
 \index{edge!tail}
@@ -2199,8 +2200,17 @@ by concatenating the entries of the matrix, row-by-row. For example,
 \end{bmatrix}.
 \]
 
-The following algorithm is an immediate consequence of
-Theorem \ref{thm:introduction:adjoint_matrix_invariant}.
+Algorithm~\ref{alg:introduction:graph_isomorphism_canonical_labels} is
+an immediate consequence of
+Theorem~\ref{thm:introduction:adjoint_matrix_invariant}. The
+lexicographically maximal element of the permutation equivalence class
+of the adjacency matrix of $G$ is called the \emph{canonical label} of
+$G$. Thus, to check if two undirected graphs are isomorphic, we simply
+check if their canonical labels are equal. This idea for graph
+isomorphism checking is presented in
+Algorithm~\ref{alg:introduction:graph_isomorphism_canonical_labels}.
+\index{graph!canonical label}
+\index{canonical label}
 
 \begin{algorithm}[!htpb]
 \dontprintsemicolon  % no semicolon at end of pseudocode statements
@@ -2226,15 +2236,6 @@ permutation equivalence class of $A_i$, for $i = 1, 2$.\;
 \caption{Computing graph isomorphism using canonical labels.}
 \label{alg:introduction:graph_isomorphism_canonical_labels}
 \end{algorithm}
-
-The lexicographically maximal element of the permutation equivalence
-class of the adjacency matrix of $G$ is called the
-\emph{canonical label} of $G$. Thus, to check if two undirected graphs
-are isomorphic, we simply check if their canonical labels are equal.
-This idea for graph isomorphism checking is presented in
-Algorithm~\ref{alg:introduction:graph_isomorphism_canonical_labels}.
-\index{graph!canonical label}
-\index{canonical label}
 
 
 %%--- Degree sequence ---------------------------------------------------%%
@@ -2334,8 +2335,8 @@ algorithmic approach that allows for constructing a simple graph with
 a given degree sequence. See Sierksma and
 Hoogeveen~\cite{SierksmaHoogeveen1991} for a coverage of seven
 criteria for a sequence of integers to be graphic.
-See \cite{ErdosEtal} for an extension of the Havel-Hakimi theorem to
-digraphs.
+See~\cite{ErdosEtal2010} for an extension of the Havel-Hakimi theorem
+to digraphs.
 %% The proof of
 %% Theorem~\ref{thm:introduction:Havel1955_Hakimi1962:graphical_sequence}
 %% and an algorithmic version of that proof are adapted from section~1.5
@@ -3146,7 +3147,8 @@ all edges incident on that vertex are deleted as well.
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% a stub node that should not be visible
-\node (stub) at (3.6,1.5) [] {};
+\node (stubLeft) at (0,1.5) [] {};
+\node (stubRight) at (5,1.5) [] {};
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/3, 1/4, 2/3, 2/4, 3/4} {
