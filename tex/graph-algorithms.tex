@@ -1546,10 +1546,12 @@ algorithm computes single-source shortest paths in a weighted graph or
 digraph, where some of the edge weights may be negative. This
 algorithm is a modification of the one published in 1957 by Richard E.
 Bellman~\cite{Bellman1957} and that by Lester Randolph Ford,
-Jr.~\cite{Ford1956} in 1956. In contrast to the ``greedy'' approach
-that Dijkstra's algorithm takes, i.e. searching for the ``cheapest''
-path, the Bellman-Ford algorithm searches over all edges and keeps
-track of the shortest one found as it searches.
+Jr.~\cite{Ford1956} in 1956. Shimbel~\cite{Shimbel1955} independently
+discovered the same method in~1955, and Moore~\cite{Moore1959}
+in~1959. In contrast to the ``greedy'' approach that Dijkstra's
+algorithm takes, i.e. searching for the ``cheapest'' path, the
+Bellman-Ford algorithm searches over all edges and keeps track of the
+shortest one found as it searches.
 
 \begin{algorithm}[!htpb]
 \dontprintsemicolon  % no semicolon at end of pseudocode statements
