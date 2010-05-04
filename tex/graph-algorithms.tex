@@ -951,13 +951,13 @@ Both BFS and DFS can be used to determine if an undirected graph is
 connected. Let $G = (V, E)$ be an undirected graph of order $n > 0$
 and let $s$ be an arbitrary vertex of $G$. We initialize a counter
 $c \leftarrow 1$ to mean that we are starting our exploration at $s$,
-hence we have already visited $s$. We apply either BFS or DFS,
-treating $G$ and $s$ as input to any of these algorithms. Each time we
-visit a vertex that was previously unvisited, we increment the counter
-$c$. At the end of the algorithm, we compare $c$ with $n$. If $c = n$,
-we know that we have visited all vertices of $G$ and conclude that $G$
-is connected. Otherwise, we conclude that $G$ is disconnected. This
-procedure is summarized in
+hence we have already visited one vertex, i.e. $s$. We apply either
+BFS or DFS, treating $G$ and $s$ as input to any of these
+algorithms. Each time we visit a vertex that was previously unvisited,
+we increment the counter $c$. At the end of the algorithm, we compare
+$c$ with $n$. If $c = n$, we know that we have visited all vertices of
+$G$ and conclude that $G$ is connected. Otherwise, we conclude that
+$G$ is disconnected. This procedure is summarized in
 Algorithm~\ref{alg:graph_algorithms:graph_connectivity}.
 
 \begin{algorithm}[!htpb]
