@@ -1838,8 +1838,15 @@ $P \leftarrow [\,]$\;
 
 \subsection{Floyd-Roy-Warshall algorithm}
 
-See section~25.2 of Cormen~et~al.~\cite{CormenEtAl2001}, and section
-14.4 of Berman and Paul~\cite{BermanPaul1997}.
+Let $D$ be a weighted digraph of order $n$ and size $m$. Dijkstra's
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} and the
+Bellman-Ford Algorithm~\ref{alg:graph_algorithms:Bellman_Ford} can be
+used to determine shortest paths from a single source vertex to all
+other vertices of $D$. To determine a shortest path between each pair
+of distinct vertices in $D$, we repeatedly apply either of these
+algorithms to each vertex of $D$. Such repeated application of
+Dijkstra's and the Bellman-Ford algorithms results in algorithms that
+run in time $O(n^3)$ and $O(n^2m)$, respectively.
 
 The \emph{Floyd-Roy-Warshall algorithm}~(FRW), or the Floyd-Warshall
 algorithm, is an algorithm for finding shortest paths in a weighted,
