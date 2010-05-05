@@ -1859,26 +1859,47 @@ Roy~\cite{Roy1959} in 1959, Robert Floyd~\cite{Floyd1962} in 1962, and
 by Stephen Warshall~\cite{Warshall1962} in 1962.
 
 In some sense, the FRW algorithm is an example of
-``dynamic programming,'' which allows one to break the computation
+\emph{dynamic programming}, which allows one to break the computation
 into simpler steps using some sort of recursive procedure. The rough
-idea is as follows. Temporarily label the vertices of $G$ as
-$V = \{1,2,\dots,n\}$. Call $SD(i,j,k)$ a shortest distance from
-vertex $i$ to vertex $j$ that only uses vertices $1$ through $k$. This
-can be computed using the recursive expression
+idea is as follows. Temporarily label the vertices of a weighted
+digraph $G$ as $V = \{1,2,\dots,n\}$ with $n = |V(G)|$. Let $P_k(i,j)$
+be a shortest path from $i$ to $j$ such that its intermediate vertices
+are in $\{1, 2, \dots, k\}$. Let $D_k(i,j)$ be the weight (or
+distance) of $P_k(i,j)$. If no shortest $i$-$j$ paths exist, define
+$P_k(i,j) = \infty$ and $D_k(i,j) = \infty$ for all
+$k \in \{1, 2, \dots, n\}$. If $k = 0$, then $P_0(i,j): i, j$ since no
+intermediate vertices are allowed in the path and hence
+$D_0(i,j) = w(i,j)$. In other words, if $i$ and $j$ are adjacent, a
+shortest $i$-$j$ path is the edge $ij$ itself and the weight of this
+path is simply the weight of $ij$. Now consider $P_k(i,j)$ for
+$k > 0$. Either $P_k(i,j)$ passes through $k$ or it does not. If $k$
+is not on the path $P_k(i,j)$, then the intermediate vertices of
+$P_k(i,j)$ are in  $\{1, 2, \dots, k-1\}$, as are the vertices of
+$P_{k-1}(i,j)$. In case $P_k(i,j)$ contains the vertex $k$, then
+$P_k(i,j)$ traverses $k$ exactly once by the definition of path. The
+$i$-$k$ subpath in $P_k(i,j)$ is a shortest $i$-$k$ path whose
+intermediate vertices are drawn from $\{1, 2, \dots, k-1\}$, which is
+also the set of intermediate vertices for the $k$-$j$ subpath in
+$P_k(i,j)$. That is, to obtain $P_k(i,j)$, we take the union of the
+paths $P_{k-1}(i,k)$ and $P_{k-1}(k,j)$. We compute the weight
+$D_k(i,j)$ of $P_k(i,j)$ using the expression
 \[
-SD(i,j,k)
+D_k(i,j)
 =
-\min\{ SD(i,j,k-1),\, SD(i,k,k-1) + SD(k,j,k-1)\}.
+\begin{cases}
+w(i,j), & \text{if $k = 0$}, \\
+\min\{D_{k-1}(i,j),\, D_{k-1}(i,k) + D_{k-1}(k,j)\}, & \text{if $k > 0$}.
+\end{cases}
 \]
 The key to the Floyd-Roy-Warshall algorithm lies in exploiting this
 formula. If $n = |V|$, then this is a $O(n^3)$ time algorithm. For
 comparison, the Bellman-Ford algorithm has complexity
-$O(|V| \cdot |E|)$, which is $O(n^3)$ time for ``dense''
-graphs. However, Bellman-Ford only yields the shortest paths emanating
-from a \emph{single} vertex. To achieve comparable output, we would
-need to iterate Bellman-Ford over \emph{all} vertices, which would be
-an  $O(n^4)$ time algorithm for ``dense'' graphs. Except possibly for
-``sparse'' graphs, Floyd-Roy-Warshall is better than an iterated
+$O(|V| \cdot |E|)$, which is $O(n^3)$ time for dense graphs. However,
+Bellman-Ford only yields the shortest paths emanating from a
+\emph{single} vertex. To achieve comparable output, we would need to
+iterate Bellman-Ford over \emph{all} vertices, which would be
+an  $O(n^4)$ time algorithm for dense graphs. Except possibly for
+sparse graphs, Floyd-Roy-Warshall is better than an iterated
 implementation of Bellman-Ford.
 
 Here is an implementation in Sage.
