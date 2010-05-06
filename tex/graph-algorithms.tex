@@ -1862,11 +1862,24 @@ In some sense, the FRW algorithm is an example of
 \emph{dynamic programming}, which allows one to break the computation
 into simpler steps using some sort of recursive procedure. The rough
 idea is as follows. Temporarily label the vertices of a weighted
-digraph $G$ as $V = \{1,2,\dots,n\}$ with $n = |V(G)|$. Let $P_k(i,j)$
-be a shortest path from $i$ to $j$ such that its intermediate vertices
-are in $\{1, 2, \dots, k\}$. Let $D_k(i,j)$ be the weight (or
-distance) of $P_k(i,j)$. If no shortest $i$-$j$ paths exist, define
-$P_k(i,j) = \infty$ and $D_k(i,j) = \infty$ for all
+digraph $G$ as $V = \{1,2,\dots,n\}$ with $n = |V(G)|$. Let
+$W = [w(i,j)]$ be the weight matrix of $G$ where
+%
+\begin{equation}
+\label{eq:graph_algorithms:Floyd_Roy_Warshall_weight_matrix}
+w(i,j)
+=
+\begin{cases}
+w(ij), & \text{if $ij \in E(G)$}, \\
+0, & \text{if $i = j$}, \\
+\infty, & \text{otherwise}.
+\end{cases}
+\end{equation}
+%
+Let $P_k(i,j)$ be a shortest path from $i$ to $j$ such that its
+intermediate vertices are in $\{1, 2, \dots, k\}$. Let $D_k(i,j)$ be
+the weight (or distance) of $P_k(i,j)$. If no shortest $i$-$j$ paths
+exist, define $P_k(i,j) = \infty$ and $D_k(i,j) = \infty$ for all
 $k \in \{1, 2, \dots, n\}$. If $k = 0$, then $P_0(i,j): i, j$ since no
 intermediate vertices are allowed in the path and hence
 $D_0(i,j) = w(i,j)$. In other words, if $i$ and $j$ are adjacent, a
