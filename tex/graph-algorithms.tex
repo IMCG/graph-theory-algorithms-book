@@ -1913,7 +1913,43 @@ Bellman-Ford only yields the shortest paths emanating from a
 iterate Bellman-Ford over \emph{all} vertices, which would be
 an  $O(n^4)$ time algorithm for dense graphs. Except possibly for
 sparse graphs, Floyd-Roy-Warshall is better than an iterated
-implementation of Bellman-Ford.
+implementation of Bellman-Ford. The above discussion is translated
+into an algorithmic presentation as given in
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}.
+
+\begin{algorithm}[!htpb]
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%% input/output
+\Input{A weighted digraph $G = (V, E)$ that has no
+  self-loops. Negative edge weights are allowed. The order of $G$ is
+  $n > 0$. Vertices are numbered from 1 to $n$, i.e.
+  $V = \{1, 2, \dots, n\}$. The weight matrix $W = [w(i,j)]$ of $G$ as
+  defined in~(\ref{eq:graph_algorithms:Floyd_Roy_Warshall_weight_matrix}).}
+\Output{A matrix $P = [a_{ij}]$ of shortest paths in $G$. A matrix
+  $D = [a_{ij}]$ of distances where $D[i,j]$ is the weight~(or
+  distance) of a shortest $i$-$j$ path in $G$.}
+\BlankLine
+%% algorithm body
+$n \leftarrow |V|$\;
+$P[a_{ij}] \leftarrow$ an $n \times n$ zero matrix\;
+$D[a_{ij}] \leftarrow W[w(i,j)]$\;
+\For{$k \leftarrow 1, 2, \dots, n$}{
+  \For{$i \leftarrow 1, 2, \dots, n$}{
+    \For{$j \leftarrow 1, 2, \dots, n$}{
+      \If{$D[i,j] > D[i,k] + D[k,j]$}{
+        $P[i,j] \leftarrow k$\;
+        $D[i,j] \leftarrow D[i,k] + D[k,j]$\;
+      }
+    }
+  }
+}
+\Return $(P,D)$\;
+\caption{The Floyd-Roy-Warshall algorithm for all-pairs shortest paths.}
+\label{alg:graph_algorithms:Floy_Roy_Warshall}
+\end{algorithm}
 
 Here is an implementation in Sage.
 %
