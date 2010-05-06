@@ -2146,6 +2146,106 @@ Figure~\ref{fig:graph_algorithms:another_Floyd_Roy_Warshall_demo}.
 %sage: D.plot(edge_labels=True, graph_border=True).show()
 
 
+%%--- Transitive closure ------------------------------------------------%%
+
+\subsection{Transitive closure}
+
+Consider a digraph $G = (V, E)$ of order $n = |V|$. The
+\emph{transitive closure}\index{transitive closure} of $G$ is defined
+as the digraph $G^* = (V, E^*)$ having the same vertex set as
+$G$. However, the edge set $E^*$ of $G^*$ consists of all edges $uv$
+such that there is a $u$-$v$ path in $G$ and $uv \notin E$. The
+transitive closure $G^*$ answers an important question about $G$: If
+$u$ and $v$ are two distinct vertices of $G$, are they connected by a
+path with length $\geq 1$?
+
+To compute the transitive closure of $G$, we let each edge of $G$ be
+of unit weight and apply the Floyd-Roy-Warshall
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall} on $G$. By
+Corollary~\ref{cor:introduction:any_path_has_length_at_most_n_minus_1},
+for any $i$-$j$ path in $G$ we have $D[i,j] < n$, and if there are no
+paths from $i$ to $j$ in $G$, we have $D[i,j] = \infty$. This
+procedure for computing transitive closure runs in time $O(n^3)$.
+
+Modifying the Floyd-Roy-Warshall algorithm slightly, we obtain an
+algorithm for computing transitive closure that, in practice, is more
+efficient than Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}
+in terms of time and space. Instead of using the operations $\min$ and
+$+$ as is the case in the Floyd-Roy-Warshall algorithm, we replace
+these operations with the logical operations $\vee$~(logical \OR) and
+$\wedge$~(logical \AND), respectively. For $i,j,k = 1, 2, \dots, n$,
+define $T_k(i,j) = 1$ if there is an $i$-$j$ path in $G$ with all
+intermediate vertices belonging to $\{1, 2, \dots, k\}$, and
+$T_k(i,j) = 0$ otherwise. Thus, the edge $ij$ belongs to the
+transitive closure $G^*$ if and only if $T_k(i,j) = 1$. The definition
+of $T_k(i,j)$ can be cast in the form of a recursive definition as
+follows. For $k = 0$, we have
+\[
+T_0(i,j)
+=
+\begin{cases}
+0, & \text{if $i \neq j$ and $ij \notin E$}, \\
+1, & \text{if $i = j$ or $ij \in E$}
+\end{cases}
+\]
+and for $k > 0$, we have
+\[
+T_k(i,j)
+=
+T_{k-1}(i,j) \vee \big( T_{k-1}(i,k) \wedge T_{k-1}(k,j) \big).
+\]
+We need not use the subscript $k$ at all and instead let $T$ be a
+boolean matrix such that $T[i,j] = 1$ if and only if there is an
+$i$-$j$ path in $G$, and $T[i,j] = 0$ otherwise. Using the above
+notations, the Floyd-Roy-Warshall algorithm is translated to
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall:transitive_closure}
+for obtaining the boolean matrix $T$. We can then use $T$ and the
+definition of transitive closure to obtain the edge set $E^*$ in the
+transitive closure $G^* = (V, E^*)$ of $G = (V, E)$.
+
+A more efficient transitive closure algorithm can be found in the PhD
+thesis of Esko Nuutila~\cite{Nuutila1995}. The transitive closure
+algorithm as presented in
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall:transitive_closure}
+is due to Stephen Warshall~\cite{Warshall1962}. It is a special case
+of a more general algorithm in automata theory due to Stephen
+Kleene~\cite{Kleene1956}, called Kleene's algorithm.
+
+\begin{algorithm}[!htpb]
+\dontprintsemicolon  % no semicolon at end of pseudocode statements
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%% input/output
+\Input{A digraph $G = (V, E)$ that has no self-loops. Vertices are
+  numbered from 1 to $n$, i.e. $V = \{1, 2, \dots, n\}$.}
+\Output{The boolean matrix $T$ such that $T[i,j] = 1$ if and only if
+  there is an $i$-$j$ path in $G$, and $T[i,j] = 0$ otherwise.}
+\BlankLine
+%% algorithm body
+$n \leftarrow |V|$\;
+$T \leftarrow$ adjacency matrix of $G$\;
+%% \For{$i \leftarrow 1, 2, \dots, n$}{
+%%   \For{$j \leftarrow 1, 2, \dots, n$}{
+%%     \eIf{$i = j$ \emph{or} $ij \in E$}{
+%%       $T[i,j] \leftarrow 1$\;
+%%     }{
+%%       $T[i,j] \leftarrow 0$\;
+%%     }
+%%   }
+%% }
+\For{$k \leftarrow 1, 2, \dots, n$}{
+  \For{$i \leftarrow 1, 2, \dots, n$}{
+    \For{$j \leftarrow 1, 2, \dots, n$}{
+      $T[i,j] \leftarrow T[i,j] \vee \big( T[i,k] \wedge T[k,j] \big)$\;
+    }
+  }
+}
+\Return $T$\;
+\caption{Variant of the Floyd-Roy-Warshall algorithm for transitive closure.}
+\label{alg:graph_algorithms:Floy_Roy_Warshall:transitive_closure}
+\end{algorithm}
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Johnson's algorithm -----------------------------------------------%%
