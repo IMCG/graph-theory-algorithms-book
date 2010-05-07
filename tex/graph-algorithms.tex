@@ -2281,57 +2281,42 @@ Let $G = (V,E)$ be a graph with edge weights but no negative cycles.
 vertices in a ``sparse'' directed graph.
 \index{Johnson's algorithm}
 
-%\begin{itemize}
-%\item
-%Add a new vertex $v_0$ with zero weight edges from it to all $v\in V$.
-%
-%\item
-%Run the Bellman-Ford algorithm to check for negative weight cycles
-%and find $h(v)$,
-%the least weight of a path from the new node $v_0$ to $v\in V$.
-%If this step detects a negative cycle, the algorithm is terminated.
-%
-%\item
-%Reweight the edges using the vertices' $h(v)$ values: an edge from
-%$v\in V$ to $w\in V$, having length $wt(v,w)$, is given the new length
-%$wt(v,w) + h(v) - h(w)$.
-%
-%\item
-%For each $v\in V$, run Dijkstra's algorithm and store the computed
-%least weight to other vertices.
-%\end{itemize}
-
 \begin{algorithm}[!htpb]
 \dontprintsemicolon  % no semicolon at end of pseudocode statements
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{Count}{count}
 \SetKwData{False}{False}
-\SetKwData{True}{True}
 %% input/output
-\Input{A connected graph $G = (V, E)$ having (possibly negative) edge
-  weights.}
-\Output{A shortest path between all pairs of vertices in $V$
-  (or terminate if a negative edge cycle is detected).}
+\Input{A sparse weighted digraph $G = (V, E)$, where the vertex set is
+  $V = \{1, 2, \dots, n\}$.}
+\Output{If $G$ has negative-weight cycles, then return
+  \False. Otherwise, return an $n \times n$ matrix $D$ of shortest-path
+  weights and a list $P$ such that $P[v]$ is a parent list resulting
+  from running Dijkstra's algorithm on $G$ with start vertex $v$.}
 \BlankLine
 %% algorithm body
-Add a new vertex $v_0$ with zero weight edges from it to all $v \in V$.\;
-
-Run the Bellman-Ford algorithm to check for negative weight cycles
-and find $h(v)$, the least weight of a path from the new node $v_0$ to
-$v \in V$.
-
-If the last step detects a negative cycle, the algorithm is terminated.\;
-
-Re-weight the edges using the vertices' $h(v)$ values: an edge from
-$v \in V$ to $w \in V$, having length $wt(v,w)$, is given the new length
-$wt(v,w) + h(v) - h(w)$.\;
-
-For each $v \in V$, run Dijkstra's algorithm and store the computed
-least weight to other vertices.
-\caption{Johnson's algorithm.}
-\label{alg:graph_algorithms:johnson}
+$s \leftarrow$ vertex not in $V$\;
+$V' \leftarrow V \cup \{s\}$\;
+$E' \leftarrow E \cup \{sv \;|\; v \in V\}$\;
+$G' \leftarrow$ digraph $(V', E')$ with weight $w(sv) = 0$ for all $v \in V$\;
+\If{$\BellmanFord(G', w, s) = \False$}{
+  \Return \False\;
+}
+$d \leftarrow$ distance list returned by $\BellmanFord(G', w, s)$\;
+\For{\emph{each edge} $uv \in E'$}{
+  $\hat{w}(uv) \leftarrow w(uv) + d[u] - d[v]$\;
+}
+\For{\emph{each vertex} $u \in V$}{
+  $(\hat{\delta}, \hat{P}) \leftarrow$ distance and parent lists returned by $\Dijkstra(G, \hat{w}, u)$\;
+  $P[u] \leftarrow \hat{P}$\;
+  \For{\emph{each vertex} $v \in V$}{
+    $D[u,v] \leftarrow \hat{\delta}[v] + d[v] - d[u]$\;
+  }
+  \Return $(D, P)$\;
+}
+\caption{Johnson's algorithm for sparse graphs.}
+\label{alg:graph_algorithms:Johnson_algorithm}
 \end{algorithm}
 
 The time complexity, for sparse graphs, is
