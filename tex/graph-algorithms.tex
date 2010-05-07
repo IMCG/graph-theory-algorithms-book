@@ -26,12 +26,21 @@ how to use matrices for representing graphs and digraphs. If
 $A = [a_{ij}]$ is an $m \times n$ matrix, the adjacency matrix
 representation of a graph would require representing all the $mn$
 entries of $A$. Alternative graph representations exist that are much
-more efficient than representing all entries of a matrix.
+more efficient than representing all entries of a matrix. The graph
+represenation used can be influenced by the size of a graph or the
+purpose of the represenation.
+Section~\ref{sec:graph_algorithms:adjacency_lists} discusses the
+adjacency list representation that can result in less storage space
+requirement than the adjacency matrix representation. The
+\texttt{graph6} format discussed in
+section~\ref{sec:graph_algorithms:graph6_format} provides a compact
+means of storing graphs for archival purposes.
 
 
 %%--- Adjacency lists ---------------------------------------------------%%
 
 \subsection{Adjacency lists}
+\label{sec:graph_algorithms:adjacency_lists}
 
 A \emph{list} is a sequence of objects. Unlike sets, a list may
 contain multiple copies of the same object. Each object of a list is
@@ -102,10 +111,22 @@ a graph and its adjacency list representation.
 \label{fig:graph_algorithms:graph_adjacency_lists}
 \end{figure}
 
+We can categorize a graph $G = (V, E)$ as \emph{dense} or
+\emph{sparse} based upon its size. A dense graph\index{dense graph}
+has size $|E|$ that is close to $|V|^2$, i.e.
+$|E| = \Omega\big(|V|^2\big)$, in which case it is feasible to
+represent $G$ as an adjacency matrix. The size of a sparse
+graph\index{sparse graph} is much less than $|V|^2$, i.e.
+$|E| = \Omega\big(|V|\big)$, which renders the adjacency matrix
+representation as unsuitable. For a sparse graph, an adjacency list
+representation can require less storage space than an adjacency matrix
+representation of the same graph.
+
 
 %%--- The graph6 format -------------------------------------------------%%
 
 \subsection{The {\tt graph6} format}
+\label{sec:graph_algorithms:graph6_format}
 
 The graph formats {\tt graph6} and {\tt sparse6} were developed by Brendan
 McKay~\cite{McKay2010} at The Australian National University as a
