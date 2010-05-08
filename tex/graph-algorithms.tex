@@ -1980,6 +1980,18 @@ $D[a_{ij}] \leftarrow W[w(i,j)]$\;
 \label{alg:graph_algorithms:Floy_Roy_Warshall}
 \end{algorithm}
 
+Like the Bellman-Ford algorithm, the Floyd-Roy-Warshall algorithm can
+also detect the presence of negative weight cycles. If $G$ is a
+weighted digraph without self-loops,
+by~(\ref{eq:graph_algorithms:Floyd_Roy_Warshall_weight_matrix}) we
+have $D(i,i) = 0$ for $i = 1, 2, \dots, n$. Any path $p$ starting and
+ending at $i$ could only improve upon the initial weight of $0$ if the
+weight sum of $p$ is less than zero, i.e. a negative-weight
+cycle. Upon termination of
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}, if $D(i,i) <
+0$, we conclude that there is a path starting and ending at $i$ whose
+weight sum is negative.
+
 Here is an implementation in Sage.
 %
 \begin{center}
