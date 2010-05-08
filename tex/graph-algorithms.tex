@@ -1917,16 +1917,20 @@ also the set of intermediate vertices for the $k$-$j$ subpath in
 $P_k(i,j)$. That is, to obtain $P_k(i,j)$, we take the union of the
 paths $P_{k-1}(i,k)$ and $P_{k-1}(k,j)$. We compute the weight
 $D_k(i,j)$ of $P_k(i,j)$ using the expression
-\[
+%
+\begin{equation}
+\label{eq:graph_algorithms:Floyd_Roy_Warshall:shortest_path_weights}
 D_k(i,j)
 =
 \begin{cases}
 w(i,j), & \text{if $k = 0$}, \\
 \min\{D_{k-1}(i,j),\, D_{k-1}(i,k) + D_{k-1}(k,j)\}, & \text{if $k > 0$}.
 \end{cases}
-\]
-The key to the Floyd-Roy-Warshall algorithm lies in exploiting this
-formula. If $n = |V|$, then this is a $O(n^3)$ time algorithm. For
+\end{equation}
+
+The key to the Floyd-Roy-Warshall algorithm lies in exploiting
+expression~(\ref{eq:graph_algorithms:Floyd_Roy_Warshall:shortest_path_weights}).
+If $n = |V|$, then this is a $O(n^3)$ time algorithm. For
 comparison, the Bellman-Ford algorithm has complexity
 $O(|V| \cdot |E|)$, which is $O(n^3)$ time for dense graphs. However,
 Bellman-Ford only yields the shortest paths emanating from a
@@ -1934,9 +1938,13 @@ Bellman-Ford only yields the shortest paths emanating from a
 iterate Bellman-Ford over \emph{all} vertices, which would be
 an  $O(n^4)$ time algorithm for dense graphs. Except possibly for
 sparse graphs, Floyd-Roy-Warshall is better than an iterated
-implementation of Bellman-Ford. The above discussion is translated
-into an algorithmic presentation as given in
-Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}.
+implementation of Bellman-Ford. Note that $P_k(i,k) = P_{k-1}(i,k)$
+and $P_k(k,i) = P_{k-1}(k,i)$, consequently $D_k(i,k) = D_{k-1}(i,k)$
+and $D_k(k,i) = D_{k-1}(k,i)$. This observation allows us to replace
+$P_k(i,j)$ with $P(i,j)$ for $k = 1, 2, \dots, n$. The final results of
+$P(i,j)$ and $D(i,k)$ are the same as $P_n(i,j)$ and $D_n(i,j)$,
+respectively. Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}
+summarizes the above discussion into an algorithmic presentation.
 
 \begin{algorithm}[!htpb]
 \dontprintsemicolon  % no semicolon at end of pseudocode statements
