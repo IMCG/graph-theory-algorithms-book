@@ -1174,11 +1174,14 @@ objects:
 %
 Thus for any simple graph $G$ with $n$ vertices, its total number of
 edges $|E(G)|$ is bounded above by
-\[
+%
+\begin{equation}
+\label{eq:introduction:upper_bound_total_edges_simple_graph}
 |E(G)|
 \leq
 \frac{n(n - 1)}{2}.
-\]
+\end{equation}
+%
 Figure~\ref{fig:introduction:five_complete_graphs} shows complete
 graphs each of whose total number of vertices is bounded by
 $1 \leq n \leq 5$. The complete graph $K_1$ has one vertex with
@@ -1279,6 +1282,45 @@ no edges. It is also called the \emph{trivial} graph.
 \caption{Complete graphs $K_n$ for $1 \leq n \leq 5$.}
 \label{fig:introduction:five_complete_graphs}
 \end{figure}
+
+The following result is an application of
+inequality~(\ref{eq:introduction:upper_bound_total_edges_simple_graph}).
+
+\begin{theorem}
+Let $G$ be a simple graph with $n$ vertices and $k$ components. Then
+$G$ has at most $\frac{1}{2} (n - k)(n - k + 1)$ edges.
+\end{theorem}
+
+\begin{proof}
+If $n_i$ is the number of vertices in component $i$, then $n_i > 0$
+and it can be shown that
+%
+\begin{equation}
+\label{eq:introduction:inequality_set_positive_integers}
+\sum n_i^2
+\leq
+\left(\sum n_i\right)^2 - (k - 1) \left(2 \sum n_i - k\right).
+\end{equation}
+%
+(This result holds true for any nonempty set of positive integers.)
+Note that $\sum n_i = n$ and
+by~(\ref{eq:introduction:upper_bound_total_edges_simple_graph}) each
+component $i$ has at most $\frac{1}{2} n_i (n_i - 1)$
+edges. Apply~(\ref{eq:introduction:inequality_set_positive_integers})
+to get
+%
+\begin{align*}
+\sum \frac{n_i (n_i - 1)}{2}
+&=
+\frac{1}{2} \sum n_i^2 - \frac{1}{2} \sum n_i \\
+&\leq
+\frac{1}{2} (n^2 - 2nk + k^2 + 2n - k) - \frac{1}{2} n \\
+&=
+\frac{(n - k) (n - k + 1)}{2}
+\end{align*}
+%
+as required.
+\end{proof}
 
 The \emph{cycle} graph on $n \geq 3$ vertices, denoted $C_n$, is the
 connected $2$-regular graph on $n$ vertices. Each vertex in $C_n$ has
