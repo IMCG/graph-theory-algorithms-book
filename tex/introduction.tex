@@ -596,11 +596,14 @@ $\lfloor (n + 1) / 2 \rfloor$ edges.
 
 For any vertex $v$ in a graph $G = (V, E)$, the cardinality of
 $\text{adj}(v)$ is called the \emph{degree} of $v$ and written as
-$\deg(v) = |\text{adj}(v)|$. The degree of $v$ counts the number of
-vertices in $G$ that are adjacent to $v$. If $\deg(v) = 0$, we say
-that $v$ is an \emph{isolated} vertex. For example, in the graph in
-Figure~\ref{fig:introduction:house_graph}, we have $\deg(b) = 3$. For
-the graph in Figure~\ref{fig:introduction:triangle_digraph}, we have
+$\deg(v) = |\text{adj}(v)|$\index{$\deg$}. The degree of $v$ counts
+the number of vertices in $G$ that are adjacent to $v$. If
+$\deg(v) = 0$, we say that $v$ is an
+\emph{isolated}\index{isolated vertex} vertex and if $\deg(v) = 1$
+then $v$ is called a \emph{pendant}\index{pendant}. For example, in
+the graph in Figure~\ref{fig:introduction:house_graph}, we have
+$\deg(b) = 3$. For the graph in
+Figure~\ref{fig:introduction:triangle_digraph}, we have
 $\deg(b) = 2$. If $V \neq \emptyset$ and $E = \emptyset$, then
 $G$ is a graph consisting entirely of isolated vertices. From
 Example~\ref{eg:introduction:house_graph} we know that the vertices
@@ -613,13 +616,11 @@ Figure~\ref{fig:introduction:house_graph} then we have $\delta(G) = 2$
 and $\Delta(G) = 3$. In the following Sage session, we construct the
 digraph in Figure~\ref{fig:introduction:triangle_digraph} and computes
 its maximum and minimum number of degrees.
-\index{$\deg$}
 \index{$\delta$}
 \index{$\Delta$}
 \index{degree!maximum}
 \index{degree!minimum}
 \index{degree of a vertex}
-\index{isolated vertex}
 \index{K\"onigsberg, seven bridges puzzle}
 %
 \begin{center}
