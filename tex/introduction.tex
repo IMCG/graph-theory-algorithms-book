@@ -693,6 +693,7 @@ Theorem~\ref{thm:introduction:hand_shaking} is recorded in the
 following corollary.
 
 \begin{corollary}
+\label{cor:introduction:even_num_vertices_odd_degree}
 A graph $G = (V, E)$ contains an even number of vertices with odd
 degrees.
 \end{corollary}
@@ -872,6 +873,22 @@ with reduced edge set $E_n$ of $n^2 - n - (n - 1)(n - 2)$
 elements. Adding another vertex to $P_{n-1}$ means going back to a
 vertex that was previously visited, because $P_{n-1}$ already contains
 all vertices of $V$.
+\end{proof}
+
+The following is an immediate consequence of
+Corollary~\ref{cor:introduction:even_num_vertices_odd_degree}.
+
+\begin{corollary}
+In any graph with exactly two vertices of odd degree, those vertices
+are connected by a path.
+\end{corollary}
+
+\begin{proof}
+Let $G$ be a graph all of whose vertices are of even degree, except
+for $u$ and $v$. Let $C$ be a component of $G$ containing $u$. By
+Corollary~\ref{cor:introduction:even_num_vertices_odd_degree}, $C$
+also contains $v$, the only remaining vertex of odd degree. As $u$ and
+$v$ belong to the same component, they are connected by a path.
 \end{proof}
 
 A path of length $n \geq 3$ whose start and end vertices are the same
