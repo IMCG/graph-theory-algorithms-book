@@ -893,9 +893,12 @@ $v$ belong to the same component, they are connected by a path.
 
 A path of length $n \geq 3$ whose start and end vertices are the same
 is called a \emph{cycle}. For example, the walk $a, b, c, e, a$
-in Figure~\ref{fig:introduction:types_of_walks} is a path and a cycle.
-A walk which has no repeated edges and the start and end vertices are
-the same, but otherwise has no  repeated vertices, is
+in Figure~\ref{fig:introduction:types_of_walks} is a path and a
+cycle. A cycle whose length is odd is called an
+\emph{odd cycle}\index{cycle!odd}, otherwise it is referred to as an
+\emph{even cycle}\index{cycle!even}. A walk which has no repeated
+edges and the start and end vertices are the same, but otherwise has
+no repeated vertices, is
 %a \emph{circuit}, otherwise known as
 a \emph{closed path}~(with apologies for slightly abusing
 terminology).\footnote{
@@ -1422,6 +1425,46 @@ A \emph{bipartite} graph $G$ is a graph with at least two
 vertices such that $V(G)$ can be split into two disjoint subsets $V_1$
 and $V_2$, both non-empty. Every edge $uv \in E(G)$ is such that
 $u \in V_1$ and $v \in V_2$, or $v \in V_1$ and $u \in V_2$.
+
+\begin{theorem}
+A graph is bipartite if and only if it has no odd cycles.
+\end{theorem}
+
+\begin{proof}
+Necessity~($\Longrightarrow$): Assume $G$ to be bipartite. Traversing
+each edge involves going from one side of the bipartition to the
+other. For a walk to be closed, it must have even length in order to
+return to the side of the bipartition from which the walk
+started. Thus, any cycle in $G$ must have even length.
+
+Sufficiency~($\Longleftarrow$): Assume $G = (V, E)$ has order
+$n \geq 2$ and no odd cycles. If $G$ is connected, choose any vertex
+$u \in V$ and define a partition of $V$ thus:
+%
+\begin{align*}
+X &= \{x \in V \;|\; d(u,x) \text{ is even}\}, \\
+Y &= \{y \in V \;|\; d(u,y) \text{ is odd}\}
+\end{align*}
+%
+where $d(u,v)$ denotes the distance (or length of the shortest path)
+from $u$ to $v$. If $(X, Y)$ is a bipartition of $G$, then we are
+done. Otherwise, $(X, Y)$ is not a bipartition of $G$. Then one of $X$
+and $Y$ has two vertices $v,w$ joined by an edge $e$. Let $P_1$ be a
+shortest $u$-$v$ path and $P_2$ be a shortest $u$-$w$ path. By
+definition of $X$ and $Y$, both $P_1$ and $P_2$ have even lengths or
+both have odd lengths. From $u$, let $x$ be the last vertex common to
+both $P_1$ and $P_2$. The subpath $u$-$x$ of $P_1$ and $u$-$x$ of
+$P_2$ have equal length. That is, the subpath $x$-$v$ of $P_1$ and
+$x$-$w$ of $P_2$ both have even or odd lengths. Construct a cycle $C$
+from the paths $x$-$v$ and $x$-$w$, and the edge $e$ joining $v$ and
+$w$. Since $x$-$v$ and $x$-$w$ both have even or odd lengths, the
+cycle $C$ has odd length, contradicting our hypothesis that $G$ has no
+odd cycles. Hence, $(X,Y)$ is a bipartition of $G$.
+
+Finally, if $G$ is disconnected, each of its components has no odd
+cycles. Repeat the above argument for each component to conclude that
+$G$ is bipartite.
+\end{proof}
 
 The \emph{complete bipartite} graph $K_{m,n}$ is the bipartite graph
 whose vertex set is partitioned into two non-empty disjoint sets $V_1$
