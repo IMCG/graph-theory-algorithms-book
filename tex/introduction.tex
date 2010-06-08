@@ -971,7 +971,12 @@ distinct vertices $u,v$ of a graph is a $u$-$v$ path of minimum
 length. A non-empty graph may have several shortest paths between some
 distinct pair of vertices. For the graph in
 Figure~\ref{fig:introduction:types_of_walks}, both $a,b,c$ and $a,e,c$
-are geodesic paths between $a$ and $c$. The number of connected
+are geodesic paths between $a$ and $c$. Let $H$ be a connected
+subgraph of a graph $G$ such that $H$ is not a proper subgraph of any
+connected subgraph of $G$. Then $H$ is said to be a
+\emph{component}\index{component} of $G$. We also say that $H$ is a
+maximal connected subgraph of $G$. Any connected graph is its own
+component. The number of connected
 components of a graph $G$ will be denoted $\omega(G)$.
 \index{$\omega$}
 \index{connected graph}
@@ -2626,7 +2631,9 @@ where $V_1 \subseteq V_2$, $V_2 \subseteq V_1$, $V_1 = V_2$, or
 $V_1 \cap V_2 = \emptyset$.
 Figure~\ref{fig:introduction:union_graphs_overlapping_vertex_sets}
 illustrates the graph union where one vertex set is a proper subset of
-the other.
+the other. If $G_1, G_2, \dots, G_n$ are the components of a graph
+$G$, then $G$ is obtained by the disjoint union of its
+components\index{component}, i.e. $G = \bigcup G_i$.
 
 \begin{figure}[!htbp]
 \centering
