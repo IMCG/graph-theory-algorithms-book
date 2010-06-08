@@ -3678,21 +3678,21 @@ contracts it to the trivial graph $K_1$.
 
 \subsection{Complements}
 
-\index{$G^c$}
-\index{complement}
-\index{self-complementary graph}
-\index{relative complement}
-The \emph{complement} of a simple graph has the same vertices, but
+The \emph{complement}\index{complement} of a simple graph has the same
+vertices, but
 exactly those edges that are not in the original graph. In other
-words, if $G^c = (V, E^c)$ is the complement of $G = (V,E)$, then two
-distinct vertices $v,w \in V$ are adjacent in $G^c$ if and only if
-they are not adjacent in $G$. The sum of the adjacency matrix of $G$
-and that of $G^c$ is the matrix with $1$'s everywhere, except for
-$0$'s on the main diagonal. A simple graph that is isomorphic to its
-complement is called a \emph{self-complementary graph}. Let $H$ be a
-subgraph of $G$. The \emph{relative complement} of $G$ and $H$ is the
-edge deletion subgraph $G - E(H)$. That is, we delete from $G$ all
-edges in $H$. Sage can compute edge complements, as the following
+words, if $G^c = (V, E^c)$\index{$G^c$} is the complement of
+$G = (V,E)$, then two distinct vertices $v,w \in V$ are adjacent in
+$G^c$ if and only if they are not adjacent in $G$. We also write the
+complement of $G$ as $\overline{G}$\index{$\overline{G}$}. The sum of
+the adjacency matrix of $G$ and that of $G^c$ is the matrix with $1$'s
+everywhere, except for $0$'s on the main diagonal. A simple graph that
+is isomorphic to its complement is called a
+\emph{self-complementary graph}\index{self-complementary graph}. Let
+$H$ be a subgraph of $G$. The
+\emph{relative complement}\index{relative complement} of $G$ and $H$
+is the edge deletion subgraph $G - E(H)$. That is, we delete from $G$
+all edges in $H$. Sage can compute edge complements, as the following
 example shows.
 %
 \begin{center}
@@ -3741,6 +3741,22 @@ hence by~\cite[Theorem~1.9]{Shoup2008} we have $4 \;|\; n$ and so
 $n = 4k$ for some non-negative $k \in \ZZ$. If $n - 1$ is even, use a
 similar argument to conclude that $n = 4k + 1$ for some non-negative
 $k \in \ZZ$.
+\end{proof}
+
+\begin{theorem}
+A graph and its complement cannot be both disconnected.
+\end{theorem}
+
+\begin{proof}
+If $G$ is connected, then we are done. Without loss of generality,
+assume that $G$ is disconnected and let $\overline{G}$ be the
+complement of $G$. Let $u,v$ be vertices in $\overline{G}$. If $u,v$
+are in different components of $G$, then they are adjacent in
+$\overline{G}$. If both $u,v$ belong to some component $C_i$ of $G$,
+let $w$ be a vertex in a different component $C_j$ of $G$. Then $u,w$
+are adjacent in $\overline{G}$, and similarly for $v$ and $w$. That is,
+$u$ and $v$ are connected in $\overline{G}$ and therefore $\overline{G}$
+is connected.
 \end{proof}
 
 
