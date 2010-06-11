@@ -4,193 +4,178 @@
 \chapter{Trees and Forests}
 \label{chap:trees_forests}
 
+In section~\ref{subsec:introduction:walks_trails_paths}, we briefly
+touched upon trees and provided examples of how trees could be used to
+model hierarchical structures. This chapter provides an in-depth study
+of trees, their properties, and various applications.
+
+{\color{red}{
 \begin{itemize}
 \item Discuss heaps and how these relate to realizing efficient
   implementations of Dijkstra's
   Algorithm~\ref{alg:graph_algorithms:dijkstra_general}.
 \end{itemize}
+}
+}
 
-Recall, a path in a graph $G = (V, E)$ whose start and end vertices
-are the same is called a cycle. We say $G$ is \emph{acyclic}, or a
-\emph{forest}, if it has no cycles. A vertex of a forest of degree one
-is called an \emph{endpoint} or a \emph{leaf}.
-\index{acyclic}
-\index{forest}
-\index{endpoint}
-\index{leaf}
-A connected forest is a \emph{tree}.
-\index{tree}
 
-A \emph{rooted tree} is a tree with a specified \emph{root} vertex
-$v_0$. (However, if $G$ is a rooted tree with root vertex $v_0$ and if
-the degree of $v_0$ is one then, by convention, we do not call $v_0$
-an endpoint or a leaf.)
-\index{tree!rooted}
-A \emph{directed tree} is a directed graph which would be a tree if
-the directions on the edges were ignored.
-\index{tree!directed}
-A rooted tree can be regarded as a directed tree since you imagine an
-edge $E = \{u, v\}$, for $u, v \in V$, being directed from $u$ to $v$,
-$e = (u, v)$, if and only if $v$ is further away from $v_0$ than $u$
-is. If $e = (u, v)$ is an edge in a rooted tree, then we call $v$ a
-\emph{child} vertex with \emph{parent} $u$. An \emph{ordered tree} is
-a rooted tree for which an ordering is specified for the children of
-each vertex.
-\index{tree!ordered}
-\index{parent}
-\index{child}
-An $n$-\emph{ary tree} is a rooted tree for which each vertex that is
-not a leaf has at most $n$ children. The case $n = 2$ are called
-\emph{binary trees}.
-\index{tree!binary}
-\index{tree!$n$-ary}
+%%-----------------------------------------------------------------------%%
+%%--- Definitions and examples ------------------------------------------%%
 
-Directed trees are pervasive in theoretical computer science, as they
-are useful structures for describing algorithms and relationships
-between objects in certain data sets.
+\section{Definitions and examples}
 
-A \emph{spanning tree} $T$ of a connected, undirected graph $G$ is a
-subgraph containing all vertices of $G$ which is a tree.
+Recall that a path in a graph $G = (V, E)$ whose start and end vertices
+are the same is called a cycle. We say $G$ is
+\emph{acyclic}\index{acyclic}, or a \emph{forest}\index{forest}, if it
+has no cycles. In a forest, a vertex of degree one is called an
+\emph{endpoint}\index{endpoint} or a \emph{leaf}\index{leaf}. A
+connected forest is a \emph{tree}\index{tree}.
+
+A \emph{rooted tree}\index{tree!rooted} is a tree with a specified
+\emph{root}\index{root} vertex $v_0$. (However, if $G$ is a rooted
+tree with root vertex $v_0$ having degree one then, by convention, we
+do not call $v_0$ an endpoint or a leaf.) The Unix\index{Unix}, in
+particular Linux\index{Linux}, filesystem\index{filesystem} hierarchy
+can be viewed as a tree~(see
+Figure~\ref{fig:trees_forests:filesystem_hierarchy}). As shown in
+Figure~\ref{fig:trees_forests:filesystem_hierarchy}, the root vertex
+is designated with the forward slash, which is also referred to as the
+root directory\index{root directory}.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\node {\texttt{/}} [edge from parent fork down]
+  child {node {\texttt{bin}}}
+  child {node {\texttt{etc}}}
+  child {node {\texttt{home}}
+    child {node {\texttt{anne}}}
+    child {node {\texttt{sam}}}
+    child {node {$\dots$}}
+  }
+  child {node {\texttt{lib}}}
+  child {node {\texttt{opt}}}
+  child {node {\texttt{proc}}}
+  child {node {\texttt{tmp}}}
+  child {node {\texttt{usr}}
+    child {node {\texttt{bin}}
+      child {node {\texttt{acyclic}}}
+      child {node {\texttt{diff}}}
+      child {node {\texttt{dot}}}
+      child {node {\texttt{gc}}}
+      child {node {\texttt{neato}}}
+      child {node {$\dots$}}
+    }
+    child {node {\texttt{include}}}
+    child {node {\texttt{local}}}
+    child {node {\texttt{share}}}
+    child {node {\texttt{src}}}
+    child {node {$\dots$}}
+  }
+  child {node {$\dots$}};
+\end{tikzpicture}
+\caption{The Linux filesystem hierarchy.}
+\label{fig:trees_forests:filesystem_hierarchy}
+\end{figure}
+
+A \emph{directed tree}\index{tree!directed} is a digraph which would
+be a tree if the directions on the edges were ignored. A rooted tree
+can be regarded as a directed tree since we can imagine an edge
+$E = uv$ for $u,v \in V$ being directed from $u$ to $v$ if and only
+if $v$ is further away from $v_0$ than $u$ is. If $e = uv$ is an edge
+in a rooted tree, then we call $v$ a \emph{child}\index{child} vertex
+with \emph{parent}\index{parent} $u$. Directed trees are pervasive in
+theoretical computer science, as they are useful structures for
+describing algorithms and relationships between objects in certain
+data sets.
+
+An \emph{ordered tree}\index{tree!ordered} is a rooted tree for which
+an ordering is specified for the children of each vertex. An
+$n$-\emph{ary tree}\index{tree!$n$-ary} is a rooted tree for which
+each vertex that is not a leaf has at most $n$ children. The case
+$n = 2$ are called \emph{binary trees}\index{tree!binary}. A
+\emph{spanning tree}\index{spanning tree} $T$ of a connected,
+undirected graph $G$ is a subgraph containing all vertices of $G$
+which is a tree.
 
 \begin{example}
 \label{example:span-tree}
 {\rm
-Consider the $3\times 3$ grid graph with $16$ vertices and
-$18$ edges. Two examples of a spanning tree are given in Figure
-\ref{fig:span-tree1} by using thicker line width for its edges.
-
-
-\begin{figure}[h!]
-\begin{center}
-\begin{tabular}{cc}
-% this was done "manually"
-\unitlength=0.620000pt
-\begin{picture}(210.00,192.00)(0.00,0.00)
-%\put(-3.00,-3.00){$\bullet$} % vertices look funny
-%\put(-3.00,189.00){$\bullet$}
-%\put(61.00,189.00){$\bullet$}
-
-\thinlines
-\put(0.00,192.00){\line(1,0){192.00}} %outer box
-\put(192.00,0.00){\line(0,1){192.00}} %outer box
-\put(0.00,0.00){\line(1,0){192.00}} %outer box
-\put(0.00,0.00){\line(0,1){192.00}} %outer box
-
-\put(0.00,64.00){\line(1,0){192.00}} %inner lines
-\put(0.00,128.00){\line(1,0){192.00}} %inner lines
-
-\put(64.00,0.00){\line(0,1){192.00}} %inner lines
-\put(128.00,0.00){\line(0,1){192.00}} %inner lines
-
-\linethickness{0.9mm}  % tree edges
-\put(0.00,0.00){\line(0,1){64.00}}
-\put(0.00,0.00){\line(1,0){192.00}}
-\put(64.00,0.00){\line(0,1){64.00}}
-\put(64.00,64.00){\line(1,0){128.00}}
-
-\put(192.00,64.00){\line(0,1){64.00}}
-
-\put(0.00,128.00){\line(1,0){192.00}}
-\put(0.00,128.00){\line(0,1){64.00}}
-\put(64.00,128.00){\line(0,1){64.00}}
-\put(128.00,128.00){\line(0,1){64.00}}
-
-\put(128.00,192.00){\line(1,0){64.00}}
-\end{picture}
-
-&
-% this used jPicEdt
-\unitlength=2.000000pt
-\begin{picture}(80,80)(20,20)
-\linethickness{0.3mm}
-\put(20,80){\line(1,0){20}}
-\linethickness{0.3mm}
-\put(40,80){\line(1,0){20}}
-\linethickness{0.3mm}
-\put(40,60){\line(0,1){20}}
-\linethickness{0.3mm}
-\put(60,60){\line(0,1){20}}
-\linethickness{0.3mm}
-\put(20,60){\line(1,0){60}}
-\linethickness{0.3mm}
-\put(80,60){\line(0,1){20}}
-\linethickness{0.3mm}
-\put(60,80){\line(1,0){20}}
-\linethickness{0.3mm}
-\put(20,20){\line(0,1){60}}
-\linethickness{0.3mm}
-\put(20,20){\line(1,0){60}}
-\linethickness{0.3mm}
-\put(80,20){\line(0,1){40}}
-\linethickness{0.3mm}
-\put(60,20){\line(0,1){40}}
-\linethickness{0.3mm}
-\put(40,20){\line(0,1){40}}
-\linethickness{0.3mm}
-\put(20,40){\line(1,0){60}}
-\linethickness{0.3mm}
-
-\linethickness{0.9mm}
-\put(20,80){\line(1,0){60}}
-\linethickness{0.9mm}
-\put(80,60){\line(0,1){20}}
-\linethickness{0.9mm}
-\put(20,60){\line(1,0){60}}
-\linethickness{0.9mm}
-\put(40,40){\line(0,1){20}}
-\linethickness{0.9mm}
-\put(60,40){\line(0,1){20}}
-\linethickness{0.9mm}
-\put(20,40){\line(1,0){20}}
-\linethickness{0.9mm}
-\put(20,20){\line(0,1){20}}
-\linethickness{0.9mm}
-\put(20,20){\line(1,0){60}}
-\linethickness{0.9mm}
-\put(80,20){\line(0,1){20}}
-\end{picture}
-\end{tabular}
-\caption{Spanning trees for the $4 \times 4$ grid graph.}
-\end{center}
-\label{fig:span-tree1}
-\end{figure}
-
-}
+Consider the $4 \times 4$ grid graph with $16$ vertices and
+$24$ edges. Two examples of a spanning tree are given in
+Figure~\ref{fig:trees_forests:grid_graph_spanning_trees} by using
+thicker line width for its edges.}
+\hfill $\square$
 \end{example}
 
-
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+\begin{tikzpicture}
+[linedecorate/.style={line width=2.5pt}]
+%% set up the grid
+\foreach \xstart/\xend/\y in {0/4.5/0, 0/4.5/1.5, 0/4.5/3, 0/4.5/4.5} {
+  \draw (\xstart,\y) -- (\xend,\y);
+  \draw (\y,\xstart) -- (\y,\xend);
+}
+%% draw the spanning tree
+\foreach \xstart/\ystart/\xend/\yend in {0/0/0/1.5, 0/0/4.5/0,
+  1.5/0/1.5/1.5, 1.5/1.5/4.5/1.5, 4.5/1.5/4.5/3, 0/3/4.5/3, 0/3/0/4.5,
+  1.5/3/1.5/4.5, 3/3/3/4.5, 3/4.5/4.5/4.5} {
+  \draw[linedecorate] (\xstart,\ystart) -- (\xend,\yend);
+}
+\end{tikzpicture}
+}
+%%
+%%
+\qquad
+\subfigure[]{
+\begin{tikzpicture}
+[linedecorate/.style={line width=2.5pt}]
+\foreach \xstart/\xend/\y in {0/4.5/0, 0/4.5/1.5, 0/4.5/3, 0/4.5/4.5} {
+  \draw (\xstart,\y) -- (\xend,\y);
+  \draw (\y,\xstart) -- (\y,\xend);
+}
+%% draw the spanning tree
+\foreach \xstart/\ystart/\xend/\yend in {0/0/0/1.5, 0/0/4.5/0,
+  4.5/0/4.5/1.5, 0/1.5/1.5/1.5, 1.5/1.5/1.5/3, 3/1.5/3/3, 0/3/4.5/3,
+  4.5/3/4.5/4.5, 0/4.5/4.5/4.5} {
+  \draw[linedecorate] (\xstart,\ystart) -- (\xend,\yend);
+}
+\end{tikzpicture}
+}
+\caption{Spanning trees for the $4 \times 4$ grid graph.}
+\label{fig:trees_forests:grid_graph_spanning_trees}
+\end{figure}
 
 The following game is a variant of the Shannon switching game, due to
-Edmunds and Lehman. We follow the description in Oxley's
-survey ({\it What is a matroid?'} ... add reference later ... ).
-
-Recall a minimal edge cut of a graph is also called a bond of the graph.
-\index{bond}
-\index{edge-tagging game}
-
-The following two-person game is played on a connected graph $G = (V,E)$.
-Two players Alice and Bob alternately tag elements of $E$.
-Alice's goal is to tag the edges of a spanning tree, while Bob's goal is to tag the
-edges of a bond. If we think of this game in terms of a communication network,
-then Bob's goal is to separate the network into pieces that are no longer
-connected to each other, while Alice is aiming to reinforce edges of the
-network to prevent their destruction. Each move for Bob consists of destroying
-one edge, while each move for Alice involves securing an edge against destruction.
+Edmunds and Lehman\index{edge-tagging game}. We follow the description
+in Oxley's survey ({\it What is a matroid?'}
+{\color{red}{add reference later}}). Recall that a minimal edge cut of
+a graph is also called a bond\index{bond} of the graph. The following
+two-person game is played on a connected graph $G = (V,E)$. Two
+players Alice and Bob alternately tag elements of $E$. Alice's goal is
+to tag the edges of a spanning tree, while Bob's goal is to tag the
+edges of a bond. If we think of this game in terms of a communication
+network, then Bob's goal is to separate the network into pieces that
+are no longer connected to each other, while Alice is aiming to
+reinforce edges of the network to prevent their destruction. Each move
+for Bob consists of destroying one edge, while each move for Alice
+involves securing an edge against destruction.
 
 \begin{theorem}
 The following statements are equivalent for a connected graph $G$.
+%
+\begin{enumerate}
+\item Bob plays first and Alice can win against all possible
+  strategies of Bob.
 
-\begin{itemize}
-\item
-Bob plays first and Alice can win against all possible strategies of Bob.
-\item
-The graph $G$ has 2 edge-disjoint spanning trees.
-\item
-For all partitions $P$ of the vertex set $V$ of $G$, the number of edges of
-$G$ that join vertices in different classes of the partition is at least
-$2(|P|-1)$.
+\item The graph $G$ has 2 edge-disjoint spanning trees.
 
-\end{itemize}
+\item For all partitions $P$ of the vertex set $V$ of $G$, the number
+  of edges of $G$ that join vertices in different classes of the
+  partition is at least $2(|P| - 1)$.
+\end{enumerate}
 \end{theorem}
 
 %%-----------------------------------------------------------------------%%
@@ -2191,7 +2176,7 @@ chapter~12 of Cormen~et~al.~\cite{CormenEtAl2001}. See also
 
 A {\it binary search tree} (BST) is a rooted binary tree
 $T=(V,E)$ having weighted vertices ${\rm wt}:V\to {\mathbb{R}}$ satisfying:
-\index{binary search tree} 
+\index{binary search tree}
 \index{BST}
 
 \begin{itemize}
