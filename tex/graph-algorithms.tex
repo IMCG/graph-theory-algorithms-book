@@ -2333,8 +2333,8 @@ $d \leftarrow$ distance list returned by $\BellmanFord(G', w, s)$\;
   \For{\emph{each vertex} $v \in V$}{
     $D[u,v] \leftarrow \hat{\delta}[v] + d[v] - d[u]$\;
   }
-  \Return $(D, P)$\;
 }
+\Return $(D, P)$\;
 \caption{Johnson's algorithm for sparse graphs.}
 \label{alg:graph_algorithms:Johnson_algorithm}
 \end{algorithm}
