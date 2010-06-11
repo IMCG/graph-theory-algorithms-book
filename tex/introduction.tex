@@ -747,22 +747,6 @@ edges, then $m = rn / 2$.
 \end{corollary}
 
 
-%%--- Problems ----------------------------------------------------------%%
-
-\subsection*{Problems~\ref{sec:introduction:graphs_digraphs}}
-
-\begin{enumerate}
-\item Let $D = (V, E)$ be a digraph of size $q$. Show that
-  \[
-  \sum_{v \in V} \id(v)
-  =
-  \sum_{v \in V} \od(v)
-  =
-  q.
-  \]
-\end{enumerate}
-
-
 %%-----------------------------------------------------------------------%%
 %%--- Subgraphs and other graph types -----------------------------------%%
 
@@ -1575,25 +1559,6 @@ form one vertex to another if the two people dance together. If each
 girl dances three times, once with with each of the three boys, then
 the resulting graph is $K_{3,3}$.
 
-%%--- Problems ----------------------------------------------------------%%
-
-\subsection*{Problems~\ref{sec:introduction:subgraphs_graph_types}}
-
-\begin{enumerate}
-\item If $G$ is a simple graph of order $n > 0$, show that
-  $\deg(v) < n$ for all $v \in V(G)$.
-
-\item Let $G$ be a graph of order $n$ and size $m$. Then $G$ is called
-  an \emph{overfull graph} if
-  $m > \Delta(G) \cdot \left\lfloor n / 2 \right\rfloor$. If
-  $m = \Delta(G) \cdot \left\lfloor n / 2 \right\rfloor + 1$, then $G$
-  is said to be \emph{just overfull}. It can be shown that overfull
-  graphs have odd order. Equivalently, let $G$ be of odd order. We can
-  define $G$ to be overfull if $m > \Delta(G) \cdot (n-1)/2$,
-  and $G$ is just overfull if $m = \Delta(G) \cdot (n-1)/2 + 1$. Find
-  an overfull graph and a graph that is just overfull.
-\end{enumerate}
-
 
 %%-----------------------------------------------------------------------%%
 %%--- Representing graphs as matrices -----------------------------------%%
@@ -2083,52 +2048,6 @@ better understand the ``connectivity'' of a graph. Distance and
 connectivity will be discussed in more detail in
 Chapters~\ref{chap:distance_connectivity}
 and~\ref{chap:random_graphs}.
-
-
-%%--- Problems ----------------------------------------------------------%%
-
-\subsection*{Problems~\ref{sec:introduction:matrix_representation}}
-
-\begin{enumerate}
-\item Let $G$ be an undirected graph whose unoriented incidence matrix
-  is $M_u$ and whose oriented incidence matrix is $M_o$.
-  \begin{enumerate}
-  \item Show that the sum of the entries in any row of $M_u$ is the
-    degree of the corresponding vertex.
-
-  \item Show that the sum of the entries in any column of $M_u$ is
-    equal to $2$.
-
-  \item If $G$ has no self-loops, show that each column of $M_o$ sums
-    to zero.
-  \end{enumerate}
-
-\item Let $G$ be a loopless digraph and let $M$ be its incidence
-  matrix.
-  \begin{enumerate}
-  \item If $r$ is a row of $M$, show that the number of occurrences of
-    $-1$ in $r$ counts the outdegree of the vertex corresponding to
-    $r$. Show that the number of occurrences of $1$ in $r$ counts the
-    indegree of the vertex corresponding to $r$.
-
-  \item Show that each column of $M$ sums to $0$.
-  \end{enumerate}
-
-\item Let $G$ be a digraph and let $M$ be its incidence matrix. For
-  any row $r$ of $M$, let $m$ be the frequency of $-1$ in $r$, let
-  $p$ be the frequency of $1$ in $r$, and let $t$ be twice the
-  frequency of $2$ in $r$. If $v$ is the vertex corresponding to
-  $r$, show that the degree of $v$ is $\deg(v) = m + p + t$.
-%%%%
-%%%% Has ``the frequency'' been defined yet? American English
-%%%% usage of this term might be different from Australian usage?
-%%%%
-
-\item Let $G$ be an undirected graph without self-loops and let $M$
-  and its oriented incidence matrix. Show that the Laplacian matrix
-  $\mathcal{L}$ of $G$ satisfies $\mathcal{L} = M \times M^T$, where
-  $M^T$ is the transpose of $M$.
-\end{enumerate}
 
 
 %%-----------------------------------------------------------------------%%
@@ -2639,20 +2558,6 @@ non-isomorphic:
 \item the length of the longest path,
 
 \item the number of connected components of a graph.
-\end{enumerate}
-
-
-%%--- Problems ----------------------------------------------------------%%
-
-\subsection*{Problems~\ref{chap:introduction:isomorphic_graphs}}
-
-\begin{enumerate}
-\item Let $J_1$ denote the incidence matrix of $G_1$ and let $J_2$
-  denote the incidence matrix of $G_2$. Find matrix theoretic criteria
-  on $J_1$ and $J_2$ which hold if and only if $G_1 \cong G_2$. In
-  other words, find the analog of
-  Theorem~\ref{thm:introduction:adjoint_matrix_invariant} for
-  incidence matrices.)
 \end{enumerate}
 
 
@@ -4137,20 +4042,6 @@ examples of this in Chapter~\ref{chap:planar_graphs}.
 \index{forbidden minor}
 
 
-%%--- Problems ----------------------------------------------------------%%
-
-\subsection*{Problems~\ref{sec:new_graphs_from_old}}
-
-\begin{enumerate}
-\item Show that the complement of an edgeless graph is a complete
-  graph.
-
-\item Let $G \square H$ be the Cartesian product of two graphs $G$ and
-  $H$. Show that
-  $|E(G \square H)| = |V(G)| \cdot |E(H)| + |E(G)| \cdot |V(H)|$.
-\end{enumerate}
-
-
 %%-----------------------------------------------------------------------%%
 %%--- Common applications -----------------------------------------------%%
 
@@ -4208,3 +4099,86 @@ are listed below.
   and how to you find it? This problem, which has many industrial
   applications, is discussed in Chapter~\ref{chap:network_flows}.
 \end{itemize}
+
+
+%%-----------------------------------------------------------------------%%
+%%-- Problems -----------------------------------------------------------%%
+
+\section{Problems}
+
+\begin{enumerate}
+\item Let $D = (V, E)$ be a digraph of size $q$. Show that
+  \[
+  \sum_{v \in V} \id(v)
+  =
+  \sum_{v \in V} \od(v)
+  =
+  q.
+  \]
+
+\item If $G$ is a simple graph of order $n > 0$, show that
+  $\deg(v) < n$ for all $v \in V(G)$.
+
+\item Let $G$ be a graph of order $n$ and size $m$. Then $G$ is called
+  an \emph{overfull graph} if
+  $m > \Delta(G) \cdot \left\lfloor n / 2 \right\rfloor$. If
+  $m = \Delta(G) \cdot \left\lfloor n / 2 \right\rfloor + 1$, then $G$
+  is said to be \emph{just overfull}. It can be shown that overfull
+  graphs have odd order. Equivalently, let $G$ be of odd order. We can
+  define $G$ to be overfull if $m > \Delta(G) \cdot (n-1)/2$,
+  and $G$ is just overfull if $m = \Delta(G) \cdot (n-1)/2 + 1$. Find
+  an overfull graph and a graph that is just overfull.
+
+\item Let $G$ be an undirected graph whose unoriented incidence matrix
+  is $M_u$ and whose oriented incidence matrix is $M_o$.
+  \begin{enumerate}
+  \item Show that the sum of the entries in any row of $M_u$ is the
+    degree of the corresponding vertex.
+
+  \item Show that the sum of the entries in any column of $M_u$ is
+    equal to $2$.
+
+  \item If $G$ has no self-loops, show that each column of $M_o$ sums
+    to zero.
+  \end{enumerate}
+
+\item Let $G$ be a loopless digraph and let $M$ be its incidence
+  matrix.
+  \begin{enumerate}
+  \item If $r$ is a row of $M$, show that the number of occurrences of
+    $-1$ in $r$ counts the outdegree of the vertex corresponding to
+    $r$. Show that the number of occurrences of $1$ in $r$ counts the
+    indegree of the vertex corresponding to $r$.
+
+  \item Show that each column of $M$ sums to $0$.
+  \end{enumerate}
+
+\item Let $G$ be a digraph and let $M$ be its incidence matrix. For
+  any row $r$ of $M$, let $m$ be the frequency of $-1$ in $r$, let
+  $p$ be the frequency of $1$ in $r$, and let $t$ be twice the
+  frequency of $2$ in $r$. If $v$ is the vertex corresponding to
+  $r$, show that the degree of $v$ is $\deg(v) = m + p + t$.
+%%%%
+%%%% Has ``the frequency'' been defined yet? American English
+%%%% usage of this term might be different from Australian usage?
+%%%%
+
+\item Let $G$ be an undirected graph without self-loops and let $M$
+  and its oriented incidence matrix. Show that the Laplacian matrix
+  $\mathcal{L}$ of $G$ satisfies $\mathcal{L} = M \times M^T$, where
+  $M^T$ is the transpose of $M$.
+
+\item Let $J_1$ denote the incidence matrix of $G_1$ and let $J_2$
+  denote the incidence matrix of $G_2$. Find matrix theoretic criteria
+  on $J_1$ and $J_2$ which hold if and only if $G_1 \cong G_2$. In
+  other words, find the analog of
+  Theorem~\ref{thm:introduction:adjoint_matrix_invariant} for
+  incidence matrices.)
+
+\item Show that the complement of an edgeless graph is a complete
+  graph.
+
+\item Let $G \square H$ be the Cartesian product of two graphs $G$ and
+  $H$. Show that
+  $|E(G \square H)| = |V(G)| \cdot |E(H)| + |E(G)| \cdot |V(H)|$.
+\end{enumerate}
