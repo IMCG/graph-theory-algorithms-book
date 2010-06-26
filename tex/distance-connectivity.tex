@@ -366,7 +366,6 @@ the vertices of $S$.
 The converse to this is false.
 
 \begin{proof}[Solution]
-
 ...
 \end{proof}
 
@@ -378,7 +377,7 @@ Suppose
 
 \begin{itemize}
 \item
-$G=(V,E)$ is a simple graph with $n=|V|$, 
+$G=(V,E)$ is a connected simple graph with $n=|V|$, 
 \item
 $0<k<n$,
 \item
@@ -392,13 +391,45 @@ then $G$ is $k$-vertex-connected.
 \index{Bondy's theorem}
 
 \begin{proof}[Solution]
+Suppose not, so $\kappa(G)<k$. Then there exists an
+$S\subset V$, $|S|=s<k$, such that $G'=G-S$ has more
+than one connected component. Let $H$ be connected
+component of $G'$ of minimal number of
+vertices, $j=V(H)$. If $v\in V(H)$ then
+$\deg_G(v)\leq j-1+s$, since $v$ is not adjacent to any
+vertex in any other connected component of $G'$.
 
-...
+Since $H$ was choosen minimally, $j\leq n-s-j$, so
+$\deg_G(v)\leq n-j-1$. This proves the following claim.
+
+\noindent
+{\bf Claim}: If $\deg_G(v) > n-j-1$ then $v\in S$.
+
+A vertex of degree $d_{n-s}$ cannot belong to
+$S$ because $S$ has $|S|=s$ vertices and the
+vertices of degree $d_n$, $d_{n-1}$, \dots,
+$d_{n-s-1}$ already exhaust the vertices in $S$. Therefore,
+
+\[
+d_{n-s}\leq n-j-1.
+\]
+We have $s\leq k-1$, so $d_{n-(k-1)}\leq d_{n-s}\leq n-j-1$,
+so $j\leq n-1-d_{n-k+1}$.
+
+Recall $v\in V(H)$ implies $\deg_G(v)\leq j-1+s$.
+Since $j=|V(H)|$, we have
+$d_j\leq j-1-s$.
+By hypothesis, $d_j\geq j+k-1$, so together we have
+
+\[
+j+k-1\leq d_j \leq j-1+s.
+\]
+This forces $k\leq s$, a contradition.
 \end{proof}
 
 
 If $G$ is $k$-vertex-connected, but not
-$k-1$-vertex-connected, then we write $\kappa(G)=k$
+$(k-1)$-vertex-connected, then we write $\kappa(G)=k$
 (some use $\kappa_0$ instead of $\kappa$).
 \index{$\kappa_0(G)$}
 \index{$\kappa(G)$}
@@ -406,8 +437,10 @@ $k-1$-vertex-connected, then we write $\kappa(G)=k$
 Here is a Sage example concerning 
 $\kappa(G)$ using the Petersen graph 
 depicted in Figure \ref{fig:petersen-graph}.
-(You must install an optional linear programming
-Sage package such as GLPK for the commands below to work.)
+(A linear programming
+Sage package, such as GLPK, must be installed 
+for the commands below to work. At the time of this writing, it is 
+expected that GLPK will be a standard part of Sage soon.)
 %
 \begin{center}
 \fontsize{9pt}{9pt}
@@ -667,6 +700,7 @@ in common between $P_1$ and $P_2$.
 \index{edge-disjoint paths}
 \index{edge-independent paths}
 
+
 Let $W$ be a set of vertices or a set of edges.
 If $W\subset V$ then we define $G-W$ to be the subgraph 
 of $G$ which has all the vertices in $W$ and all incident
@@ -884,9 +918,21 @@ edge $e$ in $S$ there is an $s$-$t$ path containing
 $e$. Therefore, $|S|\leq e$.
 
 On the other hand, since each edge has unit capacity,
-the maximum flow vlaue can't exceed the number of 
+the maximum flow value can't exceed the number of 
 edges separating $s$ from $t$, so $m\leq |S|$.
 
+
+\begin{remark}
+Although the notion of an independent path is important
+for the network-theoretic proof of Menger's theorem
+(which we view as a corollary to the Ford-Fulkerson
+theorem on network flows on networks having
+capacity $1$ on all edges), its significance is less
+important for networks having arbitrary capacities.
+One must use caution in generalizing the above 
+intuitive argument to establish a rigorous proof
+of the general version of the MFMC theorem.
+\end{remark}
 
 \begin{remark}
 \label{remark:GMCMF}
