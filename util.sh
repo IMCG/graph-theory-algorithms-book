@@ -19,14 +19,14 @@
 # The main interface to the utilities under the directory bin/.
 
 # Make the top-level directory absolute:
-GRAPH_ROOT=`pwd`
-export GRAPH_ROOT
+BOOK_ROOT=`pwd`
+export BOOK_ROOT
 
 # Print usage information for this script.
 usage() {
     echo "Usage: $0 <options>"
     echo "Optional arguments:"
-    echo "--sdist [VER]   Wrap up a source distribution with version number VER."
+    echo "--dist [VER]   Wrap up a source distribution with version number VER."
 }
 
 # You must provide an argument to this script.
@@ -42,13 +42,13 @@ fi
 # for more information about wrapping up a source distribution. That file
 # also discusses the distinction between a version release and a revision
 # release.
-if [ "$1" = "--sdist" ]; then
-    # Argument must be of the form "--sdist [VER]".
-    # No argument to --sdist, so wrap up a revision release.
+if [ "$1" = "--dist" ]; then
+    # Argument must be of the form "--dist [VER]".
+    # No argument to --dist, so wrap up a revision release.
     if [ "$#" -eq 1 ]; then
-    	"$GRAPH_ROOT/bin/sdist.sh" "--revision" "$GRAPH_ROOT"
-    # An argument is provided to --sdist, so wrap up a version release.
+    	"$BOOK_ROOT/bin/sdist.sh" "--revision" "$BOOK_ROOT"
+    # An argument is provided to --dist, so wrap up a version release.
     elif [ "$#" -eq 2 ]; then
-    	"$GRAPH_ROOT/bin/sdist.sh" "$2" "$GRAPH_ROOT"
+    	"$BOOK_ROOT/bin/sdist.sh" "$2" "$BOOK_ROOT"
     fi
 fi
