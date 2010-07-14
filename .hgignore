@@ -1,11 +1,2 @@
-pgf/
-research/
 book.dvi
 book.pdf
-p*def
-p*sty
-pgf*tex
-pgf.cfg
-pgflibrary*
-t-*.tex
-tikz*

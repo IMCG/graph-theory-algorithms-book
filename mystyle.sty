@@ -1,0 +1,111 @@
+\usepackage[latin1]{inputenc}
+
+%% For typesetting algorithms and pseudocode
+\usepackage[algochapter,boxed,linesnumbered,vlined]{algorithm2e}
+\incmargin{1em}
+\decmargin{1em}
+\restylealgo{boxed}  %% a box around the algorithm
+\Setnlsty{}{}{}  %% don't bold the line numbers
+\SetAlTitleFnt{}  %% don't bold the text "Algorithm" in the caption
+\setalcapskip{5pt}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx,url}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{makeidx}
+\usepackage{xspace}
+\usepackage{enumerate}
+\usepackage{fancyvrb}
+\usepackage{moreverb}
+
+%% Customized corollary, lemma, theorem, etc. numbering
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}  %% maybe don't need to use this
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+%% Package for drawing figures
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{matrix}
+\usetikzlibrary{trees}
+\usepackage{subfigure}
+
+%% For typesetting code listings
+\usepackage{listings}
+\lstdefinelanguage{Sage}[]{Python}
+{morekeywords={False,sage,True},sensitive=true}
+\lstset{
+  frame=none,
+  showtabs=False,
+  showspaces=False,
+  showstringspaces=False,
+  commentstyle={\ttfamily\color{dgreencolor}},
+  keywordstyle={\ttfamily\color{dbluecolor}\bfseries},
+  stringstyle={\ttfamily\color{dgraycolor}\bfseries},
+  language=Sage,
+  basicstyle={\fontsize{9pt}{9pt}\ttfamily},
+  aboveskip=0.5em,
+  belowskip=0.5em,
+  %% numbers=left,
+  numberstyle=\footnotesize
+}
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{0.01,0.02,0.7}
+\definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+\newcommand{\dblue}{\color{dbluecolor}\bf}
+\newcommand{\dred}{\color{dredcolor}\bf}
+\newcommand{\dblack}{\color{dblackcolor}\bf}
+
+%% Customized page geometry
+\textwidth=450pt
+\textheight=700pt
+\topmargin=-30pt
+\oddsidemargin=0.0pt
+\evensidemargin=0.0pt
+
+%% Format date in the form 12 March 2007, for example.
+\usepackage{datetime}
+\newdateformat{auDateFormat}{%
+  \twodigit{\THEDAY}~\monthname[\THEMONTH]~\THEYEAR
+}
+\auDateFormat
+
+%% Custom commands and shortcuts
+%% the latest version of this document
+\newcommand{\documentEdition}{\input{tex/version}}
+\newcommand{\BB}{\mathbb{B}}  %% binary alphabet
+\newcommand{\AND}{\texttt{AND}}  %% logical AND
+\newcommand{\OR}{\texttt{OR}}  %% logical OR
+\newcommand{\RR}{\mathbf{R}}  %% set of real numbers
+\newcommand{\ZZ}{\mathbf{Z}}  %% set of integers
+\newcommand{\SAGE}{{\sf SAGE}\xspace}
+\newcommand{\sage}{\SAGE}
+\newcommand{\Sage}{\SAGE}
+\DeclareMathOperator*{\adj}{adj}  %% adjacency list of a vertex
+\DeclareMathOperator*{\append}{append} %% append an element to a list
+\DeclareMathOperator*{\BellmanFord}{BellmanFord}  %% Bellman-Ford algorithm
+\DeclareMathOperator*{\dequeue}{dequeue} %% remove front element of a queue
+\DeclareMathOperator*{\Dijkstra}{Dijkstra}  %% Dijkstra's algorithm
+\DeclareMathOperator*{\enqueue}{enqueue} %% append element to end of a queue
+\DeclareMathOperator*{\extractMin}{extractMin}  %% remove minimum element
+\DeclareMathOperator*{\iadj}{iadj}  %% set of in-neighbors
+\DeclareMathOperator*{\id}{id}  %% indegree of a vertex
+\DeclareMathOperator*{\length}{length}
+\DeclareMathOperator*{\od}{od}  %% outdegree of a vertex
+\DeclareMathOperator*{\oadj}{oadj}  %% set of out-neighbors
+\DeclareMathOperator*{\pop}{pop}  %% pop an element from a stack
+\DeclareMathOperator*{\push}{push}  %% push an element onto a stack
+\DeclareMathOperator*{\remove}{remove}  %% remove an element from a list
+\DeclareMathOperator*{\Sh}{Sh}  %% Shannon multigraphs
+
+\makeindex
