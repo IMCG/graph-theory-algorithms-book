@@ -13,16 +13,8 @@ all:
 	make latex
 
 latex:
-#	latex $(FILE).tex
-#	latex $(FILE).tex
 	pdflatex $(FILE).tex
 	pdflatex $(FILE).tex
-#	latex $(FILE).tex
-
-# pdf:
-# 	make all
-# 	dvips -t a4 -o $(FILE).ps $(FILE).dvi
-# 	ps2pdf $(FILE).ps
 
 clean:
 	rm -rfv *#
