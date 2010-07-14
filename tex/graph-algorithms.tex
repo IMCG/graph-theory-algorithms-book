@@ -1930,10 +1930,6 @@ weight sum is negative.
 
 Here is an implementation in Sage.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 def floyd_roy_warshall(A):
     """
@@ -1979,7 +1975,6 @@ def floyd_roy_warshall(A):
             raise ValueError, "A negative edge weight cycle exists."
     return dist, matrix(paths)
 \end{lstlisting}
-\end{center}
 
 Here are some examples.
 
@@ -2022,18 +2017,13 @@ Here are some examples.
 %\end{center}
 %
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: A = matrix([[0,1,2,3],[0,0,2,1],[-5,0,0,3],[1,0,1,0]]); A
+sage: A = matrix([[0,1,2,3], [0,0,2,1], [-5,0,0,3], [1,0,1,0]]); A
 sage: floyd_roy_warshall(A)
 Traceback (click to the left of this block for traceback)
 ...
 ValueError: A negative edge weight cycle exists.
 \end{lstlisting}
-\end{center}
 
 The plot of this weighted digraph with four vertices appears in
 Figure~\ref{fig:graph_algorithms:Floyd_Roy_Warshall_demo}.
@@ -2071,12 +2061,8 @@ Figure~\ref{fig:graph_algorithms:Floyd_Roy_Warshall_demo}.
 %sage: D = DiGraph(A, format="weighted_adjacency_matrix")
 %sage: D.plot(edge_labels=True, graph_border=True).show()
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: A = matrix([[0,1,2,3],[0,0,2,1],[-1/2,0,0,3],[1,0,1,0]]); A
+sage: A = matrix([[0,1,2,3], [0,0,2,1], [-1/2,0,0,3], [1,0,1,0]]); A
 sage: floyd_roy_warshall(A)
 ([[0, 1, 2, 2], [3/2, 0, 2, 1], [-1/2, 1/2, 0, 3/2], [1/2, 3/2, 1, 0]],
   [-1  1  2  1]
@@ -2084,7 +2070,6 @@ sage: floyd_roy_warshall(A)
   [-1  0 -1  1]
   [ 2  2 -1 -1])
 \end{lstlisting}
-\end{center}
 
 The plot of this weighted digraph with four vertices appears in
 Figure~\ref{fig:graph_algorithms:another_Floyd_Roy_Warshall_demo}.

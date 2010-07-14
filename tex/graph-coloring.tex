@@ -23,10 +23,6 @@ Vertex coloring is a widespread center of interest in graph theory, which has ma
 
 Such an algorithm can be written in Sage in a few lines :
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: g = graphs.RandomGNP(100,5/100)
 sage: C = Set(xrange(100))
@@ -35,8 +31,6 @@ sage: for u in g:
 ...      interdits = Set([color[v] for v in g.neighbors(u) if color.has_key(v)])
 ...      color[u] = min(C-interdits)
 \end{lstlisting}
-\end{center}
-
 
 \begin{itemize}
 \item Brook's Theorem

@@ -167,13 +167,9 @@ E
 We can also use Sage to construct the graph $G$ and list its vertex
 and edge sets:
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G = Graph({"a": ["b", "e"], "b": ["a", "c", "e"], "c": ["b", "d"], \
-....: "d": ["c", "e"], "e": ["a", "b", "d"]})
+sage: G = Graph({"a":["b","e"], "b":["a","c","e"], "c":["b","d"], \
+...   "d":["c","e"], "e":["a","b","d"]})
 sage: G
 Graph on 5 vertices
 sage: G.vertices()
@@ -181,7 +177,6 @@ sage: G.vertices()
 sage: G.edges(labels=False)
 [('a', 'b'), ('a', 'e'), ('b', 'e'), ('c', 'b'), ('c', 'd'), ('e', 'd')]
 \end{lstlisting}
-\end{center}
 %
 The graph $G$ is undirected, meaning that we do not impose direction
 on any edges. Without any direction on the edges, the edge $ab$ is the
@@ -205,10 +200,6 @@ The vertices adjacent to $v$ are also referred to as its
 \emph{neighbors}. We can use the function \texttt{G.neighbors()} to
 list all the neighbors of each vertex.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: G.neighbors("a")
 ['b', 'e']
@@ -221,7 +212,6 @@ sage: G.neighbors("d")
 sage: G.neighbors("e")
 ['a', 'b', 'd']
 \end{lstlisting}
-\end{center}
 
 (3) Taking the cardinalities of the above five sets, we get
 $|\text{adj}(a)| = |\text{adj}(c)| = |\text{adj}(d)| = 2$ and
@@ -635,12 +625,8 @@ its maximum and minimum number of degrees.
 \index{degree of a vertex}
 \index{K\"onigsberg, seven bridges puzzle}
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G = DiGraph({"a": "b", "b": "c", "c": "a"})
+sage: G = DiGraph({"a":"b", "b":"c", "c":"a"})
 sage: G
 Digraph on 3 vertices
 sage: G.degree("a")
@@ -650,7 +636,6 @@ sage: G.degree("b")
 sage: G.degree("c")
 2
 \end{lstlisting}
-\end{center}
 %
 So for the graph $G$ in
 Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}, we have
@@ -1016,20 +1001,15 @@ Figure~\ref{fig:introduction:types_of_walks} and use the method
 connected. Finally, we use the method \verb!shortest_path()! to find
 a geodesic path between $g$ and $d$.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: g = Graph({"a": ["b", "e"], "b": ["a", "g", "e", "c"], \
-....: "c": ["b", "e", "d"], "d": ["c", "f"], "e": ["f", "a", "b", "c"], \
-....: "f": ["g", "d", "e"], "g": ["b", "f"]})
+sage: g = Graph({"a":["b","e"], "b":["a","g","e","c"], \
+...   "c":["b","e","d"], "d":["c","f"], "e":["f","a","b","c"], \
+...   "f":["g","d","e"], "g":["b","f"]})
 sage: g.is_connected()
 True
 sage: g.shortest_path("g", "d")
 ['g', 'f', 'd']
 \end{lstlisting}
-\end{center}
 %
 This shows that $g, f, d$ is a shortest path from $g$ to $d$. In fact,
 any other $g$-$d$ path has length greater than $2$, so we can say that
@@ -1706,14 +1686,10 @@ Define the graphs in Figure~\ref{fig:introduction:adjacency_matrices}
 using \verb!DiGraph! and \verb!Graph!. Then call the method
 \verb!adjacency_matrix()!.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G1 = DiGraph({1: [2], 2: [1], 3: [2, 6], 4: [1, 5], 5: [6], 6: [5]})
-sage: G2 = Graph({"a": ["b", "c"], "b": ["a", "d"], "c": ["a", "e"], \
-....: "d": ["b", "f"], "e": ["c", "f"], "f": ["d", "e"]})
+sage: G1 = DiGraph({1:[2], 2:[1], 3:[2,6], 4:[1,5], 5:[6], 6:[5]})
+sage: G2 = Graph({"a":["b","c"], "b":["a","d"], "c":["a","e"], \
+...   "d":["b","f"], "e":["c","f"], "f":["d","e"]})
 sage: m1 = G1.adjacency_matrix(); m1
 [0 1 0 0 0 0]
 [1 0 0 0 0 0]
@@ -1733,7 +1709,6 @@ False
 sage: m2.is_symmetric()
 True
 \end{lstlisting}
-\end{center}
 %
 In general, the adjacency matrix of a digraph is not symmetric, while
 that of an undirected graph is symmetric.
@@ -1760,10 +1735,6 @@ w_{ij}, & \text{if $v_i v_j \in E$}, \\
 For example, Sage allows you to easily compute a weighted adjacency
 matrix.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: G = Graph(sparse=True, weighted=True)
 sage: G.add_edges([(0,1,1), (1,2,2), (0,2,3), (0,3,4)])
@@ -1773,7 +1744,6 @@ sage: M = G.weighted_adjacency_matrix(); M
 [3 2 0 0]
 [4 0 0 0]
 \end{lstlisting}
-\end{center}
 
 
 %%--- Bipartite case ----------------------------------------------------%%
@@ -1819,10 +1789,6 @@ graph from its matrix.
 \index{check matrix}
 \index{Tanner graph}
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: H = Matrix([(1,1,1,0,0), (0,0,1,0,1), (1,0,0,1,1)])
 sage: B = BipartiteGraph(H)
@@ -1832,7 +1798,6 @@ sage: B.reduced_adjacency_matrix()
 [1 0 0 1 1]
 sage: B.plot(graph_border=True)
 \end{lstlisting}
-\end{center}
 %
 The corresponding graph is similar to that in
 Figure~\ref{fig:introduction:tanner_graph}.
@@ -2007,12 +1972,8 @@ where $d_i = \deg(v_i)$ is the degree of vertex $v_i$.
 
 Sage allows you to compute the Laplacian matrix of a graph:
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G = Graph({1: [2,4], 2: [1,4], 3: [2,6], 4: [1,3], 5: [4,2], 6: [3,1]})
+sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: G.laplacian_matrix()
 [ 3 -1  0 -1  0 -1]
 [-1  4 -1 -1 -1  0]
@@ -2021,7 +1982,6 @@ sage: G.laplacian_matrix()
 [ 0 -1  0 -1  2  0]
 [-1  0 -1  0  0  2]
 \end{lstlisting}
-\end{center}
 %
 There are many remarkable properties of the Laplacian matrix. It shall
 be discussed further in Chapter~\ref{chap:distance_connectivity}.
@@ -2038,12 +1998,8 @@ edges in a shortest path connecting them. The $n \times n$ matrix
 $[d(v_i, v_j)]$ is the \emph{distance matrix} of $G$. Sage helps you
 to compute the distance matrix of a graph:
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G = Graph({1: [2,4], 2: [1,4], 3: [2,6], 4: [1,3], 5: [4,2], 6: [3,1]})
+sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: d = [[G.distance(i,j) for i in range(1,7)] for j in range(1,7)]
 sage: matrix(d)
 [0 1 2 1 2 1]
@@ -2053,7 +2009,6 @@ sage: matrix(d)
 [2 1 2 1 0 3]
 [1 2 1 2 3 0]
 \end{lstlisting}
-\end{center}
 
 The distance matrix is an important quantity which allows one to
 better understand the ``connectivity'' of a graph. Distance and
@@ -2173,17 +2128,13 @@ If \verb!G! is a Sage graph, one can use the method
 \verb!G! is isomorphic to another graph. The following Sage session
 illustrates how to use \verb!G.is_isomorphic()!.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: C6 = Graph({"a": ["b", "c"], "b": ["a", "d"], "c": ["a", "e"], \
-....: "d": ["b", "f"], "e": ["c", "f"], "f": ["d", "e"]})
-sage: G1 = Graph({1: [2, 4], 2: [1, 3], 3: [2, 6], 4: [1, 5], \
-....: 5: [4, 6], 6: [3, 5]})
-sage: G2 = Graph({"a": ["d", "e"], "b": ["c", "f"], "c": ["b", "f"], \
-....: "d": ["a", "e"], "e": ["a", "d"], "f": ["b", "c"]})
+sage: C6 = Graph({"a":["b","c"], "b":["a","d"], "c":["a","e"], \
+...   "d":["b","f"], "e":["c","f"], "f":["d","e"]})
+sage: G1 = Graph({1:[2,4], 2:[1,3], 3:[2,6], 4:[1,5], \
+...   5:[4,6], 6:[3,5]})
+sage: G2 = Graph({"a":["d","e"], "b":["c","f"], "c":["b","f"], \
+...   "d":["a","e"], "e":["a","d"], "f":["b","c"]})
 sage: C6.is_isomorphic(G1)
 True
 sage: C6.is_isomorphic(G2)
@@ -2191,7 +2142,6 @@ False
 sage: G1.is_isomorphic(G2)
 False
 \end{lstlisting}
-\end{center}
 %
 Thus, for the graphs $C_6$, $G_1$ and $G_2$ in
 Figure~\ref{fig:introduction:isomorphic_graphs}, $C_6$ and $G_1$ are
@@ -2615,13 +2565,9 @@ A_1 & 0 \\
 %
 Sage can compute graph unions, as the following example shows.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G1 = Graph({1: [2,4], 2: [1,3], 3: [2,6], 4: [1,5], 5: [4,6], 6: [3,5]})
-sage: G2 = Graph({7: [8,10], 8: [7,10], 9: [8,12], 10: [7,9], 11: [10,8], 12: [9,7]})
+sage: G1 = Graph({1:[2,4], 2:[1,3], 3:[2,6], 4:[1,5], 5:[4,6], 6:[3,5]})
+sage: G2 = Graph({7:[8,10], 8:[7,10], 9:[8,12], 10:[7,9], 11:[10,8], 12:[9,7]})
 sage: G1u2 = G1.union(G2)
 sage: G1u2.adjacency_matrix()
 [0 1 0 1 0 0 0 0 0 0 0 0]
@@ -2637,7 +2583,6 @@ sage: G1u2.adjacency_matrix()
 [0 0 0 0 0 0 0 1 0 1 0 0]
 [0 0 0 0 0 0 1 0 1 0 0 0]
 \end{lstlisting}
-\end{center}
 %
 In the case where $V_1 = V_2$, then $G_1 \cup G_2$ is simply the graph
 consisting of all edges in $G_1$ or in $G_2$. In general, the union of
@@ -3056,12 +3001,8 @@ vertex. The vertex deletion subgraph of $G$ is sometimes denoted
 $G - \{v\}$.
 Sage can compute vertex deletions, as the following example shows.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G = Graph({1: [2,4], 2: [1,4], 3: [2,6], 4: [1,3], 5: [4,2], 6: [3,1]})
+sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: G.vertices()
 [1, 2, 3, 4, 5, 6]
 sage: E1 = Set(G.edges(labels=False)); E1
@@ -3076,7 +3017,6 @@ sage: E2 = Set(G.edges(labels=False)); E2
 sage: E1.difference(E2) == E4
 True
 \end{lstlisting}
-\end{center}
 %
 Figure~\ref{fig:introduction:vertex_deletion_subgraphs}
 presents a sequence of subgraphs obtained by repeatedly deleting
@@ -3213,12 +3153,8 @@ deleting an edge $e \in E$, but not the vertices incident to that edge.
 The edge deletion subgraph of $G$ is sometimes denoted $G - \{e\}$.
 Sage can compute edge deletions, as the following example shows.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G = Graph({1: [2,4], 2: [1,4], 3: [2,6], 4: [1,3], 5: [4,2], 6: [3,1]})
+sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: E1 = Set(G.edges(labels=False)); E1
 {(1, 2), (4, 5), (1, 4), (2, 3), (3, 6), (1, 6), (2, 5), (3, 4), (2, 4)}
 sage: V1 = G.vertices(); V1
@@ -3231,7 +3167,6 @@ sage: E2 = Set(G.edges(labels=False)); E2
 sage: E1.difference(E2) == E14
 True
 \end{lstlisting}
-\end{center}
 %
 Figure~\ref{fig:introduction:edge_deletion_subgraphs} shows a sequence
 of graphs resulting from edge deletion. Unlike vertex deletion, when
@@ -3614,12 +3549,8 @@ is the edge deletion subgraph $G - E(H)$. That is, we delete from $G$
 all edges in $H$. Sage can compute edge complements, as the following
 example shows.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-sage: G = Graph({1: [2,4], 2: [1,4], 3: [2,6], 4: [1,3], 5: [4,2], 6: [3,1]})
+sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: Gc = G.complement()
 sage: EG = Set(G.edges(labels=False)); EG
 {(1, 2), (4, 5), (1, 4), (2, 3), (3, 6), (1, 6), (2, 5), (3, 4), (2, 4)}
@@ -3632,7 +3563,6 @@ True
 sage: EG.intersection(EGc)
 {}
 \end{lstlisting}
-\end{center}
 
 \begin{theorem}
 If $G = (V, E)$ is self-complementary, then the order of $G$ is
@@ -3705,10 +3635,6 @@ E(G \square H)
 %
 Sage can compute Cartesian products, as the following example shows.
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: Z = graphs.CompleteGraph(2); len(Z.vertices()); len(Z.edges())
 2
@@ -3720,7 +3646,6 @@ sage: P = C.cartesian_product(Z); len(P.vertices()); len(P.edges())
 10
 15
 \end{lstlisting}
-\end{center}
 
 The \emph{path graph} $P_n$ is a tree with $n$ vertices
 $V = \{v_1, v_2, \dots, v_n\}$ and edges

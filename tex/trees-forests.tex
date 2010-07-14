@@ -711,11 +711,7 @@ go to the next element of $E$ in the for loop.
 At the end of the for loop, the edges of $T$ have
 been completely found and the algorithm stops.
 
-\begin{center}
-\vskip .15in
-
-\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
-
+\begin{lstlisting}
 def kruskal(G):
     """
     Implements Kruskal's algorithm to compute a MST of a graph.
@@ -783,10 +779,7 @@ def kruskal(G):
         AT.append(rw)
     AT = matrix(AT)
     return Graph(AT, format = "adjacency_matrix", weighted = True)
-
-\end{Verbatim}
-
-\end{center}
+\end{lstlisting}
 \index{Kruskal's algorithm}
 
 Here are some examples.
@@ -798,20 +791,15 @@ Since the above implementation assumes that the
 vertices are $V=\{0,1,\dots,n-1\}$, we first redefine
 the graph suitable and run the Kruskal algorithm on that.
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: G = graphs.GridGraph([4,4])
 sage: A = G.adjacency_matrix()
-sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+sage: G = Graph(A, format="adjacency_matrix", weighted=True)
 sage: T = kruskal(G); T.edges()
 [(0, 1, 1), (0, 4, 1), (1, 2, 1), (1, 5, 1), (2, 3, 1), (2, 6, 1), (3,7, 1),
  (4, 8, 1), (5, 9, 1), (6, 10, 1), (7, 11, 1), (8, 12, 1), (9, 13, 1),
  (10, 14, 1), (11, 15, 1)]
 \end{lstlisting}
-\end{center}
 %
 The plot of this graph is given in
 Figure~\ref{fig:trees-forests:Kruskal_example}.
@@ -887,11 +875,7 @@ but $v$ is not,\;
 \end{algorithm}
 \index{Prim's algorithm}
 
-\begin{center}
-\vskip .15in
-
-\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
-
+\begin{lstlisting}
 def prim(G):
     """
     Implements Prim's algorithm to compute a MST of a graph.
@@ -943,31 +927,19 @@ def prim(G):
         AT.append(rw)
     AT = matrix(AT)
     return Graph(AT, format = "adjacency_matrix", weighted = True)
-
-\end{Verbatim}
-
-\end{center}
-
-
-
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
-        sage: A = matrix([[0,1,2,3],[3,0,2,1],[2,1,0,3],[1,1,1,0]])
-        sage: G = DiGraph(A, format = "adjacency_matrix", weighted = True)
-        sage: E = G.edges(); E
-        [(0, 1, 1), (0, 2, 2), (0, 3, 3), (1, 0, 3), (1, 2, 2), (1, 3, 1), (2, 0, 2),
-         (2, 1, 1), (2, 3, 3), (3, 0, 1), (3, 1, 1), (3, 2, 1)]
-        sage: prim(G)
-        Multi-graph on 4 vertices
-        sage: prim(G).edges()
-        [(0, 1, 1), (0, 2, 2), (1, 3, 1)]
 \end{lstlisting}
-\end{center}
-%
 
+\begin{lstlisting}
+sage: A = matrix([[0,1,2,3], [3,0,2,1], [2,1,0,3], [1,1,1,0]])
+sage: G = DiGraph(A, format="adjacency_matrix", weighted=True)
+sage: E = G.edges(); E
+[(0, 1, 1), (0, 2, 2), (0, 3, 3), (1, 0, 3), (1, 2, 2), (1, 3, 1), (2, 0, 2),
+(2, 1, 1), (2, 3, 3), (3, 0, 1), (3, 1, 1), (3, 2, 1)]
+sage: prim(G)
+Multi-graph on 4 vertices
+sage: prim(G).edges()
+[(0, 1, 1), (0, 2, 2), (1, 3, 1)]
+\end{lstlisting}
 
 \begin{figure}[!htbp]
 \centering
@@ -1025,25 +997,16 @@ def prim(G):
 \label{fig:tree-forests:Prim_algorithm_digraph}
 \end{figure}
 
-
-
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-        sage: A = matrix([[0,7,0,5,0,0,0],[0,0,8,9,7,0,0],[0,0,0,0,5,0,0],
-         [0,0,0,0,15,6,0],[0,0,0,0,0,8,9],[0,0,0,0,0,0,11],[0,0,0,0,0,0,0]])
-        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
-        sage: E = G.edges(); E
-        [(0, 1, 7), (0, 3, 5), (1, 2, 8), (1, 3, 9), (1, 4, 7), (2, 4, 5),
-         (3, 4, 15), (3, 5, 6), (4, 5, 8), (4, 6, 9), (5, 6, 11)]
-        sage: prim(G).edges()
-        [(0, 1, 7), (0, 3, 5), (1, 2, 8), (1, 4, 7), (3, 5, 6), (4, 6, 9)]
+sage: A = matrix([[0,7,0,5,0,0,0], [0,0,8,9,7,0,0], [0,0,0,0,5,0,0], \
+...  [0,0,0,0,15,6,0], [0,0,0,0,0,8,9], [0,0,0,0,0,0,11], [0,0,0,0,0,0,0]])
+sage: G = Graph(A, format="adjacency_matrix", weighted=True)
+sage: E = G.edges(); E
+[(0, 1, 7), (0, 3, 5), (1, 2, 8), (1, 3, 9), (1, 4, 7), (2, 4, 5),
+(3, 4, 15), (3, 5, 6), (4, 5, 8), (4, 6, 9), (5, 6, 11)]
+sage: prim(G).edges()
+[(0, 1, 7), (0, 3, 5), (1, 2, 8), (1, 4, 7), (3, 5, 6), (4, 6, 9)]
 \end{lstlisting}
-\end{center}
-%
-
 
 \begin{figure}[!htbp]
 \centering
@@ -1147,20 +1110,14 @@ The resulting set of edges T is the minimum spanning tree of G.
 \end{itemize}
 
 \begin{example}
-
 In Figure \ref{fig:tree-forests:Boruvkas-algorithm} , we plot the following example.
-
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
+{\rm
 \begin{lstlisting}
-       sage: A = matrix([[0,1,2,5],[0,0,3,6],[0,0,0,4],[0,0,0,0]])
-       sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
-       sage: boruvka(G)
+sage: A = matrix([[0,1,2,5], [0,0,3,6], [0,0,0,4], [0,0,0,0]])
+sage: G = Graph(A, format="adjacency_matrix", weighted=True)
+sage: boruvka(G)
 \end{lstlisting}
-\end{center}
-%
+}
 
 \begin{figure}[!htbp]
 \centering
@@ -1215,13 +1172,7 @@ In Figure \ref{fig:tree-forests:Boruvkas-algorithm} , we plot the following exam
 
 \end{example}
 
-
-
-\begin{center}
-\vskip .15in
-
-\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
-
+\begin{lstlisting}
 def which_index(x,L):
     """
     L is a list of sublists (or tuple of sets or list
@@ -1295,48 +1246,37 @@ def boruvka(G):
                 break
             T.add_edge(e)
     return T
-
-\end{Verbatim}
-
-\end{center}
+\end{lstlisting}
 
 Some examples using Sage:
-
-
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
-\begin{lstlisting}
-
-        sage: A = matrix([[0,1,2,3],[4,0,5,6],[7,8,0,9],[10,11,12,0]])
-        sage: G = DiGraph(A, format = "adjacency_matrix", weighted = True)
-        sage: boruvka(G)
-        Multi-graph on 4 vertices
-        sage: boruvka(G).edges()
-        [(0, 1, 1), (0, 2, 2), (0, 3, 3)]
-        sage: A = matrix([[0,2,0,5,0,0,0],[0,0,8,9,7,0,0],[0,0,0,0,1,0,0],\
-         [0,0,0,0,15,6,0],[0,0,0,0,0,3,4],[0,0,0,0,0,0,11],[0,0,0,0,0,0,0]])
-        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
-        sage: E = G.edges(); E
-        [(0, 1, 2), (0, 3, 5), (1, 2, 8), (1, 3, 9), (1, 4, 7),
-         (2, 4, 1), (3, 4, 15), (3, 5, 6), (4, 5, 3), (4,6, 4), (5, 6, 11)]
-        sage: boruvka(G)
-        Multi-graph on 7 vertices
-        sage: boruvka(G).edges()
-        [(0, 1, 2), (0, 3, 5), (2, 4, 1), (3, 5, 6), (4, 5, 3), (4, 6, 4)]
-        sage: A = matrix([[0,1,2,5],[0,0,3,6],[0,0,0,4],[0,0,0,0]])
-        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
-        sage: boruvka(G).edges()
-        [(0, 1, 1), (0, 2, 2), (2, 3, 4)]
-        sage: A = matrix([[0,1,5,0,4],[0,0,0,0,3],[0,0,0,2,0],[0,0,0,0,0],[0,0,0,0,0]])
-        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
-        sage: boruvka(G).edges()
-        [(0, 1, 1), (0, 2, 5), (1, 4, 3), (2, 3, 2)]
-
-\end{lstlisting}
-\end{center}
 %
+\begin{lstlisting}
+sage: A = matrix([[0,1,2,3], [4,0,5,6], [7,8,0,9], [10,11,12,0]])
+sage: G = DiGraph(A, format="adjacency_matrix", weighted=True)
+sage: boruvka(G)
+Multi-graph on 4 vertices
+sage: boruvka(G).edges()
+[(0, 1, 1), (0, 2, 2), (0, 3, 3)]
+sage: A = matrix([[0,2,0,5,0,0,0], [0,0,8,9,7,0,0], [0,0,0,0,1,0,0],\
+...   [0,0,0,0,15,6,0], [0,0,0,0,0,3,4], [0,0,0,0,0,0,11], [0,0,0,0,0,0,0]])
+sage: G = Graph(A, format="adjacency_matrix", weighted=True)
+sage: E = G.edges(); E
+[(0, 1, 2), (0, 3, 5), (1, 2, 8), (1, 3, 9), (1, 4, 7),
+(2, 4, 1), (3, 4, 15), (3, 5, 6), (4, 5, 3), (4,6, 4), (5, 6, 11)]
+sage: boruvka(G)
+Multi-graph on 7 vertices
+sage: boruvka(G).edges()
+[(0, 1, 2), (0, 3, 5), (2, 4, 1), (3, 5, 6), (4, 5, 3), (4, 6, 4)]
+sage: A = matrix([[0,1,2,5], [0,0,3,6], [0,0,0,4], [0,0,0,0]])
+sage: G = Graph(A, format="adjacency_matrix", weighted=True)
+sage: boruvka(G).edges()
+[(0, 1, 1), (0, 2, 2), (2, 3, 4)]
+sage: A = matrix([[0,1,5,0,4], [0,0,0,0,3], [0,0,0,2,0], [0,0,0,0,0], [0,0,0,0,0]])
+sage: G = Graph(A, format="adjacency_matrix", weighted=True)
+sage: boruvka(G).edges()
+[(0, 1, 1), (0, 2, 5), (1, 4, 3), (2, 3, 2)]
+\end{lstlisting}
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Binary trees ------------------------------------------------------%%
@@ -1648,9 +1588,7 @@ very fast).
 
 An implementation of the reflected Gray code using Python is given below.
 
-\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=Python
-  3.0]
-
+\begin{lstlisting}
 def graycode(length,modulus):
     """
     Returns the n-tuple reflected Gray code mod m.
@@ -1699,8 +1637,7 @@ def graycode(length,modulus):
     for i in range(m):
         M0 = M0+Mr[i]
     return M0
-
-\end{Verbatim}
+\end{lstlisting}
 
 \vskip .2in
 Consider the reflected binary code
@@ -1783,8 +1720,7 @@ $k/2$.
 
 An example using \sage is given below.
 
-\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
-
+\begin{lstlisting}
 def int2binary(m, n):
     '''
     returns GF(2) vector of length n obtained
@@ -1822,8 +1758,7 @@ def graycodeword(m, n):
         (0, 1, 0)
     '''
     return int2binary(m,n)+int2binary(int(m/2),n)
-
-\end{Verbatim}
+\end{lstlisting}
 
 
 %%-----------------------------------------------------------------------%%

@@ -32,10 +32,6 @@ Clearly, if $H\subseteq G$ is the densest subgraph in $G$, its $|E(H)|$ edges wi
 
 Here is the corresponding Sage code:
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: g = graphs.PetersenGraph()
 sage: p = MixedIntegerLinearProgram(maximization = False)
@@ -52,9 +48,6 @@ sage: for u,v in g.edges(labels = False):
 sage: p.solve()
 3.0
 \end{lstlisting}
-\end{center}
-
-
 
 {\bf REMARK : } In many if not all the other LP formulations, this Linear Program is used as a constraint. In those problems, we are always at some point looking for a subgraph $H$ of $G$ such that $H$ does not contain any cycle. The edges of $G$ are in this case variables, whose value can be equal to $0$ or $1$ depending on whether they belong to such a graph $H$. Based on the observation that the Maximum Average Degree of a tree on $n$ vertices is exactly its average degree ($=2-2/n<1$), and that any cycles in a graph ensures its average degree is larger than $2$, we can then set the constraint that $z\leq 2-\frac 2 {|V(G)|}$. This is a handy way to write in LP the constraint that ``the set of edges belonging to $H$ is acyclic''. For this to work, though, we need to ensure that the variables corresponding to our edges are binary variables.
 
@@ -94,34 +87,30 @@ We will then, in this case, define variables representing the edges included in 
 
 Here is the corresponding Sage corresponding to a simpler case -- looking for an hamiltonian cycle in a graph:
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: g = graphs.GridGraph([4,4])
 sage: p = MixedIntegerLinearProgram(maximization = False)
 
-sage: f = p.new_variable() 
-sage: r = p.new_variable() 
+sage: f = p.new_variable()
+sage: r = p.new_variable()
 
-sage: eps = 1/(2*Integer(g.order())) 
-sage: x = g.vertex_iterator().next() 
+sage: eps = 1/(2*Integer(g.order()))
+sage: x = g.vertex_iterator().next()
 
-sage: # reorders the edge as they can appear in the two different ways 
-sage: R = lambda x,y : (x,y) if x < y else (y,x) 
+sage: # reorders the edge as they can appear in the two different ways
+sage: R = lambda x,y : (x,y) if x < y else (y,x)
 
-sage: # All the vertices have degree 2 
+sage: # All the vertices have degree 2
 sage: for v in g:
 ...     p.add_constraint( sum([ f[R(u,v)] for u in g.neighbors(v)]) == 2)
 
-sage: # r is greater than f 
-sage: for u,v in g.edges(labels = None): 
-...     p.add_constraint( r[(u,v)] + r[(v,u)] - f[R(u,v)] >= 0) 
+sage: # r is greater than f
+sage: for u,v in g.edges(labels = None):
+...     p.add_constraint( r[(u,v)] + r[(v,u)] - f[R(u,v)] >= 0)
 
-sage: # no cycle which does not contain x 
-sage: for v in g: 
-...     if v != x: 
+sage: # no cycle which does not contain x
+sage: for v in g:
+...     if v != x:
 ...          p.add_constraint( sum([ r[(u,v)] for u in g.neighbors(v)]) <= 1-eps)
 
 sage: p.set_objective(None)
@@ -144,8 +133,6 @@ True
 sage: tsp.order() == g.order()                     # optional - GLPK,CBC,CPLEX
 True
 \end{lstlisting}
-\end{center}
-
 
 
 \newpage
@@ -183,45 +170,41 @@ This problem amounts to finding, given a graph $G$ and an integer $k$, edge-disj
 
 Here is the corresponding Sage code:
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: g = graphs.RandomGNP(40,.6)
 sage: p = MixedIntegerLinearProgram()
 sage: colors = range(2)
 
-sage: # Sort an edge 
+sage: # Sort an edge
 sage: S = lambda (x,y) : (x,y) if x<y else (y,x)
 
 sage: edges = p.new_variable(dim = 2)
 sage: r_edges = p.new_variable(dim = 2)
 
 sage: # An edge belongs to at most one tree
-sage: for e in g.edges(labels=False): 
+sage: for e in g.edges(labels=False):
 ...       p.add_constraint(sum([edges[j][S(e)] for j in colors]), max = 1)
 
 sage: for j in colors:
-...       # each color class has g.order()-1 edges 
+...       # each color class has g.order()-1 edges
 ...       p.add_constraint(
-...         sum([edges[j][S(e)] for e in g.edges(labels=None)]) 
+...         sum([edges[j][S(e)] for e in g.edges(labels=None)])
 ...         >= g.order()-1)
-...       # Each vertex is in the tree 
-...       for v in g.vertices(): 
+...       # Each vertex is in the tree
+...       for v in g.vertices():
 ...            p.add_constraint(
 ...              sum([edges[j][S(e)] for e in g.edges_incident(v, labels=None)])
 ...              >= 1)
 ...       # r_edges is larger than edges
 ...       for u,v in g.edges(labels=None):
 ...            p.add_constraint(
-...               r_edges[j][(u,v)] + r_edges[j][(v, u)] 
+...               r_edges[j][(u,v)] + r_edges[j][(v, u)]
 ...               == edges[j][S((u,v))] )
 
-sage: # no cycles 
+sage: # no cycles
 sage: epsilon =  (3*Integer(g.order()))**(-1)
-sage: for j in colors: 
-...      for v in g: 
+sage: for j in colors:
+...      for v in g:
 ...          p.add_constraint(
 ...             sum([r_edges[j][(u,v)] for u in g.neighbors(v)])
 ...             <= 1-epsilon)
@@ -232,7 +215,7 @@ sage: p.solve()                                     # optional - GLPK,CBC,CPLEX
 0.0
 
 
-sage: # We can now build the solution 
+sage: # We can now build the solution
 sage: # found as a list of trees
 
 sage: edges = p.get_values(edges)                   # optional - GLPK,CBC,CPLEX
@@ -246,7 +229,6 @@ sage: for e in g.edges(labels = False):             # optional - GLPK,CBC,CPLEX
 sage: all([ trees[j].is_tree() for j in colors ])   # optional - GLPK,CBC,CPLEX
 True
 \end{lstlisting}
-\end{center}
 
 
 \newpage
@@ -286,10 +268,6 @@ Finding  a spanning tree  in a Graph $G$ can be done in linear time, whereas com
 
 Here is the corresponding Sage code:
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: g = graphs.GridGraph([10,10])
 sage: vertices = [(0,2),(5,3)]
@@ -326,7 +304,7 @@ sage: p.add_constraint(
 
 sage: # There are no cycles in our graph
 sage: for u,v in g.edges(labels = False):
-...         p.add_constraint( 
+...         p.add_constraint(
 ...           r_edges[(u,v)]+ r_edges[(v,u)] - edges[R((u,v))]
 ...           <= 0 )
 
@@ -336,25 +314,23 @@ sage: for v in g:
 ...         p.add_constraint(sum([r_edges[(u,v)] for u in g.neighbors(v)]), max = 1-eps)
 
 sage: p.set_objective(sum([edges[R(e)] for e in g.edges(labels = False)]))
-sage: p.set_binary(edges)            
+sage: p.set_binary(edges)
 sage: p.solve()                                    # optional - GLPK,CBC,CPLEX
 6.0
 
-sage: # We can now build the solution 
+sage: # We can now build the solution
 sage: # found as a tree
 
 sage: edges = p.get_values(edges)                  # optional - GLPK,CBC,CPLEX
 sage: st = Graph()                                 # optional - GLPK,CBC,CPLEX
 sage: st.add_edges(
-...     [e for e in g.edges(labels = False) 
+...     [e for e in g.edges(labels = False)
 ...     if edges[R(e)] == 1])                      # optional - GLPK,CBC,CPLEX
 sage: st.is_tree()                                 # optional - GLPK,CBC,CPLEX
 True
 sage: all([v in st for v in vertices])             # optional - GLPK,CBC,CPLEX
 True
 \end{lstlisting}
-\end{center}
-
 
 
 \newpage
@@ -389,17 +365,12 @@ The linear arboricity of a graph $G$ is the least number $k$ such that the edges
 
 Here is the corresponding Sage code :
 
-
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: g = graphs.GridGraph([4,4])
 sage: k = 2
 sage: p = MixedIntegerLinearProgram()
 
-sage: # c is a boolean value such that c[i][(u,v)] = 1 
+sage: # c is a boolean value such that c[i][(u,v)] = 1
 sage: # if and only if (u,v) is colored with i
 sage: c = p.new_variable(dim=2)
 
@@ -439,10 +410,6 @@ sage: for i in range(k):
 ...             if c[i][E(u,v)] == 1:
 ...                 add((u,v),i)
 \end{lstlisting}
-\end{center}
-
-
-
 
 
 \newpage
@@ -502,10 +469,6 @@ To each {\em directed} edge $g_1g_2$ (I consider $g_1g_2$ and $g_2g_1$ as differ
 
 Here is the corresponding Sage code:
 
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
 sage: g = graphs.PetersenGraph()
 sage: H = graphs.CompleteGraph(4)
@@ -516,7 +479,7 @@ sage: # sorts an edge
 sage: S = lambda (x,y) : (x,y) if x<y else (y,x)
 
 sage: # rs = Representative set of a vertex
-sage: # for h in H, v in G is such that rs[h][v] == 1 if and only if v 
+sage: # for h in H, v in G is such that rs[h][v] == 1 if and only if v
 sage: # is a representant of h in g
 sage: rs = p.new_variable(dim=2)
 
@@ -576,7 +539,7 @@ sage: p.set_objective(None)
 sage: p.solve()                                         # optional - GLPK,CBC,CPLEX
 0.0
 
-sage: # We can now build the solution found as a 
+sage: # We can now build the solution found as a
 sage: # dictionary associating to each vertex of H
 sage: # the corresponding set of vertices in G
 
@@ -584,9 +547,6 @@ sage: rs = p.get_values(rs)
 
 sage: from sage.sets.set import Set
 sage: rs_dict = {}
-sage: for h in H:                                                
+sage: for h in H:
 ...         rs_dict[h] = [v for v in g if rs[h][v]==1]
 \end{lstlisting}
-\end{center}
-
-

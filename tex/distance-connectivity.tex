@@ -24,10 +24,10 @@
 
 \subsection{Distance and metrics on graphs}
 
-Consider an edge-weighted simple 
+Consider an edge-weighted simple
 graph $G=(V,E,i,h)$ without negative weight
 cycles. Here $E\subset V^{(2)}$,
-$i$ is an incidence function as in 
+$i$ is an incidence function as in
 (\ref{eqn:edge-incidence}), which we regard as the identity function,
 and $h$ is an
 orientation function as in (\ref{eqn:edge-orientation}).
@@ -43,32 +43,32 @@ to be the sum of the weights of the edges in $P$:
 {\rm wt}(P)=\sum_{i=1}^m {\rm wt}(e_i).
 \]
 The {\it distance function} $\partial:V\times V\to  {\mathbb{R}}\cup
-\{\infty\}$ on 
+\{\infty\}$ on
 \index{distance function}
 $G$ is defined by $\partial(v_1,v_2) = \infty$,
 if $v_1$ and $v_2$ lie in distinct connected
 components of $G$, and by
 
 \[
-\partial(v_1,v_2) = 
+\partial(v_1,v_2) =
 \min_P {\rm wt}(P),
 \]
 otherwise, where the minimum is taken over all paths $P$
-from $v_1$ to $v_2$ (this minimum exists since 
-$G$ has no negative weight cycles. 
+from $v_1$ to $v_2$ (this minimum exists since
+$G$ has no negative weight cycles.
 
 This distance function is not in general a metric
 (that is, the triagle inequality is not true in general).
-However, when the distance function is a 
+However, when the distance function is a
 metric then $G$ is called a {\it metric graph}.
 \index{graph!metric}
 The theory of metric graphs, thanks to their close
 connection with tropical curves, is a very active
-research area at the present (see the work of 
+research area at the present (see the work of
 M. Baker et al, e.g., \cite{BakerFaber2006}).
 
 \begin{exercise}
-Show that the vertex set $V$ (of an undirected unweighted simple graph) 
+Show that the vertex set $V$ (of an undirected unweighted simple graph)
 and the distance function form
 a metric space, if and only if the graph is connected.
 \end{exercise}
@@ -78,10 +78,10 @@ $\epsilon (v)$ (for a vertex $v$) is the greatest distance between $v$
 and any other vertex in $G$.
 \index{eccentricity}
 
-The {\it diameter} of $G$, $\partial(G)$, is the maximum 
+The {\it diameter} of $G$, $\partial(G)$, is the maximum
 eccentricity of any vertex in the graph. To compute
 $\partial(G)$, first find the shortest path (see Chapter
-\ref{chap:graph_algorithms}) between each pair of 
+\ref{chap:graph_algorithms}) between each pair of
 vertices. The maximum weight of any of
 these paths is the diameter of the graph:
 
@@ -104,12 +104,12 @@ Consider an edge-weighted graph $G=(V,E)$ without negative weight
 cycles with distance function $\partial$. Let $d=\partial(G)$
 denote the diameter of $G$ and index the
 set of vertices in some arbitrary but fixed way,
-$V=\{v_1,v_2,\dots, v_n\}$. 
+$V=\{v_1,v_2,\dots, v_n\}$.
 The {\it distance matrices} of $G$ are a sequence of $n\times n$ matrices
 $\{A_1,\dots, A_d)$, where
 
 \[
-(A_k)_{ij} = 
+(A_k)_{ij} =
 \left\{
 \begin{array}{ll}
 1,& {\rm if}\ \partial(v_i,v_j)=k,\\
@@ -120,18 +120,12 @@ $\{A_1,\dots, A_d)$, where
 In particular, $A_1$ is the usual adjacency matrix $A$.
 
 To compute the distance matrices of a graph, use the Floyd-Roy-Warshall
-algorithm to compute the shortest distance 
+algorithm to compute the shortest distance
 $\partial(v_i,v_j)$ between any two pairs of vertices,
 $v_i,v_j\in V$. This data determines the entries of
 the distance matrices.
 
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-
 def distance_matrices(Gamma):
     """
     Returns the distance matrices of a graph.
@@ -149,7 +143,7 @@ def distance_matrices(Gamma):
          [0 1 0 0 0]
          [0 0 1 0 0]
          [0 0 0 1 0]
-         [0 0 0 0 1], 
+         [0 0 0 0 1],
          [0 1 1 0 0]
          [1 0 1 0 0]
          [1 1 0 1 0]
@@ -179,10 +173,7 @@ def distance_matrices(Gamma):
                     dist_mati[v1][v2] = 1
         dist_mats.append(matrix(dist_mati))
     return dist_mats
-
 \end{lstlisting}
-\end{center}
-%
 
 The {\it distance matrix} $D(G)$ of $G$ is
 the $n\times n$ matrix
@@ -195,10 +186,10 @@ communication network design (see for example
 \cite{GrahamPollak1971})
 and network flow algorithms (see for example \cite{Dijkstra1959}).
 
-To compute the distance matrix of a graph, is very 
+To compute the distance matrix of a graph, is very
 similar to computing the distance matrices.
 Again, use the Floyd-Roy-Warshall
-algorithm to compute the shortest distance 
+algorithm to compute the shortest distance
 $\partial(v_i,v_j)$ between any two pairs of vertices,
 $v_i,v_j\in V$. This data determines the entries of
 the distance matrix.
@@ -213,15 +204,15 @@ the distance matrix.
 {\rm
 Thanks to R. Graham and H. Pollak, the following unusual fact is
 known:
-If $T$ is any tree then 
+If $T$ is any tree then
 
 \[
-\det D(T)=(-1)^{n-1}(n-1)2^{n-2}, 
+\det D(T)=(-1)^{n-1}(n-1)2^{n-2},
 \]
 where $n$ denotes the number of vertices of $T$.
 In particular, the determinant of the distance matrix of a tree is
 independent of the structure of the tree.  This fact is proven in the
-paper \cite{GrahamPollak1971}, but see also 
+paper \cite{GrahamPollak1971}, but see also
 \cite{EdelbergEtAl1976}.
 }
 \end{remark}
@@ -230,14 +221,7 @@ paper \cite{GrahamPollak1971}, but see also
 % M. Edelberg, M. R. Garey, R. L. Graham, {\it On the
 % distance matrix of a tree}, Discrete Math. 14 (1976)23-39.
 
-
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-
 def distance_matrix(Gamma):
     """
     Returns the distance matrix of a graph.
@@ -267,10 +251,8 @@ def distance_matrix(Gamma):
             for v2 in V:
                 dist_mat[v1][v2] = D[v1][v2]
     return matrix(dist_mat)
-
 \end{lstlisting}
-\end{center}
-%
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Vertex and edge connectivity --------------------------------------%%
@@ -288,8 +270,8 @@ def distance_matrix(Gamma):
 If $G=(V,E)$ is a graph and $v\in V$ is a vertex with the property
 that $G-v$ has more connected components than $G$ then
 we call $v$ a {\it cut-vertex} (or {\it articulation point} or {\it vertex-cut}).
-\index{cut-vertex} 
-\index{vertex-cut} 
+\index{cut-vertex}
+\index{vertex-cut}
 \index{articulation point}
 A {\it non-separable graph} is one having no cut-vertex.
 \index{non-separable graph}
@@ -302,23 +284,14 @@ A {\it block} of a graph is a maximal non-separable subgraph.
 \begin{example}
 {\rm
 The cut-vertex of the graph in Figure \ref{fig:clawgraph}
-is the vertex $0$, as the following Sage example 
+is the vertex $0$, as the following Sage example
 demonstrates.
 
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-
 sage: G = graphs.clawgraph()
 sage: G.blocks_and_cut_vertices()
 ([[1, 0], [2, 0], [3, 0]], [0])
-
 \end{lstlisting}
-\end{center}
-%
 
 \begin{figure}[H]
 \begin{center}
@@ -335,18 +308,18 @@ which is a cut-vertex then we say $G$ is {\it $1$-connected}.
 \index{graph!$1$-connected}
  In general, we say $G$ is {\it $k$-vertex-connected} (or
 {\it $k$-connected})
-\index{vertex-connected} 
+\index{vertex-connected}
 if the graph $G-X$ is connected for each $X\subset V$
 such that $|X|\leq k-1$.
 In other words, $G$ is $k$-vertex-connected
-if the graph remains connected even after removing 
+if the graph remains connected even after removing
 any $k-1$ or fewer vertices from $G$.
 
 \begin{example}
-The $1$-skeleton of any $k$-dimensional convex polytope forms 
-a $k$-vertex-connected graph 
-(\cite{Balinski1961}). As a partial converse, Steinitz's theorem 
-states that any $3$-vertex-connected planar graph forms 
+The $1$-skeleton of any $k$-dimensional convex polytope forms
+a $k$-vertex-connected graph
+(\cite{Balinski1961}). As a partial converse, Steinitz's theorem
+states that any $3$-vertex-connected planar graph forms
 the skeleton of a convex polyhedron.
 
 \end{example}
@@ -373,15 +346,15 @@ The converse to this is false.
 \begin{theorem}
 (Bondy's theorem)
 {\rm
-Suppose 
+Suppose
 
 \begin{itemize}
 \item
-$G=(V,E)$ is a connected simple graph with $n=|V|$, 
+$G=(V,E)$ is a connected simple graph with $n=|V|$,
 \item
 $0<k<n$,
 \item
-the (non-decreasing) degree sequence 
+the (non-decreasing) degree sequence
 $[d_1,d_2,\dots, d_n]$ satisfies
 $d_j\geq j+k-1$, for $1\leq j\leq n-1-d_{n-k+1}$,
 \end{itemize}
@@ -434,20 +407,15 @@ $(k-1)$-vertex-connected, then we write $\kappa(G)=k$
 \index{$\kappa_0(G)$}
 \index{$\kappa(G)$}
 
-Here is a Sage example concerning 
-$\kappa(G)$ using the Petersen graph 
+Here is a Sage example concerning
+$\kappa(G)$ using the Petersen graph
 depicted in Figure \ref{fig:petersen-graph}.
 (A linear programming
-Sage package, such as GLPK, must be installed 
-for the commands below to work. At the time of this writing, it is 
+Sage package, such as GLPK, must be installed
+for the commands below to work. At the time of this writing, it is
 expected that GLPK will be a standard part of Sage soon.)
 %
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-
 sage: G = graphs.PetersenGraph()
 sage: len(G.vertices())
 10
@@ -458,10 +426,7 @@ sage: len(G.vertices())
 9
 sage: G.vertex_connectivity()
 2.0
-
 \end{lstlisting}
-\end{center}
-%
 
 \begin{lemma}
 {\rm
@@ -482,14 +447,14 @@ If $v\in V$ then we have
 If $G=(V,E)$ is a graph and $e\in E$ is an edge with the property
 that $G-e$ has more connected components than $G$ then
 we call $e$ a {\it cut-edge} (or an {\it isthmus} or an {\it edge-cut}).
-\index{cut-edge} 
-\index{edge-cut} 
+\index{cut-edge}
+\index{edge-cut}
 \index{isthmus}
 A graph having no cut-edge is called {\it bridgeless}.
 \index{bridgeless}
 An open question at the time of this writing
-(in 2010) involving bridges is the 
-{\it cycle double cover conjecture}, due to P. Seymour and G. Szekeres, 
+(in 2010) involving bridges is the
+{\it cycle double cover conjecture}, due to P. Seymour and G. Szekeres,
 which states that every bridgeless graph admits a set
 of cycles which contains each edge exactly twice.
 \index{cycle double cover conjecture}
@@ -497,7 +462,7 @@ We say that a connected graph $G$ is {\it $k$-edge-connected}
 if
 $G$ has at least two vertices and no set of $k-1$ edges separates $G$.
 By convention, a $1$-edge-connected graph is simply a connected
-graph. In other words, a $G$ is $k$-edge-connected if and only if 
+graph. In other words, a $G$ is $k$-edge-connected if and only if
 it remains connected even after removing $k-1$ or fewer edges
 from $G$. The {\it edge-connectivity}
 \index{edge-connectivity}
@@ -507,19 +472,13 @@ $\kappa_1$ in place of $\lambda$.)
 \index{$\lambda(G)$}
 \index{$\kappa_1(G)$}
 
-Here is a Sage example concerning 
-$\lambda(G)$ using the Petersen graph 
+Here is a Sage example concerning
+$\lambda(G)$ using the Petersen graph
 depicted in Figure \ref{fig:petersen-graph}.
 (You must install an optional linear programming
 Sage package such as GLPK for the commands below to work.)
 
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-
 sage: G = graphs.PetersenGraph()
 sage: len(G.vertices())
 10
@@ -532,10 +491,7 @@ sage: len(G.edges())
 14
 sage: G.edge_connectivity()
 2.0
-
 \end{lstlisting}
-\end{center}
-%
 
 \begin{lemma}
 {\rm
@@ -559,23 +515,15 @@ Sage can compute the edge-connectivity and the vertex-connectivity,
 provided an optional linear programming package
 (such as GLPK) is installed.
 
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-
 sage: G = graphs.PetersenGraph()
-sage: G.vertex_connectivity() 
-3.0 
+sage: G.vertex_connectivity()
+3.0
 sage: G.edge_connectivity()
 3.0
 sage: min(G.degree_sequence())
 3
-
 \end{lstlisting}
-\end{center}
 %
 This graph is depicted in Figure \ref{fig:petersen-graph}.
 
@@ -619,7 +567,7 @@ This is called {\it Whitney's inequality}.
 \begin{theorem}
 {\rm
 If $G=(V,E)$ is a connected graph with $n=|V|$ and if
-$\deg(v)\geq (n+k-2)/2$, for all $v\in V$, then 
+$\deg(v)\geq (n+k-2)/2$, for all $v\in V$, then
 $G$ is $k$-vertex-connected.
 }
 \end{theorem}
@@ -634,7 +582,7 @@ $G$ is $k$-vertex-connected.
 \begin{corollary} (Harary)
 {\rm
 A graph $G=(V,E)$ having $|V|\geq 3$ is a block if anly only if
-every pair of vertices lie on a common 
+every pair of vertices lie on a common
 cycle.
 }
 \end{corollary}
@@ -681,7 +629,7 @@ edges in any cut is $\geq k$.
 
 
 Let $G=(V,E)$ be a connected graph and $u,v\in V$ be distinct non-adjacent
-vertices. A path from $u$ to $v$ is called a 
+vertices. A path from $u$ to $v$ is called a
 {\it $u$-$v$ path}.
 \index{path!$u$-$v$}
 Two paths $P_1$, $P_2$ from $u$ to $v$ are called {\it independent}
@@ -692,7 +640,7 @@ in common between $P_1$ and $P_2$ except $u$ and $v$.
 \index{vertex-disjoint paths}
 \index{independent paths}
 \index{vertex-independent paths}
-Two paths $P_1$, $P_2$ from $u$ to $v$ are called 
+Two paths $P_1$, $P_2$ from $u$ to $v$ are called
 {\it edge-independent}
 {\it edge-disjoint}
 if there are no edges
@@ -702,19 +650,19 @@ in common between $P_1$ and $P_2$.
 
 
 Let $W$ be a set of vertices or a set of edges.
-If $W\subset V$ then we define $G-W$ to be the subgraph 
+If $W\subset V$ then we define $G-W$ to be the subgraph
 of $G$ which has all the vertices in $W$ and all incident
-edges in $E$ removed.  If $W\subset E$ then we define $G-W$ to be the subgraph 
+edges in $E$ removed.  If $W\subset E$ then we define $G-W$ to be the subgraph
 of $G$ which has all the edges in $W$ removed
 (but not the incident vertices).
-If $G-W$ is not connected then we call $W$ a 
+If $G-W$ is not connected then we call $W$ a
 {\it separating set} and we say $W$ {\it separates} $G$.
 \index{separating set}
 \index{separates}
 
 \section{Ford-Fulkerson Theorem}
 
-The Ford-Fulkerson Theorem, or ``Max-flow/Min-cut Theorem,'' 
+The Ford-Fulkerson Theorem, or ``Max-flow/Min-cut Theorem,''
 was proven by P. Elias, A. Feinstein, and C.E. Shannon in 1956, and,
 independently, by L.R. Ford, Jr.  and D.R. Fulkerson in the same year.
 So it should be called the
@@ -724,32 +672,32 @@ to be precise about the authorship.
 To explain the meaning of this theorem, we need to intoduce some
 notation and  terminology.
 
-Consider an edge-weighted simple 
+Consider an edge-weighted simple
 digraph $G=(V,E,i,h)$ without negative weight
 cycles. Here $E\subset V^{(2)}$,
-$i$ is an incidence function as in 
+$i$ is an incidence function as in
 (\ref{eqn:edge-incidence}), which we regard as the identity function,
 and $h$ is an
 orientation function as in (\ref{eqn:edge-orientation}).
-Let $G$ be a {\it network}, 
+Let $G$ be a {\it network},
 \index{network}
-with two distinguished vertices, the ``source'' and the ``sink.'' 
+with two distinguished vertices, the ``source'' and the ``sink.''
 Let $s$ and $t$ denote the source and the sink of $G$, respectively.
 The {\it capacity} (or {\it edge capacity})
 \index{capacity}
 \index{edge capacity})
-is a mapping $c: E\to {\mathbf{R}}$, denoted by $c_{uv}$ 
-or $c(u,v)$, for $(u,v)\in E$ and $h(e)= u$. 
+is a mapping $c: E\to {\mathbf{R}}$, denoted by $c_{uv}$
+or $c(u,v)$, for $(u,v)\in E$ and $h(e)= u$.
 If $(u,v)\in E$ and $h(e)= v$
 then we set, by convention, $c(v,u)=-c(u,v)$.
 Thinking of a graph as a network of pipes (representing the edges)
-transporting water with various junctions (representing vertices), 
-the capacity function represents the maximum amount 
+transporting water with various junctions (representing vertices),
+the capacity function represents the maximum amount
 of ``flow'' that can pass through an edge.
 
 A {\it flow}
 \index{flow}
-is a mapping $f: E\to {\mathbf{R}}$, denoted by $f_{uv}$ or 
+is a mapping $f: E\to {\mathbf{R}}$, denoted by $f_{uv}$ or
 $f(u,v)$, subject to the following two constraints:
 \begin{itemize}
 \item
@@ -758,31 +706,31 @@ $f(u,v)\leq c(u,v)$, for each $(u,v) \in V$ (the ``capacity constraint''),
 $\sum_{u\in V,\ (u,v)\in E} f(u,v) = \sum_{u\in V,\ (v, u)\in E} f(v, u)$ ,
 for each $v\in V$ (conservation of flows).
 \end{itemize}
-An edge $(u,v) \in E$ is {\it $f$-saturated} 
-\index{$f$-saturated} 
+An edge $(u,v) \in E$ is {\it $f$-saturated}
+\index{$f$-saturated}
 \index{saturated edge}
 if $f(u,v)=c(u,v)$.
 An edge $(u,v) \in E$ is {\it $f$-zero} if $f(u,v)=0$.
 \index{$f$-zero}
 A path with available capacity is called an ``augmenting path.''
-More precisely, a directed path form $s$ to $t$ is 
+More precisely, a directed path form $s$ to $t$ is
 {\it $f$-augmenting}, or
 \index{$f$-augmenting}
 \index{$f$-unsaturated}
 \index{augmenting path}
-$f$-unsaturated, if no forward 
+$f$-unsaturated, if no forward
 edge is $f$-saturated and no backward edge is $f$-zero.
 
-The {\it value of the flow} is defined by 
+The {\it value of the flow} is defined by
 
 \[
-| f | = \sum_{v\in V}f(s,v)-\sum_{v\in V}f(v,s), 
+| f | = \sum_{v\in V}f(s,v)-\sum_{v\in V}f(v,s),
 \]
-where $s$ is the source. 
+where $s$ is the source.
 It represents the amount of flow passing from the source to the sink.
 \index{flow!value}
 \index{value of flow}
-The {\it maximum flow problem} is to maximize $| f |$, that is, to route as 
+The {\it maximum flow problem} is to maximize $| f |$, that is, to route as
 much flow as possible from $s$ to $t$.
 \index{maximum flow problem}
 
@@ -811,13 +759,13 @@ depicted in Figure \ref{fig:digraph-flow1}.
 \end{figure}
 Suppose that each edge has capacity $1$.
 A maximum flow $f$ is obtained by taking a flow value
-of $1$ along each edge of the path 
+of $1$ along each edge of the path
 
 \[
 p_1:(0,1),(1,5),
 \]
 and a flow value
-of $1$ along each edge of the path 
+of $1$ along each edge of the path
 
 \[
 p_2:(0,2),(2,4),(4,5).
@@ -826,19 +774,10 @@ The maximum value of the flow in this case is $|f|=2$.
 
 This graph can be created in Sage using the commands
 
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-
 sage: B = matrix([[0,1,1,0,0,0],[0,0,0,1,0,1],[0,1,0,0,1,0],[0,0,0,0,0,1],[0,0,0,0,0,1],[0,0,0,0,0,0]])
 sage: H = DiGraph(B, format = "adjacency_matrix", weighted=True)
-
 \end{lstlisting}
-\end{center}
-%
 
 \noindent
 Type {\tt H.show(edge\_labels=True)} if you want to see the graph with
@@ -850,8 +789,8 @@ the capacities labeling the edges.
 
 
 Given a capacitated digraph with capacity $c$ and flow $f$,
-we define the {\it residual digraph} $G_f=(V,E)$ to be the 
-digraph with capacity $c_f(u,v) = c(u,v) - f(u,v)$ and no flow. 
+we define the {\it residual digraph} $G_f=(V,E)$ to be the
+digraph with capacity $c_f(u,v) = c(u,v) - f(u,v)$ and no flow.
 In other words, $G_f$ is the same graph but it has a different
 capacity $c_f$ and flow $0$.
 \index{residual digraph}
@@ -859,12 +798,12 @@ This is also called a {\it residual network}.
 \index{residual network}
 
 Define an {\it $s-t$ cut} in our capacitated digraph $G$
-to be a partition $C = (S,T)$ of $V$ such that 
-$s \in S$ and $t\in T$. 
-Recall the cut-set of $C$ is the set 
+to be a partition $C = (S,T)$ of $V$ such that
+$s \in S$ and $t\in T$.
+Recall the cut-set of $C$ is the set
 
 \[
-\{(u,v)\in E\ |\ u\in S, v\in T\}. 
+\{(u,v)\in E\ |\ u\in S, v\in T\}.
 \]
 
 \begin{lemma}
@@ -873,7 +812,7 @@ Recall the cut-set of $C$ is the set
 Let $G = (V, E)$ be a capacitated digraph with
 capacity $c: E\to {\mathbf{R}}$, and let
 $s$ and $t$ denote the source and the sink of $G$, respectively.
-If $C$ is an $s-t$ cut and if 
+If $C$ is an $s-t$ cut and if
 the edges in the cut-set of $C$ are removed, then $| f | = 0$.
 }
 \end{lemma}
@@ -882,15 +821,15 @@ the edges in the cut-set of $C$ are removed, then $| f | = 0$.
 Prove Lemma \ref{lemma:flow=0}.
 \end{exercise}
 
-The {\it capacity of an $s-t$ cut} 
-\index{capacity of a cut} 
-$C = (S,T)$ is defined by 
+The {\it capacity of an $s-t$ cut}
+\index{capacity of a cut}
+$C = (S,T)$ is defined by
 
 \[
 c(S,T) = \sum_{(s,t)\in (S,T)} c(u,v).
 \]
-The {\it minimum cut problem} 
-\index{minimum cut problem} 
+The {\it minimum cut problem}
+\index{minimum cut problem}
 is to minimize the amount of capacity of an $s-t$ cut.
 
 The following theorem is due to P. Elias, A. Feinstein, L.R. Ford,
@@ -909,16 +848,16 @@ The intuitive explanation of this result is as follows.
 
 Suppose that $G=(V,E)$ is a graph where each edge has capacity $1$.
 Let $s\in V$ be the source and $t\in V$ be the sink.
-The maximum flow from $s$ to $t$ is the maximum number of 
+The maximum flow from $s$ to $t$ is the maximum number of
 independent paths from $s$ to $t$.
 Denote this maximum flow by $m$.
 Each $s$-$t$ cut must intersect each $s$-$t$ path at least once.
-In fact, if $S$ is a mimimal $s$-$t$ cut then for each 
+In fact, if $S$ is a mimimal $s$-$t$ cut then for each
 edge $e$ in $S$ there is an $s$-$t$ path containing
 $e$. Therefore, $|S|\leq e$.
 
 On the other hand, since each edge has unit capacity,
-the maximum flow value can't exceed the number of 
+the maximum flow value can't exceed the number of
 edges separating $s$ from $t$, so $m\leq |S|$.
 
 
@@ -929,7 +868,7 @@ for the network-theoretic proof of Menger's theorem
 theorem on network flows on networks having
 capacity $1$ on all edges), its significance is less
 important for networks having arbitrary capacities.
-One must use caution in generalizing the above 
+One must use caution in generalizing the above
 intuitive argument to establish a rigorous proof
 of the general version of the MFMC theorem.
 \end{remark}
@@ -938,31 +877,31 @@ of the general version of the MFMC theorem.
 \label{remark:GMCMF}
 {\rm
 This theorem can be generalized as follows.
-In addition to edge capacity, suppose there is capacity at each {\it vertex}, 
-that is, a mapping $c: V\to {\mathbf{R}}$, denoted by 
-$v\longmapsto c(v)$, such that the flow $f$ has to 
-satisfy not only the capacity constraint and the conservation of flows, 
+In addition to edge capacity, suppose there is capacity at each {\it vertex},
+that is, a mapping $c: V\to {\mathbf{R}}$, denoted by
+$v\longmapsto c(v)$, such that the flow $f$ has to
+satisfy not only the capacity constraint and the conservation of flows,
 but also the vertex capacity constraint
 
 \[
- \sum_{w\in V} f(w,v) \leq c(v), 
+ \sum_{w\in V} f(w,v) \leq c(v),
 \]
 for each $v \in V-\{s,t\}$.
-Define an {\it $s-t$ cut} to be the set of vertices and edges such 
-that for any path from $s$ to $t$, the path contains a member of the cut. 
-In this case, the capacity of the cut is the sum the capacity of each 
+Define an {\it $s-t$ cut} to be the set of vertices and edges such
+that for any path from $s$ to $t$, the path contains a member of the cut.
+In this case, the capacity of the cut is the sum the capacity of each
 edge {\it and} vertex in it.
 In this new definition, the {\it generalized max-flow min-cut theorem}
 \index{max-flow min-cut theorem!generalized}
-states that the maximum value of an $s-t$ flow is equal to the minimum 
+states that the maximum value of an $s-t$ flow is equal to the minimum
 capacity of an $s-t$ cut..
 }
 \end{remark}
 
-The idea behind the Ford-Fulkerson algorithm is very simple: As long as 
-there is a path from the source to the sink, with 
-available capacity on all edges in the 
-path, we send as much flow as we can alone along each 
+The idea behind the Ford-Fulkerson algorithm is very simple: As long as
+there is a path from the source to the sink, with
+available capacity on all edges in the
+path, we send as much flow as we can alone along each
 of these paths. This is done inductively, one path at a time.
 
 
@@ -995,22 +934,22 @@ To prove the max-flow/min-cut theorem we will use the following lemma.
 
 \begin{lemma}
 {\rm
-Let $G=(V,E)$ be a directed graph with edge 
+Let $G=(V,E)$ be a directed graph with edge
 capacity $c:E\to {\mathbf{Z}}$,
 a source $s\in V$, and a sink $t\in V$.
-A flow $f:E\to {\mathbf{Z}}$ is a maximum flow if 
+A flow $f:E\to {\mathbf{Z}}$ is a maximum flow if
 and only if there is no $f$-augmenting path in the graph.
 }
 \end{lemma}
 
-In other words, a flow $f$ in a 
+In other words, a flow $f$ in a
 capacitated network is a maximum flow if and only if
 there is no $f$-augmenting path in the network.
 
 \begin{proof}[Solution]
 One direction is easy. Suppose that the flow is a maximum.
-If there is an $f$-augmenting path then the 
-current flow can be increased using that path, so the flow would not 
+If there is an $f$-augmenting path then the
+current flow can be increased using that path, so the flow would not
 be a maximum. This contradiction proves the ``only if'' direction.
 
 Now, suppose there is no $f$-augmenting path in the network.
@@ -1050,18 +989,12 @@ the flow on the graph.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TODO: Translate this into Sage
 %% easiler said than done, since the flow "record" is missing from
-%% Sage. One way: create new functions "find_path" and "max_flow" 
+%% Sage. One way: create new functions "find_path" and "max_flow"
 %% similar to the ones below but with a new argument
 %% "flow" which is a function on the edges of G. Maybe there
 %% is a better way??
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-\begin{center}
-\fontsize{9pt}{9pt}
-\selectfont
-\tt
 \begin{lstlisting}
-
 class Edge:
     def __init__(self,U,V,w):
         self.source = U
@@ -1069,7 +1002,7 @@ class Edge:
         self.capacity = w
     def __repr__(self):
         return str(self.source) + "->" + str(self.to) + " : " + str(self.capacity)
- 
+
 class FlowNetwork(object):
     """
     This is a graph structure with edge capacities.
@@ -1089,13 +1022,13 @@ class FlowNetwork(object):
     """
     def __init__(self):
         self.adj, self.flow, = {},{}
- 
+
     def add_vertex(self, vertex):
         self.adj[vertex] = []
- 
+
     def get_edges(self, v):
         return self.adj[v]
- 
+
     def add_edge(self, u,v,w=0):
         assert(u != v)
         edge = Edge(u,v,w)
@@ -1105,17 +1038,17 @@ class FlowNetwork(object):
         self.adj[u].append(edge)
         self.adj[v].append(redge)
         self.flow[edge] = self.flow[redge] = 0
- 
+
     def find_path(self, source, sink, path):
         if source == sink:
             return path
         for edge in self.get_edges(source):
             residual = edge.capacity - self.flow[edge]
             if residual > 0 and not (edge,residual) in path:
-                result = self.find_path(edge.to, sink, path + [ (edge,residual) ]) 
+                result = self.find_path(edge.to, sink, path + [ (edge,residual) ])
                 if result != None:
                     return result
- 
+
     def max_flow(self, source, sink):
         path = self.find_path(source, sink, [])
         while path != None:
@@ -1125,10 +1058,8 @@ class FlowNetwork(object):
                 self.flow[edge.redge] -= flow
             path = self.find_path(source, sink, [])
         return sum(self.flow[edge] for edge in self.get_edges(source))
-
 \end{lstlisting}
-\end{center}
-%
+
 
 \section{Menger's Theorem}
 \index{Menger's theorem}
@@ -1136,8 +1067,8 @@ class FlowNetwork(object):
 Menger's theorem has a number of different versions
 (a undirected, vertex-connectivity version,
 a directed, vertex-connectivity version,
-undirected, edge-connectivity version, and 
-a directed, edge-connectivity version). The following statement 
+undirected, edge-connectivity version, and
+a directed, edge-connectivity version). The following statement
 is the undirected, vertex-connectivity version.
 
 \begin{theorem}
@@ -1159,17 +1090,17 @@ is at least $k$. Therefore, we have an upper bound:
 \[
 \#\{ {\rm indep.}\ u-v\ {\rm paths}\}
 \leq
-\# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate}\ u\ 
+\# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate}\ u\
 {\rm and}\  v\}.
 \]
 
 We show that equality holds. Let $n$ denote the number
 of edges of $G$. The proof is by induction on $n$. By hypothesis,
 $n\geq 2$.
-If $n=2$ the statement holds by inspection, since in that case 
-$G$ is a line graph with $3$ vertices 
+If $n=2$ the statement holds by inspection, since in that case
+$G$ is a line graph with $3$ vertices
 $V=\{u,v,w\}$ and $2$ edges, $E=\{uw.wv\}$. In that situation,
-there is only $1$ $u$-$v$ path 
+there is only $1$ $u$-$v$ path
 (namely, $uwv$) and only one vertex separating $u$ and $v$
 (namely, $w$).
 
@@ -1181,12 +1112,12 @@ k = \#\{ {\rm independent}\ u-v\ {\rm paths}\}
 \]
 and let
 \[
-\ell = 
-\# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate}\ 
+\ell =
+\# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate}\
 u\ {\rm and}\  v\},
 \]
-so that $k\leq \ell$. Let $e\in E$ and let $G/e$ be the 
-contraction graph having edges $E-\{e\}$ and 
+so that $k\leq \ell$. Let $e\in E$ and let $G/e$ be the
+contraction graph having edges $E-\{e\}$ and
 vertices the same as those of $G$, except that
 the endpoints of $e$ have been identified.
 
@@ -1194,18 +1125,18 @@ Suppose that $k<\ell$ and $G$ does not have $\ell$
 independent $u$-$v$ paths. The contraction
 graph $G/e$ does not have $\ell$
 independent $u$-$v$ paths either (where
-now, if $e$ contains $u$ or $v$ then we must 
+now, if $e$ contains $u$ or $v$ then we must
 appropriately redefine $u$ or $v$, if needed).
 However, by the induction hypothesis
 $G/e$ does have the property that
-the maximum number of internally disjoint $u$-$v$ paths 
+the maximum number of internally disjoint $u$-$v$ paths
 equals the minimum number of vertices needed to separate $u$ and $v$.
 Therefore,
 
 \[
 \begin{array}{c}
 \#\{ {\rm independent}\ u-v\ {\rm paths\ in}\ G/e\}\\
-< 
+<
 \# \{{\rm min.\ number \ of\ vertices\ needed\ to\ separate}
 \ u\ {\rm and}\  v\ {\rm in}\ G\}.
 \end{array}
@@ -1229,12 +1160,12 @@ and in such a way that
 \# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate\ }u\
 {\rm and\  }v\ {\rm in\ }G\}\\
 \geq
-\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate\ }u\ 
+\# \{{\rm minimum\ number \ of\ vertices\ needed\ to\ separate\ }u\
 {\rm and\  }v\ {\rm in}\ G/e\}.
 \end{array}
 \]
 Proof: Indeed, since $n>3$ any separating set realizing
-the minimum number  of vertices needed to separate $u$ and 
+the minimum number  of vertices needed to separate $u$ and
 $v$ in $G$ cannot contain both a vertex in $G$ adjacent to $u$ and a vertex in
 $G$ adjacent to $v$. Therefore, we may pick $e$ accordingly.
 (Q.E.D. claim)
@@ -1242,7 +1173,7 @@ $G$ adjacent to $v$. Therefore, we may pick $e$ accordingly.
 The result follows from the claim and the above inequalities.
 \end{proof}
 
-The following statement 
+The following statement
 is the undirected, edge-connectivity version of
 Menger's theorem.
 
@@ -1250,23 +1181,23 @@ Menger's theorem.
 \textbf{Menger's theorem (edge-connectivity form).}
 {\rm
 Let $G$ be an undirected graph, and let $s$ and $t$ be vertices in
-$G$. 
+$G$.
 Then, the maximum number of edge-disjoint $(s,t)$-paths in
-$G$ 
+$G$
 equals the minimum number of edges from $E(G)$ whose
 deletion separates $s$ and $t$.
 }
 \end{theorem}
 
 This is proven the same way as the previous version
-but using the generalized min-cut/max-flow theorem (see 
+but using the generalized min-cut/max-flow theorem (see
 Remark \ref{remark:GMCMF} above).
 
 
 \section{Whitney's Theorem}
 \index{Whitney's Theorem}
 
-\begin{theorem} 
+\begin{theorem}
 \textbf{Whitney's theorem (vertex version).}
 {\rm
 Suppose $G=(V,E)$ is a graph with $|V|\geq k+1$. The following are
