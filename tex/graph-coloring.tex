@@ -4,6 +4,13 @@
 \chapter{Graph Coloring}
 \label{chap:graph_coloring}
 
+\begin{quote}
+\includegraphics[scale=1.0]{image/four-color-conjecture-qed} \\
+\noindent
+--- Spiked Math,
+\url{http://spikedmath.com/210.html}
+\end{quote}
+
 
 %%-----------------------------------------------------------------------%%
 %%--- Vertex coloring and chromatic numbers -----------------------------%%
@@ -19,7 +26,7 @@ Vertex coloring is a widespread center of interest in graph theory, which has ma
 
 {\bf Chromatic numbers} : quite clearly, it is always possible to find a proper coloring of a graph $G$ using one color per vertex. For this reason, the Coloring Problem is an optimisation problem which amounts to finding the least number $k$ of colors such that $G$ can be properly colored with $k$ colors -- is $k$-colorable. This integer, written $\chi(G)$, is called the chromatic number of $G$.
 
-{\bf Greedy coloring, and an easy upper bound} : the simple fact that Graph Coloring is a NP-complete problem must not prevent one from trying to color it greedily. One such method would be to iteratively pick, in a graph $G$, an uncolored vertex $v$, and to color it with the smallest color available which is not yet used by one of its neighbors (in order to keep it proper). Such a coloring will obviously stay proper until the whole vertex set is colored, and never use more than $\Delta(G)+1$ different colors (where $\Delta(G)$ is the maximal degree of $G$), as in the procedure no vertex will ever exclude more than $\Delta(G)$ colors. 
+{\bf Greedy coloring, and an easy upper bound} : the simple fact that Graph Coloring is a NP-complete problem must not prevent one from trying to color it greedily. One such method would be to iteratively pick, in a graph $G$, an uncolored vertex $v$, and to color it with the smallest color available which is not yet used by one of its neighbors (in order to keep it proper). Such a coloring will obviously stay proper until the whole vertex set is colored, and never use more than $\Delta(G)+1$ different colors (where $\Delta(G)$ is the maximal degree of $G$), as in the procedure no vertex will ever exclude more than $\Delta(G)$ colors.
 
 Such an algorithm can be written in Sage in a few lines :
 
