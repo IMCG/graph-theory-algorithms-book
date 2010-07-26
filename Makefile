@@ -11,6 +11,7 @@ all:
 	makeindex $(FILE)
 	bibtex $(FILE)
 	make latex
+	make clean
 
 latex:
 	pdflatex $(FILE).tex
