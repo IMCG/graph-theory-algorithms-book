@@ -1,5 +1,4 @@
-%%-----------------------------------------------------------------------%%
-%%--- Graph Algorithms --------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Graph Algorithms}
 \label{chap:graph_algorithms}
@@ -16,8 +15,7 @@ Shortest path algorithms are some of the most important algorithms in
 algorithmic graph theory. We shall examine several in this chapter.
 
 
-%%-----------------------------------------------------------------------%%
-%%--- Representing graphs in a computer ---------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Representing graphs in a computer}
 
@@ -37,7 +35,7 @@ section~\ref{sec:graph_algorithms:graph6_format} provides a compact
 means of storing graphs for archival purposes.
 
 
-%%--- Adjacency lists ---------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Adjacency lists}
 \label{sec:graph_algorithms:adjacency_lists}
@@ -123,7 +121,7 @@ representation can require less storage space than an adjacency matrix
 representation of the same graph.
 
 
-%%--- The graph6 format -------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{The {\tt graph6} format}
 \label{sec:graph_algorithms:graph6_format}
@@ -182,7 +180,7 @@ binary         & decimal   & glyph    & binary & decimal & glyph \\\hline\hline
 \end{table}
 
 
-%%--- Bit vectors -------------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Bit vectors}
 
@@ -317,7 +315,7 @@ $126 \, R(v)$ and $126 \, 126 \, R(v)$ require 4 and 8 bytes,
 respectively.
 
 
-%%--- The {\tt graph6} format -------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{The {\tt graph6} format}
 \index{graph6}
@@ -347,8 +345,7 @@ respectively. That is, $N(n)$ encodes the order of $G$ and $R(v)$
 encodes the edges of $G$.
 
 
-%%-----------------------------------------------------------------------%%
-%%--- Graph searching ---------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Graph searching}
 \label{sec:graph_algorithms:graph_searching}
@@ -364,7 +361,7 @@ these two names as given above, bearing in mind their intended
 purposes.
 
 
-%%--- Breadth-first search ----------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Breadth-first search}
 
@@ -735,7 +732,7 @@ $D[u] = k + 1$ and therefore $d(s,u) = D[u] = k + 1$.
 %% \end{exercise}
 
 
-%%--- Depth-first search ------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Depth-first search}
 
@@ -972,7 +969,7 @@ the tree $T$.
 \end{figure}
 
 
-%%--- Connectivity of a graph -------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Connectivity of a graph}
 
@@ -1044,8 +1041,7 @@ Algorithm~\ref{alg:graph_algorithms:graph_connectivity} with a stack
 implementation.
 
 
-%%-----------------------------------------------------------------------%%
-%%--- Weights and distances ---------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Weights and distances}
 
@@ -1214,8 +1210,7 @@ Algorithm~\ref{alg:graph_algorithms:generic_shortest_path_algorithm}
 follows the same pattern as depth-first and breadth-first searches.
 
 
-%%-----------------------------------------------------------------------%%
-%%--- Dijkstra's algorithm ----------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Dijkstra's algorithm}
 \label{sec:graph_algorithms:Dijkstra_algorithm}
@@ -1491,8 +1486,7 @@ Fibonacci heap & $O(n \cdot \log(n) + m)$ \\\hline
 \end{table}
 
 
-%%-----------------------------------------------------------------------%%
-%%--- Bellman-Ford algorithm --------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Bellman-Ford algorithm}
 
@@ -1790,8 +1784,7 @@ $P \leftarrow [\,]$\;
 %% %sage: G.plot(graph_border=True, edge_labels=True).show()
 
 
-%%-----------------------------------------------------------------------%%
-%%--- Floyd-Warshall algorithm ------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Floyd-Roy-Warshall algorithm}
 
@@ -2108,7 +2101,7 @@ Figure~\ref{fig:graph_algorithms:another_Floyd_Roy_Warshall_demo}.
 %sage: D.plot(edge_labels=True, graph_border=True).show()
 
 
-%%--- Transitive closure ------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Transitive closure}
 
@@ -2209,8 +2202,7 @@ $T \leftarrow$ adjacency matrix of $G$\;
 \end{algorithm}
 
 
-%%-----------------------------------------------------------------------%%
-%%--- Johnson's algorithm -----------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Johnson's algorithm}
 
@@ -2265,8 +2257,7 @@ $O(|V|^2\log |V| + |V| \cdot |E)|=O(n^2\log n)$, where $n = |V|$ is
 the number of vertices of the original graph $G$.
 
 
-%%-----------------------------------------------------------------------%%
-%%--- Problems ----------------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Problems}
 

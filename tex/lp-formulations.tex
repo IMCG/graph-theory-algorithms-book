@@ -1,10 +1,11 @@
-%%-----------------------------------------------------------------------%%
-%%--- Graph Problems and Their LP Formulations --------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Graph Problems and Their LP Formulations}
 
 This document is meant as an explanation of several graph theoretical functions defined in Sage's Graph Library (http://www.sagemath.org/), which use Linear Programming to solve optimization of existence problems.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Maximum average degree}
 \label{lp:mad}
@@ -52,8 +53,8 @@ sage: p.solve()
 {\bf REMARK : } In many if not all the other LP formulations, this Linear Program is used as a constraint. In those problems, we are always at some point looking for a subgraph $H$ of $G$ such that $H$ does not contain any cycle. The edges of $G$ are in this case variables, whose value can be equal to $0$ or $1$ depending on whether they belong to such a graph $H$. Based on the observation that the Maximum Average Degree of a tree on $n$ vertices is exactly its average degree ($=2-2/n<1$), and that any cycles in a graph ensures its average degree is larger than $2$, we can then set the constraint that $z\leq 2-\frac 2 {|V(G)|}$. This is a handy way to write in LP the constraint that ``the set of edges belonging to $H$ is acyclic''. For this to work, though, we need to ensure that the variables corresponding to our edges are binary variables.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
 \section{Traveling Salesman Problem}
 Given a graph $G$ whose edges are weighted by a function $w:E(G)\rightarrow \mathbb R$, a solution to the $TSP$ is a hamiltonian (spanning) cycle whose weight (the sum of the weight of its edges) is minimal. It is easy to define both the objective and the constraint that each vertex must have exactly two neighbors, but this could produce solutions such that the set of edges define the disjoint union of several cycles. One way to formulate this linear program is hence to add the constraint that, given an arbitrary vertex $v$, the set $S$ of edges in the solution must contain no cycle in $G-v$, which amounts to checking that the set of edges in $S$ no adjacent to $v$ is of maximal average degree strictly less than 2, using the remark from section \ref{mad}.
 
@@ -135,7 +136,8 @@ True
 \end{lstlisting}
 
 
-\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Edge-disjoint spanning trees}
 
 This problem is polynomial by a result from Edmonds. Obviously, nothing ensures the following formulation is a polynomial algorithm as it contains many integer variables, but it is still a short practical way to solve it.
@@ -231,7 +233,8 @@ True
 \end{lstlisting}
 
 
-\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Steiner tree}
 Finding  a spanning tree  in a Graph $G$ can be done in linear time, whereas computing a Steiner Tree is NP-hard. The goal is in this case, given a graph, a weight function $w:E(G)\rightarrow \mathbb R$ and a set $S$ of vertices, to find the tree of minimum cost connecting them all together. Equivalently, we will be looking for an acyclic subgraph $H$of $G$ containing $|V(H)|$ vertices and $|E(H)|=|V(H)|-1$ edges, which contains each vertex from $S$
 
@@ -333,7 +336,8 @@ True
 \end{lstlisting}
 
 
-\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Linear arboricity}
 The linear arboricity of a graph $G$ is the least number $k$ such that the edges of $G$ can be partitionned into $k$ classes, each of them being a forest of paths (the disjoints union of paths -- trees of maximal degree 2). The corresponding LP is very similar to the one giving edge-disjoint spanning trees
 
@@ -412,7 +416,8 @@ sage: for i in range(k):
 \end{lstlisting}
 
 
-\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{H-minor}
 
 For more information on minor theory, please see \\\url{http://en.wikipedia.org/wiki/Minor_\%28graph_theory\%29}\\ It is a wonderful subject, and I do not want to begin talking about it when I know I couldn't freely fill pages with remarks :-)
