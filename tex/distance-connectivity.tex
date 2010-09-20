@@ -285,7 +285,7 @@ A {\it block} of a graph is a maximal non-separable subgraph.
 
 \begin{example}
 {\rm
-The cut-vertex of the graph in Figure \ref{fig:clawgraph}
+The cut-vertex of the graph in Figure~\ref{fig:distance_connectivity:claw_graph}
 is the vertex $0$, as the following Sage example
 demonstrates.
 
@@ -295,12 +295,25 @@ sage: G.blocks_and_cut_vertices()
 ([[1, 0], [2, 0], [3, 0]], [0])
 \end{lstlisting}
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[height=5cm,width=6cm]{image/clawgraph}
-\end{center}
-\caption{A graph with $4$ vertices.}
-\label{fig:clawgraph}
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},scale=1.5]
+%% nodes or vertices
+\foreach \nodename/\direction/\navigate/\x/\y in {1/below/south/0/0,
+  2/below/south/1/0, 3/below/south/2/0, 0/above/north/1/2} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {0/1, 0/2, 0/3} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+\caption{A claw graph with $4$ vertices.}
+\label{fig:distance_connectivity:claw_graph}
 \end{figure}
 }
 \end{example}
