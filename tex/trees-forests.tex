@@ -801,38 +801,23 @@ sage: T = kruskal(G); T.edges()
 The plot of this graph is given in
 Figure~\ref{fig:trees-forests:Kruskal_example}.
 
-
-\begin{figure}[h!]
-\begin{center}
-\unitlength=0.920000pt
-\begin{picture}(210.00,192.00)(0.00,0.00)
-%\put(-3.00,-3.00){$\bullet$} % vertices look funny
-%\put(-3.00,189.00){$\bullet$}
-%\put(61.00,189.00){$\bullet$}
-
-\thinlines
-\put(0.00,192.00){\line(1,0){192.00}} %outer box
-\put(192.00,0.00){\line(0,1){192.00}} %outer box
-\put(0.00,0.00){\line(1,0){192.00}} %outer box
-\put(0.00,0.00){\line(0,1){192.00}} %outer box
-
-\put(0.00,64.00){\line(1,0){192.00}} %inner lines
-\put(0.00,128.00){\line(1,0){192.00}} %inner lines
-
-\put(64.00,0.00){\line(0,1){192.00}} %inner lines
-\put(128.00,0.00){\line(0,1){192.00}} %inner lines
-
-\linethickness{0.9mm}  % tree edges
-\put(0.00,0.00){\line(0,1){192.00}}
-\put(0.00,0.00){\line(1,0){192.00}}
-\put(0.00,64.00){\line(1,0){192.00}}
-\put(0.00,128.00){\line(1,0){192.00}}
-\put(0.00,192.00){\line(1,0){192.00}}
-\end{picture}
-\end{center}
-\label{fig:trees-forests:Kruskal_example}
-
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+[linedecorate/.style={line width=2.5pt},scale=1.5]
+\foreach \x/\ystart/\yend in {1/0/3, 2/0/3, 3/0/3}
+{
+  \draw (\x,\ystart) -- (\x,\yend);
+}
+%% draw the spanning tree
+\foreach \xstart/\ystart/\xend/\yend in {0/0/3/0, 0/1/3/1, 0/2/3/2,
+  0/3/3/3, 0/0/0/3}
+{
+  \draw[linedecorate] (\xstart,\ystart) -- (\xend,\yend);
+}
+\end{tikzpicture}
 \caption{Kruskal's algorithm for the $4\times 4$ grid graph.}
+\label{fig:trees-forests:Kruskal_example}
 \end{figure}
 
 \subsection{Prim's algorithm}
