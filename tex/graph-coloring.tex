@@ -52,7 +52,7 @@ Edge coloring is the direct application of vertex coloring to the line graph of 
 \begin{theorem}[Vizing]
 The edges of a graph $G$ can be properly colored using at least $\Delta(G)$ colors and at most $\Delta(G)+1$
 \end{theorem}
-Notice that the lower bound can be easily proved : if a vertex $v$ has a degree $d(v)$, then at least $d(v)$ colors are requied to color $G$ as all the edges incident to $v$ must receive different colors. Besides, the upper bound of $\Delta(G)+1$ can not be deduced from the greedy algorithm given in the previous section, as the maximal degree of $L(G)$ is not equal to $\Delta(G)$ but to $\displaystyle \max_{u\sim v}d(u)+d(v)-2$, which can reach $2\Delta(G)-2$ in regular graphs.
+Notice that the lower bound can be easily proved : if a vertex $v$ has a degree $d(v)$, then at least $d(v)$ colors are required to color $G$ as all the edges incident to $v$ must receive different colors. Besides, the upper bound of $\Delta(G)+1$ can not be deduced from the greedy algorithm given in the previous section, as the maximal degree of $L(G)$ is not equal to $\Delta(G)$ but to $\displaystyle \max_{u\sim v}d(u)+d(v)-2$, which can reach $2\Delta(G)-2$ in regular graphs.
 
 
 \begin{itemize}

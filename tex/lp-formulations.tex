@@ -20,7 +20,7 @@ Clearly, if $H\subseteq G$ is the densest subgraph in $G$, its $|E(H)|$ edges wi
 
 {\bf LP Formulation :}
 \begin{itemize}
-\item Mimimize : $z$\\
+\item Minimize : $z$\\
 \item Such that :
   \begin{itemize}
   \item     a vertex can absorb at most $z$
@@ -56,13 +56,13 @@ sage: p.solve()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Traveling Salesman Problem}
-Given a graph $G$ whose edges are weighted by a function $w:E(G)\rightarrow \mathbb R$, a solution to the $TSP$ is a hamiltonian (spanning) cycle whose weight (the sum of the weight of its edges) is minimal. It is easy to define both the objective and the constraint that each vertex must have exactly two neighbors, but this could produce solutions such that the set of edges define the disjoint union of several cycles. One way to formulate this linear program is hence to add the constraint that, given an arbitrary vertex $v$, the set $S$ of edges in the solution must contain no cycle in $G-v$, which amounts to checking that the set of edges in $S$ no adjacent to $v$ is of maximal average degree strictly less than 2, using the remark from section \ref{mad}.
+Given a graph $G$ whose edges are weighted by a function $w:E(G)\rightarrow \mathbb R$, a solution to the $TSP$ is a Hamiltonian (spanning) cycle whose weight (the sum of the weight of its edges) is minimal. It is easy to define both the objective and the constraint that each vertex must have exactly two neighbors, but this could produce solutions such that the set of edges define the disjoint union of several cycles. One way to formulate this linear program is hence to add the constraint that, given an arbitrary vertex $v$, the set $S$ of edges in the solution must contain no cycle in $G-v$, which amounts to checking that the set of edges in $S$ no adjacent to $v$ is of maximal average degree strictly less than 2, using the remark from section \ref{mad}.
 
 We will then, in this case, define variables representing the edges included in the solution, along with variables representing the weight that each of these edges will send to their endpoints.
 
 {\bf LP Formulation :}
 \begin{itemize}
-\item Mimimize $$\sum_{e\in E(G)}w(e) b_e$$\\
+\item Minimize $$\sum_{e\in E(G)}w(e) b_e$$\\
 \item Such that :
   \begin{itemize}
   \item Each vertex is of degree 2
@@ -86,7 +86,7 @@ We will then, in this case, define variables representing the edges included in 
 
 {\bf Sage method : }\verb!Graph.traveling_salesman_problem()!
 
-Here is the corresponding Sage corresponding to a simpler case -- looking for an hamiltonian cycle in a graph:
+Here is the corresponding Sage corresponding to a simpler case -- looking for an Hamiltonian cycle in a graph:
 
 \begin{lstlisting}
 sage: g = graphs.GridGraph([4,4])
@@ -339,7 +339,7 @@ True
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Linear arboricity}
-The linear arboricity of a graph $G$ is the least number $k$ such that the edges of $G$ can be partitionned into $k$ classes, each of them being a forest of paths (the disjoints union of paths -- trees of maximal degree 2). The corresponding LP is very similar to the one giving edge-disjoint spanning trees
+The linear arboricity of a graph $G$ is the least number $k$ such that the edges of $G$ can be partitioned into $k$ classes, each of them being a forest of paths (the disjoints union of paths -- trees of maximal degree 2). The corresponding LP is very similar to the one giving edge-disjoint spanning trees
 
 {\bf LP Formulation :}
 \begin{itemize}

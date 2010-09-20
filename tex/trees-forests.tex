@@ -640,7 +640,7 @@ all vertices.
 
 Exploiting the former criteria gives rise to Kruskal's algorithm.
 Exploiting the latter criteria gives rise to Prim's algorithm.
-Both of these argorithms are discussed in more detail below.
+Both of these algorithms are discussed in more detail below.
 
 \item minimum-cost spanning trees
 
@@ -1450,7 +1450,7 @@ successive entries differ in only one coordinate.
 \item
 An error is relatively easy to detect, since you can
 compare an $n$-tuple with the previous one. If they
-difer in more than one coordinate, you know an error
+differ in more than one coordinate, you know an error
 was made.
 
 \end{itemize}
@@ -1845,7 +1845,7 @@ when $\ell = 2$.
 In general, if $C$ is a code contained in $\BB_\ell$, then to create
 the tree for $C$, start with the tree for $\BB_\ell$. First, remove
 all nodes associated to a binary string for which it and all of its
-descendents are not in $C$. Next, remove all labels which do not
+descendants are not in $C$. Next, remove all labels which do not
 correspond to codewords in $C$. The resulting labeled graph is the
 tree associated to the binary code $C$.
 \index{code!tree}
@@ -2093,7 +2093,7 @@ the encoding of each symbol. Starting from the root $r$ whose
 designated label is the empty string $\varepsilon$, the algorithm
 traverses the vertices of $T$ in a breadth-first search fashion. If
 $v$ is an internal vertex with label \verb!e!, the label of its left
-child is the concatenation \verb!e0! and for the rigth child of $v$ we
+child is the concatenation \verb!e0! and for the right child of $v$ we
 assign the label \verb!e1!. If $v$ happens to be a leaf vertex, we
 take its label to be its Huffman encoding. Any Huffman encoding
 assigned to a symbol of an alphabet is not unique. Either of the two
@@ -2407,7 +2407,7 @@ thereby creating a ``smaller'' tree $T- v$ satisfying
 the criteria above.
 
 Deletion proceeds as a search does. However, in this case, you are
-searching for vertix $v\in V$ for which
+searching for vertex $v\in V$ for which
 ${\rm wt}(v)=\ell$. Once found, we remove $v$ from $V$
 and any edge $(u,v)\in E$ is replaced by $(u,w_1)$
 and $(u,w_2)$, where $w_1.w_2\in V$ were the children of $v$
@@ -2478,7 +2478,7 @@ thereby creating a ``smaller'' tree $T- v$ satisfying
 the criteria above.
 
 Deletion proceeds as a search does. However, in this case, you are
-searching for vertix $v\in V$ for which
+searching for vertex $v\in V$ for which
 ${\rm wt}(v)=\ell$. Once found, we remove $v$ from $V$
 and any edge $(u,v)\in E$ is replaced by $(u,w_1)$
 and $(u,w_2)$, where $w_1.w_2\in V$ were the children of $v$

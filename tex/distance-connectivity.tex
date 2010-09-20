@@ -59,7 +59,7 @@ from $v_1$ to $v_2$ (this minimum exists since
 $G$ has no negative weight cycles.
 
 This distance function is not in general a metric
-(that is, the triagle inequality is not true in general).
+(that is, the triangle inequality is not true in general).
 However, when the distance function is a
 metric then $G$ is called a {\it metric graph}.
 \index{graph!metric}
@@ -387,7 +387,7 @@ vertices, $j=V(H)$. If $v\in V(H)$ then
 $\deg_G(v)\leq j-1+s$, since $v$ is not adjacent to any
 vertex in any other connected component of $G'$.
 
-Since $H$ was choosen minimally, $j\leq n-s-j$, so
+Since $H$ was chosen minimally, $j\leq n-s-j$, so
 $\deg_G(v)\leq n-j-1$. This proves the following claim.
 
 \noindent
@@ -412,7 +412,7 @@ By hypothesis, $d_j\geq j+k-1$, so together we have
 \[
 j+k-1\leq d_j \leq j-1+s.
 \]
-This forces $k\leq s$, a contradition.
+This forces $k\leq s$, a contradiction.
 \end{proof}
 
 
@@ -615,7 +615,7 @@ $G$ is $k$-vertex-connected.
 
 \begin{corollary} (Harary)
 {\rm
-A graph $G=(V,E)$ having $|V|\geq 3$ is a block if anly only if
+A graph $G=(V,E)$ having $|V|\geq 3$ is a block if and only if
 every pair of vertices lie on a common
 cycle.
 }
@@ -703,7 +703,7 @@ So it should be called the
 ``Elias-Feinstein-Ford-Fulkerson-Shannon Theorem,''
 to be precise about the authorship.
 
-To explain the meaning of this theorem, we need to intoduce some
+To explain the meaning of this theorem, we need to introduce some
 notation and  terminology.
 
 Consider an edge-weighted simple
@@ -901,7 +901,7 @@ The maximum flow from $s$ to $t$ is the maximum number of
 independent paths from $s$ to $t$.
 Denote this maximum flow by $m$.
 Each $s$-$t$ cut must intersect each $s$-$t$ path at least once.
-In fact, if $S$ is a mimimal $s$-$t$ cut then for each
+In fact, if $S$ is a minimal $s$-$t$ cut then for each
 edge $e$ in $S$ there is an $s$-$t$ path containing
 $e$. Therefore, $|S|\leq e$.
 
