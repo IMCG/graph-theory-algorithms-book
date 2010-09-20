@@ -140,8 +140,8 @@ McKay~\cite{McKay2010}.
 
 \begin{table}[!htbp]
 \centering
-\begin{tabular}{|ccc|ccc|} \hline
-binary         & decimal   & glyph    & binary & decimal & glyph \\\hline\hline
+\begin{tabular}{ccc|ccc} \hline
+binary         & decimal   & glyph    & binary & decimal & glyph \\\hline
 \verb!0111111! & \verb!63! & \verb!?! & \verb!1011111! & \verb!95!  & \verb!_! \\
 \verb!1000000! & \verb!64! & \verb!@! & \verb!1100000! & \verb!96!  & \verb!`! \\
 \verb!1000001! & \verb!65! & \verb!A! & \verb!1100001! & \verb!97!  & \verb!a! \\
@@ -234,9 +234,9 @@ integer representation of $v$ is
 
 \begin{table}[!htbp]
 \centering
-\begin{tabular}{|l|ccccccc|} \hline
-position       & 1          & 2          & 3          & 4          & 5          & 6          & 7 \\\hline
-bit value      & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\\hline
+\begin{tabular}{l|ccccccc} \hline
+position       & 1          & 2          & 3          & 4          & 5          & 6          & 7 \\
+bit value      & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
 position value & $2^6$      & $2^5$      & $2^4$      & $2^3$      & $2^2$      & $2^1$      & $2^0$ \\\hline
 \end{tabular}
 \caption{Big-endian order of the ASCII binary code of \texttt{E}.}
@@ -245,9 +245,9 @@ position value & $2^6$      & $2^5$      & $2^4$      & $2^3$      & $2^2$      
 
 \begin{table}[!htbp]
 \centering
-\begin{tabular}{|l|ccccccc|} \hline
-position       & 1          & 2          & 3          & 4          & 5          & 6          & 7 \\\hline
-bit value      & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} \\\hline
+\begin{tabular}{l|ccccccc} \hline
+position       & 1          & 2          & 3          & 4          & 5          & 6          & 7 \\
+bit value      & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} \\
 position value & $2^0$      & $2^1$      & $2^2$      & $2^3$      & $2^4$      & $2^5$      & $2^6$ \\\hline
 \end{tabular}
 \caption{Little-endian order of the ASCII binary code of \texttt{E}.}
@@ -1332,8 +1332,8 @@ $Q \leftarrow V$~\tcc*[f]{list of nodes to visit}\;
 
 \begin{table}[!htbp]
 \centering
-\begin{tabular}{|ccccc|} \hline
-$v_1$               & $v_2$                 & $v_3$                 & $v_4$                 & $v_5$ \\\hline\hline
+\begin{tabular}{ccccc} \hline
+$v_1$               & $v_2$                 & $v_3$                 & $v_4$                 & $v_5$ \\\hline
 \underline{$(0,-)$} & $(\infty,-)$          & $(\infty,-)$          & $(\infty,-)$          & $(\infty,-)$ \\
                     & $(10,v_1)$            & \underline{$(3,v_1)$} & $(11,v_3)$            & \underline{$(5,v_3)$} \\
                     & \underline{$(7,v_3)$} &                       & \underline{$(9,v_2)$} & \\\hline
@@ -1473,8 +1473,8 @@ Chapter~\ref{chap:trees_forests}.
 
 \begin{table}[!htbp]
 \centering
-\begin{tabular}{|ll|} \hline
-Implementation & Time complexity \\\hline\hline
+\begin{tabular}{ll} \hline
+Implementation & Time complexity \\\hline
 list           & $O(n^2)$ \\
 binary heap    & $O \big( \log(n) \cdot (n + m) \big)$ \\
 $k$-ary heap   & $O \big( (kn + m) \frac{\log(n)}{\log(k)} \big)$ \\
