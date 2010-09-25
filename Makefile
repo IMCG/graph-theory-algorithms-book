@@ -1,4 +1,4 @@
-# Copyright (C) 2008 Minh Van Nguyen <nguyenminh2@gmail.com>
+# Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
 #
 # Make sure that the following commands are in your PATH variable:
 # latex, dvips, ps2pdf, rm
