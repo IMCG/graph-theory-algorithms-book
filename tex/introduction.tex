@@ -122,7 +122,8 @@ edge $(v_1, v_2)$ as $v_1 v_2$. The edge $v_1 v_2$ is also said to be
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {a/0/5/above/north,
   b/2/3/right/east, e/-2/3/left/west, c/2/0/right/east,
-  d/-2/0/left/west} {
+  d/-2/0/left/west}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -258,7 +259,8 @@ form $vv$ is a self-loop.
   arrowdecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {c/-2/0/left/west,
-  b/2/0/right/east, a/0/2/above/north} {
+  b/2/0/right/east, a/0/2/above/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -409,7 +411,8 @@ $\lfloor (n + 1) / 2 \rfloor$ edges.
   linedecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {c/-1.5/0/left/west,
-  b/1.5/0/right/east, a/0/1.5/above/north} {
+  b/1.5/0/right/east, a/0/1.5/above/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -800,7 +803,8 @@ walk $a, b, c, b, e$ has length $4$.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {b/4/4/above/north,
   a/0/4/above/north, c/6/3/right/east, d/6/1/right/east,
-  e/4/0/below/south, g/-2/2/left/west, f/0/0/below/south} {
+  e/4/0/below/south, g/-2/2/left/west, f/0/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -1050,14 +1054,16 @@ more details.
 %% nodes or vertices
 \foreach \nodename/\x/\y in {me/0/0, sister/2/0, brother/4/0,
   mum/2/1.5, cousin1/6/0, cousin2/8/0, uncle/6/1.5, aunt/8/1.5,
-  grandma/4/3} {
+  grandma/4/3}
+{
   \node (\nodename) at (\x,\y) [] {\nodename};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {grandma/mum, grandma/uncle,
   grandma/aunt, mum/me, mum/sister, mum/brother, uncle/cousin1,
-  aunt/cousin2} {
+  aunt/cousin2}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -1100,13 +1106,15 @@ from a given graph, we delete edges from the given graph.
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090,
   4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/-0.2244/0.3090,
-  7/0.2244/0.3090, 8/-0.3632/-0.1180, 9/0/-0.3819, 10/0.3632/-0.1180} {
+  7/0.2244/0.3090, 8/-0.3632/-0.1180, 9/0/-0.3819, 10/0.3632/-0.1180}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/5, 1/7, 1/10, 2/3, 2/6, 2/7,
-  3/4, 3/6, 3/8, 4/5, 4/8, 4/9, 5/9, 5/10, 6/7, 6/8, 7/10, 8/9, 9/10} {
+  3/4, 3/6, 3/8, 4/5, 4/8, 4/9, 5/9, 5/10, 6/7, 6/8, 7/10, 8/9, 9/10}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -1183,13 +1191,15 @@ no edges. It is also called the \emph{trivial} graph.
   scale=1.6]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090,
-  4/-0.5877/-0.8090, 5/0.5877/-0.8090} {
+  4/-0.5877/-0.8090, 5/0.5877/-0.8090}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/3, 1/4, 1/5, 2/3, 2/4, 2/5,
-  3/4, 3/5, 4/5} {
+  3/4, 3/5, 4/5}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -1329,7 +1339,8 @@ spanning subgraph of $C_n$ obtained by deleting one edge.
   scale=1.5]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0.8660/0.5, 2/0/1, 3/-0.8660/0.5,
-  4/-0.8660/-0.5, 5/0/-1, 6/0.8660/-0.5} {
+  4/-0.8660/-0.5, 5/0/-1, 6/0.8660/-0.5}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
@@ -1473,7 +1484,8 @@ $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
   linedecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/0/0, b/0/1, c/0/2, d/0/3, e/0/4,
-  f/2.5/3, g/2.5/2, h/2.5/1} {
+  f/2.5/3, g/2.5/2, h/2.5/1}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
@@ -1637,7 +1649,8 @@ a_{ij}
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {1/2/1/right/east,
   2/2/3/right/east, 3/0/4/above/north, 4/0/0/below/south,
-  5/-2/1/left/west, 6/-2/3/left/west} {
+  5/-2/1/left/west, 6/-2/3/left/west}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -1663,7 +1676,8 @@ a_{ij}
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {c/2/1/right/east,
   e/2/3/right/east, f/0/4/above/north, a/0/0/below/south,
-  b/-2/1/left/west, d/-2/3/left/west} {
+  b/-2/1/left/west, d/-2/3/left/west}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -1813,14 +1827,16 @@ Figure~\ref{fig:introduction:tanner_graph}.
 \foreach \nodename/\nodelabel/\x/\y/\direction/\navigate in {
   c1/1/0/4/left/west, c2/2/0/3/left/west, c3/3/0/2/left/west,
   c4/4/0/1/left/west, c5/5/0/0/left/west, r1/1/4/4/right/east,
-  r2/2/4/2/right/east, r3/3/4/0/right/east} {
+  r2/2/4/2/right/east, r3/3/4/0/right/east}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodelabel$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {r1/c1, r1/c2, r1/c3, r2/c3, r2/c5,
-  r3/c1, r3/c4, r3/c5} {
+  r3/c1, r3/c4, r3/c5}
+{
   (\startnode) edge[linedecorate] (\endnode)
 };
 \end{tikzpicture}
@@ -2046,7 +2062,8 @@ $G$ and $H$ are isomorphic, we write $G \cong H$.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {a/0/0/left/west,
   b/2/0/right/east, c/-1/1.5/left/west, d/3/1.5/right/east,
-  e/0/3/left/west, f/2/3/right/east} {
+  e/0/3/left/west, f/2/3/right/east}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -2610,7 +2627,8 @@ components\index{component}, i.e. $G = \bigcup G_i$.
 %% complete bipartite graph K_{1,5}
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090,
-  4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/0/0} {
+  4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
@@ -2622,7 +2640,8 @@ components\index{component}, i.e. $G = \bigcup G_i$.
 %% wheel graph W_4
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/3.866/-0.809, 2/3/0.691, 3/2.134/-0.809,
-  4/3/-0.309} {
+  4/3/-0.309}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
@@ -2647,7 +2666,8 @@ components\index{component}, i.e. $G = \bigcup G_i$.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {
   1/-0.8660/-0.5/left/west, 2/0.8660/-0.5/right/east,
-  3/0/1/above/north, 4/0/0/below/south} {
+  3/0/1/above/north, 4/0/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -2669,7 +2689,8 @@ components\index{component}, i.e. $G = \bigcup G_i$.
 \foreach \nodename/\x/\y/\direction/\navigate in {
   1/-0.9510/0.3090/left/west, 2/0.9510/0.3090/right/east,
   3/0/1/above/north, 4/0/0/below/south, 5/-0.5877/-0.8090/left/west,
-  6/0.5877/-0.8090/right/east} {
+  6/0.5877/-0.8090/right/east}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -2692,7 +2713,8 @@ components\index{component}, i.e. $G = \bigcup G_i$.
 \foreach \nodename/\x/\y/\direction/\navigate in {
   1/-0.9510/0.3090/left/west, 2/0.9510/0.3090/right/east,
   3/0/1/above/north, 4/0/0/below/south, 5/-0.5877/-0.8090/left/west,
-  6/0.5877/-0.8090/right/east} {
+  6/0.5877/-0.8090/right/east}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -2714,7 +2736,8 @@ components\index{component}, i.e. $G = \bigcup G_i$.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {
   1/-0.8660/-0.5/left/west, 2/0.8660/-0.5/right/east,
-  3/0/1/above/north, 4/0/0/below/south} {
+  3/0/1/above/north, 4/0/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -2784,7 +2807,8 @@ for an illustration of the symmetric difference of two graphs.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {
   1/-0.8660/-0.5/left/west, 2/0.8660/-0.5/right/east,
-  3/0/1/above/north, 4/0/0/below/south} {
+  3/0/1/above/north, 4/0/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) [] {$\nodename$};
 }
@@ -2806,7 +2830,8 @@ for an illustration of the symmetric difference of two graphs.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {
   1/0/-1/right/east, 3/1/0/right/east, 5/0/1/above/north,
-  7/-1/0/left/west, 9/0/0/above right/north} {
+  7/-1/0/left/west, 9/0/0/above right/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) [] {$\nodename$};
 }
@@ -2829,7 +2854,8 @@ for an illustration of the symmetric difference of two graphs.
 \foreach \nodename/\x/\y/\direction/\navigate in {
   2/-0.5877/-0.8090/left/west, 4/0.5877/-0.8090/right/east,
   5/0/1/above/north, 7/0.9510/0.3090/right/east,
-  9/-0.9510/0.3090/left/west} {
+  9/-0.9510/0.3090/left/west}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -2864,7 +2890,8 @@ shows various wheel graphs.
   scale=2]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0.8660/-0.5, 2/0/1, 3/-0.8660/-0.5,
-  4/0/0} {
+  4/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
@@ -2889,7 +2916,8 @@ shows various wheel graphs.
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/4, 1/5, 2/3, 2/5, 3/4, 3/5,
-  4/5} {
+  4/5}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -2904,13 +2932,15 @@ shows various wheel graphs.
   scale=2]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090,
-  4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/0/0} {
+  4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/5, 1/6, 2/3, 2/6, 3/4, 3/6,
-  4/5, 4/6, 5/6} {
+  4/5, 4/6, 5/6}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -2924,13 +2954,15 @@ shows various wheel graphs.
   scale=2]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0.8660/0.5, 2/0/1, 3/-0.8660/0.5,
-  4/-0.8660/-0.5, 5/0/-1, 6/0.8660/-0.5, 7/0/0} {
+  4/-0.8660/-0.5, 5/0/-1, 6/0.8660/-0.5, 7/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/6, 1/7, 2/3, 2/7, 3/4, 3/7,
-  4/5, 4/7, 5/6, 5/7, 6/7} {
+  4/5, 4/7, 5/6, 5/7, 6/7}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -2946,13 +2978,15 @@ shows various wheel graphs.
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0.7818/0.6234, 2/0/1, 3/-0.7818/0.6234,
   4/-0.9749/-0.2225, 5/-0.4338/-0.9009, 6/0.4338/-0.9009,
-  7/0.9749/-0.2225, 8/0/0} {
+  7/0.9749/-0.2225, 8/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/7, 1/8, 2/3, 2/8, 3/4, 3/8,
-  4/5, 4/8, 5/6, 5/8, 6/7, 6/8, 7/8} {
+  4/5, 4/8, 5/6, 5/8, 6/7, 6/8, 7/8}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -2968,13 +3002,15 @@ shows various wheel graphs.
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/1/0, 2/0.7071/0.7071, 3/0/1,
   4/-0.7071/0.7071, 5/-1/0, 6/-0.7071/-0.7071, 7/0/-1,
-  8/0.7071/-0.7071, 9/0/0} {
+  8/0.7071/-0.7071, 9/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/8, 1/9, 2/3, 2/9, 3/4, 3/9,
-  4/5, 4/9, 5/6, 5/9, 6/7, 6/9, 7/8, 7/9, 8/9} {
+  4/5, 4/9, 5/6, 5/9, 6/7, 6/9, 7/8, 7/9, 8/9}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3033,17 +3069,20 @@ all edges incident on that vertex are deleted as well.
   linedecorate/.style={-,thick}, scale=1.5]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/0/1, b/1/1, c/1/2, d/1/0, 1/2/1.5,
-  2/2/0.5, 3/3/1.5, 4/3/0.5, e/4/1} {
+  2/2/0.5, 3/3/1.5, 4/3/0.5, e/4/1}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 \foreach \nodename/\direction/\navigate in {a/left/west,
-  b/above left/west, c/above/north, d/below/south, e/right/east} {
+  b/above left/west, c/above/north, d/below/south, e/right/east}
+{
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/b, a/c, a/d, b/c, b/d, b/1, b/2,
-  c/1, c/2, d/1, d/2, 1/2, 1/3, 1/4, 2/3, 2/4, 3/4, 3/e, 4/e} {
+  c/1, c/2, d/1, d/2, 1/2, 1/3, 1/4, 2/3, 2/4, 3/4, 3/e, 4/e}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3056,17 +3095,20 @@ all edges incident on that vertex are deleted as well.
   linedecorate/.style={-,thick}, scale=1.5]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/0/1, c/1/2, d/1/0, 1/2/1.5, 2/2/0.5,
-  3/3/1.5, 4/3/0.5, e/4/1} {
+  3/3/1.5, 4/3/0.5, e/4/1}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 \foreach \nodename/\direction/\navigate in {a/left/west,
-  c/above/north, d/below/south, e/right/east} {
+  c/above/north, d/below/south, e/right/east}
+{
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/c, a/d, c/1, c/2, d/1, d/2, 1/2,
-  1/3, 1/4, 2/3, 2/4, 3/4, 3/e, 4/e} {
+  1/3, 1/4, 2/3, 2/4, 3/4, 3/e, 4/e}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3079,17 +3121,20 @@ all edges incident on that vertex are deleted as well.
   linedecorate/.style={-,thick}, scale=1.5]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {c/1/2, d/1/0, 1/2/1.5, 2/2/0.5, 3/3/1.5,
-  4/3/0.5, e/4/1} {
+  4/3/0.5, e/4/1}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 \foreach \nodename/\direction/\navigate in {c/left/west,
-  d/left/west, e/right/east} {
+  d/left/west, e/right/east}
+{
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {c/1, c/2, d/1, d/2, 1/2, 1/3, 1/4,
-  2/3, 2/4, 3/4, 3/e, 4/e} {
+  2/3, 2/4, 3/4, 3/e, 4/e}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3102,17 +3147,20 @@ all edges incident on that vertex are deleted as well.
   linedecorate/.style={-,thick}, scale=1.5]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {c/1/2, d/1/0, 1/2/1.5, 2/2/0.5, 3/3/1.5,
-  4/3/0.5} {
+  4/3/0.5}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 \foreach \nodename/\direction/\navigate in {c/left/west,
-  d/left/west} {
+  d/left/west}
+{
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {c/1, c/2, d/1, d/2, 1/2, 1/3, 1/4,
-  2/3, 2/4, 3/4} {
+  2/3, 2/4, 3/4}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3183,11 +3231,13 @@ intact.
   linedecorate/.style={-,thick}, scale=1.6]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/0.8660/-0.5, b/0/1, c/-0.8660/-0.5,
-  d/0/0} {
+  d/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 \foreach \nodename/\direction/\navigate in {a/right/east, b/above/north,
-  c/left/west} {
+  c/left/west}
+{
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
@@ -3205,11 +3255,13 @@ intact.
   linedecorate/.style={-,thick}, scale=1.6]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/0.8660/-0.5, b/0/1, c/-0.8660/-0.5,
-  d/0/0} {
+  d/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 \foreach \nodename/\direction/\navigate in {a/right/east, b/above/north,
-  c/left/west} {
+  c/left/west}
+{
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
@@ -3228,11 +3280,13 @@ intact.
   linedecorate/.style={-,thick}, scale=1.6]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/0.8660/-0.5, b/0/1, c/-0.8660/-0.5,
-  d/0/0} {
+  d/0/0}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 \foreach \nodename/\direction/\navigate in {a/right/east, b/above/north,
-  c/left/west} {
+  c/left/west}
+{
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
@@ -3411,14 +3465,16 @@ contracts it to the trivial graph $K_1$.
 \foreach \nodename/\x/\y/\direction/\navigate in {
   a/-0.5877/-0.8090/left/west, b/0.5877/-0.8090/right/east,
   c/0.9510/0.3090/right/east, d/0/1/above/north,
-  e/-0.9510/0.3090/left/west, f/0/0/above right/north} {
+  e/-0.9510/0.3090/left/west, f/0/0/above right/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode/\color in {c/d/red, c/b/blue, c/f/red,
-  d/e/red, d/f/red, e/a/blue, e/f/red, a/b/gray, a/f/blue, b/f/blue} {
+  d/e/red, d/f/red, e/a/blue, e/f/red, a/b/gray, a/f/blue, b/f/blue}
+{
   (\startnode) edge[linedecorate,color=\color] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3433,7 +3489,8 @@ contracts it to the trivial graph $K_1$.
   scale=1.7]
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {c/1/0/right/east,
-  d/0/1/above/north, e/-1/0/left/west, f/0/0/above right/north} {
+  d/0/1/above/north, e/-1/0/left/west, f/0/0/above right/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -3442,7 +3499,8 @@ contracts it to the trivial graph $K_1$.
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {c/d, c/ab, c/f, d/e, d/f, e/ab, e/f,
-  ab/f} {
+  ab/f}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3456,7 +3514,8 @@ contracts it to the trivial graph $K_1$.
   scale=1.7]
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {d/0/1/above/north,
-  e/-0.8660/-0.5/left/west, f/0/0/above right/north} {
+  e/-0.8660/-0.5/left/west, f/0/0/above right/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -3478,7 +3537,8 @@ contracts it to the trivial graph $K_1$.
   scale=1.7]
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {f/0/1/above/north,
-  e/-0.8660/-0.5/left/west} {
+  e/-0.8660/-0.5/left/west}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -3811,13 +3871,15 @@ hypercube graphs $Q_n$ for $n = 1,\dots,4$.
   linedecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {1/0/0, 2/2/0, 3/2/2, 4/0/2, 5/0.5/0.5,
-  6/2.5/0.5, 7/2.5/2.5, 8/0.5/2.5} {
+  6/2.5/0.5, 7/2.5/2.5, 8/0.5/2.5}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 2/3, 3/4, 4/1, 5/6, 6/7, 7/8,
-  8/5, 1/5, 2/6, 3/7, 4/8} {
+  8/5, 1/5, 2/6, 3/7, 4/8}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3834,7 +3896,8 @@ hypercube graphs $Q_n$ for $n = 1,\dots,4$.
   4/-0.7071/0.7071, 5/-1/0, 6/-0.7071/-0.7071, 7/0/-1,
   8/0.7071/-0.7071, 9/0.4142/0, 10/0.2928/0.2928, 11/0/0.4142,
   12/-0.2928/0.2928, 13/-0.4142/0, 14/-0.2928/-0.2928, 15/0/-0.4142,
-  16/0.2928/-0.2928} {
+  16/0.2928/-0.2928}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
@@ -3842,7 +3905,8 @@ hypercube graphs $Q_n$ for $n = 1,\dots,4$.
 \foreach \startnode/\endnode in {1/2, 1/8, 1/10, 1/16, 2/3, 2/9, 2/11,
   3/4, 3/10, 3/12, 4/5, 4/11, 4/13, 5/6, 5/12, 5/14, 6/7, 6/13, 6/15,
   7/8, 7/14, 7/16, 8/9, 8/15, 9/12, 9/14, 10/13, 10/15, 11/14, 11/16,
-  12/15, 13/16} {
+  12/15, 13/16}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3891,7 +3955,8 @@ Figure~\ref{fig:introduction:3_mesh_M323}.
   1/0/0,  2/1.5/0,  3/3/0,
   4/0/1,  5/1.5/1,  6/3/1,
   7/0/2,  8/1.5/2,  9/3/2,
-  10/0/3, 11/1.5/3, 12/3/3} {
+  10/0/3, 11/1.5/3, 12/3/3}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
@@ -3900,7 +3965,8 @@ Figure~\ref{fig:introduction:3_mesh_M323}.
   1/4, 4/7, 7/10,
   2/5, 5/8, 8/11,
   3/6, 6/9, 9/12,
-  1/2, 2/3, 4/5, 5/6, 7/8, 8/9, 10/11, 11/12} {
+  1/2, 2/3, 4/5, 5/6, 7/8, 8/9, 10/11, 11/12}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -3920,7 +3986,8 @@ Figure~\ref{fig:introduction:3_mesh_M323}.
   7/0/4,      8/1.5/4,  9/3/4,
   10/0.5/0.5, 11/2/0.5, 12/3.5/0.5,
   13/0.5/2.5, 14/2/2.5, 15/3.5/2.5,
-  16/0.5/4.5, 17/2/4.5, 18/3.5/4.5} {
+  16/0.5/4.5, 17/2/4.5, 18/3.5/4.5}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
 }
 %% edges or lines
@@ -3930,7 +3997,8 @@ Figure~\ref{fig:introduction:3_mesh_M323}.
   10/11, 11/12, 13/14, 14/15, 16/17, 17/18,
   1/10, 2/11, 3/12, 4/13, 5/14, 6/15, 7/16, 8/17, 9/18,
   1/4, 4/7, 2/5, 5/8, 3/6, 6/9,
-  10/13, 13/16, 11/14, 14/17, 12/15, 15/18} {
+  10/13, 13/16, 11/14, 14/17, 12/15, 15/18}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}

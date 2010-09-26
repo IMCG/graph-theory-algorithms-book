@@ -302,7 +302,8 @@ sage: G.blocks_and_cut_vertices()
   linedecorate/.style={-,thick},scale=1.5]
 %% nodes or vertices
 \foreach \nodename/\direction/\navigate/\x/\y in {1/below/south/0/0,
-  2/below/south/1/0, 3/below/south/2/0, 0/above/north/1/2} {
+  2/below/south/1/0, 3/below/south/2/0, 0/above/north/1/2}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }

@@ -78,7 +78,8 @@ a graph and its adjacency list representation.
 \foreach \nodename/\x/\y/\direction/\navigate in {
   1/0/0/left/west, 2/4/0/right/east, 3/4/3.5/right/east,
   4/0/3.5/left/west, 5/2/1/below/south, 6/3/2/above/north,
-  7/2/3/below/south, 8/1/2/above/north} {
+  7/2/3/below/south, 8/1/2/above/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -439,14 +440,16 @@ number of elements.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
   1/0/4/above/north, 3/6/3/above/north, 4/6/1/below/south,
-  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south} {
+  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/5, 2/7, 3/4, 3/5,
-  4/6, 5/6, 6/7} {
+  4/6, 5/6, 6/7}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -461,7 +464,8 @@ number of elements.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {4/0/0/below/south,
   3/0/1/left/west, 7/1/1/below/south, 6/2/1/below/south,
-  2/0.5/2/left/west, 5/2/2/left/west, 1/1.25/3/above/north} {
+  2/0.5/2/left/west, 5/2/2/left/west, 1/1.25/3/above/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -481,7 +485,8 @@ number of elements.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
   1/0/4/above/north, 3/6/3/above/north, 4/6/1/below/south,
-  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south} {
+  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -491,7 +496,8 @@ number of elements.
   (\startnode) edge[arrowdecorate] node {} (\endnode)
 }
 \foreach \startnode/\endnode/\benddirection/\angle in {
-  1/2/bend left/12, 4/6/bend right/12, 6/5/bend right/12} {
+  1/2/bend left/12, 4/6/bend right/12, 6/5/bend right/12}
+{
   (\startnode) edge[arrowdecorate,\benddirection=\angle] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -506,7 +512,8 @@ number of elements.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {2/0/1/below/south,
   1/1/0/below/south, 5/1/1/left/west, 7/2/1/below/south,
-  6/2/2/left/west, 3/0.5/2/left/west, 4/1.25/3/above/north} {
+  6/2/2/left/west, 3/0.5/2/left/west, 4/1.25/3/above/north}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -884,14 +891,16 @@ the tree $T$.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
   1/0/4/above/north, 3/6/3/above/north, 4/6/1/below/south,
-  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south} {
+  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/5, 2/7, 3/4, 3/5,
-  4/6, 5/6, 6/7} {
+  4/6, 5/6, 6/7}
+{
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -907,7 +916,8 @@ the tree $T$.
 \foreach \nodename/\x/\y/\direction/\navigate in {
   1/1.25/3/above/north, 2/0.5/2/below/south, 5/2/2/right/east,
   3/1.25/1/below/south, 6/2.75/1/right/east, 7/2/0/below/south,
-  4/3.5/0/below/south} {
+  4/3.5/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -927,7 +937,8 @@ the tree $T$.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
   1/0/4/above/north, 3/6/3/above/north, 4/6/1/below/south,
-  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south} {
+  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -937,7 +948,8 @@ the tree $T$.
   (\startnode) edge[arrowdecorate] node {} (\endnode)
 }
 \foreach \startnode/\endnode/\benddirection/\angle in {
-  1/2/bend left/12, 4/6/bend right/12, 6/5/bend right/12} {
+  1/2/bend left/12, 4/6/bend right/12, 6/5/bend right/12}
+{
   (\startnode) edge[arrowdecorate,\benddirection=\angle] node {} (\endnode)
 };
 \end{tikzpicture}
@@ -953,7 +965,8 @@ the tree $T$.
 \foreach \nodename/\x/\y/\direction/\navigate in {
   4/1.25/3/above/north, 3/0.5/2/below/south, 6/2/2/right/east,
   5/1.25/1/left/west, 7/2.75/1/left/west, 1/1.25/0/below/south,
-  2/2.75/0/below/south} {
+  2/2.75/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -1299,7 +1312,8 @@ $Q \leftarrow V$~\tcc*[f]{list of nodes to visit}\;
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {
   v_1/0/0/below/south, v_2/2/2.5/above/north, v_3/4/0/below/south,
-  v_4/6/2.5/above/north, v_5/8/0/below/south} {
+  v_4/6/2.5/above/north, v_5/8/0/below/south}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
@@ -1307,11 +1321,13 @@ $Q \leftarrow V$~\tcc*[f]{list of nodes to visit}\;
 \path
 \foreach \startnode/\endnode/\direction/\weight in {
   v_1/v_2/left/10, v_1/v_3/below/3, v_2/v_4/above/2, v_3/v_4/left/8,
-  v_3/v_5/below/2} {
+  v_3/v_5/below/2}
+{
   (\startnode) edge[arrowdecorate] node[\direction]{$\weight$} (\endnode)
 }
 \foreach \startnode/\endnode/\direction/\weight in {
-  v_3/v_2/left/4, v_2/v_3/right/1, v_4/v_5/right/7, v_5/v_4/left/9} {
+  v_3/v_2/left/4, v_2/v_3/right/1, v_4/v_5/right/7, v_5/v_4/left/9}
+{
   (\startnode) edge[arrowdecorate,bend left] node[\direction]{$\weight$} (\endnode)
 };
 \end{tikzpicture}
@@ -2291,19 +2307,22 @@ the number of vertices of the original graph $G$.
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {v_1/4/0/below/south,
   v_2/0/0/below/south, v_3/0/3/above/north, v_4/4/3/above/north,
-  v_5/7/1.5/right/east} {
+  v_5/7/1.5/right/east}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode/\direction/\weight in {v_1/v_2/below/1,
-  v_1/v_5/below/6, v_2/v_4/right/3, v_3/v_4/above/1, v_4/v_1/right/3} {
+  v_1/v_5/below/6, v_2/v_4/right/3, v_3/v_4/above/1, v_4/v_1/right/3}
+{
   (\startnode) edge[arrowdecorate] node[\direction]{$\weight$} (\endnode)
 }
 \foreach \startnode/\endnode/\direction/\angle/\weight in {
   v_3/v_2/right/20/2, v_3/v_1/above left/15/1, v_2/v_3/left/20/1,
-  v_1/v_3/below right/15/3, v_4/v_5/above/15/2, v_5/v_4/below/15/1} {
+  v_1/v_3/below right/15/3, v_4/v_5/above/15/2, v_5/v_4/below/15/1}
+{
   (\startnode) edge[arrowdecorate,bend left=\angle] node[\direction]{$\weight$} (\endnode)
 };
 \end{tikzpicture}
