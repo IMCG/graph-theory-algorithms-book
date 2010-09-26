@@ -1634,63 +1634,18 @@ which indexes the codewords in $\Gamma_8$
 and the corresponding $y$ is the $j$-th
 codeword in $\Gamma_8$ converted to decimal.
 This will give us some idea of how the Gray code
-``looks'' in some sense. The plot is given in Figure \ref{fig:Gamma8}.
+``looks'' in some sense. The plot is given in
+Figure~\ref{fig:trees_forests:Gamma_8}.
 
-%% Figure created using the following code.
-%% def int2binary(m, n):
-%%    '''
-%%    returns GF(2) vector of length n obtained
-%%    from the binary repr of m, padded by 0's
-%%    (on the left) to length n.
-%%
-%%    EXAMPLES:
-%%        sage: for j in range(8):
-%%        ....:     print int2binary(j,3)+int2binary(int(j/2),3)
-%%        ....:
-%%        (0, 0, 0)
-%%        (0, 0, 1)
-%%        (0, 1, 1)
-%%        (0, 1, 0)
-%%        (1, 1, 0)
-%%        (1, 1, 1)
-%%        (1, 0, 1)
-%%        (1, 0, 0)
-%%    '''
-%%    s = bin(m)
-%%    k = len(s)
-%%    F = GF(2)
-%%    b = [F(0)]*n
-%%    for i in range(2,k):
-%%        b[n-k+i] = F(int(s[i]))
-%%    return vector(b)
-%%
-%% def binary2int(b):
-%%    "''
-%%    inverts int2binary
-%%
-%%    "''
-%%    k = len(b)
-%%    n = sum([int(b[i])*2**(k-1-i) for i in range(k)])
-%%    return n
-%%
-%% def graycodeword(m, n):
-%%    '''
-%%    returns the mth codeword in the reflected binary Gray code
-%%    of length n.
-%%
-%%    EXAMPLES:
-%%        sage: graycodeword(3,3)
-%%        (0, 1, 0)
-%%    '''
-%%    return int2binary(m,n)+int2binary(int(m/2),n)
-%%
-%% sage: L = [(k,binary2int(graycodeword(k, 8))) for k in range(256)]
-%% sage: P = list_plot(L); P.save(``gray-code-2-8.png'')
 \begin{figure}[!htbp]
 \centering
-\includegraphics{image/graycode-gamma8}
-\caption{List plot of $\Gamma_8$ created using Sage.}
-\label{}
+\begin{tikzpicture}
+\begin{axis}
+\addplot+[only marks,mark size=0.8pt] file {data/gamma8.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{List plot of $\Gamma_8$.}
+\label{fig:trees_forests:Gamma_8}
 \end{figure}
 
 What if you only want to compute the
