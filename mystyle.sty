@@ -74,12 +74,12 @@
 \oddsidemargin=0.0pt
 \evensidemargin=0.0pt
 
-%% Format date in the form 12 March 2007, for example.
+%% Format date in the ISO format 2007 March 12, for example.
 \usepackage{datetime}
-\newdateformat{auDateFormat}{%
-  \twodigit{\THEDAY}~\monthname[\THEMONTH]~\THEYEAR
+\newdateformat{isoDateFormat}{%
+  \THEYEAR~\monthname[\THEMONTH]~\twodigit{\THEDAY}
 }
-\auDateFormat
+\isoDateFormat
 
 %% Custom commands and shortcuts
 %% the latest version of this document
