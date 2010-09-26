@@ -42,14 +42,12 @@ solution he laid the foundation of what is now known as graph theory.
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
   linedecorate/.style={-,thick}]
 %% nodes or vertices
-\foreach \nodename/\x/\y in {a/0/0, b/0/2, c/0/4, d/4/2} {
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  a/0/0/left/west, b/0/2/left/west, c/0/4/left/west, d/4/2/right/east}
+{
   \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-\foreach \nodename/\direction/\navigate in {a/left/west, b/left/west,
-  c/left/west} {
   \node [\direction] at (\nodename.\navigate) {$\nodename$};
 }
-\node [right] at (d.east) {$d$};
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/d, b/d, c/d} {
