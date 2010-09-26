@@ -1743,7 +1743,7 @@ def graycodeword(m, n):
         sage: graycodeword(3,3)
         (0, 1, 0)
     '''
-    return int2binary(m,n)+int2binary(int(m/2),n)
+    return map(int, int2binary(m,n)+int2binary(int(m/2),n))
 \end{lstlisting}
 
 
