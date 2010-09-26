@@ -40,6 +40,10 @@
 \usepackage{pgfplots}
 \usepackage{subfigure}
 
+%% The following is a brute-force way to prevent the headers
+%% from getting transformed into all-caps
+\renewcommand\MakeUppercase{}
+
 %% For typesetting code listings
 \usepackage{listings}
 \lstdefinelanguage{Sage}[]{Python}
