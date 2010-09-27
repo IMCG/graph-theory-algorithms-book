@@ -297,22 +297,7 @@ sage: G.blocks_and_cut_vertices()
 
 \begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\direction/\navigate/\x/\y in {1/below/south/0/0,
-  2/below/south/1/0, 3/below/south/2/0, 0/above/north/1/2}
-{
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {0/1, 0/2, 0/3} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
+\input{image/distance-connectivity_claw-graph.tex}
 \caption{A claw graph with $4$ vertices.}
 \label{fig:distance_connectivity:claw_graph}
 \end{figure}
@@ -545,28 +530,7 @@ This graph is depicted in Figure~\ref{fig:distance_connectivity:petersen_graph}.
 
 \begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {
-  %% outer pentagon
-  0/0/2, 1/-1.9021/0.6180, 2/-1.1755/-1.6180, 3/1.1755/-1.6180,
-  4/1.9021/0.6180,
-  %% inner pentagon
-  5/0/1, 6/-0.9510/0.3090, 7/-0.5877/-0.8090, 8/0.5877/-0.8090,
-  9/0.9510/0.3090}
-{
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {0/1, 0/4, 0/5, 1/2, 1/6, 2/3, 2/7,
-  3/4, 3/8, 4/9, 5/7, 5/8, 6/8, 6/9, 7/9}
-{
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
+\input{image/distance-connectivity_petersen-graph.tex}
 \caption{The Petersen graph with $10$ vertices.}
 \label{fig:distance_connectivity:petersen_graph}
 \end{figure}
@@ -787,23 +751,7 @@ depicted in Figure \ref{fig:digraph-flow1}.
 
 \begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick},scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\direction/\navigate/\x/\y in {0/left/west/0/0,
-  1/below left/south west/1/-1, 2/above/north/1/1, 3/below/south/2/-2,
-  4/above/north/3/1, 5/right/east/3/-1}
-{
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {0/1, 0/2, 1/3, 1/5, 2/1, 2/4, 3/5, 4/5} {
-  (\startnode) edge[arrowdecorate] node {} (\endnode)
-};
-\end{tikzpicture}
+\input{image/distance-connectivity_digraph-flow1.tex}
 \caption{A digraph with $6$ vertices.}
 \label{fig:digraph-flow1}
 \end{figure}
