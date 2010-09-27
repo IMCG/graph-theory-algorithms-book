@@ -26,6 +26,7 @@ clean:
 	rm -rfv *.bbl
 	rm -rfv *.blg
 	rm -rfv *.dvi
+	rm -rfv *.gnuplot
 	rm -rfv *.idx
 	rm -rfv *.ilg
 	rm -rfv *.ind
@@ -35,4 +36,5 @@ clean:
 	rm -rfv *.lot
 	rm -rfv *.out
 	rm -rfv *.ps
+	rm -rfv *.table
 	rm -rfv *.toc
