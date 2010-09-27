@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {b/4/4/above/north,
+  a/0/4/above/north, c/6/3/right/east, d/6/1/right/east,
+  e/4/0/below/south, g/-2/2/left/west, f/0/0/below/south}
+{
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/b, a/e, b/c, b/e, b/g, c/d, c/e,
+  d/f, e/f, f/g} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}

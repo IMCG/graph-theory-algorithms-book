@@ -1,0 +1,129 @@
+%% wheel graph W_6
+\subfigure[$G_1$]{
+\label{fig:introduction:contracting_wheel_graph_W6}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,very thick},%
+  scale=1.7]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  a/-0.5877/-0.8090/left/west, b/0.5877/-0.8090/right/east,
+  c/0.9510/0.3090/right/east, d/0/1/above/north,
+  e/-0.9510/0.3090/left/west, f/0/0/above right/north}
+{
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode/\color in {c/d/red, c/b/blue, c/f/red,
+  d/e/red, d/f/red, e/a/blue, e/f/red, a/b/gray, a/f/blue, b/f/blue}
+{
+  (\startnode) edge[linedecorate,color=\color] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%% edge contraction W_6/ab
+\subfigure[$G_2 = G_1/ab$]{
+\label{fig:introduction:contracting_wheel_graph_W5}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {c/1/0/right/east,
+  d/0/1/above/north, e/-1/0/left/west, f/0/0/above right/north}
+{
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node (ab) at (0,-1) [nodedecorate] {};
+\node [right] at (ab.east) {$v_{ab} = g$};
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {c/d, c/ab, c/f, d/e, d/f, e/ab, e/f,
+  ab/f}
+{
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%% edge contraction G_2/cg
+\subfigure[$G_3 = G_2/cg$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {d/0/1/above/north,
+  e/-0.8660/-0.5/left/west, f/0/0/above right/north}
+{
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node (cg) at (0.8660,-0.5) [nodedecorate] {};
+\node [right] at (cg.east) {$v_{cg} = h$};
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {cg/d, cg/e, cg/f, d/e, d/f, e/f} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%% edge contraction G_3/dh
+\subfigure[$G_4 = G_3/dh$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {f/0/1/above/north,
+  e/-0.8660/-0.5/left/west}
+{
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+\node (dh) at (0.8660,-0.5) [nodedecorate] {};
+\node [right] at (dh.east) {$v_{dh} = i$};
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {dh/f, dh/e, e/f} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%% edge contraction G_4/fi
+\subfigure[$G_5 = G_4/fi$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+%% nodes or vertices
+\node (e) at (-0.8660,-0.5) [nodedecorate] {};
+\node [left] at (e.west) {$e$};
+\node (fi) at (0.8660,-0.5) [nodedecorate] {};
+\node [right] at (fi.east) {$v_{fi} = j$};
+%% edges or lines
+\path (e) edge[linedecorate] node {} (fi);
+\end{tikzpicture}
+}
+%%
+%% edge contraction G_5/ej
+\subfigure[$G_6 = G_5/ej$]{
+\label{fig:introduction:wheel_graph_W6_contracted_to_K1}
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick},%
+  scale=1.7]
+%% nodes or vertices
+\node (ej) at (0,0) [nodedecorate] {};
+\node [right] at (ej.east) {$v_{ej}$};
+%% stub node that should not be visible
+\node (stub1) at (1,0) [] {};
+\node (stub2) at (-1,0) [] {};
+\end{tikzpicture}
+}

@@ -1,0 +1,77 @@
+%% bipartite graph
+\subfigure[Bipartite]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {a/0/0, b/0/1, c/0/2, d/0/3, e/0/4,
+  f/2.5/3, g/2.5/2, h/2.5/1}
+{
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/h, b/g, c/g, c/f, d/h, e/g} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\quad
+%%
+%% complete bipartite graph K_{4,3}
+\subfigure[$K_{4,3}$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {a/0/0, b/0/1, c/0/2, d/0/3, e/2.5/2.5,
+  f/2.5/1.5, g/2.5/0.5} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/e, a/f, a/g, b/e, b/f, b/g, c/e,
+  c/f, c/g, d/e, d/f, d/g} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\quad
+%%
+%% complete bipartite graph K_{3,3}
+\subfigure[$K_{3,3}$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {a/0/0, b/0/1, c/0/2, d/2.5/2, e/2.5/1,
+  f/2.5/0} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/d, a/e, a/f, b/d, b/e, b/f, c/d,
+  c/e, c/f} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+\quad
+%%
+%% star graph K_{1,4}
+\subfigure[$K_{1,4}$]{
+\begin{tikzpicture}
+[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  linedecorate/.style={-,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {a/0/1.5, b/2.5/3, c/2.5/2, d/2.5/1,
+  e/2.5/0} {
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/b, a/c, a/d, a/e} {
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+}
