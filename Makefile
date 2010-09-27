@@ -14,8 +14,8 @@ all:
 	make clean
 
 latex:
-	pdflatex $(FILE).tex
-	pdflatex $(FILE).tex
+	pdflatex -shell-escape $(FILE).tex
+	pdflatex -shell-escape $(FILE).tex
 
 clean:
 	rm -rfv *#
