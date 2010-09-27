@@ -1,0 +1,23 @@
+%% sin(x) and coordinates
+\subfigure[Plots of functions.]{
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    xlabel=$x$,%
+    ylabel=$f(x)$
+  ]
+%% invoke external gnuplot as calculator
+\addplot[smooth,color=blue] gnuplot{sin(x)};
+\addplot[smooth,color=red] gnuplot{cos(x)};
+\end{axis}
+\end{tikzpicture}
+}
+\quad
+%%
+%% scatterplot
+\subfigure[A scatterplot.]{
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[enlargelimits=false]
+\addplot+[only marks,samples=400] {rand};
+\end{axis}
+\end{tikzpicture}
+}
