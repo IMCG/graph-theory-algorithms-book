@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+\node {\texttt{/}} [edge from parent fork down]
+  child {node {\texttt{bin}}}
+  child {node {\texttt{etc}}}
+  child {node {\texttt{home}}
+    child {node {\texttt{anne}}}
+    child {node {\texttt{sam}}}
+    child {node {$\dots$}}
+  }
+  child {node {\texttt{lib}}}
+  child {node {\texttt{opt}}}
+  child {node {\texttt{proc}}}
+  child {node {\texttt{tmp}}}
+  child {node {\texttt{usr}}
+    child {node {\texttt{bin}}
+      child {node {\texttt{acyclic}}}
+      child {node {\texttt{diff}}}
+      child {node {\texttt{dot}}}
+      child {node {\texttt{gc}}}
+      child {node {\texttt{neato}}}
+      child {node {$\dots$}}
+    }
+    child {node {\texttt{include}}}
+    child {node {\texttt{local}}}
+    child {node {\texttt{share}}}
+    child {node {\texttt{src}}}
+    child {node {$\dots$}}
+  }
+  child {node {$\dots$}};
+\end{tikzpicture}

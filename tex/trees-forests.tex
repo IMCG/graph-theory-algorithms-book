@@ -42,36 +42,7 @@ root directory\index{root directory}.
 
 \begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}
-\node {\texttt{/}} [edge from parent fork down]
-  child {node {\texttt{bin}}}
-  child {node {\texttt{etc}}}
-  child {node {\texttt{home}}
-    child {node {\texttt{anne}}}
-    child {node {\texttt{sam}}}
-    child {node {$\dots$}}
-  }
-  child {node {\texttt{lib}}}
-  child {node {\texttt{opt}}}
-  child {node {\texttt{proc}}}
-  child {node {\texttt{tmp}}}
-  child {node {\texttt{usr}}
-    child {node {\texttt{bin}}
-      child {node {\texttt{acyclic}}}
-      child {node {\texttt{diff}}}
-      child {node {\texttt{dot}}}
-      child {node {\texttt{gc}}}
-      child {node {\texttt{neato}}}
-      child {node {$\dots$}}
-    }
-    child {node {\texttt{include}}}
-    child {node {\texttt{local}}}
-    child {node {\texttt{share}}}
-    child {node {\texttt{src}}}
-    child {node {$\dots$}}
-  }
-  child {node {$\dots$}};
-\end{tikzpicture}
+\input{image/trees_forests_filesystem-hierarchy.tex}
 \caption{The Linux filesystem hierarchy.}
 \label{fig:trees_forests:filesystem_hierarchy}
 \end{figure}
@@ -108,42 +79,7 @@ thicker line width for its edges.}
 
 \begin{figure}[!htbp]
 \centering
-\subfigure[]{
-\begin{tikzpicture}
-[linedecorate/.style={line width=2.5pt}]
-%% set up the grid
-\foreach \xstart/\xend/\y in {0/4.5/0, 0/4.5/1.5, 0/4.5/3, 0/4.5/4.5} {
-  \draw (\xstart,\y) -- (\xend,\y);
-  \draw (\y,\xstart) -- (\y,\xend);
-}
-%% draw the spanning tree
-\foreach \xstart/\ystart/\xend/\yend in {0/0/0/1.5, 0/0/4.5/0,
-  1.5/0/1.5/1.5, 1.5/1.5/4.5/1.5, 4.5/1.5/4.5/3, 0/3/4.5/3, 0/3/0/4.5,
-  1.5/3/1.5/4.5, 3/3/3/4.5, 3/4.5/4.5/4.5}
-{
-  \draw[linedecorate] (\xstart,\ystart) -- (\xend,\yend);
-}
-\end{tikzpicture}
-}
-%%
-%%
-\qquad
-\subfigure[]{
-\begin{tikzpicture}
-[linedecorate/.style={line width=2.5pt}]
-\foreach \xstart/\xend/\y in {0/4.5/0, 0/4.5/1.5, 0/4.5/3, 0/4.5/4.5} {
-  \draw (\xstart,\y) -- (\xend,\y);
-  \draw (\y,\xstart) -- (\y,\xend);
-}
-%% draw the spanning tree
-\foreach \xstart/\ystart/\xend/\yend in {0/0/0/1.5, 0/0/4.5/0,
-  4.5/0/4.5/1.5, 0/1.5/1.5/1.5, 1.5/1.5/1.5/3, 3/1.5/3/3, 0/3/4.5/3,
-  4.5/3/4.5/4.5, 0/4.5/4.5/4.5}
-{
-  \draw[linedecorate] (\xstart,\ystart) -- (\xend,\yend);
-}
-\end{tikzpicture}
-}
+\input{image/trees_forests_grid-graph-spanning-trees.tex}
 \caption{Spanning trees for the $4 \times 4$ grid graph.}
 \label{fig:trees_forests:grid_graph_spanning_trees}
 \end{figure}
@@ -168,282 +104,28 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 
 \begin{figure}[!htbp]
 \centering
-%%
-%% all trees of order 1
-\subfigure[$n = 1$]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-\node () at (0,0) [nodedecorate] {};
-%% buffer nodes; these should not be visible
-\node () at (-0.5,0) [] {};
-\node () at (0.5,0) [] {};
-\end{tikzpicture}
-}
-\quad
-%%
-%% all trees of order 2
-\subfigure[$n = 2$]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/0/0, 2/0/1} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% buffer nodes; these should not be visible
-\node () at (-0.5,0) [] {};
-\node () at (0.5,0) [] {};
-%% edges or lines
-\path
-(1) edge[linedecorate] node {} (2);
-\end{tikzpicture}
-}
-\quad
-%%
-%% all trees of order 3
-\subfigure[$n = 3$]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/0/0, 2/0/1, 3/0/2} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% buffer nodes; these should not be visible
-\node () at (-0.5,0) [] {};
-\node () at (0.5,0) [] {};
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/2, 2/3} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
+\input{image/trees_forests_distinct-trees-specified-order-1-2-3.tex}
 \caption{All distinct trees of order $n = 1, 2, 3$.}
 \label{fig:trees_forests:distinct_trees_specified_order_1_2_3}
 \end{figure}
 
 \begin{figure}[!htbp]
 \centering
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/0/0, 2/0/1, 3/0/2, 4/0/3} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/2, 2/3, 3/4} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-\quad
-%%
-%%
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},
-  scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/-0.8660/-0.5, 2/0.8660/-0.5, 3/0/1, 4/0/0} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/4, 2/4, 3/4} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
+\input{image/trees_forests_distinct-trees-specified-order-4.tex}
 \caption{All distinct trees of order $n = 4$.}
 \label{fig:trees_forests:distinct_trees_specified_order_4}
 \end{figure}
 
-
 \begin{figure}[!htbp]
 \centering
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/0/0, 2/0/1, 3/0/2, 4/0/3, 5/0/4} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/2, 2/3, 3/4, 4/5} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-\quad
-%%
-%%
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
-  scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {
-  1/-0.8660/-0.5, 2/0.8660/-0.5, 3/0/1, 4/0/0, 5/0/2}
-{
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/4, 2/4, 3/4, 3/5} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-\quad
-%%
-%%
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
-  scale=2]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/1/0, 2/0/1, 3/-1/0, 4/0/-1, 5/0/0} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/5, 2/5, 3/5, 4/5} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
+\input{image/trees_forests_distinct-trees-specified-order-5.tex}
 \caption{All distinct trees of order $n = 5$.}
 \label{fig:trees_forests:distinct_trees_specified_order_5}
 \end{figure}
 
 \begin{figure}[!htbp]
 \centering
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/0/0, 2/0/1, 3/0/2, 4/0/3, 5/0/4, 6/0/5} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/2, 2/3, 3/4, 4/5, 5/6} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-\quad
-%%
-%%
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
-  scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {
-  1/-0.8660/-0.5, 2/0.8660/-0.5, 3/0/1, 4/0/0, 5/0/2, 6/0/3} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/4, 2/4, 3/4, 3/5, 5/6} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-\quad
-%%
-%%
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
-  scale=1.3]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/0/0, 2/0/1, 3/0/2, 4/0/3, 5/0/4, 6/1/2} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/2, 2/3, 3/4, 4/5, 3/6} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-\quad
-%%
-%%
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
-  scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {
-  1/-0.8660/-0.5, 2/0.8660/-0.5, 3/0/1, 4/0/0, 5/-0.8660/1.5,
-  6/0.8660/1.5}
-{
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/4, 2/4, 3/4, 3/5, 3/6} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-\quad
-%%
-%%
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},
-  scale=1.3]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/0/0, 2/0/1, 3/0/2, 4/0/3, 5/1/1, 6/-1/1} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/2, 2/3, 3/4, 2/5, 2/6} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-\quad
-%%
-%%
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
-  scale=2]
-%% nodes or vertices
-\foreach \nodename/\x/\y in {1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090,
-  4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/0/0}
-{
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-}
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {1/6, 2/6, 3/6, 4/6, 5/6} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
+\input{image/trees_forests_distinct-trees-specified-order-6.tex}
 \caption{All distinct trees of order $n = 6$.}
 \label{fig:trees_forests:distinct_trees_specified_order_6}
 \end{figure}
@@ -808,19 +490,7 @@ Figure~\ref{fig:trees-forests:Kruskal_example}.
 
 \begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}
-[linedecorate/.style={line width=2.5pt},scale=1.5]
-\foreach \x/\ystart/\yend in {1/0/3, 2/0/3, 3/0/3}
-{
-  \draw (\x,\ystart) -- (\x,\yend);
-}
-%% draw the spanning tree
-\foreach \xstart/\ystart/\xend/\yend in {0/0/3/0, 0/1/3/1, 0/2/3/2,
-  0/3/3/3, 0/0/0/3}
-{
-  \draw[linedecorate] (\xstart,\ystart) -- (\xend,\yend);
-}
-\end{tikzpicture}
+\input{image/trees-forests_Kruskal-example.tex}
 \caption{Kruskal's algorithm for the $4\times 4$ grid graph.}
 \label{fig:trees-forests:Kruskal_example}
 \end{figure}
@@ -930,55 +600,7 @@ sage: prim(G).edges()
 
 \begin{figure}[!htbp]
 \centering
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick}]
-% nodes or vertices
-\node (0) at (-4,4) [nodedecorate] {};
-\node [left] at (0.west) {$0$};
-\node (1) at (0,8) [nodedecorate] {};
-\node [above] at (1.north) {$1$};
-\node (2) at (4,4) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (3) at (0,0) [nodedecorate] {};
-\node [below] at (3.south) {$3$};
-% edges or lines
-\path
-(0) edge[arrowdecorate,bend left=15] node[left]{$1$} (1)
-(0) edge[arrowdecorate,bend left=10] node[above]{$2$} (2)
-(0) edge[arrowdecorate,bend left=10] node[right]{$3$} (3)
-(1) edge[arrowdecorate,bend left=10] node[right]{$3$} (0)
-(1) edge[arrowdecorate,bend left=15] node[right]{$2$} (2)
-(1) edge[arrowdecorate,bend left=10] node[right]{$1$} (3)
-(2) edge[arrowdecorate,bend left=10] node[below]{$2$} (0)
-(2) edge[arrowdecorate,bend left=10] node[left]{$1$} (1)
-(2) edge[arrowdecorate,bend left=15] node[right]{$3$} (3)
-(3) edge[arrowdecorate,bend left=15] node[left]{$1$} (0)
-(3) edge[arrowdecorate,bend left=10] node[left]{$1$} (1)
-(3) edge[arrowdecorate,bend left=10] node[left]{$1$} (2);
-\end{tikzpicture}
-}
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (0) at (4,-4) [nodedecorate] {};
-\node [right] at (0.east) {$0$};
-\node (1) at (2,-2) [nodedecorate] {};
-\node [right] at (1.east) {$1$};
-\node (2) at (6,-6) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (3) at (0,0) [nodedecorate] {};
-\node [right] at (3.east) {$3$};
-% edges or lines
-\path
-(3) edge[linedecorate] node[left]{$1$} (1)
-(1) edge[linedecorate] node[left]{$1$} (0)
-(0) edge[linedecorate] node[left]{$2$} (2);
-\end{tikzpicture}
-}
+\input{image/tree-forests_Prim-algorithm-digraph.tex}
 \caption{Prim's algorithm for digraphs. Above is the original digraph
   and below is the MST produced by Prim's algorithm.}
 \label{fig:tree-forests:Prim_algorithm_digraph}
@@ -997,62 +619,7 @@ sage: prim(G).edges()
 
 \begin{figure}[!htbp]
 \centering
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (0) at (0,0) [nodedecorate] {};
-\node (1) at (3,1.5) [nodedecorate] {};
-\node (2) at (6,3) [nodedecorate] {};
-\node (3) at (0,3) [nodedecorate] {};
-\node (4) at (3,4.5) [nodedecorate] {};
-\node (5) at (0,6) [nodedecorate] {};
-\node (6) at (3,7.5) [nodedecorate] {};
-% edges or lines
-\path
-(0) edge[linedecorate] node[below]{$7$} (1)
-(0) edge[linedecorate] node[left]{$5$} (3)
-(1) edge[linedecorate] node[below]{$8$} (2)
-(1) edge[linedecorate] node[below]{$9$} (3)
-(1) edge[linedecorate] node[right]{$7$} (4)
-(2) edge[linedecorate] node[below]{$5$} (4)
-(3) edge[linedecorate] node[below]{$15$} (4)
-(3) edge[linedecorate] node[left]{$6$} (5)
-(4) edge[linedecorate] node[below]{$8$} (5)
-(4) edge[linedecorate] node[right]{$9$} (6)
-(5) edge[linedecorate] node[below]{$11$} (6);
-\end{tikzpicture}
-}
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (6) at (0,0) [nodedecorate] {};
-\node [left] at (6.west) {$6$};
-\node (4) at (2,2) [nodedecorate] {};
-\node [left] at (4.west) {$4$};
-\node (1) at (4,4) [nodedecorate] {};
-\node [left] at (1.west) {$1$};
-\node (2) at (6,2) [nodedecorate] {};
-\node [left] at (2.west) {$2$};
-\node (0) at (4,6) [nodedecorate] {};
-\node [left] at (0.west) {$0$};
-\node (3) at (4,8) [nodedecorate] {};
-\node [left] at (3.west) {$3$};
-\node (5) at (4,10) [nodedecorate] {};
-\node [left] at (5.west) {$5$};
-% edges or lines
-\path
-(6) edge[linedecorate] node[below]{$9$} (4)
-(4) edge[linedecorate] node[below]{$7$} (1)
-(1) edge[linedecorate] node[above]{$8$} (2)
-(1) edge[linedecorate] node[right]{$7$} (0)
-(0) edge[linedecorate] node[right]{$5$} (3)
-(3) edge[linedecorate] node[right]{$6$} (5);
-\end{tikzpicture}
-}
+\input{image/tree-forests_Prim-algorithm-digraph2.tex}
 \caption{Another example of Prim's algorithm. On the left is the
   original graph. On the right is the MST produced by Prim's algorithm.}
 \label{fig:tree-forests:Prim_algorithm_digraph2}
@@ -1108,50 +675,7 @@ sage: boruvka(G)
 
 \begin{figure}[!htbp]
 \centering
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (0) at (0,0) [nodedecorate] {};
-\node [left] at (0.west) {$0$};
-\node (1) at (4,0) [nodedecorate] {};
-\node [right] at (1.east) {$1$};
-\node (2) at (4,4) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (3) at (0,4) [nodedecorate] {};
-\node [left] at (3.west) {$3$};
-% edges or lines
-\path
-(0) edge[linedecorate] node[below]{$1$} (1)
-(0) edge[linedecorate] node[below left] {$2$} (2)
-(0) edge[linedecorate] node[left]{$5$} (3)
-(1) edge[linedecorate] node[right]{$3$} (2)
-(1) edge[linedecorate] node[above left] {$6$} (3)
-(2) edge[linedecorate] node[above]{$4$} (3);
-\end{tikzpicture}
-}
-\qquad
-\subfigure[]{
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (3) at (0,0) [nodedecorate] {};
-\node [right] at (3.east) {$3$};
-\node (2) at (1,2) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (0) at (2,4) [nodedecorate] {};
-\node [right] at (0.east) {$0$};
-\node (1) at (3,6) [nodedecorate] {};
-\node [right] at (1.east) {$1$};
-% edges or lines
-\path
-(3) edge[linedecorate] node[left]{$4$} (2)
-(2) edge[linedecorate] node[left]{$2$} (0)
-(0) edge[linedecorate] node[left]{$1$} (1);
-\end{tikzpicture}
-}
+\input{image/tree-forests_Boruvkas-algorithm.tex}
 \caption{An example of Borovka's algorithm. On the left is the
   original graph. On the right is the MST produced by Boruvka's algorithm.}
 \label{fig:tree-forests:Boruvkas-algorithm}
@@ -1507,39 +1031,7 @@ Hamiltonian cycle on the graph $Q_n$
 
 \begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  darkline/.style={-,ultra thick},
-  lightline/.style={-,ultra thick,color=gray!30}]
-% nodes or vertices
-% foreground square
-\node (1) at (0,0) [nodedecorate] {};
-\node (2) at (4,0) [nodedecorate] {};
-\node (3) at (4,4) [nodedecorate] {};
-\node (4) at (0,4) [nodedecorate] {};
-% background square
-\node (5) at (1.5,1.5) [nodedecorate] {};
-\node (6) at (5.5,1.5) [nodedecorate] {};
-\node (7) at (5.5,5.5) [nodedecorate] {};
-\node (8) at (1.5,5.5) [nodedecorate] {};
-% edges or lines
-\path
-% foreground square
-(1) edge[darkline] node {} (2)
-(2) edge[lightline] node {} (3)
-(3) edge[lightline] node {} (4)
-(4) edge[lightline] node {} (1)
-% background square
-(5) edge[lightline] node {} (6)
-(6) edge[darkline] node {} (7)
-(7) edge[lightline] node {} (8)
-(8) edge[darkline] node {} (5)
-% joining foreground and background squares
-(1) edge[darkline] node {} (5)
-(2) edge[darkline] node {} (6)
-(3) edge[darkline] node {} (7)
-(4) edge[darkline] node {} (8);
-\end{tikzpicture}
+\input{image/trees_forests_gray-code-cube.tex}
 \caption{Viewing $\Gamma_3$ as a Hamiltonian path on $Q_3$.}
 \label{fig:trees_forests:gray_code_cube}
 \end{figure}
@@ -1639,11 +1131,7 @@ Figure~\ref{fig:trees_forests:Gamma_8}.
 
 \begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}
-\begin{axis}
-\addplot+[only marks,mark size=0.8pt] file {data/gamma8.dat};
-\end{axis}
-\end{tikzpicture}
+\input{image/trees_forests_Gamma-8.tex}
 \caption{List plot of $\Gamma_8$.}
 \label{fig:trees_forests:Gamma_8}
 \end{figure}
@@ -1779,26 +1267,7 @@ when $\ell = 2$.
 
 \begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
-  scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {
-  00/0/0/below/south, 01/2/0/below/south, 10/4/0/below/south,
-  11/6/0/below/south, 0/1/1/above/north, 1/5/1/above/north}
-{
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
-}
-\node (e) at (3,2) [nodedecorate] {};
-\node [above] at (e.north) {$\varepsilon$};
-%% edges or lines
-\path
-\foreach \startnode/\endnode in {0/00, 0/01, 1/10, 1/11, e/0, e/1} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
+\input{image/trees_forests_tree-representation-B-2.tex}
 \caption{Tree representation of the binary code $\BB_2$.}
 \label{fig:trees_forests:tree_representation_B_2}
 \end{figure}
@@ -2121,54 +1590,7 @@ Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings
 
 \begin{figure}[!htbp]
 \centering
-\subfigure[]{
-\label{fig:trees_forests:eg:binary_tree_Huffman_encodings:binary_tree}
-\begin{tikzpicture}
-[linedecorate/.style={-,thick},%
-  scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\weight/\x/\y in {b/2/0/0, f/3/1/0, g/5/0.5/1,
-  a/19/1.5/1, h/24/1/2, d/25/2/2, e/31/3/2, c/40/4/2, i/49/1.5/3,
-  j/71/3.5/3, k/120/2.5/4}
-{
-  \node (\nodename) at (\x,\y) [] {$\nodename:\weight$};
-}
-%% \node (e) at (3,2) [nodedecorate] {};
-%% \node [above] at (e.north) {$\varepsilon$};
-%% %% edges or lines
-\path
-\foreach \startnode/\endnode in {g/b, g/f, h/g, h/a, i/h, i/d, j/e,
-  j/c, k/i, k/j}
-{
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
-%%
-%%
-\subfigure[]{
-\label{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings}
-\begin{tikzpicture}
-[linedecorate/.style={-,thick},%
-  scale=1.5]
-%% nodes or vertices
-\foreach \nodename/\code/\x/\y in {b/0000/0/0, f/0001/1/0, g/000/0.5/1,
-  a/001/1.5/1, h/00/1/2, d/01/2/2, e/10/3/2, c/11/4/2, i/0/1.5/3,
-  j/1/3.5/3, k/$\varepsilon$/2.5/4}
-{
-  \node (\nodename) at (\x,\y) [] {$\texttt{\code}$};
-}
-%% \node (e) at (3,2) [nodedecorate] {};
-%% \node [above] at (e.north) {$\varepsilon$};
-%% %% edges or lines
-\path
-\foreach \startnode/\endnode in {g/b, g/f, h/g, h/a, i/h, i/d, j/e,
-  j/c, k/i, k/j}
-{
-  (\startnode) edge[linedecorate] node {} (\endnode)
-};
-\end{tikzpicture}
-}
+\input{image/trees_forests_binary-tree-Huffman-encodings.tex}
 \caption{Binary tree representation of an alphabet and its Huffman encodings.}
 \label{fig:trees_forests:eg:binary_tree_Huffman_encodings}
 \end{figure}
