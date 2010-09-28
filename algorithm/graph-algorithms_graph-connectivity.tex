@@ -1,0 +1,35 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+%%
+%% input/output
+\Input{An undirected graph $G = (V, E)$ of order $n > 0$. A vertex $s$
+  from which to start the search. The vertices are numbered from $1$
+  to  $n = |V|$, i.e. $V = \{1, 2, \dots, n\}$.}
+\Output{$\True$ if $G$ is connected; $\False$ otherwise.}
+\BlankLine
+%%
+%% algorithm body
+$Q \leftarrow [s]$~\tcc*[f]{queue of nodes to visit}\;
+$D \leftarrow [0, 0, \dots, 0]$~\tcc*[f]{$n$ copies of $0$}\;
+$D[s] \leftarrow 1$\;
+$c \leftarrow 1$\;
+\While{$\length(Q) > 0$}{
+  $v \leftarrow \dequeue(Q)$\;
+  \For{\emph{each} $w \in \adj(v)$}{
+    \If{$D[w] = 0$}{
+      $D[w] \leftarrow 1$\;
+      $c \leftarrow c + 1$\;
+      $\enqueue(Q, w)$\;
+    }
+  }
+}
+\If{$c = |V|$~\nllabel{alg:BFS:connectivity_test}}{
+  \Return \True\;
+} \Else{
+  \Return \False\;
+}

@@ -1,0 +1,32 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{An undirected or directed graph $G = (V, E)$ that is weighted
+  and has no self-loops. The order of $G$ is $n > 0$. A vertex $s \in V$
+  from which to start the search. Vertices are numbered from 1 to $n$,
+  i.e. $V = \{1, 2, \dots, n\}$.}
+\Output{A list $D$ of distances such that $D[v]$ is the distance of a
+  shortest path from $s$ to $v$. A list $P$ of vertex parents such
+  that $P[v]$ is the parent of $v$, i.e. $v$ is adjacent from $P[v]$.}
+\BlankLine
+%%
+%% algorithm body
+$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+$D[s] \leftarrow 0$\;
+$P \leftarrow [\,]$\;
+$Q \leftarrow V$~\tcc*[f]{list of nodes to visit}\;
+\While{$\length(Q) > 0$~\nllabel{alg:dijkstra_general:while_loop}}{
+  find $v \in Q$ such that $D[v]$ is minimal~\nllabel{alg:dijkstra_general:find_vertex_minimal_distance}\;
+  $Q \leftarrow \remove(Q, v)$\;
+  \For{\emph{each} $u \in \adj(v) \cap Q$~\nllabel{alg:dijkstra_general:for_loop}}{
+    \If{$D[u] > D[v] + w(vu)$~\nllabel{alg:dijkstra_general:if_relaxation}}{
+      $D[u] \leftarrow D[v] + w(vu)$\;
+      $P[u] \leftarrow v$\;
+    }
+  }
+}
+\Return $(D, P)$\;

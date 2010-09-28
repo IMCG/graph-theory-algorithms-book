@@ -1,0 +1,28 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A weighted graph or digraph $G = (V, E)$, where the vertices
+  are numbered as $V = \{1, 2, \dots, n\}$. A starting vertex $s$.}
+\Output{A list $D$ of distances from $s$ to all other vertices. A list
+  $P$ of parent vertices such that $P[v]$ is the parent of $v$.}
+\BlankLine
+%%
+%% algorithm body
+$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+let $C$ be a list of candidate vertices to visit\;
+\While{$\length(C) > 0$}{
+  select $v \in C$\;
+  $C \leftarrow \remove(C, v)$\;
+  \For{\emph{each} $u \in \adj(v)$~\nllabel{alg:generic_shortest_path:neighbors}}{
+    \If{$D[u] > D[v] + w(vu)$}{
+      $D[u] \leftarrow D[v] + w(vu)$\;
+      $P[u] \leftarrow v$\;
+      if $u$ is not in $C$, add $u$ to $C$\;
+    }
+  }
+}
+\Return $(D,P)$\;

@@ -1,0 +1,22 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{Count}{count}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+%%
+%% input/output
+\Input{A connected graph $G = (V, E)$ having edge weights.}
+\Output{A MST $T$ for $G$.}
+\BlankLine
+%%
+%% algorithm body
+Initialize: $V(T) = \{v_0\}$, where $v_0$ is an arbitrary vertex, $E(T)=\emptyset$\;
+While $V(T)\not= V$:\;
+{
+\quad Choose edge $(u,v)$ with minimal weight such that $u$ is in $V(T)$
+but $v$ is not,\;
+\quad Add $v$ to $V(T)$, add $(u, v)$ to $E(T)$.\;
+}

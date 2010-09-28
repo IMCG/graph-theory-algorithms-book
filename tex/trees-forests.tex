@@ -503,30 +503,8 @@ undirected graph $\Gamma=(V,E)$. It is very similar to Kruskal's
 algorithm except that it starts with an empty vertex set, rather than
 a full one.
 
-
-
 \begin{algorithm}[!htpb]
-\dontprintsemicolon  % no semicolon at end of pseudocode statements
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-\SetKwData{Count}{count}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
-%% input/output
-\Input{A connected graph $G = (V, E)$ having edge weights. }
-\Output{A MST $T$ for $G$.}
-\BlankLine
-%% algorithm body
-Initialize: $V(T) = \{v_0\}$, where $v_0$ is an arbitrary vertex, $E(T)=\emptyset$ \;
-
-While $V(T)\not= V$:\;
-{
-\quad Choose edge $(u,v)$ with minimal weight such that $u$ is in $V(T)$
-but $v$ is not,\;
-\quad Add $v$ to $V(T)$, add $(u, v)$ to $E(T)$.\;
-}
-
+\input{algorithm/trees-forests_Prim-algorithm.tex}
 \caption{Prim's algorithm.}
 \label{alg:tree-forest:prim}
 \end{algorithm}
@@ -1456,30 +1434,7 @@ $Q$~(line~\ref{alg:Huffman_tree:extract_tree_root}) and return it
 together with $T$~(line~\ref{alg:Huffman_tree:return_tree_and_root}).
 
 \begin{algorithm}[!htpb]
-\dontprintsemicolon  % no semicolon at end of pseudocode statements
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-%% input/output
-\Input{An alphabet $A$ of $n$ symbols. A weight list $W$ of size $n$
-  such that $W[i]$ is the weight of $a_i \in A$.}
-\Output{A binary tree $T$ representing the Huffman code of $A$ and the
-  root $r$ of $T$.}
-\BlankLine
-%% algorithm body
-$n \leftarrow |A|$\;
-$Q \leftarrow A$~\nllabel{alg:Huffman_tree:initialize_priority_queue}~\tcc*[f]{minimum priority queue}\;
-$T \leftarrow \text{empty tree}$~\nllabel{alg:Huffman_tree:empty_binary_tree}\;
-\For{$i \leftarrow 1, 2, \dots, n-1$~\nllabel{alg:Huffman_tree:for_loop:start}}{
-  $a \leftarrow \extractMin(Q)$\;
-  $b \leftarrow \extractMin(Q)$\;
-  $z \leftarrow$ node with left child $a$ and right child $b$\;
-  add the edges $za$ and $zb$ to $T$\;
-  $W[z] \leftarrow W[a] + W[b]$\;
-  insert $z$ into priority queue $Q$~\nllabel{alg:Huffman_tree:insert_into_queue}\;
-}
-$r \leftarrow \extractMin(Q)$~\nllabel{alg:Huffman_tree:extract_tree_root}\;
-\Return $(T, r)$~\nllabel{alg:Huffman_tree:return_tree_and_root}\;
+\input{algorithm/trees-forests_binary-tree-Huffman-codes.tex}
 \caption{Binary tree representation of Huffman codes.}
 \label{alg:trees_forests:binary_tree_Huffman_codes}
 \end{algorithm}
@@ -1519,36 +1474,7 @@ Algorithm~\ref{alg:trees_forests:Huffman_encoding_alphabet} is
 $O(|V|)$, where $V$ is the vertex set of $T$.
 
 \begin{algorithm}[!htpb]
-\dontprintsemicolon  % no semicolon at end of pseudocode statements
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-\SetKwData{treeRoot}{root}
-\SetKwData{one}{1}
-\SetKwData{zero}{0}
-%% input/output
-\Input{A binary tree $T$ representing the Huffman code of an alphabet
-  $A$. The root $r$ of $T$.}
-\Output{A list $H$ representing a Huffman code of $A$, where $H[a_i]$
-  corresponds to a Huffman encoding of $a_i \in A$.}
-\BlankLine
-%% algorithm body
-$H \leftarrow [\,]$~\tcc*[f]{list of Huffman encodings}\;
-$Q \leftarrow [r]$~\tcc*[f]{queue of vertices}\;
-\While{$\length(Q) > 0$}{
-  $\treeRoot \leftarrow \dequeue(Q)$\;
-  \eIf{\treeRoot \emph{is a leaf}}{
-    $H[\treeRoot] \leftarrow$ label of \treeRoot\;
-  }{
-    $a \leftarrow$ left child of \treeRoot\;
-    $b \leftarrow$ right child of \treeRoot\;
-    $\enqueue(Q, a)$\;
-    $\enqueue(Q, b)$\;
-    label of $a \leftarrow$ label of \treeRoot $+$ \zero\;
-    label of $b \leftarrow$ label of \treeRoot $+$ \one\;
-  }
-}
-\Return $H$\;
+\input{algorithm/trees-forests_Huffman-encoding-alphabet.tex}
 \caption{Huffman encoding of an alphabet.}
 \label{alg:trees_forests:Huffman_encoding_alphabet}
 \end{algorithm}

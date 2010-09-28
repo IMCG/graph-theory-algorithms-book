@@ -1,0 +1,27 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{An alphabet $A$ of $n$ symbols. A weight list $W$ of size $n$
+  such that $W[i]$ is the weight of $a_i \in A$.}
+\Output{A binary tree $T$ representing the Huffman code of $A$ and the
+  root $r$ of $T$.}
+\BlankLine
+%%
+%% algorithm body
+$n \leftarrow |A|$\;
+$Q \leftarrow A$~\nllabel{alg:Huffman_tree:initialize_priority_queue}~\tcc*[f]{minimum priority queue}\;
+$T \leftarrow \text{empty tree}$~\nllabel{alg:Huffman_tree:empty_binary_tree}\;
+\For{$i \leftarrow 1, 2, \dots, n-1$~\nllabel{alg:Huffman_tree:for_loop:start}}{
+  $a \leftarrow \extractMin(Q)$\;
+  $b \leftarrow \extractMin(Q)$\;
+  $z \leftarrow$ node with left child $a$ and right child $b$\;
+  add the edges $za$ and $zb$ to $T$\;
+  $W[z] \leftarrow W[a] + W[b]$\;
+  insert $z$ into priority queue $Q$~\nllabel{alg:Huffman_tree:insert_into_queue}\;
+}
+$r \leftarrow \extractMin(Q)$~\nllabel{alg:Huffman_tree:extract_tree_root}\;
+\Return $(T, r)$~\nllabel{alg:Huffman_tree:return_tree_and_root}\;

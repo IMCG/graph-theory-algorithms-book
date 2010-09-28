@@ -1,0 +1,34 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+%%
+%% input/output
+\Input{A non-increasing sequence $S = (d_1, d_2, \dots, d_n)$
+  of non-negative integers, where $n \geq 2$.}
+\Output{\True if $S$ is realizable by a simple graph; \False otherwise.}
+\BlankLine
+%%
+%% algorithm body
+\If{\emph{$\sum_i d_i$ is odd}~\nllabel{alg:Havel_Hakimi:handshaking_lemma}}{
+  \Return \False\;
+}
+\While{\True}{
+  \If{$\min(S) < 0$~\nllabel{alg:Havel_Hakimi:non_negative}}{
+    \Return \False\;
+  }
+  \If{$\max(S) = 0$~\nllabel{alg:Havel_Hakimi:all_zeros}}{
+    \Return \True\;
+  }
+  \If{$\max(S) > \length(S) - 1$~\nllabel{alg:Havel_Hakimi:degree_less_than_order}}{
+    \Return \False\;
+  }
+  $S
+  \leftarrow
+  (d_2-1,\, d_3-1, \dots, d_{d_1+1}-1,\, d_{d_1+2}, \dots, d_{\length(S)})$
+  \nllabel{alg:Havel_Hakimi:reduce_S_to_S_prime}\;
+  Sort $S$ in non-increasing order.\;
+}

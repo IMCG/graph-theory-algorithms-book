@@ -1,0 +1,45 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{False}{False}
+\SetKwData{True}{True}
+\SetKwData{Updated}{updated}
+%%
+%% input/output
+\Input{An undirected or directed graph $G = (V, E)$ that is weighted
+  and has no self-loops. Negative edge weights are allowed. The order
+  of $G$ is $n > 0$. A vertex $s \in V$ from which to start the
+  search. Vertices are numbered from 1 to $n$, i.e.
+  $V = \{1, 2, \dots, n\}$.}
+\Output{A list $D$ of distances such that $D[v]$ is the distance of a
+  shortest path from $s$ to $v$. A list $P$ of vertex parents such
+  that $P[v]$ is the parent of $v$, i.e. $v$ is adjacent from
+  $P[v]$. If $G$ has negative-weight cycles, then return
+  \False. Otherwise, return $D$ and $P$.}
+\BlankLine
+%%
+%% algorithm body
+$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}~\nllabel{alg:Bellman_Ford:init_infinity}\;
+$D[s] \leftarrow 0$\;
+$P \leftarrow [\,]$\;
+\For{$i \leftarrow 1, 2, \dots, n-1$}{
+  $\Updated \leftarrow \False$\;
+  \For{\emph{each edge} $uv \in E$}{
+    \If{$D[v] > D[u] + w(uv)$}{
+      $D[v] \leftarrow D[u] + w(uv)$\;
+      $P[v] \leftarrow u$\;
+      $\Updated \leftarrow \True$\;
+    }
+  }
+  \If{$\Updated = \False$}{
+    exit the loop\;
+  }
+}
+\For{\emph{each edge} $uv \in E$}{
+  \If{$D[v] > D[u] + w(uv)$}{
+    \Return \False\;
+  }
+}
+\Return $(D, P)$\;

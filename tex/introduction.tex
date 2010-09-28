@@ -1563,26 +1563,7 @@ Algorithm~\ref{alg:introduction:graph_isomorphism_canonical_labels}.
 \index{canonical label}
 
 \begin{algorithm}[!htpb]
-\dontprintsemicolon  % no semicolon at end of pseudocode statements
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
-%% input/output
-\Input{Two undirected simple graphs $G_1$ and $G_2$, each having $n$
-  vertices.}
-\Output{\True if $G_1 \cong G_2$; \False otherwise.}
-\BlankLine
-%% algorithm body
-Compute the adjacency matrix $A_i$ of $G_i$ ($i = 1, 2$).\;
-Compute the lexicographically maximal element $A_i'$ of the
-permutation equivalence class of $A_i$, for $i = 1, 2$.\;
-\eIf{$A_1' = A_2'$}{
-  \Return \True\;
-}{
-  \Return \False\;
-}
+\input{algorithm/introduction_graph-isomorphism-canonical-labels.tex}
 \caption{Computing graph isomorphism using canonical labels.}
 \label{alg:introduction:graph_isomorphism_canonical_labels}
 \end{algorithm}
@@ -1771,36 +1752,7 @@ sequence. These ideas are summarized in
 Algorithm~\ref{alg:introduction:Havel_Hakimi_degree_sequence}.
 
 \begin{algorithm}[!htpb]
-\dontprintsemicolon  % no semicolon at end of pseudocode statements
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
-%% input/output
-\Input{A non-increasing sequence $S = (d_1, d_2, \dots, d_n)$
-  of non-negative integers, where $n \geq 2$.}
-\Output{\True if $S$ is realizable by a simple graph; \False otherwise.}
-\BlankLine
-\If{\emph{$\sum_i d_i$ is odd}~\nllabel{alg:Havel_Hakimi:handshaking_lemma}}{
-  \Return \False\;
-}
-\While{\True}{
-  \If{$\min(S) < 0$~\nllabel{alg:Havel_Hakimi:non_negative}}{
-    \Return \False\;
-  }
-  \If{$\max(S) = 0$~\nllabel{alg:Havel_Hakimi:all_zeros}}{
-    \Return \True\;
-  }
-  \If{$\max(S) > \length(S) - 1$~\nllabel{alg:Havel_Hakimi:degree_less_than_order}}{
-    \Return \False\;
-  }
-  $S
-  \leftarrow
-  (d_2-1,\, d_3-1, \dots, d_{d_1+1}-1,\, d_{d_1+2}, \dots, d_{\length(S)})$
-  \nllabel{alg:Havel_Hakimi:reduce_S_to_S_prime}\;
-  Sort $S$ in non-increasing order.\;
-}
+\input{algorithm/introduction_Havel-Hakimi-degree-sequence.tex}
 \caption{Havel-Hakimi test for sequences realizable by simple graphs.}
 \label{alg:introduction:Havel_Hakimi_degree_sequence}
 \end{algorithm}

@@ -1,0 +1,33 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{treeRoot}{root}
+\SetKwData{one}{1}
+\SetKwData{zero}{0}
+%%
+%% input/output
+\Input{A binary tree $T$ representing the Huffman code of an alphabet
+  $A$. The root $r$ of $T$.}
+\Output{A list $H$ representing a Huffman code of $A$, where $H[a_i]$
+  corresponds to a Huffman encoding of $a_i \in A$.}
+\BlankLine
+%%
+%% algorithm body
+$H \leftarrow [\,]$~\tcc*[f]{list of Huffman encodings}\;
+$Q \leftarrow [r]$~\tcc*[f]{queue of vertices}\;
+\While{$\length(Q) > 0$}{
+  $\treeRoot \leftarrow \dequeue(Q)$\;
+  \eIf{\treeRoot \emph{is a leaf}}{
+    $H[\treeRoot] \leftarrow$ label of \treeRoot\;
+  }{
+    $a \leftarrow$ left child of \treeRoot\;
+    $b \leftarrow$ right child of \treeRoot\;
+    $\enqueue(Q, a)$\;
+    $\enqueue(Q, b)$\;
+    label of $a \leftarrow$ label of \treeRoot $+$ \zero\;
+    label of $b \leftarrow$ label of \treeRoot $+$ \one\;
+  }
+}
+\Return $H$\;
