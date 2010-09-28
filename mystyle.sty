@@ -118,6 +118,21 @@
 \DeclareMathOperator*{\remove}{remove}  %% remove an element from a list
 \DeclareMathOperator*{\Sh}{Sh}  %% Shannon multigraphs
 
+%% Custom environments
+%% For listing problem sets. Each problem is numbered according to the
+%% format
+%%
+%% chapterNumber.problemNumber.
+\newcounter{problemcounter}
+\newenvironment{problem}{%
+  \setcounter{problemcounter}{1}
+  \begin{list}
+    {\thechapter.\arabic{problemcounter}.}
+    {\usecounter{problemcounter}}
+    \let\olditem\item}{%
+  \end{list}
+}
+
 \makeindex
 \usepackage{hyperref}
 \hypersetup{
