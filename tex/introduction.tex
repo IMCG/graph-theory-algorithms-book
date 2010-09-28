@@ -895,7 +895,8 @@ $G$ has at most $\frac{1}{2} (n - k)(n - k + 1)$ edges.
 
 \begin{proof}
 If $n_i$ is the number of vertices in component $i$, then $n_i > 0$
-and it can be shown that
+and it can be shown~(see the proof of Lemma~2.1
+in~\cite[pp.21--22]{Foulds1992}) that
 %
 \begin{equation}
 \label{eq:introduction:inequality_set_positive_integers}
@@ -904,8 +905,8 @@ and it can be shown that
 \left(\sum n_i\right)^2 - (k - 1) \left(2 \sum n_i - k\right).
 \end{equation}
 %
-(This result holds true for any nonempty set of positive integers.)
-Note that $\sum n_i = n$ and
+(This result holds true for any nonempty but finite set of positive
+integers.) Note that $\sum n_i = n$ and
 by~(\ref{eq:introduction:upper_bound_total_edges_simple_graph}) each
 component $i$ has at most $\frac{1}{2} n_i (n_i - 1)$
 edges. Apply~(\ref{eq:introduction:inequality_set_positive_integers})
@@ -914,9 +915,9 @@ to get
 \begin{align*}
 \sum \frac{n_i (n_i - 1)}{2}
 &=
-\frac{1}{2} \sum n_i^2 - \frac{1}{2} \sum n_i \\
+\frac{1}{2} \sum n_i^2 - \frac{1}{2} \sum n_i \\[4pt]
 &\leq
-\frac{1}{2} (n^2 - 2nk + k^2 + 2n - k) - \frac{1}{2} n \\
+\frac{1}{2} (n^2 - 2nk + k^2 + 2n - k) - \frac{1}{2} n \\[4pt]
 &=
 \frac{(n - k) (n - k + 1)}{2}
 \end{align*}
