@@ -24,13 +24,14 @@ To delete junk files resulting from the compilation process, run
 
 $ make clean
 
-The file graph.sh is a script that interfaces with utilities under the
-directory bin/.
+In fact, a successful compilation should automatically delete any junk
+files resulting from the compilation process. The file graph.sh is a script
+that interfaces with utilities under the directory bin/.
 
 
 [1] http://www.gnu.org/copyleft/fdl.html
 [2] http://www.wdjoyner.org
-[3] http://sites.google.com/site/nguyenminh2
+[3] http://sage.math.washington.edu/home/mvngu/
 [4] http://www-sop.inria.fr/members/Nathann.Cohen
 [5] http://www.sagemath.org
 [6] http://www.latex-project.org
