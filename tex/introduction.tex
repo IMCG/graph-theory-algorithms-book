@@ -2586,6 +2586,52 @@ are listed below.
 \section{Problems}
 
 \begin{enumerate}
+\item For each graph in
+  Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}, do
+  the following:
+  %%
+  \begin{enumerate}
+  \item Construct the graph using Sage.
+
+  \item Find its adjacency matrix.
+
+  \item Find its node and edge sets.
+
+  \item How many nodes and edges are in the graph?
+
+  \item If applicable, find all of each node's in-coming and out-going
+    edges. Hence find the node's indegree and outdegree.
+  \end{enumerate}
+
+  \begin{figure}[!htbp]
+    \centering
+    \input{image/introduction_social-network.tex}
+    \caption{Graph representation of a social network.}
+    \label{fig:introduction:social_network}
+  \end{figure}
+
+\item In the friendship network of
+  Figure~\ref{fig:introduction:social_network}, Carol is a mutual
+  friend of Alice and Bob. How many possible ways are there to remove
+  exactly one edge such that, in the resulting network, Carol is no
+  longer a mutual friend of Alice and Bob?
+
+  \begin{figure}[!htbp]
+    \centering
+    \input{image/introduction_routing-network.tex}
+    \caption{Graph representation of a routing network.}
+    \label{fig:introduction:routing_network}
+  \end{figure}
+
+\item The routing network of German cities in
+  Figure~\ref{fig:introduction:routing_network} shows that each pair
+  of distinct cities are connected by a flight path. In particular,
+  there is a flight path connecting Karlsruhe and Stuttgart. What is
+  the shortest route between Karlsruhe and Stuttgart? Suppose we can
+  remove at least one edge from this network. How many possible ways
+  are there to remove edges such that, in the resulting network,
+  Karlsruhe is no longer connected to Stuttgart via a flight path?
+
 \item Let $D = (V, E)$ be a digraph of size $q$. Show that
   \[
   \sum_{v \in V} \id(v)
