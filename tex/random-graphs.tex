@@ -38,7 +38,9 @@ Instinctively, we would like to find a copy of $H$ in $G_{n,p}$ by iteratively f
 \end{proof}
 
 \begin{proof}
-  Formally, let us write $H_i = H[\{v_1,\dots,v_{j-1}\}]$, and denote the probability that $H$ is an induced subgraph of $G_{n,p}$ by $P[H\mapsto_{ind} G_{n,p}]$. We can roughly bound the probability that $H_i$, but not $H_{i+1}$, is an induced subgraph of $G_{n,p}$ the following way :
+  Formally, let us write $H_i = H[\{v_1,\dots,v_{j-1}\}]$, and denote
+  the probability that $H$ is an induced subgraph of $G_{n,p}$ by $P[H
+    \mapsto_{ind} G_{n,p}]$. We can roughly bound the probability that $H_i$, but not $H_{i+1}$, is an induced subgraph of $G_{n,p}$ the following way :
 
   \begin{itemize}
   \item We put a copy of $H_i$ at any of the $\binom n i$ different $i$-subsets of $V(G_{n,p})$.
@@ -57,11 +59,11 @@ Which is asymptotically equal to 0 as $n$ grows.
 Thus
 
 \begin{align*}
-  P[H\mapsto_{ind} G_{n,p}]&=1 - P[H_2\mapsto_{ind} G_{n,p}, H_3\not \mapsto_{ind} G_{n,p}]\\
-  &-P[H_3\mapsto_{ind} G_{n,p}, H_4\not \mapsto_{ind} G_{n,p}]\\
+  P[H \mapsto_{ind} G_{n,p}]&=1 - P[H_2 \mapsto_{ind} G_{n,p}, H_3\not \mapsto_{ind} G_{n,p}]\\
+  &-P[H_3 \mapsto_{ind} G_{n,p}, H_4\not \mapsto_{ind} G_{n,p}]\\
   &\dots\\
-  &-P[H_{k-1}\mapsto_{ind} G_{n,p}, H_k\not \mapsto_{ind} G_{n,p}]\\
-  P[H\mapsto_{ind} G_{n,p}]&\geq 1-\sum_{i\leq k}i!n^i(1-\epsilon^i)^{n-i}\\
+  &-P[H_{k-1} \mapsto_{ind} G_{n,p}, H_k\not \mapsto_{ind} G_{n,p}]\\
+  P[H \mapsto_{ind} G_{n,p}]&\geq 1-\sum_{i\leq k}i!n^i(1-\epsilon^i)^{n-i}\\
   &\geq 1-k\times o(1/n)\\
 \end{align*}
 
