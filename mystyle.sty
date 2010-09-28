@@ -40,10 +40,6 @@
 \usepackage{pgfplots}
 \usepackage{subfigure}
 
-%% The following is a brute-force way to prevent the headers
-%% from getting transformed into all-caps
-\renewcommand\MakeUppercase{}
-
 %% For typesetting code listings
 \usepackage{listings}
 \lstdefinelanguage{Sage}[]{Python}
@@ -98,6 +94,9 @@
 \newcommand{\Sage}{\SAGE}
 
 %% Customize existing commands
+%% The following is a brute-force way to prevent the headers from
+%% getting transformed into all-caps.
+\renewcommand{\MakeUppercase}{}
 \renewcommand{\mapsto}{\longmapsto}  %% function image A |--> B
 \renewcommand{\to}{\longrightarrow}  %% function notation f: A -> B
 
