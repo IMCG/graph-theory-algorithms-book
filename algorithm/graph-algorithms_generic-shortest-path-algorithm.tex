@@ -12,15 +12,15 @@
 \BlankLine
 %%
 %% algorithm body
-$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+$D \assign [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
 let $C$ be a list of candidate vertices to visit\;
 \While{$\length(C) > 0$}{
   select $v \in C$\;
-  $C \leftarrow \remove(C, v)$\;
+  $C \assign \remove(C, v)$\;
   \For{\emph{each} $u \in \adj(v)$~\nllabel{alg:generic_shortest_path:neighbors}}{
     \If{$D[u] > D[v] + w(vu)$}{
-      $D[u] \leftarrow D[v] + w(vu)$\;
-      $P[u] \leftarrow v$\;
+      $D[u] \assign D[v] + w(vu)$\;
+      $P[u] \assign v$\;
       if $u$ is not in $C$, add $u$ to $C$\;
     }
   }

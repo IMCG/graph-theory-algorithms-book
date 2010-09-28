@@ -13,15 +13,15 @@
 \BlankLine
 %%
 %% algorithm body
-$S \leftarrow [s]$ \tcc*[f]{stack of nodes to visit}\;
-$D \leftarrow [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
-$D[s] \leftarrow 0$\;
-$T \leftarrow [\,]$\;
+$S \assign [s]$ \tcc*[f]{stack of nodes to visit}\;
+$D \assign [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
+$D[s] \assign 0$\;
+$T \assign [\,]$\;
 \While{$\length(S) > 0$~\nllabel{alg:DFS:while_loop_tests_non_empty_stack}}{
-  $v \leftarrow \pop(S)$\;
+  $v \assign \pop(S)$\;
   \For{\emph{each} $w \in \adj(v)$~\nllabel{alg:DFS:for_loop_visit_neighbors}}{
     \If{$D[w] = \infty$~\nllabel{alg:DFS:if_test_unvisited_neighbors}}{
-      $D[w] \leftarrow D[v] + 1$\;
+      $D[w] \assign D[v] + 1$\;
       $\push(S, w)$\;
       $\append(T, vw)$\;
     }

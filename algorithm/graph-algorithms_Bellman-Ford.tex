@@ -19,14 +19,14 @@
 \BlankLine
 %%
 %% algorithm body
-$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}~\nllabel{alg:Bellman_Ford:init_infinity}\;
-$D[s] \leftarrow 0$\;
-$P \leftarrow [\,]$~\nllabel{alg:Bellman_Ford:init_parent_list}\;
-\For{$i \leftarrow 1, 2, \dots, n-1$~\nllabel{alg:Bellman_Ford:for_loop:relax}}{
+$D \assign [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}~\nllabel{alg:Bellman_Ford:init_infinity}\;
+$D[s] \assign 0$\;
+$P \assign [\,]$~\nllabel{alg:Bellman_Ford:init_parent_list}\;
+\For{$i \assign 1, 2, \dots, n-1$~\nllabel{alg:Bellman_Ford:for_loop:relax}}{
   \For{\emph{each edge} $uv \in E$}{
     \If{$D[v] > D[u] + w(uv)$}{
-      $D[v] \leftarrow D[u] + w(uv)$\;
-      $P[v] \leftarrow u$\;
+      $D[v] \assign D[u] + w(uv)$\;
+      $P[v] \assign u$\;
     }
   }
   \nllabel{alg:Bellman_Ford:for_loop:end_relax}

@@ -15,17 +15,17 @@
 \BlankLine
 %%
 %% algorithm body
-$D \leftarrow [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
-$D[s] \leftarrow 0$\;
-$P \leftarrow [\,]$\;
-$Q \leftarrow V$~\tcc*[f]{list of nodes to visit}\;
+$D \assign [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+$D[s] \assign 0$\;
+$P \assign [\,]$\;
+$Q \assign V$~\tcc*[f]{list of nodes to visit}\;
 \While{$\length(Q) > 0$~\nllabel{alg:dijkstra_general:while_loop}}{
   find $v \in Q$ such that $D[v]$ is minimal~\nllabel{alg:dijkstra_general:find_vertex_minimal_distance}\;
-  $Q \leftarrow \remove(Q, v)$\;
+  $Q \assign \remove(Q, v)$\;
   \For{\emph{each} $u \in \adj(v) \cap Q$~\nllabel{alg:dijkstra_general:for_loop}}{
     \If{$D[u] > D[v] + w(vu)$~\nllabel{alg:dijkstra_general:if_relaxation}}{
-      $D[u] \leftarrow D[v] + w(vu)$\;
-      $P[u] \leftarrow v$\;
+      $D[u] \assign D[v] + w(vu)$\;
+      $P[u] \assign v$\;
     }
   }
 }

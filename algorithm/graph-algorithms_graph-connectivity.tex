@@ -14,16 +14,16 @@
 \BlankLine
 %%
 %% algorithm body
-$Q \leftarrow [s]$~\tcc*[f]{queue of nodes to visit}\;
-$D \leftarrow [0, 0, \dots, 0]$~\tcc*[f]{$n$ copies of $0$}\;
-$D[s] \leftarrow 1$\;
-$c \leftarrow 1$\;
+$Q \assign [s]$~\tcc*[f]{queue of nodes to visit}\;
+$D \assign [0, 0, \dots, 0]$~\tcc*[f]{$n$ copies of $0$}\;
+$D[s] \assign 1$\;
+$c \assign 1$\;
 \While{$\length(Q) > 0$}{
-  $v \leftarrow \dequeue(Q)$\;
+  $v \assign \dequeue(Q)$\;
   \For{\emph{each} $w \in \adj(v)$}{
     \If{$D[w] = 0$}{
-      $D[w] \leftarrow 1$\;
-      $c \leftarrow c + 1$\;
+      $D[w] \assign 1$\;
+      $c \assign c + 1$\;
       $\enqueue(Q, w)$\;
     }
   }

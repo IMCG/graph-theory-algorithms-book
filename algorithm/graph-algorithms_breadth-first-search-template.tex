@@ -13,15 +13,15 @@
 \BlankLine
 %%
 %% algorithm body
-$Q \leftarrow [s]$~\nllabel{alg:BFS:initialize_queue_visit_nodes} \tcc*[f]{queue of nodes to visit}\;
-$D \leftarrow [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
-$D[s] \leftarrow 0$\;
-$T \leftarrow [\,]$~\nllabel{alg:BFS:initialize_empty_tree}\;
+$Q \assign [s]$~\nllabel{alg:BFS:initialize_queue_visit_nodes} \tcc*[f]{queue of nodes to visit}\;
+$D \assign [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
+$D[s] \assign 0$\;
+$T \assign [\,]$~\nllabel{alg:BFS:initialize_empty_tree}\;
 \While{$\length(Q) > 0$~\nllabel{alg:BFS:while_loop:non_empty_queue}}{
-  $v \leftarrow \dequeue(Q)$\;
+  $v \assign \dequeue(Q)$\;
   \For{\emph{each} $w \in \adj(v)$~\nllabel{alg:BFS:explore_neighborhood}}{
     \If{$D[w] = \infty$~\nllabel{alg:BFS:marking_vertex_as_visited}}{
-      $D[w] \leftarrow D[v] + 1$\;
+      $D[w] \assign D[v] + 1$\;
       $\enqueue(Q, w)$\;
       $\append(T, vw)$~\nllabel{alg:BFS:while_loop:append_to_tree}\;
     }

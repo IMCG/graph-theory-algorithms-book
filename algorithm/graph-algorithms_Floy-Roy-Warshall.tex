@@ -16,15 +16,15 @@
 \BlankLine
 %%
 %% algorithm body
-$n \leftarrow |V|$\;
-$P[a_{ij}] \leftarrow$ an $n \times n$ zero matrix\;
-$D[a_{ij}] \leftarrow W[w(i,j)]$\;
-\For{$k \leftarrow 1, 2, \dots, n$}{
-  \For{$i \leftarrow 1, 2, \dots, n$}{
-    \For{$j \leftarrow 1, 2, \dots, n$}{
+$n \assign |V|$\;
+$P[a_{ij}] \assign$ an $n \times n$ zero matrix\;
+$D[a_{ij}] \assign W[w(i,j)]$\;
+\For{$k \assign 1, 2, \dots, n$}{
+  \For{$i \assign 1, 2, \dots, n$}{
+    \For{$j \assign 1, 2, \dots, n$}{
       \If{$D[i,j] > D[i,k] + D[k,j]$}{
-        $P[i,j] \leftarrow k$\;
-        $D[i,j] \leftarrow D[i,k] + D[k,j]$\;
+        $P[i,j] \assign k$\;
+        $D[i,j] \assign D[i,k] + D[k,j]$\;
       }
     }
   }

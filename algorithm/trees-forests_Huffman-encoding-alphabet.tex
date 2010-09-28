@@ -15,19 +15,19 @@
 \BlankLine
 %%
 %% algorithm body
-$H \leftarrow [\,]$~\tcc*[f]{list of Huffman encodings}\;
-$Q \leftarrow [r]$~\tcc*[f]{queue of vertices}\;
+$H \assign [\,]$~\tcc*[f]{list of Huffman encodings}\;
+$Q \assign [r]$~\tcc*[f]{queue of vertices}\;
 \While{$\length(Q) > 0$}{
-  $\treeRoot \leftarrow \dequeue(Q)$\;
+  $\treeRoot \assign \dequeue(Q)$\;
   \eIf{\treeRoot \emph{is a leaf}}{
-    $H[\treeRoot] \leftarrow$ label of \treeRoot\;
+    $H[\treeRoot] \assign$ label of \treeRoot\;
   }{
-    $a \leftarrow$ left child of \treeRoot\;
-    $b \leftarrow$ right child of \treeRoot\;
+    $a \assign$ left child of \treeRoot\;
+    $b \assign$ right child of \treeRoot\;
     $\enqueue(Q, a)$\;
     $\enqueue(Q, b)$\;
-    label of $a \leftarrow$ label of \treeRoot $+$ \zero\;
-    label of $b \leftarrow$ label of \treeRoot $+$ \one\;
+    label of $a \assign$ label of \treeRoot $+$ \zero\;
+    label of $b \assign$ label of \treeRoot $+$ \one\;
   }
 }
 \Return $H$\;

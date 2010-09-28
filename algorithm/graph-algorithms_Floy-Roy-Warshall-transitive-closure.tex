@@ -12,21 +12,21 @@
 \BlankLine
 %%
 %% algorithm body
-$n \leftarrow |V|$\;
-$T \leftarrow$ adjacency matrix of $G$\;
-%% \For{$i \leftarrow 1, 2, \dots, n$}{
-%%   \For{$j \leftarrow 1, 2, \dots, n$}{
+$n \assign |V|$\;
+$T \assign$ adjacency matrix of $G$\;
+%% \For{$i \assign 1, 2, \dots, n$}{
+%%   \For{$j \assign 1, 2, \dots, n$}{
 %%     \eIf{$i = j$ \emph{or} $ij \in E$}{
-%%       $T[i,j] \leftarrow 1$\;
+%%       $T[i,j] \assign 1$\;
 %%     }{
-%%       $T[i,j] \leftarrow 0$\;
+%%       $T[i,j] \assign 0$\;
 %%     }
 %%   }
 %% }
-\For{$k \leftarrow 1, 2, \dots, n$}{
-  \For{$i \leftarrow 1, 2, \dots, n$}{
-    \For{$j \leftarrow 1, 2, \dots, n$}{
-      $T[i,j] \leftarrow T[i,j] \vee \big( T[i,k] \wedge T[k,j] \big)$\;
+\For{$k \assign 1, 2, \dots, n$}{
+  \For{$i \assign 1, 2, \dots, n$}{
+    \For{$j \assign 1, 2, \dots, n$}{
+      $T[i,j] \assign T[i,j] \vee \big( T[i,k] \wedge T[k,j] \big)$\;
     }
   }
 }
