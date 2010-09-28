@@ -1208,7 +1208,7 @@ $\{0,1\}$. A word over the binary alphabet is a finite sequence of
 $0$'s and $1$'s. If $A$ is an alphabet, let $A^*$ denote the set of
 all words in $A$. The length of a word is denoted by vertical
 bars. That is, if $w = a_1 \cdots a_k$ is a word over $A$, then define
-$|w|: A^* \longrightarrow \ZZ$ by
+$|w|: A^* \to \ZZ$ by
 \[
 |w|
 =
@@ -1217,7 +1217,7 @@ $|w|: A^* \longrightarrow \ZZ$ by
 k.
 \]
 Let $A$ and $B$ be two alphabets. A \emph{code}\index{code} for $A$
-using $B$ is an injection $c: A \longrightarrow B^*$. By abuse of
+using $B$ is an injection $c: A \to B^*$. By abuse of
 notation, we often denote the code simply by the set
 \[
 C
@@ -1297,14 +1297,14 @@ codewords are determined by the following rules:
 
 \subsection{Uniquely decodable codes}
 
-If $c: A \longrightarrow B^*$ is a code, then we can extend $c$ to
+If $c: A \to B^*$ is a code, then we can extend $c$ to
 $A^*$ by \emph{concatenation}:
 \[
 c(a_1 a_2 \cdots a_k)
 =
 c(a_1) c(a_2) \cdots c(a_k).
 \]
-If the extension $c: A^* \longrightarrow T^*$ is also an injection,
+If the extension $c: A^* \to T^*$ is also an injection,
 then $c$ is called \emph{uniquely decodable}.
 \index{code!uniquely decodable}
 
@@ -1321,7 +1321,7 @@ $9$, punctuation symbols, and some others) are also encodable in Morse
 code, but they use longer codewords.
 
 Let $A$ denote the English alphabet, $B = \{0, 1\}$ the binary
-alphabet, and $C: A \longrightarrow B^*$ the Morse code. Since
+alphabet, and $C: A \to B^*$ the Morse code. Since
 $c(ET) = 01 = c(A)$, it is clear that the Morse code is \emph{not}
 uniquely decodable.
 \end{proof}
@@ -1329,7 +1329,7 @@ uniquely decodable.
 In fact, prefix-free implies uniquely decodable.
 
 \begin{theorem}
-If a code $c: A \longrightarrow B^*$ is prefix-free, then it is
+If a code $c: A \to B^*$ is prefix-free, then it is
 uniquely decodable.
 \end{theorem}
 
@@ -1341,7 +1341,7 @@ $x_1 \cdots x_k = y_1 \cdots y_\ell$. This in turn implies $k = \ell$
 and $x_i = y_i$ for all $i$.
 
 The case of length $1$ follows from the fact that
-$c: A \longrightarrow B^*$ is injective~(by the definition of a
+$c: A \to B^*$ is injective~(by the definition of a
 code).
 
 Suppose that the statement of the theorem holds for all
@@ -1360,8 +1360,8 @@ imply $k = \ell$ and $x_i = y_i$ for all $i$.
 \end{proof}
 
 Consider now a weighted alphabet $(A,p)$, where
-$p: A \longrightarrow [0,1]$ satisfies $\sum_{a \in A}p(a) = 1$, and a
-code $c: A \longrightarrow B^*$. In other words, $p$ is a probability
+$p: A \to [0,1]$ satisfies $\sum_{a \in A}p(a) = 1$, and a
+code $c: A \to B^*$. In other words, $p$ is a probability
 distribution on $A$. Think of $p(a)$ as the probability that the
 symbol $a$ arises in an typical message. The
 \emph{average word length} $L(c)$ is\footnote{
@@ -1377,7 +1377,7 @@ L(c)
 where $|\cdot|$ denotes the \emph{length} of a codeword.
 \index{length of codeword}
 Given a weighted alphabet $(A,p)$ as above, a code
-$c: A \longrightarrow B^*$ is called \emph{optimal} if there is no
+$c: A \to B^*$ is called \emph{optimal} if there is no
 such code with a smaller average word length.
 \index{code!optimal}
 Optimal codes satisfy the following amazing property. For a proof,
@@ -1386,7 +1386,7 @@ see more, refer to section~3.6 of Biggs~\cite{Biggs2009}.
 
 \begin{lemma}
 \label{lem:trees_forests:binary_optimal_prefix_free_code}
-Suppose $c: A \longrightarrow B^*$ is a binary optimal prefix-free
+Suppose $c: A \to B^*$ is a binary optimal prefix-free
 code and let $\ell = \max_{a \in A} \big(|c(a)|\big)$ denote the
 maximum length of a codeword. The following statements hold.
 %

@@ -32,7 +32,7 @@ $i$ is an incidence function as in
 (\ref{eqn:edge-incidence}), which we regard as the identity function,
 and $h$ is an
 orientation function as in (\ref{eqn:edge-orientation}).
-Let ${\rm wt}:E\to {\mathbb{R}}$ be the weight function.
+Let ${\rm wt}: E \to {\mathbb{R}}$ be the weight function.
 (if $G$ is not provided with a weight function on the edges,
 then assume that ${\rm wt}(e)=1$, for all $e\in E$.)
 If $v_1,v_2\in V$ are two vertices and $P=(e_1,\dots,e_m)$ is
@@ -43,7 +43,7 @@ to be the sum of the weights of the edges in $P$:
 \[
 {\rm wt}(P)=\sum_{i=1}^m {\rm wt}(e_i).
 \]
-The {\it distance function} $\partial:V\times V\to  {\mathbb{R}}\cup
+The {\it distance function} $\partial:V\times V \to  {\mathbb{R}}\cup
 \{\infty\}$ on
 \index{distance function}
 $G$ is defined by $\partial(v_1,v_2) = \infty$,
@@ -74,7 +74,7 @@ and the distance function form
 a metric space, if and only if the graph is connected.
 \end{exercise}
 
-The {\it eccentricity} $\epsilon:V\to  {\mathbb{R}}$ is defined as follows:
+The {\it eccentricity} $\epsilon:V \to  {\mathbb{R}}$ is defined as follows:
 $\epsilon (v)$ (for a vertex $v$) is the greatest distance between $v$
 and any other vertex in $G$.
 \index{eccentricity}
@@ -685,7 +685,7 @@ Let $s$ and $t$ denote the source and the sink of $G$, respectively.
 The {\it capacity} (or {\it edge capacity})
 \index{capacity}
 \index{edge capacity})
-is a mapping $c: E\to {\mathbf{R}}$, denoted by $c_{uv}$
+is a mapping $c: E \to {\mathbf{R}}$, denoted by $c_{uv}$
 or $c(u,v)$, for $(u,v)\in E$ and $h(e)= u$.
 If $(u,v)\in E$ and $h(e)= v$
 then we set, by convention, $c(v,u)=-c(u,v)$.
@@ -696,7 +696,7 @@ of ``flow'' that can pass through an edge.
 
 A {\it flow}
 \index{flow}
-is a mapping $f: E\to {\mathbf{R}}$, denoted by $f_{uv}$ or
+is a mapping $f: E \to {\mathbf{R}}$, denoted by $f_{uv}$ or
 $f(u,v)$, subject to the following two constraints:
 \begin{itemize}
 \item
@@ -808,7 +808,7 @@ Recall the cut-set of $C$ is the set
 \label{lemma:flow=0}
 {\rm
 Let $G = (V, E)$ be a capacitated digraph with
-capacity $c: E\to {\mathbf{R}}$, and let
+capacity $c: E \to {\mathbf{R}}$, and let
 $s$ and $t$ denote the source and the sink of $G$, respectively.
 If $C$ is an $s-t$ cut and if
 the edges in the cut-set of $C$ are removed, then $| f | = 0$.
@@ -876,7 +876,7 @@ of the general version of the MFMC theorem.
 {\rm
 This theorem can be generalized as follows.
 In addition to edge capacity, suppose there is capacity at each {\it vertex},
-that is, a mapping $c: V\to {\mathbf{R}}$, denoted by
+that is, a mapping $c: V \to {\mathbf{R}}$, denoted by
 $v\longmapsto c(v)$, such that the flow $f$ has to
 satisfy not only the capacity constraint and the conservation of flows,
 but also the vertex capacity constraint
@@ -933,9 +933,9 @@ To prove the max-flow/min-cut theorem we will use the following lemma.
 \begin{lemma}
 {\rm
 Let $G=(V,E)$ be a directed graph with edge
-capacity $c:E\to {\mathbf{Z}}$,
+capacity $c: E \to {\mathbf{Z}}$,
 a source $s\in V$, and a sink $t\in V$.
-A flow $f:E\to {\mathbf{Z}}$ is a maximum flow if
+A flow $f: E \to {\mathbf{Z}}$ is a maximum flow if
 and only if there is no $f$-augmenting path in the graph.
 }
 \end{lemma}
