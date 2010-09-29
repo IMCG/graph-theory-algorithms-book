@@ -1625,23 +1625,138 @@ Kleene~\cite{Kleene1956}, called Kleene's algorithm.
 
 \section{Johnson's algorithm}
 
-See section~25.3 of Cormen~et~al.~\cite{CormenEtAl2001} and
-Johnson~\cite{Johnson1977}.
+Let $G = (V,E)$ be a sparse\index{sparse graph} digraph with edge
+weights but no negative cycles.
+\emph{Johnson's algorithm}\index{Johnson's algorithm}~\cite{Johnson1977}
+finds a shortest path between each pair of vertices in $G$. First
+published in 1977, the main insight of Johnson's algorithm is to
+combine the technique of edge reweighting\index{reweight} with the
+Bellman-Ford\index{Bellman-Ford algorithm} and
+Dijkstra's\index{Dijkstra's algorithm} algorithms. The Bellman-Ford
+algorithm is first used to ensure that $G$ has no negative
+cycles. Next, we reweight edges in such a manner as to preserve
+shortest paths. The final stage makes use of Dijkstra's algorithm for
+computing shortest paths between all vertex pairs. Pseudocode for
+Johnson's algorithm is presented in
+Algorithm~\ref{alg:graph_algorithms:Johnson_algorithm}. With a
+Fibonacci heap\index{Fibonacci heap} implementation of the
+minimum-priority queue\index{minimum-priority queue}, the time
+complexity for sparse graphs is $O(|V|^2 \log |V| + |V| \cdot |E|)$,
+where $n = |V|$ is the number of vertices of the original graph $G$.
 
-Let $G = (V,E)$ be a graph with edge weights but no negative cycles.
-\emph{Johnson's algorithm} finds a shortest path between all pairs of
-vertices in a ``sparse'' directed graph.
-\index{Johnson's algorithm}
+To prove the correctness of
+Algorithm~\ref{alg:graph_algorithms:Johnson_algorithm}, we need to
+show that the new set of edge weights produced by $\hat{w}$ must
+satisfy two properties:
+%%
+\begin{enumerate}
+\item The reweighted\index{reweight} edges preserve shortest
+  paths. That is, let $p$ be a $u$-$v$ path for $u,v \in V$. Then $p$
+  is a shortest weighted path\index{weighted path}\index{shortest path}
+  using weight function $w$ if and only if $p$ is also a shortest
+  weighted path using weight function $\hat{w}$.
 
-\begin{algorithm}[!htpb]
+\item The reweight function $\hat{w}$ produces nonnegative weights. In
+  other words, if $u,v \in V$ then $\hat{w}(uv) \geq 0$.
+\end{enumerate}
+%%
+Both of these properties are proved in
+Lemma~\ref{lem:graph_algorithms:reweighting_preserves_shortest_paths}.
+
+\begin{algorithm}[!htbp]
 \input{algorithm/graph-algorithms_Johnson-algorithm.tex}
 \caption{Johnson's algorithm for sparse graphs.}
 \label{alg:graph_algorithms:Johnson_algorithm}
 \end{algorithm}
 
-The time complexity, for sparse graphs, is
-$O(|V|^2\log |V| + |V| \cdot |E)|=O(n^2\log n)$, where $n = |V|$ is
-the number of vertices of the original graph $G$.
+\begin{lemma}
+\label{lem:graph_algorithms:reweighting_preserves_shortest_paths}
+\textbf{Reweighting preserves shortest paths.}\index{reweight}
+Let $G = (V,E)$ be a weighted digraph having weight function
+$w: E \to \R$ and let $h: V \to \R$ be a mapping of vertices to real
+numbers. Let $\hat{w}$ be another weight function for $G$ such that
+\[
+\hat{w}(uv)
+=
+w(uv) + h(u) - h(v)
+\]
+for all $uv \in E$. Suppose $p: v_0, v_1, \dots, v_k$ is any path in
+$G$. Then we have the following results.
+%%
+\begin{enumerate}
+\item The path $p$ is a shortest $v_0$-$v_k$ path with weight function
+  $w$ if and only if it is a shortest $v_0$-$v_k$ path with weight
+  function $\hat{w}$.
+
+\item The graph $G$ has a negative cycle using weight function $w$ if
+  and only if $G$ has a negative cycle using $\hat{w}$.
+
+\item If $G$ has no negative cycles, then $\hat{w}(uv) \geq 0$ for all
+  $uv \in E$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Write $\delta$ and $\hat{\delta}$ for the shortest path weights
+derived from $w$ and $\hat{w}$, respectively. To prove part~1, we need
+to show that $w(p) = \delta(v_0, v_k)$ if and only if
+$\hat{w}(p) = \hat{\delta}(v_0, v_k)$. First, note that any
+$v_0$-$v_k$ path $p$ satisfies $\hat{w}(p) = w(p) + h(v_0) - h(v_k)$
+because
+%%
+\begin{align*}
+\hat{w}(p)
+&=
+\sum_{i=1}^k \hat{w}(v_{i-1} v_i) \\
+&=
+\sum_{i=1}^k \big(w(v_{i-1} v_i) + h(v_{i-1}) - h(v_i)\big) \\
+&=
+\sum_{i=1}^k w(v_{i-1} v_i)
++
+\sum_{i=1}^k \big(h(v_{i-1}) - h(v_i)\big) \\
+&=
+\sum_{i=1}^k w(v_{i-1} v_i) + h(v_0) - h(v_k) \\
+&=
+w(p) + h(v_0) - h(v_k).
+\end{align*}
+%%
+Any $v_0$-$v_k$ path shorter than $p$ and using weight function $w$ is
+also shorter using $\hat{w}$. Therefore, $w(p) = \delta(v_0, v_k)$ if
+and only if $\hat{w}(p) = \hat{\delta}(v_0, v_k)$.
+
+To prove part~2, consider any cycle $c: v_0, v_1, \dots, v_k$ where
+$v_0 = v_k$. Using the proof of part~1, we have
+%%
+\begin{align*}
+\hat{w}(c)
+&=
+w(c) + h(v_0) - h(v_k) \\
+&=
+w(c)
+\end{align*}
+%%
+thus showing that $c$ is a negative cycle using $w$ if and only if it
+is a negative cycle using $\hat{w}$.
+
+To prove part~3, we construct a new graph $G' = (V', E')$ as
+follows. Consider a vertex $s \notin V$ and let $V' = V \cup \{s\}$
+and $E' = E \cup \{sv \mid v \in V\}$. Extend the weight function $w$
+to include $w(sv) = 0$ for all $v \in V$. By construction, $s$ has no
+incoming edges and any path in $G'$ that contains $s$ has $s$ has the
+source vertex. Thus $G'$ has no negative cycles if and only if $G$ has
+no negative cycles. Define the function $h: V \to \R$ by
+$v \mapsto \delta(s,v)$ with domain $V'$. By the triangle
+inequality\index{triangle inequality}~(see
+Lemma~\ref{lem:graph_algorithms:path_distance_metric_function}),
+\[
+\delta(s,u) + w(uv) \geq \delta(s,v)
+\quad
+\iff
+\quad
+h(u) + w(uv) \geq h(v)
+\]
+thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

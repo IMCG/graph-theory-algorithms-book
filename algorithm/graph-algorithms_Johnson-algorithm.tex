@@ -19,7 +19,7 @@ $s \assign$ vertex not in $V$\;
 $V' \assign V \cup \{s\}$\;
 $E' \assign E \cup \{sv \;|\; v \in V\}$\;
 $G' \assign$ digraph $(V', E')$ with weight $w(sv) = 0$ for all $v \in V$\;
-\If{$\BellmanFord(G', w, s) = \False$}{
+\If{$\BellmanFord(G', w, s) = \False$\index{Bellman-Ford algorithm}}{
   \Return \False\;
 }
 $d \assign$ distance list returned by $\BellmanFord(G', w, s)$\;
@@ -27,7 +27,7 @@ $d \assign$ distance list returned by $\BellmanFord(G', w, s)$\;
   $\hat{w}(uv) \assign w(uv) + d[u] - d[v]$\;
 }
 \For{\emph{each vertex} $u \in V$}{
-  $(\hat{\delta}, \hat{P}) \assign$ distance and parent lists returned by $\Dijkstra(G, \hat{w}, u)$\;
+  $(\hat{\delta}, \hat{P}) \assign$ distance and parent lists returned by $\Dijkstra(G, \hat{w}, u)$\index{Dijkstra's algorithm}\;
   $P[u] \assign \hat{P}$\;
   \For{\emph{each vertex} $v \in V$}{
     $D[u,v] \assign \hat{\delta}[v] + d[v] - d[u]$\;
