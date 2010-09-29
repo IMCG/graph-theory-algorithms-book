@@ -3,13 +3,13 @@
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
 %%
 %% input/output
 \Input{Two undirected simple graphs $G_1$ and $G_2$, each having $n$
   vertices.}
-\Output{\True if $G_1 \cong G_2$; \False otherwise.}
+\Output{\MyTrue if $G_1 \cong G_2$; \MyFalse otherwise.}
 \BlankLine
 %%
 %% algorithm body
@@ -17,7 +17,7 @@ Compute the adjacency matrix $A_i$ of $G_i$ ($i = 1, 2$).\;
 Compute the lexicographically maximal element $A_i'$ of the
 permutation equivalence class of $A_i$, for $i = 1, 2$.\;
 \eIf{$A_1' = A_2'$}{
-  \Return \True\;
+  \Return \MyTrue\;
 }{
-  \Return \False\;
+  \Return \MyFalse\;
 }

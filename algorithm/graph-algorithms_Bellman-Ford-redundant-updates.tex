@@ -3,8 +3,8 @@
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
 \SetKwData{Updated}{updated}
 %%
 %% input/output
@@ -17,7 +17,7 @@
   shortest path from $s$ to $v$. A list $P$ of vertex parents such
   that $P[v]$ is the parent of $v$, i.e. $v$ is adjacent from
   $P[v]$. If $G$ has negative-weight cycles, then return
-  \False. Otherwise, return $D$ and $P$.}
+  \MyFalse. Otherwise, return $D$ and $P$.}
 \BlankLine
 %%
 %% algorithm body
@@ -25,21 +25,21 @@ $D \assign [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}~\nl
 $D[s] \assign 0$\;
 $P \assign [\,]$\;
 \For{$i \assign 1, 2, \dots, n-1$}{
-  $\Updated \assign \False$\;
+  $\Updated \assign \MyFalse$\;
   \For{\emph{each edge} $uv \in E$}{
     \If{$D[v] > D[u] + w(uv)$}{
       $D[v] \assign D[u] + w(uv)$\;
       $P[v] \assign u$\;
-      $\Updated \assign \True$\;
+      $\Updated \assign \MyTrue$\;
     }
   }
-  \If{$\Updated = \False$}{
+  \If{$\Updated = \MyFalse$}{
     exit the loop\;
   }
 }
 \For{\emph{each edge} $uv \in E$}{
   \If{$D[v] > D[u] + w(uv)$}{
-    \Return \False\;
+    \Return \MyFalse\;
   }
 }
 \Return $(D, P)$\;

@@ -3,28 +3,28 @@
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
 %%
 %% input/output
 \Input{A non-increasing sequence $S = (d_1, d_2, \dots, d_n)$
   of non-negative integers, where $n \geq 2$.}
-\Output{\True if $S$ is realizable by a simple graph; \False otherwise.}
+\Output{\MyTrue if $S$ is realizable by a simple graph; \MyFalse otherwise.}
 \BlankLine
 %%
 %% algorithm body
 \If{\emph{$\sum_i d_i$ is odd}~\nllabel{alg:Havel_Hakimi:handshaking_lemma}}{
-  \Return \False\;
+  \Return \MyFalse\;
 }
-\While{\True}{
+\While{\MyTrue}{
   \If{$\min(S) < 0$~\nllabel{alg:Havel_Hakimi:non_negative}}{
-    \Return \False\;
+    \Return \MyFalse\;
   }
   \If{$\max(S) = 0$~\nllabel{alg:Havel_Hakimi:all_zeros}}{
-    \Return \True\;
+    \Return \MyTrue\;
   }
   \If{$\max(S) > \length(S) - 1$~\nllabel{alg:Havel_Hakimi:degree_less_than_order}}{
-    \Return \False\;
+    \Return \MyFalse\;
   }
   $S
   \assign

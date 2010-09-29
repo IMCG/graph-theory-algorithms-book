@@ -3,14 +3,14 @@
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{False}{False}
-\SetKwData{True}{True}
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
 %%
 %% input/output
 \Input{An undirected graph $G = (V, E)$ of order $n > 0$. A vertex $s$
   from which to start the search. The vertices are numbered from $1$
   to  $n = |V|$, i.e. $V = \{1, 2, \dots, n\}$.}
-\Output{$\True$ if $G$ is connected; $\False$ otherwise.}
+\Output{$\MyTrue$ if $G$ is connected; $\MyFalse$ otherwise.}
 \BlankLine
 %%
 %% algorithm body
@@ -29,7 +29,7 @@ $c \assign 1$\;
   }
 }
 \If{$c = |V|$~\nllabel{alg:BFS:connectivity_test}}{
-  \Return \True\;
+  \Return \MyTrue\;
 } \Else{
-  \Return \False\;
+  \Return \MyFalse\;
 }

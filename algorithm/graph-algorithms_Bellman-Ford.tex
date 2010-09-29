@@ -3,7 +3,7 @@
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{False}{False}
+\SetKwData{MyFalse}{False}
 %%
 %% input/output
 \Input{An undirected or directed graph $G = (V, E)$ that is weighted
@@ -15,7 +15,7 @@
   shortest path from $s$ to $v$. A list $P$ of vertex parents such
   that $P[v]$ is the parent of $v$, i.e. $v$ is adjacent from
   $P[v]$. If $G$ has negative-weight cycles, then return
-  \False. Otherwise, return $D$ and $P$.}
+  \MyFalse. Otherwise, return $D$ and $P$.}
 \BlankLine
 %%
 %% algorithm body
@@ -33,7 +33,7 @@ $P \assign [\,]$~\nllabel{alg:Bellman_Ford:init_parent_list}\;
 }
 \For{\emph{each edge} $uv \in E$~\nllabel{alg:Bellman_Ford:for_loop:check_negative_weight_cycles}}{
   \If{$D[v] > D[u] + w(uv)$}{
-    \Return \False\;
+    \Return \MyFalse\;
   }
 }
 \Return $(D, P)$\;

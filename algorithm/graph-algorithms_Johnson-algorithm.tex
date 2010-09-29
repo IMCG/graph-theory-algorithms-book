@@ -3,13 +3,13 @@
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
-\SetKwData{False}{False}
+\SetKwData{MyFalse}{False}
 %%
 %% input/output
 \Input{A sparse weighted digraph $G = (V, E)$, where the vertex set is
   $V = \{1, 2, \dots, n\}$.}
 \Output{If $G$ has negative-weight cycles, then return
-  \False. Otherwise, return an $n \times n$ matrix $D$ of shortest-path
+  \MyFalse. Otherwise, return an $n \times n$ matrix $D$ of shortest-path
   weights and a list $P$ such that $P[v]$ is a parent list resulting
   from running Dijkstra's algorithm on $G$ with start vertex $v$.}
 \BlankLine
@@ -19,8 +19,8 @@ $s \assign$ vertex not in $V$\;
 $V' \assign V \cup \{s\}$\;
 $E' \assign E \cup \{sv \;|\; v \in V\}$\;
 $G' \assign$ digraph $(V', E')$ with weight $w(sv) = 0$ for all $v \in V$\;
-\If{$\BellmanFord(G', w, s) = \False$\index{Bellman-Ford algorithm}}{
-  \Return \False\;
+\If{$\BellmanFord(G', w, s) = \MyFalse$\index{Bellman-Ford algorithm}}{
+  \Return \MyFalse\;
 }
 $d \assign$ distance list returned by $\BellmanFord(G', w, s)$\;
 \For{\emph{each edge} $uv \in E'$}{
