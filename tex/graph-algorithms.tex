@@ -3,16 +3,24 @@
 \chapter{Graph Algorithms}
 \label{chap:graph_algorithms}
 
-Graph algorithms have many applications. Suppose you are a salesman
-with a product you would like to sell in several cities. To determine
-the cheapest travel route from city-to-city, you must effectively
-search a graph having weighted edges for the ``cheapest'' route
-visiting each city once. Each vertex denotes a city you must visit and
-each edge has a weight indicating either the distance from one city to
-another or the cost to travel from one city to another.
+Graph algorithms have many applications. Suppose you are a
+salesman\index{traveling salesman problem} with a product you would
+like to sell in several cities. To determine the cheapest travel route
+from city-to-city, you must effectively search a graph having weighted
+edges for the ``cheapest'' route visiting each city once. Each vertex
+denotes a city you must visit and each edge has a weight indicating
+either the distance from one city to another or the cost to travel
+from one city to another.
 
-Shortest path algorithms are some of the most important algorithms in
-algorithmic graph theory. We shall examine several in this chapter.
+Shortest path algorithms\index{shortest path algorithm} are some of
+the most important algorithms in algorithmic graph theory. We first
+examine several common graph traversal algorithms and some basic data
+structures\index{data structure} underlying these algorithms. A data
+structure is a combination of methods for structuring a collection of
+data~(e.g. vertices and edges) and protocols for accessing the
+data. Subsequent shortest path algorithms rely in one way or another
+on graph traversal techniques and basic data structures for organizing
+and managing vertices and edges.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -28,9 +36,10 @@ more efficient than representing all entries of a matrix. The graph
 representation used can be influenced by the size of a graph or the
 purpose of the representation.
 Section~\ref{sec:graph_algorithms:adjacency_lists} discusses the
-adjacency list representation that can result in less storage space
-requirement than the adjacency matrix representation. The
-\texttt{graph6} format discussed in
+adjacency list\index{adjacency list} representation that can result in
+less storage space requirement than the adjacency
+matrix\index{adjacency matrix} representation. The
+\texttt{graph6}\index{\texttt{graph6}} format discussed in
 section~\ref{sec:graph_algorithms:graph6_format} provides a compact
 means of storing graphs for archival purposes.
 
@@ -40,34 +49,41 @@ means of storing graphs for archival purposes.
 \subsection{Adjacency lists}
 \label{sec:graph_algorithms:adjacency_lists}
 
-A \emph{list} is a sequence of objects. Unlike sets, a list may
-contain multiple copies of the same object. Each object of a list is
-referred to as an \emph{element} of the list. A list $L$ of
+A \emph{list}\index{list} is a sequence of objects. Unlike
+sets\index{set}, a list may contain multiple copies of the same
+object. Each object in a list is referred to as an
+\emph{element}\index{list!element} of the list. A list $L$ of
 $n \geq 0$ elements is written as $L = [a_1, a_2, \dots, a_n]$, where
 the $i$-th element $a_i$ can be indexed as $L[i]$. In case $n = 0$,
-the list $L = [\,]$ is referred to as the \emph{empty list}. Two lists
-are equivalent if they both contain the same elements at exactly the
-same positions.
+the list $L = [\,]$ is referred to as the
+\emph{empty list}\index{list!empty}. Two lists are equivalent if they
+both contain the same elements at exactly the same positions.
 
-Define the adjacency lists of a graph as follows. Let $G$ be a graph
-with vertex set $V = \{v_1, v_2, \dots, v_n\}$. Assign to each vertex
-$v_i$ a list $L_i$ containing all the vertices that are adjacent to
-$v_i$. The list $L_i$ associated with $v_i$ is referred to as the
-\emph{adjacency list} of $v_i$. Then $L_i = [\,]$ if and only if $v_i$
-is an isolated vertex. We say that $L_i$ is \emph{the} adjacency list
-of $v_i$ because any permutation of the elements of $L_i$ results in a
-list that contains the same vertices adjacent to $v_i$. If each
-adjacency list $L_i$ contains $s_i$ elements where
-$0 \leq s_i \leq n$, we say that $L_i$ has \emph{length} $s_i$. The
-adjacency list representation of the graph $G$ requires that we
-represent $\sum_i s_i = 2 \cdot |E(G)| \leq n^2$ elements in a
-computer's memory, since each edge appears twice in the adjacency list
-representation. An adjacency list is explicit about which vertices are
-adjacent to a vertex, and implicit about which vertices are not
-adjacent to that same vertex. Without knowing the graph $G$, given the
-adjacency lists $L_1, L_2, \dots, L_n$, we can reconstruct $G$. For
-example, Figure~\ref{fig:graph_algorithms:graph_adjacency_lists} shows
-a graph and its adjacency list representation.
+Define the adjacency lists\index{adjacency list} of a graph as
+follows. Let $G$ be a graph with vertex set
+$V = \{v_1, v_2, \dots, v_n\}$. Assign to each vertex $v_i$ a list
+$L_i$ containing all the vertices that are adjacent to $v_i$. The list
+$L_i$ associated with $v_i$ is referred to as the
+\emph{adjacency list}\index{adjacency list} of $v_i$. Then
+$L_i = [\,]$ if and only if $v_i$ is an isolated
+vertex\index{vertex!isolated}. We say that $L_i$ is \emph{the}
+adjacency list of $v_i$ because any permutation of the elements of
+$L_i$ results in a list that contains the same vertices adjacent to
+$v_i$. We are mainly concerned with the neighbors of $v_i$, but
+disregard the position where each neighbor is located in $L_i$. If
+each adjacency list\index{adjacency list} $L_i$ contains $s_i$
+elements where $0 \leq s_i \leq n$, we say that $L_i$ has
+\emph{length}\index{list!length} $s_i$. The adjacency list
+representation of the graph $G$ requires that we represent
+$\sum_i s_i = 2 \cdot |E(G)| \leq n^2$ elements in a computer's
+memory, since each edge appears twice in the adjacency list
+representation. An adjacency list\index{adjacency list} is explicit
+about which vertices are adjacent to a vertex and implicit about
+which vertices are not adjacent to that same vertex. Without knowing
+the graph $G$, given the adjacency lists $L_1, L_2, \dots, L_n$, we
+can reconstruct $G$. For example,
+Figure~\ref{fig:graph_algorithms:graph_adjacency_lists} shows a graph
+and its adjacency list representation.
 
 \begin{figure}[!htbp]
 \centering
@@ -82,10 +98,11 @@ has size $|E|$ that is close to $|V|^2$, i.e.
 $|E| = \Omega\big(|V|^2\big)$, in which case it is feasible to
 represent $G$ as an adjacency matrix. The size of a sparse
 graph\index{sparse graph} is much less than $|V|^2$, i.e.
-$|E| = \Omega\big(|V|\big)$, which renders the adjacency matrix
-representation as unsuitable. For a sparse graph, an adjacency list
-representation can require less storage space than an adjacency matrix
-representation of the same graph.
+$|E| = \Omega\big(|V|\big)$, which renders the adjacency
+matrix\index{adjacency matrix} representation as unsuitable. For a
+sparse graph, an adjacency list\index{adjacency list} representation
+can require less storage space than an adjacency matrix representation
+of the same graph.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,17 +110,20 @@ representation of the same graph.
 \subsection{The {\tt graph6} format}
 \label{sec:graph_algorithms:graph6_format}
 
-The graph formats {\tt graph6} and {\tt sparse6} were developed by Brendan
-McKay~\cite{McKay2010} at The Australian National University as a
-compact way to represent graphs. These two formats use bit vectors and
-printable characters of the American Standard Code for Information
-Interchange~(ASCII) encoding scheme. The 64 printable ASCII characters
-used in {\tt graph6} and {\tt sparse6} are those ASCII characters with decimal
-codes from 63 to 126, inclusive, as shown in
+The graph formats \texttt{graph6}\index{\texttt{graph6}} and
+\texttt{sparse6}\index{\texttt{sparse6}} were developed by Brendan
+McKay\index{McKay, Brendan}~\cite{McKay2010} at The Australian
+National University\index{Australian National University} as a compact
+way to represent graphs. These two formats use bit
+vectors\index{bit vector} and printable characters of the American
+Standard Code for Information Interchange~(ASCII)\index{ASCII}
+encoding scheme. The 64 printable ASCII characters used in
+\texttt{graph6} and \texttt{sparse6} are those ASCII characters with
+decimal codes from 63 to 126, inclusive, as shown in
 Table~\ref{tab:graph_algorithms:graph6_sparse6_ASCII_printable_characters}.
-This section shall only cover the {\tt graph6} format. For full
-specification on both of the {\tt graph6} and {\tt sparse6} formats, see
-McKay~\cite{McKay2010}.
+This section shall only cover the \texttt{graph6} format. For full
+specification on both of the \texttt{graph6} and \texttt{sparse6}
+formats, see McKay~\cite{McKay2010}.
 
 \begin{table}[!htbp]
 \centering
@@ -116,39 +136,44 @@ McKay~\cite{McKay2010}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Bit vectors}
+\index{bit vector}
 
-Before discussing how {\tt graph6} and {\tt sparse6} represent graphs using
-printable ASCII characters, we first present encoding schemes used by
-these two formats. A \emph{bit vector} is, as its name suggests, a
+Before discussing how \texttt{graph6}\index{\texttt{graph6}} and
+\texttt{sparse6}\index{\texttt{sparse6}} represent graphs using
+printable ASCII\index{ASCII} characters, we first present encoding
+schemes used by these two formats. A
+\emph{bit vector}\index{bit vector} is, as its name suggests, a
 vector whose elements are 1's and 0's. It can be represented as a list
-of bits, e.g. \verb!E! can be represented as the ASCII bit vector
-$[\texttt{1}, \texttt{0}, \texttt{0}, \texttt{0}, \texttt{1},
-  \texttt{0}, \texttt{1}]$. For brevity, we write a bit vector in a
-compact form such as \texttt{1000101}. The \emph{length} of a bit
-vector is its number of bits. The \emph{most significant bit}
-of a bit vector $v$ is the bit position with the largest value among
-all the bit positions in $v$. Similarly, the
-\emph{least significant bit} is the bit position in $v$ having the
-least value among all the bit positions in $v$. The least significant
-bit of $v$ is usually called the parity bit because when $v$
-interpreted as an integer the parity bit determines whether the
-integer is even or odd. Reading \texttt{1000101} from left to right,
-the first bit \texttt{1} is the most significant bit, followed by the
-second bit \texttt{0} which is the second most significant bit, and so
-on all the way down to the seventh bit \texttt{1} which is the least
-significant bit.
+of bits\index{bit}, e.g. \verb!E! can be represented as the ASCII bit
+vector $[
+  \texttt{1}, \texttt{0}, \texttt{0}, \texttt{0}, \texttt{1},
+  \texttt{0}, \texttt{1}
+]$. For brevity, we write a bit vector in a compact form such as
+\texttt{1000101}. The \emph{length}\index{bit vector!length} of a bit
+vector is its number of bits. The
+\emph{most significant bit}\index{most significant bit} of a bit
+vector $v$ is the bit position with the largest value among all the
+bit positions in $v$. Similarly, the
+\emph{least significant bit}\index{least significant bit} is the bit
+position in $v$ having the least value among all the bit positions in
+$v$. The least significant bit of $v$ is usually called the parity
+bit\index{bit!parity} because when $v$ is interpreted as an integer
+the parity bit determines whether the integer is even or odd. Reading
+\texttt{1000101} from left to right, the first bit \texttt{1} is the
+most significant bit, followed by the second bit \texttt{0} which is
+the second most significant bit, and so on all the way down to the
+seventh bit \texttt{1} which is the least significant bit.
 
 The order in which we process the bits of a bit vector is referred to
-as \emph{endianness}. Processing $v$ in \emph{big-endian} order means
-\index{big-endian order}
-\index{endianness}
-that we first process the most significant bit of $v$, followed by the
-second most significant bit, and so on all the way down to the least
-significant bit of $v$. \emph{Little-endian} order means that we first
-process the least significant bit, followed by the second least
-significant bit, and so on all the way up to the most significant
-bit. In big-endian order, the ASCII binary representation of
-\texttt{E} is written \texttt{1000101}~(see
+as \emph{endianness}\index{endianness}. Processing $v$ in
+\emph{big-endian}\index{big-endian} order means that we first process
+the most significant bit of $v$, followed by the second most
+significant bit, and so on all the way down to the least significant
+bit of $v$. \emph{Little-endian}\index{little-endian} order means that
+we first process the least significant bit, followed by the second
+least significant bit, and so on all the way up to the most
+significant bit. In big-endian order, the ASCII\index{ASCII} binary
+representation of \texttt{E} is written \texttt{1000101}~(see
 Table~\ref{tab:graph_algorithms:big_endian_ASCII_binary_E}), while
 the little-ending order is written \texttt{1010001}~(see
 Table~\ref{tab:graph_algorithms:little_endian_ASCII_binary_E}). To
@@ -157,7 +182,7 @@ bit value by its corresponding position value, then add up all the
 results. In general, if the bit vector $v = b_1 b_2 \cdots b_k$ is the
 big-endian binary representation of a positive integer, then the
 integer representation of $v$ is
-%
+%%
 \begin{equation}
 \label{eq:graph_algorithms:big_endian_binary_to_integer}
 \sum_{i=1}^k 2^{k-i} b_i
@@ -179,22 +204,24 @@ integer representation of $v$ is
 \label{tab:graph_algorithms:little_endian_ASCII_binary_E}
 \end{table}
 
-In {\tt graph6} and {\tt sparse6} formats, the length of a bit vector must be a
-multiple of 6. Suppose $v$ is a bit vector of length $k$ such that
-$6 \nmid k$. To transform $v$ into a bit vector having length a
-multiple of 6, let $r = k \mod 6$ be the remainder upon dividing $k$
-by 6, and pad $6 - r$ zeros to the right of $v$.
+In \texttt{graph6}\index{\texttt{graph6}} and
+\texttt{sparse6}\index{\texttt{sparse6}} formats, the length of a bit
+vector\index{bit vector} must be a multiple of 6. Suppose $v$ is a bit
+vector of length $k$ such that $6 \nmid k$. To transform $v$ into a
+bit vector having length a multiple of 6, let $r = k \mod 6$ be the
+remainder\index{remainder} upon dividing $k$ by 6, and pad $6 - r$
+zeros\index{zero padding} to the right of $v$.
 
 Suppose $v = b_1 b_2 \cdots b_k$ is a bit vector of length $k$, where
-$6 \;|\; k$. We split $v$ into $k/6$ bit vectors $v_i$, each of length
+$6 \mid k$. We split $v$ into $k/6$ bit vectors $v_i$, each of length
 6. For $0 \leq i \leq k/6$, the $i$-th bit vector is given by
 \[
 v_i
 =
 b_{6i-5} b_{6i-4} b_{6i-3} b_{6i-2} b_{6i-1} b_{6i}.
 \]
-Consider each $v_i$ as the big-endian binary representation of a
-positive
+Consider each $v_i$ as the big-endian\index{big-endian} binary
+representation of a positive
 integer. Use~(\ref{eq:graph_algorithms:big_endian_binary_to_integer})
 to obtain the integer representation $N_i$ of each $v_i$. Then add 63
 to each $N_i$ to obtain $N_i'$ and store $N_i'$ in one byte of
@@ -202,23 +229,24 @@ memory. That is, each $N_i'$ can be represented as a bit vector of
 length $8$. Thus the required number of bytes to store $v$ is
 $\lceil k/6 \rceil$. Let $B_i$ be the byte representation of $N_i'$ so
 that
-%
+%%
 \begin{equation}
 \label{eq:graph_algorithms:byte_representation_bit_vector}
 R(v)
 =
 B_1 B_2 \cdots B_{\lceil k/6 \rceil}
 \end{equation}
-%
+%%
 denotes the representation of $v$ as a sequence of $\lceil k/6 \rceil$
 bytes.
 
 We now discuss how to encode an integer $n$ in the range
 $0 \leq n \leq 2^{36} - 1$
 using~(\ref{eq:graph_algorithms:byte_representation_bit_vector}) and
-denote such an encoding of $n$ as $N(n)$. Let $v$ be the big-endian
-binary representation of $n$. Then $N(n)$ is given by
-%
+denote such an encoding of $n$ as $N(n)$. Let $v$ be the
+big-endian\index{big-endian} binary representation of $n$. Then $N(n)$
+is given by
+%%
 \begin{equation}
 \label{eq:graph_algorithms:graph6_sparse6_graph_orders}
 N(n)
@@ -242,16 +270,18 @@ respectively.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{The {\tt graph6} format}
-\index{graph6}
+\subsubsection{The \texttt{graph6} format}
+\index{\texttt{graph6}}
 
-The {\tt graph6} format is used to represent simple, undirected graphs of
-order from $0$ to $2^{36} - 1$, inclusive. Let $G$ be a simple,
-undirected graph of order $0 \leq n \leq 2^{36} - 1$. If $n = 0$, then
-$G$ is represented in {\tt graph6} format as ``\verb!?!''. Suppose $n >
-0$. Let $M = [a_{ij}]$ be the adjacency matrix of $G$. Consider the
-upper triangle of $M$, excluding the main diagonal, and write that
-upper triangle as the bit vector
+The \texttt{graph6}\index{\texttt{graph6}} format is used to represent
+simple, undirected graphs of order from $0$ to $2^{36} - 1$,
+inclusive. Let $G$ be a simple, undirected graph of order
+$0 \leq n \leq 2^{36} - 1$. If $n = 0$, then $G$ is represented in
+\texttt{graph6} format as ``\verb!?!''. Suppose $n > 0$. Let
+$M = [a_{ij}]$ be the adjacency matrix\index{adjacency matrix} of
+$G$. Consider the upper triangle\index{upper triangle} of $M$,
+excluding the main diagonal\index{main diagonal}, and write that upper
+triangle as the bit vector\index{bit vector}
 \[
 v
 =
@@ -262,8 +292,8 @@ v
 \underbrace{a_{0,n} a_{1,n} \cdots a_{n-1,n}}_{c_n}
 \]
 where $c_i$ denotes the entries $a_{0,i} a_{1,i} \cdots a_{i-1,i}$ in
-column $i$ of $M$. Then the {\tt graph6} representation of $G$ is
-$N(n) R(v)$, where $R(v)$ and $N(n)$ are as
+column $i$ of $M$. Then the \texttt{graph6}\index{\texttt{graph6}}
+representation of $G$ is $N(n) R(v)$, where $R(v)$ and $N(n)$ are as
 in~(\ref{eq:graph_algorithms:byte_representation_bit_vector})
 and~(\ref{eq:graph_algorithms:graph6_sparse6_graph_orders}),
 respectively. That is, $N(n)$ encodes the order of $G$ and $R(v)$
