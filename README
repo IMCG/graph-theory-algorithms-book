@@ -25,7 +25,7 @@ To delete junk files resulting from the compilation process, run
 $ make clean
 
 In fact, a successful compilation should automatically delete any junk
-files resulting from the compilation process. The file graph.sh is a script
+files resulting from the compilation process. The file util.sh is a script
 that interfaces with utilities under the directory bin/.
 
 
