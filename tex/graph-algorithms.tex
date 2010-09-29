@@ -681,7 +681,7 @@ the tree $T$.
 Both BFS and DFS can be used to determine if an undirected graph is
 connected. Let $G = (V, E)$ be an undirected graph of order $n > 0$
 and let $s$ be an arbitrary vertex of $G$. We initialize a counter
-$c \leftarrow 1$ to mean that we are starting our exploration at $s$,
+$c \assign 1$ to mean that we are starting our exploration at $s$,
 hence we have already visited one vertex, i.e. $s$. We apply either
 BFS or DFS, treating $G$ and $s$ as input to any of these
 algorithms. Each time we visit a vertex that was previously unvisited,
@@ -702,7 +702,7 @@ the BFS template of
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template},
 with some minor changes. Instead of initializing the list $D$ with
 $n = |V|$ copies of $\infty$, we use $n$ copies of $0$. Each time we
-have visited a vertex $w$, we make the assignment $D[w] \leftarrow 1$,
+have visited a vertex $w$, we make the assignment $D[w] \assign 1$,
 instead of incrementing the value $D[v]$ of $w$'s parent vertex and
 assign that value to $D[w]$. At the end of the while loop, we have the
 equality $c = \sum_{d \in D} d$. The value of this sum could be used
@@ -761,8 +761,8 @@ the following property.
 
 \begin{lemma}
 Let $G = (V,E)$ be a connected graph with a positive weight function
-$w: E \to \RR^{+}$. Define a distance function
-$d: V \times V \to \RR$ given by
+$w: E \to \R^{+}$. Define a distance function
+$d: V \times V \to \R$ given by
 \[
 d(u,v)
 =

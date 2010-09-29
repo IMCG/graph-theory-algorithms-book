@@ -374,7 +374,7 @@ $O(|E|\log |V|)$.
 \subsection{Kruskal's algorithm}
 
 Kruskal's algorithm starts with an edge-weighted digraph $G=(V,E)$
-as input. Let $w:E\to {\mathbb{R}}$ denote the weight function.
+as input. Let $w:E\to \R$ denote the weight function.
 The first stage is to create a ``skeleton'' of the
 tree $T$ which is initially set to be a graph with no
 edges: $T=(V,\emptyset)$. The next stage is to
@@ -911,7 +911,7 @@ a French booklet by L. Gros on the solution to the
 
 The term ``Gray code'' is ambiguous. It is actually a
 large family of sequences of $n$-tuples. Let
-${\mathbb{Z}}_m=\{0,1,\dots,m-1\}$. More precisely, an
+$\Z_m=\{0,1,\dots,m-1\}$. More precisely, an
 {\it $m$-ary Gray code of length $n$} (called a {\it binary
 Gray code} when $m=2$) is a sequence of
 all possible (namely, $N=m^n$) $n$-tuples
@@ -924,7 +924,7 @@ g_1,g_2,\dots, g_N,
 where
 \begin{itemize}
 \item
-each $g_i\in {\mathbb{Z}}_m^n$,
+each $g_i\in \Z_m^n$,
 \item
 $g_i$ and $g_{i+1}$ differ by $1$ in exactly one
 coordinate.
@@ -932,7 +932,7 @@ coordinate.
 In other words, an $m$-ary Gray code of length
 $n$ is a particular way to order the set of all
 $m^n$ $n$-tuples whose coordinates are taken from
-${\mathbb{Z}}_m$. From the transmission/communication
+$\Z_m$. From the transmission/communication
 perspective, this sequence has two advantages:
 
 \begin{itemize}
@@ -982,7 +982,7 @@ $n$-space
 \{(x_1,\dots,x_n)\ |\ 0\leq x_i\leq 1\},
 \]
 and whose edges are those line segments in
-${\mathbb{R}}^n$ connecting two ``neighboring''
+$\R^n$ connecting two ``neighboring''
 vertices (namely, two vertices which differ
 in exactly one coordinate).
 A binary Gray code of length $n$ can be regarded as a
@@ -1085,7 +1085,7 @@ def graycode(length,modulus):
 Consider the reflected binary code
 of length $8$, $\Gamma_8$. This has $2^8=256$ codewords.
 \sage can easily create the list plot of the coordinates
-$(x,y)$, where $x$ is an integer $j \in {\mathbb{Z}}_{256}$
+$(x,y)$, where $x$ is an integer $j \in \Z_{256}$
 which indexes the codewords in $\Gamma_8$
 and the corresponding $y$ is the $j$-th
 codeword in $\Gamma_8$ converted to decimal.
@@ -1172,7 +1172,7 @@ $\{0,1\}$. A word over the binary alphabet is a finite sequence of
 $0$'s and $1$'s. If $A$ is an alphabet, let $A^*$ denote the set of
 all words in $A$. The length of a word is denoted by vertical
 bars. That is, if $w = a_1 \cdots a_k$ is a word over $A$, then define
-$|w|: A^* \to \ZZ$ by
+$|w|: A^* \to \Z$ by
 \[
 |w|
 =
@@ -1204,12 +1204,12 @@ Example~\ref{eg:tree_forests:binary_code_tree_representation} shows.
 
 \begin{example}
 \label{eg:tree_forests:binary_code_tree_representation}
-Let $\BB_\ell$ be the binary code of length $\leq \ell$. Represent
-codewords of $\BB_\ell$ using trees.
+Let $\B_\ell$ be the binary code of length $\leq \ell$. Represent
+codewords of $\B_\ell$ using trees.
 \end{example}
 
 \begin{proof}[Solution]
-Here is how to represent the code $\BB_\ell$ consisting of all binary
+Here is how to represent the code $\B_\ell$ consisting of all binary
 strings of length $\leq \ell$. Start with the
 \emph{root node}\index{node!root} $\varepsilon$\index{$\varepsilon$}
 being the empty string. The two children of this node, $v_0$ and
@@ -1232,12 +1232,12 @@ when $\ell = 2$.
 \begin{figure}[!htbp]
 \centering
 \input{image/trees-forests_tree-representation-B-2.tex}
-\caption{Tree representation of the binary code $\BB_2$.}
+\caption{Tree representation of the binary code $\B_2$.}
 \label{fig:trees_forests:tree_representation_B_2}
 \end{figure}
 
-In general, if $C$ is a code contained in $\BB_\ell$, then to create
-the tree for $C$, start with the tree for $\BB_\ell$. First, remove
+In general, if $C$ is a code contained in $\B_\ell$, then to create
+the tree for $C$, start with the tree for $\B_\ell$. First, remove
 all nodes associated to a binary string for which it and all of its
 descendants are not in $C$. Next, remove all labels which do not
 correspond to codewords in $C$. The resulting labeled graph is the
@@ -1636,7 +1636,7 @@ chapter~12 of Cormen~et~al.~\cite{CormenEtAl2001}. See also
 \end{itemize}
 
 A {\it binary search tree} (BST) is a rooted binary tree
-$T=(V,E)$ having weighted vertices ${\rm wt}:V\to {\mathbb{R}}$ satisfying:
+$T=(V,E)$ having weighted vertices ${\rm wt}:V\to \R$ satisfying:
 \index{binary search tree}
 \index{BST}
 
