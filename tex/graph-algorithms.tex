@@ -747,22 +747,25 @@ $v$-$w$ path that realizes $d(v,w)$ is sometimes called a
 \emph{shortest path}\index{path!shortest} from $v$ to $w$.
 
 The distance function $d$ on a graph with nonnegative edge weights is
-known as a \emph{metric function}. Intuitively, the distance between
-two physical locations is greater than zero. When these two locations
-coincide, i.e. they are one and the same location, the distance
-separating them is zero. Regardless of whether we are measuring the
-distance from location $a$ to $b$ or from $b$ to $a$, we would obtain
-the same distance. Imagine now a third location $c$. The distance from
-$a$ to $b$ plus the distance from $b$ to $c$ is greater than or equal
-to the distance from $a$ to $c$. The latter principle is known as the
-\emph{triangle inequality}. In summary, given three vertices $u,v,w$
-in a connected graph $G$, the distance function $d$ on $G$ satisfies
-the following property.
+known as a \emph{metric function}\index{metric function}. Intuitively,
+the distance between two physical locations is greater than zero. When
+these two locations coincide, i.e. they are one and the same location,
+the distance separating them is zero. Regardless of whether we are
+measuring the distance from location $a$ to $b$ or from $b$ to $a$, we
+would obtain the same distance. Imagine now a third location $c$. The
+distance from $a$ to $b$ plus the distance from $b$ to $c$ is greater
+than or equal to the distance from $a$ to $c$. The latter principle is
+known as the
+\emph{triangle inequality}\index{triangle inequality}. In summary,
+given three vertices $u,v,w$ in a graph $G$, the distance function $d$
+on $G$ satisfies the following property.
 
 \begin{lemma}
-Let $G = (V,E)$ be a connected graph with a positive weight function
-$w: E \to \R^{+}$. Define a distance function
-$d: V \times V \to \R$ given by
+\label{lem:graph_algorithms:path_distance_metric_function}
+\textbf{Path distance as metric function.}
+Let $G = (V,E)$ be a graph with weight function
+$w: E \to \R$. Define a distance function $d: V \times V \to \R$
+given by
 \[
 d(u,v)
 =
@@ -771,26 +774,29 @@ d(u,v)
 \min\{w(W) \;|\; \text{$W$ is a $u$-$v$ walk}\}, & \text{otherwise}.
 \end{cases}
 \]
-Then $d$ satisfies the following properties:
-%
+Then $d$ is a metric\index{metric} on $V$ if it satisfies the
+following properties:
+%%
 \begin{enumerate}
 \item Nonnegativity: $d(u,v) \geq 0$ with $d(u,v) = 0$ if and only if
   $u = v$.
 
 \item Symmetry: $d(u,v) = d(v,u)$.
 
-\item Triangle inequality: $d(u,v) + d(v,w) \geq d(u,w)$.
+\item Triangle inequality\index{triangle inequality}:
+  $d(u,v) + d(v,w) \geq d(u,w)$.
 \end{enumerate}
 \end{lemma}
 
-The pair $(V, d)$ is called a \emph{metric space}, where the word
-``metric'' refers to the distance function $d$. Any graphs we consider
-are assumed to have finite sets of vertices. For this reason, $(V,d)$
-is also known as a \emph{finite metric space}. The distance matrix
-$D = [d(v_i, v_j)]$ of a connected graph is the distance matrix of its
-finite metric space. The topic of metric space is covered in further
-details in topology texts such as Runde~\cite{Runde2005} and Shirali
-and Vasudeva~\cite{ShiraliVasudeva2006}.
+The pair $(V, d)$ is called a \emph{metric space}\index{metric space},
+where the word ``metric'' refers to the distance function $d$. Any
+graphs we consider are assumed to have finite sets of vertices. For
+this reason, $(V,d)$ is also known as a
+\emph{finite metric space}\index{metric space!finite}. The distance
+matrix $D = [d(v_i, v_j)]$ of a connected graph is the distance matrix
+of its finite metric space. The topic of metric space is covered in
+further details in topology texts such as Runde~\cite{Runde2005} and
+Shirali and Vasudeva~\cite{ShiraliVasudeva2006}.
 
 Many different algorithms exist for computing a shortest path in a
 weighted graph. Some only work if the graph has no negative weight
