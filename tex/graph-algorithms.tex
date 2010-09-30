@@ -581,13 +581,22 @@ discovered in the early 1970s by
 Hopcroft\index{Hopcroft, John E.} and
 Tarjan~\cite{HopcroftTarjan1973,Tarjan1972}\index{Tarjan, Robert Endre}.
 
+\begin{figure}[!htbp]
+\centering
+\index{knight's tour}
+\input{image/graph-algorithms_one-knight-tour.tex}
+\caption{The knight's tour from a given starting position.}
+\label{fig:graph_algorithms:one_knight_tour}
+\end{figure}
+
 To get an intuitive appreciation for DFS\index{DFS}, suppose we have
 an $8 \times 8$ chessboard\index{chess!chessboard} in front of us. We
 place a single knight\index{chess!knight piece} piece on a fixed
-square of the board. Our objective is to find a sequence of
-knight\index{chess!knight piece} moves that visits each and every
-square exactly once, while obeying the rules of chess\index{chess}
-that govern the movement of the knight
+square of the board, as shown in
+Figure~\ref{fig:graph_algorithms:one_knight_tour:initial_position}. Our
+objective is to find a sequence of knight\index{chess!knight piece}
+moves that visits each and every square exactly once, while obeying
+the rules of chess\index{chess} that govern the movement of the knight
 piece\index{chess!knight piece}. Such a sequence of moves, if one
 exists, is called a \emph{knight's tour}\index{knight's tour}. How do
 we find such a tour? We could make one knight\index{chess!knight} move
@@ -602,7 +611,13 @@ until a tour is found or until we have exhausted all possible
 moves. The above strategy for finding a knight's
 tour\index{knight's tour} is an example of depth-first
 search\index{depth-first search}, sometimes called
-\emph{backtracking}.
+\emph{backtracking}. Figure~\ref{fig:graph_algorithms:one_knight_tour:a_tour}
+shows a knight's tour with the starting position as shown in
+Figure~\ref{fig:graph_algorithms:one_knight_tour:initial_position};
+and
+Figure~\ref{fig:graph_algorithms:one_knight_tour:graph_representation}
+is a graph representation of this tour. The black-filled nodes
+indicate the endpoints of the tour.
 
 \begin{algorithm}[!htpb]
 \index{depth-first search}\index{DFS}
