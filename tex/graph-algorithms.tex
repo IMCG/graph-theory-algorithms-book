@@ -40,7 +40,7 @@ Section~\ref{sec:graph_algorithms:adjacency_lists} discusses the
 adjacency list\index{list!adjacency} representation that can result in
 less storage space requirement than the adjacency
 matrix\index{matrix!adjacency} representation. The
-\texttt{graph6}\index{\texttt{graph6}} format discussed in
+\graphsix\index{\graphsix} format discussed in
 section~\ref{sec:graph_algorithms:graph6_format} provides a compact
 means of storing graphs for archival purposes.
 
@@ -109,28 +109,28 @@ of the same graph.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{The {\tt graph6} format}
+\subsection{The \graphsix format}
 \label{sec:graph_algorithms:graph6_format}
 
-The graph formats \texttt{graph6}\index{\texttt{graph6}} and
-\texttt{sparse6}\index{\texttt{sparse6}} were developed by Brendan
+The graph formats \graphsix\index{\graphsix} and
+\sparsesix\index{\sparsesix} were developed by Brendan
 McKay\index{McKay, Brendan D.}~\cite{McKay2010} at The Australian
 National University\index{Australian National University} as a compact
 way to represent graphs. These two formats use bit
 vectors\index{bit vector} and printable characters of the American
 Standard Code for Information Interchange~(ASCII)\index{ASCII}
 encoding scheme. The 64 printable ASCII characters used in
-\texttt{graph6} and \texttt{sparse6} are those ASCII characters with
-decimal codes from 63 to 126, inclusive, as shown in
+\graphsix and \sparsesix are those ASCII characters with decimal codes
+from 63 to 126, inclusive, as shown in
 Table~\ref{tab:graph_algorithms:graph6_sparse6_ASCII_printable_characters}.
-This section shall only cover the \texttt{graph6} format. For full
-specification on both of the \texttt{graph6} and \texttt{sparse6}
-formats, see McKay~\cite{McKay2010}.
+This section shall only cover the \graphsix format. For full
+specification on both of the \graphsix and \sparsesix formats, see
+McKay~\cite{McKay2010}.
 
 \begin{table}[!htbp]
 \centering
 \input{data/graph-algorithms_graph6-sparse6-ASCII-printable-characters.tex}
-\caption{ASCII printable characters used by graph6 and sparse6.}
+\caption{ASCII printable characters used by \graphsix and \sparsesix.}
 \label{tab:graph_algorithms:graph6_sparse6_ASCII_printable_characters}
 \end{table}
 
@@ -140,14 +140,14 @@ formats, see McKay~\cite{McKay2010}.
 \subsubsection{Bit vectors}
 \index{bit vector}
 
-Before discussing how \texttt{graph6}\index{\texttt{graph6}} and
-\texttt{sparse6}\index{\texttt{sparse6}} represent graphs using
-printable ASCII\index{ASCII} characters, we first present encoding
-schemes used by these two formats. A
-\emph{bit vector}\index{bit vector} is, as its name suggests, a
-vector whose elements are 1's and 0's. It can be represented as a list
-of bits\index{bit}, e.g. \verb!E! can be represented as the ASCII bit
-vector $[
+Before discussing how \graphsix\index{\graphsix} and
+\sparsesix\index{\sparsesix} represent graphs using printable
+ASCII\index{ASCII} characters, we first present encoding schemes used
+by these two formats. A \emph{bit vector}\index{bit vector} is, as its
+name suggests, a vector whose elements are 1's and 0's. It can be
+represented as a list of bits\index{bit}, e.g. \verb!E! can be
+represented as the ASCII bit vector
+$[
   \texttt{1}, \texttt{0}, \texttt{0}, \texttt{0}, \texttt{1},
   \texttt{0}, \texttt{1}
 ]$. For brevity, we write a bit vector in a compact form such as
@@ -206,13 +206,13 @@ integer representation of $v$ is
 \label{tab:graph_algorithms:little_endian_ASCII_binary_E}
 \end{table}
 
-In \texttt{graph6}\index{\texttt{graph6}} and
-\texttt{sparse6}\index{\texttt{sparse6}} formats, the length of a bit
-vector\index{bit vector} must be a multiple of 6. Suppose $v$ is a bit
-vector of length $k$ such that $6 \nmid k$. To transform $v$ into a
-bit vector having length a multiple of 6, let $r = k \mod 6$ be the
-remainder\index{remainder} upon dividing $k$ by 6, and pad $6 - r$
-zeros\index{zero padding} to the right of $v$.
+In \graphsix\index{\graphsix} and \sparsesix\index{\sparsesix}
+formats, the length of a bit vector\index{bit vector} must be a
+multiple of 6. Suppose $v$ is a bit vector of length $k$ such that
+$6 \nmid k$. To transform $v$ into a bit vector having length a
+multiple of 6, let $r = k \mod 6$ be the remainder\index{remainder}
+upon dividing $k$ by 6, and pad $6 - r$ zeros\index{zero padding} to
+the right of $v$.
 
 Suppose $v = b_1 b_2 \cdots b_k$ is a bit vector of length $k$, where
 $6 \mid k$. We split $v$ into $k/6$ bit vectors $v_i$, each of length
@@ -272,18 +272,18 @@ respectively.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{The \texttt{graph6} format}
-\index{\texttt{graph6}}
+\subsubsection{The \graphsix format}
+\index{\graphsix}
 
-The \texttt{graph6}\index{\texttt{graph6}} format is used to represent
-simple, undirected graphs of order from $0$ to $2^{36} - 1$,
-inclusive. Let $G$ be a simple, undirected graph of order
-$0 \leq n \leq 2^{36} - 1$. If $n = 0$, then $G$ is represented in
-\texttt{graph6} format as ``\verb!?!''. Suppose $n > 0$. Let
-$M = [a_{ij}]$ be the adjacency matrix\index{matrix!adjacency} of
-$G$. Consider the upper triangle\index{matrix!upper triangle} of $M$,
-excluding the main diagonal\index{matrix!main diagonal}, and write
-that upper triangle as the bit vector\index{bit vector}
+The \graphsix\index{\graphsix} format is used to represent simple,
+undirected graphs of order from $0$ to $2^{36} - 1$, inclusive. Let
+$G$ be a simple, undirected graph of order $0 \leq n \leq 2^{36} - 1$.
+If $n = 0$, then $G$ is represented in \graphsix format as
+``\verb!?!''. Suppose $n > 0$. Let $M = [a_{ij}]$ be the adjacency
+matrix\index{matrix!adjacency} of $G$. Consider the upper
+triangle\index{matrix!upper triangle} of $M$, excluding the main
+diagonal\index{matrix!main diagonal}, and write that upper triangle as
+the bit vector\index{bit vector}
 \[
 v
 =
@@ -294,8 +294,8 @@ v
 \underbrace{a_{0,n} a_{1,n} \cdots a_{n-1,n}}_{c_n}
 \]
 where $c_i$ denotes the entries $a_{0,i} a_{1,i} \cdots a_{i-1,i}$ in
-column $i$ of $M$. Then the \texttt{graph6}\index{\texttt{graph6}}
-representation of $G$ is $N(n) R(v)$, where $R(v)$ and $N(n)$ are as
+column $i$ of $M$. Then the \graphsix\index{\graphsix} representation
+of $G$ is $N(n) R(v)$, where $R(v)$ and $N(n)$ are as
 in~(\ref{eq:graph_algorithms:byte_representation_bit_vector})
 and~(\ref{eq:graph_algorithms:graph6_sparse6_graph_orders}),
 respectively. That is, $N(n)$ encodes the order of $G$ and $R(v)$
