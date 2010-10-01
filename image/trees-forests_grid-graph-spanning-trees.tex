@@ -7,12 +7,11 @@
   \draw (\y,\xstart) -- (\y,\xend);
 }
 %% draw the spanning tree
-\foreach \xstart/\ystart/\xend/\yend in {0/0/0/1.5, 0/0/4.5/0,
-  1.5/0/1.5/1.5, 1.5/1.5/4.5/1.5, 4.5/1.5/4.5/3, 0/3/4.5/3, 0/3/0/4.5,
-  1.5/3/1.5/4.5, 3/3/3/4.5, 3/4.5/4.5/4.5}
-{
-  \draw[linedecorate] (\xstart,\ystart) -- (\xend,\yend);
-}
+\draw[linedecorate] (0,1.5) -- (0,0) -- (4.5,0);
+\draw[linedecorate] (1.5,0) -- (1.5,1.5) -- (4.5,1.5) -- (4.5,3) --
+  (0,3) -- (0,4.5);
+\draw[linedecorate] (1.5,3) -- (1.5,4.5);
+\draw[linedecorate] (3,3) -- (3,4.5) -- (4.5,4.5);
 \end{tikzpicture}
 }
 %%
@@ -26,11 +25,9 @@
   \draw (\y,\xstart) -- (\y,\xend);
 }
 %% draw the spanning tree
-\foreach \xstart/\ystart/\xend/\yend in {0/0/0/1.5, 0/0/4.5/0,
-  4.5/0/4.5/1.5, 0/1.5/1.5/1.5, 1.5/1.5/1.5/3, 3/1.5/3/3, 0/3/4.5/3,
-  4.5/3/4.5/4.5, 0/4.5/4.5/4.5}
-{
-  \draw[linedecorate] (\xstart,\ystart) -- (\xend,\yend);
-}
+\draw[linedecorate] (4.5,1.5) -- (4.5,0) -- (0,0) -- (0,1.5) --
+  (1.5,1.5) -- (1.5,3);
+\draw[linedecorate] (0,4.5) -- (4.5,4.5) -- (4.5,3) -- (0,3);
+\draw[linedecorate] (3,1.5) -- (3,3);
 \end{tikzpicture}
 }
