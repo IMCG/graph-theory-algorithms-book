@@ -978,7 +978,13 @@ with negative weights\index{weight!negative}, provided that the weight
 sum of any cycle\index{cycle} is
 nonnegative\index{weight!nonnegative}. The term
 \emph{negative cycle}\index{cycle!negative} refers to the weight sum
-$s$ of a cycle\index{cycle} such that $s < 0$.
+$s$ of a cycle\index{cycle} such that $s < 0$. Some algorithms halt
+upon detecting a negative cycle; examples of such algorithms include
+the Bellman-Ford\index{Bellman-Ford algorithm} and
+Johnson's\index{Johnson's algorithm} algorithms. See
+Yamada\index{Yamada, Takeo} and
+Kinoshita\index{Kinoshita, Harunobu}~\cite{YamadaKinoshita2002} for an
+algorithm to detect all the negative cycles in a digraph.
 
 Algorithm~\ref{alg:graph_algorithms:generic_shortest_path_algorithm}
 is a general template for many shortest path\index{path!shortest}
