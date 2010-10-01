@@ -2106,4 +2106,114 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
   any vertex as a starting vertex and run Dijkstra's algorithm over
   it. Now consider the undirected version of that digraph and repeat
   the exercise.
+
+\item Consider the world map of major capital cities in
+  Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}.
+  %%
+  \begin{enumerate}
+  \item Run breadth-\index{breadth-first search} and
+    depth-first\index{depth-first search} searches over the graph in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities} and
+    compare your results.
+
+  \item Convert the graph in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities} to a
+    digraph as follows. Let $0 \leq \alpha \leq 1$ be a fixed
+    threshold probability and let $V = \{v_1, \dots, v_n\}$ be the
+    vertex set of the graph. For each edge $v_i v_j$, let
+    $0 \leq p \leq 1$ be its
+    orientation\index{orientation!probability} probability and define
+    the directedness\index{directedness} $\dir(v_i, v_j)$\index{$\dir$} by
+    \[
+    \dir(v_i, v_j)
+    =
+    \begin{cases}
+    v_i v_j, & \text{if $p \leq \alpha$,} \\
+    v_j v_i, & \text{otherwise.}
+    \end{cases}
+    \]
+    That is, $\dir(v_i, v_j)$ takes the endpoints of an undirected
+    edge $v_i v_j$ and returns a directed version of this edge. The
+    result is either the directed edge $v_i v_j$ or the directed edge
+    $v_j v_i$. Use the above procedure to convert the graph of
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities} to a
+    digraph, and run breadth-\index{breadth-first search} and
+    depth-first\index{depth-first search} searches over the resulting
+    digraph.
+
+  \item Table~\ref{tab:graph_algorithms:capital_cities_distance} lists
+    distances in kilometers between the major capital cities shown in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Let
+    those distances be the weights of the edges shown in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Repeatedly
+    run Dijkstra's\index{Dijkstra's algorithm} algorithm over this
+    undirected, weighted graph with each city as the start vertex. Use
+    the procedure from the previous exercise to obtain a directed
+    version of the graph in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities} and
+    repeat the current exercise with the resulting weighted digraph.
+
+  \item Repeat the previous exercise, but use the
+    Bellman-Ford\index{Bellman-Ford algorithm} algorithm instead of
+    Dijkstra's\index{Dijkstra's algorithm} algorithm. Compare the
+    results you obtain using these two different algorithms.
+
+  \item Consider a weighted digraph version of the graph in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Run the
+    Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm} and
+    Johnson's\index{Johnson's algorithm} algorithms over the weighted
+    digraph. Compare the results output by these two algorithms to the
+    results of the previous exercise.
+  \end{enumerate}
+
+\begin{landscape}
+\begin{figure}[!htbp]
+\centering
+\index{Bangkok}\index{Thailand}
+\index{Beijing}\index{China}
+\index{Berlin}\index{Germany}
+\index{Brasilia}\index{Brazil}
+\index{Buenos Aires}\index{Argentina}
+\index{Lima}\index{Peru}
+\index{London}\index{England}
+\index{Madrid}\index{Spain}
+\index{Moscow}\index{Russia}
+\index{New Delhi}\index{India}
+\index{Ottawa}\index{Canada}
+\index{Pretoria}\index{South Africa}
+\index{Sydney}\index{Australia}
+\index{Tokyo}\index{Japan}
+\index{Washington DC}\index{USA}
+\input{image/graph-algorithms_worldmap-capital-cities.tex}
+\caption{Major capital cities of the world.}
+\label{fig:graph_algorithms:worldmap_capital_cities}
+\end{figure}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}[!htbp]
+\centering
+\index{Bangkok}\index{Thailand}
+\index{Beijing}\index{China}
+\index{Berlin}\index{Germany}
+\index{Brasilia}\index{Brazil}
+\index{Buenos Aires}\index{Argentina}
+\index{Lima}\index{Peru}
+\index{London}\index{England}
+\index{Madrid}\index{Spain}
+\index{Moscow}\index{Russia}
+\index{New Delhi}\index{India}
+\index{Ottawa}\index{Canada}
+\index{Pretoria}\index{South Africa}
+\index{Sydney}\index{Australia}
+\index{Tokyo}\index{Japan}
+\index{Washington DC}\index{USA}
+{\tiny
+\input{data/graph-algorithms_capital-cities-distance.tex}
+}
+\caption{Distances in kilometers between major world capital cities.}
+\label{tab:graph_algorithms:capital_cities_distance}
+\end{table}
+\end{landscape}
+
 \end{problem}
