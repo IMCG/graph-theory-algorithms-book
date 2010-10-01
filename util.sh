@@ -19,8 +19,7 @@
 # The main interface to the utilities under the directory bin/.
 
 # Make the top-level directory absolute:
-BOOK_ROOT=`pwd`
-export BOOK_ROOT
+BOOK_ROOT=`pwd`; export BOOK_ROOT
 
 # Print usage information for this script.
 usage() {
