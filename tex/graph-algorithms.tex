@@ -2047,9 +2047,10 @@ To prove part~3, we construct a new graph $G' = (V', E')$ as
 follows. Consider a vertex $s \notin V$ and let $V' = V \cup \{s\}$
 and $E' = E \cup \{sv \mid v \in V\}$. Extend the weight function $w$
 to include $w(sv) = 0$ for all $v \in V$. By construction, $s$ has no
-incoming edges and any path in $G'$ that contains $s$ has $s$ has the
-source vertex. Thus $G'$ has no negative cycles if and only if $G$ has
-no negative cycles. Define the function $h: V \to \R$ by
+incoming edges and any path in $G'$ that contains $s$ has $s$ as the
+source\index{vertex!source} vertex. Thus $G'$ has no
+negative\index{cycle!negative} cycles if and only if $G$ has no
+negative cycles. Define the function $h: V \to \R$ by
 $v \mapsto \delta(s,v)$ with domain $V'$. By the triangle
 inequality\index{triangle inequality}~(see
 Lemma~\ref{lem:graph_algorithms:path_distance_metric_function}),
