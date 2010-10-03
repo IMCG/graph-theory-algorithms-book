@@ -2663,4 +2663,65 @@ research.
 \item Let $G \square H$ be the Cartesian product of two graphs $G$ and
   $H$. Show that
   $|E(G \square H)| = |V(G)| \cdot |E(H)| + |E(G)| \cdot |V(H)|$.
+
+\begin{figure}[!htbp]
+\centering
+\index{Euler, Leonhard}
+\index{Euler, Leonhard!polygon division problem}
+\input{image/introduction_Euler-polygon-division-hexagon.tex}
+\caption{Euler's polygon division problem for the hexagon.}
+\label{fig:introduction:Euler_polygon_division_hexagon}
+\end{figure}
+
+\item In 1751, Leonhard Euler\index{Euler, Leonhard} posed a problem
+  to Christian Goldbach\index{Goldbach, Christian}, a problem that now
+  bears the name ``Euler's polygon division
+  problem''\index{Euler, Leonhard!polygon division problem}. Given a
+  plane convex polygon having $n$ sides, how many ways are there to
+  divide the polygon into triangles using only diagonals? For our
+  purposes, we consider only regular polygons having $n$ sides for
+  $n \geq 3$. For example, the triangle is a regular $3$-gon, the
+  square a regular $4$-gon, the pentagon a regular $5$-gon, etc. In
+  the case of the hexagon considered as the cycle graph $C_6$, there
+  are $14$ ways to divide it into triangles, as shown in
+  Figure~\ref{fig:introduction:Euler_polygon_division_hexagon},
+  resulting in $14$ graphs. However, of those $14$ graphs only $3$ are
+  nonisomorphic\index{graph!nonisomorphic} to each other.
+  %%
+  \begin{enumerate}
+  \item What is the number of ways to
+    divide\index{Euler, Leonhard!polygon division problem} a pentagon
+    into triangles using only diagonals? List all such divisions. If
+    each of the resulting so divided pentagons is considered a graph,
+    how many of those graphs are
+    nonisomorphic\index{graph!nonisomorphic} to each other?
+
+  \item Repeat the above exercise for the
+    heptagon\index{Euler, Leonhard!polygon division problem}.
+
+  \item Let $E_n$\index{$E_n$} be the number of ways to
+    divide\index{Euler, Leonhard!polygon division problem} an $n$-gon
+    into triangles using only diagonals. For $n \geq 1$, the
+    \emph{Catalan numbers}\index{Catalan numbers} $C_n$ are defined as
+    \[
+    C_n
+    =
+    \frac{1}{n+1} \binom{2n}{n}.
+    \]
+    D\"orrie~\cite[pp.21--27]{Dorrie1965}\index{D\"orrie, Heinrich}
+    showed that $E_n$ is related to the Catalan\index{Catalan numbers}
+    numbers via the equation $E_n = C_{n-1}$. Show that
+    \[
+    C_n
+    =
+    \frac{1}{4n + 2} \binom{2n + 2}{n + 1}.
+    \]
+    For $k \geq 2$, show that the Catalan\index{Catalan numbers}
+    numbers satisfy the recurrence relation
+    \[
+    C_k
+    =
+    \frac{4k - 2}{k + 1} C_{k-1}.
+    \]
+  \end{enumerate}
 \end{problem}
