@@ -236,6 +236,9 @@ True
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Steiner tree}
+
+See Trietsch~\cite{Trietsch1984} for a relationship between Steiner
+trees and Euler's problem of polygon division.
 Finding  a spanning tree  in a Graph $G$ can be done in linear time, whereas computing a Steiner Tree is NP-hard. The goal is in this case, given a graph, a weight function $w:E(G) \to \R$ and a set $S$ of vertices, to find the tree of minimum cost connecting them all together. Equivalently, we will be looking for an acyclic subgraph $H$of $G$ containing $|V(H)|$ vertices and $|E(H)|=|V(H)|-1$ edges, which contains each vertex from $S$
 
 {\bf LP Formulation :}
