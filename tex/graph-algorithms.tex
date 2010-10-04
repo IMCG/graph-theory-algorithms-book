@@ -2166,6 +2166,12 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     results of the previous exercise.
   \end{enumerate}
 
+\begin{algorithm}[!htpb]
+\input{algorithm/graph-algorithms_linear-search.tex}
+\caption{Linear search for lists.}
+\label{alg:graph_algorithms:linear_search}
+\end{algorithm}
+
 \begin{landscape}
 \begin{figure}[!htbp]
 \centering
@@ -2216,4 +2222,29 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \end{table}
 \end{landscape}
 
+\item A list data structure can be used to manage vertices and
+  edges. If $L$ is a nonempty list of vertices of a graph, we may want
+  to know whether the graph contains a particular vertex. We could
+  search the list $L$, returning \texttt{True} if $L$ contains the
+  vertex in question and \texttt{False} otherwise. Linear search is a
+  simple searching algorithm. Given an object $E$ for which we want to
+  search, we consider each element $e$ of $L$ in turn and compare $E$
+  to $e$. If at any point during our search we found a match, we halt
+  the algorithm and output an affirmative answer. Otherwise, we have
+  scanned through all elements of $L$ and each of those elements do
+  not match $E$. In this case, linear search reports that $E$ is not
+  in $L$. Our discussion is summarized in
+  Algorithm~\ref{alg:graph_algorithms:linear_search}.
+  %%
+  \begin{enumerate}
+  \item Implement Algorithm~\ref{alg:graph_algorithms:linear_search}
+    in Sage and test your implementation using the graphs presented in
+    the figures of this chapter.
+
+  \item What is the maximum number of comparisons during the running
+    of Algorithm~\ref{alg:graph_algorithms:linear_search}? What is the
+    average number of comparisons?
+
+  \item Why must the input list $L$ be nonempty?
+  \end{enumerate}
 \end{problem}
