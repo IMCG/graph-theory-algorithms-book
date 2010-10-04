@@ -1,0 +1,33 @@
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{High}{high}
+\SetKwData{Low}{low}
+\SetKwData{Mid}{mid}
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
+%%
+%% input/output
+\Input{A nonempty list $L$ of positive integers. Elements of $L$ are
+  sorted in nondecreasing order. An integer $i$ for which we want to
+  search in $L$.}
+\Output{\MyTrue if $i$ is in $L$; \MyFalse otherwise.}
+\BlankLine
+%%
+%% algorithm body
+$\Low \assign 0$\;
+$\High \assign |L| - 1$\;
+\While{$\Low \leq \High$}{
+  $\Mid \assign \lfloor\frac{\Low\, +\, \High}{2}\rfloor$\;
+  \If{$i = L[\Mid]$}{
+    \Return \MyTrue\;
+  }
+  \eIf{$i < L[\Mid]$}{
+    $\High \assign \Mid - 1$\;
+  }{
+    $\Low \assign \Mid + 1$\;
+  }
+}
+\Return \MyFalse\;
