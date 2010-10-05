@@ -2317,4 +2317,50 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     a crossing. What is the minimum number of crossings needed to get
     from $(MGWC,\, \_)$ to $(\_,\, MGWC)$?
   \end{enumerate}
+
+\item Symbolic\index{symbolic computation} computation systems such as
+  Magma, Maple, Mathematica, Maxima, and Sage are able to read in a
+  symbolic expression such as
+  \[
+  \verb!(a + b)^2 - (a - b)^2!
+  \]
+  and determine whether or not the brackets match. A bracket is any of
+  the following characters:
+  \[
+  \verb!(!\quad \verb!)!\quad
+  \verb!{!\quad \verb!}!\quad
+  \verb![!\quad \verb!]!\quad
+  \]
+  A string $S$ of characters is said to be \emph{balanced} if any left
+  bracket in $S$ has a corresponding right bracket that is also in
+  $S$. Furthermore, if there are $k$ occurrences of one type of left
+  bracket, then there must be $k$ occurrences of the corresponding right
+  bracket. The
+  \emph{balanced bracket problem}\index{balanced bracket problem} is
+  concerned with determining whether or not the brackets in $S$ are
+  balanced. Algorithm~\ref{alg:graph_algorithms:bracket_parser}
+  contains a procedure to determine if the brackets in $S$ are
+  balanced, and if so return a list of positive integers to indicate
+  how the brackets match.
+  %%
+  \begin{enumerate}
+  \item Implement Algorithm~\ref{alg:graph_algorithms:bracket_parser}
+    in Sage and test your implementation on various strings containing
+    brackets. Test your implementation on nonempty strings without any
+    brackets.
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:bracket_parser} so
+    that it returns \texttt{True} if the brackets of an input string
+    are balanced, and returns \texttt{False} otherwise.
+
+  \item What is the worst-case runtime of
+    Algorithm~\ref{alg:graph_algorithms:bracket_parser}?
+  \end{enumerate}
+
+\begin{algorithm}[!htpb]
+\index{balanced bracket problem}
+\input{algorithm/graph-algorithms/bracket-parser.tex}
+\caption{A bracket parser.}
+\label{alg:graph_algorithms:bracket_parser}
+\end{algorithm}
 \end{problem}
