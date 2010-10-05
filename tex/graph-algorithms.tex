@@ -2281,4 +2281,40 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     Algorithm~\ref{alg:graph_algorithms:binary_search} so that it
     works with an input list that is sorted in nonincreasing order.
   \end{enumerate}
+
+\item The following problem is known as the
+  \emph{river crossing problem}\index{river crossing problem}. A man,
+  a goat, a wolf, and a basket of cabbage are all on one side of a
+  river. They have a boat which could be used to cross to the other
+  side of the river. The boat can only hold at most two passengers,
+  one of whom must be able to row the boat. One of the two passengers
+  must be the man and the other passenger can be either the goat, the
+  wolf, or the basket of cabbage. When crossing the river, if the man
+  leaves the wolf with the goat, the wolf would prey on the goat. If
+  he leaves the goat with the basket of cabbage, the goat would eat
+  the cabbage. The objective is to cross the river in such a way that
+  the wolf has no chance of preying on the goat, nor that the goat eat
+  the cabbage.
+  %%
+  \begin{enumerate}
+  \item Let $M$, $G$, $W$, and $C$ denote the man, the goat, the wolf,
+    and the basket of cabbage, respectively. Initially all four are on
+    the left side of the river and none of them are on the right
+    side. Denote this by the ordered pair $(MGWC,\, \_)$, which is
+    called the initial\index{state!initial} state of the problem. When
+    they have all crossed to the right side of the river, the
+    final\index{state!final} state of the problem is $(\_,\, MGWC)$.
+    The underscore ``\_'' means that neither $M$, $G$, $W$, nor $C$
+    are on the corresponding side of the river. List a finite sequence
+    of moves to get from $(MGWC,\, \_)$ to $(\_,\, MGWC)$. Draw your
+    result as a digraph.
+
+  \item In the digraph $G$ obtained from the previous exercise, let
+    each edge of $G$ be of unit weight. Find a shortest path from
+    $(MGWC,\, \_)$ to $(\_,\, MGWC)$.
+
+  \item Rowing from one side of the river to the other side is called
+    a crossing. What is the minimum number of crossings needed to get
+    from $(MGWC,\, \_)$ to $(\_,\, MGWC)$?
+  \end{enumerate}
 \end{problem}
