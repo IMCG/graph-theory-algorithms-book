@@ -31,8 +31,8 @@ connected forest is a \emph{tree}\index{tree}.
 
 A \emph{rooted tree}\index{tree!rooted} is a tree\index{tree} with a
 specified \emph{root}\index{root} vertex $v_0$. However, if $G$ is a
-rooted tree with root vertex $v_0$ having degree one then, by
-convention, we do not call $v_0$ an endpoint or a leaf. The
+rooted tree with root vertex $v_0$ having degree one, then by
+convention we do not call $v_0$ an endpoint or a leaf. The
 Unix\index{Unix}, in particular Linux\index{Linux},
 filesystem\index{filesystem} hierarchy can be viewed as a tree~(see
 Figure~\ref{fig:trees_forests:filesystem_hierarchy}). As shown in
@@ -49,11 +49,11 @@ Figure~\ref{fig:trees_forests:expression_tree_perfect_square}.
 
 A \emph{directed tree}\index{tree!directed} is a digraph which would
 be a tree if the directions on the edges were ignored. A rooted tree
-can be regarded as a directed tree since we can imagine an edge
-$E = uv$ for $u,v \in V$ being directed from $u$ to $v$ if and only
-if $v$ is further away from $v_0$ than $u$ is. If $e = uv$ is an edge
-in a rooted tree, then we call $v$ a \emph{child}\index{child} vertex
-with \emph{parent}\index{parent} $u$. Directed trees are pervasive in
+can be regarded as a directed tree since we can imagine an edge $uv$
+for $u,v \in V$ being directed from $u$ to $v$ if and only if $v$ is
+further away from $v_0$ than $u$ is. If $uv$ is an edge in a rooted
+tree, then we call $v$ a \emph{child}\index{vertex!child} vertex with
+\emph{parent}\index{vertex!parent} $u$. Directed trees are pervasive in
 theoretical computer science, as they are useful structures for
 describing algorithms and relationships between objects in certain
 data sets.
@@ -88,9 +88,9 @@ an ordering is specified for the children of each vertex. An
 $n$-\emph{ary tree}\index{tree!$n$-ary} is a rooted tree for which
 each vertex that is not a leaf has at most $n$ children. The case
 $n = 2$ are called \emph{binary trees}\index{tree!binary}. A
-\emph{spanning tree}\index{spanning tree} $T$ of a connected,
-undirected graph $G$ is a subgraph containing all vertices of $G$
-which is a tree.
+\emph{spanning tree}\index{spanning tree} of a connected, undirected
+graph $G$ is a subgraph that is a tree and containing all vertices of
+$G$.
 
 \begin{example}
 \label{eg:trees_forests:spanning_tree}
@@ -110,7 +110,7 @@ thicker line width for its edges.}
 \end{figure}
 
 \begin{example}
-For $n = 1, \dots, 6$, how many distinct (non-isomorphic) trees are
+For $n = 1, \dots, 6$, how many distinct (nonisomorphic) trees are
 there of order $n$? Construct all such trees for each $n$.
 \end{example}
 
@@ -155,8 +155,9 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 \label{fig:trees_forests:distinct_trees_specified_order_6}
 \end{figure}
 
-The following game is a variant of the Shannon switching game, due to
-Edmunds and Lehman\index{edge-tagging game}. We follow the description
+The following game is a variant of the Shannon
+switching\index{Shannon!switching game} game, due to Edmunds and
+Lehman\index{edge-tagging game}. We follow the description
 in Oxley's survey ({\it What is a matroid?'}
 {\color{red}{add reference later}}). Recall that a minimal edge cut of
 a graph is also called a bond\index{bond} of the graph. The following
@@ -171,16 +172,17 @@ for Bob consists of destroying one edge, while each move for Alice
 involves securing an edge against destruction.
 
 \begin{theorem}
-The following statements are equivalent for a connected graph $G$.
-%
+The following statements are equivalent for a connected graph
+$G = (V, E)$.
+%%
 \begin{enumerate}
 \item Bob plays first and Alice can win against all possible
   strategies of Bob.
 
-\item The graph $G$ has 2 edge-disjoint spanning trees.
+\item The graph $G$ has $2$ edge-disjoint spanning trees.
 
-\item For all partitions $P$ of the vertex set $V$ of $G$, the number
-  of edges of $G$ that join vertices in different classes of the
+\item For all partitions $P$ of the vertex set $V$, the number of
+  edges of $G$ that join vertices in different classes of the
   partition is at least $2(|P| - 1)$.
 \end{enumerate}
 \end{theorem}
