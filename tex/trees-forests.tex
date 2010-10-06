@@ -155,6 +155,99 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 \label{fig:trees_forests:distinct_trees_specified_order_6}
 \end{figure}
 
+\begin{example}
+Let $T = (V, E)$ be a binary tree with vertex set
+\[
+V
+=
+\{a, b, c, d, e, f, v, w, x, y, z\}
+\]
+and edge set
+\[
+E
+=
+\{va,\, vw,\, wx,\, wy,\, xb,\, xc,\, yd,\, yz,\, ze,\, zf\}.
+\]
+Suppose that $x$ is the root of the branch we want to remove from
+$T$. Find all children of $x$ and cut off the branch rooted at $x$
+from $T$. Verify that the resulting graph is also a binary tree.
+\end{example}
+
+\begin{proof}[Solution]
+We construct the tree $T$ in Sage as follows:
+%%
+\begin{lstlisting}
+sage: T = DiGraph({
+...   "v":["a","w"], "w":["x","y"],
+...   "x":["c","b"], "y":["z","d"],
+...   "z":["f","e"]})
+sage: for v in T.vertex_iterator():
+...       print(v),
+a c b e d f w v y x z
+sage: for e in T.edge_iterator():
+...       print("%s%s" % (e[0], e[1])),
+wy wx va vw yd yz xc xb ze zf
+\end{lstlisting}
+%%
+Each vertex in a binary tree has at most $2$ children. Use this
+definition to test whether or not a graph is a binary tree.
+%%
+\begin{lstlisting}
+sage: T.is_tree()
+True
+sage: def is_bintree1(tree):
+...       for v in tree.vertex_iterator():
+...           if len(tree.neighbors_out(v)) > 2:
+...               return False
+...       return True
+sage: is_bintree1(T)
+True
+\end{lstlisting}
+%%
+The latter technique for binary tree testing is inefficient because in
+the worst-case it scans through all the vertices of a graph. If $T$ is
+a tree, we can test whether or not it is a binary tree as
+follows. Each vertex in a binary tree has a maximum degree of $3$ and
+the root vertex is the only vertex with degree $2$.
+%%
+\begin{lstlisting}
+sage: def is_bintree2(g):
+...       if g.is_tree() and max(g.degree()) == 3 and g.degree().count(2) == 1:
+...           return True
+...       return False
+sage: is_bintree2(T)
+True
+\end{lstlisting}
+%%
+As $x$ is the root vertex of the branch we want to cut off from $T$,
+we could use breadth- or depth-first search to determine all the
+children of $x$. We then delete $x$ and its children from $T$.
+%%
+\begin{lstlisting}
+sage: T2 = copy(T)
+sage: # using breadth-first search
+sage: V = list(T.breadth_first_search("x")); V
+['x', 'c', 'b']
+sage: T.delete_vertices(V)
+sage: for v in T.vertex_iterator():
+...       print(v),
+a e d f w v y z
+sage: for e in T.edge_iterator():
+...       print("%s%s" % (e[0], e[1])),
+wy va vw yd yz ze zf
+sage: # using depth-first search
+sage: V = list(T2.depth_first_search("x")); V
+['x', 'b', 'c']
+sage: T2.delete_vertices(V)
+sage: for v in T2.vertex_iterator():
+...       print(v),
+a e d f w v y z
+sage: for e in T2.edge_iterator():
+...       print("%s%s" % (e[0], e[1])),
+wy va vw yd yz ze zf
+\end{lstlisting}
+\end{proof}
+
 The following game is a variant of the Shannon
 switching\index{Shannon!switching game} game, due to Edmunds and
 Lehman\index{edge-tagging game}. We follow the description
