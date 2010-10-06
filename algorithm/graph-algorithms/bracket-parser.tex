@@ -28,10 +28,11 @@ $n \assign |S|$\;
       \Return $\varepsilon$\;
     }
     $(\Left,\, d) \assign \text{pop } T$\;
-    \uIf{\rm{\Left matches $S[i+1]$}}{
+    \eIf{\rm{\Left matches $S[i+1]$}}{
       \text{append $d$ to $L$}\;
+    }{
+      \Return $\varepsilon$\;
     }
-    \Return $\varepsilon$\;
   }
 }
 \uIf{$T$ \rm{is empty}}{
