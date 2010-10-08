@@ -332,7 +332,7 @@ b_{6i-5} b_{6i-4} b_{6i-3} b_{6i-2} b_{6i-1} b_{6i}.
 \]
 Consider each $v_i$ as the big-endian\index{big-endian} binary
 representation of a positive
-integer. Use~(\ref{eq:graph_algorithms:big_endian_binary_to_integer})
+integer. Use~\eqref{eq:graph_algorithms:big_endian_binary_to_integer}
 to obtain the integer representation $N_i$ of each $v_i$. Then add 63
 to each $N_i$ to obtain $N_i'$ and store $N_i'$ in one byte of
 memory. That is, each $N_i'$ can be represented as a bit vector of
@@ -352,7 +352,7 @@ bytes.
 
 We now discuss how to encode an integer $n$ in the range
 $0 \leq n \leq 2^{36} - 1$
-using~(\ref{eq:graph_algorithms:byte_representation_bit_vector}) and
+using~\eqref{eq:graph_algorithms:byte_representation_bit_vector} and
 denote such an encoding of $n$ as $N(n)$. Let $v$ be the
 big-endian\index{big-endian} binary representation of $n$. Then $N(n)$
 is given by
@@ -404,8 +404,8 @@ v
 where $c_i$ denotes the entries $a_{0,i} a_{1,i} \cdots a_{i-1,i}$ in
 column $i$ of $M$. Then the \graphsix\index{\graphsix} representation
 of $G$ is $N(n) R(v)$, where $R(v)$ and $N(n)$ are as
-in~(\ref{eq:graph_algorithms:byte_representation_bit_vector})
-and~(\ref{eq:graph_algorithms:graph6_sparse6_graph_orders}),
+in~\eqref{eq:graph_algorithms:byte_representation_bit_vector}
+and~\eqref{eq:graph_algorithms:graph6_sparse6_graph_orders},
 respectively. That is, $N(n)$ encodes the order of $G$ and $R(v)$
 encodes the edges of $G$.
 
@@ -1265,9 +1265,9 @@ d(s,v)
 \end{equation}
 %
 For $i = 1$, equality holds. Assume for induction
-that~(\ref{eq:graph_algorithms:Dijkstra:shortest_distance}) holds for
+that~\eqref{eq:graph_algorithms:Dijkstra:shortest_distance} holds for
 some $1 \leq i \leq n - 1$, so that now our task is to show
-that~(\ref{eq:graph_algorithms:Dijkstra:shortest_distance}) holds for
+that~\eqref{eq:graph_algorithms:Dijkstra:shortest_distance} holds for
 $i + 1$. To verify $D[v_{i+1}] = d(s, v_{i+1})$, note that by our
 inductive hypothesis,
 \[
@@ -1659,7 +1659,7 @@ w(i,j), & \text{if $k = 0$}, \\
 
 The key to the Floyd-Roy-Warshall
 algorithm\index{Floyd-Roy-Warshall algorithm} lies in exploiting
-expression~(\ref{eq:graph_algorithms:Floyd_Roy_Warshall:shortest_path_weights}).
+expression~\eqref{eq:graph_algorithms:Floyd_Roy_Warshall:shortest_path_weights}.
 If $n = |V|$, then this is a $O(n^3)$ time algorithm. For
 comparison, the Bellman-Ford algorithm\index{Bellman-Ford algorithm}
 has complexity $O(|V| \cdot |E|)$, which is $O(n^3)$ time for dense
@@ -1691,7 +1691,7 @@ Floyd-Roy-Warshall algorithm\index{Floyd-Roy-Warshall algorithm} can
 also detect the presence of negative weight
 cycles\index{cycle!negative}. If $G$ is a weighted digraph without
 self-loops,
-by~(\ref{eq:graph_algorithms:Floyd_Roy_Warshall_weight_matrix}) we
+by~\eqref{eq:graph_algorithms:Floyd_Roy_Warshall_weight_matrix} we
 have $D(i,i) = 0$ for $i = 1, 2, \dots, n$. Any path $p$ starting and
 ending at $i$ could only improve upon the initial weight of $0$ if the
 weight sum of $p$ is less than zero, i.e. a negative weight

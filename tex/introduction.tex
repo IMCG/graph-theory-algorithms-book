@@ -167,7 +167,7 @@ The graph $G$ is undirected, meaning that we do not impose direction
 on any edges. Without any direction on the edges, the edge $ab$ is the
 same as the edge $ba$. That is why \texttt{G.edges()} returns six
 edges instead of the 12 edges listed
-in~(\ref{eq:introduction:edges_of_house_graph}).
+in~\eqref{eq:introduction:edges_of_house_graph}.
 
 \index{$\adj$}
 (2) Let $\adj(v)$ be the set of all vertices that are adjacent
@@ -245,7 +245,7 @@ of the edges in the graph of
 Figure~\ref{fig:introduction:house_graph}, then the graph has six
 edges. However, if the direction of each edge is taken into account,
 then there are 12 edges as listed
-in~(\ref{eq:introduction:edges_of_house_graph}). The following
+in~\eqref{eq:introduction:edges_of_house_graph}. The following
 definition captures the situation where the direction of the edges are
 taken into account.
 
@@ -886,7 +886,7 @@ no edges. It is also called the \emph{trivial} graph.
 \end{figure}
 
 The following result is an application of
-inequality~(\ref{eq:introduction:upper_bound_total_edges_simple_graph}).
+inequality~\eqref{eq:introduction:upper_bound_total_edges_simple_graph}.
 
 \begin{theorem}
 Let $G$ be a simple graph with $n$ vertices and $k$ components. Then
@@ -907,9 +907,9 @@ in~\cite[pp.21--22]{Foulds1992}) that
 %
 (This result holds true for any nonempty but finite set of positive
 integers.) Note that $\sum n_i = n$ and
-by~(\ref{eq:introduction:upper_bound_total_edges_simple_graph}) each
+by~\eqref{eq:introduction:upper_bound_total_edges_simple_graph} each
 component $i$ has at most $\frac{1}{2} n_i (n_i - 1)$
-edges. Apply~(\ref{eq:introduction:inequality_set_positive_integers})
+edges. Apply~\eqref{eq:introduction:inequality_set_positive_integers}
 to get
 %
 \begin{align*}
@@ -1297,7 +1297,7 @@ b_{ij}
 %
 Each column of $B$ corresponds to an edge and each row corresponds to
 a vertex. The definition of incidence matrix of a digraph as contained
-in expression~(\ref{eq:introduction:incidence_matrix_digraph}) is
+in expression~\eqref{eq:introduction:incidence_matrix_digraph} is
 applicable to digraphs with self-loops as well as multidigraphs.
 
 For the undirected case, let $G$ be an undirected graph with edge set
@@ -1630,10 +1630,10 @@ does not provide an algorithm to construct a simple graph with a given
 degree sequence. For a simple graph that has a degree sequence with
 repeated elements, e.g. the degree sequences of $C_n$, $P_n$, $K_n$,
 and $K_{m,n}$, it is redundant to verify
-inequality~(\ref{eq:introduction:Erdos_Gallai_1961:graphical_sequence})
+inequality~\eqref{eq:introduction:Erdos_Gallai_1961:graphical_sequence}
 for repeated elements of that sequence. In 2003, Tripathi and
 Vijay~\cite{TripathiVijay2003} showed that one only needs to verify
-inequality~(\ref{eq:introduction:Erdos_Gallai_1961:graphical_sequence})
+inequality~\eqref{eq:introduction:Erdos_Gallai_1961:graphical_sequence}
 for as many times as there are distinct terms in $S$.
 \index{Erd\H{o}s, Paul}
 \index{Gallai, Tibor}
@@ -2269,7 +2269,7 @@ $G$ is $|E| = n(n - 1) / 4$.
 \begin{proof}
 Let $G$ be a self-complementary graph of order $n$. Each of $G$ and
 $G^c$ contains half the number of edges in
-$K_n$. From~(\ref{eq:introduction:size_of_K_n}), we have
+$K_n$. From~\eqref{eq:introduction:size_of_K_n}, we have
 \[
 |E(G)|
 =
