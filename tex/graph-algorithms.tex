@@ -286,8 +286,17 @@ significant bit. In big-endian order, the ASCII\index{ASCII} binary
 representation of \texttt{E} is written \texttt{1000101}~(see
 Table~\ref{tab:graph_algorithms:big_endian_ASCII_binary_E}), while
 the little-ending order is written \texttt{1010001}~(see
-Table~\ref{tab:graph_algorithms:little_endian_ASCII_binary_E}). To
-determine the integer representation of a bit vector, multiply each
+Table~\ref{tab:graph_algorithms:little_endian_ASCII_binary_E}). In his
+novel \emph{Gulliver's Travels}\index{Gulliver's Travels},
+Jonathan Swift\index{Swift, Jonathan} used the terms
+big-\index{big-endian} and little-endian\index{little-endian} in
+satirizing politicians who squabbled over whether to break an egg at
+the big end or the little end. Danny
+Cohen\index{Cohen, Danny}~\cite{Cohen1980,Cohen1981} first used the
+terms in 1980 as an April fool's joke in the context of computer
+architecture.
+
+To determine the integer representation of a bit vector, multiply each
 bit value by its corresponding position value, then add up all the
 results. In general, if the bit vector $v = b_1 b_2 \cdots b_k$ is the
 big-endian binary representation of a positive integer, then the
