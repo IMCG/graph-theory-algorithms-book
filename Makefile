@@ -5,17 +5,21 @@
 
 # change "template" to the name of your master .tex file
 FILE = book
+TEX_MASTER = $(FILE).tex
 
 all:
 	make latex
 	makeindex $(FILE)
-	bibtex $(FILE)
+	(BSTINPUTS=.:style:${BSTINPUTS:-:} && export BSTINPUTS && \
+	 bibtex $(FILE))
 	make latex
 	make clean
 
 latex:
-	pdflatex -shell-escape $(FILE).tex
-	pdflatex -shell-escape $(FILE).tex
+	(TEXINPUTS=.:style:${TEXINPUTS:-:} && export TEXINPUTS && \
+	 pdflatex -shell-escape $(TEX_MASTER))
+	(TEXINPUTS=.:style:${TEXINPUTS:-:} && export TEXINPUTS && \
+	 pdflatex -shell-escape $(TEX_MASTER))
 
 clean:
 	rm -rfv *#
