@@ -1,6 +1,10 @@
 Algorithmic Graph Theory
 http://code.google.com/p/graph-theory-algorithms-book/
 
+Copyright (C) 2010 David Joyner <wdjoyner@gmail.com>
+Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+Copyright (C) 2010 Nathann Cohen <nathann.cohen@gmail.com>
+
 A GNU-FDL [1] book on algorithmic graph theory by David Joyner [2],
 Minh Van Nguyen [3], and Nathann Cohen [4]. This is an introductory
 book on algorithmic graph theory. Theory and algorithms are
