@@ -1,0 +1,30 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2010 David Joyner <wdjoyner@gmail.com>
+%% Copyright (C) 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}
+[linedecorate/.style={-,thick},%
+  nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  0/0/2/left/west, 1/0/0/left/west, 2/2.5/1/above/north,
+  3/5/0/right/east, 4/5/2/right/east}
+{
+  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {0/1, 0/2, 1/2, 2/3, 2/4, 3/4}
+{
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}

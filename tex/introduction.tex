@@ -99,21 +99,30 @@ simple graphs, and so on. Where do we begin?
 \label{fig:introduction:graphs_as_plots}
 \end{figure}
 
-We start by calling a ``graph'' what some call an ``unweighted,
-undirected graph without multiple edges.'' A \emph{graph}\index{graph}
-$G = (V, E)$ is an ordered pair of sets. Elements of $V$ are called
-\emph{vertices}\index{vertices} or \emph{nodes}, and elements of
-$E \subseteq V \times V$ are called \emph{edges}\index{edges} or
-\emph{arcs}. We refer to $V$ as the vertex set of $G$, with $E$ being
-the edge set. The cardinality of $V$ is called the
-\emph{order}\index{order} of $G$, and $|E|$ is called the
+We start by calling a ``graph'' what some call an
+``unweighted\index{graph!unweighted},
+undirected\index{graph!undirected} graph without
+multiple\index{edge!multiple} edges.''
+
+\begin{definition}
+(Version 1)
+{\rm
+A \emph{graph}\index{graph} $G = (V, E)$ is an ordered pair of finite
+sets. Elements of $V$ are called \emph{vertices}\index{vertex} or
+\emph{nodes}\index{node}, and elements of $E \subseteq V \times V$ are
+called \emph{edges}\index{edge} or \emph{arcs}\index{arcs}. We refer
+to $V$ as the \emph{vertex set}\index{vertex!set} of $G$, with $E$
+being the \emph{edge set}\index{edge!}. The cardinality of $V$ is
+called the \emph{order}\index{order} of $G$, and $|E|$ is called the
 \emph{size}\index{size} of $G$. We usually disregard any direction of
 the edges and consider $(u,v)$ and $(v,u)$ as one and the same edge in
 $G$. In that case, $G$ is referred to as an
-\emph{undirected graph}\index{undirected graph}.
+\emph{undirected graph}\index{graph!undirected}.
+}
+\end{definition}
 
-One can label a graph by attaching labels to its vertices. If $(v_1,
-v_2) \in E$ is an edge of a graph $G = (V, E)$, we say that $v_1$ and
+One can label a graph by attaching labels to its vertices.
+If $(v_1, v_2) \in E$ is an edge of a graph $G = (V, E)$, we say that $v_1$ and
 $v_2$ are \emph{adjacent} vertices. For ease of notation, we write the
 edge $(v_1, v_2)$ as $v_1 v_2$. The edge $v_1 v_2$ is also said to be
 \emph{incident} with the vertices $v_1$ and $v_2$.
@@ -310,31 +319,55 @@ multigraph.
 \index{multigraphs}
 \index{multi-undirected graph}
 
+As we indicated above, a graph may have ``weighted''\index{edge!weight}
+edges.
+
+\begin{definition} (Version 2)
+{\rm
+A \emph{weighted graph}\index{graph!weighted} is a graph $G = (V, E)$
+where each set $V$ and $E$ is a pair consisting of a vertex and a real
+number called the \emph{weight}\index{weight!graph}.
+}
+\end{definition}
+
 The illustration in
 Figure~\ref{fig:introduction:seven_bridges_Konigsberg} is actually a
-multigraph called the K\"onigsberg graph. For a multigraph $G$, we are
+multigraph, a graph with possibly multiple edges,
+called the K\"onigsberg\index{K\"onigsberg graph} graph.
+
+\begin{definition} (Version 3)
+{\rm
+For a weighted multigraph\index{weight!multigraph} $G$, we are
 given:
 %
 \begin{itemize}
-\item A finite set $V$ whose elements are called \emph{vertices}.
+\item A finite set $V$ whose elements are pairs $(v, w_v)$, where $v$
+  is called a \emph{vertex}\index{vertex!multigraph} and $w_v \in \R$
+  is called its \emph{weight}\index{weight!multigraph}. (Sometimes,
+  the pair $(v, w_v)$ is called the vertex.)
 
-\item A finite set $E$ whose elements are called \emph{edges}. We do
-  not necessarily assume $E \subseteq V^{(2)}$, where $V^{(2)}$ is the
-  set of unordered pairs of vertices.
+\item A finite set $E$ whose elements are called
+  \emph{edges}\index{edge!multigraph}. We do not necessarily assume
+  that $E \subseteq V^{(2)}$, where $V^{(2)}$ is the set of unordered
+  pairs of vertices.\footnote{
+    However, we always assume that $E \subseteq \R \times V^{(2)}$,
+    where the $\R$-component is called the
+    \emph{weight}\index{edge!weight} of the edge.
+  }
 
-\item An incidence function
+\item An incidence\index{incidence function} function
 
 \begin{equation}
-\label{eqn:edge-incidence}
+\label{eqn:introduction:edge_incidence}
 i: E \to V^{(2)}.
 \end{equation}
 \end{itemize}
 %
-Such a multigraph is denoted $G = (V,E,i)$. An \emph{orientation} on
-$G$ is a function
+Such a multigraph is denoted $G = (V,E,i)$. An
+\emph{orientation}\index{orientation} on $G$ is a function
 %
 \begin{equation}
-\label{eqn:edge-orientation}
+\label{eqn:introduction:edge_orientation}
 h: E \to V
 \end{equation}
 %
@@ -349,6 +382,8 @@ multidigraph.
 \index{orientation}
 \index{edge!head}
 \index{edge!tail}
+}
+\end{definition}
 
 \index{graph!simple}
 \index{simple graph}
@@ -390,14 +425,26 @@ $\lfloor (n + 1) / 2 \rfloor$ edges.
 \label{fig:introduction:Shannon_multigraphs}
 \end{figure}
 
-For any vertex $v$ in a graph $G = (V, E)$, the cardinality of
-$\text{adj}(v)$ is called the \emph{degree} of $v$ and written as
-$\deg(v) = |\text{adj}(v)|$\index{$\deg$}. The degree of $v$ counts
-the number of vertices in $G$ that are adjacent to $v$. If
-$\deg(v) = 0$, we say that $v$ is an
-\emph{isolated}\index{isolated vertex} vertex and if $\deg(v) = 1$
-then $v$ is called a \emph{pendant}\index{pendant}. For example, in
-the graph in Figure~\ref{fig:introduction:house_graph}, we have
+\begin{definition}
+{\rm
+For any vertex $v$ in a graph $G = (V, E)$, the
+cardinality\index{cardinality} of $\adj(v)$ is called the
+\emph{degree}\index{degree} of $v$ and written as
+$\deg(v) = |\adj(v)|$\index{$\deg$}. The degree of $v$ counts the
+number of vertices in $G$ that are adjacent to $v$. If $\deg(v) = 0$,
+then $v$ is not incident to any edge and we say that $v$ is an
+\emph{isolated}\index{vertex!isolated} vertex. If $\deg(v) = 1$,
+then $v$ is called a \emph{pendant}\index{pendant}.
+}
+\end{definition}
+
+Some examples would put the above definition in concrete
+terms. Consider again the graph in
+Figure~\ref{fig:introduction:self_loop}. Note that no vertices are
+isolated. Even though vertex $a$ is not incident to any vertex other
+than $a$ itself, note that $\deg(a) = 2$ and so by definition $a$ is
+not isolated. Furthermore, each of $b$ and $c$ is a pendant. For the
+house graph in Figure~\ref{fig:introduction:house_graph}, we have
 $\deg(b) = 3$. For the graph in
 Figure~\ref{fig:introduction:triangle_digraph}, we have
 $\deg(b) = 2$. If $V \neq \emptyset$ and $E = \emptyset$, then
@@ -405,9 +452,13 @@ $G$ is a graph consisting entirely of isolated vertices. From
 Example~\ref{eg:introduction:house_graph} we know that the vertices
 $a, c, d$ in Figure~\ref{fig:introduction:house_graph} have the
 smallest degree in the graph of that figure, while $b, e$ have the
-largest degree. The minimum degree among all vertices in $G$ is
-denoted $\delta(G)$, whereas the maximum degree is written as
-$\Delta(G)$. Thus, if $G$ denotes the graph in
+largest degree.
+
+The minimum degree among all vertices in $G$ is denoted
+$\delta(G)$\index{$\delta(G)$}, whereas the maximum degree is written
+as $\Delta(G)$\index{$\Delta(G)$}.
+
+Thus, if $G$ denotes the graph in
 Figure~\ref{fig:introduction:house_graph} then we have $\delta(G) = 2$
 and $\Delta(G) = 3$. In the following Sage session, we construct the
 digraph in Figure~\ref{fig:introduction:triangle_digraph} and computes
@@ -522,7 +573,7 @@ following corollary.
 
 \begin{corollary}
 \label{cor:introduction:degree_sum_even}
-If $G$ is a graph, then its total number of degrees is non-negative
+If $G$ is a graph, then the sum of its degrees is nonnegative
 and even.
 \end{corollary}
 
@@ -650,30 +701,36 @@ also contains $v$, the only remaining vertex of odd degree. As $u$ and
 $v$ belong to the same component, they are connected by a path.
 \end{proof}
 
-A path of length $n \geq 3$ whose start and end vertices are the same
-is called a \emph{cycle}. For example, the walk $a, b, c, e, a$
-in Figure~\ref{fig:introduction:types_of_walks} is a path and a
-cycle. A cycle whose length is odd is called an
-\emph{odd cycle}\index{cycle!odd}, otherwise it is referred to as an
-\emph{even cycle}\index{cycle!even}. A walk which has no repeated
-edges and the start and end vertices are the same, but otherwise has
-no repeated vertices, is
-%a \emph{circuit}, otherwise known as
-a \emph{closed path}~(with apologies for slightly abusing
+A trail\index{trail} of length $n \geq 3$ whose start and end vertices
+are the same is called a \emph{closed path}\index{path!closed}. For
+example, the walk $a, b, c, e, a$ in
+Figure~\ref{fig:introduction:types_of_walks} is a closed path. A path
+whose length is odd is called \emph{odd}\index{path!odd}, otherwise it
+is referred to as \emph{even}\index{path!even}. A walk which has no
+repeated edges and the start and end vertices are the same, but
+otherwise has no repeated vertices, is a
+\emph{cycle}\index{cycle}~(with apologies for slightly abusing
 terminology).\footnote{
-A closed path in a graph is sometimes also called a ``circuit.'' Since
-that terminology unfortunately conflicts with the closely related
-notion of a circuit of a matroid, we do not use it here.}
+  A cycle in a graph is sometimes also called a
+  ``circuit''\index{circuit}. Since that terminology unfortunately
+  conflicts with the closely related notion of a circuit of a matroid,
+  we do not use it here.
+}
 Thus the walk $a, b, e, a$ in
 Figure~\ref{fig:introduction:types_of_walks} is a closed path. It is
 easy to see that if you remove any edge from a cycle, then the
-resulting walk contains no closed paths. An \emph{Euler subgraph} of a
-graph $G$ is either a cycle or an edge-disjoint union of cycles in
-$G$.
-\index{closed path}
-\index{cycle}
-\index{path!closed}
-\index{Euler subgraph}
+resulting walk contains no closed paths. An
+\emph{Euler subgraph}\index{Euler subgraph} of a graph $G$ is either a
+cycle or an edge-disjoint union of cycles in $G$. An example of a
+closed path which is not a cycle is given in
+Figure~\ref{fig:introduction:butterfly_graph}.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/introduction/butterfly-graph.tex}
+\caption{Butterfly graph with $5$ vertices.}
+\label{fig:introduction:butterfly_graph}
+\end{figure}
 
 The length of the shortest cycle in a graph is called the \emph{girth}
 of the graph. An acyclic graph is said to have infinite girth, by
@@ -807,14 +864,12 @@ Trees are a special type of graphs that are used in modelling
 structures that have some form of hierarchy. For example, the
 hierarchy within an organization can be drawn as a tree
 structure, similar to the family tree in
-Figure~\ref{fig:introduction:family_tree}. Formally, a \emph{tree} is
-an undirected graph that is connected and has no cycles. If one vertex
-of a tree is designated as the root vertex, then the tree is called a
-\emph{rooted tree}. Chapter~\ref{chap:trees_forests} covers trees in
-more details.
-\index{family tree}
-\index{tree}
-\index{tree!rooted}
+Figure~\ref{fig:introduction:family_tree}\index{family tree}.
+Formally, a \emph{tree}\index{tree} is an undirected graph that is
+connected and has no cycles. If one vertex of a tree is specially
+designated as the \emph{root vertex}\index{vertex!root}, then the tree
+is called a  \emph{rooted tree}\index{tree!rooted}.
+Chapter~\ref{chap:trees_forests} covers trees in more details.
 
 \begin{figure}[!htbp]
 \centering
@@ -1062,11 +1117,17 @@ connection with Theorem~\ref{thm:introduction:hand_shaking}. If not
 many people shake hands in the room, it is a waste of time recording
 all the handshakes and also all the ``non-handshakes.'' This is
 basically what the adjacency matrix does. In this kind of
-``sparse graph'' situation, it would be much easier to simply record
-the handshakes as a Python dictionary. This section requires some
-concepts and techniques from linear algebra, especially matrix
-theory. See introductory texts on linear algebra and matrix
-theory~\cite{Beezer2009} for coverage of such concepts and techniques.
+``sparse graph''\index{graph!sparse} situation, it would be much
+easier to simply record the handshakes as a Python
+dictionary.\footnote{
+  A Python\index{Python} dictionary is basically an indexed set. See
+  the reference manual at \url{http://www.python.org} for further
+  details.
+}
+This section requires some concepts and techniques from linear
+algebra, especially matrix theory. See introductory texts on linear
+algebra and matrix theory~\cite{Beezer2009} for coverage of such
+concepts and techniques.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
