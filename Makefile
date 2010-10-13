@@ -17,7 +17,6 @@
 # Make sure that the following commands are in your PATH variable:
 # latex, dvips, ps2pdf, rm
 
-# change "template" to the name of your master .tex file
 FILE = book
 TEX_MASTER = $(FILE).tex
 
