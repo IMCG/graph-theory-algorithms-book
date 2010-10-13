@@ -20,14 +20,14 @@ FILE = book
 TEX_MASTER = $(FILE).tex
 
 all:
-	make latex
+	make pdf
 	makeindex $(FILE)
 	(BSTINPUTS=.:style:${BSTINPUTS:-:} && export BSTINPUTS && \
 	 bibtex $(FILE))
-	make latex
+	make pdf
 	make clean
 
-latex:
+pdf:
 	(TEXINPUTS=.:style:${TEXINPUTS:-:} && export TEXINPUTS && \
 	 pdflatex -shell-escape $(TEX_MASTER))
 	(TEXINPUTS=.:style:${TEXINPUTS:-:} && export TEXINPUTS && \
