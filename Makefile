@@ -14,7 +14,7 @@
 # http://www.gnu.org/licenses/
 ###########################################################################
 
-# Make sure you have a proper and working LaTeX/Tex distribution.
+# Make sure you have a proper and working LaTeX/TeX distribution.
 
 FILE = book
 TEX_MASTER = $(FILE).tex
