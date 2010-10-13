@@ -14,8 +14,7 @@
 # http://www.gnu.org/licenses/
 ###########################################################################
 
-# Make sure that the following commands are in your PATH variable:
-# latex, dvips, ps2pdf, rm
+# Make sure you have a proper and working LaTeX/Tex distribution.
 
 FILE = book
 TEX_MASTER = $(FILE).tex
