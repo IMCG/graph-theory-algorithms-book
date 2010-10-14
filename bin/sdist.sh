@@ -102,9 +102,6 @@ if [ -e "book.pdf" ] && [ -f "book.pdf" ]; then
     tar -jcf "$NAME$VERSION".tar.bz2 "$NAME$VERSION"
     zip -q -r "$NAME$VERSION".zip "$NAME$VERSION"
     rm -rf "$NAME$VERSION"
-    # You should now be left with the original source tree named
-    # "graph-theory-x.y". In addition, you now have two new files named
-    # "<NAME><VERSION>.tar.bz2" and "<NAME><VERSION>.pdf".
 else
     echo "File book.pdf does not exist. Exiting..."
     exit 1
