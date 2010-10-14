@@ -102,6 +102,7 @@ if [ -e "book.pdf" ] && [ -f "book.pdf" ]; then
     tar -jcf "$NAME$VERSION".tar.bz2 "$NAME$VERSION"
     zip -q -r "$NAME$VERSION".zip "$NAME$VERSION"
     rm -rf "$NAME$VERSION"
+    exit 0
 else
     echo "File book.pdf does not exist. Exiting..."
     exit 1
