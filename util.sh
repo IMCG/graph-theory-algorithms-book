@@ -50,4 +50,7 @@ if [ "$1" = "--dist" ]; then
     elif [ "$#" -eq 2 ]; then
     	"$BOOK_ROOT/bin/sdist.sh" "$2" "$BOOK_ROOT"
     fi
+else
+    usage
+    exit 1
 fi
