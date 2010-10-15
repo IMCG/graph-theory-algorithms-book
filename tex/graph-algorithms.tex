@@ -598,11 +598,10 @@ $d(s,v) = D[v]$.
 %% We need to show that if $d(s,u)$ is the length of any
 %% shortest $s$-$u$ path, then $d(s,u) = D[u]$.
 Let $d(s,u) = k + 1$ with the corresponding shortest $s$-$u$ path
-being $(s, v_1, v_2, \dots, v_k, u)$. Then by our induction
-hypothesis, $(s, v_1, v_2, \dots, v_k)$ is a shortest path from $s$ to
-$v_k$ of length $d(s, v_k) = D[v_k] = k$. In other words, $D[v_k] <
-D[u]$ and the while loop spanning
-lines~\ref{alg:BFS:while_loop:non_empty_queue}
+being $(s, v_1, v_2, \dots, v_k, u)$. By our induction hypothesis,
+$(s, v_1, v_2, \dots, v_k)$ is a shortest path from $s$ to $v_k$ of
+length $d(s, v_k) = D[v_k] = k$. In other words, $D[v_k] < D[u]$ and
+the while loop spanning lines~\ref{alg:BFS:while_loop:non_empty_queue}
 to~\ref{alg:BFS:while_loop:append_to_tree} processes $v_k$ before
 processing $u$. The graph under consideration has the edge $v_k
 u$. When examining the adjacency list of $v_k$, BFS reaches $u$~(if
