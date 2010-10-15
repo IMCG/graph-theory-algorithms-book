@@ -262,18 +262,22 @@ wy va vw yd yz ze zf
 The following game is a variant of the Shannon
 switching\index{Shannon!switching game} game, due to Edmonds and
 Lehman\index{edge-tagging game}. We follow the description
-in Oxley's survey~\cite{Oxley2003}. Recall that a minimal edge cut of
-a graph is also called a bond\index{bond} of the graph. The following
-two-person game is played on a connected graph $G = (V,E)$. Two
-players Alice and Bob alternately tag elements of $E$. Alice's goal is
-to tag the edges of a spanning tree, while Bob's goal is to tag the
-edges of a bond. If we think of this game in terms of a communication
-network, then Bob's goal is to separate the network into pieces that
-are no longer connected to each other, while Alice is aiming to
-reinforce edges of the network to prevent their destruction. Each move
-for Bob consists of destroying one edge, while each move for Alice
-involves securing an edge against destruction. The next result can be
-found in Oxley~\cite{Oxley2003}.
+in Oxley's\index{Oxley, James} survey~\cite{Oxley2003}. Recall that a
+minimal edge cut of a graph is also called a bond\index{bond} of the
+graph. The following two-person game is played on a connected graph
+$G = (V,E)$. Two players Alice and Bob alternately tag elements of
+$E$. Alice's goal is to tag the edges of a spanning tree, while Bob's
+goal is to tag the edges of a bond. If we think of this game in terms
+of a communication network, then Bob's goal is to separate the network
+into pieces that are no longer connected to each other, while Alice is
+aiming to reinforce edges of the network to prevent their
+destruction. Each move for Bob consists of destroying one edge, while
+each move for Alice involves securing an edge against destruction. The
+next result characterizes winning strategies on $G$. The full proof
+can be found in Oxley\index{Oxley, James}~\cite{Oxley2003}. See
+Rasmussen~\cite{Rasmussen2007}\index{Rasmussen, Rune} for
+optimization\index{algorithm!optimization} algorithms for solving
+similar games.
 
 \begin{theorem}
 The following statements are equivalent for a connected graph
