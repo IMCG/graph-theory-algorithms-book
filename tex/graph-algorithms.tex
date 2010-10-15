@@ -609,6 +609,30 @@ $u$ is not reached earlier) and so $D[u] \leq k + 1$. Hence,
 $D[u] = k + 1$ and therefore $d(s,u) = D[u] = k + 1$.
 \end{proof}
 
+In the proof of
+Theorem~\ref{thm:graph_algorithms:BFS:list_D_length_shortest_paths},
+we used $d(u,v)$ to denote the length of the shortest path from $u$ to
+$v$. This shortest path length is also known as the
+\emph{distance}\index{distance} from $u$ and $v$, and will be
+discussed in further details in
+section~\ref{sec:graph_algorithms:weights_distances} and
+Chapter~\ref{chap:distance_connectivity}. The
+\emph{diameter}\index{diameter} of a graph $G = (V,E)$ is defined as
+\[
+\max_{\substack{u,v \in V \\ u \neq v}} d(u,v).
+\]
+Using the above definition, to find the diameter\index{diameter} we
+first determine the distance\index{distance} between each pair of
+distinct vertices, then we compute the maximum of all such
+distances. Breadth-first\index{breadth-first search} search is a
+useful technique for finding the diameter\index{diameter}: we simply
+run breadth-first\index{breadth-first search} search from each
+vertex. An interesting application of the diameter\index{diameter}
+appears in the
+\emph{small-world phenomenon}\index{small-world}~\cite{Kleinberg2000,
+  Milgram1967,WattsStrogatz1998}, which contends that a certain
+special class of sparse graphs have low diameter.
+
 %% As an example, here is some Sage code which implements BFS to compute
 %% the list distances from a given vertex.
 %% %
@@ -951,6 +975,7 @@ stack\index{stack} implementation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Weights and distances}
+\label{sec:graph_algorithms:weights_distances}
 \index{weight}
 \index{distance}
 
