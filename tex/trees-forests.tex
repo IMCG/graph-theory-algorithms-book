@@ -307,8 +307,11 @@ the original tree. The following theorem provides several basic
 characterizations of trees.
 
 \begin{theorem}
+\label{thm:trees_forests:basic_characterization_of_trees}
+\textbf{Basic characterizations of trees.}
 If $T = (V, E)$ is a graph with $n$ vertices, then the following
 statements are equivalent:
+%%
 \begin{enumerate}
 \item $T$ is a tree.
 
@@ -324,117 +327,112 @@ statements are equivalent:
 \end{enumerate}
 \end{theorem}
 
-Let $G=(V_1,E_2)$ be a graph and $T=(V_2,E_2)$ a subgraph of $G$ which is a tree.
-As in (6) we see adding just one edge in $E_1-E_2$ to $T$ will create a
-unique cycle in $G$. Such a cycle is called a {\it fundamental cycle}
-of $G$. (The set of such fundamental cycles of $G$ depends on $T$.)
-\index{fundamental cycle}
-\index{tree}
-
-\begin{proof}[Solution]
-\noindent
+\begin{proof}
 (1) $\implies$ (2):
-This basically follows by induction on the number of vertices.
+This basically follows by induction on the number of vertices. By
+definition, a tree has no cycles. Make the following induction
+hypothesis: for any tree $T = (V,E)$, let $|E| = |V| - 1$. This holds
+in the base case where $|V|=1$ since in that case, there can be no
+edges. Assume it is true for all trees with $|V| = k$, for some
+$k > 1$. Let $T = (V,E)$ be a tree having $k + 1$ vertices. Remove an
+edge (but not the vertices it is incident to). This disconnects $T$
+into $T_1 = (V_1, E_1)$ union $T_2 = (V_2, E_2)$, where
+$|E| = |E_1| + |E_2| + 1$ and $|V| = |V_1| + |V_2|$ (and possibly one
+of the $E_i$ is empty), each of which is a tree satisfying the
+conditions of the induction hypothesis. Therefore,
+%%
+\begin{align*}
+|E|
+&=
+|E_1| + |E_2| + 1 \\[4pt]
+&=
+|V_1| - 1 + |V_2| - 1 + 1 \\[4pt]
+&=
+|V| - 1.
+\end{align*}
 
-By definition, a tree has no cycles. Make the following
-induction hypothesis: for any tree $T=(V,E)$, $|E|=|V|-1$.
-This holds in the base case where $|V|=1$ since in that case,
-there can be no edges. Assume it is true for all trees with
-$|V|=k$, for some $k>1$. Let $T=(V,E)$ be a tree having
-$k+1$ vertices. Remove an edge (but not the vertices
-it is incident to). This
-disconnects
-$T$ into $T_1=(V_1, E_1)$ union $T_2 = (V_2, E_2)$,
-where $|E|=|E_1|+|E_2|+1$ and $|V|=|V_1|+|V_2|$
-(and possibly one of the $E_i$ is empty),
-each of which is a tree satisfying the conditions of the induction
-hypothesis. Therefore,
-
-\[
-|E|=|E_1|+|E_2|+1 = |V_1| - 1 + |V_2| - 1 + 1 =|V|-1.
-\]
-
-\noindent
 (2) $\implies$ (3):
-If $T=(V,E)$ has $k$ connected components then it is a disjoint
-union of trees $T_i=(V_i,E_i)$, $i=1,2,\dots, k$,
-for some $k$. Each of these satisfy, by (2),
-
+If $T = (V,E)$ has $k$ connected components then it is a disjoint
+union of trees $T_i = (V_i, E_i)$, $i = 1, 2, \dots, k$, for some
+$k$. By part~(2), each of these satisfy
 \[
-|E_i|=|V_i|-1,
+|E_i|
+=
+|V_i| - 1
 \]
 so
+%%
+\begin{align*}
+|E|
+&=
+\sum_{i=1}^k |E_i| \\[4pt]
+&=
+\sum_{i=1}^k |V_i| - k \\[4pt]
+&=
+|V| - k.
+\end{align*}
+%%
+This contradicts part~(2) unless $k = 1$. Therefore, $T$ is connected.
 
-\[
-|E|=\sum_{i=1}^k |E_i|
-=\sum_{i=1}^k |V_i| -k
-=|V|-k.
-\]
-This contradicts (2) unless $k=1$.
-Therefore, $T$ is connected.
-
-\noindent
 (3) $\implies$ (4):
-If removing an edge $e\in E$ leaves $T=(V,E)$ connected then
-$T'=(V,E')$ is a tree, where $E'=E-e$.
-However, this means that $|E'|=|E|-1=|V|-1-1=|V|-2$,
-which contradicts (3). Therefore $e$ is a cut set.
+If removing an edge $e \in E$ leaves $T = (V,E)$ connected then
+$T' = (V, E')$ is a tree, where $E' = E - e$. However, this means that
+$|E'| = |E| - 1 = |V| - 1 - 1 = |V| - 2$, which contradicts
+part~(3). Therefore $e$ is a cut set.
 
-\noindent
 (4) $\implies$ (5):
 Let
-
 \[
-P = (v_0=u\to v_1 \to v_2 \to \dots \to v_k = v)
+P : v_0 = u,\, v_1,\, v_2, \dots, v_k = v
 \]
 and
 \[
-P' = (v'_0=u\to v'_1 \to v'_2 \to \dots \to v'_\ell = v)
+P' : v'_0 = u,\, v'_1,\, v'_2, \dots, v'_\ell = v
 \]
 be two paths from $u$ to $v$.
 
-\noindent
 (5) $\implies$ (6):
-Let $e=(u,v)$ be a new edge connecting $u,v\in V$.
-Suppose that
-
+Let $e = (u,v)$ be a new edge connecting $u,v \in V$. Suppose that
 \[
-P = (v_0=w\to v_1 \to v_2 \to \dots \to v_k = w)
+P : v_0 = w,\, v_1,\, v_2, \dots, v_k = w
 \]
 and
 \[
-P' = (v'_0=w\to v'_1 \to v'_2 \to \dots \to v'_\ell = w)
+P' : v'_0 = w,\, v'_1,\, v'_2, \dots, v'_\ell = w
 \]
-are two cycles in $T\cup (\{u,v\},\{e\})$.
+are two cycles in $T \cup \big(\{u,v\},\, \{e\}\big)$.
 
-If either $P$ or $P'$ does not contain $e$,
-say $P$ does not contain $e$, then $P$ is a
-cycle in $T$. Let $u = v_0$ and let $v=v_1$.
-The edge $v_0=w\to v_1$ is a $u$-$v$ path
-and the sequence $v=v_1 \to v_2 \to \dots \to v_k=w=u$
-taken in reverse order is another $u$-$v$ path.
-This is a contradiction to (5).
+If either $P$ or $P'$ does not contain $e$, say $P$ does not contain
+$e$, then $P$ is a cycle in $T$. Let $u = v_0$ and let $v = v_1$. The
+edge $v_0 = w v_1$ is a $u$-$v$ path and the sequence
+$v = v_1,\, v_2, \dots, v_k = w = u$ taken in reverse order is another
+$u$-$v$ path. This contradicts part~(5).
 
-We may suppose now that $P$ and $P'$ both contain $e$.
-Therefore, $P$ contains a subpath $P_0=P-e$ (which is not
-closed), that is the same as $P$ except it lacks the edge
-from $u$ to $v$. Likewise, $P'$ contains a subpath $P'_0=P'-e$ (which is not
-closed), that is the same as $P'$ except it lacks the edge
-from $u$ to $v$. By (5), these $u$-$v$ paths
-$p_0$ and $P_0'$ must be the same. This forces
-$P$ and $P'$ to be the same, which proves (6).
+We may suppose now that $P$ and $P'$ both contain $e$. Therefore, $P$
+contains a subpath $P_0 = P - e$ (which is not closed) that is the
+same as $P$ except it lacks the edge from $u$ to $v$. Likewise, $P'$
+contains a subpath $P'_0=P'-e$ (which is not closed) that is the same
+as $P'$ except it lacks the edge from $u$ to $v$. By (5), these
+$u$-$v$ paths $p_0$ and $P_0'$ must be the same. This forces $P$ and
+$P'$ to be the same, which proves part~(6).
 
-
-\noindent
 (6) $\implies$ (1):
 Condition (6) implies that $T$ is acyclic. (Otherwise, it is trivial
-to make two cycles by adding an extra edge.) We must show $T$ is connected.
-Suppose $T$ is disconnected. Let $u$ be a vertex in one component,
-$T_1$ say,
-of $T$ and $v$ a vertex in another component, $T_2$ say, of $T$.
-Adding the edge $e=(u,v)$ does not create a cycle (if it did
-then $T_1$ and $T_2$ would not be disjoint), which contradicts (6).
+to make two cycles by adding an extra edge.) We must show $T$ is
+connected. Suppose $T$ is disconnected. Let $u$ be a vertex in one
+component, $T_1$ say, of $T$ and $v$ a vertex in another component,
+$T_2$ say, of $T$. Adding the edge $e = uv$ does not create a cycle
+(if it did then $T_1$ and $T_2$ would not be disjoint), which
+contradicts part~(6).
 \end{proof}
+
+Let $G = (V_1, E_1)$ be a graph and $T = (V_2, E_2)$ a subgraph of $G$
+which is a tree\index{tree}. As in part~(6) of
+Theorem~\ref{thm:trees_forests:basic_characterization_of_trees}, we
+see that adding just one edge in $E_1 - E_2$ to $T$ will create a
+unique cycle in $G$. Such a cycle is called a
+\emph{fundamental cycle}\index{fundamental cycle} of $G$. The set of
+such fundamental cycles of $G$ depends on $T$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
