@@ -528,6 +528,48 @@ unique cycle in $G$. Such a cycle is called a
 \emph{fundamental cycle}\index{fundamental cycle} of $G$. The set of
 such fundamental cycles of $G$ depends on $T$.
 
+The following result essentially says that if a tree has at least one
+edge, then the tree has at least two vertices each of which has degree
+one. In other words, each tree of order $\geq 2$ has at least two
+pendants\index{pendant}.
+
+\begin{theorem}
+Every nontrivial tree has at least two leaves.
+\end{theorem}
+
+\begin{proof}
+Let $T$ be a nontrivial tree of order $m$ and size $n$. Consider the
+degree sequence $d_1, d_2, \dots, d_m$ of $T$ where
+$d_1 \leq d_2 \leq \cdots \leq d_m$. As $T$ is nontrivial and
+connected, then $m \geq 2$ and $d_i \geq 1$ for $i = 1, 2, \dots, m$.
+If $T$ has less than two leaves, then $d_1 \geq 1$ and $d_i \geq 2$
+for $2 \leq i \leq m$, hence
+%%
+\begin{equation}
+\label{eqn:trees_forests:less_than_two_leaves_lower_bound_degree_sum}
+\sum_{i=1}^m d_i
+\geq
+1 + 2(m-1)
+=
+2m - 1.
+\end{equation}
+%%
+But by Theorems~\ref{thm:introduction:degree_sum}
+and~\ref{thm:trees_forests:each_tree_has_size_n_minus_one}, we have
+\[
+\sum_{i=1}^m d_i
+=
+2n
+=
+2(m - 1)
+=
+2m - 2
+\]
+which contradicts
+inequality~\eqref{eqn:trees_forests:less_than_two_leaves_lower_bound_degree_sum}.
+Conclude that $T$ has at least two leaves.
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
