@@ -169,21 +169,22 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 
 \begin{example}
 \label{eg:trees_forests:branch_cut_binary_tree}
-Let $T = (V, E)$ be a binary tree with vertex set
+Let $T = (V, E)$ be a tree with vertex set
 \[
 V
 =
 \{a, b, c, d, e, f, v, w, x, y, z\}
 \]
-and edge set
+edge set
 \[
 E
 =
-\{va,\, vw,\, wx,\, wy,\, xb,\, xc,\, yd,\, yz,\, ze,\, zf\}.
+\{va,\, vw,\, wx,\, wy,\, xb,\, xc,\, yd,\, yz,\, ze,\, zf\}
 \]
-Suppose that $x$ is the root of the branch we want to remove from
-$T$. Find all children of $x$ and cut off the branch rooted at $x$
-from $T$. Verify that the resulting graph is also a binary tree.
+and root vertex $v$. Verify that $T$ is a binary tree. Suppose that
+$x$ is the root of the branch we want to remove from $T$. Find all
+children of $x$ and cut off the branch rooted at $x$ from $T$. Is the
+resulting graph also a binary tree?
 \end{example}
 
 \begin{proof}[Solution]
@@ -208,30 +209,29 @@ definition to test whether or not a graph is a binary tree.
 \begin{lstlisting}
 sage: T.is_tree()
 True
-sage: def is_bintree1(tree):
-...       for v in tree.vertex_iterator():
-...           if len(tree.neighbors_out(v)) > 2:
+sage: def is_bintree1(G):
+...       for v in G.vertex_iterator():
+...           if len(G.neighbors_out(v)) > 2:
 ...               return False
 ...       return True
 sage: is_bintree1(T)
 True
 \end{lstlisting}
 %%
-The latter technique for binary tree testing is inefficient because in
-the worst-case it scans through all the vertices of a graph. If $T$ is
-a rooted tree, we can test whether or not it is a binary tree as
-follows. Each vertex in a binary tree has a maximum degree of $3$. If
-the root vertex has exactly two children, then the root vertex is the
-only vertex with degree
-$2$. (Problem~\thechapter.\ref{prob:trees_forests:binary_tree_test}
-asks you to prove this result.)
+Here's another way to test for binary trees. Let $T$ be an undirected
+rooted tree. Each vertex in a binary tree has a maximum degree of
+$3$. If the root vertex is the only vertex with degree $2$, then $T$
+is a binary tree.
+(Problem~\thechapter.\ref{prob:trees_forests:binary_tree_test} asks
+you to prove this result.) We can use this test because the root
+vertex $v$ of $T$ is the only vertex with two children.
 %%
 \begin{lstlisting}
-sage: def is_bintree2(g):
-...       if g.is_tree() and max(g.degree()) == 3 and g.degree().count(2) == 1:
+sage: def is_bintree2(G):
+...       if G.is_tree() and max(G.degree()) == 3 and G.degree().count(2) == 1:
 ...           return True
 ...       return False
-sage: is_bintree2(T)
+sage: is_bintree2(T.to_undirected())
 True
 \end{lstlisting}
 %%
@@ -262,6 +262,20 @@ sage: for e in T2.edge_iterator():
 ...       print("%s%s" % (e[0], e[1])),
 wy va vw yd yz ze zf
 \end{lstlisting}
+%%
+The resulting graph $T$ is a binary tree because each vertex has at
+most two children.
+%%
+\begin{lstlisting}
+sage: T
+Digraph on 8 vertices
+sage: is_bintree1(T)
+True
+\end{lstlisting}
+%%
+Notice that the test defined in the function \verb!is_bintree2! can no
+longer be used to test whether or not $T$ is a binary tree, because
+$T$ now has two vertices, i.e. $v$ and $w$, each of which has degree $2$.
 \end{proof}
 
 The following game is a variant of the Shannon
