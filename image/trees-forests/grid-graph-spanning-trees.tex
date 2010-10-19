@@ -11,18 +11,19 @@
 
 \subfigure[]{
 \begin{tikzpicture}
-[linedecorate/.style={line width=2.5pt}]
+[darkline/.style={line width=2.5pt},%
+  lightline/.style={-,ultra thick,color=gray!30}]
 %% set up the grid
 \foreach \xstart/\xend/\y in {0/4.5/0, 0/4.5/1.5, 0/4.5/3, 0/4.5/4.5} {
-  \draw (\xstart,\y) -- (\xend,\y);
-  \draw (\y,\xstart) -- (\y,\xend);
+  \draw[lightline] (\xstart,\y) -- (\xend,\y);
+  \draw[lightline] (\y,\xstart) -- (\y,\xend);
 }
 %% draw the spanning tree
-\draw[linedecorate] (0,1.5) -- (0,0) -- (4.5,0);
-\draw[linedecorate] (1.5,0) -- (1.5,1.5) -- (4.5,1.5) -- (4.5,3) --
+\draw[darkline] (0,1.5) -- (0,0) -- (4.5,0);
+\draw[darkline] (1.5,0) -- (1.5,1.5) -- (4.5,1.5) -- (4.5,3) --
   (0,3) -- (0,4.5);
-\draw[linedecorate] (1.5,3) -- (1.5,4.5);
-\draw[linedecorate] (3,3) -- (3,4.5) -- (4.5,4.5);
+\draw[darkline] (1.5,3) -- (1.5,4.5);
+\draw[darkline] (3,3) -- (3,4.5) -- (4.5,4.5);
 \end{tikzpicture}
 }
 %%
@@ -30,15 +31,16 @@
 \qquad
 \subfigure[]{
 \begin{tikzpicture}
-[linedecorate/.style={line width=2.5pt}]
+[darkline/.style={line width=2.5pt},%
+  lightline/.style={-,ultra thick,color=gray!30}]
 \foreach \xstart/\xend/\y in {0/4.5/0, 0/4.5/1.5, 0/4.5/3, 0/4.5/4.5} {
-  \draw (\xstart,\y) -- (\xend,\y);
-  \draw (\y,\xstart) -- (\y,\xend);
+  \draw[lightline] (\xstart,\y) -- (\xend,\y);
+  \draw[lightline] (\y,\xstart) -- (\y,\xend);
 }
 %% draw the spanning tree
-\draw[linedecorate] (4.5,1.5) -- (4.5,0) -- (0,0) -- (0,1.5) --
-  (1.5,1.5) -- (1.5,3);
-\draw[linedecorate] (0,4.5) -- (4.5,4.5) -- (4.5,3) -- (0,3);
-\draw[linedecorate] (3,1.5) -- (3,3);
+\draw[darkline] (4.5,1.5) -- (4.5,0) -- (0,0) -- (0,1.5) -- (1.5,1.5)
+  -- (1.5,3);
+\draw[darkline] (0,4.5) -- (4.5,4.5) -- (4.5,3) -- (0,3);
+\draw[darkline] (3,1.5) -- (3,3);
 \end{tikzpicture}
 }
