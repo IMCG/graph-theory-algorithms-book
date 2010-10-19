@@ -10,13 +10,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[linedecorate/.style={line width=2.5pt},scale=1.5]
+[darkline/.style={line width=2.5pt},%
+  lightline/.style={-,ultra thick,color=gray!30},%
+  scale=1.5]
 \foreach \x/\ystart/\yend in {1/0/3, 2/0/3, 3/0/3}
 {
-  \draw (\x,\ystart) -- (\x,\yend);
+  \draw[lightline] (\x,\ystart) -- (\x,\yend);
 }
 %% draw the spanning tree
-\draw[linedecorate] (3,3) -- (0,3) -- (0,0) -- (3,0);
-\draw[linedecorate] (0,1) -- (3,1);
-\draw[linedecorate] (0,2) -- (3,2);
+\draw[darkline] (3,3) -- (0,3) -- (0,0) -- (3,0);
+\draw[darkline] (0,1) -- (3,1);
+\draw[darkline] (0,2) -- (3,2);
 \end{tikzpicture}
