@@ -635,24 +635,21 @@ Algorithm~\ref{alg:trees_forests:randomized_spanning_tree_construction}.
 \label{alg:trees_forests:randomized_spanning_tree_construction}
 \end{algorithm}
 
-One condition is that spanning tree of a connected graph $G$ can also
-be defined as a maximal set of edges of $G$ that contains no cycle.
-Another condition is that it is a minimal set of edges that connect
-all vertices.
-
-Exploiting the former criteria gives rise to Kruskal's algorithm.
-Exploiting the latter criteria gives rise to Prim's algorithm.
-Both of these algorithms are discussed in more detail below.
+Another characterization of a spanning tree $T$ of a connected graph
+$G$ is that $T$ is a maximal set of edges of $G$ that contains no
+cycle. Kruskal's algorithm~(see
+section~\ref{subsec:trees_forests:Kruskal_algorithm}) exploits this
+condition to construct a minimum spanning tree~(MST)\index{MST}. A
+\emph{minimum spanning tree}\index{tree!minimum spanning} is a
+spanning tree of a weighted graph having lowest total weight among all
+possible spanning trees of the graph. A third characterization of a
+spanning tree is that it is a minimal set of edges that connect all
+vertices, a characterization that results in yet another algorithm
+called Prim's algorithm~(see
+section~\ref{subsec:trees_forests:Prim_algorithm}) for constructing
+minimum spanning trees.
 
 \begin{itemize}
-\item minimum-cost spanning trees
-
-A {\it minimum spanning tree} (MST) is a spanning
-tree of an edge weighted graph having lowest total weight
-among all possible spanning trees.
-\index{tree!minimum spanning}
-\index{MST}
-
 \item Kruskal's algorithm~\cite{Kruskal1956}; see also section~23.2 of
   Cormen~et~al.~\cite{CormenEtAl2001}.
 
@@ -688,6 +685,7 @@ $O(|E|\log |V|)$.
 \end{itemize}
 
 \subsection{Kruskal's algorithm}
+\label{subsec:trees_forests:Kruskal_algorithm}
 
 Kruskal's algorithm starts with an edge-weighted digraph $G=(V,E)$
 as input. Let $w:E\to \R$ denote the weight function.
@@ -812,6 +810,7 @@ Figure~\ref{fig:trees-forests:Kruskal_example}.
 \end{figure}
 
 \subsection{Prim's algorithm}
+\label{subsec:trees_forests:Prim_algorithm}
 
 Prim's algorithm is an algorithm that finds a minimum spanning tree
 for a connected weighted
