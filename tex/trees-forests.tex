@@ -609,11 +609,31 @@ for economical reasons we will want to connect the components together
 using the least amount of wire. The problem essentially amounts to
 finding a minimum spanning tree in the graph containing these vertices.
 
-\begin{itemize}
-\item spanning trees
+But what is a spanning tree? We can characterize a spanning tree in
+several ways, each leading to an algorithm for constructing a spanning
+tree. Let $G$ be a connected graph and let $T$ be a subgraph of
+$G$. If $T$ is a tree that contains all the vertices of $G$, then $T$
+is called a \emph{spanning tree} of $G$. We can think of $T$ as a tree
+that is also an edge-deletion subgraph of $G$. That is, we start with
+a connected graph $G$ and delete an edge from $G$ such that the
+resulting edge-deletion subgraph $T_1$ is still connected. If $T_1$ is
+a tree, then we have obtained a spanning tree of $G$. Otherwise, we
+delete an edge from $T_1$ to obtain an edge-deletion subgraph $T_2$
+that is still connected. If $T_2$ is a tree, then we are
+done. Otherwise, we repeat the above procedure until we obtain an
+edge-deletion subgraph $T_k$ of $G$ such that $T_k$ is connected,
+$T_k$ is a tree, and it contains all vertices of $G$. Each edge
+removal does not decrease the number of vertices and must also leave
+the resulting edge-deletion subgraph connected. Thus eventually the
+above procedure results in a spanning tree of $G$. Our discussion is
+summarized in
+Algorithm~\ref{alg:trees_forests:randomized_spanning_tree_construction}.
 
-We can characterize a spanning tree in several ways. Each of these
-conditions lead to an algorithm for constructing them.
+\begin{algorithm}[!htpb]
+\input{algorithm/trees-forests/randomized-spanning-tree.tex}
+\caption{Randomized spanning tree construction.}
+\label{alg:trees_forests:randomized_spanning_tree_construction}
+\end{algorithm}
 
 One condition is that spanning tree of a connected graph $G$ can also
 be defined as a maximal set of edges of $G$ that contains no cycle.
@@ -624,6 +644,7 @@ Exploiting the former criteria gives rise to Kruskal's algorithm.
 Exploiting the latter criteria gives rise to Prim's algorithm.
 Both of these algorithms are discussed in more detail below.
 
+\begin{itemize}
 \item minimum-cost spanning trees
 
 A {\it minimum spanning tree} (MST) is a spanning
