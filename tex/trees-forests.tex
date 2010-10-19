@@ -570,6 +570,33 @@ inequality~\eqref{eqn:trees_forests:less_than_two_leaves_lower_bound_degree_sum}
 Conclude that $T$ has at least two leaves.
 \end{proof}
 
+\begin{theorem}
+If $T$ is a tree of order $m$ and $G$ is a graph with minimum degree
+$\delta(G) \geq m - 1$, then $T$ is isomorphic to a subgraph of $G$.
+\end{theorem}
+
+\begin{proof}
+Use an inductive argument on the number of vertices. The result holds
+for $m = 1$ because $K_1$ is a subgraph of every nontrivial graph. The
+result also holds for $m = 2$ since $K_2$ is a subgraph of any graph
+with at least one edge.
+
+Let $m \geq 3$, let $T_1$ be a tree of order $m - 1$, and let $H$ be a
+graph with $\delta(H) \geq m - 2$. Assume for induction that $T_1$ is
+isomorphic to a subgraph of $H$. We need to show that if $T$ is a tree
+of order $m$ and $G$ is a graph with $\delta(G) \geq m - 1$, then $T$
+is isomorphic to a subgraph of $G$. Towards that end, consider a leaf
+$v$ of $T$ and let $u$ be a vertex of $T$ such that $u$ is adjacent to
+$v$. Then $T - v$ is a tree of order $m - 1$ and
+$\delta(G) \geq m - 1 > m - 2$. Apply the inductive hypothesis to see
+that $T - v$ is isomorphic to a subgraph $T'$ of $G$. Let $u'$ be the
+vertex of $T'$ that corresponds to the vertex $u$ of $T$ under an
+isomorphism. Since $\deg(u') \geq m - 1$ and $T'$ has $m - 2$ vertices
+distinct from $u'$, it follows that $u'$ is adjacent to some
+$w \in V(G)$ such that $w \notin V(T')$. Therefore $T$ is isomorphic
+to the graph obtained by adding the edge $u'w$ to $T'$.
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
