@@ -168,6 +168,7 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 \end{figure}
 
 \begin{example}
+\label{eg:trees_forests:branch_cut_binary_tree}
 Let $T = (V, E)$ be a binary tree with vertex set
 \[
 V
@@ -2008,6 +2009,12 @@ This BST represents the sorting of the list $L$.
 
 \begin{problem}
 \item Construct all nonisomorphic trees of order $7$.
+
+\item The solution of
+  Example~\ref{eg:trees_forests:branch_cut_binary_tree} relied on the
+  following result: Let $T = (V,E)$ be a tree rooted at $v_0$. If
+  $\max_{v \in V} \deg(v) = 3$ and $v_0$ is the only vertex with
+  degree $2$, then $T$ is a binary tree. Prove this statement.
 
 \item Show by giving an example that the Morse code is not
   prefix-free.
