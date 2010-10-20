@@ -699,13 +699,67 @@ Theorem~\ref{thm:trees_forests:basic_characterizations_of_trees} to
 see that if $T$ has size $|V| - 1$, then it is a spanning tree of
 $G$. Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} provides
 pseudocode of our discussion of Kruskal's algorithm. When the
-algorithm halts, it returns a minimum spanning tree of $G$.
+algorithm halts, it returns a minimum spanning tree of $G$. The
+correctness of Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} is
+proven in Theorem~\ref{thm:trees_forests:correctness_Kruskal_algorithm}.
 
 \begin{algorithm}[!htpb]
 \input{algorithm/trees-forests/Kruskal-algorithm.tex}
 \caption{Kruskal's algorithm.}
 \label{alg:trees_forests:Kruskal_algorithm}
 \end{algorithm}
+
+\begin{theorem}
+\label{thm:trees_forests:correctness_Kruskal_algorithm}
+\textbf{Correctness of Algorithm~\ref{alg:trees_forests:Kruskal_algorithm}.}
+If $G$ is a nontrivial connected weighted graph, then
+Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} outputs a minimum
+spanning tree of $G$.
+\end{theorem}
+
+\begin{proof}
+Let $G$ be a nontrivial connected graph of order $m$ and having weight
+function $w$. Let $T$ be a subgraph of $G$ produced by Kruskal's
+algorithm~\ref{alg:trees_forests:Kruskal_algorithm}. By construction,
+$T$ is a spanning tree of $G$ with
+\[
+E(T)
+=
+\{e_1, e_2, \dots, e_{m-1}\}
+\]
+where $w(e_1) \leq w(e_2) \leq \cdots \leq w(e_{m-1})$ so that the
+total weight of $T$ is
+\[
+w(T)
+=
+\sum_{i=1}^{m-1} w(e_i).
+\]
+Suppose for contradiction that $T$ is not a minimum spanning tree of
+$G$. Among all the minimum spanning trees of $G$, let $H$ be a minimum
+spanning tree of $G$ such that $H$ has the most number of edges in
+common with $T$. As $T$ and $H$ are distinct subgraphs of $G$, then
+$T$ has at least an edge not belonging to $H$. Let $e_i \in E(T)$ be
+the first edge not in $H$. Construct the graph $G_0 = H + e_i$
+obtained by adding the edge $e_i$ to $H$. Note that $G_0$ has exactly
+one cycle $C$. Since $T$ is acyclic, there exists an edge
+$e_0 \in E(C)$ such that $e_0$ is not in $T$. Construct the graph
+$T_0 = G_0 - e_0$ obtained by deleting the edge $e_0$ from $G_0$. Then
+$T_0$ is a spanning tree of $G$ with
+\[
+w(T_0)
+=
+w(H) + w(e_i) - w(e_0)
+\]
+and $w(H) \leq w(T_0)$ and hence $w(e_0) \leq w(e_i)$. By Kruskal's
+algorithm~\ref{alg:trees_forests:Kruskal_algorithm}, $e_i$ is an edge
+of minimum weight such that
+$\{e_1, e_2, \dots, e_{i-1}\} \cup \{e_i\}$ is acyclic. Furthermore,
+the subgraph $\{e_1, e_2, \dots, e_{i-1}, e_0\}$ of $H$ is
+acyclic. Thus we have $w(e_i) = w(e_0)$ and $w(T_0) = w(H)$ and so $T$
+is a minimum spanning tree of $G$. By construction, $T_0$ has more
+edges in common with $T$ than $H$ has with $T$, in contradiction of
+our hypothesis.
+\end{proof}
 
 \begin{lstlisting}
 def kruskal(G):
