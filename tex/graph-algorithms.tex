@@ -2156,6 +2156,71 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
   it. Now consider the undirected version of that digraph and repeat
   the exercise.
 
+\item A list data structure can be used to manage vertices and
+  edges. If $L$ is a nonempty list of vertices of a graph, we may want
+  to know whether the graph contains a particular vertex. We could
+  search the list $L$, returning \texttt{True} if $L$ contains the
+  vertex in question and \texttt{False} otherwise. Linear search is a
+  simple searching algorithm. Given an object $E$ for which we want to
+  search, we consider each element $e$ of $L$ in turn and compare $E$
+  to $e$. If at any point during our search we found a match, we halt
+  the algorithm and output an affirmative answer. Otherwise, we have
+  scanned through all elements of $L$ and each of those elements do
+  not match $E$. In this case, linear search reports that $E$ is not
+  in $L$. Our discussion is summarized in
+  Algorithm~\ref{alg:graph_algorithms:linear_search}.
+  %%
+  \begin{enumerate}
+  \item Implement Algorithm~\ref{alg:graph_algorithms:linear_search}
+    in Sage and test your implementation using the graphs presented in
+    the figures of this chapter.
+
+  \item What is the maximum number of comparisons during the running
+    of Algorithm~\ref{alg:graph_algorithms:linear_search}? What is the
+    average number of comparisons?
+
+  \item Why must the input list $L$ be nonempty?
+  \end{enumerate}
+
+\begin{algorithm}[!htpb]
+\input{algorithm/graph-algorithms/linear-search.tex}
+\caption{Linear search for lists.}
+\label{alg:graph_algorithms:linear_search}
+\end{algorithm}
+
+\item Binary search is a much faster searching algorithm than linear
+  search. The binary search algorithm assumes that its input list is
+  ordered in some manner. For simplicity, we assume that the input
+  list $L$ consists of positive integers. The main idea of binary
+  search is to partition $L$ into two halves: the left half and the
+  right half. Our task now is to determine whether the object $E$ of
+  interest is in the left half or the right half, and apply binary
+  search recursively to the half in which $E$ is
+  located. Algorithm~\ref{alg:graph_algorithms:binary_search} provides
+  pseudocode of our discussion of binary search.
+  %%
+  \begin{enumerate}
+  \item Implement Algorithm~\ref{alg:graph_algorithms:binary_search}
+    in Sage and test your implementation using the graphs presented in
+    the figures of this chapter.
+
+  \item What is the worst case runtime of
+    Algorithm~\ref{alg:graph_algorithms:binary_search}? How does this
+    compare to the worst case runtime of linear search?
+
+  \item Why must the input list $L$ be sorted in nondecreasing order?
+    Would Algorithm~\ref{alg:graph_algorithms:binary_search} work if
+    $L$ is sorted in nonincreasing order? If not, modify
+    Algorithm~\ref{alg:graph_algorithms:binary_search} so that it
+    works with an input list that is sorted in nonincreasing order.
+  \end{enumerate}
+
+\begin{algorithm}[!htpb]
+\input{algorithm/graph-algorithms/binary-search.tex}
+\caption{Binary search for lists of positive integers.}
+\label{alg:graph_algorithms:binary_search}
+\end{algorithm}
+
 \item Consider the world map of major capital cities in
   Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}.
   %%
@@ -2215,18 +2280,6 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     results of the previous exercise.
   \end{enumerate}
 
-\begin{algorithm}[!htpb]
-\input{algorithm/graph-algorithms/linear-search.tex}
-\caption{Linear search for lists.}
-\label{alg:graph_algorithms:linear_search}
-\end{algorithm}
-
-\begin{algorithm}[!htpb]
-\input{algorithm/graph-algorithms/binary-search.tex}
-\caption{Binary search for lists of positive integers.}
-\label{alg:graph_algorithms:binary_search}
-\end{algorithm}
-
 \begin{landscape}
 \begin{figure}[!htbp]
 \centering
@@ -2276,59 +2329,6 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \label{tab:graph_algorithms:capital_cities_distance}
 \end{table}
 \end{landscape}
-
-\item A list data structure can be used to manage vertices and
-  edges. If $L$ is a nonempty list of vertices of a graph, we may want
-  to know whether the graph contains a particular vertex. We could
-  search the list $L$, returning \texttt{True} if $L$ contains the
-  vertex in question and \texttt{False} otherwise. Linear search is a
-  simple searching algorithm. Given an object $E$ for which we want to
-  search, we consider each element $e$ of $L$ in turn and compare $E$
-  to $e$. If at any point during our search we found a match, we halt
-  the algorithm and output an affirmative answer. Otherwise, we have
-  scanned through all elements of $L$ and each of those elements do
-  not match $E$. In this case, linear search reports that $E$ is not
-  in $L$. Our discussion is summarized in
-  Algorithm~\ref{alg:graph_algorithms:linear_search}.
-  %%
-  \begin{enumerate}
-  \item Implement Algorithm~\ref{alg:graph_algorithms:linear_search}
-    in Sage and test your implementation using the graphs presented in
-    the figures of this chapter.
-
-  \item What is the maximum number of comparisons during the running
-    of Algorithm~\ref{alg:graph_algorithms:linear_search}? What is the
-    average number of comparisons?
-
-  \item Why must the input list $L$ be nonempty?
-  \end{enumerate}
-
-\item Binary search is a much faster searching algorithm than linear
-  search. The binary search algorithm assumes that its input list is
-  ordered in some manner. For simplicity, we assume that the input
-  list $L$ consists of positive integers. The main idea of binary
-  search is to partition $L$ into two halves: the left half and the
-  right half. Our task now is to determine whether the object $E$ of
-  interest is in the left half or the right half, and apply binary
-  search recursively to the half in which $E$ is
-  located. Algorithm~\ref{alg:graph_algorithms:binary_search} provides
-  pseudocode of our discussion of binary search.
-  %%
-  \begin{enumerate}
-  \item Implement Algorithm~\ref{alg:graph_algorithms:binary_search}
-    in Sage and test your implementation using the graphs presented in
-    the figures of this chapter.
-
-  \item What is the worst case runtime of
-    Algorithm~\ref{alg:graph_algorithms:binary_search}? How does this
-    compare to the worst case runtime of linear search?
-
-  \item Why must the input list $L$ be sorted in nondecreasing order?
-    Would Algorithm~\ref{alg:graph_algorithms:binary_search} work if
-    $L$ is sorted in nonincreasing order? If not, modify
-    Algorithm~\ref{alg:graph_algorithms:binary_search} so that it
-    works with an input list that is sorted in nonincreasing order.
-  \end{enumerate}
 
 \item The following problem is known as the
   \emph{river crossing problem}\index{river crossing problem}. A man,
