@@ -662,11 +662,13 @@ problem.
 \subsection{Kruskal's algorithm}
 \label{subsec:trees_forests:Kruskal_algorithm}
 
-Kruskal's algorithm~\cite{Kruskal1956}; see also section~23.2 of
-Cormen~et~al.~\cite{CormenEtAl2001}. Kruskal's algorithm is a greedy
-algorithm to compute a MST. It was discovered by J. Kruskal in the
-1950's. Kruskal's algorithm can be shown to run in $O(|E| \log |E|)$
-time.
+In 1956, Joseph B. Kruskal published~\cite{Kruskal1956} a procedure
+for constructing a minimum spanning tree of a connected weighted
+graph $G = (V,E)$. Now known as Kruskal's algorithm, with a suitable
+implementation the procedure runs in $O\big(|E| \cdot \log |E|\big)$
+time. Variants of Kruskal's algorithm include the algorithm by
+Prim~\cite{Prim1957} and that by Loberman and
+Weinberger~\cite{LobermanWeinberger1957}.
 
 Kruskal's algorithm starts with an edge-weighted digraph $G=(V,E)$
 as input. Let $w:E\to \R$ denote the weight function.
