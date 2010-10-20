@@ -647,7 +647,14 @@ spanning tree is that it is a minimal set of edges that connect all
 vertices, a characterization that results in yet another algorithm
 called Prim's algorithm~(see
 section~\ref{subsec:trees_forests:Prim_algorithm}) for constructing
-minimum spanning trees.
+minimum spanning trees. The task of determining a minimum spanning
+tree in a connected weighted graph is called the
+\emph{minimum spanning tree problem}. As early as 1926, Otakar
+Bor\r{u}vka stated~\cite{Boruvka1926a,Boruvka1926b} this problem and
+offered a solution now known as Bor\r{u}vka's algorithm~(see
+section~\ref{subsec:trees_forests:Boruvka_algorithm}). See Graham and
+Hell~\cite{GrahamHell1985} for a history of the minimum spanning tree
+problem.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -908,6 +915,7 @@ sage: prim(G).edges()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Bor\r{u}vka's algorithm}
+\label{subsec:trees_forests:Boruvka_algorithm}
 
 Bor\r{u}vka's
 algorithm~\cite{Boruvka1926a,Boruvka1926b}. Bor\r{u}vka's algorithm is
