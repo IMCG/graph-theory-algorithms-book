@@ -2330,6 +2330,58 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \end{table}
 \end{landscape}
 
+\item In addition to searching, there is the related problem of
+  sorting a list according to an ordering relation. If the given list
+  $L = [e_1, e_2, \dots, e_n]$ consists of real numbers, we want to
+  order elements in nondecreasing order. \emph{Bubble sort} is a basic
+  sorting algorithm that can be used to sort a list of real numbers,
+  indeed any collection of objects that can be ordered according to an
+  ordering relation. During each pass through the list $L$ from left
+  to right, we consider $e_i$ and its right neighbor $e_{i+1}$. If
+  $e_i \leq e_{i+1}$, then we move on to consider $e_{i+1}$ and its
+  right neighbor $e_{i+2}$. If $e_i > e_{i+1}$, then we swap these two
+  values around in the list and then move on to consider $e_{i+1}$ and
+  its right neighbor $e_{i+2}$. Each successive pass pushes to the
+  right end an element that is the next largest in comparison to the
+  previous largest element pushed to the right end. Hence the name
+  bubble sort for the
+  algorithm. Algorithm~\ref{alg:graph_algorithms:bubble_sort}
+  summarizes our discussion.
+  %%
+  \begin{algorithm}[!htbp]
+    \input{algorithm/graph-algorithms/bubble-sort.tex}
+    \caption{Bubble sort.}
+    \label{alg:graph_algorithms:bubble_sort}
+  \end{algorithm}
+  %%
+  \begin{enumerate}[(a)]
+  \item Analyze the worst-case runtime of
+    Algorithm~\ref{alg:graph_algorithms:bubble_sort}.
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:bubble_sort} so
+    that it sorts elements in nonincreasing order.
+
+  \item Line~\ref{alg:bubble_sort:swap_values} of
+    Algorithm~\ref{alg:graph_algorithms:bubble_sort} is where elements
+    are actually sorted. Swapping the values of two elements is such a
+    common task that sometimes we want to perform the swap as
+    efficiently as possible, i.e. using as few operations as
+    possible. A common way to swap the values of two elements $a$ and
+    $b$ is to create a temporary placeholder $t$ and realize the swap
+    as presented in
+    Algorithm~\ref{alg:graph_algorithms:swapping_using_temporary_object}.
+    Some programming languages allow for swapping the values of two
+    elements without creating a temporary placeholder for an
+    intermediary value. Investigate how to realize this swapping
+    method using a programming language of your choice.
+    %%
+    \begin{algorithm}[!htbp]
+      \input{algorithm/graph-algorithms/swapping-with-temporary.tex}
+      \caption{Swapping values using a temporary placeholder.}
+      \label{alg:graph_algorithms:swapping_using_temporary_object}
+    \end{algorithm}
+  \end{enumerate}
+
 \item The following problem is known as the
   \emph{river crossing problem}\index{river crossing problem}. A man,
   a goat, a wolf, and a basket of cabbage are all on one side of a

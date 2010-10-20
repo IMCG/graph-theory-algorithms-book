@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A list $L$ of $n > 1$ elements that can be ordered using the
+  ``less than or equal to'' relation ``$\leq$''.}
+\Output{The same list as $L$, but sorted in nondecreasing order.}
+\BlankLine
+%%
+%% algorithm body
+\For{$i \assign n, n - 1, \dots, 1$}{
+  \For{$j \assign 2, 3, \dots, i$}{
+    \If{$L[j-1] > L[j]$}{
+      swap the values of $L[j-1]$ and $L[j]$\nllabel{alg:bubble_sort:swap_values}\;
+    }
+  }
+}
+\Return $L$\;
