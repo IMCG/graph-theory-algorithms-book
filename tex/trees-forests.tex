@@ -832,15 +832,13 @@ def kruskal(G):
 \end{lstlisting}
 \index{Kruskal's algorithm}
 
-Here are some examples.
-
-We start with the grid graph. This is implemented in Sage
-in a way that the vertices are given by the coordinates of the
-grid the graph lies on, as opposed to $0,1,\dots,n-1$.
-Since the above implementation assumes that the
-vertices are $V=\{0,1,\dots,n-1\}$, we first redefine
-the graph suitable and run the Kruskal algorithm on that.
-
+Here is an example. We start with the grid graph. This is implemented
+in Sage such that the vertices are given by the coordinates of the
+grid the graph lies on, as opposed to $0, 1, \dots, n-1$. Since the
+above implementation of Kruskal's algorithm assumes that the vertices
+are $V = \{0, 1, \dots, n-1\}$, we first redefine the graph suitable
+for running Kruskal's algorithm on it.
+%%
 \begin{lstlisting}
 sage: G = graphs.GridGraph([4,4])
 sage: A = G.adjacency_matrix()
@@ -850,8 +848,8 @@ sage: T = kruskal(G); T.edges()
  (4, 8, 1), (5, 9, 1), (6, 10, 1), (7, 11, 1), (8, 12, 1), (9, 13, 1),
  (10, 14, 1), (11, 15, 1)]
 \end{lstlisting}
-%
-The plot of this graph is given in
+%%
+An illustration of this graph is given in
 Figure~\ref{fig:trees-forests:Kruskal_example}.
 
 \begin{figure}[!htbp]
