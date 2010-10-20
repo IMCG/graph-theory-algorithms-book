@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A connected weighted graph $G = (V,E)$ with weight function $w$.}
+\Output{A minimum spanning tree of $G$.}
+\BlankLine
+%%
+%% algorithm body
+$m \assign |V|$\;
+$T \assign \emptyset$\;
+sort $E = \{e_1, e_2, \dots, e_n\}$ by weights so that
+$w(e_1) \leq w(w_2) \leq \cdots \leq w(e_n)$\;
+\For{$i \assign 1, 2, \dots, n$}{
+  \If{\rm $e_i \notin E(T)$ and $T \cup \{e_i\}$ is acyclic}{
+    $T \assign T \cup \{e_i\}$\;
+  }
+  \If{$|T| = m - 1$}{
+    \Return $T$\;
+  }
+}
