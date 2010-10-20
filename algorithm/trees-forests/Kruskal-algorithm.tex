@@ -26,7 +26,7 @@ $T \assign \emptyset$\;
 sort $E = \{e_1, e_2, \dots, e_n\}$ by weights so that
 $w(e_1) \leq w(w_2) \leq \cdots \leq w(e_n)$\;
 \For{$i \assign 1, 2, \dots, n$}{
-  \If{\rm $e_i \notin E(T)$ and $T \cup \{e_i\}$ is acyclic}{
+  \If{\rm $e_i \notin E(T)$ and $T \cup \{e_i\}$ is acyclic\nllabel{alg:Kruskal:edge_not_in_T_acyclic}}{
     $T \assign T \cup \{e_i\}$\;
   }
   \If{$|T| = m - 1$}{

@@ -2139,6 +2139,21 @@ This BST represents the sorting of the list $L$.
 \item What is the worst-case runtime of
   Algorithm~\ref{alg:trees_forests:randomized_spanning_tree_construction}?
 
+\item In Kruskal's
+  algorithm~\ref{alg:trees_forests:Kruskal_algorithm},
+  line~\ref{alg:Kruskal:edge_not_in_T_acyclic} requires that the
+  addition of a new edge to $T$ does not result in $T$ having a
+  cycle. A tree by definition has no cycles. Suppose
+  line~\ref{alg:Kruskal:edge_not_in_T_acyclic} is changed to:
+  \[
+  \textbf{if } e_i \notin E(T)
+  \text{ and }
+  T \cup \{e_i\} \text{ is a tree } \textbf{then}
+  \]
+  With this change, explain why
+  Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} would return a
+  minimum spanning tree or why the algorithm would fail to do so.
+
 \item Show by giving an example that the Morse code is not
   prefix-free.
 
