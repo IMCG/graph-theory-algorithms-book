@@ -670,27 +670,36 @@ time. Variants of Kruskal's algorithm include the algorithm by
 Prim~\cite{Prim1957} and that by Loberman and
 Weinberger~\cite{LobermanWeinberger1957}.
 
-Kruskal's algorithm starts with an edge-weighted digraph $G=(V,E)$
-as input. Let $w:E\to \R$ denote the weight function.
-The first stage is to create a ``skeleton'' of the
-tree $T$ which is initially set to be a graph with no
-edges: $T=(V,\emptyset)$. The next stage is to
-sort the edges of $G$ by weight. In other words, we
-label the edges of $G$ as
-
+Kruskal's algorithm belongs to the class of greedy algorithms. As will
+be explained below, when constructing a minimum spanning tree
+Kruskal's algorithm considers only the edge having minimum weight
+among all available edges. Given a weighted nontrivial graph
+$G = (V,E)$ that is connected, let $w: E \to \R$ be the weight
+function of $G$. The first stage is creating a ``skeleton'' of the
+tree $T$ that is initially set to be a graph with no edges, i.e.
+$T = (V, \emptyset)$. The next stage involves sorting the edges of $G$
+by weights in nondecreasing order. In other words, we label the edges
+of $G$ as follows:
 \[
-E = \{e_1,e_2,\dots ,e_m\},
+E
+=
+\{e_1, e_2, \dots, e_n\}
 \]
-where $w(e_1) \leq w(e_2) \leq \dots \leq w(e_m)$.
-Next, start a for loop over $e\in E$. You add
-$e$ to $T$ as an edge provided it does not create
-a cycle. The only way adding $e=(u,v)$ to $T$ would
-create a cycle would be if both $u$ and $v$ were
-endpoints of an edge already in $T$. As long as this
-cycle condition fails, you add $e$ to $T$ and otherwise,
-go to the next element of $E$ in the for loop.
-At the end of the for loop, the edges of $T$ have
-been completely found and the algorithm stops.
+where $n = |E|$ and $w(e_1) \leq w(e_2) \leq \cdots \leq w(e_n)$.
+Now consider each edge $e_i$ for $i = 1,2,\dots,n$. We add $e_i$ to
+the edge set of $T$ provided that $e_i$ does not result in $T$ having
+a cycle. The only way adding $e_i = u_i v_i$ to $T$ would create a
+cycle is if both $u_i$ and $v_i$ were endpoints of edges~(not
+necessarily distinct) in the same connected component of $T$. As long
+as the acyclic condition holds with the addition of a new edge to $T$,
+we add that new edge. Following the acyclic test, we also test that
+the (updated) graph $T$ is a tree of $G$. As $G$ is a graph of order
+$|V|$, apply
+Theorem~\ref{thm:trees_forests:basic_characterizations_of_trees} to
+see that if $T$ has size $|V| - 1$, then it is a spanning tree of
+$G$. Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} provides
+pseudocode of our discussion of Kruskal's algorithm. When the
+algorithm halts, it returns a minimum spanning tree of $G$.
 
 \begin{algorithm}[!htpb]
 \input{algorithm/trees-forests/Kruskal-algorithm.tex}
