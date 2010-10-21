@@ -2570,4 +2570,23 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \caption{A bracket parser.}
 \label{alg:graph_algorithms:bracket_parser}
 \end{algorithm}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/graph-algorithms/n-queens.tex}
+\caption{Solutions of the $n$-queens problem for $n = 4, 8$.}
+\label{fig:graph_algorithms:n_queens_solutions}
+\end{figure}
+
+\item The $n$-queens problem is concerned with the placement of $n$
+  queens on an $n \times n$ chessboard such that no two queens can
+  attack each other. Two queens can attack each other if they are in
+  the same row, column, diagonal, or antidiagonal of the chessboard.
+  The trivial case $n = 1$ is easily solved by placing the one queen
+  in the only given position. There are no solutions for the cases
+  $n = 2, 3$. Solutions for the cases $n = 4, 8$ are shown in
+  Figure~\ref{fig:graph_algorithms:n_queens_solutions}. Devise a
+  backtracking algorithm to solve the $n$-queens problem for the case
+  where $n > 3$. See Bell and Stevens~\cite{BellStevens2009} for a
+  survey of the $n$-queens problem and its solutions.
 \end{problem}
