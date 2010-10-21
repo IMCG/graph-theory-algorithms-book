@@ -31,7 +31,7 @@
 $\Low \assign 0$\;
 $\High \assign |L| - 1$\;
 \While{$\Low \leq \High$}{
-  $\Mid \assign \lfloor\frac{\Low\, +\, \High}{2}\rfloor$\;
+  $\Mid \assign \lfloor\frac{\Low\, +\, \High}{2}\rfloor$\nllabel{alg:binary_search:mid_floor}\;
   \If{$i = L[\Mid]$}{
     \Return \MyTrue\;
   }

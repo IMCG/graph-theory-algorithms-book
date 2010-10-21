@@ -2220,6 +2220,12 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     Algorithm~\ref{alg:graph_algorithms:binary_search} so that it
     works with an input list that is sorted in nonincreasing order.
 
+  \item Line~\ref{alg:binary_search:mid_floor} of
+    Algorithm~\ref{alg:graph_algorithms:binary_search} uses the floor
+    function to compute the index of the middle value. Would binary
+    search still work if we use the ceiling function instead of the
+    floor function?
+
   \item An improvement on the time complexity of binary search is to
     not blindly use the middle value of the interval of interest, but
     to guess more precisely where the target falls within this
