@@ -2382,6 +2382,47 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     \end{algorithm}
   \end{enumerate}
 
+\item \emph{Selection sort} is another simple sorting algorithm that
+  works as follows. Let $L = [e_1, e_2, \dots, e_n]$ be a list of
+  elements that can be ordered according to the relation ``$\leq$'',
+  e.g. the $e_i$ can all be real numbers or integers. On the first
+  scan of $L$ from left to right, among the elements
+  $L[2], \dots, L[n]$ we find the smallest element and exchange it
+  with $L[1]$. On the second scan, we find the smallest element among
+  $L[3], \dots, L[n]$ and exchange that smallest element with
+  $L[2]$. In general, during the $i$-th scan we find the smallest
+  element among $L[i+1], \dots, L[n]$ and exchange that with
+  $L[i]$. At the end of the $i$-th scan, the element $L[i]$ is in its
+  final position and would not be processed again. When the index
+  reaches $i = n$, the list would have been sorted in nondecreasing
+  order. The procedure is summarized in
+  Algorithm~\ref{alg:graph_algorithms:selection_sort}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Analyze the worst-case runtime of
+    Algorithm~\ref{alg:graph_algorithms:selection_sort} and compare
+    your result to the worst-case runtime of the bubble sort
+    Algorithm~\ref{alg:graph_algorithms:bubble_sort}.
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:selection_sort} to
+    sort elements in nonincreasing order.
+
+  \item Line~\ref{alg:selection_sort:swap_values} of
+    Algorithm~\ref{alg:graph_algorithms:selection_sort} assumes that
+    among $L[i+1], L[i+2], \dots, L[n]$ there is a smallest element
+    $L[k]$ such that $L[i] > L[k]$, hence we perform the swap. It is
+    possible that $L[i] < L[k]$, obviating the need to carry out the
+    value swapping. Modify
+    Algorithm~\ref{alg:graph_algorithms:selection_sort} to take
+    account of our discussion.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/selection-sort.tex}
+\caption{Selection sort.}
+\label{alg:graph_algorithms:selection_sort}
+\end{algorithm}
+
 \item The following problem is known as the
   \emph{river crossing problem}\index{river crossing problem}. A man,
   a goat, a wolf, and a basket of cabbage are all on one side of a
