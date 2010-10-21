@@ -969,7 +969,8 @@ the DFS\index{DFS} template for determining graph
 connectivity\index{graph!connected}, we simply replace the
 queue\index{queue} implementation in
 Algorithm~\ref{alg:graph_algorithms:graph_connectivity} with a
-stack\index{stack} implementation.
+stack\index{stack} implementation~(see
+problem~\thechapter.\ref{prob:graph_algorithms:connectivity_with_DFS_BFS}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2480,6 +2481,13 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     quicksort and compare its runtime complexity with the other
     sorting algorithms covered in this chapter.
   \end{enumerate}
+
+\item\label{prob:graph_algorithms:connectivity_with_DFS_BFS}
+  Algorithm~\ref{alg:graph_algorithms:graph_connectivity} uses
+  breadth-first search to determine the connectivity of an undirected
+  graph. Modify this algorithm to use depth-first search. How can
+  Algorithm~\ref{alg:graph_algorithms:graph_connectivity} be used or
+  modified to test the connectivity of a digraph?
 
 \item The following problem is known as the
   \emph{river crossing problem}\index{river crossing problem}. A man,
