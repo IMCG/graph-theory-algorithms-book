@@ -278,6 +278,72 @@ longer be used to test whether or not $T$ is a binary tree, because
 $T$ now has two vertices, i.e. $v$ and $w$, each of which has degree $2$.
 \end{proof}
 
+Consider again the organism classification tree in
+Figure~\ref{fig:trees_forests:classification_tree_organisms}. We can
+view the vertex ``organism'' as the root of the tree and having two
+children. The first branch of ``organism'' is the subtree rooted at
+``plant'' and its second branch is the subtree rooted at
+``animal''. We form the complete tree by joining an edge between
+``organism'' and ``plant'', and an edge between ``organism'' and
+``animal''. The subtree rooted at ``plant'' can be constructed in the
+same manner. The first branch of this subtree is the subtree rooted at
+``tree'' and the second branch is the subtree rooted at ``flower''. To
+construct the subtree rooted at ``plant'', we join an edge between
+``plant'' and ``tree'', and an edge between ``plant'' and
+``flower''. The other subtrees of the tree in
+Figure~\ref{fig:trees_forests:classification_tree_organisms} can be
+constructed using the above recursive procedure.
+
+In general, the following recursive and constructive definition is an
+alternative way to define trees. We say \emph{constructive} because it
+provides an algorithm to contruct a tree, as opposed to the
+nonconstructive definition presented earlier in this section, where we
+defined the conditions under which a graph qualifies as a tree without
+presenting a procedure to construct a tree. Furthermore, we say
+\emph{recursive} since a larger tree can be viewed as being
+constructed from smaller trees, i.e. join up existing trees to obtain
+a new tree.
+
+\begin{definition}
+\rm
+\textbf{Recursive construction of trees.}
+An isolated vertex is a tree. That single vertex is the root of the
+tree. Given a collection $T_1, T_2, \dots, T_n$ of $n > 0$ trees,
+construct a new tree as follows:
+%%
+\begin{enumerate}
+\item Let $T$ be a tree having exactly the one vertex $v$, which is
+  the root of $T$.
+
+\item Let $v_i$ be the root of the tree $T_i$.
+
+\item For $i = 1, 2, \dots, n$, add the edge $v v_i$ to $T$ and add
+  $T_i$ to $T$. That is, each $v_i$ is now a child of $v$.
+\end{enumerate}
+%%
+The result is the tree $T$ rooted at $v$ with vertex set
+\[
+V(T)
+=
+\{v\} \cup \left(\bigcup_i V(T_i)\right)
+\]
+and edge set
+\[
+E(T)
+=
+\bigcup_i \big(\{v v_i\} \cup E(T_i)\big).
+\]
+The recursive construction of $T$ is illustrated in
+Figure~\ref{fig:trees_forests:recursive_construction_tree}.
+\end{definition}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/trees-forests/recursive-definition-tree.tex}
+\caption{Recursive construction of a tree.}
+\label{fig:trees_forests:recursive_construction_tree}
+\end{figure}
+
 The following game is a variant of the Shannon
 switching\index{Shannon!switching game} game, due to Edmonds and
 Lehman\index{edge-tagging game}. We follow the description
