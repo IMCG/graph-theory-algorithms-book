@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}
+[linedecorate/.style={-,thick},%
+  nodecircle/.style={shape=circle,inner sep=3pt,draw,thick},%
+  nodeinvisible/.style={},%
+  nodetriangle/.style={shape=isosceles triangle,%
+    shape border rotate=90,inner sep=10pt,draw,thick}]
+%% visible nodes or vertices
+\foreach \nodename/\x/\y in {T_1/0/0, T_2/3/0, T_n/9/0}
+{
+  \node (\nodename) at (\x,\y) [nodetriangle] {$\nodename$};
+}
+\node (v) at (4.5,5) [nodecircle] {$v$};
+\node (ellipsis) at (6,2) [inner sep=3pt] {$\dots$};
+%% invisible nodes or vertices
+\foreach \nodename/\x/\y in {I_1/-0.14/1.785, I_2/2.935/1.73, I_n/9.14/1.822}
+{
+  \node (\nodename) at (\x,\y) [nodeinvisible] {};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {v/I_1, v/I_2, v/I_n}
+{
+  (\startnode) edge[linedecorate] node {} (\endnode)
+};
+\end{tikzpicture}
