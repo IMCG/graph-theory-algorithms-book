@@ -305,6 +305,7 @@ constructed from smaller trees, i.e. join up existing trees to obtain
 a new tree.
 
 \begin{definition}
+\label{def:trees_forests:recursive_construction_trees}
 \rm
 \textbf{Recursive construction of trees.}
 An isolated vertex is a tree. That single vertex is the root of the
@@ -2307,6 +2308,23 @@ This BST represents the sorting of the list $L$.
     nonisomorphic spanning trees are there in the $n \times n$ grid
     graph?
   \end{enumerate}
+
+\item Definition~\ref{def:trees_forests:recursive_construction_trees}
+  shows how to recursively construct a new tree from a given
+  collection of trees, hence it is referred to as a recursive
+  definition. To prove theorems based upon recursive definitions, we
+  use a proof technique called \emph{structural induction}. Let $S(C)$
+  be a statement about the collection of structures $C$, each of which
+  is defined by a recursive definition. In the base case, prove $S(C)$
+  for the basis structure(s) $C$. For the inductive case, let $X$ be a
+  structure formed using the recursive definition from the structures
+  $Y_1, Y_2, \dots, Y_k$. Assume for induction that the statements
+  $S(Y_1),\, S(Y_2), \dots, S(Y_k)$ hold and use the inductive
+  hypotheses $S(Y_i)$ to prove $S(X)$. Hence conclude that $S(X)$ is
+  true for all $X$. Apply structural induction to show that any graph
+  constructed using
+  Definition~\ref{def:trees_forests:recursive_construction_trees} is
+  indeed a tree.
 
 \item In Kruskal's
   algorithm~\ref{alg:trees_forests:Kruskal_algorithm},
