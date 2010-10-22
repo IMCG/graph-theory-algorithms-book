@@ -2571,6 +2571,62 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \label{alg:graph_algorithms:bracket_parser}
 \end{algorithm}
 
+\item Figure~\ref{fig:graph_algorithms:one_knight_tour} provides a
+  knight's tour for the knight piece with initial position as in
+  Figure~\ref{fig:graph_algorithms:one_knight_tour:initial_position}. By
+  rotating the chessboard in
+  Figure~\ref{fig:graph_algorithms:one_knight_tour:a_tour} by
+  $90n$ degrees for positive integer values of $n$, we obtain another
+  knight's tour that, when represented as a graph, is isomorphic to
+  the graph in
+  Figure~\ref{fig:graph_algorithms:one_knight_tour:graph_representation}.
+  %%
+  \begin{enumerate}[(a)]
+  \item At the beginning of the 18th century, De~Montmort and
+    De~Moivre provided the following
+    strategy~\cite[p.176]{BallCoxeter1987} to solve the knight's tour
+    problem on an $8 \times 8$ chessboard. Divide the board into an
+    inner $4 \times 4$ square and an outer shell of two squares deep,
+    as shown in
+    Figure~\ref{fig:graph_algorithms:montmort-moivre-strategy:inner_square}.
+    Place a knight on a square in the outer shell and move the knight
+    piece around that shell, always in the same direction, so as to
+    visit each square in the outer shell. After that, move into the
+    inner square and solve the knight's tour problem for the
+    $4 \times 4$ case. Apply this strategy to solve the knight's tour
+    problem with the initial position as in
+    Figure~\ref{fig:graph_algorithms:montmort-moivre-strategy:initial_position}.
+
+  \item Use De~Montmort and De~Moivre's strategy to obtain a knight's
+    tour, starting at the position of the black-filled node in
+    Figure~\ref{fig:graph_algorithms:one_knight_tour:a_tour}.
+
+  \item A \emph{re-entrant} or \emph{closed} knight's tour is a
+    knight's tour that starts and ends at the same square. Find
+    re-entrant knight's tours with initial positions as in
+    Figure~\ref{fig:graph_algorithms:reentrant_knight_tour}.
+
+  \item Devise a backtracking algorithm to solve the knight's tour
+    problem on an $n \times n$ chessboard for $n > 3$.
+  \end{enumerate}
+
+\begin{figure}[!htbp]
+\centering
+\index{knight's tour}
+\input{image/graph-algorithms/montmort-moivre-knight-tour-strategy.tex}
+\caption{De~Montmort and De~Moivre's solution strategy for the
+  $8 \times 8$ knight's tour problem.}
+\label{fig:graph_algorithms:De_Montmort_De_Moivre_knight_tour_strategy}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{knight's tour}
+\input{image/graph-algorithms/reentrant-knight-tour.tex}
+\caption{Initial positions of re-entrant knight's tours.}
+\label{fig:graph_algorithms:reentrant_knight_tour}
+\end{figure}
+
 \begin{figure}[!htbp]
 \centering
 \input{image/graph-algorithms/n-queens.tex}
