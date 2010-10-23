@@ -2645,4 +2645,33 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
   backtracking algorithm to solve the $n$-queens problem for the case
   where $n > 3$. See Bell and Stevens~\cite{BellStevens2009} for a
   survey of the $n$-queens problem and its solutions.
+
+\item Figure~\ref{fig:graph_algorithms:maze_associated_graph} shows a
+  maze and its graph representation; the figure is adapted from
+  page~434 in Sedgewick~\cite{Sedgewick1990}. To obtain the graph
+  representation, we use a vertex to represent an intersection. An
+  edge joining two vertices represents a path from one intersection to
+  another.
+  %%
+  \begin{enumerate}[(a)]
+  \item Suppose the entrance to the maze is represented by the
+    lower-left black-filled vertex in
+    Figure~\ref{fig:maze_graph:graph_representation} and the exit is
+    the upper-right black-filled vertex. Solve the maze by providing a
+    path from the entrance to the exit.
+
+  \item Repeat the previous exercise for each pair of distinct
+    vertices, letting one vertex of the pair be the entrance and the
+    other vertex the exit.
+
+  \item What is the diameter of the graph in
+    Figure~\ref{fig:maze_graph:graph_representation}?
+  \end{enumerate}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/graph-algorithms/maze-graph.tex}
+\caption{A maze and its graph representation.}
+\label{fig:graph_algorithms:maze_associated_graph}
+\end{figure}
 \end{problem}
