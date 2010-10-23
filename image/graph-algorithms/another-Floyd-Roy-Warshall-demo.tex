@@ -10,26 +10,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick}]
-% nodes or vertices
-\node (0) at (0,0) [nodedecorate] {};
-\node [below] at (0.south) {$0$};
-\node (1) at (0,7) [nodedecorate] {};
-\node [above] at (1.north) {$1$};
-\node (2) at (4,3.5) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (3) at (-4,3.5) [nodedecorate] {};
-\node [left] at (3.west) {$3$};
-% edges or lines
-\path
-(0) edge[arrowdecorate] node[left]{$1$} (1)
-(0) edge[arrowdecorate,bend left=10] node[above]{$2$} (2)
-(0) edge[arrowdecorate,bend left=15] node[below]{$3$} (3)
-(1) edge[arrowdecorate] node[above]{$2$} (2)
-(1) edge[arrowdecorate] node[above]{$1$} (3)
-(2) edge[arrowdecorate,bend left=15] node[below]{$-1/2$} (0)
-(2) edge[arrowdecorate,bend left=10] node[below right]{$3$} (3)
-(3) edge[arrowdecorate,bend left=10] node[above]{$1$} (0)
-(3) edge[arrowdecorate,bend left=10] node[above right]{$1$} (2);
+[nodeDecorate/.style={shape=circle,inner sep=1pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {0/0/0, 1/0/7, 2/4/3.5, 3/-4/3.5}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[->,>=stealth,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  0/1/bend left/1, 0/2/bend right/2, 0/3/bend left/3,
+  1/2/bend left/2, 1/3/bend right/1, 2/0/bend left=0/-0.5,
+  2/3/bend right/3, 3/0/bend left=0/1, 3/2/bend left=0/1}
+{
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
 \end{tikzpicture}
