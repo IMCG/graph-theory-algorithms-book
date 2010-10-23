@@ -10,27 +10,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[nodedecorate/.style={shape=rectangle,inner sep=4pt,draw,thick},%
- linedecorate/.style={-,thick},%
+[nodeDecorate/.style={shape=rectangle,inner sep=4pt,draw,thick},%
  scale=1.2]
 %% nodes or vertices
-\foreach \nodename/\x/\y in {Stuttgart/0/0, Erfurt/8/0, Nuremberg/2/3,
-  Munich/0/6, Frankfurt/8/6, Kassel/4/6, Augsburg/0/9, Mannheim/8/9,
-  Karlsruhe/4/12}
+\foreach \nodename/\x/\y in {
+  Stuttgart/0/0, Erfurt/8/0, Nuremberg/2/3, Munich/0/6, Frankfurt/8/6,
+  Kassel/4/6, Augsburg/0/9, Mannheim/8/9, Karlsruhe/4/12}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {\nodename};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\nodename};
 }
-\node (Wurzburg) at (6,3) [nodedecorate] {W\"urzburg};
+\node (Wurzburg) at (6,3) [nodeDecorate] {W\"urzburg};
 %% edges or lines
-\path
-\foreach \startnode/\endnode/\position/\distance in {
-  Stuttgart/Nuremberg/left/157, Erfurt/Wurzburg/right/154,
-  Nuremberg/Wurzburg/above/90, Nuremberg/Munich/left/149,
-  Wurzburg/Frankfurt/right/97, Munich/Kassel/above/383,
-  Frankfurt/Kassel/above/145, Munich/Augsburg/left/57,
-  Frankfurt/Mannheim/right/72, Augsburg/Karlsruhe/left/197,
-  Mannheim/Karlsruhe/right/54}
+\tikzstyle{EdgeStyle}=[-,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\distance in {
+  Stuttgart/Nuremberg/157, Erfurt/Wurzburg/154,
+  Nuremberg/Wurzburg/90, Nuremberg/Munich/149,
+  Wurzburg/Frankfurt/97, Munich/Kassel/383,
+  Frankfurt/Kassel/145, Munich/Augsburg/57,
+  Frankfurt/Mannheim/72, Augsburg/Karlsruhe/197,
+  Mannheim/Karlsruhe/54}
 {
-  (\startnode) edge[linedecorate] node[\position] {\distance} (\endnode)
-};
+  \Edge[label=$\distance$](\startnode)(\endnode)
+}
 \end{tikzpicture}
