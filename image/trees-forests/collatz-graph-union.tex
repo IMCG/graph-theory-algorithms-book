@@ -1,0 +1,85 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}
+[<-,>=stealth,thick]
+\node {$1$}
+  child {node {$2$}
+    child {node {$4$}
+      child {node {$8$}
+        [sibling distance=6cm]
+        child {node {$16$}
+          child {node {$32$}
+            [sibling distance=2.5cm]
+            child {node {$21$}
+              child {node {$42$}
+                child {node {$84$}
+                  child {node {$168$}
+                    child {node {$336$}}
+                  }
+                }
+              }
+            }
+            child {node {$64$}
+              child {node {$128$}
+                child {node {$85$}
+                  child {node {$170$}
+                    child {node {$340$}}
+                  }
+                }
+                child {node {$256$}
+                  child {node {$512$}
+                    child {node {$1024$}}
+                  }
+                }
+              }
+            }
+          }
+        }
+        child {node {$5$}
+          [sibling distance=2.5cm]
+          child {node {$3$}
+            child {node {$6$}
+              child {node {$12$}
+                child {node {$24$}
+                  child {node {$48$}
+                    child {node {$96$}}
+                  }
+                }
+              }
+            }
+          }
+          child {node {$10$}
+            child {node {$20$}
+              child {node {$13$}
+                child {node {$26$}
+                  child {node {$52$}
+                    child {node {$104$}}
+                  }
+                }
+              }
+              child {node {$40$}
+                child {node {$80$}
+                  child {node {$53$}
+                    child {node {$106$}}
+                  }
+                  child {node {$160$}
+                    child {node {$320$}}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+\end{tikzpicture}

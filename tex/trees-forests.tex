@@ -2373,4 +2373,76 @@ This BST represents the sorting of the list $L$.
 
 \item Convert the above function {\tt graycodeword} into a pure Python
   function.
+
+\item The Collatz conjecture~\cite{Lagarias1985} asserts that for any
+  integer $n > 0$, repeated iteration of the function
+  \[
+  T(n)
+  =
+  \begin{cases}
+  \frac{3n + 1}{2}, & \text{if $n$ is odd}, \\
+  \frac{n}{2}, & \text{if $n$ is even}
+  \end{cases}
+  \]
+  eventually produces the value $1$. For example, repeated iteration
+  of $T(n)$ starting from $n = 22$ results in the sequence
+  %%
+  \begin{equation}
+  \label{eqn:trees_forests:Collatz_sequence_22}
+  22,\, 11,\, 17,\, 26,\, 13,\, 20,\, 10,\, 5,\, 8,\, 4,\, 2,\, 1.
+  \end{equation}
+  %%
+  One way to think about the Collatz conjecture is consider the
+  digraph $G$ produced by considering $(a_i,\, T(a_i))$ as a directed
+  edge of $G$. Then the Collatz conjecture can be rephrased to say
+  that there is some integer $k > 0$ such that
+  $(a_k,\, T(a_k)) = (2, 1)$ is a directed edge of $G$. The graph
+  obtained in this manner is called the \emph{Collatz graph} of
+  $T(n)$. Given a collection of positive integers
+  $\alpha_1, \alpha_2, \dots, \alpha_k$, let $G_{\alpha_i}$ be the
+  Collatz graph of the function $T(\alpha_i)$ with initial iteration
+  value $\alpha_i$. Then the union of the $G_{\alpha_i}$ is the
+  directed tree
+  \[
+  \bigcup_i G_{\alpha_i}
+  \]
+  rooted at $1$, called the \emph{Collatz tree} of
+  $(\alpha_1, \alpha_2, \dots, \alpha_k)$.
+  Figure~\ref{fig:trees_forests:Collatz_graph_union} shows such a tree
+  for the collection of initial iteration values $1024$, $336$, $340$,
+  $320$, $106$, $104$, and $96$. See
+  Lagarias~\cite{Lagarias2009a,Lagarias2009b} for a comprehensive
+  survey of the Collatz conjecture.
+  %%
+  \begin{enumerate}[(a)]
+  \item The \emph{Collatz sequence} of a positive integer $n > 1$ is
+    the integer sequence produced by repeated iteration of $T(n)$ with
+    initial iteration value $n$. For example, the Collatz sequence
+    of $n = 22$ is the
+    sequence~\eqref{eqn:trees_forests:Collatz_sequence_22}. Write a
+    Sage function to produce the Collatz sequence of an integer $n > 1$.
+
+  \item The \emph{Collatz length} of $n > 1$ is the number of terms in
+    the Collatz sequence of $n$, inclusive of the starting iteration
+    value and the final integer $1$. For instance, the Collatz length
+    of $22$ is $12$, that of $106$ is $11$, and that of $51$ is
+    $18$. Write a Sage function to compute the Collatz length of a
+    positive integer $n > 1$. If $n > 1$ is a vertex in a Collatz
+    tree, verify that the Collatz length of $n$ is the distance
+    $d(n,1)$.
+
+  \item Describe the Collatz graph produced by the function $T(n)$
+    with initial iteration value $n = 1$.
+
+  \item Fix a positive integer $n > 1$ and let $L_i$ be the Collatz
+    length of the integer $1 \leq i \leq n$. Plot the pairs $(i, L_i)$
+    on one set of axes.
+  \end{enumerate}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/trees-forests/collatz-graph-union.tex}
+\caption{The union of Collatz graphs is a tree.}
+\label{fig:trees_forests:Collatz_graph_union}
+\end{figure}
 \end{problem}
