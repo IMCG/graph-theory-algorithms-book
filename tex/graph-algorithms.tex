@@ -2249,6 +2249,57 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     Sedgewick~\cite{Sedgewick1990}).
   \end{enumerate}
 
+\item Let $G$ be a simple undirected graph having distance matrix
+  $D = [d(v_i, v_j)]$, where $d(v_i, v_j) \in \R$ denotes the shortest
+  distance from $v_i \in V(G)$ to $v_j \in V(G)$. If $v_i = v_j$, we
+  set $d(v_i, v_j) = 0$. For each pair of distinct vertices
+  $(v_i, v_j)$, we have $d(v_i, v_j) = d(v_j, v_i)$. The $i$-$j$ entry
+  of $D$ is also written as $d_{i,j}$ and denotes the entry in row $i$
+  and column $j$.
+  %%
+  \begin{enumerate}[(a)]
+  \item The \emph{total distance} $td(u)$ of a fixed vertex
+    $u \in V(G)$ is the sum of distances from $u$ to each vertex in $G$:
+    \[
+    td(u)
+    =
+    \sum_{v \in V(G)} d(u,v).
+    \]
+    If $G$ is connected, $i$ is the row index of vertex $u$ in the
+    distance matrix $D$, and $j$ is the column index of $u$ in $D$,
+    show that the total distance of $u$ is
+    %%
+    \begin{equation}
+    \label{eqn:graph_algorithms:toal_distance_vertex}
+    td(u)
+    =
+    \sum_k d_{i,k}
+    =
+    \sum_k d_{k,j}.
+    \end{equation}
+
+  \item Let the vertices of $G$ be labeled
+    $V = \{v_1, v_2, \dots, v_n\}$, where $n = |V(G)|$ is the order of
+    $G$. The \emph{total distance} $td(G)$ of $G$ is obtained by
+    summing all the $d(v_i, v_j)$ for $i < j$. If $G$ is connected,
+    show that the total distance of $G$ is equal to the sum of all
+    entries in the upper (or lower) triangular of $D$:
+    %%
+    \begin{equation}
+    \label{eqn:graph_algorithms:toal_distance_graph}
+    td(G)
+    =
+    \sum_{i < j} d_{i,j}
+    =
+    \sum_{i > j} d_{i,j}.
+    \end{equation}
+
+  \item Would
+    equations~\eqref{eqn:graph_algorithms:toal_distance_vertex}
+    and~\eqref{eqn:graph_algorithms:toal_distance_graph} hold if $G$
+    is not connected or directed?
+  \end{enumerate}
+
 \item Consider the world map of major capital cities in
   Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}.
   %%
