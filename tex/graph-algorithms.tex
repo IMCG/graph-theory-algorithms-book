@@ -1007,15 +1007,15 @@ edge as having a weight of one or unit weight\index{weight!unit}.
 Based on the concept of weighted graphs\index{graph!weighted}, we now
 define what it means for a path to be a shortest
 path\index{path!shortest}. Let $G = (V,E)$ be a (di)graph with
-nonnegative edge weights\index{weight!nonnegative} $w(e)$ for each
-edge $e \in E$. The \emph{length}\index{path!length} or
-\emph{distance}\index{path!distance} $d(P)$ of a path $P$ from
-$v \in V$ to $w \in V$ is the sum of the edge weights for edges in
-$P$. Denote by $d(v,w)$ the smallest value of $d(P)$ for all paths $P$
-from $v$ to $w$. When we regard edge weights as physical
-distances\index{distance}, a $v$-$w$ path that realizes $d(v,w)$ is
-sometimes called a \emph{shortest path}\index{path!shortest} from $v$
-to $w$.
+nonnegative edge weights\index{weight!nonnegative} $w(e) \in \R$ for
+each edge $e \in E$. The \emph{length}\index{path!length} or
+\emph{distance}\index{path!distance} $d(P)$ of a $u$-$v$ path $P$ from
+$u \in V$ to $v \in V$ is the sum of the edge weights for edges in
+$P$. Denote by $d(u,v)$ the smallest value of $d(P)$ for all paths $P$
+from $u$ to $v$. When we regard edge weights as physical
+distances\index{distance}, a $u$-$v$ path that realizes $d(u,v)$ is
+sometimes called a \emph{shortest path}\index{path!shortest} from $u$
+to $v$.
 
 The distance\index{distance!function} function $d$ on a graph with
 nonnegative edge weights\index{weight!nonnegative} is known as a
