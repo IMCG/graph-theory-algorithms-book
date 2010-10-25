@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}
+[<-,>=stealth,thick]
+\node {$1$}
+  [sibling distance=3cm]
+  child {node {$2$}
+    child {node {$4$}
+      child {node {$8$}
+        [sibling distance=2cm]
+        child {node {$15$}}
+        child {node {$20$}
+          [sibling distance=1cm]
+          child {node {$33$}}
+          child {node {$44$}
+            child {node {$69$}}
+          }
+        }
+        child {node {$24$}
+          [sibling distance=1cm]
+          child {node {$35$}}
+          child {node {$72$}}
+        }
+      }
+      child {node {$10$}
+        [sibling distance=2cm]
+        child {node {$22$}}
+      }
+    }
+  };
+\end{tikzpicture}
