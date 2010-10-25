@@ -666,6 +666,7 @@ to the graph obtained by adding the edge $u'w$ to $T'$.
 \end{proof}
 
 \begin{example}
+\label{eg:trees_forests:Euler_phi_function_tree}
 Consider a positive integer $n$. The Euler phi function $\varphi(n)$
 counts the number of integers $a$, with $1 \leq a \leq n$, such that
 $\gcd(a,n) = 1$. The Euler phi sequence of $n$ is obtained by
@@ -2435,6 +2436,12 @@ This BST represents the sorting of the list $L$.
 
 \item Convert the above function {\tt graycodeword} into a pure Python
   function.
+
+\item Example~\ref{eg:trees_forests:Euler_phi_function_tree} verifies
+  that for any positive integer $n > 1$, repeated iteration of the
+  Euler phi function $\varphi(n)$ eventually produces $1$. Show that
+  this is the case or provide an explanation why it is in general
+  false.
 
 \item The Collatz conjecture~\cite{Lagarias1985} asserts that for any
   integer $n > 0$, repeated iteration of the function
