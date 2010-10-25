@@ -1894,6 +1894,76 @@ Figure~\ref{fig:graph_algorithms:another_Floyd_Roy_Warshall_demo}.
 %sage: D = DiGraph(A, format="weighted_adjacency_matrix")
 %sage: D.plot(edge_labels=True, graph_border=True).show()
 
+\begin{figure}[!htbp]
+\centering
+\input{image/graph-algorithms/trimethylcyclobutane.tex}
+\caption{Molecular graph of 1,1,3-trimethylcyclobutane.}
+\label{fig:graph_algorithms:trimethylcyclobutane}
+\end{figure}
+
+\begin{example}
+Section~\ref{sec:introduction:common_applications} briefly presented
+the concept of molecular graphs in chemistry. The Wiener number of a
+molecular graph was first published in~1947 by Harold
+Wiener~\cite{Wiener1947}. If $G = (V,E)$ is a graph with vertex set
+$V = \{v_1, v_2, \dots, v_n\}$, then the Wiener number $W$ of $G$ is
+defined by
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:Wiener_number}
+W(G)
+=
+\sum_{i < j} d(v_i, v_j)
+\end{equation}
+%%
+where $d(v_i, v_j)$ is the distance from $v_i$ to $v_j$. What is the
+Wiener number of the molecular graph in
+Figure~\ref{fig:graph_algorithms:trimethylcyclobutane}?
+\end{example}
+
+\begin{proof}[Solution]
+Consider the molecular graph in
+Figure~\ref{fig:graph_algorithms:trimethylcyclobutane} as directed
+with unit weight. To compute the Wiener number of this graph, use the
+Floyd-Roy-Warshall algorithm to obtain a distance matrix
+$D = [d_{i,j}]$, where $d_{i,j}$ is the distance from $v_i$ to $v_j$,
+and apply the
+definition~\eqref{eqn:graph_algorithms:Wiener_number}. The distance
+matrix resulting from the Floyd-Roy-Warshall algorithm is
+\[
+M
+=
+\begin{bmatrix}
+0 & 2 & 1 & 2 & 3 & 2 & 4 \\
+2 & 0 & 1 & 2 & 3 & 2 & 4 \\
+1 & 1 & 0 & 1 & 2 & 1 & 3 \\
+2 & 2 & 1 & 0 & 1 & 2 & 2 \\
+3 & 3 & 2 & 1 & 0 & 1 & 1 \\
+2 & 2 & 1 & 2 & 1 & 0 & 2 \\
+4 & 4 & 3 & 2 & 1 & 2 & 0
+\end{bmatrix}.
+\]
+Sum all entries in the upper (or lower) triangular of $M$ to obtain
+the Wiener number $W = 42$. Using Sage, we have
+%%
+\begin{lstlisting}
+sage: G = Graph({1:[3], 2:[3], 3:[4,6], 4:[5], 6:[5], 5:[7]})
+sage: D = G.shortest_path_all_pairs()[0]
+sage: M = [D[i][j] for i in D for j in D[i]]
+sage: M = matrix(M, nrows=7, ncols=7)
+sage: W = 0
+sage: for i in range(M.nrows() - 1):
+...       for j in range(i+1, M.ncols()):
+...           W += M[i,j]
+sage: W
+42
+\end{lstlisting}
+%%
+which verifies our computation above. See
+Gutman~et~al.~\cite{GutmanEtAl1993} for a survey of some results
+concerning the Wiener number.
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
