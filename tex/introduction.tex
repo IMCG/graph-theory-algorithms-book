@@ -2606,14 +2606,25 @@ economics, and operation research.
   contained in Chapter~\ref{chap:planar_graphs}.
   \index{graph!planar}
 
-\item Can you label or ``color'' all the vertices of a graph in such a
+\item Can you label or color all the vertices of a graph in such a
   way that no adjacent vertices have the same color? If so, this is
-  called a \emph{vertex coloring}. Can you label or ``color'' all the
+  called a \emph{vertex coloring}. Can you label or color all the
   edges of a graph in such a way that no incident edges have the same
-  color? If so, this is called an \emph{edge coloring}. Graph coloring
+  color? If so, this is called an \emph{edge coloring}.
+  Figure~\ref{fig:vertex_coloring:wheel_graph_W_4} shows a vertex
+  coloring of the wheel graph $W_4$ using two colors;
+  Figure~\ref{fig:vertex_coloring:Petersen_graph} shows a vertex
+  coloring of the Petersen graph using three colors. Graph coloring
   has several remarkable applications, one of which is to scheduling
   of jobs relying on a shared resource. This is discussed further in
   Chapter~\ref{chap:graph_coloring}.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/introduction/vertex-coloring.tex}
+\caption{Vertex coloring with two and three colors.}
+\label{fig:introduction:vertex_coloring}
+\end{figure}
 
 \item In some fields, such as operations research, a directed graph
   with non-negative edge weights is called a \emph{network}, the
