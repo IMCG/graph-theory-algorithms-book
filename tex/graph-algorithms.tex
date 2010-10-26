@@ -292,22 +292,32 @@ most significant bit, followed by the second bit \texttt{0} which is
 the second most significant bit, and so on all the way down to the
 seventh bit \texttt{1} which is the least significant bit.
 
-The order in which we process the bits of a bit vector is referred to
-as \emph{endianness}\index{endianness}. Processing $v$ in
-\emph{big-endian}\index{big-endian} order means that we first process
+The order in which we process the bits of a bit vector
+\[
+v
+=
+b_{n-1} b_{n-2} \cdots b_0
+\]
+is referred to as \emph{endianness}\index{endianness}. Processing $v$
+in \emph{big-endian}\index{big-endian} order means that we first process
 the most significant bit of $v$, followed by the second most
 significant bit, and so on all the way down to the least significant
-bit of $v$. \emph{Little-endian}\index{little-endian} order means that
-we first process the least significant bit, followed by the second
-least significant bit, and so on all the way up to the most
-significant bit. In big-endian order, the ASCII\index{ASCII} binary
-representation of \texttt{E} is written \texttt{1000101}~(see
-Table~\ref{tab:graph_algorithms:big_endian_ASCII_binary_E}), while
-the little-ending order is written \texttt{1010001}~(see
-Table~\ref{tab:graph_algorithms:little_endian_ASCII_binary_E}). In his
-novel \emph{Gulliver's Travels}\index{Gulliver's Travels} first
-published in~1726, Jonathan Swift\index{Swift, Jonathan} used the
-terms big-\index{big-endian} and little-endian\index{little-endian} in
+bit of $v$. Thus, in big-endian order we read the bits $b_i$ of $v$
+from left to right in increasing order of powers of $2$.
+Table~\ref{tab:graph_algorithms:big_endian_ASCII_binary_E} illustrates
+the big-endian interpretation of the ASCII\index{ASCII} binary
+representation of \texttt{E}.
+\emph{Little-endian}\index{little-endian} order means that we first
+process the least significant bit, followed by the second least
+significant bit, and so on all the way up to the most significant
+bit. In little-endian order, the bits $b_i$ are read from right to
+left in increasing order of powers of $2$.
+Table~\ref{tab:graph_algorithms:little_endian_ASCII_binary_E}
+illustrates the little-endian interpretation of the ASCII\index{ASCII}
+binary representation of \texttt{E}. In his novel
+\emph{Gulliver's Travels}\index{Gulliver's Travels} first published
+in~1726, Jonathan Swift\index{Swift, Jonathan} used the terms
+big-\index{big-endian} and little-endian\index{little-endian} in
 satirizing politicians who squabbled over whether to break an egg at
 the big end or the little end. Danny
 Cohen\index{Cohen, Danny}~\cite{Cohen1980,Cohen1981} first used the
