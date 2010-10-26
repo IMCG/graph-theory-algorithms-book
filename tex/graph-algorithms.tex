@@ -293,11 +293,14 @@ the second most significant bit, and so on all the way down to the
 seventh bit \texttt{1} which is the least significant bit.
 
 The order in which we process the bits of a bit vector
-\[
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:bits_of_bit_vector}
 v
 =
 b_{n-1} b_{n-2} \cdots b_0
-\]
+\end{equation}
+%%
 is referred to as \emph{endianness}\index{endianness}. Processing $v$
 in \emph{big-endian}\index{big-endian} order means that we first process
 the most significant bit of $v$, followed by the second most
@@ -324,18 +327,23 @@ Cohen\index{Cohen, Danny}~\cite{Cohen1980,Cohen1981} first used the
 terms in 1980 as an April fool's joke in the context of computer
 architecture.
 
-To determine the integer representation of a bit vector, multiply each
-bit value by its corresponding position value, then add up all the
-results. In general, if the bit vector $v = b_1 b_2 \cdots b_k$ is the
-big-endian binary representation of a positive integer, then the
-integer representation of $v$ is
+Suppose the bit vector~\eqref{eqn:graph_algorithms:bits_of_bit_vector}
+is read in big-endian order. To determine the integer representation
+of $v$, multiply each bit value by its corresponding position value,
+then add up all the results. Thus, if $v$ is read in big-endian order,
+the integer representation of $v$ is obtained by evaluating the
+polynomial
 %%
 \begin{equation}
 \label{eq:graph_algorithms:big_endian_binary_to_integer}
-\sum_{i=1}^k 2^{k-i} b_i
+p(x)
 =
-2^{k-1} b_1 + 2^{k-2} b_2 + 2^{k-3} b_3 + \cdots + 2^0 b_k.
+\sum_{i=0}^{n-1} x^i b_i
+=
+x^{n-1} b_{n-1} + x^{n-2} b_{n-2} + \cdots + x b_1 + b_0.
 \end{equation}
+%%
+at $x = 2$.
 
 {\color{red}
 \begin{itemize}
