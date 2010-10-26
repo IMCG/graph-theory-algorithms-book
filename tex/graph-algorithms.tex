@@ -2209,6 +2209,32 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \section{Problems}
 
 \begin{problem}
+\item The Euclidean algorithm is one of the oldest known
+  algorithms. Given two positive integers $a$ and $b$ with $a \geq b$,
+  let $a \bmod b$ be the remainder obtained upon dividing $a$ by $b$.
+  The Euclidean algorithm determines the greatest common divisor
+  $\gcd(a,b)$ of $a$ and $b$. The procedure is summarized in
+  Algorithm~\ref{alg:graph_algorithms:Euclidean_algorithm}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Implement
+    Algorithm~\ref{alg:graph_algorithms:Euclidean_algorithm} in Sage
+    and use your implementation to compute the greatest common
+    divisors of various pairs of integers. Use the built-in Sage
+    command \verb!gcd! to verify your answer.
+
+  \item Modify
+    Algorithm~\ref{alg:graph_algorithms:Euclidean_algorithm} to
+    compute the greatest common divisor of any pair of integers.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/Euclidean-algorithm.tex}
+\caption{The Euclidean algorithm.}
+\index{Euclidean algorithm}
+\label{alg:graph_algorithms:Euclidean_algorithm}
+\end{algorithm}
+
 \item Let $G = (V, E)$ be an undirected graph, let $s \in V$, and $D$
   is the list of distances resulting from running
   Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
