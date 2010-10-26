@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\dontprintsemicolon
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A polynomial $p(x) = \sum_{i=0}^n a_i x_i$, where $a_n \neq 0$,
+  and $x_0 \in \R$.}
+\Output{An evaluation of $p$ at $x = x_0$.}
+\BlankLine
+%%
+%% algorithm body
+$b \assign a_n$\;
+\For{$i \assign n - 1, n - 2, \dots, 0$}{
+  $y \assign y x_0 + a_i$\;
+}
+\Return $y$\;

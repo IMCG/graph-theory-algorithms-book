@@ -343,16 +343,10 @@ p(x)
 x^{n-1} b_{n-1} + x^{n-2} b_{n-2} + \cdots + x b_1 + b_0.
 \end{equation}
 %%
-at $x = 2$.
-
-{\color{red}
-\begin{itemize}
-\item Discuss efficient methods to
-  compute~\eqref{eq:graph_algorithms:big_endian_binary_to_integer}. This
-  might start off discussing Horner's method and followed by bit-level
-  manipulation techniques.
-\end{itemize}
-}
+at $x = 2$. See
+problem~\thechapter.\ref{prob:graph_algorithms:Horner_method} for
+discussion of an efficient method to compute the integer
+representation of a bit vector.
 
 \begin{table}[!htbp]
 \centering
@@ -2251,6 +2245,41 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \caption{The Euclidean algorithm.}
 \index{Euclidean algorithm}
 \label{alg:graph_algorithms:Euclidean_algorithm}
+\end{algorithm}
+
+\item\label{prob:graph_algorithms:Horner_method} Given a polynomial
+  $p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$ of degree
+  $n$, we can use Horner's method~\cite{Horner1819} to efficiently
+  evaluate $p$ at a specific value $x = x_0$. Horner's method evalutes
+  $p(x)$ by expressing the polynomial as
+  \[
+  p(x)
+  =
+  \sum_{i=0}^n a_i x^i
+  =
+  (\cdots (a_n x + a_{n-1}) x + \cdots)x + a_0
+  \]
+  to obtain Algorithm~\ref{alg:graph_algorithms:Horner_method}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Compare the runtime of polynomial evaluation using
+    equation~\eqref{eq:graph_algorithms:big_endian_binary_to_integer}
+    and Horner's method.
+
+  \item Let $v$ be a bit vector read using big-endian order. Write a
+    Sage function that uses Horner's method to compute the integer
+    representation of $v$.
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:Horner_method} to
+    evaluate the integer representation of a bit vector $v$ read using
+    little-endian order. Hence, write a Sage function to convert $v$
+    to its integer representation.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/Horner-method.tex}
+\caption{Polynomial evaluation using Horner's method.}
+\label{alg:graph_algorithms:Horner_method}
 \end{algorithm}
 
 \item Let $G = (V, E)$ be an undirected graph, let $s \in V$, and $D$
