@@ -2491,7 +2491,7 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
   %%
   \begin{enumerate}[(a)]
   \item If $P_n$ is the path graph on $n \geq 0$ vertices, show that
-    the Wiener number of $P_n$ is $W(P_n) = \frac{1}{6} (n^3 - n)$.
+    the Wiener number of $P_n$ is $W(P_n) = \frac{1}{6} n(n^2 - 1)$.
 
   \item If $C_n$ is the cycle graph on $n \geq 0$ vertices, show that
     the Wiener number of $C_n$ is
@@ -2499,9 +2499,18 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     W(C_n)
     =
     \begin{cases}
-    \frac{1}{8} (n^3 - n), & \text{if $n$ is odd,} \\
+    \frac{1}{8} n(n^2 - 1), & \text{if $n$ is odd,} \\
     \frac{1}{8} n^3, & \text{if $n$ is even.}
     \end{cases}
+    \]
+
+  \item If $K_n$ is the complete graph on $n$ vertices, show that its
+    Wiener number is $W(K_n) = \frac{1}{2} n(n - 1)$.
+
+  \item Show that the Wiener number of the complete bipartite graph
+    $K_{m,n}$ is
+    \[
+    W(K_{m,n}) = mn + m(m - 1) + n(n - 1).
     \]
   \end{enumerate}
 
