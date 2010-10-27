@@ -2522,4 +2522,15 @@ This BST represents the sorting of the list $L$.
 \caption{The union of Collatz graphs is a tree.}
 \label{fig:trees_forests:Collatz_graph_union}
 \end{figure}
+
+\item The following result was first published in
+  Wiener~\cite{Wiener1947}. Let $T = (V,E)$ be a tree of order $n > 0$.
+  For each edge $e \in E$, let $n_1(e)$ and $n_2(e) = n - n_1(e)$ be
+  the orders of the two components of the edge-deletion subgraph
+  $T - e$. Show that the Wiener number of $T$ is
+  \[
+  W(T)
+  =
+  \sum_{e \in E} n_1(e) \cdot n_2(e).
+  \]
 \end{problem}
