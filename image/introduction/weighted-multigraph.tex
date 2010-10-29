@@ -1,0 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}
+[nodeDecorate/.style={shape=circle,inner sep=1pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {v_1/4/0, v_2/0/0, v_3/0/3, v_4/4/3, v_5/7/1.5}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[->,>=stealth,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  v_1/v_2/bend left/1, v_1/v_3/bend left/3, v_2/v_3/bend left/1,
+  v_2/v_4/bend left/3, v_3/v_1/bend left/1, v_3/v_2/bend left=0/2,
+  v_3/v_4/bend left/1, v_4/v_1/bend left=0/3, v_4/v_5/bend left/2,
+  v_5/v_1/bend left/6, v_5/v_4/bend left/1}
+{
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+\Edge[label=$3$](v_5)(v_1)
+\end{tikzpicture}
