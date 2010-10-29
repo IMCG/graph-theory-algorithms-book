@@ -32,10 +32,10 @@
 #
 # $ BOOK_ROOT/util.sh --dist x.y
 #
-# This results in a source tarball named "graph-theory-x.y.tar.bz2" and a
-# PDF version of the book named "graph-theory-x.y.pdf". Thus, a version
-# release has a version number of the form x.y, where x signifies the
-# major version number and y signifies the minor version number.
+# This results in a compressed source tarball, a ZIP archive, and a PDF
+# version of the book. Thus, a version release has a version number of the
+# form x.y, where x signifies the major version number and y signifies the
+# minor version number.
 #
 # Apart from the version release, you could also wrap up a revision release
 # by issuing the command
@@ -43,8 +43,9 @@
 # $ BOOK_ROOT/util.sh --dist
 #
 # This has the effect of taking the current revision or snapshot of the
-# source tree and produce a bug fix release. The resulting source tarball is
-# named "latest-rxxx.tar.bz2" and a PDF version of the book is named
+# source tree and produce a bug fix release. The resulting compressed
+# source tarball is named "latest-rxxx.tar.bz2", the ZIP archive is named
+# "latest-rxxx.zip", and a PDF version of the book is named
 # "latest-rxxx.pdf". You can think of the command
 # "BOOK_ROOT/util.sh --dist" as producing a nightly build of the whole
 # source tree and wrap up that tree for distribution. If this project were
