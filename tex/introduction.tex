@@ -74,23 +74,7 @@ Lewis Carroll's\index{Carroll, Lewis}
 The word ``graph'' is commonly understood to mean a visual
 representation of a dataset, such as a bar chart, a histogram, a
 scatterplot, or a plot of a function. Examples of such graphs are
-shown in Figure~\ref{fig:introduction:graphs_as_plots}. This book is
-not about graphs in the sense of plots of functions or
-datasets. Rather, our focus is on
-\emph{combinatorial graphs}\index{combinatorial graphs} or
-\emph{graphs} for short. A graph in the combinatorial sense is a
-collection of discrete interconnected elements, an example of which is
-shown in Figure~\ref{fig:introduction:seven_bridges_Konigsberg}. How
-can we elaborate on this brief description of combinatorial graphs? To
-paraphrase what Felix Klein said about curves,\footnote{
-  ``Everyone knows what a curve is, until he has studied enough
-  mathematics to become confused through the countless number of
-  possible exceptions.''
-}
-it is easy to define a graph until we realize the countless number of
-exceptions. There are directed graphs, weighted graphs, multigraphs,
-simple graphs, and so on. Where do we begin?
-\index{Klein, Felix}
+shown in Figure~\ref{fig:introduction:graphs_as_plots}. 
 
 \begin{figure}[!htbp]
 \centering
@@ -98,6 +82,29 @@ simple graphs, and so on. Where do we begin?
 \caption{Visual representations of datasets as plots.}
 \label{fig:introduction:graphs_as_plots}
 \end{figure}
+
+This book is
+not about graphs in the sense of plots of functions or
+datasets. Rather, our focus is on
+\emph{combinatorial graphs}\index{combinatorial graphs} or
+\emph{graphs} for short. A graph in the combinatorial sense is a
+collection of discrete interconnected elements, an example of which is
+shown in Figure~\ref{fig:introduction:seven_bridges_Konigsberg}. How
+can we elaborate on this brief description of combinatorial graphs? To
+paraphrase what Felix Klein said about curves\footnote{
+  ``Everyone knows what a curve is, until he has studied enough
+  mathematics to become confused through the countless number of
+  possible exceptions.''
+},
+it is easy to define a graph until we realize the countless number of
+exceptions. There are directed graphs, weighted graphs, multigraphs,
+simple graphs, and so on. Where do we begin?
+\index{Klein, Felix}
+
+\noindent
+Notation: If $S$ is a set, let $S^{(n)}$ denote the set of
+unordered $n$-tuples (with possible repetition). We shall sometimes
+refer to an unordered $n$-tuple as a {\it $n$-set}.
 
 We start by calling a ``graph'' what some call an
 ``unweighted\index{graph!unweighted},
@@ -109,7 +116,7 @@ multiple\index{edge!multiple} edges.''
 {\rm
 A \emph{graph}\index{graph} $G = (V, E)$ is an ordered pair of finite
 sets. Elements of $V$ are called \emph{vertices}\index{vertex} or
-\emph{nodes}\index{node}, and elements of $E \subseteq V \times V$ are
+\emph{nodes}\index{node}, and elements of $E \subseteq V^{(2)}$ are
 called \emph{edges}\index{edge} or \emph{arcs}\index{arcs}. We refer
 to $V$ as the \emph{vertex set}\index{vertex!set} of $G$, with $E$
 being the \emph{edge set}\index{edge!}. The cardinality of $V$ is
@@ -225,7 +232,7 @@ largest number of adjacent vertices.
 
 (4) If all the edges in $G$ are removed, the result is still a graph,
 although one without any edges. By definition, the edge set of any
-graph is a subset of $V \times V$. Removing all edges of $G$ leaves us
+graph is a subset of $V^{(2)}$. Removing all edges of $G$ leaves us
 with the empty set $\emptyset$, which is a subset of every set.
 
 (5) Say we remove all of the vertices from the graph in
@@ -245,7 +252,7 @@ Figure~\ref{fig:introduction:self_loop} represent a graph? Why or why not?
 
 \begin{proof}[Solution]
 If $V = \{ a, b, c \}$ and $E = \{ aa, bc \}$, it is clear that $E
-\subseteq V \times V$. Then $(V, E)$ is a graph. The edge $aa$ is
+\subseteq V^{(2)}$. Then $(V, E)$ is a graph. The edge $aa$ is
 called a \emph{self-loop} of the graph. In general, any edge of the
 form $vv$ is a self-loop.
 \end{proof}
@@ -270,7 +277,9 @@ taken into account.
 
 A \emph{directed edge} is an edge such that one vertex incident with it
 is designated as the head vertex and the other incident vertex is
-designated as the tail vertex. A directed edge $uv$ is said to be
+designated as the tail vertex. In this situtation, we may assume that 
+the set of edges is a subset of the ordered pairs $V\times V$.
+A directed edge $uv$ is said to be
 directed from its tail $u$ to its head $v$. A \emph{directed graph} or
 \emph{digraph} $G$ is a graph such that each of whose edges is
 directed. The \emph{indegree} $\id(v)$ of a vertex $v \in V(G)$ counts
@@ -285,8 +294,10 @@ edges such that $v$ is the tail of those edges.
 \index{$\id$}
 \index{$\od$}
 
+Let $G$ be a graph having no loops or multiple edges.
 It is important to distinguish a graph $G$ as being directed or
-undirected. If $G$ is undirected and $uv \in E(G)$, then $uv$ and $vu$
+undirected. 
+If $G$ is undirected and $uv \in E(G)$, then $uv$ and $vu$
 represent the same edge. In case $G$ is a digraph, then $uv$ and $vu$
 are different directed edges. For a digraph $G = (V, E)$ and a vertex
 $v \in V$, all the neighbors of $v$ in $G$ are contained in $\adj(v)$,
@@ -297,6 +308,7 @@ $\iadj(v) \subseteq \adj(v)$ of $v \in V$ consists of all those
 vertices that contribute to the indegree of $v$. Similarly, the set
 of \emph{out-neighbors} $\oadj(v) \subseteq \adj(v)$ of $v \in V$ are
 those vertices that contribute to the outdegree of $v$. Then
+
 \[
 \iadj(v) \cap \oadj(v)
 =
@@ -336,6 +348,7 @@ multigraph, a graph with possibly multiple edges,
 called the K\"onigsberg\index{K\"onigsberg graph} graph.
 
 \begin{definition} (Version 3)
+\label{def:graph-version3}
 {\rm
 For a weighted multigraph\index{weight!multigraph} $G$, we are
 given:
@@ -349,11 +362,12 @@ given:
 \item A finite set $E$ whose elements are called
   \emph{edges}\index{edge!multigraph}. We do not necessarily assume
   that $E \subseteq V^{(2)}$, where $V^{(2)}$ is the set of unordered
-  pairs of vertices.\footnote{
+  pairs of 
+vertices\footnote{
     However, we always assume that $E \subseteq \R \times V^{(2)}$,
     where the $\R$-component is called the
     \emph{weight}\index{edge!weight} of the edge.
-  }
+  }.
 
 \item An incidence\index{incidence function} function
 
@@ -384,6 +398,47 @@ multidigraph.
 \index{edge!tail}
 }
 \end{definition}
+
+The degree of a weighted multigraph must be defined.
+There is a weighted degree and an unweighted degree.
+The {\it unweighted indegree} of a $v\in V$ counts the edges
+going into $v$:
+
+\[
+deg_+(v) = \sum_{e \in E, h(e)=v} 1,
+\]
+{\it unweighted outdegree} of a $v\in V$ counts the edges
+going out of $v$:
+\[
+deg_-(v) = \sum_{e \in E, v\in i(e)=\{v,w\}, h(e)= w} 1.
+\]
+Similarly, there is the set of {\it in-neighbors}
+
+\[
+{\rm iadj}(v) = \{w\in V\ |\ {\rm for\ some}\ e\in E, 
+i(e)=\{v,w\}, h(e)=v\},
+\]
+and the set of {\it out-neighbors}
+\[
+{\rm oadj}(v) = \{w\in V\ |\ {\rm for\ some}\ e\in E, 
+i(e)=\{v,w\}, h(e)=w\},
+\]
+Define the {\it adjacency} of $v$ to be the union of these:
+
+\[
+{\rm adj}(v) = {\rm iadj}(v) \cup {\rm oadj}(v).
+\]
+
+\begin{figure}[!htbp]
+\centering
+\input{image/graph-algorithms/Dijkstra-directed-house-graph.tex}
+\caption{An example of a weighted multigraph.}
+\label{fig:weighted-multigraph}
+\end{figure}
+%sage: M = matrix([[0,1,3,0,6],[0,0,1,3,0],[1,2,0,1,0],[3,0,0,0,2],[0,0,0,1,0]])
+%sage: D = DiGraph(M, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
+% copied from graph algorithms section 2.8
 
 \index{graph!simple}
 \index{simple graph}
@@ -433,8 +488,9 @@ cardinality\index{cardinality} of $\adj(v)$ is called the
 $\deg(v) = |\adj(v)|$\index{$\deg$}. The degree of $v$ counts the
 number of vertices in $G$ that are adjacent to $v$. If $\deg(v) = 0$,
 then $v$ is not incident to any edge and we say that $v$ is an
-\emph{isolated}\index{vertex!isolated} vertex. If $\deg(v) = 1$,
-then $v$ is called a \emph{pendant}\index{pendant}.
+\emph{isolated}\index{vertex!isolated} vertex. If $G$ has no loops
+and $\deg(v) = 1$, then $v$ is called a 
+\emph{pendant}\index{pendant}.
 }
 \end{definition}
 
@@ -563,7 +619,7 @@ As $\sum_{v \in V} \deg(v)$ and $\sum_{v \in V_e} \deg(v)$ are both
 even, their difference is also even.
 \end{proof}
 
-As $E \subseteq V \times V$, then $E$ can be the empty set, in which
+As $E \subseteq V^{(2)}$, then $E$ can be the empty set, in which
 case the total degree of $G = (V, E)$ is zero. Where $E \neq
 \emptyset$, then the total degree of $G$ is greater than zero. By
 Theorem~\ref{thm:introduction:degree_sum}, the total degree of $G$ is
@@ -598,6 +654,13 @@ We now consider several common types of graphs. Along the way, we also
 present basic properties of graphs that could be used to distinguish
 different types of graphs.
 
+Let $G$ be a multigraph as in Definition \ref{def:graph-version3},
+with vertex set $V(G)$ and edge set
+$E(G)$. Consider a graph $H$ such that $V(H) \subseteq V(G)$ and $E(H)
+\subseteq E(G)$. Furthermore, if $e \in E(H)$,
+$i(e)=\{u,v\}$, then $u,v \in V(H)$. 
+Under these conditions, $H$ is called a \emph{subgraph} of $G$.
+\index{subgraph}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -607,7 +670,8 @@ different types of graphs.
 If $u$ and $v$ are two vertices in a graph $G$, a $u$-$v$ \emph{walk}
 is an alternating sequence of vertices and edges starting with $u$ and
 ending at $v$. Consecutive vertices and edges are incident. Formally,
-a walk $W$ of length $n \geq 0$ can be defined as
+a {\it walk} $W$ of length $n \geq 0$ can be defined as
+
 \[
 W: v_0, e_1, v_1, e_2, v_2, \dots, v_{n-1}, e_n, v_n
 \]
@@ -616,8 +680,10 @@ number of~(not necessarily distinct) edges in the walk. The vertex
 $v_0$ is the starting vertex of the walk and $v_n$ is the end vertex,
 so we refer to $W$ as a $v_0$-$v_n$ walk. The \emph{trivial walk} is
 the walk of length $n = 0$ in which the start and end vertices are one
-and the same vertex. For brevity, we omit the edges in a walk and
+and the same vertex. If the graph has no multiple edges then,
+for brevity, we omit the edges in a walk and
 usually write the walk as the following sequence of vertices:
+
 \[
 W: v_0, v_1, v_2, \dots, v_{n-1}, v_n.
 \]
@@ -646,24 +712,26 @@ Figure~\ref{fig:introduction:types_of_walks} is a trail. It does not
 contain any repeated edges, but it contains one repeated vertex,
 i.e. $b$. Nothing in the definition of a trail restricts a trail from
 having repeated vertices.
-A walk with no repeating vertices is called a \emph{path}. Without any
+A walk with no repeating vertices, except possibly the first and last, 
+is called a \emph{path}. Without any
 repeating vertices, a path cannot have repeating edges, hence a path
 is also a trail.
 \index{trail}
 %\index{circuit}
 \index{path}
 
-\begin{corollary}
-\label{cor:introduction:any_path_has_length_at_most_n_minus_1}
-Let $G = (V, E)$ be a (di)graph of order $n = |V|$. Any path in $G$
+
+\begin{proposition}
+\label{prop:introduction:any_path_has_length_at_most_n_minus_1}
+Let $G = (V, E)$ be a simple (di)graph of order $n = |V|$. Any path in $G$
 has length at most $n - 1$.
-\end{corollary}
+\end{proposition}
 
 \begin{proof}
 Let $V = \{v_1, v_2, \dots, v_n\}$ be the vertex set of $G$. Without
-loss of generality, we can assume that each pair of vertices in $G$ is
-connected by an edge, giving a total of $n^2$ possible edges for
-$E = V \times V$. We can remove self-loops from $E$, which now leaves
+loss of generality, we can assume that each pair of vertices in 
+the digraph $G$ is connected by an edge, giving a total of $n^2$ possible edges for
+$E = V\times V$. We can remove self-loops from $E$, which now leaves
 us with an edge set $E_1$ that consists of $n^2 - n$ edges. Start our
 path from any vertex, say, $v_1$. To construct a path of length $1$,
 choose an edge $v_1 v_{j_1} \in E_1$ such that
@@ -685,44 +753,30 @@ vertex that was previously visited, because $P_{n-1}$ already contains
 all vertices of $V$.
 \end{proof}
 
-The following is an immediate consequence of
-Corollary~\ref{cor:introduction:even_num_vertices_odd_degree}.
-
-\begin{corollary}
-In any graph with exactly two vertices of odd degree, those vertices
-are connected by a path.
-\end{corollary}
-
-\begin{proof}
-Let $G$ be a graph all of whose vertices are of even degree, except
-for $u$ and $v$. Let $C$ be a component of $G$ containing $u$. By
-Corollary~\ref{cor:introduction:even_num_vertices_odd_degree}, $C$
-also contains $v$, the only remaining vertex of odd degree. As $u$ and
-$v$ belong to the same component, they are connected by a path.
-\end{proof}
-
+A walk\index{walk} of length $n \geq 3$ whose start and end vertices
+are the same is called a \emph{closed walk}\index{walk!closed}.
 A trail\index{trail} of length $n \geq 3$ whose start and end vertices
-are the same is called a \emph{closed path}\index{path!closed}. For
-example, the walk $a, b, c, e, a$ in
-Figure~\ref{fig:introduction:types_of_walks} is a closed path. A path
-whose length is odd is called \emph{odd}\index{path!odd}, otherwise it
-is referred to as \emph{even}\index{path!even}. A walk which has no
-repeated edges and the start and end vertices are the same, but
-otherwise has no repeated vertices, is a
-\emph{cycle}\index{cycle}~(with apologies for slightly abusing
+are the same is called a \emph{closed trail}\index{trail!closed}. 
+A path\index{path} of length $n \geq 3$ whose start and end vertices
+are the same is called a \emph{closed path}\index{path!closed}
+or a \emph{cycle}\index{cycle}~(with apologies for slightly abusing
 terminology).\footnote{
   A cycle in a graph is sometimes also called a
   ``circuit''\index{circuit}. Since that terminology unfortunately
   conflicts with the closely related notion of a circuit of a matroid,
-  we do not use it here.
+  we do not use it here. 
 }
+For example, the walk $a, b, c, e, a$ in
+Figure~\ref{fig:introduction:types_of_walks} is a closed path. A path
+whose length is odd is called \emph{odd}\index{path!odd}, otherwise it
+is referred to as \emph{even}\index{path!even}. 
 Thus the walk $a, b, e, a$ in
-Figure~\ref{fig:introduction:types_of_walks} is a closed path. It is
+Figure~\ref{fig:introduction:types_of_walks} is a cycle. It is
 easy to see that if you remove any edge from a cycle, then the
-resulting walk contains no closed paths. An
+resulting walk contains no closed walks. An
 \emph{Euler subgraph}\index{Euler subgraph} of a graph $G$ is either a
 cycle or an edge-disjoint union of cycles in $G$. An example of a
-closed path which is not a cycle is given in
+closed walk which is not a cycle is given in
 Figure~\ref{fig:introduction:butterfly_graph}.
 
 \begin{figure}[!htbp]
@@ -750,9 +804,9 @@ Consider the graph in Figure~\ref{fig:introduction:types_of_walks}.
 
 \item Find two distinct paths and determine their lengths.
 
-\item Find a closed path that is not a cycle.
+\item Find a closed trail that is not a cycle.
 
-\item Find a closed path $C$ which has an edge $e$ such that $C - e$
+\item Find a closed walk $C$ which has an edge $e$ such that $C - e$
   contains a cycle.
 \end{enumerate}
 \end{example}
@@ -770,7 +824,9 @@ $t_1: a,b,c,e,b$ and $t_2: b,e,f,d,c,e$. The length of trail $t_1$ is
 $p_2: g, b, a, e, f, d$. The length of path $p_1$ is 5 and the length
 of path $p_2$ is also 5.
 
-(4) Here is a closed path that is not a cycle: $d, c, e, b, a, e, f, d$.
+(4) Here is a closed trail that is not a cycle: $d, c, e, b, a, e, f, d$.
+
+(5) Left to the reader.
 \end{proof}
 
 \begin{theorem}
@@ -822,6 +878,23 @@ components of a graph $G$ will be denoted $\omega(G)$.
 \index{path!geodesic}
 \index{shortest path}
 
+
+The following is an immediate consequence of
+Corollary~\ref{cor:introduction:even_num_vertices_odd_degree}.
+
+\begin{proposition}
+Suppose that exactly two vertices of a graph have odd degree.
+Those two vertices are connected by a path.
+\end{proposition}
+
+\begin{proof}
+Let $G$ be a graph all of whose vertices are of even degree, except
+for $u$ and $v$. Let $C$ be a component of $G$ containing $u$. By
+Corollary~\ref{cor:introduction:even_num_vertices_odd_degree}, $C$
+also contains $v$, the only remaining vertex of odd degree. As $u$ and
+$v$ belong to the same component, they are connected by a path.
+\end{proof}
+
 \begin{example}
 Determine whether or not the graph in
 Figure~\ref{fig:introduction:types_of_walks} is connected. Find a
@@ -850,6 +923,7 @@ any other $g$-$d$ path has length greater than $2$, so we can say that
 $g, f, d$ is the shortest path between $g$ and $d$.
 \end{proof}
 
+\begin{remark}
 We will explain Dijkstra's algorithm in
 Chapter~\ref{chap:graph_algorithms}, which gives one of the best
 algorithms for finding shortest paths between two vertices in a
@@ -859,6 +933,7 @@ of knowledge, finding the shortest path from a vertex $v$ to a
 hard as finding the shortest path from a vertex $v$ to \emph{all}
 other vertices in the graph!
 \index{Dijkstra's algorithm}
+\end{remark}
 
 Trees are a special type of graphs that are used in modelling
 structures that have some form of hierarchy. For example, the
@@ -884,9 +959,13 @@ Chapter~\ref{chap:trees_forests} covers trees in more details.
 \subsection{Subgraphs, complete and bipartite graphs}
 
 Let $G$ be a graph with vertex set $V(G)$ and edge set
-$E(G)$. Consider a graph $H$ such that $V(H) \subseteq V(G)$ and $E(H)
-\subseteq E(G)$. Furthermore, if $uv \in E(H)$ then $u,v \in
-V(H)$. Then $H$ is called a \emph{subgraph} of $G$ and $G$ is referred
+$E(G)$. Recall, if we have a 
+graph $H$ such that $V(H) \subseteq V(G)$ and $E(H)
+\subseteq E(G)$, and the incidence function
+$i$ Of $G$, when restricted to $E(H)$
+has image in $V(H)^{(2)}$,
+then $H$ is a subgraph of $G$.
+In this situation, $G$ is referred
 to as a \emph{supergraph} of $H$.
 \index{subgraph}
 \index{supergraph}
