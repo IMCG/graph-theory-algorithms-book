@@ -33,7 +33,11 @@
 %% scatterplot
 \subfigure[A scatterplot.]{
 \begin{tikzpicture}[scale=0.85]
-\begin{axis}[enlargelimits=false]
+\begin{axis}[%
+  enlargelimits=false,%
+  xlabel=$x$,%
+  ylabel=$y$%
+]
 \addplot+[only marks,samples=400] {rand};
 \end{axis}
 \end{tikzpicture}
