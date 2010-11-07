@@ -12,13 +12,19 @@
 %% sin(x) and coordinates
 \subfigure[Plots of functions.]{
 \begin{tikzpicture}[scale=0.85]
-\begin{axis}[
-    xlabel=$x$,%
-    ylabel=$f(x)$
-  ]
+\begin{axis}[%
+  xlabel=$x$,%
+  ylabel=$f(x)$%
+]
+%% The following works with Ubuntu 10.04, but does not work with
+%% Ubuntu 10.10.
 %% invoke external gnuplot as calculator
-\addplot[smooth,color=blue] gnuplot{sin(x)};
-\addplot[smooth,color=red] gnuplot{cos(x)};
+%% \addplot[smooth,color=blue] gnuplot{sin(x)};
+%% \addplot[smooth,color=red] gnuplot{cos(x)};
+%%
+%% Equivalent of the previous block for Ubuntu 10.10.
+\addplot[smooth,color=blue] expression {sin(deg(x))};
+\addplot[smooth,color=red] expression {cos(deg(x))};
 \end{axis}
 \end{tikzpicture}
 }
