@@ -1006,14 +1006,13 @@ Figure~\ref{fig:trees-forests:Kruskal_example}.
 
 Like Kruskal's algorithm, Prim's algorithm uses a greedy approach to
 computing a minimum spanning tree of a connected weighted graph
-$G = (V,E)$. The algorithm was developed in 1930 by Czech
-mathematician V.~Jarn\'ik~\cite{Jarnik1930} and later independently by
-R.~C.~Prim~\cite{Prim1957} and
+$G = (V,E)$, where $n = |V|$ and $m = |E|$. The algorithm was
+developed in 1930 by Czech mathematician V.~Jarn\'ik~\cite{Jarnik1930}
+and later independently by R.~C.~Prim~\cite{Prim1957} and
 E.~W.~Dijkstra~\cite{Dijkstra1959}. However, Prim was the first to
-present an implementation that runs in time $O(n^2)$, where
-$n = |V|$. Using $2$-heaps, the runtime can be
-reduced~\cite{KershenbaumVanSlyke1972} to $O(m \cdot \log n)$, where
-$m = |E|$. With a Fibonacci heap
+present an implementation that runs in time $O(n^2)$. Using $2$-heaps,
+the runtime can be reduced~\cite{KershenbaumVanSlyke1972} to
+$O(m \cdot \log n)$. With a Fibonacci heap
 implementation~\cite{FredmanTarjan1984,FredmanTarjan1987}, the runtime
 can be reduced even further to $O(m + n \cdot \log n)$.
 
