@@ -9,52 +9,46 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subfigure[]{
+\subfigure[Original digraph.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick}]
-% nodes or vertices
-\node (0) at (-4,4) [nodedecorate] {};
-\node [left] at (0.west) {$0$};
-\node (1) at (0,8) [nodedecorate] {};
-\node [above] at (1.north) {$1$};
-\node (2) at (4,4) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (3) at (0,0) [nodedecorate] {};
-\node [below] at (3.south) {$3$};
-% edges or lines
-\path
-(0) edge[arrowdecorate,bend left=15] node[left]{$1$} (1)
-(0) edge[arrowdecorate,bend left=10] node[above]{$2$} (2)
-(0) edge[arrowdecorate,bend left=10] node[right]{$3$} (3)
-(1) edge[arrowdecorate,bend left=10] node[right]{$3$} (0)
-(1) edge[arrowdecorate,bend left=15] node[right]{$2$} (2)
-(1) edge[arrowdecorate,bend left=10] node[right]{$1$} (3)
-(2) edge[arrowdecorate,bend left=10] node[below]{$2$} (0)
-(2) edge[arrowdecorate,bend left=10] node[left]{$1$} (1)
-(2) edge[arrowdecorate,bend left=15] node[right]{$3$} (3)
-(3) edge[arrowdecorate,bend left=15] node[left]{$1$} (0)
-(3) edge[arrowdecorate,bend left=10] node[left]{$1$} (1)
-(3) edge[arrowdecorate,bend left=10] node[left]{$1$} (2);
+[arrowDecorate/.style={->,>=stealth,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {0/-4/4, 1/0/8, 2/4/4, 3/0/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[->,>=stealth,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  0/1/bend left/1, 0/2/bend left/2, 0/3/bend left=0/3,
+  1/0/bend left=0/3, 1/2/bend left/2, 1/3/bend left/1,
+  2/0/bend left/2, 2/1/bend left=0/1, 2/3/bend left/3,
+  3/0/bend left/1, 3/1/bend left/1, 3/2/bend left=0/1}
+{
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
 \end{tikzpicture}
 }
-\subfigure[]{
+%%
+%%
+\subfigure[Minimum spanning tree.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (0) at (4,-4) [nodedecorate] {};
-\node [right] at (0.east) {$0$};
-\node (1) at (2,-2) [nodedecorate] {};
-\node [right] at (1.east) {$1$};
-\node (2) at (6,-6) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (3) at (0,0) [nodedecorate] {};
-\node [right] at (3.east) {$3$};
-% edges or lines
-\path
-(3) edge[linedecorate] node[left]{$1$} (1)
-(1) edge[linedecorate] node[left]{$1$} (0)
-(0) edge[linedecorate] node[left]{$2$} (2);
+[arrowDecorate/.style={->,>=stealth,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {0/-4/4, 1/0/8, 2/4/4, 3/0/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[->,>=stealth,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  0/1/bend left/1, 1/3/bend left/1, 3/2/bend left=0/1}
+{
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
 \end{tikzpicture}
 }
