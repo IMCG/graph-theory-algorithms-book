@@ -1016,6 +1016,37 @@ $O(m \cdot \log n)$. With a Fibonacci heap
 implementation~\cite{FredmanTarjan1984,FredmanTarjan1987}, the runtime
 can be reduced even further to $O(m + n \cdot \log n)$.
 
+Pseudocode of Prim's algorithm is given in
+Algorithm~\ref{alg:trees_forests:prim}. For each $v \in V$, $\cost[v]$
+denotes the minimum weight among all edges connecting $v$ to a vertex
+in the tree $T$, and $\parent[v]$ denotes the parent of $v$ in
+$T$. During the algorithm's execution, vertices $v$ that are not in
+$T$ are organized in the minimum-priority queue $Q$, prioritized
+according to $\cost[v]$. Lines~\ref{alg:prim:for_start:init}
+to~\ref{alg:prim:for_end:init} set each $\cost[v]$ to a number that
+is larger than any weight in the graph $G$, usually written $\infty$.
+The parent of each vertex is set to \texttt{NULL} because we have not
+yet started constructing the MST $T$. In
+lines~\ref{alg:prim:arbitrary_root}
+to~\ref{alg:prim:init_min_priority_queue}, we choose an arbitrary
+vertex $r$ from $V$ and mark that vertex as the root of $T$. The
+minimum-priority queue is set to be all vertices from $V$. We set
+$\cost[r]$ to zero, making $r$ the only vertex so far with a cost that
+is $< \infty$. During the first execution of the while loop from
+lines~\ref{alg:prim:while_start:build_tree}
+to~\ref{alg:prim:while_end:build_tree}, $r$ is the first vertex to be
+extracted from $Q$ and processed. Line~\ref{alg:prim:extract_min}
+extracts a vertex $u$ from $Q$ based on the key $\cost$, thus moving
+$u$ to the vertex set of $T$. The while loop updates the $\cost$ and
+$\parent$ fields of each vertex $v$ adjacent to $u$ that is not in
+$T$. If $\parent[v] \neq \texttt{NULL}$, then $\cost[v] < \infty$ and
+$\cost[v]$ is the weight of an edge connecting $v$ to some vertex
+already in $T$. Lines~\ref{alg:prim:MST_edge_set}
+to~\ref{alg:prim:return_MST} construct the edge set of the minimum
+spanning tree and return this edge set. The proof of correctness of
+Algorithm~\ref{alg:trees_forests:prim} is similar to the proof of
+Theorem~\ref{thm:trees_forests:correctness_Kruskal_algorithm}.
+
 \begin{algorithm}[!htbp]
 \input{algorithm/trees-forests/Prim-algorithm.tex}
 \caption{Prim's algorithm.}
