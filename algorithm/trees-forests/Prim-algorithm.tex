@@ -14,17 +14,29 @@
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
+\SetKwData{NULL}{NULL}
 %%
 %% input/output
-\Input{A connected graph $G = (V, E)$ having edge weights.}
-\Output{A MST $T$ for $G$.}
+\Input{A weighted connected graph $G = (V, E)$ with weight function $w$.}
+\Output{A minimum spanning tree $T$ of $G$.}
 \BlankLine
 %%
 %% algorithm body
-Initialize: $V(T) = \{v_0\}$, where $v_0$ is an arbitrary vertex, $E(T)=\emptyset$\;
-While $V(T)\not= V$:\;
-{
-\quad Choose edge $(u,v)$ with minimal weight such that $u$ is in $V(T)$
-but $v$ is not,\;
-\quad Add $v$ to $V(T)$, add $(u, v)$ to $E(T)$.\;
+\For{\rm each $v \in V$}{
+  $\cost[v] \assign \infty$\;
+  $\parent[v] \assign \NULL$\;
 }
+$r \assign$ aribtrary vertex of $V$\;
+$\cost[r] \assign 0$\;
+$Q \assign V$\;
+\While{$Q \neq \emptyset$}{
+  $u \assign \extractMin(Q)$\;
+  \For{\rm each $v \in \adj(u)$}{
+    \If{\rm $v \in Q$ and $w(u,v) < \cost[v]$}{
+      $\parent[v] \assign u$\;
+      $\cost[v] \assign w(u,v)$\;
+    }
+  }
+}
+$T \assign \big\{(v, \parent[v]) \mid v \in V - \{r\}\big\}$\;
+\Return $T$\;
