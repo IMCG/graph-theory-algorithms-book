@@ -31,7 +31,7 @@ $\cost[r] \assign 0$\;
 $Q \assign V$\nllabel{alg:prim:init_min_priority_queue}\;
 \While{$Q \neq \emptyset$\nllabel{alg:prim:while_start:build_tree}}{
   $u \assign \extractMin(Q)$\nllabel{alg:prim:extract_min}\;
-  \For{\rm each $v \in \adj(u)$}{
+  \For{\rm each $v \in \adj(u)$\nllabel{alg:prim:neighbors_u}}{
     \If{\rm $v \in Q$ and $w(u,v) < \cost[v]$}{
       $\parent[v] \assign u$\;
       $\cost[v] \assign w(u,v)$\nllabel{alg:prim:while_end:build_tree}\;
