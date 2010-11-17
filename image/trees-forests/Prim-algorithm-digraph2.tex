@@ -9,59 +9,47 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subfigure[]{
+\subfigure[Original undirected graph.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (0) at (0,0) [nodedecorate] {};
-\node (1) at (3,1.5) [nodedecorate] {};
-\node (2) at (6,3) [nodedecorate] {};
-\node (3) at (0,3) [nodedecorate] {};
-\node (4) at (3,4.5) [nodedecorate] {};
-\node (5) at (0,6) [nodedecorate] {};
-\node (6) at (3,7.5) [nodedecorate] {};
-% edges or lines
-\path
-(0) edge[linedecorate] node[below]{$7$} (1)
-(0) edge[linedecorate] node[left]{$5$} (3)
-(1) edge[linedecorate] node[below]{$8$} (2)
-(1) edge[linedecorate] node[below]{$9$} (3)
-(1) edge[linedecorate] node[right]{$7$} (4)
-(2) edge[linedecorate] node[below]{$5$} (4)
-(3) edge[linedecorate] node[below]{$15$} (4)
-(3) edge[linedecorate] node[left]{$6$} (5)
-(4) edge[linedecorate] node[below]{$8$} (5)
-(4) edge[linedecorate] node[right]{$9$} (6)
-(5) edge[linedecorate] node[below]{$11$} (6);
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  0/0/0, 1/3/1.5, 2/6/3, 3/0/3, 4/3/4.5, 5/0/6, 6/3/7.5}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[-,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\weight in {
+  0/1/7, 0/3/5, 1/2/8, 1/3/9, 1/4/7, 2/4/5, 3/4/15, 3/5/6, 4/5/8,
+  4/6/9, 5/6/11}
+{
+  \Edge[label=$\weight$](\startnode)(\endnode)
+}
 \end{tikzpicture}
 }
-\subfigure[]{
+\qquad
+%%
+%%
+\subfigure[Minimum spanning tree.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (6) at (0,0) [nodedecorate] {};
-\node [left] at (6.west) {$6$};
-\node (4) at (2,2) [nodedecorate] {};
-\node [left] at (4.west) {$4$};
-\node (1) at (4,4) [nodedecorate] {};
-\node [left] at (1.west) {$1$};
-\node (2) at (6,2) [nodedecorate] {};
-\node [left] at (2.west) {$2$};
-\node (0) at (4,6) [nodedecorate] {};
-\node [left] at (0.west) {$0$};
-\node (3) at (4,8) [nodedecorate] {};
-\node [left] at (3.west) {$3$};
-\node (5) at (4,10) [nodedecorate] {};
-\node [left] at (5.west) {$5$};
-% edges or lines
-\path
-(6) edge[linedecorate] node[below]{$9$} (4)
-(4) edge[linedecorate] node[below]{$7$} (1)
-(1) edge[linedecorate] node[above]{$8$} (2)
-(1) edge[linedecorate] node[right]{$7$} (0)
-(0) edge[linedecorate] node[right]{$5$} (3)
-(3) edge[linedecorate] node[right]{$6$} (5);
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  0/0/0, 1/3/1.5, 2/6/3, 3/0/3, 4/3/4.5, 5/0/6, 6/3/7.5}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[-,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\weight in {
+  0/1/7, 1/4/7, 3/0/5, 4/2/5, 4/6/9, 5/3/6}
+{
+  \Edge[label=$\weight$](\startnode)(\endnode)
+}
 \end{tikzpicture}
 }
