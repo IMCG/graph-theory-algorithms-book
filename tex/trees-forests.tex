@@ -1049,6 +1049,11 @@ to~\ref{alg:prim:return_MST} construct the edge set of the minimum
 spanning tree and return this edge set. The proof of correctness of
 Algorithm~\ref{alg:trees_forests:prim} is similar to the proof of
 Theorem~\ref{thm:trees_forests:correctness_Kruskal_algorithm}.
+Figure~\ref{fig:tree_forests:Prim_algorithm_digraph} shows the minimum
+spanning tree rooted at vertex $1$ as a result of running Prim's
+algorithm over a digraph;
+Figure~\ref{fig:tree_forests:Prim_algorithm_undirected_graph} shows
+the corresponding tree rooted at vertex $5$ of an undirected graph.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/trees-forests/Prim-algorithm.tex}
@@ -1127,7 +1132,7 @@ sage: prim(G).edges()
 \centering
 \input{image/trees-forests/Prim-algorithm-digraph.tex}
 \caption{Running Prim's algorithm over a digraph.}
-\label{fig:tree-forests:Prim_algorithm_digraph}
+\label{fig:tree_forests:Prim_algorithm_digraph}
 \end{figure}
 
 \begin{lstlisting}
@@ -1145,7 +1150,7 @@ sage: prim(G).edges()
 \centering
 \input{image/trees-forests/Prim-algorithm-digraph2.tex}
 \caption{Running Prim's algorithm over an undirected graph.}
-\label{fig:tree-forests:Prim_algorithm_digraph2}
+\label{fig:tree_forests:Prim_algorithm_undirected_graph}
 \end{figure}
 
 
