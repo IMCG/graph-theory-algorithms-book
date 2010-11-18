@@ -1175,6 +1175,25 @@ Bor\r{u}vka's algorithm runs in time $O(m \cdot \log n)$.
 \label{alg:trees_forests:Boruvka}
 \end{algorithm}
 
+Algorithm~\ref{alg:trees_forests:Boruvka} provides pseudocode of
+Bor\r{u}vka's algorithm. Given a weighted connected graph $G = (V,E)$
+all of whose edge weights are distinct, the initialization steps in
+lines~\ref{alg:Boruvka:get_graph_order}
+and~\ref{alg:Boruvka:spanning_forest} construct a spanning forest $T$
+of $G$, i.e. the subgraph of $G$ containing all of the latter's
+vertices and no edges. The initial forest has $n$ components, each
+being the trivial graph $K_1$. The while loop from
+lines~\ref{alg:Boruvka:while_loop_start}
+to~\ref{alg:Boruvka:while_loop_end} constructs a spanning tree of $G$
+via a recursive procedure similar to
+Theorem~\ref{thm:trees_forests:recursive_construction_trees}. For each
+component $T'$ of $T$, we consider all the out-going edges of $T'$ and
+choose an edge $e'$ that has minimum weight among all such edges. This
+edge is then added to the edge set of $T$. In this way, two distinct
+components, each of which is a tree, are joined together by a
+bridge. At the end of the while loop, our final graph is a minimum
+spanning tree of $G$.
+
 \begin{example}
 In Figure \ref{fig:tree-forests:Boruvkas-algorithm} , we plot the following example.
 {\rm

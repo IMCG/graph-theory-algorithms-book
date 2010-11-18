@@ -23,12 +23,12 @@
 \BlankLine
 %%
 %% algorithm body
-$n \assign |V|$\;
-$T \assign \overline{K}_n$\;
-\While{$|E(T)| < n - 1$}{
+$n \assign |V|$\nllabel{alg:Boruvka:get_graph_order}\;
+$T \assign \overline{K}_n$\nllabel{alg:Boruvka:spanning_forest}\;
+\While{$|E(T)| < n - 1$\nllabel{alg:Boruvka:while_loop_start}}{
   \For{\rm each component $T'$ of $T$}{
     $e' \assign$ edge of minimum weight that leaves $T'$\;
-    $E(T) \assign E(T) \cup e'$\;
+    $E(T) \assign E(T) \cup e'$\nllabel{alg:Boruvka:while_loop_end}\;
   }
 }
 \Return $T$\;
