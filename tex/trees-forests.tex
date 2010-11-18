@@ -1194,24 +1194,22 @@ components, each of which is a tree, are joined together by a
 bridge. At the end of the while loop, our final graph is a minimum
 spanning tree of $G$.
 
-\begin{example}
-In Figure \ref{fig:tree-forests:Boruvkas-algorithm} , we plot the following example.
-{\rm
-\begin{lstlisting}
-sage: A = matrix([[0,1,2,5], [0,0,3,6], [0,0,0,4], [0,0,0,0]])
-sage: G = Graph(A, format="adjacency_matrix", weighted=True)
-sage: boruvka(G)
-\end{lstlisting}
-}
-
 \begin{figure}[!htbp]
 \centering
 \input{image/trees-forests/Boruvkas-algorithm.tex}
-\caption{An example of Borovka's algorithm. On the left is the
-  original graph. On the right is the MST produced by Boruvka's algorithm.}
-\label{fig:tree-forests:Boruvkas-algorithm}
+\caption{Recursive construction of MST via Bor\r{u}vka's algorithm.}
+\label{fig:trees_forests:Boruvka_algorithm}
 \end{figure}
 
+\begin{example}
+\rm
+Figure~\ref{fig:trees_forests:Boruvka_algorithm} illustrates the
+gradual construction of a minimum spanning tree for the undirected
+graph given in
+Figure~\ref{fig:Boruvkas_algorithm:original_undirected_graph}. In this
+case, we require two iterations of the while loop in Bor\r{u}vka's
+algorithm in order to obtain the final minimum spanning tree in
+Figure~\ref{fig:Boruvkas_algorithm:final_minimum_spanning_tree}.\qed
 \end{example}
 
 \begin{lstlisting}

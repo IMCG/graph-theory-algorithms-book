@@ -9,47 +9,94 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subfigure[]{
+\subfigure[Original undirected graph.]{
+\label{fig:Boruvkas_algorithm:original_undirected_graph}
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (0) at (0,0) [nodedecorate] {};
-\node [left] at (0.west) {$0$};
-\node (1) at (4,0) [nodedecorate] {};
-\node [right] at (1.east) {$1$};
-\node (2) at (4,4) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (3) at (0,4) [nodedecorate] {};
-\node [left] at (3.west) {$3$};
-% edges or lines
-\path
-(0) edge[linedecorate] node[below]{$1$} (1)
-(0) edge[linedecorate] node[below left] {$2$} (2)
-(0) edge[linedecorate] node[left]{$5$} (3)
-(1) edge[linedecorate] node[right]{$3$} (2)
-(1) edge[linedecorate] node[above left] {$6$} (3)
-(2) edge[linedecorate] node[above]{$4$} (3);
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  0/0/0, 1/4/0, 2/4/4, 3/0/4, 4/-2/2, 5/6/2, 6/2/6}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[-,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  0/1/bend left=0/1, 0/2/bend left/2, 0/3/bend left=0/5,
+  0/4/bend left=0/9, 1/2/bend left=0/3, 1/3/bend left/6,
+  1/5/bend left=0/11, 2/3/bend left=0/4, 3/4/bend left=0/9.5,
+  3/6/bend left=0/8, 4/6/bend left/7, 5/6/bend right/10}
+{
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
 \end{tikzpicture}
 }
+%%
+%%
 \qquad
-\subfigure[]{
+\subfigure[0-th iteration.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
-% nodes or vertices
-\node (3) at (0,0) [nodedecorate] {};
-\node [right] at (3.east) {$3$};
-\node (2) at (1,2) [nodedecorate] {};
-\node [right] at (2.east) {$2$};
-\node (0) at (2,4) [nodedecorate] {};
-\node [right] at (0.east) {$0$};
-\node (1) at (3,6) [nodedecorate] {};
-\node [right] at (1.east) {$1$};
-% edges or lines
-\path
-(3) edge[linedecorate] node[left]{$4$} (2)
-(2) edge[linedecorate] node[left]{$2$} (0)
-(0) edge[linedecorate] node[left]{$1$} (1);
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  0/0/0, 1/4/0, 2/4/4, 3/0/4, 4/-2/2, 5/6/2, 6/2/6}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+\end{tikzpicture}
+}
+%%
+%%
+\subfigure[1-st iteration.]{
+\begin{tikzpicture}
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  0/0/0, 1/4/0, 2/4/4, 3/0/4, 4/-2/2, 5/6/2, 6/2/6}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[-,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  0/1/bend left=0/1, 0/2/bend left/2, 2/3/bend left=0/4,
+  4/6/bend left/7, 5/6/bend right/10}
+{
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+\end{tikzpicture}
+}
+%%
+%%
+\qquad
+\subfigure[2-nd iteration.]{
+\label{fig:Boruvkas_algorithm:final_minimum_spanning_tree}
+\begin{tikzpicture}
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  0/0/0, 1/4/0, 2/4/4, 3/0/4, 4/-2/2, 5/6/2, 6/2/6}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[-,thick]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  0/1/bend left=0/1, 0/2/bend left/2, 2/3/bend left=0/4,
+  3/6/bend left=0/8, 4/6/bend left/7, 5/6/bend right/10}
+{
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
 \end{tikzpicture}
 }
