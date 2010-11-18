@@ -1169,35 +1169,11 @@ Choquet~\cite{Choquet1938} and Florek~et~al.~\cite{FlorekEtAl1951}. If
 $G$ has order $n = |V|$ and size $m = |E|$, it can be shown that
 Bor\r{u}vka's algorithm runs in time $O(m \cdot \log n)$.
 
-Pseudocode for Bor\r{u}vka's algorithm is:
-
-\begin{itemize}
-\item
-Begin with a connected graph G containing edges of distinct
- weights, and an empty set of edges T
-\item
-While the vertices of G connected by T are disjoint:
-\begin{itemize}
-\item
-Begin with an empty set of edges E
-\item
-         For each component:
-\begin{itemize}
-\item
-        Begin with an empty set of edges S
-\item
-        For each vertex in the component:
- \begin{itemize}
-\item
-Add the cheapest edge from the vertex in
-             the component to another vertex in a disjoint component to S
-\end{itemize}
-        Add the cheapest edge in S to E
-\end{itemize}
-    Add the resulting set of edges E to T.
-\end{itemize}
-The resulting set of edges T is the minimum spanning tree of G.
-\end{itemize}
+\begin{algorithm}[!htbp]
+\input{algorithm/trees-forests/Boruvka.tex}
+\caption{Bor\r{u}vka's algorithm.}
+\label{alg:trees_forests:Boruvka}
+\end{algorithm}
 
 \begin{example}
 In Figure \ref{fig:tree-forests:Boruvkas-algorithm} , we plot the following example.
