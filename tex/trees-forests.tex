@@ -1160,17 +1160,14 @@ sage: prim(G).edges()
 \label{subsec:trees_forests:Boruvka_algorithm}
 
 Bor\r{u}vka's
-algorithm~\cite{Boruvka1926a,Boruvka1926b}. Bor\r{u}vka's algorithm is
-an algorithm for finding a minimum spanning tree in a graph for which
-all edge weights are distinct. It was first published in 1926 by
-Otakar Bor\o uvka but then rediscovered by many others.
-
-Bor\r{u}vka's algorithm can be shown to run in time
-$O(|E|\log |V|)$.
-Bor\r{u}vka's algorithm algorithm is an algorithm
-for finding a minimum spanning tree in a connected graph for
-which all edge weights are distinct.
-\index{Bor\r{u}vka's algorithm}
+algorithm~\cite{Boruvka1926a,Boruvka1926b}\index{Bor\r{u}vka's algorithm}
+is an algorithm for finding a minimum spanning tree in a weighted
+connected graph $G = (V,E)$ for which all edge weights are
+distinct. It was first published in~1926 by Otakar Bor\r{u}vka but
+subsequently rediscovered by many others, including
+Choquet~\cite{Choquet1938} and Florek~et~al.~\cite{FlorekEtAl1951}. If
+$G$ has order $n = |V|$ and size $m = |E|$, it can be shown that
+Bor\r{u}vka's algorithm runs in time $O(m \cdot \log n)$.
 
 Pseudocode for Bor\r{u}vka's algorithm is:
 
