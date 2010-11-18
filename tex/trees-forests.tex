@@ -1192,7 +1192,11 @@ choose an edge $e'$ that has minimum weight among all such edges. This
 edge is then added to the edge set of $T$. In this way, two distinct
 components, each of which is a tree, are joined together by a
 bridge. At the end of the while loop, our final graph is a minimum
-spanning tree of $G$.
+spanning tree of $G$. Note that the forest-merging steps in the for
+loop from lines~\ref{alg:Boruvka:for_loop}
+to~\ref{alg:Boruvka:while_loop_end} are amenable to parallelization,
+hence the alternative name to Bor\r{u}vka's algorithm: the parallel
+forest-merging method.
 
 \begin{figure}[!htbp]
 \centering
