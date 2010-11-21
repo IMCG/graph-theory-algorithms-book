@@ -288,7 +288,8 @@ $\id(v)$\index{$\id$} of a vertex $v \in V(G)$ counts the number of
 edges such that $v$ is the head of those edges. The
 \emph{outdegree}\index{outdegree} $\od(v)$\index{$\od$} of a vertex
 $v \in V(G)$ is the number of edges such that $v$ is the tail of those
-edges.
+edges. The \emph{degree}\index{degree} of a vertex of a digraph is
+the sum of the indegree and the outdegree of that vertex.
 
 Let $G$ be a graph without self-loops and multiple edges. It is
 important to distinguish a graph $G$ as being directed or undirected.
@@ -313,6 +314,21 @@ vertices that contribute to the outdegree of $v$. Then
 \]
 %%
 and $\adj(v) = \iadj(v) \cup \oadj(v)$.
+
+\subsection{Multigraphs}
+
+This subsection introduces a larger class of graphs.
+For simplicity of presentation, in this book we shall 
+assume {\it usually} that a graph is not a multigraph.
+In other words, when you read a property of graphs
+later in the book, it will be assumed (unless stated 
+explicitly otherwise) that the graph is not 
+a multigraph.
+However, as multigraphs and weighted graphs {\it are} very 
+important in many applications, we will try to keep them
+in the back of our mind. When appropriate, we will add as a remark,
+how an interesting property of ``ordinary'' graphs extends to the
+multigraph or weighted graph case.
 
 Another important class of graphs consist of those graphs having
 multiple edges between pairs of vertices. A \emph{multigraph} is a
@@ -402,7 +418,10 @@ illustrates a weighted multigraph.
 %% sage: D.plot(edge_labels=True, graph_border=True).show()
 
 The degree of a weighted multigraph must be defined. There is a
-weighted degree and an unweighted degree. The
+weighted degree and an unweighted degree. 
+
+Let $G$ be a graph as in Definition \ref{def:introduction:graph-version3}.
+The
 \emph{unweighted indegree}\index{indegree!unweighted} of a vertex
 $v \in V$ counts the edges going into $v$:
 \[
@@ -415,20 +434,25 @@ vertex $v \in V$ counts the edges going out of $v$:
 \[
 deg_-(v)
 =
-\sum_{\substack{e \in E \\ v \in i(e)=\{v,w\} \\ h(e)= w}} 1.
+\sum_{\substack{e \in E \\ v \in i(e)=\{v,v'\} \\ h(e)= v'}} 1.
 \]
+The \emph{unweighted degree}\index{unweighted degree} 
+of a vertex of a weighted multigraph is
+the sum of the unweighted indegree and the unweighted outdegree 
+of that vertex. Loops are counted twice.
+
 Similarly, there is the set of
 \emph{in-neighbors}\index{multigraph!in-neighbor}
 \[
 \iadj(v)
 =
-\{w \in V \mid \text{for some } e \in E,\, i(e)=\{v,w\},\, h(e)=v\}
+\{w \in V \mid \text{for some } e \in E,\, i(e)=\{v,v'\},\, h(e)=v\}
 \]
 and the set of \emph{out-neighbors}\index{multigraph!out-neighbor}
 \[
 \oadj(v)
 =
-\{w \in V \mid \text{for some } e \in E,\, i(e)=\{v,w\},\, h(e)=w\}.
+\{w \in V \mid \text{for some } e \in E,\, i(e)=\{v,v'\},\, h(e)=v'\}.
 \]
 Define the \emph{adjacency}\index{multigraph!adjacency} of $v$ to be
 the union of these:
@@ -437,6 +461,30 @@ the union of these:
 =
 \iadj(v) \cup \oadj(v).
 \]
+
+The
+\emph{weighted indegree}\index{indegree!unweighted} of a vertex
+$v \in V$ counts the edges going into $v$:
+\[
+wdeg_+(v)
+=
+\sum_{\substack{e \in E \\ h(e)=v}} w_v.
+\]
+The \emph{weighted outdegree}\index{outdegree!unweighted} of a
+vertex $v \in V$ counts the edges going out of $v$:
+\[
+wdeg_-(v)
+=
+\sum_{\substack{e \in E \\ v \in i(e)=\{v,v'\} \\ h(e)= v'}} w_v.
+\]
+The \emph{weighted degree}\index{weighted degree} 
+of a vertex of a weighted multigraph is
+the sum of the weighted indegree and the weighted outdegree 
+of that vertex. In other words, it is the sum of the weights
+of the edges incident to that vertex,
+regarding the graph as an undirected weighted graph. 
+
+\subsection{Simple graphs}
 
 A \emph{simple graph}\index{graph!simple}\index{simple graph} is a
 graph with no self-loops and no multiple edges.
@@ -476,6 +524,12 @@ $\lfloor (n + 1) / 2 \rfloor$ edges.
 \caption{The family of Shannon multigraphs $\Sh(n)$ for $n = 2,\dots,7$.}
 \label{fig:introduction:Shannon_multigraphs}
 \end{figure}
+
+\vskip .2in
+\noindent
+{\bf Notational Convention}:
+Unless stated otherwise, all graphs are simple graphs in the remainder of this book.
+\vskip .2in
 
 \begin{definition}
 \rm
@@ -2441,7 +2495,12 @@ is connected.
 
 The \emph{Cartesian product} $G \square H$ of graphs $G$ and $H$ is a
 graph such that the vertex set of $G \square H$ is the Cartesian
-product $V(G) \times V(H)$. Any two vertices $(u, u')$ and $(v, v')$
+product 
+
+\[
+V(G \square H) = V(G) \times V(H). 
+\]
+Any two vertices $(u, u')$ and $(v, v')$
 are adjacent in $G \square H$ if and only if either
 %
 \begin{enumerate}
@@ -2449,8 +2508,8 @@ are adjacent in $G \square H$ if and only if either
 
 \item $u' = v'$ and $u$ is adjacent with $v$ in $G$.
 \end{enumerate}
-The vertex set of $G \square H$ is $V(G \square H) = V(G) \times V(H)$
-and the edge set of $G \square H$ is the union
+The vertex set of $G \square H$ is $V(G \square H)$
+and the edge set of $G \square H$ is 
 \[
 E(G \square H)
 =
@@ -2578,6 +2637,10 @@ $G_2$ and $G_2$ is a minor of $G_3$, then $G_1$ is a minor of
 $G_3$. Therefore, the relation``being a minor of'' is a partial
 ordering on the set of graphs.
 \index{graph minor}
+
+For example, in Figure~\ref{fig:introduction:contracting_wheel_graph_W6}
+to~\ref{fig:introduction:wheel_graph_W6_contracted_to_K1}, the
+graph $G_3$ is a minor of the graph $G_1$.
 
 The following non-intuitive fact about graph minors was proven by
 Neil Robertson and Paul Seymour in a series of 20 papers spanning 1983
