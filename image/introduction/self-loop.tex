@@ -10,17 +10,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={-,thick}]
+[arrowDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {c/-2/0/left/west,
-  b/2/0/right/east, a/0/2/above/north}
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  c/-2/0/left/west, b/2/0/right/east, a/0/2/above/north}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+  \node [\direction] at (\nodename.\navigate) {\footnotesize$\nodename$};
 }
 %% edges or lines
 \path
-(a) edge[arrowdecorate,loop below,min distance=10mm,out=310,in=230] node {} (a)
-(b) edge[arrowdecorate] node {} (c);
+(a) edge[arrowDecorate,loop below,min distance=10mm,out=310,in=230] node {} (a)
+(b) edge[arrowDecorate] node {} (c);
 \end{tikzpicture}
