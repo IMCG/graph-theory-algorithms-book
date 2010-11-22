@@ -10,15 +10,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[nodedecorate/.style={shape=rectangle,inner sep=4pt,draw,thick},%
- linedecorate/.style={-,thick}]
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=rectangle,inner sep=4pt,draw,thick}]
 %% nodes or vertices
-\foreach \nodename/\x/\y in {Alice/-2/2, Bob/2/2, Carol/0/0} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {\nodename};
+\foreach \nodename/\x/\y in {Alice/-2/2, Bob/2/2, Carol/0/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize\nodename};
 }
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {Alice/Bob, Alice/Carol, Bob/Carol} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+\foreach \startnode/\endnode in {Alice/Bob, Alice/Carol, Bob/Carol}
+{
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
