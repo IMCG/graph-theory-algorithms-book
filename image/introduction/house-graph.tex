@@ -10,19 +10,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {a/0/5/above/north,
-  b/2/3/right/east, e/-2/3/left/west, c/2/0/right/east,
-  d/-2/0/left/west}
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  a/0/5/above/north, b/2/3/right/east, e/-2/3/left/west,
+  c/2/0/right/east, d/-2/0/left/west}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+  \node [\direction] at (\nodename.\navigate) {\footnotesize$\nodename$};
 }
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {a/b, b/c, b/e, c/d, d/e, e/a} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+\foreach \startnode/\endnode in {a/b, b/c, b/e, c/d, d/e, e/a}
+{
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
