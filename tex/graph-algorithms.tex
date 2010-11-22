@@ -510,14 +510,6 @@ resulting from the BFS\index{BFS} algorithm is called a
 \label{alg:graph_algorithms:breadth_first_search_template}
 \end{algorithm}
 
-\begin{figure}[!htbp]
-\centering
-\index{breadth-first search}\index{BFS}
-\input{image/graph-algorithms/breadth-first-search-undirected.tex}
-\caption{Breadth-first search tree for an undirected graph.}
-\label{fig:graph_algorithms:breadth_first_search_undirected}
-\end{figure}
-
 The breadth-first search\index{breadth-first search} algorithm makes
 use of a special type of list called a \emph{queue}\index{queue}. This
 is analogous to a queue of people waiting in line to be served. A
@@ -537,6 +529,22 @@ first-out~(FIFO)\index{first in, first out}\index{FIFO} protocol for
 adding and removing elements. As with lists\index{list}, the
 \emph{length}\index{queue!length} of a queue is its total number of
 elements.
+
+\begin{figure}[!htbp]
+\centering
+\index{breadth-first search}\index{BFS}
+\input{image/graph-algorithms/breadth-first-search-undirected.tex}
+\caption{Breadth-first search tree for an undirected graph.}
+\label{fig:graph_algorithms:breadth_first_search_undirected}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{breadth-first search}\index{BFS}
+\input{image/graph-algorithms/breadth-first-search-directed.tex}
+\caption{Breadth-first search tree for a digraph.}
+\label{fig:graph_algorithms:breadth_first_search_directed}
+\end{figure}
 
 Note that the BFS\index{BFS}
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
@@ -568,11 +576,12 @@ $G$ with starting vertex $v_i$. Repeat this algorithm as often as
 necessary until all vertices of $G$ are visited. The result may be a
 tree that contains all the vertices of $G$ or a collection of trees,
 each of which contains a subset of $V(G)$.
-Figure~\ref{fig:graph_algorithms:breadth_first_search_undirected}
-presents BFS\index{BFS} trees\index{breadth-first search!tree}
+Figures~\ref{fig:graph_algorithms:breadth_first_search_undirected}
+and~\ref{fig:graph_algorithms:breadth_first_search_directed}
+present BFS\index{BFS} trees\index{breadth-first search!tree}
 resulting from applying
 Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
-an undirected graph and a digraph.
+an undirected graph and a digraph, respectively.
 
 \begin{theorem}
 \label{thm:graph_algorithms:BFS:worst_case_time_complexity}
