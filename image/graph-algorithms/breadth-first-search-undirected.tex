@@ -9,96 +9,154 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subfigure[]{
+\subfigure[Original undirected graph.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
-  1/0/4/above/north, 3/6/3/above/north, 4/6/1/below/south,
-  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south}
+\foreach \nodename/\x/\y in {2/4/4, 1/0/4, 3/6/3, 4/6/1, 5/4/0, 7/-2/2, 6/0/0}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/5, 2/7, 3/4, 3/5,
-  4/6, 5/6, 6/7}
+\foreach \startnode/\endnode in {
+  1/2, 1/5, 2/3, 2/5, 2/7, 3/4, 3/5, 4/6, 5/6, 6/7}
 {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
 %%
 %%
 \qquad
-\subfigure[]{
+\subfigure[First iteration of while loop.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
-  scale=1.6]
+[darkLine/.style={line width=2.5pt},%
+  lightLine/.style={-,ultra thick,color=gray!30},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {4/0/0/below/south,
-  3/0/1/left/west, 7/1/1/below/south, 6/2/1/below/south,
-  2/0.5/2/left/west, 5/2/2/left/west, 1/1.25/3/above/north}
+\foreach \nodename/\x/\y in {2/4/4, 1/0/4, 3/6/3, 4/6/1, 5/4/0, 7/-2/2, 6/0/0}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
-%% edges or lines
+%% light edges or lines
 \path
-\foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/7, 3/4, 5/6} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+\foreach \startnode/\endnode in {2/3, 2/5, 2/7, 3/4, 3/5, 4/6, 5/6, 6/7}
+{
+  (\startnode) edge[lightLine] node {} (\endnode)
+};
+%% dark edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/5}
+{
+  (\startnode) edge[darkLine] node {} (\endnode)
 };
 \end{tikzpicture}
 }
 %%
 %%
-\subfigure[]{
+\subfigure[Second iteration of while loop.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick}]
+[darkLine/.style={line width=2.5pt},%
+  lightLine/.style={-,ultra thick,color=gray!30},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {2/4/4/above/north,
-  1/0/4/above/north, 3/6/3/above/north, 4/6/1/below/south,
-  5/4/0/below/south, 7/-2/2/above/north, 6/0/0/below/south}
+\foreach \nodename/\x/\y in {2/4/4, 1/0/4, 3/6/3, 4/6/1, 5/4/0, 7/-2/2, 6/0/0}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
-%% edges or lines
+%% light edges or lines
 \path
-\foreach \startnode/\endnode in {2/5, 3/2, 3/5, 4/3, 5/1, 6/7, 7/2} {
-  (\startnode) edge[arrowdecorate] node {} (\endnode)
-}
-\foreach \startnode/\endnode/\benddirection/\angle in {
-  1/2/bend left/12, 4/6/bend right/12, 6/5/bend right/12}
+\foreach \startnode/\endnode in {2/5, 3/4, 3/5, 4/6, 5/6, 6/7}
 {
-  (\startnode) edge[arrowdecorate,\benddirection=\angle] node {} (\endnode)
+  (\startnode) edge[lightLine] node {} (\endnode)
+};
+%% dark edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/7}
+{
+  (\startnode) edge[darkLine] node {} (\endnode)
 };
 \end{tikzpicture}
 }
 %%
 %%
 \qquad
-\subfigure[]{
+\subfigure[Third iteration of while loop.]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick},
-  scale=1.6]
+[darkLine/.style={line width=2.5pt},%
+  lightLine/.style={-,ultra thick,color=gray!30},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {2/0/1/below/south,
-  1/1/0/below/south, 5/1/1/left/west, 7/2/1/below/south,
-  6/2/2/left/west, 3/0.5/2/left/west, 4/1.25/3/above/north}
+\foreach \nodename/\x/\y in {2/4/4, 1/0/4, 3/6/3, 4/6/1, 5/4/0, 7/-2/2, 6/0/0}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+}
+%% light edges or lines
+\path
+\foreach \startnode/\endnode in {2/5, 3/4, 3/5, 4/6, 6/7}
+{
+  (\startnode) edge[lightLine] node {} (\endnode)
+};
+%% dark edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/7, 5/6}
+{
+  (\startnode) edge[darkLine] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%%
+\subfigure[Fourth iteration of while loop.]{
+\begin{tikzpicture}
+[darkLine/.style={line width=2.5pt},%
+  lightLine/.style={-,ultra thick,color=gray!30},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {2/4/4, 1/0/4, 3/6/3, 4/6/1, 5/4/0, 7/-2/2, 6/0/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+}
+%% light edges or lines
+\path
+\foreach \startnode/\endnode in {2/5, 3/5, 4/6, 6/7}
+{
+  (\startnode) edge[lightLine] node {} (\endnode)
+};
+%% dark edges or lines
+\path
+\foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/7, 3/4, 5/6}
+{
+  (\startnode) edge[darkLine] node {} (\endnode)
+};
+\end{tikzpicture}
+}
+%%
+%%
+\qquad
+\subfigure[Final BFS tree.]{
+\begin{tikzpicture}
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=1.4]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  4/0/0, 3/0/1, 7/1/1, 6/2/1, 2/0.5/2, 5/2/2, 1/1.25/3}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {4/3, 4/6, 3/2, 3/5, 6/7, 5/1} {
-  (\startnode) edge[arrowdecorate] node {} (\endnode)
+\foreach \startnode/\endnode in {1/2, 1/5, 2/3, 2/7, 3/4, 5/6}
+{
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
