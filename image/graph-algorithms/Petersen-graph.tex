@@ -11,7 +11,7 @@
 
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=1pt,draw,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=1.5]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
@@ -22,7 +22,7 @@
   0/0.0/2.0, 4/1.9021/0.6180, 3/1.1755/-1.6180, 2/-1.1755/-1.6180,
   1/-1.9021/0.6180}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \path
