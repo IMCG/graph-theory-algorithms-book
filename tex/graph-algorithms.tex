@@ -854,8 +854,16 @@ in the stack.
 \centering
 \index{depth-first search}\index{DFS}
 \input{image/graph-algorithms/depth-first-search-undirected.tex}
-\caption{Depth-first search trees for undirected and directed graphs.}
+\caption{Depth-first search tree for an undirected graph.}
 \label{fig:graph_algorithms:depth_first_search_undirected}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{depth-first search}\index{DFS}
+\input{image/graph-algorithms/depth-first-search-directed.tex}
+\caption{Depth-first search tree for a digraph.}
+\label{fig:graph_algorithms:depth_first_search_directed}
 \end{figure}
 
 The depth-first search\index{depth-first search}
@@ -894,14 +902,15 @@ algorithm as often as required in order to traverse all vertices of
 the input graph. The output of DFS\index{DFS} consists of two lists
 $D$ and $T$: $T$ is a tree rooted\index{tree!rooted} at the starting
 vertex $s$; and each $D[i]$ counts the length of the $s$-$v_i$ path in
-$T$. Figure~\ref{fig:graph_algorithms:depth_first_search_undirected}
-shows the DFS\index{DFS} trees\index{depth-first search!tree}
-resulting from running
-Algorithm~\ref{alg:graph_algorithms:depth_first_search_template} on an
-undirected graph and a digraph. The worst-case time complexity of
-DFS\index{DFS} can be analyzed using an argument similar to that in
-Theorem~\ref{thm:graph_algorithms:BFS:worst_case_time_complexity}. Arguing
-along the same lines as in the proof of
+$T$. Figures~\ref{fig:graph_algorithms:depth_first_search_undirected}
+and~\ref{fig:graph_algorithms:depth_first_search_directed} show the
+DFS\index{DFS} trees\index{depth-first search!tree} resulting from
+running Algorithm~\ref{alg:graph_algorithms:depth_first_search_template}
+on an undirected graph and a digraph, respectively. The worst-case
+time complexity of DFS\index{DFS} can be analyzed using an argument
+similar to that in
+Theorem~\ref{thm:graph_algorithms:BFS:worst_case_time_complexity}.
+Arguing along the same lines as in the proof of
 Theorem~\ref{thm:graph_algorithms:BFS:list_D_length_shortest_paths},
 we can also show that the list $D$ returned by DFS\index{DFS} contains
 lengths of any shortest paths from the starting vertex $s$ to any
