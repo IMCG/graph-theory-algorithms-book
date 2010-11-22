@@ -11,15 +11,15 @@
 
 \begin{tikzpicture}
 [nodeDecorate/.style={shape=rectangle,inner sep=4pt,draw,thick},%
- scale=1.2]
+  scale=1.2]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   Stuttgart/0/0, Erfurt/8/0, Nuremberg/2/3, Munich/0/6, Frankfurt/8/6,
   Kassel/4/6, Augsburg/0/9, Mannheim/8/9, Karlsruhe/4/12}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\nodename};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize\nodename};
 }
-\node (Wurzburg) at (6,3) [nodeDecorate] {W\"urzburg};
+\node (Wurzburg) at (6,3) [nodeDecorate] {\footnotesize W\"urzburg};
 %% edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
 \tikzstyle{LabelStyle}=[fill=white]
@@ -31,6 +31,7 @@
   Frankfurt/Mannheim/72, Augsburg/Karlsruhe/197,
   Mannheim/Karlsruhe/54}
 {
+  \footnotesize
   \Edge[label=$\distance$](\startnode)(\endnode)
 }
 \end{tikzpicture}
