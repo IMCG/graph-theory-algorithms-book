@@ -13,74 +13,73 @@
 \subfigure[Simple graph.]{
 \label{fig:introduction:triangle_simple_graph}
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {c/-1.5/0/left/west,
-  b/1.5/0/right/east, a/0/1.5/above/north}
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  c/-1.5/0/left/west, b/1.5/0/right/east, a/0/1.5/above/north}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+  \node [\direction] at (\nodename.\navigate) {\footnotesize$\nodename$};
 }
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {a/b, b/c, c/a} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+\foreach \startnode/\endnode in {a/b, b/c, c/a}
+{
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
 \quad
+%%
 %%
 %% digraph
 \subfigure[Digraph.]{
 \label{fig:introduction:triangle_digraph}
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick}]
+[arrowDecorate/.style={->,>=stealth,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {c/-1.5/0/left/west,
-  b/1.5/0/right/east, a/0/1.5/above/north} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  c/-1.5/0/left/west, b/1.5/0/right/east, a/0/1.5/above/north}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+  \node [\direction] at (\nodename.\navigate) {\footnotesize$\nodename$};
 }
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {a/b, b/c, c/a} {
-  (\startnode) edge[arrowdecorate] node {} (\endnode)
+\foreach \startnode/\endnode in {a/b, b/c, c/a}
+{
+  (\startnode) edge[arrowDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
 \quad
 %%
+%%
 %% multidigraph
 \subfigure[Multidigraph.]{
 \label{fig:introduction:Konigsberg_multidigraph}
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  arrowdecorate/.style={->,>=stealth,thick}]
+[arrowDecorate/.style={->,>=stealth,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
 %% nodes or vertices
-\foreach \nodename/\x/\y in {a/0/0, b/0/2, c/0/4, d/4/2} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  a/0/0/left/west, b/0/2/left/west, c/0/4/left/west, d/4/2/right/east}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+  \node [\direction] at (\nodename.\navigate) {\footnotesize$\nodename$};
 }
-\foreach \nodename/\direction/\navigate in {a/left/west, b/left/west,
-  c/left/west} {
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
-}
-\node [right] at (d.east) {$d$};
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {a/b, b/c} {
-  (\startnode) edge[arrowdecorate,bend left] node {} (\endnode)
-};
-\path
-\foreach \startnode/\endnode in {c/b, b/a} {
-  (\startnode) edge[arrowdecorate,bend left] node {} (\endnode)
-};
+\foreach \startnode/\endnode/\bend in {
+  a/b/bend left, a/d/bend right, b/c/bend left, c/b/bend left,
+  b/a/bend left, c/d/bend left}
+{
+  (\startnode) edge[arrowDecorate,\bend] node {} (\endnode)
+}
 %% multiple directed edges
-\path
-(a) edge[arrowdecorate,bend left=10] node {} (d)
-(c) edge[arrowdecorate,bend left] node {} (d)
-(a) edge[arrowdecorate,bend right] node {} (d)
-(c) edge[arrowdecorate,bend right=10] node {} (d);
+(a) edge[arrowDecorate,bend left=10] node {} (d)
+(c) edge[arrowDecorate,bend right=10] node {} (d);
 \end{tikzpicture}
 }
