@@ -10,32 +10,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[linedecorate/.style={-,thick},%
-  nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   24/0/0, 13/4/0, 15/-1/4, 25/5/4, 35/-1/2, 45/5/2, 14/2/1, 23/2/3,
   12/2/5, 34/2/7}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% node labels
-\node [left] at (24.west) {$\{2,4\}$};
-\node [right] at (13.east) {$\{1,3\}$};
-\node [below] at (14.south) {$\{1,4\}$};
-\node [left] at (35.west) {$\{3,5\}$};
-\node [right] at (45.east) {$\{4,5\}$};
-\node [above] at (23.north) {$\{2,3\}$};
-\node [left] at (15.west) {$\{1,5\}$};
-\node [right] at (25.east) {$\{2,5\}$};
-\node [right] at (12.east) {$\{1,2\}$};
-\node [above] at (34.north) {$\{3,4\}$};
+\node [left] at (24.west) {\footnotesize$\{2,4\}$};
+\node [right] at (13.east) {\footnotesize$\{1,3\}$};
+\node [below] at (14.south) {\footnotesize$\{1,4\}$};
+\node [left] at (35.west) {\footnotesize$\{3,5\}$};
+\node [right] at (45.east) {\footnotesize$\{4,5\}$};
+\node [above] at (23.north) {\footnotesize$\{2,3\}$};
+\node [left] at (15.west) {\footnotesize$\{1,5\}$};
+\node [right] at (25.east) {\footnotesize$\{2,5\}$};
+\node [right] at (12.east) {\footnotesize$\{1,2\}$};
+\node [above] at (34.north) {\footnotesize$\{3,4\}$};
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {
   24/13, 24/15, 24/35, 13/45, 13/25, 35/14, 35/12, 14/23, 14/25,
   45/23, 45/12, 15/23, 15/34, 34/12, 34/25}
 {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
