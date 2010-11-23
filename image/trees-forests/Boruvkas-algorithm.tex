@@ -13,13 +13,13 @@
 \label{fig:Boruvkas_algorithm:original_undirected_graph}
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/4/0, 2/4/4, 3/0/4, 4/-2/2, 5/6/2, 6/2/6}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
@@ -30,6 +30,7 @@
   1/5/bend left=0/11, 2/3/bend left=0/4, 3/4/bend left=0/9.5,
   3/6/bend left=0/8, 4/6/bend left/7, 5/6/bend right/10}
 {
+  \footnotesize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -40,13 +41,13 @@
 \subfigure[0-th iteration.]{
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/4/0, 2/4/4, 3/0/4, 4/-2/2, 5/6/2, 6/2/6}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 \end{tikzpicture}
 }
@@ -55,13 +56,13 @@
 \subfigure[1-st iteration.]{
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/4/0, 2/4/4, 3/0/4, 4/-2/2, 5/6/2, 6/2/6}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
@@ -70,6 +71,7 @@
   0/1/bend left=0/1, 0/2/bend left/2, 2/3/bend left=0/4,
   4/6/bend left/7, 5/6/bend right/10}
 {
+  \footnotesize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -81,13 +83,13 @@
 \label{fig:Boruvkas_algorithm:final_minimum_spanning_tree}
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/4/0, 2/4/4, 3/0/4, 4/-2/2, 5/6/2, 6/2/6}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
@@ -96,6 +98,7 @@
   0/1/bend left=0/1, 0/2/bend left/2, 2/3/bend left=0/4,
   3/6/bend left=0/8, 4/6/bend left/7, 5/6/bend right/10}
 {
+  \footnotesize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
