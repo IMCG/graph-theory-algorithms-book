@@ -10,22 +10,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=1.5]
 %% nodes or vertices
 \foreach \nodename/\x/\y/\direction/\navigate in {
   00/0/0/below/south, 01/2/0/below/south, 10/4/0/below/south,
   11/6/0/below/south, 0/1/1/above/north, 1/5/1/above/north}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+  \node [\direction] at (\nodename.\navigate) {\footnotesize$\nodename$};
 }
-\node (e) at (3,2) [nodedecorate] {};
-\node [above] at (e.north) {$\varepsilon$};
+\node (e) at (3,2) [nodeDecorate] {};
+\node [above] at (e.north) {\footnotesize$\varepsilon$};
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {0/00, 0/01, 1/10, 1/11, e/0, e/1} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+\foreach \startnode/\endnode in {0/00, 0/01, 1/10, 1/11, e/0, e/1}
+{
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
