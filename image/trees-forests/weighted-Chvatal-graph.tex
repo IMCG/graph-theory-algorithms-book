@@ -11,7 +11,7 @@
 
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=1pt,draw,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=3]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
@@ -24,7 +24,7 @@
   %% inner two nodes
   10/0.5/-0.2, 11/-0.5/-0.2}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
@@ -39,6 +39,7 @@
   6/11/bend left=0/11.8, 7/8/bend left=0/22.1, 7/11/bend left=0/27.1,
   8/10/bend left=0/17, 9/10/bend left=0/3.7, 9/11/bend left=0/48}
 {
+  \footnotesize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
