@@ -11,11 +11,11 @@
 
 \begin{tikzpicture}
 [arrowDecorate/.style={->,>=stealth,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=1pt,draw,thick}]
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[->,>=stealth,thick]
@@ -25,6 +25,7 @@
   v_2/v_4/bend left/2, v_3/v_2/bend left/4, v_3/v_4/bend left=0/8,
   v_3/v_5/bend right/2, v_4/v_5/bend left/7, v_5/v_4/bend left/9}
 {
+  \footnotesize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
