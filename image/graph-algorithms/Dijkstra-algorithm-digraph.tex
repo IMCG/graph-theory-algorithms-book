@@ -9,9 +9,12 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subfigure[Original digraph.]{
+\label{fig:Dijkstra_digraph:original_digraph}
 \begin{tikzpicture}
 [arrowDecorate/.style={->,>=stealth,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick}]
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
 {
@@ -29,3 +32,168 @@
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
+}
+%%
+%%
+\qquad
+\subfigure[First iteration of while loop.]{
+\begin{tikzpicture}
+[darkArrow/.style={->,>=stealth,thick},%
+  lightArrow/.style={->,>=stealth,thick,color=gray!30},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+}
+%% light edges or lines
+\tikzstyle{EdgeStyle}=[lightArrow]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  v_2/v_3/bend left/1, v_2/v_4/bend left/2, v_3/v_2/bend left/4,
+  v_3/v_4/bend left=0/8, v_3/v_5/bend right/2, v_4/v_5/bend left/7,
+  v_5/v_4/bend left/9}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+%% dark edges or lines
+\tikzstyle{EdgeStyle}=[darkArrow]
+\foreach \startnode/\endnode/\bend/\weight in {
+  v_1/v_2/bend left/10, v_1/v_3/bend right/3}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+\end{tikzpicture}
+}
+%%
+%%
+\subfigure[Second iteration of while loop.]{
+\begin{tikzpicture}
+[darkArrow/.style={->,>=stealth,thick},%
+  lightArrow/.style={->,>=stealth,thick,color=gray!30},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+}
+%% light edges or lines
+\tikzstyle{EdgeStyle}=[lightArrow]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  v_1/v_2/bend left/10, v_2/v_3/bend left/1, v_2/v_4/bend left/2,
+  v_4/v_5/bend left/7, v_5/v_4/bend left/9}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+%% dark edges or lines
+\tikzstyle{EdgeStyle}=[darkArrow]
+\foreach \startnode/\endnode/\bend/\weight in {
+   v_1/v_3/bend right/3, v_3/v_2/bend left/4, v_3/v_4/bend left=0/8,
+   v_3/v_5/bend right/2}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+\end{tikzpicture}
+}
+%%
+%%
+\qquad
+\subfigure[Third iteration of while loop.]{
+\begin{tikzpicture}
+[darkArrow/.style={->,>=stealth,thick},%
+  lightArrow/.style={->,>=stealth,thick,color=gray!30},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+}
+%% light edges or lines
+\tikzstyle{EdgeStyle}=[lightArrow]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  v_1/v_2/bend left/10, v_2/v_3/bend left/1, v_2/v_4/bend left/2,
+  v_4/v_5/bend left/7, v_5/v_4/bend left/9}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+%% dark edges or lines
+\tikzstyle{EdgeStyle}=[darkArrow]
+\foreach \startnode/\endnode/\bend/\weight in {
+   v_1/v_3/bend right/3, v_3/v_2/bend left/4, v_3/v_4/bend left=0/8,
+   v_3/v_5/bend right/2}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+\end{tikzpicture}
+}
+%%
+%%
+\subfigure[Fourth iteration of while loop.]{
+\begin{tikzpicture}
+[darkArrow/.style={->,>=stealth,thick},%
+  lightArrow/.style={->,>=stealth,thick,color=gray!30},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+}
+%% light edges or lines
+\tikzstyle{EdgeStyle}=[lightArrow]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+  v_1/v_2/bend left/10, v_2/v_3/bend left/1, v_3/v_4/bend left=0/8,
+  v_4/v_5/bend left/7, v_5/v_4/bend left/9}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+%% dark edges or lines
+\tikzstyle{EdgeStyle}=[darkArrow]
+\foreach \startnode/\endnode/\bend/\weight in {
+   v_1/v_3/bend right/3, v_2/v_4/bend left/2, v_3/v_2/bend left/4,
+   v_3/v_5/bend right/2}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+\end{tikzpicture}
+}
+%%
+%%
+\qquad
+\subfigure[Final shortest paths graph.]{
+\label{fig:Dijkstra_digraph:final_shortest_paths_digraph}
+\begin{tikzpicture}
+[darkArrow/.style={->,>=stealth,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.8]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+}
+%% dark edges or lines
+\tikzstyle{EdgeStyle}=[darkArrow]
+\tikzstyle{LabelStyle}=[fill=white]
+\foreach \startnode/\endnode/\bend/\weight in {
+   v_1/v_3/bend right/3, v_2/v_4/bend left/2, v_3/v_2/bend left/4,
+   v_3/v_5/bend right/2}
+{
+  \footnotesize
+  \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
+}
+\end{tikzpicture}
+}

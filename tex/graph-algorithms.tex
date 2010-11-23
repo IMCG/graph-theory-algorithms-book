@@ -1292,14 +1292,18 @@ algorithm returns the lists $D$ and $P$.
 
 \begin{example}
 Apply Dijkstra's algorithm\index{Dijkstra's algorithm} to the graph in
-Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph}, with
-starting vertex $v_1$.
+Figure~\ref{fig:Dijkstra_digraph:original_digraph}, with starting
+vertex $v_1$.
 \end{example}
 
 \begin{proof}[Solution]
 Dijkstra's Algorithm~\ref{alg:graph_algorithms:dijkstra_general}
 applied to the graph in
-Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph} yields
+Figure~\ref{fig:Dijkstra_digraph:original_digraph} yields the sequence
+of intermediary graphs shown in
+Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph},
+culminating in the final shortest paths graph of
+Figure~\ref{fig:Dijkstra_digraph:final_shortest_paths_digraph} and
 Table~\ref{tab:graph_algorithms:working_through_Dijkstra_algorithm}. For
 any column $v_i$ in the table, each 2-tuple represents the
 distance\index{distance} and parent vertex of $v_i$. As we move along
