@@ -1367,6 +1367,37 @@ $h - 1$.
 \label{fig:trees_forests:examples_binary_trees}
 \end{figure}
 
+\begin{theorem}
+\label{thm:trees_forests:complete_binary_tree_exact_order}
+If $T$ is a complete binary tree of height $h$, then $T$ has
+$2^{h+1} - 1$ vertices.
+\end{theorem}
+
+\begin{proof}
+Argue by induction on $h$. The assertion of the theorem is trivially
+true in the base case $h = 0$. Let $k \geq 0$ and assume for induction
+that any complete binary tree of height $k$ has order $2^{k+1} - 1$.
+Suppose $T$ is a complete binary tree of height $k + 1$ and denote the
+left- and right-subtrees of $T$ by $T_1$ and $T_2$, respectively. Each
+$T_i$ (for $i = 1,2$) is a complete binary tree of height $k$ and by
+our induction hypothesis $T_i$ has $2^{k+1} - 1$ vertices. Thus $T$
+has order
+\[
+1 + (2^{k+1} - 1) + (2^{k+1} - 1)
+=
+2^{k+2} - 1
+\]
+as required.
+\end{proof}
+
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}
+provides a useful upper bound on the order of a binary tree of a given
+height. This upper bound is stated in the following corollary.
+
+\begin{corollary}
+A binary tree of height $h$ has at most $2^{h+1} - 1$ vertices.
+\end{corollary}
+
 In this section, we consider
 
 \begin{itemize}
