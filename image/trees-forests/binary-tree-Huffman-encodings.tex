@@ -12,23 +12,21 @@
 \subfigure[]{
 \label{fig:trees_forests:eg:binary_tree_Huffman_encodings:binary_tree}
 \begin{tikzpicture}
-[linedecorate/.style={-,thick},%
+[lineDecorate/.style={-,thick},%
   scale=1.5]
 %% nodes or vertices
-\foreach \nodename/\weight/\x/\y in {b/2/0/0, f/3/1/0, g/5/0.5/1,
-  a/19/1.5/1, h/24/1/2, d/25/2/2, e/31/3/2, c/40/4/2, i/49/1.5/3,
-  j/71/3.5/3, k/120/2.5/4}
+\foreach \nodename/\weight/\x/\y in {
+  b/2/0/0, f/3/1/0, g/5/0.5/1, a/19/1.5/1, h/24/1/2, d/25/2/2,
+  e/31/3/2, c/40/4/2, i/49/1.5/3, j/71/3.5/3, k/120/2.5/4}
 {
-  \node (\nodename) at (\x,\y) [] {$\nodename:\weight$};
+  \node (\nodename) at (\x,\y) [] {\footnotesize$\nodename:\weight$};
 }
-%% \node (e) at (3,2) [nodedecorate] {};
-%% \node [above] at (e.north) {$\varepsilon$};
-%% %% edges or lines
+%% edges or lines
 \path
-\foreach \startnode/\endnode in {g/b, g/f, h/g, h/a, i/h, i/d, j/e,
-  j/c, k/i, k/j}
+\foreach \startnode/\endnode in {
+  g/b, g/f, h/g, h/a, i/h, i/d, j/e, j/c, k/i, k/j}
 {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
@@ -37,23 +35,21 @@
 \subfigure[]{
 \label{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings}
 \begin{tikzpicture}
-[linedecorate/.style={-,thick},%
+[lineDecorate/.style={-,thick},%
   scale=1.5]
 %% nodes or vertices
-\foreach \nodename/\code/\x/\y in {b/0000/0/0, f/0001/1/0, g/000/0.5/1,
-  a/001/1.5/1, h/00/1/2, d/01/2/2, e/10/3/2, c/11/4/2, i/0/1.5/3,
-  j/1/3.5/3, k/$\varepsilon$/2.5/4}
+\foreach \nodename/\code/\x/\y in {
+  b/0000/0/0, f/0001/1/0, g/000/0.5/1, a/001/1.5/1, h/00/1/2,
+  d/01/2/2, e/10/3/2, c/11/4/2, i/0/1.5/3, j/1/3.5/3, k/$\varepsilon$/2.5/4}
 {
-  \node (\nodename) at (\x,\y) [] {$\texttt{\code}$};
+  \node (\nodename) at (\x,\y) [] {\footnotesize$\texttt{\code}$};
 }
-%% \node (e) at (3,2) [nodedecorate] {};
-%% \node [above] at (e.north) {$\varepsilon$};
-%% %% edges or lines
+%% edges or lines
 \path
-\foreach \startnode/\endnode in {g/b, g/f, h/g, h/a, i/h, i/d, j/e,
-  j/c, k/i, k/j}
+\foreach \startnode/\endnode in {
+  g/b, g/f, h/g, h/a, i/h, i/d, j/e, j/c, k/i, k/j}
 {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
