@@ -12,11 +12,11 @@
 \subfigure[Original digraph.]{
 \begin{tikzpicture}
 [arrowDecorate/.style={->,>=stealth,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {0/-4/4, 1/0/8, 2/4/4, 3/0/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[->,>=stealth,thick]
@@ -27,6 +27,7 @@
   2/0/bend left/2, 2/1/bend left=0/1, 2/3/bend left/3,
   3/0/bend left/1, 3/1/bend left/1, 3/2/bend left=0/1}
 {
+  \footnotesize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -36,11 +37,11 @@
 \subfigure[Minimum spanning tree.]{
 \begin{tikzpicture}
 [arrowDecorate/.style={->,>=stealth,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {0/-4/4, 1/0/8, 2/4/4, 3/0/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[->,>=stealth,thick]
@@ -48,6 +49,7 @@
 \foreach \startnode/\endnode/\bend/\weight in {
   0/1/bend left/1, 1/3/bend left/1, 3/2/bend left=0/1}
 {
+  \footnotesize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
