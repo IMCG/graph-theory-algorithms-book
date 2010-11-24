@@ -1508,39 +1508,39 @@ codes, musical scores, chess notation, football diagrams, and so on)
 and have little or no mathematical structure. We shall not study them.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsubsection{Basic definitions}
 
-If every word in the code has the same length, the code is called
-a {\it block code}. If a code is not a block code then it is called
-a {\it variable-length} code.
-\index{code!block}
-\index{code!variable-length}
-A {\it prefix-free} code is a code (typically one of variable-length)
-with the property that there is no valid codeword in the code that
-is a prefix (start) of any other codeword\footnote{In other words,
-a codeword $s=s_1 \dots s_m$ is a {\it prefix} of a codeword
-$t=t_1\dots t_n$ if and only if $m\leq n$ and
-$s_1=t_1$, \dots, $s_m=t_m$. Codes which are prefix-free are easier
-to decode than codes which are not prefix-free.}.
-This is the {\it prefix-free condition}.
-\index{code!prefix-free}
+If every word in the code has the same length, the code is called a
+\emph{block code}\index{code!block}. If a code is not a block code,
+then it is called a \emph{variable-length}\index{code!variable-length}
+code. A \emph{prefix-free}\index{code!prefix-free} code is a
+code~(typically one of variable-length) with the property that there
+is no valid codeword in the code that is a prefix or start of any
+other codeword.\footnote{
+  In other words, a codeword $s = s_1 \cdots s_m$ is a \emph{prefix} of
+  a codeword $t = t_1 \cdots t_n$ if and only if $m \leq n$ and
+  $s_1 = t_1, \dots, s_m = t_m$. Codes that are prefix-free are easier
+  to decode than codes that are not prefix-free.
+}
+This is the \emph{prefix-free condition}.
 
-One example of a prefix-free code is the ASCII code.
-Another example is
-
+One example of a prefix-free code is the ASCII code. Another example
+is
 \[
-00, 01, 100.
+00,\, 01,\, 100.
 \]
 On the other hand, a non-example is the code
-
 \[
-00, 01, 010, 100
+00,\, 01,\, 010,\, 100
 \]
-since the second codeword is a prefix of the third one.
-Another non-example is Morse code recalled in
-Table~\ref{tab:trees_forests:Morse_code} (we use $0$ for
-$\cdot$ (``dit'') and $1$ for $-$ (``dah'')).
-\index{code!Morse}
+since the second codeword is a prefix of the third one. Another
+non-example is Morse\index{code!Morse} code recalled in
+Table~\ref{tab:trees_forests:Morse_code}, where we use $0$ for
+``$\cdot$'' (``dit'') and $1$ for ``$-$'' (``dah''). For example,
+consider the Morse code for \texttt{a} and the Morse code for
+\texttt{w}. These codewords violate the prefix-free condition.
 
 \begin{table}[!htbp]
 \centering
@@ -1549,8 +1549,6 @@ $\cdot$ (``dit'') and $1$ for $-$ (``dah'')).
 \label{tab:trees_forests:Morse_code}
 \end{table}
 
-For example, look at the Morse code for {\tt a} and the Morse code for
-{\tt w}. These codewords violate the prefix-free condition.
 
 \subsubsection{Gray codes}
 
