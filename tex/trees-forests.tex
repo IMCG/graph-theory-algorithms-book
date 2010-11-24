@@ -1550,83 +1550,74 @@ consider the Morse code for \texttt{a} and the Morse code for
 \end{table}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsubsection{Gray codes}
 
-History\footnote{This
-history comes from an unpublished section 7.2.1.1
-(``Generating all $n$-tuples'')
-in volume 4 of Donald Knuth's {\bf The Art of Computer Programming}.
+We begin with some history.\footnote{
+  This history comes from an unpublished section~7.2.1.1
+  (``Generating all $n$-tuples'') in volume~4 of Donald Knuth's
+  \emph{The Art of Computer Programming}.
 }
-: Frank Gray (1887-1969) wrote about the so-called Gray codes in a
-1951 paper published in the Bell System Technical Journal,
-and then patented a device (used for television sets)
-based on it in 1953. However, the idea of a binary Gray code
-appeared earlier. In fact, it appeared in an earlier patent
-(one by Stibitz in 1943). It was also used in E. Baudot's
-(a French engineer) telegraph machine of 1878 and in
-a French booklet by L. Gros on the solution to the
-``Chinese ring puzzle'' published in 1872.
+Frank Gray~(1887--1969) wrote about the so-called Gray codes in a~1951
+paper published in the Bell System Technical Journal and then in~1953
+patented a device~(used for television sets) based on his
+paper. However, the idea of a binary Gray code appeared earlier. In
+fact, it appeared in an earlier patent~(one by Stibitz in~1943). It
+was also used in the French engineer E.~Baudot's telegraph machine
+of~1878 and in a French booklet by L.~Gros on the solution published
+in~1872 to the ``Chinese ring puzzle''.
 
-The term ``Gray code'' is ambiguous. It is actually a
-large family of sequences of $n$-tuples. Let
-$\Z_m=\{0,1,\dots,m-1\}$. More precisely, an
-{\it $m$-ary Gray code of length $n$} (called a {\it binary
-Gray code} when $m=2$) is a sequence of
-all possible (namely, $N=m^n$) $n$-tuples
-\index{Gray code!binary}
-\index{Gray code!$m$-ary}
-
+The term ``Gray code'' is ambiguous. It is actually a large family of
+sequences of $n$-tuples. Let $\Z_m = \{0, 1, \dots, m-1\}$. More
+precisely, an
+\emph{$m$-ary Gray code of length $n$}\index{Gray code!$m$-ary}~(called
+a \emph{binary Gray code}\index{Gray code!binary} when $m = 2$) is a
+sequence of all possible~(i.e. $N = m^n$) $n$-tuples
 \[
-g_1,g_2,\dots, g_N,
+g_1, g_2, \dots, g_N
 \]
 where
+%%
 \begin{itemize}
-\item
-each $g_i\in \Z_m^n$,
-\item
-$g_i$ and $g_{i+1}$ differ by $1$ in exactly one
-coordinate.
+\item each $g_i \in \Z_m^n$,
+
+\item $g_i$ and $g_{i+1}$ differ by $1$ in exactly one coordinate.
 \end{itemize}
-In other words, an $m$-ary Gray code of length
-$n$ is a particular way to order the set of all
-$m^n$ $n$-tuples whose coordinates are taken from
-$\Z_m$. From the transmission/communication
-perspective, this sequence has two advantages:
-
+%%
+In other words, an $m$-ary Gray code of length $n$ is a particular way
+to order the set of all $m^n$ $n$-tuples whose coordinates are taken
+from $\Z_m$. From the transmission/communication perspective, this
+sequence has two advantages:
+%%
 \begin{itemize}
-\item
-It is easy and fast to produce the sequence, since
-successive entries differ in only one coordinate.
+\item It is easy and fast to produce the sequence, since successive
+  entries differ in only one coordinate.
 
-\item
-An error is relatively easy to detect, since you can
-compare an $n$-tuple with the previous one. If they
-differ in more than one coordinate, you know an error
-was made.
-
+\item An error is relatively easy to detect, since we can compare an
+  $n$-tuple with the previous one. If they differ in more than one
+  coordinate, we conclude that an error was made.
 \end{itemize}
 
 \begin{example}
-{\rm
+\rm
 Here is a $3$-ary Gray code of length $2$:
-
 \[
-[0, 0], [1, 0], [2, 0], [2, 1], [1, 1], [0, 1], [0, 2], [1, 2], [2, 2]
+[0,0],\; [1,0],\; [2,0],\; [2,1],\; [1,1],\; [0,1],\; [0,2],\;
+[1,2],\; [2,2]
 \]
 and here is a binary Gray code of length $3$:
-
 \[
-[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0], [0, 1, 1], [1, 1, 1], [1, 0, 1], [0, 0, 1].
+[0,0,0],\; [1,0,0],\; [1,1,0],\; [0,1,0],\; [0,1,1],\;
+[1,1,1],\; [1,0,1],\; [0,0,1].
 \]
-}
 \end{example}
 
-Gray codes have applications to engineering,
-recreational mathematics (solving the Tower of Hanoi
-puzzle, ``The Brain'' puzzle, the ``Chinese ring puzzle'',
-and others), and to mathematics (for example, aspects of
-combinatorics, computational group theory
-and the computational aspects of linear codes).
+Gray codes have applications to engineering, recreational
+mathematics~(solving the Tower of Hanoi puzzle, ``The Brain'' puzzle,
+the ``Chinese ring puzzle'', etc.), and to mathematics~(e.g. aspects
+of combinatorics, computational group theory, and the computational
+aspects of linear codes).
 
 \subsubsection{Binary Gray codes}
 
