@@ -1398,6 +1398,35 @@ height. This upper bound is stated in the following corollary.
 A binary tree of height $h$ has at most $2^{h+1} - 1$ vertices.
 \end{corollary}
 
+We now count the number of possible binary trees on $n$
+vertices. Let $b_n$ be the number of binary trees of order $n$. For
+$n = 0$, we set $b_0 = 1$. The trivial graph is the only binary tree
+with one vertex, hence $b_1 = 1$. Suppose $n > 1$ and let $T$ be a
+binary tree on $n$ vertices. Then the left subtree of $T$ has order
+$0 \leq i \leq n - 1$ and the right subtree has $n - 1 - i$
+vertices. As there are $b_i$ possible left subtrees and $b_{n-1-i}$
+possible right subtrees, $T$ has a total of $b_i b_{n-1-i}$ different
+combinations of left and right subtrees. Summing from $i = 0$ to
+$i = n - 1$ and we have
+%%
+\begin{equation}
+\label{eqn:trees_forests:Catalan_recursion}
+b_n
+=
+\sum_{i=0}^{n-1} b_i b_{n-1-i}.
+\end{equation}
+%%
+Expression~\eqref{eqn:trees_forests:Catalan_recursion} is known as the
+\emph{Catalan recursion} and the number $b_n$ is the $n$-th Catalan
+number, which we know from
+problem~\ref{chap:introduction}.\ref{prob:introduction:Euler_polygon_division}
+can be expressed in the closed form
+\[
+b_n
+=
+\frac{1}{n+1} \binom{2n}{n}.
+\]
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
