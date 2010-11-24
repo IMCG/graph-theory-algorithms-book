@@ -1457,64 +1457,55 @@ different binary trees on $2$, $3$, and $4$ vertices, respectively.
 \subsection{Binary codes}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsubsection{What is a code?}
 
-A {\it code} is a rule for converting data in one
-\index{code}
-\index{codeword}
-\index{alphabet}
-format, or well-defined tangible representation,
-into sequences of symbols in another format (and the finite set of symbols
-used is called the {\it alphabet}). We shall identify a code
-as a finite set of symbols which are the image
-of the alphabet under this conversion rule. The elements of this set
-are referred to as {\it codewords}. For example, using the ASCII code,
-the letters in the English alphabet get converted into numbers
-$\{0, 1, \dots, 255\}$. If these numbers are written in binary
-then each codeword of a letter has length 8. In this way, we can
-reformat, or encode, a ``string'' into a sequence of binary symbols (i.e.,
-$0$'s and $1$'s).
-{\it Encoding} is the conversion process one way.
-{\it Decoding} is the reverse
-\index{encode}
-\index{decode}
-process, converting these sequences of code-symbols back into information
-in the original format.
+A \emph{code}\index{code} is a rule for converting data in one format,
+or well-defined tangible representation, into sequences of symbols in
+another format. The finite set of symbols used is called the
+\emph{alphabet}\index{alphabet}. We shall identify a code as a finite
+set of symbols which are the image of the alphabet under this
+conversion rule. The elements of this set are referred to as
+\emph{codewords}\index{codeword}. For example, using the ASCII code,
+the letters in the English alphabet get converted into numbers in the
+set $\{0, 1, \dots, 255\}$. If these numbers are written in binary,
+then each codeword of a letter has length $8$, i.e. eight bits. In
+this way, we can reformat or encode a ``string'' into a sequence of
+binary symbols, i.e. $0$'s and $1$'s. \emph{Encoding}\index{encode} is
+the conversion process one way. \emph{Decoding}\index{decode} is the
+reverse process, converting these sequences of code-symbols back into
+information in the original format.
 
-
-Codes are used for
-
+Codes are used for:
+%%
 \begin{itemize}
-\item
-{\it Economy}. Sometimes this is called ``entropy encoding''
-since there is an entropy function which describes how much information
-a channel (with a given error rate) can carry and such
-codes are designed to maximize entropy as best as possible.
-In this case, in addition to simply being given an alphabet $A$, one
-might be given a ``weighted alphabet,'' i.e., an alphabet for which each
-symbol $a\in A$ is associated with a non-negative number
-$w_a\geq 0$ (in practice, the probability that the
-symbol $a$ occurs in a typical word).
+\item \emph{Economy}. Sometimes this is called \emph{entropy encoding}
+  since there is an entropy function which describes how much
+  information a channel (with a given error rate) can carry and such
+  codes are designed to maximize entropy as best as possible. In this
+  case, in addition to simply being given an alphabet $\mathcal{A}$,
+  one might be given a \emph{weighted alphabet}, i.e. an alphabet for
+  which each symbol $a \in \mathcal{A}$ is associated with a
+  nonnegative number $w_a \geq 0$~(in practice, the probability that
+  the symbol $a$ occurs in a typical word).
 
-\item
-{\it Reliability}. Such codes are called ``error-correcting codes,''
-since such codes are designed to communicate information
-over a noisy channel in such a way that the errors in transmission are
-likely to be correctable.
+\item \emph{Reliability}. Such codes are called
+  \emph{error-correcting codes}, since such codes are designed to
+  communicate information over a noisy channel in such a way that the
+  errors in transmission are likely to be correctable.
 
-\item
-{\it Security}. Such codes are called ``cryptosystems.''
-In this case, the inverse of the coding function $c:A\to B^*$ is designed to be
-computationally infeasible. In other words, the coding function
-$c$ is designed to be a ``trapdoor function.''
-
+\item \emph{Security}. Such codes are called \emph{cryptosystems}. In
+  this case, the inverse of the coding function
+  $c: \mathcal{A} \to B^*$ is designed to be computationally
+  infeasible. In other words, the coding function $c$ is designed to
+  be a \emph{trapdoor function}.
 \end{itemize}
-
-Other codes are merely simpler ways to communicate information
-(flag semaphores, color codes, genetic codes, braille codes, musical scores, chess
-notation, football diagrams, and so on), and have little or no
-mathematical structure. We shall not study them.
-
+%%
+Other codes are merely simpler ways to communicate
+information~(e.g.~flag semaphores, color codes, genetic codes, braille
+codes, musical scores, chess notation, football diagrams, and so on)
+and have little or no mathematical structure. We shall not study them.
 
 
 \subsubsection{Basic definitions}
