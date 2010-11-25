@@ -2117,8 +2117,25 @@ Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings
 
 \section{Tree traversals}
 
-See section~3.5 of Gross and Yellen~\cite{GrossYellen1999}.
-See also \url{http://en.wikipedia.org/wiki/Tree_traversal}.
+In computer science, \emph{tree traversal}\index{tree traversal}
+refers to the process of examining each vertex in a tree data
+structure. Starting at the root of an ordered tree $T$, we can
+traverse the vertices of $T$ in one of various ways.
+
+A \emph{level-order} traversal of an ordered tree $T$ examines the
+vertices in increasing order of depth, with vertices of equal depth
+being examined according to their prescribed order. One way to think
+about level-order traversal is to consider vertices of $T$ having the
+same depth as being ordered from left to right in decreasing order of
+importance. If $[v_1, v_2, \dots, v_n]$ lists the vertices from left
+to right at depth $k$, a decreasing order of importance can be
+realized by assigning each vertex a numeric label using a labelling
+function $L: V(T) \to \R$ such that
+$L(v_1) < L(v_2) < \cdots < L(v_n)$. In this way, a vertex with a
+lower numeric label is examined prior to a vertex with a higher
+numeric label. A level-order traversal of $T$, whose vertices of equal
+depth are prioritized according to $L$, is an examination of the
+vertices of $T$ from top to bottom, left to right.
 
 \begin{itemize}
 \item stacks and queues
@@ -2131,15 +2148,6 @@ See also \url{http://en.wikipedia.org/wiki/Tree_traversal}.
 
 \item symmetric, or in-order, traversal
 \end{itemize}
-
-In computer science, {\it tree traversal} refers to the process of
-examining each node in a tree data structure exactly once.
-\index{tree traversal}
-We restrict our discussion to binary rooted trees.
-
-Starting at the root of a binary tree, there are three main steps that
-can be performed and the order in which they are performed defines the
-traversal type.
 
 \noindent
 {\it Depth-first traversal}:
