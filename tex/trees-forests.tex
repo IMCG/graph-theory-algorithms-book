@@ -1484,11 +1484,11 @@ Codes are used for:
   since there is an entropy function which describes how much
   information a channel (with a given error rate) can carry and such
   codes are designed to maximize entropy as best as possible. In this
-  case, in addition to simply being given an alphabet $\mathcal{A}$,
-  one might be given a \emph{weighted alphabet}, i.e. an alphabet for
-  which each symbol $a \in \mathcal{A}$ is associated with a
-  nonnegative number $w_a \geq 0$~(in practice, the probability that
-  the symbol $a$ occurs in a typical word).
+  case, in addition to simply being given an alphabet $\cA$, one might
+  be given a \emph{weighted alphabet}, i.e. an alphabet for which each
+  symbol $a \in \cA$ is associated with a nonnegative number
+  $w_a \geq 0$~(in practice, the probability that the symbol $a$
+  occurs in a typical word).
 
 \item \emph{Reliability}. Such codes are called
   \emph{error-correcting codes}, since such codes are designed to
@@ -1496,10 +1496,9 @@ Codes are used for:
   errors in transmission are likely to be correctable.
 
 \item \emph{Security}. Such codes are called \emph{cryptosystems}. In
-  this case, the inverse of the coding function
-  $c: \mathcal{A} \to B^*$ is designed to be computationally
-  infeasible. In other words, the coding function $c$ is designed to
-  be a \emph{trapdoor function}.
+  this case, the inverse of the coding function $c: \cA \to B^*$ is
+  designed to be computationally infeasible. In other words, the
+  coding function $c$ is designed to be a \emph{trapdoor function}.
 \end{itemize}
 %%
 Other codes are merely simpler ways to communicate
@@ -1803,20 +1802,21 @@ def graycodeword(m, n):
 \section{Huffman codes}
 \label{sec:trees_forests:Huffman_codes}
 
-An \emph{alphabet}\index{alphabet} $A$ is a finite set whose elements
-are referred to as \emph{symbols}. A \emph{word}\index{word} (or
-\emph{string}\index{string} or \emph{message}\index{message}) over $A$
-is a finite sequence of symbols in $A$ and the \emph{length} of the
-word is the number of symbols it contains. A word is usually written
-by concatenating symbols together: $a_1 a_2 \cdots a_k$ ($a_i \in A$)
-is a word of length $k$.
+An \emph{alphabet}\index{alphabet} $\cA$ is a finite set whose
+elements are referred to as \emph{symbols}. A
+\emph{word}\index{word}~(or \emph{string}\index{string} or
+\emph{message}\index{message}) over $\cA$ is a finite sequence of
+symbols in $\cA$ and the \emph{length} of the word is the number of
+symbols it contains. A word is usually written by concatenating
+symbols together, e.g. $a_1 a_2 \cdots a_k$ ($a_i \in \cA$) is a word
+of length $k$.
 
 A commonly occurring alphabet in practice is the \emph{binary alphabet}
-$\{0,1\}$. A word over the binary alphabet is a finite sequence of
-$0$'s and $1$'s. If $A$ is an alphabet, let $A^*$ denote the set of
-all words in $A$. The length of a word is denoted by vertical
-bars. That is, if $w = a_1 \cdots a_k$ is a word over $A$, then define
-$|w|: A^* \to \Z$ by
+$\B = \{0, 1\}$. A word over the binary alphabet is a finite sequence
+of $0$'s and $1$'s. If $\cA$ is an alphabet, let $\cA^*$ denote the
+set of all words in $\cA$. The length of a word is denoted by vertical
+bars. That is, if $w = a_1 \cdots a_k$ is a word over $\cA$, then
+define $|w|: \cA^* \to \Z$ by
 \[
 |w|
 =
@@ -1824,18 +1824,18 @@ $|w|: A^* \to \Z$ by
 =
 k.
 \]
-Let $A$ and $B$ be two alphabets. A \emph{code}\index{code} for $A$
-using $B$ is an injection $c: A \to B^*$. By abuse of
+Let $\cA$ and $\cB$ be two alphabets. A \emph{code}\index{code} for
+$\cA$ using $\cB$ is an injection $c: \cA \to \cB^*$. By abuse of
 notation, we often denote the code simply by the set
 \[
 C
 =
 c(A)
 =
-\{c(a) \;|\; a \in A\}.
+\{c(a) \mid a \in \cA\}.
 \]
 The elements of $C$ are called \emph{codewords}\index{codeword}. If
-$B$ is the binary alphabet, then $C$ is called a
+$\cB$ is the binary alphabet, then $C$ is called a
 \emph{binary code}\index{code!binary}.
 
 
