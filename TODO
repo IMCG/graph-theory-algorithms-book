@@ -6,5 +6,9 @@ This is a list of possible enhancements to the book.
 * Balanced trees: 2-3-4 trees, red-black trees, B-trees
 
 * Priority queues: heaps, binary heaps, Fibonacci heaps
-  * Discuss heaps and how these relate to realizing efficient
-    implementations of Dijkstra's algorithm.
+  Discuss heaps and how these relate to realizing efficient
+  implementations of Dijkstra's algorithm.
+
+* Binary tree search
+
+* Fibonaccian search, might require discussion of Fibonacci trees
