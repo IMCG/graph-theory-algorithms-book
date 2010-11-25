@@ -1904,16 +1904,15 @@ codewords are determined by the following rules:
 
 \subsection{Uniquely decodable codes}
 
-If $c: A \to B^*$ is a code, then we can extend $c$ to
-$A^*$ by \emph{concatenation}:
+If $c: \cA \to \cB^*$ is a code, then we can extend $c$ to $\cA^*$ by
+concatenation:
 \[
 c(a_1 a_2 \cdots a_k)
 =
 c(a_1) c(a_2) \cdots c(a_k).
 \]
-If the extension $c: A^* \to T^*$ is also an injection,
-then $c$ is called \emph{uniquely decodable}.
-\index{code!uniquely decodable}
+If the extension $c: \cA^* \to \cT^*$ is also an injection, then $c$
+is called \emph{uniquely decodable}\index{code!uniquely decodable}.
 
 \begin{example}
 Is the Morse code\index{code!Morse} in
@@ -1927,8 +1926,8 @@ $4$. Other commonly occurring symbols used~(the digits $0$ through
 $9$, punctuation symbols, and some others) are also encodable in Morse
 code, but they use longer codewords.
 
-Let $A$ denote the English alphabet, $B = \{0, 1\}$ the binary
-alphabet, and $C: A \to B^*$ the Morse code. Since
+Let $\cA$ denote the English alphabet, $\B = \{0, 1\}$ the binary
+alphabet, and $c: \cA \to \B^*$ the Morse code. Since
 $c(ET) = 01 = c(A)$, it is clear that the Morse code is \emph{not}
 uniquely decodable.
 \end{proof}
@@ -1936,8 +1935,8 @@ uniquely decodable.
 In fact, prefix-free implies uniquely decodable.
 
 \begin{theorem}
-If a code $c: A \to B^*$ is prefix-free, then it is
-uniquely decodable.
+If a code $c: \cA \to \cB^*$ is prefix-free, then it is uniquely
+decodable.
 \end{theorem}
 
 \begin{proof}
@@ -1947,13 +1946,12 @@ $c(x_1) \cdots c(x_k) = c(y_1) \cdots c(y_\ell)$, then
 $x_1 \cdots x_k = y_1 \cdots y_\ell$. This in turn implies $k = \ell$
 and $x_i = y_i$ for all $i$.
 
-The case of length $1$ follows from the fact that
-$c: A \to B^*$ is injective~(by the definition of a
-code).
+The case of length $1$ follows from the fact that $c: \cA \to \cB^*$
+is injective~(by the definition of code).
 
-Suppose that the statement of the theorem holds for all
-codes of length $< m$. We must show that the length $m$ case is
-true. Suppose $c(x_1) \cdots c(x_k) = c(y_1) \cdots c(y_\ell)$, where
+Suppose that the statement of the theorem holds for all codes of
+length $< m$. We must show that the length $m$ case is true. Suppose
+$c(x_1) \cdots c(x_k) = c(y_1) \cdots c(y_\ell)$, where
 $m = \max(k, \ell)$. These strings are equal, so the substring
 $c(x_1)$ of the left-hand side and the substring $c(y_1)$ of the
 right-hand side are either equal or one is contained in the other. If,
@@ -1966,47 +1964,44 @@ hypothesis, $x_2 \cdots x_k = y_2 \cdots y_\ell$. These facts together
 imply $k = \ell$ and $x_i = y_i$ for all $i$.
 \end{proof}
 
-Consider now a weighted alphabet $(A,p)$, where
-$p: A \to [0,1]$ satisfies $\sum_{a \in A}p(a) = 1$, and a
-code $c: A \to B^*$. In other words, $p$ is a probability
-distribution on $A$. Think of $p(a)$ as the probability that the
-symbol $a$ arises in an typical message. The
-\emph{average word length} $L(c)$ is\footnote{
-  In probability terminology, this is the expected value $E(X)$ of the
-  random variable $X$ which assigns to a randomly selected symbol in
-  $A$, the length of the associated codeword in $C$.
+Consider now a weighted alphabet $(\cA, p)$, where $p: \cA \to [0,1]$
+satisfies $\sum_{a \in \cA} p(a) = 1$, and a code $c: \cA \to \cB^*$.
+In other words, $p$ is a probability distribution on $\cA$. Think of
+$p(a)$ as the probability that the symbol $a$ arises in a typical
+message. The \emph{average word length} $L(c)$ is\footnote{
+  In probability terminology, this is the expected value $\E(X)$ of
+  the random variable $X$, which assigns to a randomly selected symbol
+  in $\cA$ the length of the associated codeword in $c$.
 }
 \[
 L(c)
 =
-\sum_{a \in A} p(a) \cdot |c(a)|
+\sum_{a \in \cA} p(a) \cdot |c(a)|
 \]
-where $|\cdot|$ denotes the \emph{length} of a codeword.
-\index{length of codeword}
-Given a weighted alphabet $(A,p)$ as above, a code
-$c: A \to B^*$ is called \emph{optimal} if there is no
-such code with a smaller average word length.
-\index{code!optimal}
-Optimal codes satisfy the following amazing property. For a proof,
-which is very easy and highly recommended for anyone who is curious to
+where $|\cdot|$ is the length\index{codeword!length} of a codeword.
+Given a weighted alphabet $(\cA, p)$ as above, a code
+$c: \cA \to \cB^*$ is called \emph{optimal}\index{code!optimal} if
+there is no such code with a smaller average word length. Optimal
+codes satisfy the following amazing property. For a proof, which is
+very easy and highly recommended for anyone who is curious to
 see more, refer to section~3.6 of Biggs~\cite{Biggs2009}.
 
 \begin{lemma}
 \label{lem:trees_forests:binary_optimal_prefix_free_code}
-Suppose $c: A \to B^*$ is a binary optimal prefix-free
-code and let $\ell = \max_{a \in A} \big(|c(a)|\big)$ denote the
-maximum length of a codeword. The following statements hold.
-%
+Suppose $c: \cA \to \B^*$ is a binary optimal prefix-free code and let
+$\ell = \max_{a \in \cA} \big(|c(a)|\big)$ denote the maximum length
+of a codeword. The following statements hold.
+%%
 \begin{enumerate}
-\item If $|c(a')|>|c(a)|$, then $p(a')\leq p(a)$.
+\item If $|c(a')| > |c(a)|$, then $p(a') \leq p(a)$.
 
-\item The subset of codewords of length $\ell$,
+\item The subset of codewords of length $\ell$, i.e.
 \[
 C_\ell
 =
-\{c \in c(A) \;|\; \ell = |c(a)|\},
+\{c \in c(\cA) \mid \ell = |c(a)|\}
 \]
-contains two codewords of the form $b0$ and $b1$ for some $b \in B^*$.
+contains two codewords of the form $b0$ and $b1$ for some $b \in \B^*$.
 \end{enumerate}
 \end{lemma}
 
