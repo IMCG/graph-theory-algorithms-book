@@ -2018,36 +2018,36 @@ code.
 
 Here is the recursive/inductive construction of a Huffman code. We
 shall regard the binary Huffman code as a tree, as described
-above. Suppose that the weighted alphabet $(A,p)$ has $n$ symbols. We
-assume inductively that there is an optimal prefix-free binary code
-for any weighted alphabet $(A',p')$ having $<n$ symbols.
+above. Suppose that the weighted alphabet $(\cA, p)$ has $n$
+symbols. We assume inductively that there is an optimal prefix-free
+binary code for any weighted alphabet $(\cA', p')$ having $<n$ symbols.
 
 \begin{description}
-\item[Huffman's rule 1] Let $a,a' \in A$ be symbols with the smallest
-  weights. Construct a new weighted alphabet with $a,a'$ replaced by
-  the single symbol $a^* = aa'$ and having weight
+\item[Huffman's rule 1] Let $a,a' \in \cA$ be symbols with the
+  smallest weights. Construct a new weighted alphabet with $a,a'$
+  replaced by the single symbol $a^* = aa'$ and having weight
   $p(a^*) = p(a) + p(a')$. All other symbols and weights remain
   unchanged.
 
-\item[Huffman's rule 2] For the code $(A',p')$ above, if $a^*$ is
+\item[Huffman's rule 2] For the code $(\cA', p')$ above, if $a^*$ is
   encoded as the binary string $s$, then the encoded binary string for
   $a$ is $s0$ and the encoded binary string for $a'$ is $s1$.
 \end{description}
 
 The above two rules tell us how to inductively build the tree
-representation for the Huffman code of $(A,p)$ up from its
+representation for the Huffman code of $(\cA, p)$ up from its
 leaves~(associated to the low weight symbols).
-%
+%%
 \begin{itemize}
 \item Find two different symbols of lowest weight, $a$ and $a'$. If
   two such symbols do not exist, stop. Replace the weighted alphabet
-  with the new weighted alphabet as in Huffman's rule 1.
+  with the new weighted alphabet as in Huffman's rule~1.
 
 \item Add two nodes~(labeled with $a$ and $a'$, respectively) to the
-  tree, with parent $a^*$ (see Huffman's rule 1).
+  tree, with parent $a^*$ (see Huffman's rule~1).
 
-\item If there are no remaining symbols in $A$, label the parent $a^*$
-  with the empty set and stop. Otherwise, go to the first step.
+\item If there are no remaining symbols in $\cA$, label the parent
+  $a^*$ with the empty set and stop. Otherwise, go to the first step.
 \end{itemize}
 
 These ideas are captured in
@@ -2118,21 +2118,21 @@ $O(|V|)$, where $V$ is the vertex set of $T$.
 \end{algorithm}
 
 \begin{example}
-Consider the alphabet $A = \{a, b, c, d, e, f\}$ with corresponding
+Consider the alphabet $\cA = \{a, b, c, d, e, f\}$ with corresponding
 weights $w(a) = 19$, $w(b) = 2$, $w(c) = 40$, $w(d) = 25$,
 $w(e) = 31$, and $w(f) = 3$. Construct a binary tree representation of
-the Huffman code of $A$ and determine the encoding of each symbol of
-$A$.
+the Huffman code of $\cA$ and determine the encoding of each symbol of
+$\cA$.
 \end{example}
 
 \begin{proof}[Solution]
 Use Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} to
 construct a binary tree representation of the weighted alphabet
-$A$. The resulting binary tree $T$ is shown in
+$\cA$. The resulting binary tree $T$ is shown in
 Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:binary_tree},
-where $a_i: w_i$ is an abbreviation for ``vertex $a_i$ has weight
-$w_i$.'' The binary tree is rooted at $k$. To encode each alphabetic
-symbol, input $T$ and $k$ into
+where $a_i: w_i$ is an abbreviation for
+``vertex $a_i$ has weight $w_i$''. The binary tree is rooted at
+$k$. To encode each alphabetic symbol, input $T$ and $k$ into
 Algorithm~\ref{alg:trees_forests:Huffman_encoding_alphabet} to get the
 encodings shown in
 Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings}.
