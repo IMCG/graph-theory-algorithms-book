@@ -1855,7 +1855,7 @@ codewords of $\B_\ell$ using trees.
 \begin{proof}[Solution]
 Here is how to represent the code $\B_\ell$ consisting of all binary
 strings of length $\leq \ell$. Start with the
-\emph{root node}\index{node!root} $\varepsilon$\index{$\varepsilon$}
+root\index{node!root} node $\varepsilon$\index{$\varepsilon$}
 being the empty string. The two children of this node, $v_0$ and
 $v_1$, correspond to the two strings of length $1$. Label $v_0$ with a
 ``$0$'' and $v_1$ with a ``$1$''. The two children of $v_0$,
@@ -1865,10 +1865,10 @@ i.e. $v_{10}$ and $v_{11}$, correspond to the strings of length $2$
 that each starts with a $1$. Continue creating child nodes until we
 reach length $\ell$, at which point we stop. There are a total of
 $2^{\ell + 1} - 1$ nodes in this tree and $2^\ell$ of them are
-\emph{leaves}\index{leaf}~(vertices of a tree with degree $1$,
-i.e. childless nodes). Note that the parent of any node is a prefix to
-that node. Label each node $v_s$ with the string ``$s$'', where $s$ is
-a binary sequence of length $\leq \ell$. See
+leaves\index{leaf}~(vertices of a tree with degree $1$, i.e. childless
+nodes). Note that the parent of any node is a prefix to that
+node. Label each node $v_s$ with the string ``$s$'', where $s$ is a
+binary sequence of length $\leq \ell$. See
 Figure~\ref{fig:trees_forests:tree_representation_B_2} for an example
 when $\ell = 2$.
 \end{proof}
@@ -1881,18 +1881,17 @@ when $\ell = 2$.
 \end{figure}
 
 In general, if $C$ is a code contained in $\B_\ell$, then to create
-the tree for $C$, start with the tree for $\B_\ell$. First, remove
-all nodes associated to a binary string for which it and all of its
-descendants are not in $C$. Next, remove all labels which do not
-correspond to codewords in $C$. The resulting labeled graph is the
-tree associated to the binary code $C$.
-\index{code!tree}
+the tree\index{code!tree} for $C$, start with the tree for
+$\B_\ell$. First, remove all nodes associated to a binary string for
+which it and all of its descendants are not in $C$. Next, remove all
+labels which do not correspond to codewords in $C$. The resulting
+labeled graph is the tree associated to the binary code $C$.
 
 For visualizing the construction of Huffman codes later, it is
-important to see that one can \emph{reverse} this construction to
+important to see that we can \emph{reverse} this construction to
 start from such a binary tree and recover a binary code from it. The
 codewords are determined by the following rules:
-%
+%%
 \begin{itemize}
 \item The root node gets the empty codeword.
 
