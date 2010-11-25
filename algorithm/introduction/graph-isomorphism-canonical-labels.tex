@@ -25,11 +25,12 @@
 \BlankLine
 %%
 %% algorithm body
-Compute the adjacency matrix $A_i$ of $G_i$ ($i = 1, 2$).\;
-Compute the lexicographically maximal element $A_i'$ of the
-permutation equivalence class of $A_i$, for $i = 1, 2$.\;
-\eIf{$A_1' = A_2'$}{
-  \Return \MyTrue\;
-}{
-  \Return \MyFalse\;
+\For{$i \assign 1, 2$}{
+  $A_i \assign$ adjacency matrix of $G_i$\;
+  $A_i' \assign$ lexicographically maximal element of permutation
+  equivalence class of $A_i$\;
 }
+\If{$A_1' = A_2'$}{
+  \Return \MyTrue\;
+}
+\Return \MyFalse\;
