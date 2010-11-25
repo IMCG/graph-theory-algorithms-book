@@ -25,7 +25,7 @@
 %%
 %% algorithm body
 $D \assign [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
-let $C$ be a list of candidate vertices to visit\;
+$C \assign$ list of candidate vertices to visit\;
 \While{$\length(C) > 0$}{
   select $v \in C$\;
   $C \assign \remove(C, v)$\;
@@ -33,7 +33,9 @@ let $C$ be a list of candidate vertices to visit\;
     \If{$D[u] > D[v] + w(vu)$}{
       $D[u] \assign D[v] + w(vu)$\;
       $P[u] \assign v$\;
-      if $u$ is not in $C$, add $u$ to $C$\;
+      \If{$u \notin C$}{
+        add $u$ to $C$\;
+      }
     }
   }
 }
