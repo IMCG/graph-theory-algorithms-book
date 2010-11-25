@@ -1619,28 +1619,26 @@ the ``Chinese ring puzzle'', etc.), and to mathematics~(e.g. aspects
 of combinatorics, computational group theory, and the computational
 aspects of linear codes).
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsubsection{Binary Gray codes}
 
-Consider the so-called $n$-hypercube graph
-$Q_n$. This can be envisioned as the graph whose
-vertices are the vertices of a cube in
-$n$-space
-\index{graph!hypercube}
-
+Consider the so-called $n$-hypercube\index{graph!hypercube} graph
+$Q_n$, whose first few instances are illustrated in
+Figure~\ref{fig:introduction:hypercube_graphs}. This can be envisioned
+as the graph whose vertices are the vertices of a cube in $n$-space
 \[
-\{(x_1,\dots,x_n)\ |\ 0\leq x_i\leq 1\},
+\{(x_1, \dots, x_n) \mid 0 \leq x_i \leq 1\}
 \]
-and whose edges are those line segments in
-$\R^n$ connecting two ``neighboring''
-vertices (namely, two vertices which differ
-in exactly one coordinate).
-A binary Gray code of length $n$ can be regarded as a
-path on the hypercube graph $Q_n$ which visits
-each vertex of the cube exactly once.
-In other words, a binary Gray code of length $n$
-may be identified with a
-Hamiltonian cycle on the graph $Q_n$
-(see Figure \ref{fig:trees_forests:gray_code_cube} for an example).
+and whose edges are those line segments in $\R^n$ connecting two
+\emph{neighboring} vertices, i.e. two vertices that differ in exactly
+one coordinate. A binary Gray code of length $n$ can be regarded as a
+path on the hypercube graph $Q_n$ that visits each vertex of the cube
+exactly once. In other words, a binary Gray code of length $n$ may be
+identified with a Hamiltonian path on the graph $Q_n$. For example,
+Figure~\ref{fig:trees_forests:gray_code_cube} illustrates a
+Hamiltonian path on $Q_3$.
 
 \begin{figure}[!htbp]
 \centering
@@ -1649,35 +1647,28 @@ Hamiltonian cycle on the graph $Q_n$
 \label{fig:trees_forests:gray_code_cube}
 \end{figure}
 
-
-How do you efficiently compute a Gray code?
-
-Perhaps the simplest way to state the idea of
-quickly constructing
-the {\it reflected binary Gray code} $\Gamma_n$
-of length $n$ is as follows:
-
-\[
-\Gamma_0=[],\ \ \ \
-\Gamma_{n}=[0,\Gamma_{n-1}],[1,\Gamma_{n-1}^{rev}],
-\]
-where $\Gamma_m^{rev}$ means the Gray code in
-reverse order. For instance, we have
-
-\[
-\Gamma_0=[],
-\]
-\[
-\Gamma_1 = [0], [1],
-\]
-\[
-\Gamma_2=[[0,0],[0,1],[1,1],[1,0],
-\]
-and so on. This is a nice procedure if you want to create
-the entire list at once (which, by the way, gets very long
-very fast).
-
-An implementation of the reflected Gray code using Python is given below.
+How do we efficiently compute a Gray code? Perhaps the simplest way to
+state the idea of quickly constructing the
+\emph{reflected binary Gray code} $\Gamma_n$ of length $n$ is as
+follows:
+%%
+\begin{align*}
+\Gamma_0 &= [\,], \\[4pt]
+\Gamma_{n} &= \big[[0, \Gamma_{n-1}],\, [1, \Gamma_{n-1}^{\rm rev}]\big]
+\end{align*}
+%%
+where $\Gamma_m^{\rm rev}$ means the Gray code in reverse order. For
+instance, we have
+%%
+\begin{align*}
+\Gamma_0 &= [\,], \\[4pt]
+\Gamma_1 &= \big[[0],\, [1]\big], \\[4pt]
+\Gamma_2 &= \big[[0,0],\, [0,1],\, [1,1],\, [1,0]\big]
+\end{align*}
+%%
+and so on. This is a nice procedure for creating the entire list at
+once, which gets very long very fast. An implementation of the
+reflected Gray code using Python is given below.
 
 \begin{lstlisting}
 def graycode(length,modulus):
@@ -1704,7 +1695,6 @@ def graycode(length,modulus):
          [2, 3],
          [1, 3],
          [0, 3]]
-
     """
     n,m = length,modulus
     F = range(m)
@@ -1731,16 +1721,13 @@ def graycode(length,modulus):
 \end{lstlisting}
 
 \vskip .2in
-Consider the reflected binary code
-of length $8$, $\Gamma_8$. This has $2^8=256$ codewords.
-\sage can easily create the list plot of the coordinates
-$(x,y)$, where $x$ is an integer $j \in \Z_{256}$
-which indexes the codewords in $\Gamma_8$
-and the corresponding $y$ is the $j$-th
-codeword in $\Gamma_8$ converted to decimal.
-This will give us some idea of how the Gray code
-``looks'' in some sense. The plot is given in
-Figure~\ref{fig:trees_forests:Gamma_8}.
+Consider the reflected binary code of length $8$,
+i.e. $\Gamma_8$. This has $2^8 = 256$ codewords. Sage can easily
+create the list plot of the coordinates $(x,y)$, where $x$ is an
+integer $j \in \Z_{256}$ that indexes the codewords in $\Gamma_8$ and
+the corresponding $y$ is the $j$-th codeword in $\Gamma_8$ converted
+to decimal. This will give us some idea of how the Gray code ``looks''
+in some sense. The plot is given in Figure~\ref{fig:trees_forests:Gamma_8}.
 
 \begin{figure}[!htbp]
 \centering
@@ -1749,18 +1736,14 @@ Figure~\ref{fig:trees_forests:Gamma_8}.
 \label{fig:trees_forests:Gamma_8}
 \end{figure}
 
-What if you only want to compute the
-$i$-th Gray codeword in the Gray code of length $n$?
-Can it be computed quickly as well without computing the
-entire list?
-At least in the case of the reflected binary Gray code, there
-is a very simple way to do this. The $k$-th element in the
-above-described reflected binary Gray code of length $n$
-is obtained by simply adding the binary representation of
-$k$ to the binary representation of the integer part of
-$k/2$.
-
-An example using \sage is given below.
+What if we only want to compute the $i$-th Gray codeword in the Gray
+code of length $n$? Can it be computed quickly without computing the
+entire list? At least in the case of the reflected binary Gray code,
+there is a very simple way to do this. The $k$-th element in the
+above-described reflected binary Gray code of length $n$ is obtained
+by simply adding the binary representation of $k$ to the binary
+representation of the integer part of $k / 2$. An example using Sage
+is given below.
 
 \begin{lstlisting}
 def int2binary(m, n):
