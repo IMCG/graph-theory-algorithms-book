@@ -1,0 +1,82 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subfigure[Errera graph.]{
+\begin{tikzpicture}
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=2]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  0/2/0, 1/1.4142/1.4142, 2/0/2, 3/-1.4142/1.4142, 4/-2/0,
+  5/-1.4142/-1.4142, 6/0/-2, 7/1.4142/-1.4142, 8/0.25/0, 9/-0.25/0.7071,
+  10/-1.1642/0.7071, 11/-1.4142/0, 12/-1.1642/-0.7071,
+  13/-0.25/-0.7071, 14/1.6642/0.7071, 15/1.1642/0, 16/1.6642/-0.7071}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[-,thick]
+\foreach \startnode/\endnode/\bend in {
+  0/1/bend right, 0/7/bend left, 0/14/bend left=0, 0/15/bend left=0,
+  0/16/bend left=0, 1/2/bend right, 1/9/bend left=0, 1/14/bend left=0,
+  1/15/bend left=0, 2/3/bend right, 2/8/bend left=0, 2/9/bend left=0,
+  2/10/bend left=0, 2/14/bend left=0, 3/4/bend right, 3/9/bend left=0,
+  3/10/bend left=0, 3/11/bend left=0, 4/5/bend right, 4/10/bend
+  left=0, 4/11/bend left=0, 4/12/bend left=0, 5/6/bend right,
+  5/11/bend left=0, 5/12/bend left=0, 5/13/bend left=0, 6/7/bend
+  right, 6/8/bend left=0, 6/12/bend left=0, 6/13/bend left=0,
+  6/16/bend left=0, 7/13/bend left=0, 7/15/bend left=0, 7/16/bend left=0,
+  8/10/bend left=0, 8/12/bend left=0, 8/14/bend left=0, 8/16/bend left=0,
+  9/11/bend left=0, 9/13/bend left=0, 9/15/bend left=0, 10/12/bend left=0,
+  11/13/bend left=0, 13/15/bend left=0, 14/16/bend left=0}
+{
+  \Edge[style=\bend](\startnode)(\endnode)
+}
+\end{tikzpicture}
+}
+%%
+%%
+\subfigure[Planar representation.]{
+\begin{tikzpicture}
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=2]
+%% nodes or vertices
+\foreach \nodename/\x/\y in {
+  0/3.4641/-2, 1/0/4, 2/-3.4641/-2, 3/0/3, 4/-1.73205/1, 5/-1.732/-1,
+  6/0/-1.5, 7/1.732/-1, 8/1.73205/1, 9/0.5/2.3333, 10/-0.5/2.3333,
+  11/-0.683/1, 12/-0.866/-0.3333, 13/0.866/-0.3333, 14/0.683/1,
+  15/0/1.66665, 16/0/0.33335}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+}
+%% edges or lines
+\tikzstyle{EdgeStyle}=[-,thick]
+\foreach \startnode/\endnode/\bend in {
+  0/1/bend right, 0/6/bend left=25, 0/7/bend left=0, 0/8/bend right=25,
+  1/2/bend right, 1/3/bend left=0, 1/4/bend right=25, 1/8/bend left=25,
+  2/0/bend right, 2/5/bend left=0, 2/4/bend left=25, 2/6/bend right=25,
+  3/4/bend right=25, 3/8/bend left=25, 3/9/bend left=25, 3/10/bend right=25,
+  4/10/bend left=25, 5/4/bend left=25, 5/6/bend right=25, 5/10/bend left=25,
+  5/11/bend left=25, 5/12/bend right=25, 6/12/bend left=25, 6/13/bend right=25,
+  7/6/bend left=25, 7/8/bend right=25, 7/9/bend right=25, 7/14/bend right=25,
+  7/13/bend left=25, 8/9/bend right=25, 9/10/bend right=25, 9/14/bend left=25,
+  9/15/bend left=25, 10/11/bend right=25, 10/15/bend right=25,
+  11/12/bend right=25, 11/15/bend left=25, 11/16/bend right=25,
+  12/13/bend right=25, 12/16/bend right=25, 13/14/bend right=25,
+  13/16/bend left=25, 14/15/bend right=25, 14/16/bend left=25,
+  15/16/bend left=0}
+{
+  \Edge[style=\bend](\startnode)(\endnode)
+}
+\end{tikzpicture}
+}
