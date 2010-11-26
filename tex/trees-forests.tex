@@ -2135,7 +2135,19 @@ $L(v_1) < L(v_2) < \cdots < L(v_n)$. In this way, a vertex with a
 lower numeric label is examined prior to a vertex with a higher
 numeric label. A level-order traversal of $T$, whose vertices of equal
 depth are prioritized according to $L$, is an examination of the
-vertices of $T$ from top to bottom, left to right.
+vertices of $T$ from top to bottom, left to right. As an example, the
+level-order traversal of the tree in
+Figure~\ref{fig:trees_forests:level_order_traversal} is
+\[
+42,\, 4,\, 5,\, 2,\, 3,\, 5,\, 7,\, 10,\, 11,\, 12,\, 13,\, 14.
+\]
+
+\begin{figure}[!htbp]
+\centering
+\input{image/trees-forests/level-order-traversal.tex}
+\caption{Level-order traversal of a tree.}
+\label{fig:trees_forests:level_order_traversal}
+\end{figure}
 
 \begin{itemize}
 \item stacks and queues
