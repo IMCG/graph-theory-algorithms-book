@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A positive integer $n$.}
+\Output{An edge list $E$ containing the edges of the friendship graph
+  $F_n$.}
+\BlankLine
+%%
+%% algorithm body
+\If{$n = 1$}{
+  \Return $C_3$\;
+}
+$E \assign [\,]$\;
+$N \assign 2n + 1$\;
+\For{$i \assign 0, 1, \dots, N-3$}{
+  \eIf{\rm $i$ is odd}{
+    append to $E$ the edges $(i,\, i+1)$ and $(i,\, N-1)$\;
+  }{
+    append to $E$ the edge $(i, N-1)$\;
+  }
+}
+append to $E$ the edges $(N-2,\, 0)$ and $(N-2,\, N-1)$\;
+\Return $E$\;
