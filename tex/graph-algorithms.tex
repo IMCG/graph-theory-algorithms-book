@@ -2027,7 +2027,7 @@ To compute the transitive closure of $G$, we let each edge of $G$ be
 of unit weight and apply the
 Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm}
 Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall} on $G$. By
-Corollary~\ref{cor:introduction:any_path_has_length_at_most_n_minus_1},
+Proposition~\ref{prop:introduction:any_path_has_length_at_most_n_minus_1},
 for any $i$-$j$ path in $G$ we have $D[i,j] < n$, and if there are no
 paths from $i$ to $j$ in $G$, we have $D[i,j] = \infty$. This
 procedure for computing transitive closure runs in time $O(n^3)$.
