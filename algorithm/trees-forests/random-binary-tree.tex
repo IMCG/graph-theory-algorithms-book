@@ -1,0 +1,44 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{Direction}{direction}
+\SetKwData{Left}{left}
+\SetKwData{Parent}{parent}
+\SetKwData{Right}{right}
+%%
+%% input/output
+\Input{Positive integer $n$.}
+\Output{A random binary tree on $n$ vertices.}
+\BlankLine
+%%
+%% algorithm body
+\If{$n = 1$}{
+  \Return $K_1$\;
+}
+$v \assign 0$\;
+$T \assign$ null graph\;
+add $v$ to $T$\;
+$\Parent \assign [(v,0)]$\;
+\For{$i \assign 1, 2, \dots, n-1$}{
+  $(v,k) \assign$ remove random element from \Parent\;
+  \If{$k < 1$}{
+    add $(v, k+1)$ to \Parent\;
+  }
+  add edge $(v, i)$ to $T$\;
+  add $(i, 0)$ to \Parent\;
+}
+\Return $T$\;

@@ -1400,11 +1400,14 @@ Expression~\eqref{eqn:trees_forests:Catalan_recursion} is known as the
 number, which we know from
 problem~\ref{chap:introduction}.\ref{prob:introduction:Euler_polygon_division}
 can be expressed in the closed form
-\[
+%%
+\begin{equation}
+\label{eqn:trees_forests:nth_Catalan_number_closed_form}
 b_n
 =
 \frac{1}{n+1} \binom{2n}{n}.
-\]
+\end{equation}
+%%
 Figures~\ref{fig:trees_forests:binary_trees_2_vertices}
 to~\ref{fig:trees_forests:binary_trees_4_vertices} enumerate all the
 different binary trees on $2$, $3$, and $4$ vertices, respectively.
@@ -1429,6 +1432,31 @@ different binary trees on $2$, $3$, and $4$ vertices, respectively.
 \caption{The $b_4 = 14$ binary trees on $4$ vertices.}
 \label{fig:trees_forests:binary_trees_4_vertices}
 \end{figure}
+
+The first few values
+of~\eqref{eqn:trees_forests:nth_Catalan_number_closed_form} are
+\[
+b_0 = 1,\quad
+b_1 = 1,\quad
+b_2 = 2,\quad
+b_3 = 5,\quad
+b_4 = 14
+\]
+which are rather small and of manageable size if we want to explicitly
+enumerate all different binary trees with the above orders. However,
+from $n = 4$ onwards the value of $b_n$ increases very fast. Instead
+of enumerating all the $b_n$ different binary trees of a specified
+order $n$, a related problem is generating a random binary tree of
+order $n$. That is, we consider the set $B$ as a sample space of $b_n$
+different binary trees on $n$ vertices, and choose a random element
+from $B$. Such a random element can be generated using
+Algorithm~\ref{alg:trees_forests:random_binary_tree}.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/trees-forests/random-binary-tree.tex}
+\caption{Random binary tree.}
+\label{alg:trees_forests:random_binary_tree}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
