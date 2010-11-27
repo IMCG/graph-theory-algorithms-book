@@ -2501,7 +2501,7 @@ This BST represents the sorting of the list $L$.
   indeed a tree.
 
 \item In Kruskal's
-  algorithm~\ref{alg:trees_forests:Kruskal_algorithm},
+  Algorithm~\ref{alg:trees_forests:Kruskal_algorithm},
   line~\ref{alg:Kruskal:edge_not_in_T_acyclic} requires that the
   addition of a new edge to $T$ does not result in $T$ having a
   cycle. A tree by definition has no cycles. Suppose
@@ -2539,24 +2539,25 @@ This BST represents the sorting of the list $L$.
 \item Show by giving an example that the Morse code is not
   prefix-free.
 
-\item Consider the alphabet $A = \{a,b,c\}$ with corresponding
+\item Consider the alphabet $\cA = \{a,b,c\}$ with corresponding
   probabilities~(or weights) $p(a) = 0.5$, $p(b) = 0.3$, and
-  $p(c) = 0.2$. Generate two different Huffman codes for $A$ and
+  $p(c) = 0.2$. Generate two different Huffman codes for $\cA$ and
   illustrate the tree representations of those codes.
 
 \item Find the Huffman code for the letters of the English alphabet
   weighted by the frequency of common American usage.\footnote{
     You can find this on the Internet or in the literature. Part of
-    this exercise is finding this frequency distribution yourself.}
+    this exercise is finding this frequency distribution yourself.
+  }
 
-\item Let $G=(V_1,E_2)$ be a graph and $T=(V_2,E_2)$ a spanning tree
-  of $G$. Show there is a one-to-one correspondence between
+\item Let $G = (V_1, E_2)$ be a graph and $T = (V_2, E_2)$ a spanning
+  tree of $G$. Show that there is a one-to-one correspondence between
   fundamental cycles in $G$ and edges not in $T$.
 
-\item Let $G=(V, E)$ be the $3\times 3$ grid graph and $T_1=(V_1,E_1)$,
-  $T_2=(V_2,E_2)$ be spanning trees of $G$ in
+\item Let $G = (V,E)$ be the $3 \times 3$ grid graph and
+  $T_1 = (V_1, E_1)$, $T_2 = (V_2, E_2)$ be spanning trees of $G$ in
   Example~\ref{eg:trees_forests:spanning_tree}. Find a fundamental
-  cycle in $G$ for $T_1$ which is not a fundamental cycle in $G$ for
+  cycle in $G$ for $T_1$ that is not a fundamental cycle in $G$ for
   $T_2$.
 
 \item Usually there exist many spanning trees of a graph. Can you
@@ -2564,8 +2565,8 @@ This BST represents the sorting of the list $L$.
   other words, find necessary and sufficient conditions for a graph
   $G$ such that if $T$ is a spanning tree then $T$ is unique.
 
-\item Convert the above function {\tt graycodeword} into a pure Python
-  function.
+\item Convert the above function \texttt{graycodeword} into a pure
+  Python function.
 
 \item Example~\ref{eg:trees_forests:Euler_phi_function_tree} verifies
   that for any positive integer $n > 1$, repeated iteration of the
