@@ -29,9 +29,9 @@ $\push(S, r)$\;
 \While{$\length(S) > 0$}{
   $v \assign \pop(S)$\;
   $\append(L, v)$\;
-  $C \assign$ ordering of children $[u_1, u_2, \dots, u_k]$ of $v$\;
-  \For{$u \in C$}{
-    $\push(S, u)$\;
+  $[u_1, u_2, \dots, u_k] \assign$ ordering of children of $v$\;
+  \For{$i \assign k, k-1, \dots, 1$}{
+    $\push(S, u_i)$\;
   }
 }
 \Return $S$\;
