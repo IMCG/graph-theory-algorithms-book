@@ -1450,7 +1450,11 @@ order $n$, a related problem is generating a random binary tree of
 order $n$. That is, we consider the set $B$ as a sample space of $b_n$
 different binary trees on $n$ vertices, and choose a random element
 from $B$. Such a random element can be generated using
-Algorithm~\ref{alg:trees_forests:random_binary_tree}.
+Algorithm~\ref{alg:trees_forests:random_binary_tree}. The list
+\texttt{parent} holds all vertices with less than two children, each
+vertex can be considered as a candidate parent to which we can add a
+child. An element of \texttt{parent} is a two-tuple $(v, k)$ where the
+vertex $v$ currently has $k$ children.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/trees-forests/random-binary-tree.tex}
