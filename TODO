@@ -12,3 +12,6 @@ This is a list of possible enhancements to the book.
 * Binary tree search
 
 * Fibonaccian search, might require discussion of Fibonacci trees
+
+* Prufer encoding and Cayley's formula
+  Discuss these in the context of generating a random tree.
