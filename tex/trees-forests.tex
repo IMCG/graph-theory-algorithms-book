@@ -2214,6 +2214,24 @@ Figure~\ref{fig:trees_forests:tree_traversal} is
 \label{alg:trees_forests:pre_order_traversal}
 \end{algorithm}
 
+Whereas pre-order traversal lists a vertex $v$ the first time we visit
+it, \emph{post-order traversal} lists $v$ the last time we visit
+it. The pseudocode for post-order traversal is presented in
+Algorithm~\ref{alg:trees_forests:post_order_traversal}, whose general
+structure bears close resemblance to
+Algorithm~\ref{alg:trees_forests:pre_order_traversal}. The post-order
+traversal of the tree in Figure~\ref{fig:trees_forests:tree_traversal}
+is
+\[
+2,\, 10,\, 14,\, 11,\, 3,\, 12,\, 13,\, 5,\, 4,\, 7,\, 5,\, 42.
+\]
+
+\begin{algorithm}[!htbp]
+\input{algorithm/trees-forests/post-order-traversal.tex}
+\caption{Post-order traversal.}
+\label{alg:trees_forests:post_order_traversal}
+\end{algorithm}
+
 \begin{itemize}
 \item post-order traversal
 
