@@ -2170,7 +2170,7 @@ numeric label. A level-order traversal of $T$, whose vertices of equal
 depth are prioritized according to $L$, is an examination of the
 vertices of $T$ from top to bottom, left to right. As an example, the
 level-order traversal of the tree in
-Figure~\ref{fig:trees_forests:level_order_traversal} is
+Figure~\ref{fig:trees_forests:tree_traversal} is
 \[
 42,\, 4,\, 5,\, 2,\, 3,\, 5,\, 7,\, 10,\, 11,\, 12,\, 13,\, 14.
 \]
@@ -2182,8 +2182,8 @@ level-order traversal is also known as \emph{breadth-first traversal}.
 \begin{figure}[!htbp]
 \centering
 \input{image/trees-forests/level-order-traversal.tex}
-\caption{Traversing of a tree.}
-\label{fig:trees_forests:level_order_traversal}
+\caption{Traversing a tree.}
+\label{fig:trees_forests:tree_traversal}
 \end{figure}
 
 \begin{algorithm}[!htbp]
@@ -2203,7 +2203,7 @@ Algorithm~\ref{alg:trees_forests:level_order_traversal}; the only
 significant change is to use a stack instead of a queue. Using
 Algorithm~\ref{alg:trees_forests:pre_order_traversal}, a pre-order
 traversal of the tree in
-Figure~\ref{fig:trees_forests:level_order_traversal} is
+Figure~\ref{fig:trees_forests:tree_traversal} is
 \[
 42,\, 5,\, 7,\, 4,\, 5,\, 13,\, 12,\, 3,\, 11,\, 14,\, 10,\, 2.
 \]
