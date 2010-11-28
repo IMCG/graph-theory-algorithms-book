@@ -2222,10 +2222,18 @@ Figure~\ref{fig:trees_forests:tree_traversal} is
 
 Whereas pre-order traversal lists a vertex $v$ the first time we visit
 it, \emph{post-order traversal} lists $v$ the last time we visit
-it. The pseudocode for post-order traversal is presented in
+it. In other words, children are visited prior to their respective
+parents, with siblings being visited in their prescribed order. The
+prefix ``pre'' in ``pre-order traversal'' means ``before'', i.e. visit
+parents before visiting children. On the other hand, the prefix
+``post'' in ``post-order traversal'' means ``after'', i.e. visit
+parents after having visited their children. The pseudocode for
+post-order traversal is presented in
 Algorithm~\ref{alg:trees_forests:post_order_traversal}, whose general
 structure bears close resemblance to
-Algorithm~\ref{alg:trees_forests:pre_order_traversal}. The post-order
+Algorithm~\ref{alg:trees_forests:pre_order_traversal}. The while loop
+of the former is executed $n$ times because each vertex is pushed and
+popped exactly once, resulting in a runtime of $O(n)$. The post-order
 traversal of the tree in Figure~\ref{fig:trees_forests:tree_traversal}
 is
 \[
