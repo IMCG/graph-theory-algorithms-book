@@ -45,10 +45,14 @@ a specified \emph{root}\index{root} vertex $v_0$, i.e. the vertex
 $v_0$ has been specially designated as the root of $T$. However, if
 $G$ is a rooted tree with root vertex $v_0$ having degree one, then by
 convention we do not call $v_0$ an endpoint or a leaf. The
-\emph{depth} of a vertex in $T$ is its distance from the root. The
-\emph{height} of $T$ is the length of a longest path starting from the
-root vertex, i.e. the height is the maximum depth among all vertices
-of $T$.
+\emph{depth} $\depth(v)$ of a vertex $v$ in $T$ is its distance from
+the root. The \emph{height} $\height(T)$ of $T$ is the length of a
+longest path starting from the root vertex, i.e. the height is the
+maximum depth among all vertices of $T$. It follows by definition that
+$\depth(v) = 0$ if and only if $v$ is the root of $T$,
+$\height(T) = 0$ if and only if $T$ is the trivial graph,
+$\depth(v) \geq 0$ for all $v \in V(T)$, and
+$\height(T) \leq \diam(T)$.
 
 The Unix\index{Unix}, in particular Linux\index{Linux},
 filesystem\index{filesystem} hierarchy can be viewed as a tree~(see
