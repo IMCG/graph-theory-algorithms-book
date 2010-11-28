@@ -29,9 +29,9 @@ $\enqueue(Q, r)$\;
 \While{$\length(Q) > 0$}{
   $v \assign \dequeue(Q)$\;
   $\append(L, v)$\;
-  $C \assign$ ordering of children $[u_1, u_2, \dots, u_k]$ of $v$\;
-  \For{$u \in C$}{
-    $\enqueue(Q, u)$\;
+  $[u_1, u_2, \dots, u_k] \assign$ ordering of children of $v$\;
+  \For{$i \assign 1, 2, \dots, k$}{
+    $\enqueue(Q, u_i)$\;
   }
 }
 \Return $Q$\;
