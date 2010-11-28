@@ -2192,6 +2192,28 @@ level-order traversal is also known as \emph{breadth-first traversal}.
 \label{alg:trees_forests:level_order_traversal}
 \end{algorithm}
 
+\emph{Pre-order traversal} is a traversal of an ordered tree using a
+general strategy similar to depth-first search. For this reason,
+pre-order traversal is also referred to as
+\emph{depth-first traversal}. The pseudocode for pre-order traversal
+is presented in
+Algorithm~\ref{alg:trees_forests:pre_order_traversal}. Note the close
+resemblance to
+Algorithm~\ref{alg:trees_forests:level_order_traversal}; the only
+significant change is to use a stack instead of a queue. Using
+Algorithm~\ref{alg:trees_forests:pre_order_traversal}, a pre-order
+traversal of the tree in
+Figure~\ref{fig:trees_forests:level_order_traversal} is
+\[
+42,\, 5,\, 7,\, 4,\, 5,\, 13,\, 12,\, 3,\, 11,\, 14,\, 10,\, 2.
+\]
+
+\begin{algorithm}[!htbp]
+\input{algorithm/trees-forests/pre-order-traversal.tex}
+\caption{Pre-order traversal.}
+\label{alg:trees_forests:pre_order_traversal}
+\end{algorithm}
+
 \begin{itemize}
 \item depth-first, or pre-order, traversal
 

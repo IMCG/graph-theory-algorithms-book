@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{An ordered tree $T$ on $n > 0$ vertices.}
+\Output{A list of the vertices of $T$ in pre-order.}
+\BlankLine
+%%
+%% algorithm body
+$L \assign [\,]$\;
+$S \assign$ empty stack\;
+$r \assign$ root of $T$\;
+$\push(S, r)$\;
+\While{$\length(S) > 0$}{
+  $v \assign \pop(S)$\;
+  $\append(L, v)$\;
+  $C \assign$ ordering of children $[u_1, u_2, \dots, u_k]$ of $v$\;
+  \For{$u \in C$}{
+    $\push(S, u)$\;
+  }
+}
+\Return $S$\;
