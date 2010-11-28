@@ -2198,12 +2198,15 @@ tree, increasing the depth as we move downward.
 \emph{Pre-order traversal} is a traversal of an ordered tree using a
 general strategy similar to depth-first search. For this reason,
 pre-order traversal is also referred to as
-\emph{depth-first traversal}. The pseudocode for pre-order traversal
-is presented in
-Algorithm~\ref{alg:trees_forests:pre_order_traversal}. Note the close
-resemblance to
+\emph{depth-first traversal}. Parents are visited prior to their
+respective children and siblings are visited according to their
+prescribed order. The pseudocode for pre-order traversal is presented
+in Algorithm~\ref{alg:trees_forests:pre_order_traversal}. Note the
+close resemblance to
 Algorithm~\ref{alg:trees_forests:level_order_traversal}; the only
-significant change is to use a stack instead of a queue. Using
+significant change is to use a stack instead of a queue. Each vertex
+is pushed and popped exactly once, so the while loop is executed $n$
+times, resulting in the runtime $O(n)$. Using
 Algorithm~\ref{alg:trees_forests:pre_order_traversal}, a pre-order
 traversal of the tree in
 Figure~\ref{fig:trees_forests:tree_traversal} is
