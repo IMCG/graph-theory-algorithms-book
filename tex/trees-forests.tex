@@ -2252,6 +2252,42 @@ is
 \label{alg:trees_forests:post_order_traversal}
 \end{algorithm}
 
+Instead of traversing a tree $T$ from top to bottom as is the case
+with level-order traversal, we can reverse the direction of our
+traversal by traversing a tree from bottom to top. Called
+\emph{bottom-up traversal}, we first visit all the leaves of $T$ and
+consider the subtree $T_1$ obtained by vertex deletion of those
+leaves. We then recursively perform bottom-up traversal of $T_1$ by
+visiting all of its leaves and obtain the subtree $T_2$ resulting from
+vertex deletion of those leaves of $T_1$. Apply bottom-up traversal to
+$T_2$ and its vertex deletion subtrees until we have visited all
+vertices, including the root vertex. The result is a procedure for
+bottom-up traversal as presented in
+Algorithm~\ref{alg:trees_forests:bottom_up_traversal}. In
+lines~\ref{alg:bottom_up_traversal:children_count}
+to~\ref{alg:bottom_up_traversal:children_count_end}, we initialize the
+list $C$ to contain the number of children of vertex
+$i$. This takes $O(m)$ time, where $m = |E(T)|$.
+Lines~\ref{alg:bottom_up_traversal:empty_queue_R}
+to~\ref{alg:bottom_up_traversal:enqueue_R_w} extract all the leaves
+of $T$ and add them to the queue $Q$. From
+lines~\ref{alg:bottom_up_traversal:empty_list_L}
+to~\ref{alg:bottom_up_traversal:enqueue_Q_u}, we repeatedly apply
+bottom-up traversal to subtrees of $T$. As each vertex is enqueued and
+dequeued exactly once, the two loops together run in time $O(n)$ and
+therefore Algorithm~\ref{alg:trees_forests:bottom_up_traversal} has a
+runtime of $O(n + m)$. As an example, a bottom-up traversal of the
+tree in Figure~\ref{fig:trees_forests:tree_traversal} is
+\[
+2,\, 7,\, 10,\, 12,\, 13,\, 14,\, 15,\, 5,\, 11,\, 3,\, 4,\, 42.
+\]
+
+\begin{algorithm}[!htbp]
+\input{algorithm/trees-forests/bottom-up-traversal.tex}
+\caption{Bottom-up traversal.}
+\label{alg:trees_forests:bottom_up_traversal}
+\end{algorithm}
+
 \begin{itemize}
 \item symmetric, or in-order, traversal
 \end{itemize}

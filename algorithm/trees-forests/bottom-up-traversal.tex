@@ -24,11 +24,11 @@
 %% algorithm body
 $Q \assign$ empty queue\;
 $r \assign$ root of $T$\;
-$C \assign [0, 0, \dots, 0]$\tcc*[f]{$n$ copies of $0$}\;
+$C \assign [0, 0, \dots, 0]$\nllabel{alg:bottom_up_traversal:children_count}\tcc*[f]{$n$ copies of $0$}\;
 \For{\rm each edge $(u,v) \in E(T)$}{
-  $C[u] \assign C[u] + 1$\;
+  $C[u] \assign C[u] + 1$\nllabel{alg:bottom_up_traversal:children_count_end}\;
 }
-$R \assign$ empty queue\;
+$R \assign$ empty queue\nllabel{alg:bottom_up_traversal:empty_queue_R}\;
 $\enqueue(R, r)$\;
 \While{$\length(R) > 0$}{
   $v \assign \dequeue(R)$\;
@@ -36,11 +36,11 @@ $\enqueue(R, r)$\;
     \eIf{$C[w] = 0$}{
       $\enqueue(Q, w)$\;
     }{
-      $\enqueue(R, w)$\;
+      $\enqueue(R, w)$\nllabel{alg:bottom_up_traversal:enqueue_R_w}\;
     }
   }
 }
-$L \assign [\,]$\;
+$L \assign [\,]$\nllabel{alg:bottom_up_traversal:empty_list_L}\;
 \While{$\length(Q) > 0$}{
   $v \assign \dequeue(Q)$\;
   $\append(L, v)$\;
@@ -48,7 +48,7 @@ $L \assign [\,]$\;
     $C[\parent(v)] \assign C[\parent(v)] - 1$\;
     \If{$C[\parent(v)] = 0$}{
       $u \assign \parent(v)$\;
-      $\enqueue(Q, u)$\;
+      $\enqueue(Q, u)$\nllabel{alg:bottom_up_traversal:enqueue_Q_u}\;
     }
   }
 }
