@@ -13,6 +13,18 @@
 
 \usepackage[latin1]{inputenc}
 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{makeidx}
+\usepackage{moreverb}
+\usepackage{url}
+\usepackage{xspace}
+
 %% For typesetting algorithms and pseudocode
 \usepackage[algochapter,linesnumbered,noend,ruled]{algorithm2e}
 \IncMargin{1em}
@@ -20,25 +32,6 @@
 \SetNlSty{}{}{}  %% don't bold the line numbers
 \SetAlCapFnt{\normalfont}  %% don't bold the text ``Algorithm'' in the caption
 \SetAlCapSkip{5pt}
-
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{graphicx,url}
-\usepackage{lscape}
-\usepackage{makeidx}
-\usepackage{xspace}
-\usepackage{enumerate}
-\usepackage{fancyvrb}
-\usepackage{moreverb}
-
-%% Customized corollary, lemma, theorem, etc. numbering
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{definition}[theorem]{Definition}  %% maybe don't need to use this
-\newtheorem{example}[theorem]{Example}
-\newtheorem{exercise}[theorem]{Exercise}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
 
 %% Package for drawing figures
 \usepackage{tikz}
@@ -50,10 +43,10 @@
 \usetikzlibrary{matrix}
 \usetikzlibrary{shapes}
 \usetikzlibrary{trees}
-\usepackage{tkz-berge}  %% for drawing combinatorial graphs
 \usepackage{pgfplots}
-\usepackage{subfigure}
 \usepackage{skak}
+\usepackage{subfigure}
+\usepackage{tkz-berge}  %% for drawing combinatorial graphs
 
 %% For typesetting code listings
 \usepackage{listings}
@@ -77,9 +70,9 @@
 \definecolor{dbluecolor}{rgb}{0.01,0.02,0.7}
 \definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
 \definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+\newcommand{\dblack}{\color{dblackcolor}\bf}
 \newcommand{\dblue}{\color{dbluecolor}\bf}
 \newcommand{\dred}{\color{dredcolor}\bf}
-\newcommand{\dblack}{\color{dblackcolor}\bf}
 
 %% Customized page geometry
 \textwidth=450pt
@@ -95,22 +88,32 @@
 }
 \isoDateFormat
 
+%% Customized corollary, lemma, theorem, etc. numbering
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
 %% Custom commands and shortcuts
+\newcommand{\AND}{\texttt{AND}}  %% logical AND
 \newcommand{\assign}{\leftarrow}  %% assignment operator
+\newcommand{\B}{\mathbb{B}}  %% binary alphabet
 \newcommand{\documentEdition}{\input{tex/version}}
 \newcommand{\E}{\mathbf{E}}  %% expectation
 \newcommand{\graphsix}{\texttt{graph6}\xspace}  %% typewriter font for graph6
-\newcommand{\sparsesix}{\texttt{sparse6}\xspace}  %% typewriter font for sparse6
-\newcommand{\B}{\mathbb{B}}  %% binary alphabet
-\newcommand{\AND}{\texttt{AND}}  %% logical AND
 \newcommand{\OR}{\texttt{OR}}  %% logical OR
 \newcommand{\R}{\mathbf{R}}  %% set of real numbers
-\newcommand{\Z}{\mathbf{Z}}  %% set of integers
 \newcommand{\SAGE}{{\sf SAGE}\xspace}
 \newcommand{\sage}{\SAGE}
 \newcommand{\Sage}{\SAGE}
+\newcommand{\sparsesix}{\texttt{sparse6}\xspace}  %% typewriter font for sparse6
+\newcommand{\Z}{\mathbf{Z}}  %% set of integers
 
-%% Caligraphy fonts
+%% Calligraphy fonts
 \newcommand{\cA}{\mathcal{A}}
 \newcommand{\cB}{\mathcal{B}}
 \newcommand{\cT}{\mathcal{T}}
@@ -145,10 +148,7 @@
 
 %% Customize existing commands
 \renewcommand{\_}{\underline{{\color{white}w}}}  %% a long underscore
-%% The following is a brute-force way to prevent the headers from
-%% getting transformed into all-caps.
-\renewcommand{\MakeUppercase}{}
-%% \renewcommand{\mapsto}{\longmapsto}  %% function image A |--> B
+\renewcommand{\MakeUppercase}{}  %% no all-caps in page headers
 \renewcommand{\qed}{\hfill \mbox{\raggedright \rule{0.1in}{0.1in}}}
 \renewcommand{\to}{\longrightarrow}  %% function notation f: A -> B
 
@@ -200,7 +200,7 @@
   pdftitle={Algorithmic Graph Theory},%
   pdfauthor={David Joyner, Minh Van Nguyen, Nathann Cohen},%
   pdfsubject={mathematics},%
-  pdfkeywords={algorithm, graph theory},%
+  pdfkeywords={algorithm, data structure, graph theory},%
   colorlinks=true,%
   linkcolor=black,%
   citecolor=black,%
