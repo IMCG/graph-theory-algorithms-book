@@ -9,8 +9,6 @@ This is a list of possible enhancements to the book.
   Discuss heaps and how these relate to realizing efficient
   implementations of Dijkstra's algorithm.
 
-* Binary tree search
-
 * Fibonaccian search, might require discussion of Fibonacci trees
 
 * Prufer encoding and Cayley's formula
