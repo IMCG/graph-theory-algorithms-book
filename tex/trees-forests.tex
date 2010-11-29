@@ -22,66 +22,77 @@
 
 \noindent
 In section~\ref{subsec:introduction:walks_trails_paths}, we briefly
-touched upon trees and provided examples of how trees could be used to
-model hierarchical structures. This chapter provides an in-depth study
-of trees, their properties, and various applications.
+touched upon trees\index{tree} and provided examples of how trees
+could be used to model hierarchical\index{hierarchical structure}
+structures. This chapter provides an in-depth study of
+trees\index{tree}, their properties, and various applications.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Definitions and examples}
 
-Recall that a path in a graph $G = (V, E)$ whose start and end vertices
-are the same is called a cycle\index{cycle}. We say $G$ is
+Recall that a path\index{path} in a graph $G = (V, E)$ whose start and
+end vertices are the same is called a cycle\index{cycle}. We say $G$ is
 \emph{acyclic}\index{acyclic}, or a \emph{forest}\index{forest}, if it
 has no cycles. In a forest, a vertex of degree one is called an
-\emph{endpoint}\index{endpoint} or a \emph{leaf}\index{leaf}. Any
-vertex that is not a leaf is called an \emph{internal} vertex. A
-connected forest is a \emph{tree}\index{tree}. In other words, a tree
-is a graph without cycles and each edge is a bridge\index{bridge}.
+\emph{endpoint}\index{vertex!endpoint} or a \emph{leaf}\index{vertex!leaf}. Any
+vertex that is not a leaf\index{vertex!leaf} is called an \emph{internal}
+vertex. A connected forest\index{forest} is a
+\emph{tree}\index{tree}. In other words, a tree\index{tree} is a graph
+without cycles\index{cycle} and each edge is a bridge\index{bridge}.
 
 A \emph{rooted tree}\index{tree!rooted} $T$ is a tree\index{tree} with
-a specified \emph{root}\index{root} vertex $v_0$, i.e. the vertex
-$v_0$ has been specially designated as the root of $T$. However, if
-$G$ is a rooted tree with root vertex $v_0$ having degree one, then by
-convention we do not call $v_0$ an endpoint or a leaf. The
-\emph{depth} $\depth(v)$ of a vertex $v$ in $T$ is its distance from
-the root. The \emph{height} $\height(T)$ of $T$ is the length of a
-longest path starting from the root vertex, i.e. the height is the
-maximum depth among all vertices of $T$. It follows by definition that
-$\depth(v) = 0$ if and only if $v$ is the root of $T$,
-$\height(T) = 0$ if and only if $T$ is the trivial graph,
-$\depth(v) \geq 0$ for all $v \in V(T)$, and
-$\height(T) \leq \diam(T)$.
+a specified \emph{root}\index{vertex!root} vertex $v_0$, i.e. exactly
+one vertex has been specially designated as the root of $T$. However,
+if $G$ is a rooted\index{tree!rooted} tree with root vertex $v_0$
+having degree one, then by convention we do not call $v_0$ an
+endpoint\index{vertex!endpoint} or a leaf\index{vertex!leaf}. The
+\emph{depth}\index{tree!depth}\index{tree!depth}
+$\depth(v)$\index{$\depth(v)$} of a vertex $v$ in $T$ is its
+distance\index{distance} from the
+root\index{vertex!root}. The \emph{height}\index{tree!height}
+$\height(T)$\index{$\height(T)$} of $T$ is the
+length\index{path!length} of a longest path\index{path} starting from
+the root\index{vertex!root} vertex, i.e. the height\index{tree!height}
+is the maximum depth\index{tree!depth} among all vertices of $T$. It
+follows by definition that $\depth(v) = 0$\index{tree!depth} if and
+only if $v$ is the root of $T$, $\height(T) = 0$\index{tree!height} if
+and only if $T$ is the trivial\index{trivial graph} graph,
+$\depth(v) \geq 0$\index{tree!depth} for all $v \in V(T)$, and
+$\height(T) \leq \diam(T)$\index{tree!height}.
 
 The Unix\index{Unix}, in particular Linux\index{Linux},
-filesystem\index{filesystem} hierarchy can be viewed as a tree~(see
+filesystem\index{filesystem} hierarchy\index{hierarchical structure}
+can be viewed as a tree~(see
 Figure~\ref{fig:trees_forests:filesystem_hierarchy}). As shown in
-Figure~\ref{fig:trees_forests:filesystem_hierarchy}, the root
-vertex\index{vertex!root} is designated with the forward slash, which
-is also referred to as the root
+Figure~\ref{fig:trees_forests:filesystem_hierarchy}, the
+root\index{vertex!root} vertex is designated with the forward slash,
+which is also referred to as the root
 directory\index{root directory}. Other examples of trees include the
-organism classification\index{tree!classification} tree in
+organism classification\index{classification tree} tree in
 Figure~\ref{fig:trees_forests:classification_tree_organisms}, the
 family\index{tree!family} tree in
 Figure~\ref{fig:introduction:family_tree}, and the
 expression\index{tree!expression} tree in
 Figure~\ref{fig:trees_forests:expression_tree_perfect_square}.
 
-A \emph{directed tree}\index{tree!directed} is a digraph which would
-be a tree if the directions on the edges were ignored. A rooted tree
-can be regarded as a directed tree since we can imagine an edge $uv$
-for $u,v \in V$ being directed from $u$ to $v$ if and only if $v$ is
-further away from $v_0$ than $u$ is. If $uv$ is an edge in a rooted
-tree, then we call $v$ a \emph{child}\index{vertex!child} vertex with
-\emph{parent}\index{vertex!parent} $u$. Directed trees are pervasive in
-theoretical computer science, as they are useful structures for
-describing algorithms and relationships between objects in certain
-data sets.
+A \emph{directed tree}\index{tree!directed} is a
+digraph\index{digraph} which would be a tree if the directions on the
+edges were ignored. A rooted\index{tree!rooted} tree can be regarded
+as a directed\index{tree!directed} tree since we can imagine an edge
+$uv$ for $u,v \in V$ being directed from $u$ to $v$ if and only if $v$ is
+further away from $v_0$ than $u$ is. If $uv$ is an edge in a
+rooted\index{tree!rooted} tree, then we call $v$ a
+\emph{child}\index{vertex!child} vertex with
+\emph{parent}\index{vertex!parent} $u$. Directed\index{tree!directed}
+trees are pervasive in theoretical computer science, as they are
+useful structures for describing algorithms and relationships between
+objects in certain datasets.
 
 \begin{figure}[!htbp]
 \centering
-\index{filesystem hierarchy}
+\index{filesystem!hierarchy}
 \index{Linux}
 \input{image/trees-forests/filesystem-hierarchy.tex}
 \caption{The Linux filesystem hierarchy.}
@@ -90,7 +101,8 @@ data sets.
 
 \begin{figure}[!htbp]
 \centering
-\index{tree!classification}
+\index{organism}
+\index{classification tree}
 \input{image/trees-forests/classification-tree-organisms.tex}
 \caption{Classification tree of organisms.}
 \label{fig:trees_forests:classification_tree_organisms}
@@ -98,19 +110,24 @@ data sets.
 
 \begin{figure}[!htbp]
 \centering
+\index{perfect square}
 \index{tree!expression}
 \input{image/trees-forests/expression-tree-perfect-square.tex}
 \caption{Expression tree for the perfect square $a^2 + 2ab + b^2$.}
 \label{fig:trees_forests:expression_tree_perfect_square}
 \end{figure}
 
-An \emph{ordered tree}\index{tree!ordered} is a rooted tree for which
-an ordering is specified for the children of each vertex. An
+An \emph{ordered tree}\index{tree!ordered} is a
+rooted\index{tree!rooted} tree for which an ordering is specified for
+the children\index{vertex!child} of each vertex. An
 $n$-\emph{ary tree}\index{tree!$n$-ary} is a rooted tree for which
-each vertex that is not a leaf has at most $n$ children. The case
-$n = 2$ are called \emph{binary trees}\index{tree!binary}. An $n$-ary
-tree is said to be \emph{complete} if each of its internal vertices
-has exactly $n$ children and all leaves have the same depth. A
+each vertex that is not a leaf\index{vertex!leaf} has at most $n$
+children. The case $n = 2$ are called
+\emph{binary trees}\index{tree!binary}. An $n$-ary\index{tree!$n$-ary}
+tree is said to be \emph{complete}\index{tree!complete} if each of its
+internal\index{vertex!internal} vertices has exactly $n$
+children\index{vertex!child} and all leaves\index{vertex!leaf} have
+the same depth\index{tree!depth}\index{tree!depth}. A
 \emph{spanning tree}\index{spanning tree} of a connected, undirected
 graph $G$ is a subgraph that is a tree and containing all vertices of
 $G$.
@@ -118,8 +135,9 @@ $G$.
 \begin{example}
 \label{eg:trees_forests:spanning_tree}
 {\rm
-Consider the $4 \times 4$ grid graph with $16$ vertices and
-$24$ edges. Two examples of a spanning tree are given in
+Consider the $4 \times 4$ grid\index{grid graph} graph with $16$
+vertices and $24$ edges. Two examples of a
+spanning\index{spanning tree} tree are given in
 Figure~\ref{fig:trees_forests:grid_graph_spanning_trees} by using a
 darker line shading for its edges.}
 \qed
@@ -127,14 +145,17 @@ darker line shading for its edges.}
 
 \begin{figure}[!htbp]
 \centering
+\index{grid graph}
+\index{spanning tree}
 \input{image/trees-forests/grid-graph-spanning-trees.tex}
 \caption{Two spanning trees for the $4 \times 4$ grid graph.}
 \label{fig:trees_forests:grid_graph_spanning_trees}
 \end{figure}
 
 \begin{example}
-For $n = 1, \dots, 6$, how many distinct (nonisomorphic) trees are
-there of order $n$? Construct all such trees for each $n$.
+For $n = 1, \dots, 6$, how many distinct
+(nonisomorphic)\index{tree!nonisomorphic} trees are there of order
+$n$? Construct all such trees for each $n$.
 \end{example}
 
 \begin{proof}[Solution]
@@ -152,6 +173,7 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 
 \begin{figure}[!htbp]
 \centering
+\index{tree!nonisomorphic}
 \input{image/trees-forests/distinct-trees-specified-order-1-2-3.tex}
 \caption{All distinct trees of order $n = 1, 2, 3$.}
 \label{fig:trees_forests:distinct_trees_specified_order_1_2_3}
@@ -159,6 +181,7 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 
 \begin{figure}[!htbp]
 \centering
+\index{tree!nonisomorphic}
 \input{image/trees-forests/distinct-trees-specified-order-4.tex}
 \caption{All distinct trees of order $n = 4$.}
 \label{fig:trees_forests:distinct_trees_specified_order_4}
@@ -166,6 +189,7 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 
 \begin{figure}[!htbp]
 \centering
+\index{tree!nonisomorphic}
 \input{image/trees-forests/distinct-trees-specified-order-5.tex}
 \caption{All distinct trees of order $n = 5$.}
 \label{fig:trees_forests:distinct_trees_specified_order_5}
@@ -173,6 +197,7 @@ Figure~\ref{fig:trees_forests:distinct_trees_specified_order_6}).
 
 \begin{figure}[!htbp]
 \centering
+\index{tree!nonisomorphic}
 \input{image/trees-forests/distinct-trees-specified-order-6.tex}
 \caption{All distinct trees of order $n = 6$.}
 \label{fig:trees_forests:distinct_trees_specified_order_6}
@@ -192,9 +217,10 @@ E
 =
 \{va,\, vw,\, wx,\, wy,\, xb,\, xc,\, yd,\, yz,\, ze,\, zf\}
 \]
-and root vertex $v$. Verify that $T$ is a binary tree. Suppose that
-$x$ is the root of the branch we want to remove from $T$. Find all
-children of $x$ and cut off the branch rooted at $x$ from $T$. Is the
+and root vertex $v$. Verify that $T$ is a binary\index{binary tree}
+tree. Suppose that $x$ is the root\index{vertex!root} of the branch we
+want to remove from $T$. Find all children of $x$ and
+cut\index{branch cut} off the branch rooted at $x$ from $T$. Is the
 resulting graph also a binary tree?
 \end{example}
 
@@ -214,8 +240,9 @@ sage: for e in T.edge_iterator():
 wy wx va vw yd yz xc xb ze zf
 \end{lstlisting}
 %%
-Each vertex in a binary tree has at most $2$ children. Use this
-definition to test whether or not a graph is a binary tree.
+Each vertex in a binary\index{binary tree} tree has at most $2$
+children\index{vertex!child}. Use this definition to test whether or
+not a graph is a binary\index{binary tree} tree.
 %%
 \begin{lstlisting}
 sage: T.is_tree()
@@ -229,13 +256,15 @@ sage: is_bintree1(T)
 True
 \end{lstlisting}
 %%
-Here's another way to test for binary trees. Let $T$ be an undirected
-rooted tree. Each vertex in a binary tree has a maximum degree of
-$3$. If the root vertex is the only vertex with degree $2$, then $T$
-is a binary tree.
+Here's another way to test for binary\index{binary tree} trees. Let
+$T$ be an undirected rooted\index{tree!rooted} tree. Each vertex in a
+binary\index{binary tree} tree has a maximum\index{degree!maximum}
+degree of $3$. If the root\index{vertex!root} vertex is the only
+vertex with degree $2$, then $T$ is a binary\index{binary tree} tree.
 (Problem~\thechapter.\ref{prob:trees_forests:binary_tree_test} asks
-you to prove this result.) We can use this test because the root
-vertex $v$ of $T$ is the only vertex with two children.
+you to prove this result.) We can use this test because the
+root\index{vertex!root} vertex $v$ of $T$ is the only vertex with two
+children.
 %%
 \begin{lstlisting}
 sage: def is_bintree2(G):
@@ -246,8 +275,10 @@ sage: is_bintree2(T.to_undirected())
 True
 \end{lstlisting}
 %%
-As $x$ is the root vertex of the branch we want to cut off from $T$,
-we could use breadth- or depth-first search to determine all the
+As $x$ is the root\index{vertex!root} vertex of the branch we want to
+cut\index{branch cut} off from $T$, we could use
+breadth-\index{breadth-first search} or
+depth-first\index{depth-first search} search to determine all the
 children of $x$. We then delete $x$ and its children from $T$.
 %%
 \begin{lstlisting}
@@ -274,8 +305,8 @@ sage: for e in T2.edge_iterator():
 wy va vw yd yz ze zf
 \end{lstlisting}
 %%
-The resulting graph $T$ is a binary tree because each vertex has at
-most two children.
+The resulting graph $T$ is a binary\index{binary tree} tree because
+each vertex has at most two children.
 %%
 \begin{lstlisting}
 sage: T
@@ -289,12 +320,14 @@ longer be used to test whether or not $T$ is a binary tree, because
 $T$ now has two vertices, i.e. $v$ and $w$, each of which has degree $2$.
 \end{proof}
 
-Consider again the organism classification tree in
+Consider again the organism\index{organism}
+classification\index{classification tree} tree in
 Figure~\ref{fig:trees_forests:classification_tree_organisms}. We can
 view the vertex ``organism'' as the root of the tree and having two
-children. The first branch of ``organism'' is the subtree rooted at
-``plant'' and its second branch is the subtree rooted at
-``animal''. We form the complete tree by joining an edge between
+children. The first branch of ``organism'' is the
+subtree\index{subtree} rooted at ``plant'' and its second branch is
+the subtree rooted at ``animal''. We form the
+complete\index{tree!complete} tree by joining an edge between
 ``organism'' and ``plant'', and an edge between ``organism'' and
 ``animal''. The subtree rooted at ``plant'' can be constructed in the
 same manner. The first branch of this subtree is the subtree rooted at
@@ -303,18 +336,20 @@ construct the subtree rooted at ``plant'', we join an edge between
 ``plant'' and ``tree'', and an edge between ``plant'' and
 ``flower''. The other subtrees of the tree in
 Figure~\ref{fig:trees_forests:classification_tree_organisms} can be
-constructed using the above recursive procedure.
+constructed using the above recursive\index{recursion} procedure.
 
-In general, the recursive construction in
+In general, the recursive\index{recursion} construction in
 Theorem~\ref{thm:trees_forests:recursive_construction_trees} provides
-an alternative way to define trees. We say \emph{construction} because
-it provides an algorithm to construct a tree, as opposed to the
-nonconstructive definition presented earlier in this section, where we
-defined the conditions under which a graph qualifies as a tree without
-presenting a procedure to construct a tree. Furthermore, we say
-\emph{recursive} since a larger tree can be viewed as being
-constructed from smaller trees, i.e. join up existing trees to obtain
-a new tree. The recursive construction of trees as presented in
+an alternative way to define\index{tree!recursive definition}
+trees. We say \emph{construction} because it provides an algorithm to
+construct a tree, as opposed to the nonconstructive definition
+presented earlier in this section, where we defined the conditions
+under which a graph qualifies as a tree without presenting a procedure
+to construct a tree. Furthermore, we say
+\emph{recursive}\index{recursion} since a larger tree can be viewed as
+being constructed from smaller trees, i.e. join up existing trees to
+obtain a new tree. The recursive\index{recursion} construction of
+trees as presented in
 Theorem~\ref{thm:trees_forests:recursive_construction_trees} is
 illustrated in
 Figure~\ref{fig:trees_forests:recursive_construction_tree}.
@@ -322,9 +357,12 @@ Figure~\ref{fig:trees_forests:recursive_construction_tree}.
 \begin{theorem}
 \label{thm:trees_forests:recursive_construction_trees}
 \textbf{Recursive construction of trees.}
-An isolated vertex is a tree. That single vertex is the root of the
-tree. Given a collection $T_1, T_2, \dots, T_n$ of $n > 0$ trees,
-construct a new tree as follows:
+\index{recursion}
+\index{tree!recursive definition}
+An isolated\index{vertex!isolated} vertex is a tree. That single
+vertex is the root of the tree. Given a collection
+$T_1, T_2, \dots, T_n$ of $n > 0$ trees, construct a new tree as
+follows:
 %%
 \begin{enumerate}
 \item Let $T$ be a tree having exactly the one vertex $v$, which is
@@ -352,32 +390,39 @@ E(T)
 
 \begin{figure}[!htbp]
 \centering
+\index{recursion}
+\index{tree!recursive definition}
 \input{image/trees-forests/recursive-definition-tree.tex}
 \caption{Recursive construction of a tree.}
 \label{fig:trees_forests:recursive_construction_tree}
 \end{figure}
 
-The following game is a variant of the Shannon
-switching\index{Shannon!switching game} game, due to Edmonds and
-Lehman\index{edge-tagging game}. We follow the description
-in Oxley's\index{Oxley, James} survey~\cite{Oxley2003}. Recall that a
-minimal edge cut of a graph is also called a bond\index{bond} of the
-graph. The following two-person game is played on a connected graph
-$G = (V,E)$. Two players Alice and Bob alternately tag elements of
-$E$. Alice's goal is to tag the edges of a spanning tree, while Bob's
-goal is to tag the edges of a bond. If we think of this game in terms
-of a communication network, then Bob's goal is to separate the network
-into pieces that are no longer connected to each other, while Alice is
-aiming to reinforce edges of the network to prevent their
-destruction. Each move for Bob consists of destroying one edge, while
-each move for Alice involves securing an edge against destruction. The
-next result characterizes winning strategies on $G$. The full proof
-can be found in Oxley\index{Oxley, James}~\cite{Oxley2003}. See
+The following game is a variant of the Shannon\index{Shannon!Claude E.}
+switching\index{Shannon!switching game} game, due to
+Edmonds\index{Edmonds, Jack} and
+Lehman\index{edge-tagging game}\index{Lehman, A.}. We follow the
+description in Oxley's\index{Oxley, James}
+survey~\cite{Oxley2003}. Recall that a minimal edge\index{edge cut}
+cut of a graph is also called a bond\index{bond} of the graph. The
+following two-person game is played on a
+connected\index{connected graph} graph $G = (V,E)$. Two players Alice
+and Bob alternately tag elements of $E$. Alice's goal is to tag the
+edges of a spanning\index{spanning tree} tree, while Bob's goal is to
+tag the edges of a bond\index{bond}. If we think of this game in terms
+of a communication\index{network!communication} network, then Bob's
+goal is to separate the network into pieces that are no longer
+connected to each other, while Alice is aiming to reinforce edges of
+the network to prevent their destruction. Each move for Bob consists
+of destroying one edge, while each move for Alice involves securing an
+edge against destruction. The next result characterizes winning
+strategies on $G$. The full proof can be found in
+Oxley\index{Oxley, James}~\cite{Oxley2003}. See
 Rasmussen~\cite{Rasmussen2007}\index{Rasmussen, Rune} for
 optimization\index{algorithm!optimization} algorithms for solving
 similar games.
 
 \begin{theorem}
+\index{Shannon!switching game}
 The following statements are equivalent for a connected graph
 $G = (V, E)$.
 %%
@@ -399,25 +444,26 @@ $G = (V, E)$.
 \section{Properties of trees}
 
 By Theorem~\ref{thm:inroduction:edge_is_bridge_iff_edge_not_on_cycle},
-each edge of a tree is a bridge. Removing any edge of a tree
-partitions the tree into two components, each of which is a subtree of
-the original tree. The following results provide further basic
-characterizations of trees.
+each edge of a tree is a bridge\index{bridge}. Removing any edge of a
+tree partitions the tree into two components\index{component}, each of
+which is a subtree\index{tree!subtree} of the original tree. The
+following results provide further basic characterizations of trees.
 
 \begin{theorem}
 \label{thm:trees_forests:each_tree_has_size_n_minus_one}
+\index{size!tree}
 Any tree $T = (V,E)$ has size $|E| = |V| - 1$.
 \end{theorem}
 
 \begin{proof}
-This follows by induction on the number of vertices. By definition, a
-tree has no cycles. We need to show that any tree $T = (V,E)$ has size
-$|E| = |V| - 1$. For the base case $|V| = 1$, there are no
-edges. Assume for induction that the result holds for all integers
-less than or equal to $k \geq 2$. Let $T = (V,E)$ be a tree having
-$k + 1$ vertices. Remove an edge from $T$, but not the vertices it is
-incident to. This disconnects $T$ into two components
-$T_1 = (V_1, E_1)$ and $T_2 = (V_2, E_2)$, where
+This follows by induction\index{induction} on the number of
+vertices. By definition, a tree has no cycles\index{cycle}. We need to
+show that any tree $T = (V,E)$ has size $|E| = |V| - 1$. For the base
+case $|V| = 1$, there are no edges. Assume for induction that the
+result holds for all integers less than or equal to $k \geq 2$. Let
+$T = (V,E)$ be a tree having $k + 1$ vertices. Remove an edge from
+$T$, but not the vertices it is incident to. This disconnects $T$ into
+two components $T_1 = (V_1, E_1)$ and $T_2 = (V_2, E_2)$, where
 $|E| = |E_1| + |E_2| + 1$ and $|V| = |V_1| + |V_2|$ (and possibly one
 of the $E_i$ is empty). Each $T_i$ is a tree satisfying the conditions
 of the induction hypothesis. Therefore,
@@ -443,13 +489,13 @@ equivalent:
 \item\label{enu:trees_forests:is_tree} $T$ is a tree.
 
 \item\label{enu:trees_forests:no_cycles_n_minus_one_edges} $T$
-  contains no cycles and has $n - 1$ edges.
+  contains no cycles and has $n - 1$ edges\index{size!tree}.
 
 \item\label{enu:trees_forests:connected_n_minus_one_edges} $T$ is
-  connected and has $n - 1$ edges.
+  connected and has $n - 1$ edges\index{size!tree}.
 
 \item\label{enu:trees_forests:each_edge_is_cut_set} Every edge of $T$
-  is a cut set.
+  is a cut\index{cut set} set.
 \end{enumerate}
 \end{corollary}
 
@@ -506,7 +552,7 @@ a tree.
 \begin{theorem}
 \label{thm:trees_forests:tree_has_one_u_v_path}
 Let $T = (V,E)$ be a tree and let $u,v \in V$ be distinct
-vertices. Then $T$ has exactly one $u$-$v$ path.
+vertices. Then $T$ has exactly one $u$-$v$ path\index{path!tree}.
 \end{theorem}
 
 \begin{proof}
@@ -534,7 +580,8 @@ If $T = (V,E)$ is a graph then the following are equivalent:
 \begin{enumerate}
 \item $T$ is a tree.
 
-\item For any new edge $e$, the join $T + e$ has exactly one cycle.
+\item For any new edge $e$, the join\index{join} $T + e$ has exactly
+  one cycle.
 \end{enumerate}
 \end{theorem}
 
@@ -586,14 +633,14 @@ statements are equivalent:
 \begin{enumerate}
 \item $T$ is a tree.
 
-\item $T$ contains no cycles and has $n - 1$ edges.
+\item $T$ contains no cycles and has $n - 1$ edges\index{size!tree}.
 
-\item $T$ is connected and has $n - 1$ edges.
+\item $T$ is connected and has $n - 1$ edges\index{size!tree}.
 
 \item Every edge of $T$ is a cut set.
 
 \item For any pair of distinct vertices $u,v \in V$, there is exactly
-  one $u$-$v$ path.
+  one $u$-$v$ path\index{path!tree}.
 
 \item For any new edge $e$, the join $T + e$ has exactly one cycle.
 \end{enumerate}
@@ -603,8 +650,8 @@ Let $G = (V_1, E_1)$ be a graph and $T = (V_2, E_2)$ a subgraph of $G$
 that is a tree\index{tree}. As in part~(6) of
 Theorem~\ref{thm:trees_forests:basic_characterizations_of_trees}, we
 see that adding just one edge in $E_1 - E_2$ to $T$ will create a
-unique cycle in $G$. Such a cycle is called a
-\emph{fundamental cycle}\index{fundamental cycle} of $G$. The set of
+unique cycle\index{cycle} in $G$. Such a cycle is called a
+\emph{fundamental cycle}\index{cycle!fundamental} of $G$. The set of
 such fundamental cycles of $G$ depends on $T$.
 
 The following result essentially says that if a tree has at least one
@@ -618,8 +665,8 @@ Every nontrivial tree has at least two leaves.
 
 \begin{proof}
 Let $T$ be a nontrivial tree of order $m$ and size $n$. Consider the
-degree sequence $d_1, d_2, \dots, d_m$ of $T$ where
-$d_1 \leq d_2 \leq \cdots \leq d_m$. As $T$ is nontrivial and
+degree sequence\index{degree!sequence} $d_1, d_2, \dots, d_m$ of $T$
+where $d_1 \leq d_2 \leq \cdots \leq d_m$. As $T$ is nontrivial and
 connected, then $m \geq 2$ and $d_i \geq 1$ for $i = 1, 2, \dots, m$.
 If $T$ has less than two leaves, then $d_1 \geq 1$ and $d_i \geq 2$
 for $2 \leq i \leq m$, hence
@@ -650,13 +697,15 @@ Conclude that $T$ has at least two leaves.
 \end{proof}
 
 \begin{theorem}
-If $T$ is a tree of order $m$ and $G$ is a graph with minimum degree
-$\delta(G) \geq m - 1$, then $T$ is isomorphic to a subgraph of $G$.
+If $T$ is a tree of order $m$ and $G$ is a graph with
+minimum\index{degree!minimum} degree $\delta(G) \geq m - 1$, then $T$
+is isomorphic to a subgraph of $G$.
 \end{theorem}
 
 \begin{proof}
-Use an inductive argument on the number of vertices. The result holds
-for $m = 1$ because $K_1$ is a subgraph of every nontrivial graph. The
+Use an inductive\index{induction} argument on the number of
+vertices. The result holds for $m = 1$ because
+$K_1$\index{graph!trivial} is a subgraph of every nontrivial graph. The
 result also holds for $m = 2$ since $K_2$ is a subgraph of any graph
 with at least one edge.
 
@@ -670,32 +719,35 @@ $v$. Then $T - v$ is a tree of order $m - 1$ and
 $\delta(G) \geq m - 1 > m - 2$. Apply the inductive hypothesis to see
 that $T - v$ is isomorphic to a subgraph $T'$ of $G$. Let $u'$ be the
 vertex of $T'$ that corresponds to the vertex $u$ of $T$ under an
-isomorphism. Since $\deg(u') \geq m - 1$ and $T'$ has $m - 2$ vertices
-distinct from $u'$, it follows that $u'$ is adjacent to some
-$w \in V(G)$ such that $w \notin V(T')$. Therefore $T$ is isomorphic
-to the graph obtained by adding the edge $u'w$ to $T'$.
+isomorphism\index{isomorphism}. Since $\deg(u') \geq m - 1$ and $T'$
+has $m - 2$ vertices distinct from $u'$, it follows that $u'$ is
+adjacent to some $w \in V(G)$ such that $w \notin V(T')$. Therefore
+$T$ is isomorphic to the graph obtained by adding the edge $u'w$ to
+$T'$.
 \end{proof}
 
 \begin{example}
 \label{eg:trees_forests:Euler_phi_function_tree}
-Consider a positive integer $n$. The Euler phi function $\varphi(n)$
-counts the number of integers $a$, with $1 \leq a \leq n$, such that
-$\gcd(a,n) = 1$. The Euler phi sequence of $n$ is obtained by
-repeatedly iterating $\varphi(n)$ with initial iteration value
-$n$. Continue on iterating and stop when the output of
-$\varphi(\alpha_k)$ is $1$, for some positive integer $\alpha_k$. The
-number of terms generated by the iteration, including the initial
-iteration value $n$ and the final value of $1$, is the length of
-$\varphi(n)$.
+Consider a positive integer $n$. The Euler\index{Euler!Leonhard}
+phi\index{Euler!phi function} function
+$\varphi(n)$\index{$\varphi(n)$} counts the number of integers $a$,
+with $1 \leq a \leq n$, such that $\gcd(a,n) = 1$. The Euler phi
+sequence\index{Euler!phi sequence} of $n$ is obtained by repeatedly
+iterating $\varphi(n)$ with initial iteration value $n$. Continue on
+iterating and stop when the output of $\varphi(\alpha_k)$ is $1$, for
+some positive integer $\alpha_k$. The number of terms generated by the
+iteration, including the initial iteration value $n$ and the final
+value of $1$, is the length of $\varphi(n)$.
 %%
 \begin{enumerate}[(a)]
-\item Let $s_0=n, s_1, s_2, \dots, s_k=1$ be the Euler phi sequence of
-  $n$ and produce a digraph $G$ of this sequence as follows. The
-  vertex set of $G$ is $V = \{s_0=n, s_1, s_2, \dots, s_k=1\}$ and the
-  edge set of $G$ is $E = \{s_i s_{i+1} \mid 0 \leq i < k\}$. Produce
-  the digraphs of the Euler phi sequences of $15$, $22$, $33$, $35$,
-  $69$, and $72$. Construct the union of all such digraphs and
-  describe the resulting graph structure.
+\item Let $s_0=n, s_1, s_2, \dots, s_k=1$ be the Euler phi
+  sequence\index{Euler!phi sequence} of $n$ and produce a digraph $G$
+  of this sequence as follows. The vertex set of $G$ is
+  $V = \{s_0=n, s_1, s_2, \dots, s_k=1\}$ and the edge set of $G$ is
+  $E = \{s_i s_{i+1} \mid 0 \leq i < k\}$. Produce the digraphs of the
+  Euler phi sequences\index{Euler!phi sequence} of $15$, $22$, $33$,
+  $35$, $69$, and $72$. Construct the union\index{union!digraph} of
+  all such digraphs and describe the resulting graph structure.
 
 \item For each $n = 1, 2, \dots, 1000$, compute the length of
   $\varphi(n)$ and plot the pairs $(n, \varphi(n))$ on one set of axes.
@@ -703,7 +755,7 @@ $\varphi(n)$.
 \end{example}
 
 \begin{proof}[Solution]
-The Euler phi sequence of $15$ is
+The Euler phi sequence\index{Euler!phi sequence} of $15$ is
 \[
 15,\quad
 \varphi(15) = 8,\quad
@@ -711,19 +763,21 @@ The Euler phi sequence of $15$ is
 \varphi(4) = 2,\quad
 \varphi(2) = 1.
 \]
-The Euler phi sequences of $22$, $33$, $35$, $69$, and $72$ can be
-similarly computed to obtain their respective digraph
-representations. The union of all such digraphs is a directed tree
-rooted at $1$, as shown in
+The Euler phi sequences\index{Euler!phi sequence} of $22$, $33$, $35$,
+$69$, and $72$ can be similarly computed to obtain their respective
+digraph representations. The union\index{union!digraph} of all such
+digraphs is a directed tree rooted at $1$, as shown in
 Figure~\ref{fig:trees_forests:union_digraphs_Euler_phi_sequences}.
 Figure~\ref{fig:trees_forests:plot_length_Euler_phi} shows a
-scatterplot of $n$ versus the length of $\varphi(n)$.
+scatterplot\index{scatterplot} of $n$ versus the length of
+$\varphi(n)$.
 \end{proof}
 
 \begin{figure}[!htbp]
 \centering
-%%
-%%
+\index{Euler!phi sequence}
+\index{scatterplot}
+\index{union!digraph}
 \subfigure[]{
 \label{fig:trees_forests:union_digraphs_Euler_phi_sequences}
 \input{image/trees-forests/union-digraphs-Euler-phi-sequences.tex}
@@ -743,85 +797,109 @@ scatterplot of $n$ versus the length of $\varphi(n)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Minimum spanning trees}
+\index{spanning tree!minimum}
 
-Suppose we want to design an electronic circuit connecting several
-components. If these components represent the vertices of a graph and
-a wire connecting two components represents an edge of the graph, then
-for economical reasons we will want to connect the components together
+Suppose we want to design an electronic
+circuit\index{electronic circuit} connecting several components. If
+these components represent the vertices of a graph and a wire
+connecting two components represents an edge of the graph, then for
+economical reasons we will want to connect the components together
 using the least amount of wire. The problem essentially amounts to
-finding a minimum spanning tree in the graph containing these vertices.
+finding a minimum\index{spanning tree!minimum} spanning tree in the
+graph containing these vertices.
 
-But what is a spanning tree? We can characterize a spanning tree in
-several ways, each leading to an algorithm for constructing a spanning
+But what is a spanning\index{spanning tree} tree? We can characterize
+a spanning\index{spanning tree} tree in several ways, each leading to
+an algorithm for constructing a spanning\index{spanning tree}
 tree. Let $G$ be a connected graph and let $T$ be a subgraph of
 $G$. If $T$ is a tree that contains all the vertices of $G$, then $T$
-is called a \emph{spanning tree} of $G$. We can think of $T$ as a tree
-that is also an edge-deletion subgraph of $G$. That is, we start with
-a connected graph $G$ and delete an edge from $G$ such that the
-resulting edge-deletion subgraph $T_1$ is still connected. If $T_1$ is
-a tree, then we have obtained a spanning tree of $G$. Otherwise, we
-delete an edge from $T_1$ to obtain an edge-deletion subgraph $T_2$
-that is still connected. If $T_2$ is a tree, then we are
-done. Otherwise, we repeat the above procedure until we obtain an
-edge-deletion subgraph $T_k$ of $G$ such that $T_k$ is connected,
-$T_k$ is a tree, and it contains all vertices of $G$. Each edge
-removal does not decrease the number of vertices and must also leave
-the resulting edge-deletion subgraph connected. Thus eventually the
-above procedure results in a spanning tree of $G$. Our discussion is
+is called a \emph{spanning tree}\index{spanning tree} of $G$. We can
+think of $T$ as a tree that is also an
+edge-deletion\index{subgraph!edge-deletion} subgraph of $G$. That is,
+we start with a connected graph $G$ and delete an edge from $G$ such
+that the resulting edge-deletion\index{subgraph!edge-deletion}
+subgraph $T_1$ is still connected. If $T_1$ is a tree, then we have
+obtained a spanning\index{spanning tree} tree of $G$. Otherwise, we
+delete an edge from $T_1$ to obtain an
+edge-deletion\index{subgraph!edge-deletion} subgraph $T_2$ that is
+still connected. If $T_2$ is a tree, then we are done. Otherwise, we
+repeat the above procedure until we obtain an
+edge-deletion\index{subgraph!edge-deletion} subgraph $T_k$ of $G$ such
+that $T_k$ is connected, $T_k$ is a tree, and it contains all vertices
+of $G$. Each edge removal does not decrease the number of vertices and
+must also leave the resulting
+edge-deletion\index{subgraph!edge-deletion} subgraph connected. Thus
+eventually the above procedure results in a
+spanning\index{spanning tree} tree of $G$. Our discussion is
 summarized in
 Algorithm~\ref{alg:trees_forests:randomized_spanning_tree_construction}.
 
 \begin{algorithm}[!htbp]
+\index{spanning tree}
 \input{algorithm/trees-forests/randomized-spanning-tree.tex}
 \caption{Randomized spanning tree construction.}
 \label{alg:trees_forests:randomized_spanning_tree_construction}
 \end{algorithm}
 
-Another characterization of a spanning tree $T$ of a connected graph
-$G$ is that $T$ is a maximal set of edges of $G$ that contains no
-cycle. Kruskal's algorithm~(see
+Another characterization of a spanning\index{spanning tree} tree $T$
+of a connected graph $G$ is that $T$ is a maximal set of edges of $G$
+that contains no cycle\index{acyclic}.
+Kruskal's\index{Kruskal!algorithm} algorithm~(see
 section~\ref{subsec:trees_forests:Kruskal_algorithm}) exploits this
-condition to construct a minimum spanning tree~(MST)\index{MST}. A
-\emph{minimum spanning tree}\index{tree!minimum spanning} is a
-spanning tree of a weighted graph having lowest total weight among all
-possible spanning trees of the graph. A third characterization of a
-spanning tree is that it is a minimal set of edges that connect all
-vertices, a characterization that results in yet another algorithm
-called Prim's algorithm~(see
+condition to construct a minimum\index{spanning tree!minimum} spanning
+tree~(MST)\index{MST}. A
+\emph{minimum spanning tree}\index{spanning tree!minimum} is a
+spanning\index{spanning tree} tree of a weighted\index{graph!weighted}
+graph having lowest total weight\index{weight} among all possible
+spanning\index{spanning tree} trees of the graph. A third
+characterization of a spanning\index{spanning tree} tree is that it is
+a minimal set of edges that connect all vertices, a characterization
+that results in yet another algorithm called
+Prim's\index{Prim!algorithm} algorithm~(see
 section~\ref{subsec:trees_forests:Prim_algorithm}) for constructing
-minimum spanning trees. The task of determining a minimum spanning
-tree in a connected weighted graph is called the
-\emph{minimum spanning tree problem}. As early as 1926, Otakar
-Bor\r{u}vka stated~\cite{Boruvka1926a,Boruvka1926b} this problem and
-offered a solution now known as Bor\r{u}vka's algorithm~(see
-section~\ref{subsec:trees_forests:Boruvka_algorithm}). See Graham and
-Hell~\cite{GrahamHell1985} for a history of the minimum spanning tree
-problem.
+minimum\index{spanning tree!minimum} spanning trees. The task of
+determining a minimum\index{spanning tree!minimum} spanning tree in a
+connected weighted\index{graph!weighted} graph is called the
+\emph{minimum spanning tree problem}\index{minimum spanning tree problem}.
+As early as 1926, Otakar Bor\r{u}vka\index{Bor\r{u}vka!Otakar}
+stated~\cite{Boruvka1926a,Boruvka1926b} this problem and offered a
+solution now known as Bor\r{u}vka's\index{Bor\r{u}vka!algorithm}
+algorithm~(see
+section~\ref{subsec:trees_forests:Boruvka_algorithm}). See
+Graham\index{Graham, Ronald L.} and
+Hell\index{Hell, Pavol}~\cite{GrahamHell1985} for a history of the
+minimum\index{spanning tree!minimum} spanning tree problem.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Kruskal's algorithm}
 \label{subsec:trees_forests:Kruskal_algorithm}
+\index{Kruskal!algorithm}
 
-In 1956, Joseph B. Kruskal published~\cite{Kruskal1956} a procedure
-for constructing a minimum spanning tree of a connected weighted
-graph $G = (V,E)$. Now known as Kruskal's algorithm, with a suitable
+In 1956, Joseph B. Kruskal\index{Kruskal!Joseph B.}
+published~\cite{Kruskal1956} a procedure for constructing a
+minimum\index{spanning tree!minimum} spanning tree of a connected
+weighted\index{graph!weighted} graph $G = (V,E)$. Now known as
+Kruskal's\index{Kruskal!algorithm} algorithm, with a suitable
 implementation the procedure runs in $O\big(|E| \cdot \log |E|\big)$
-time. Variants of Kruskal's algorithm include the algorithm by
-Prim~\cite{Prim1957} and that by Loberman and
-Weinberger~\cite{LobermanWeinberger1957}.
+time. Variants of Kruskal's\index{Kruskal!algorithm} algorithm
+include the algorithm by Prim\index{Prim!R. C.}~\cite{Prim1957} and
+that by Loberman\index{Loberman, H.} and
+Weinberger\index{Weinberger, A.}~\cite{LobermanWeinberger1957}.
 
-Kruskal's algorithm belongs to the class of greedy algorithms. As will
-be explained below, when constructing a minimum spanning tree
-Kruskal's algorithm considers only the edge having minimum weight
-among all available edges. Given a weighted nontrivial graph
-$G = (V,E)$ that is connected, let $w: E \to \R$ be the weight
-function of $G$. The first stage is creating a ``skeleton'' of the
-tree $T$ that is initially set to be a graph with no edges, i.e.
-$T = (V, \emptyset)$. The next stage involves sorting the edges of $G$
-by weights in nondecreasing order. In other words, we label the edges
-of $G$ as follows:
+Kruskal's\index{Kruskal!algorithm} algorithm belongs to the class of
+greedy\index{algorithm!greedy} algorithms. As will be explained below,
+when constructing a minimum\index{spanning tree!minimum} spanning tree
+Kruskal's\index{Kruskal!algorithm} algorithm considers only the edge
+having minimum\index{weight!minimum} weight among all available
+edges. Given a weighted\index{graph!weighted} nontrivial graph
+$G = (V,E)$ that is connected, let $w: E \to \R$ be the
+weight\index{weight!function} function of $G$. The first stage is
+creating a ``skeleton'' of the tree $T$ that is initially set to be a
+graph without edges, i.e. $T = (V, \emptyset)$. The next stage
+involves sorting the edges of $G$ by weights in nondecreasing
+order. In other words, we label the edges of $G$ as follows:
 \[
 E
 =
@@ -830,22 +908,26 @@ E
 where $n = |E|$ and $w(e_1) \leq w(e_2) \leq \cdots \leq w(e_n)$.
 Now consider each edge $e_i$ for $i = 1,2,\dots,n$. We add $e_i$ to
 the edge set of $T$ provided that $e_i$ does not result in $T$ having
-a cycle. The only way adding $e_i = u_i v_i$ to $T$ would create a
-cycle is if both $u_i$ and $v_i$ were endpoints of edges~(not
-necessarily distinct) in the same connected component of $T$. As long
-as the acyclic condition holds with the addition of a new edge to $T$,
-we add that new edge. Following the acyclic test, we also test that
-the (updated) graph $T$ is a tree of $G$. As $G$ is a graph of order
-$|V|$, apply
+a cycle\index{acyclic}. The only way adding $e_i = u_i v_i$ to $T$
+would create a cycle is if both $u_i$ and $v_i$ were
+endpoints\index{edge!endpoint} of edges~(not necessarily distinct) in
+the same connected\index{component!connected} component of $T$. As
+long as the acyclic\index{acyclic} condition holds with the addition
+of a new edge to $T$, we add that new edge. Following the
+acyclic\index{acyclic} test, we also test that the~(updated) graph $T$
+is a tree of $G$. As $G$ is a graph of order $|V|$, apply
 Theorem~\ref{thm:trees_forests:basic_characterizations_of_trees} to
-see that if $T$ has size $|V| - 1$, then it is a spanning tree of
-$G$. Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} provides
-pseudocode of our discussion of Kruskal's algorithm. When the
-algorithm halts, it returns a minimum spanning tree of $G$. The
+see that if $T$ has size $|V| - 1$, then it is a
+spanning\index{spanning tree} tree of $G$.
+Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} provides
+pseudocode of our discussion of Kruskal's\index{Kruskal!algorithm}
+algorithm. When the algorithm halts, it returns a
+minimum\index{spanning tree!minimum} spanning tree of $G$. The
 correctness of Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} is
 proven in Theorem~\ref{thm:trees_forests:correctness_Kruskal_algorithm}.
 
 \begin{algorithm}[!htbp]
+\index{Kruskal!algorithm}
 \input{algorithm/trees-forests/Kruskal-algorithm.tex}
 \caption{Kruskal's algorithm.}
 \label{alg:trees_forests:Kruskal_algorithm}
@@ -853,6 +935,7 @@ proven in Theorem~\ref{thm:trees_forests:correctness_Kruskal_algorithm}.
 
 \begin{theorem}
 \label{thm:trees_forests:correctness_Kruskal_algorithm}
+\index{Kruskal!algorithm}
 \textbf{Correctness of Algorithm~\ref{alg:trees_forests:Kruskal_algorithm}.}
 If $G$ is a nontrivial connected weighted graph, then
 Algorithm~\ref{alg:trees_forests:Kruskal_algorithm} outputs a minimum
@@ -972,14 +1055,16 @@ def kruskal(G):
     AT = matrix(AT)
     return Graph(AT, format = "adjacency_matrix", weighted = True)
 \end{lstlisting}
-\index{Kruskal's algorithm}
+\index{Kruskal!algorithm}
 
-Here is an example. We start with the grid graph. This is implemented
-in Sage such that the vertices are given by the coordinates of the
-grid the graph lies on, as opposed to $0, 1, \dots, n-1$. Since the
-above implementation of Kruskal's algorithm assumes that the vertices
-are $V = \{0, 1, \dots, n-1\}$, we first redefine the graph suitable
-for running Kruskal's algorithm on it.
+Here is an example. We start with the grid\index{grid graph}
+graph. This is implemented in Sage such that the vertices are given by
+the coordinates of the grid the graph lies on, as opposed to
+$0, 1, \dots, n-1$. Since the above implementation of
+Kruskal's\index{Kruskal!algorithm} algorithm assumes that the
+vertices are $V = \{0, 1, \dots, n-1\}$, we first redefine the graph
+suitable for running Kruskal's\index{Kruskal!algorithm} algorithm on
+it.
 %%
 \begin{lstlisting}
 sage: G = graphs.GridGraph([4,4])
@@ -996,8 +1081,10 @@ Figure~\ref{fig:trees-forests:Kruskal_example}.
 
 \begin{figure}[!htbp]
 \centering
+\index{grid graph}
+\index{Kruskal!algorithm}
 \input{image/trees-forests/Kruskal-example.tex}
-\caption{Kruskal's algorithm for the $4\times 4$ grid graph.}
+\caption{Kruskal's algorithm for the $4 \times 4$ grid graph.}
 \label{fig:trees-forests:Kruskal_example}
 \end{figure}
 
@@ -1006,25 +1093,31 @@ Figure~\ref{fig:trees-forests:Kruskal_example}.
 
 \subsection{Prim's algorithm}
 \label{subsec:trees_forests:Prim_algorithm}
+\index{Prim!algorithm}
 
-Like Kruskal's algorithm, Prim's algorithm uses a greedy approach to
-computing a minimum spanning tree of a connected weighted graph
-$G = (V,E)$, where $n = |V|$ and $m = |E|$. The algorithm was
-developed in 1930 by Czech mathematician V.~Jarn\'ik~\cite{Jarnik1930}
-and later independently by R.~C.~Prim~\cite{Prim1957} and
-E.~W.~Dijkstra~\cite{Dijkstra1959}. However, Prim was the first to
-present an implementation that runs in time $O(n^2)$. Using $2$-heaps,
-the runtime can be reduced~\cite{KershenbaumVanSlyke1972} to
-$O(m \cdot \log n)$. With a Fibonacci heap
+Like Kruskal's\index{Kruskal!algorithm} algorithm,
+Prim's\index{Prim!algorithm} algorithm uses a
+greedy\index{algorithm!greedy} approach to computing a
+minimum\index{spanning tree!minimum} spanning tree of a connected
+weighted\index{graph!weighted} graph $G = (V,E)$, where $n = |V|$ and
+$m = |E|$. The algorithm was developed in 1930 by Czech mathematician
+V.~Jarn\'ik\index{Jarn\'ik, V.}~\cite{Jarnik1930} and later
+independently by R.~C.~Prim\index{Prim!R. C.}~\cite{Prim1957} and
+E.~W.~Dijkstra\index{Dijkstra!E. W.}~\cite{Dijkstra1959}. However,
+Prim\index{Prim!R. C.} was the first to present an implementation
+that runs in time $O(n^2)$. Using $2$-heaps\index{heap!$2$-heap}, the
+runtime can be reduced~\cite{KershenbaumVanSlyke1972} to
+$O(m \cdot \log n)$. With a Fibonacci\index{heap!Fibonacci} heap
 implementation~\cite{FredmanTarjan1984,FredmanTarjan1987}, the runtime
 can be reduced even further to $O(m + n \cdot \log n)$.
 
-Pseudocode of Prim's algorithm is given in
+Pseudocode of Prim's\index{Prim!algorithm} algorithm is given in
 Algorithm~\ref{alg:trees_forests:prim}. For each $v \in V$, $\cost[v]$
-denotes the minimum weight among all edges connecting $v$ to a vertex
-in the tree $T$, and $\parent[v]$ denotes the parent of $v$ in
-$T$. During the algorithm's execution, vertices $v$ that are not in
-$T$ are organized in the minimum-priority queue $Q$, prioritized
+denotes the minimum\index{weight!minimum} weight among all edges
+connecting $v$ to a vertex in the tree $T$, and $\parent[v]$ denotes
+the parent of $v$ in $T$. During the algorithm's execution, vertices
+$v$ that are not in $T$ are organized in the
+minimum-priority\index{queue!minimum-priority} queue $Q$, prioritized
 according to $\cost[v]$. Lines~\ref{alg:prim:for_start:init}
 to~\ref{alg:prim:for_end:init} set each $\cost[v]$ to a number that
 is larger than any weight in the graph $G$, usually written $\infty$.
@@ -1033,9 +1126,10 @@ yet started constructing the MST $T$. In
 lines~\ref{alg:prim:arbitrary_root}
 to~\ref{alg:prim:init_min_priority_queue}, we choose an arbitrary
 vertex $r$ from $V$ and mark that vertex as the root of $T$. The
-minimum-priority queue is set to be all vertices from $V$. We set
-$\cost[r]$ to zero, making $r$ the only vertex so far with a cost that
-is $< \infty$. During the first execution of the while loop from
+minimum-priority\index{queue!minimum-priority} queue is set to be all
+vertices from $V$. We set $\cost[r]$ to zero, making $r$ the only
+vertex so far with a cost that is $< \infty$. During the first
+execution of the while loop from
 lines~\ref{alg:prim:while_start:build_tree}
 to~\ref{alg:prim:while_end:build_tree}, $r$ is the first vertex to be
 extracted from $Q$ and processed. Line~\ref{alg:prim:extract_min}
@@ -1059,10 +1153,11 @@ Figure~\ref{fig:tree_forests:Prim_algorithm_undirected_graph} shows
 the corresponding tree rooted at vertex $5$ of an undirected graph.
 
 \begin{algorithm}[!htbp]
+\index{Prim!algorithm}
+\index{spanning tree!minimum}
 \input{algorithm/trees-forests/Prim-algorithm.tex}
 \caption{Prim's algorithm.}
 \label{alg:trees_forests:prim}
-\index{Prim's algorithm}
 \end{algorithm}
 
 \begin{lstlisting}
@@ -1133,6 +1228,8 @@ sage: prim(G).edges()
 
 \begin{figure}[!htbp]
 \centering
+\index{Prim!algorithm}
+\index{spanning tree!minimum}
 \input{image/trees-forests/Prim-algorithm-digraph.tex}
 \caption{Running Prim's algorithm over a digraph.}
 \label{fig:tree_forests:Prim_algorithm_digraph}
@@ -1151,6 +1248,8 @@ sage: prim(G).edges()
 
 \begin{figure}[!htbp]
 \centering
+\index{Prim!algorithm}
+\index{spanning tree!minimum}
 \input{image/trees-forests/Prim-algorithm-undirected-graph.tex}
 \caption{Running Prim's algorithm over an undirected graph.}
 \label{fig:tree_forests:Prim_algorithm_undirected_graph}
@@ -1161,48 +1260,61 @@ sage: prim(G).edges()
 
 \subsection{Bor\r{u}vka's algorithm}
 \label{subsec:trees_forests:Boruvka_algorithm}
+\index{Bor\r{u}vka!algorithm}
 
 Bor\r{u}vka's
-algorithm~\cite{Boruvka1926a,Boruvka1926b}\index{Bor\r{u}vka's algorithm}
-is an algorithm for finding a minimum spanning tree in a weighted
-connected graph $G = (V,E)$ for which all edge weights are
-distinct. It was first published in~1926 by Otakar Bor\r{u}vka but
-subsequently rediscovered by many others, including
-Choquet~\cite{Choquet1938} and Florek~et~al.~\cite{FlorekEtAl1951}. If
-$G$ has order $n = |V|$ and size $m = |E|$, it can be shown that
-Bor\r{u}vka's algorithm runs in time $O(m \cdot \log n)$.
+algorithm~\cite{Boruvka1926a,Boruvka1926b}\index{Bor\r{u}vka!algorithm}
+is an algorithm for finding a minimum\index{spanning tree!minimum}
+spanning tree in a weighted connected graph $G = (V,E)$ for which all
+edge weights are distinct. It was first published in~1926 by Otakar
+Bor\r{u}vka\index{Bor\r{u}vka!Otakar} but subsequently rediscovered
+by many others, including
+Choquet\index{Choquet, G.}~\cite{Choquet1938} and
+Florek\index{Florek, K.}\index{{\L}ukaszewicz, J.}\index{Perkal, J.}\index{Steinhaus, H.}\index{Zubrzycki, S.}~et~al.~\cite{FlorekEtAl1951}.
+If $G$ has order $n = |V|$ and size $m = |E|$, it can be shown that
+Bor\r{u}vka's\index{Bor\r{u}vka!algorithm} algorithm runs in time
+$O(m \cdot \log n)$.
 
 \begin{algorithm}[!htbp]
+\index{Bor\r{u}vka!algorithm}
+\index{spanning tree!minimum}
 \input{algorithm/trees-forests/Boruvka.tex}
 \caption{Bor\r{u}vka's algorithm.}
 \label{alg:trees_forests:Boruvka}
 \end{algorithm}
 
 Algorithm~\ref{alg:trees_forests:Boruvka} provides pseudocode of
-Bor\r{u}vka's algorithm. Given a weighted connected graph $G = (V,E)$
-all of whose edge weights are distinct, the initialization steps in
+Bor\r{u}vka's\index{Bor\r{u}vka!algorithm} algorithm. Given a
+weighted connected graph $G = (V,E)$ all of whose edge weights are
+distinct, the initialization steps in
 lines~\ref{alg:Boruvka:get_graph_order}
-and~\ref{alg:Boruvka:spanning_forest} construct a spanning forest $T$
-of $G$, i.e. the subgraph of $G$ containing all of the latter's
-vertices and no edges. The initial forest has $n$ components, each
-being the trivial graph $K_1$. The while loop from
+and~\ref{alg:Boruvka:spanning_forest} construct a
+spanning\index{spanning forest} forest $T$ of $G$, i.e. the subgraph
+of $G$ containing all of the latter's vertices and no edges. The
+initial forest has $n$ components, each being the
+trivial\index{graph!trivial} graph $K_1$. The while loop from
 lines~\ref{alg:Boruvka:while_loop_start}
 to~\ref{alg:Boruvka:while_loop_end} constructs a spanning tree of $G$
-via a recursive procedure similar to
+via a recursive\index{recursion} procedure similar to
 Theorem~\ref{thm:trees_forests:recursive_construction_trees}. For each
 component $T'$ of $T$, we consider all the out-going edges of $T'$ and
-choose an edge $e'$ that has minimum weight among all such edges. This
-edge is then added to the edge set of $T$. In this way, two distinct
-components, each of which is a tree, are joined together by a
-bridge. At the end of the while loop, our final graph is a minimum
+choose an edge $e'$ that has minimum\index{weight!minimum} weight
+among all such edges. This edge is then added to the edge set of
+$T$. In this way, two distinct components, each of which is a tree,
+are joined together by a bridge\index{bridge}. At the end of the while
+loop, our final graph is a minimum\index{spanning tree!minimum}
 spanning tree of $G$. Note that the forest-merging steps in the for
 loop from lines~\ref{alg:Boruvka:for_loop}
-to~\ref{alg:Boruvka:while_loop_end} are amenable to parallelization,
-hence the alternative name to Bor\r{u}vka's algorithm: the parallel
-forest-merging method.
+to~\ref{alg:Boruvka:while_loop_end} are amenable to
+parallelization\index{parallelization}, hence the alternative name to
+Bor\r{u}vka's\index{Bor\r{u}vka!algorithm} algorithm: the parallel
+forest-merging method\index{parallel forest-merging}.
 
 \begin{figure}[!htbp]
 \centering
+\index{Bor\r{u}vka!algorithm}
+\index{recursion}
+\index{spanning tree!minimum}
 \input{image/trees-forests/Boruvkas-algorithm.tex}
 \caption{Recursive construction of MST via Bor\r{u}vka's algorithm.}
 \label{fig:trees_forests:Boruvka_algorithm}
@@ -1214,8 +1326,9 @@ Figure~\ref{fig:trees_forests:Boruvka_algorithm} illustrates the
 gradual construction of a minimum spanning tree for the undirected
 graph given in
 Figure~\ref{fig:Boruvkas_algorithm:original_undirected_graph}. In this
-case, we require two iterations of the while loop in Bor\r{u}vka's
-algorithm in order to obtain the final minimum spanning tree in
+case, we require two iterations of the while loop in
+Bor\r{u}vka's\index{Bor\r{u}vka!algorithm} algorithm in order to
+obtain the final minimum\index{spanning tree!minimum} spanning tree in
 Figure~\ref{fig:Boruvkas_algorithm:final_minimum_spanning_tree}.\qed
 \end{example}
 
@@ -1328,23 +1441,30 @@ sage: boruvka(G).edges()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Binary trees}
+\index{binary tree}
 
-A \emph{binary tree} is a rooted tree with at most two children per
-parent. Each child is designated as either a \emph{left-child} or a
-\emph{right-child}. Thus binary trees are also $2$-ary trees. Some
+A \emph{binary tree}\index{binary tree} is a rooted\index{tree!rooted}
+tree with at most two children per parent. Each child is designated as
+either a \emph{left-child}\index{child!left} or a
+\emph{right-child}\index{child!right}. Thus binary\index{binary tree}
+trees are also $2$-ary\index{tree!$2$-ary} trees. Some
 examples of binary trees are illustrated in
 Figure~\ref{fig:trees_forests:examples_binary_trees}. Given a vertex
-$v$ in a binary tree $T$ of height $h$, the \emph{left subtree} of $v$
-is comprised of the subtree that spans the left-child of $v$ and all
-of this child's descendants. The notion of a \emph{right-subtree} of a
-binary tree is similarly defined. Each of the left- and right-subtrees
-of $v$ is itself a binary tree with height $\leq h - 1$. If $v$ is the
-root vertex, then each of its left- and right-subtrees has height
-$\leq h - 1$, and at least one of these subtrees has height equal to
-$h - 1$.
+$v$ in a binary tree $T$ of height $h$, the
+\emph{left subtree}\index{subtree!left} of $v$ is comprised of the
+subtree that spans the left-child\index{child!left} of $v$ and all
+of this child's descendants. The notion of a
+\emph{right-subtree}\index{subtree!right} of a
+binary\index{binary tree} tree is similarly defined. Each of the
+left\index{subtree!left} and right\index{subtree!right} subtrees of
+$v$ is itself a binary tree with height $\leq h - 1$. If $v$ is the
+root vertex, then each of its left\index{subtree!left} and
+right\index{subtree!right} subtrees has height $\leq h - 1$, and at
+least one of these subtrees has height equal to $h - 1$.
 
 \begin{figure}[!htbp]
 \centering
+\index{binary tree}
 \input{image/trees-forests/example-binary-trees.tex}
 \caption{Examples of binary trees.}
 \label{fig:trees_forests:examples_binary_trees}
@@ -1352,19 +1472,21 @@ $h - 1$.
 
 \begin{theorem}
 \label{thm:trees_forests:complete_binary_tree_exact_order}
-If $T$ is a complete binary tree of height $h$, then $T$ has
-$2^{h+1} - 1$ vertices.
+If $T$ is a complete\index{binary tree!complete} binary tree of height
+$h$, then $T$ has $2^{h+1} - 1$ vertices.
 \end{theorem}
 
 \begin{proof}
-Argue by induction on $h$. The assertion of the theorem is trivially
-true in the base case $h = 0$. Let $k \geq 0$ and assume for induction
-that any complete binary tree of height $k$ has order $2^{k+1} - 1$.
-Suppose $T$ is a complete binary tree of height $k + 1$ and denote the
-left- and right-subtrees of $T$ by $T_1$ and $T_2$, respectively. Each
-$T_i$ (for $i = 1,2$) is a complete binary tree of height $k$ and by
-our induction hypothesis $T_i$ has $2^{k+1} - 1$ vertices. Thus $T$
-has order
+Argue by induction\index{induction} on $h$. The assertion of the
+theorem is trivially true in the base case $h = 0$. Let $k \geq 0$ and
+assume for induction that any complete binary tree of height $k$ has
+order $2^{k+1} - 1$. Suppose $T$ is a
+complete\index{binary tree!complete} binary tree of height $k + 1$ and
+denote the left\index{subtree!left} and right\index{subtree!right}
+subtrees of $T$ by $T_1$ and $T_2$, respectively. Each $T_i$~(for
+$i = 1,2$) is a complete\index{binary tree!complete} binary tree of
+height $k$ and by our induction hypothesis $T_i$ has $2^{k+1} - 1$
+vertices. Thus $T$ has order
 \[
 1 + (2^{k+1} - 1) + (2^{k+1} - 1)
 =
@@ -1374,8 +1496,9 @@ as required.
 \end{proof}
 
 Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}
-provides a useful upper bound on the order of a binary tree of a given
-height. This upper bound is stated in the following corollary.
+provides a useful upper bound on the order of a
+binary\index{binary tree} tree of a given height. This upper bound is
+stated in the following corollary.
 
 \begin{corollary}
 A binary tree of height $h$ has at most $2^{h+1} - 1$ vertices.
@@ -1400,10 +1523,10 @@ b_n
 \end{equation}
 %%
 Expression~\eqref{eqn:trees_forests:Catalan_recursion} is known as the
-\emph{Catalan recursion} and the number $b_n$ is the $n$-th Catalan
-number, which we know from
+\emph{Catalan recursion}\index{Catalan recursion} and the number $b_n$
+is the $n$-th Catalan\index{Catalan number} number, which we know from
 problem~\ref{chap:introduction}.\ref{prob:introduction:Euler_polygon_division}
-can be expressed in the closed form
+can be expressed in the closed\index{closed form} form
 %%
 \begin{equation}
 \label{eqn:trees_forests:nth_Catalan_number_closed_form}
@@ -1418,6 +1541,7 @@ different binary trees on $2$, $3$, and $4$ vertices, respectively.
 
 \begin{figure}[!htbp]
 \centering
+\index{binary tree}
 \input{image/trees-forests/binary-trees-2-vertices.tex}
 \caption{The $b_2 = 2$ binary trees on $2$ vertices.}
 \label{fig:trees_forests:binary_trees_2_vertices}
@@ -1425,6 +1549,7 @@ different binary trees on $2$, $3$, and $4$ vertices, respectively.
 
 \begin{figure}[!htbp]
 \centering
+\index{binary tree}
 \input{image/trees-forests/binary-trees-3-vertices.tex}
 \caption{The $b_3 = 5$ binary trees on $3$ vertices.}
 \label{fig:trees_forests:binary_trees_3_vertices}
@@ -1432,6 +1557,7 @@ different binary trees on $2$, $3$, and $4$ vertices, respectively.
 
 \begin{figure}[!htbp]
 \centering
+\index{binary tree}
 \input{image/trees-forests/binary-trees-4-vertices.tex}
 \caption{The $b_4 = 14$ binary trees on $4$ vertices.}
 \label{fig:trees_forests:binary_trees_4_vertices}
@@ -1451,9 +1577,11 @@ enumerate all different binary trees with the above orders. However,
 from $n = 4$ onwards the value of $b_n$ increases very fast. Instead
 of enumerating all the $b_n$ different binary trees of a specified
 order $n$, a related problem is generating a random binary tree of
-order $n$. That is, we consider the set $B$ as a sample space of $b_n$
-different binary trees on $n$ vertices, and choose a random element
-from $B$. Such a random element can be generated using
+order $n$. That is, we consider the set $B$ as a
+sample\index{probability!sample space} space of $b_n$ different binary
+trees on $n$ vertices, and choose a random\index{element!random}
+element from $B$. Such a random\index{element!random} element can be
+generated using
 Algorithm~\ref{alg:trees_forests:random_binary_tree}. The list
 \texttt{parent} holds all vertices with less than two children, each
 vertex can be considered as a candidate parent to which we can add a
@@ -1461,6 +1589,7 @@ child. An element of \texttt{parent} is a two-tuple $(v, k)$ where the
 vertex $v$ currently has $k$ children.
 
 \begin{algorithm}[!htbp]
+\index{binary tree!random}
 \input{algorithm/trees-forests/random-binary-tree.tex}
 \caption{Random binary tree.}
 \label{alg:trees_forests:random_binary_tree}
@@ -1470,6 +1599,7 @@ vertex $v$ currently has $k$ children.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Binary codes}
+\index{binary code}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1482,12 +1612,14 @@ another format. The finite set of symbols used is called the
 \emph{alphabet}\index{alphabet}. We shall identify a code as a finite
 set of symbols which are the image of the alphabet under this
 conversion rule. The elements of this set are referred to as
-\emph{codewords}\index{codeword}. For example, using the ASCII code,
-the letters in the English alphabet get converted into numbers in the
-set $\{0, 1, \dots, 255\}$. If these numbers are written in binary,
-then each codeword of a letter has length $8$, i.e. eight bits. In
-this way, we can reformat or encode a ``string'' into a sequence of
-binary symbols, i.e. $0$'s and $1$'s. \emph{Encoding}\index{encode} is
+\emph{codewords}\index{codeword}. For example, using the
+ASCII\index{ASCII} code, the letters in the
+English\index{alphabet!English} alphabet get converted into numbers in
+the set $\{0, 1, \dots, 255\}$. If these numbers are written in
+binary, then each codeword\index{codeword} of a letter has length $8$,
+i.e. eight bits. In this way, we can reformat or encode a
+``string''\index{string} into a sequence of binary\index{bits}
+symbols, i.e. $0$'s and $1$'s. \emph{Encoding}\index{encode} is
 the conversion process one way. \emph{Decoding}\index{decode} is the
 reverse process, converting these sequences of code-symbols back into
 information in the original format.
@@ -1495,31 +1627,40 @@ information in the original format.
 Codes are used for:
 %%
 \begin{itemize}
-\item \emph{Economy}. Sometimes this is called \emph{entropy encoding}
-  since there is an entropy function which describes how much
-  information a channel (with a given error rate) can carry and such
-  codes are designed to maximize entropy as best as possible. In this
-  case, in addition to simply being given an alphabet $\cA$, one might
-  be given a \emph{weighted alphabet}, i.e. an alphabet for which each
-  symbol $a \in \cA$ is associated with a nonnegative number
-  $w_a \geq 0$~(in practice, the probability that the symbol $a$
-  occurs in a typical word).
+\item \emph{Economy}\index{code!economy}. Sometimes this is called
+  \emph{entropy encoding}\index{entropy encoding} since there is an
+  entropy\index{entropy function} function which describes how much
+  information\index{information channel} a channel~(with a given
+  error\index{error rate} rate) can carry and such codes are designed
+  to maximize entropy as best as possible. In this case, in addition
+  to simply being given an alphabet\index{alphabet} $\cA$, one might
+  be given a \emph{weighted alphabet}\index{alphabet!weighted},
+  i.e. an alphabet for which each symbol $a \in \cA$ is associated
+  with a nonnegative number $w_a \geq 0$~(in practice, this number
+  represents the probability that the symbol $a$ occurs in a typical
+  word).
 
-\item \emph{Reliability}. Such codes are called
-  \emph{error-correcting codes}, since such codes are designed to
-  communicate information over a noisy channel in such a way that the
-  errors in transmission are likely to be correctable.
+\item \emph{Reliability}\index{code!reliability}. Such codes are
+  called \emph{error-correcting codes}\index{code!error-correcting},
+  since such codes are designed to communicate information over a
+  noisy\index{noisy channel} channel in such a way that the errors in
+  transmission are likely to be correctable.
 
-\item \emph{Security}. Such codes are called \emph{cryptosystems}. In
-  this case, the inverse of the coding function $c: \cA \to B^*$ is
-  designed to be computationally infeasible. In other words, the
-  coding function $c$ is designed to be a \emph{trapdoor function}.
+\item \emph{Security}\index{code!security}. Such codes are called
+  \emph{cryptosystems}\index{cryptosystem}. In this case, the inverse
+  of the coding function $c: \cA \to B^*$ is designed to be
+  computationally infeasible. In other words, the
+  coding\index{coding function} function $c$ is designed to be a
+  \emph{trapdoor function}\index{trapdoor function}.
 \end{itemize}
 %%
 Other codes are merely simpler ways to communicate
-information~(e.g.~flag semaphores, color codes, genetic codes, braille
-codes, musical scores, chess notation, football diagrams, and so on)
-and have little or no mathematical structure. We shall not study them.
+information~(e.g.~flag\index{flag semaphore} semaphores,
+color\index{color code} codes, genetic\index{genetic code} codes,
+braille\index{braille} codes, musical\index{musical score} scores,
+chess\index{chess} notation, football\index{football} diagrams, and so
+on) and have little or no mathematical structure. We shall not study
+them.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1533,15 +1674,16 @@ code. A \emph{prefix-free}\index{code!prefix-free} code is a
 code~(typically one of variable-length) with the property that there
 is no valid codeword in the code that is a prefix or start of any
 other codeword.\footnote{
-  In other words, a codeword $s = s_1 \cdots s_m$ is a \emph{prefix} of
-  a codeword $t = t_1 \cdots t_n$ if and only if $m \leq n$ and
-  $s_1 = t_1, \dots, s_m = t_m$. Codes that are prefix-free are easier
-  to decode than codes that are not prefix-free.
+  In other words, a codeword $s = s_1 \cdots s_m$ is a
+  \emph{prefix}\index{code!prefix} of a codeword $t = t_1 \cdots t_n$
+  if and only if $m \leq n$ and $s_1 = t_1, \dots, s_m = t_m$. Codes
+  that are prefix-free\index{code!prefix-free} are easier to decode
+  than codes that are not prefix-free.
 }
-This is the \emph{prefix-free condition}.
+This is the \emph{prefix-free condition}\index{prefix-free condition}.
 
-One example of a prefix-free code is the ASCII code. Another example
-is
+One example of a prefix-free\index{code!prefix-free} code is the
+ASCII\index{ASCII} code. Another example is
 \[
 00,\, 01,\, 100.
 \]
@@ -1550,14 +1692,15 @@ On the other hand, a non-example is the code
 00,\, 01,\, 010,\, 100
 \]
 since the second codeword is a prefix of the third one. Another
-non-example is Morse\index{code!Morse} code recalled in
+non-example is Morse\index{Morse code} code recalled in
 Table~\ref{tab:trees_forests:Morse_code}, where we use $0$ for
 ``$\cdot$'' (``dit'') and $1$ for ``$-$'' (``dah''). For example,
-consider the Morse code for \texttt{a} and the Morse code for
-\texttt{w}. These codewords violate the prefix-free condition.
+consider the Morse code for \tta and the Morse\index{Morse code} code
+for \ttw. These codewords violate the prefix-free condition.
 
 \begin{table}[!htbp]
 \centering
+\index{Morse code}
 \input{data/trees-forests/Morse-code.tex}
 \caption{Morse code}
 \label{tab:trees_forests:Morse_code}
@@ -1567,24 +1710,28 @@ consider the Morse code for \texttt{a} and the Morse code for
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Gray codes}
+\index{Gray code}
 
 We begin with some history.\footnote{
   This history comes from an unpublished section~7.2.1.1
-  (``Generating all $n$-tuples'') in volume~4 of Donald Knuth's
+  (``Generating all $n$-tuples'') in volume~4 of
+  Donald Knuth's\index{Knuth, Donald E.}
   \emph{The Art of Computer Programming}.
 }
-Frank Gray~(1887--1969) wrote about the so-called Gray codes in a~1951
-paper published in the Bell System Technical Journal and then in~1953
-patented a device~(used for television sets) based on his
-paper. However, the idea of a binary Gray code appeared earlier. In
-fact, it appeared in an earlier patent~(one by Stibitz in~1943). It
-was also used in the French engineer E.~Baudot's telegraph machine
-of~1878 and in a French booklet by L.~Gros on the solution published
-in~1872 to the ``Chinese ring puzzle''.
+Frank Gray\index{Gray, Frank}~(1887--1969) wrote about the so-called
+Gray\index{Gray code} codes in a~1951 paper published in the Bell
+System Technical Journal and then in~1953 patented a device~(used for
+television sets) based on his paper. However, the idea of a
+binary\index{Gray code!binary} Gray code appeared earlier. In fact, it
+appeared in an earlier patent~(one by Stibitz in~1943). It
+was also used in the French engineer E.~Baudot's\index{Baudot, E.}
+telegraph\index{telegraph} machine of~1878 and in a French booklet by
+L.~Gros\index{Gros, L.} on the solution published in~1872 to the
+Chinese ring\index{Chinese ring puzzle} puzzle.
 
-The term ``Gray code'' is ambiguous. It is actually a large family of
-sequences of $n$-tuples. Let $\Z_m = \{0, 1, \dots, m-1\}$. More
-precisely, an
+The term ``Gray code''\index{Gray code} is ambiguous. It is actually a
+large family of sequences of $n$-tuples. Let
+$\Z_m = \{0, 1, \dots, m-1\}$. More precisely, an
 \emph{$m$-ary Gray code of length $n$}\index{Gray code!$m$-ary}~(called
 a \emph{binary Gray code}\index{Gray code!binary} when $m = 2$) is a
 sequence of all possible~(i.e. $N = m^n$) $n$-tuples
@@ -1629,43 +1776,52 @@ is a binary Gray code of length $3$. \qed
 \end{example}
 
 Gray codes have applications to engineering, recreational
-mathematics~(solving the Tower of Hanoi puzzle, ``The Brain'' puzzle,
-the ``Chinese ring puzzle'', etc.), and to mathematics~(e.g. aspects
-of combinatorics, computational group theory, and the computational
-aspects of linear codes).
+mathematics~(solving the Tower of
+Hanoi\index{Tower of Hanoi puzzle} puzzle, The
+Brain\index{The Brain puzzle} puzzle, the Chinese
+ring\index{Chinese ring puzzle}  puzzle, etc.), and to
+mathematics~(e.g. aspects of combinatorics\index{combinatorics},
+computational\index{group theory!computational} group theory, and the
+computational aspects of linear\index{code!linear} codes).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Binary Gray codes}
+\index{Gray code!binary}
 
 Consider the so-called $n$-hypercube\index{graph!hypercube} graph
 $Q_n$, whose first few instances are illustrated in
 Figure~\ref{fig:introduction:hypercube_graphs}. This can be envisioned
-as the graph whose vertices are the vertices of a cube in $n$-space
+as the graph whose vertices are the vertices of a cube in
+$n$-space\index{$n$-space}
 \[
 \{(x_1, \dots, x_n) \mid 0 \leq x_i \leq 1\}
 \]
 and whose edges are those line segments in $\R^n$ connecting two
 \emph{neighboring} vertices, i.e. two vertices that differ in exactly
-one coordinate. A binary Gray code of length $n$ can be regarded as a
-path on the hypercube graph $Q_n$ that visits each vertex of the cube
-exactly once. In other words, a binary Gray code of length $n$ may be
-identified with a Hamiltonian path on the graph $Q_n$. For example,
-Figure~\ref{fig:trees_forests:gray_code_cube} illustrates a
-Hamiltonian path on $Q_3$.
+one coordinate. A binary\index{Gray code!binary} Gray code of length
+$n$ can be regarded as a
+path on the hypercube\index{graph!hypercube} graph $Q_n$ that visits
+each vertex of the cube exactly once. In other words, a binary Gray
+code of length $n$ may be identified with a
+Hamiltonian\index{path!Hamiltonian} path on the graph $Q_n$. For
+example, Figure~\ref{fig:trees_forests:gray_code_cube} illustrates a
+Hamiltonian\index{path!Hamiltonian} path on $Q_3$.
 
 \begin{figure}[!htbp]
 \centering
+\index{graph!hypercube}
+\index{path!Hamiltonian}
 \input{image/trees-forests/gray-code-cube.tex}
 \caption{Viewing $\Gamma_3$ as a Hamiltonian path on $Q_3$.}
 \label{fig:trees_forests:gray_code_cube}
 \end{figure}
 
-How do we efficiently compute a Gray code? Perhaps the simplest way to
-state the idea of quickly constructing the
-\emph{reflected binary Gray code} $\Gamma_n$ of length $n$ is as
-follows:
+How do we efficiently compute a Gray\index{Gray code} code? Perhaps
+the simplest way to state the idea of quickly constructing the
+\emph{reflected binary Gray code}\index{Gray code!reflected}
+$\Gamma_n$ of length $n$ is as follows:
 %%
 \begin{align*}
 \Gamma_0 &= [\,], \\[4pt]
@@ -1735,17 +1891,20 @@ def graycode(length,modulus):
     return M0
 \end{lstlisting}
 
-\vskip .2in
-Consider the reflected binary code of length $8$,
-i.e. $\Gamma_8$. This has $2^8 = 256$ codewords. Sage can easily
-create the list plot of the coordinates $(x,y)$, where $x$ is an
-integer $j \in \Z_{256}$ that indexes the codewords in $\Gamma_8$ and
-the corresponding $y$ is the $j$-th codeword in $\Gamma_8$ converted
-to decimal. This will give us some idea of how the Gray code ``looks''
-in some sense. The plot is given in Figure~\ref{fig:trees_forests:Gamma_8}.
+\vskip 0.2in
+Consider the reflected\index{Gray code!reflected} binary code of
+length $8$, i.e. $\Gamma_8$. This has $2^8 = 256$ codewords. Sage can
+easily create the list plot of the coordinates $(x,y)$, where $x$ is
+an integer $j \in \Z_{256}$ that indexes the codewords in $\Gamma_8$
+and the corresponding $y$ is the $j$-th codeword in $\Gamma_8$
+converted to decimal. This will give us some idea of how the Gray code
+``looks'' in some sense. The plot is given in
+Figure~\ref{fig:trees_forests:Gamma_8}.
 
 \begin{figure}[!htbp]
 \centering
+\index{Gray code!reflected}
+\index{scatterplot}
 \input{image/trees-forests/gamma8.tex}
 \caption{Scatterplot of $\Gamma_8$.}
 \label{fig:trees_forests:Gamma_8}
@@ -1807,7 +1966,7 @@ def graycodeword(m, n):
 \label{sec:trees_forests:Huffman_codes}
 
 An \emph{alphabet}\index{alphabet} $\cA$ is a finite set whose
-elements are referred to as \emph{symbols}. A
+elements are referred to as \emph{symbols}\index{symbol}. A
 \emph{word}\index{word}~(or \emph{string}\index{string} or
 \emph{message}\index{message}) over $\cA$ is a finite sequence of
 symbols in $\cA$ and the \emph{length} of the word is the number of
@@ -1815,12 +1974,13 @@ symbols it contains. A word is usually written by concatenating
 symbols together, e.g. $a_1 a_2 \cdots a_k$ ($a_i \in \cA$) is a word
 of length $k$.
 
-A commonly occurring alphabet in practice is the \emph{binary alphabet}
-$\B = \{0, 1\}$. A word over the binary alphabet is a finite sequence
-of $0$'s and $1$'s. If $\cA$ is an alphabet, let $\cA^*$ denote the
-set of all words in $\cA$. The length of a word is denoted by vertical
-bars. That is, if $w = a_1 \cdots a_k$ is a word over $\cA$, then
-define $|w|: \cA^* \to \Z$ by
+A commonly occurring alphabet in practice is the
+\emph{binary alphabet}\index{alphabet!binary} $\B = \{0, 1\}$. A word
+over the binary alphabet is a finite sequence of $0$'s\index{bits} and
+$1$'s. If $\cA$ is an alphabet, let $\cA^*$ denote the set of all
+words in $\cA$. The length of a word is denoted by vertical bars. That
+is, if $w = a_1 \cdots a_k$ is a word over $\cA$, then define
+$|w|: \cA^* \to \Z$ by
 \[
 |w|
 =
@@ -1846,30 +2006,31 @@ $\cB$ is the binary alphabet, then $C$ is called a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Tree representation}
+\index{code!tree representation}
 
-Any binary code can be represented by a tree, as
+Any binary\index{code!binary} code can be represented by a tree, as
 Example~\ref{eg:tree_forests:binary_code_tree_representation} shows.
 
 \begin{example}
 \label{eg:tree_forests:binary_code_tree_representation}
-Let $\B_\ell$ be the binary code of length $\leq \ell$. Represent
-codewords of $\B_\ell$ using trees.
+Let $\B_\ell$ be the binary\index{code!binary} code of length
+$\leq \ell$. Represent codewords of $\B_\ell$ using trees.
 \end{example}
 
 \begin{proof}[Solution]
 Here is how to represent the code $\B_\ell$ consisting of all binary
 strings of length $\leq \ell$. Start with the
-root\index{node!root} node $\varepsilon$\index{$\varepsilon$}
+root\index{vertex!root} node $\varepsilon$\index{$\varepsilon$}
 being the empty string. The two children of this node, $v_0$ and
 $v_1$, correspond to the two strings of length $1$. Label $v_0$ with a
 ``$0$'' and $v_1$ with a ``$1$''. The two children of $v_0$,
 i.e. $v_{00}$ and $v_{01}$, correspond to the strings of length $2$
-which start with a $0$. Similarly, the  two children of $v_1$,
+which start with a $0$. Similarly, the two children of $v_1$,
 i.e. $v_{10}$ and $v_{11}$, correspond to the strings of length $2$
 that each starts with a $1$. Continue creating child nodes until we
 reach length $\ell$, at which point we stop. There are a total of
 $2^{\ell + 1} - 1$ nodes in this tree and $2^\ell$ of them are
-leaves\index{leaf}~(vertices of a tree with degree $1$, i.e. childless
+leaves\index{vertex!leaf}~(vertices of a tree with degree $1$, i.e. childless
 nodes). Note that the parent of any node is a prefix to that
 node. Label each node $v_s$ with the string ``$s$'', where $s$ is a
 binary sequence of length $\leq \ell$. See
@@ -1879,22 +2040,24 @@ when $\ell = 2$.
 
 \begin{figure}[!htbp]
 \centering
+\index{code!tree representation}
 \input{image/trees-forests/tree-representation-B-2.tex}
 \caption{Tree representation of the binary code $\B_2$.}
 \label{fig:trees_forests:tree_representation_B_2}
 \end{figure}
 
 In general, if $C$ is a code contained in $\B_\ell$, then to create
-the tree\index{code!tree} for $C$, start with the tree for
-$\B_\ell$. First, remove all nodes associated to a binary string for
-which it and all of its descendants are not in $C$. Next, remove all
-labels which do not correspond to codewords in $C$. The resulting
+the tree\index{code!tree representation} for $C$, start with the tree
+for $\B_\ell$. First, remove all nodes associated to a binary string
+for which it and all of its descendants are not in $C$. Next, remove
+all labels which do not correspond to codewords in $C$. The resulting
 labeled graph is the tree associated to the binary code $C$.
 
-For visualizing the construction of Huffman codes later, it is
-important to see that we can \emph{reverse} this construction to
-start from such a binary tree and recover a binary code from it. The
-codewords are determined by the following rules:
+For visualizing the construction of Huffman\index{Huffman code} codes
+later, it is important to see that we can \emph{reverse} this
+construction to start from such a binary\index{tree!binary} tree and
+recover a binary\index{code!binary} code from it. The codewords are
+determined by the following rules:
 %%
 \begin{itemize}
 \item The root node gets the empty codeword.
@@ -1919,7 +2082,7 @@ If the extension $c: \cA^* \to \cT^*$ is also an injection, then $c$
 is called \emph{uniquely decodable}\index{code!uniquely decodable}.
 
 \begin{example}
-Is the Morse code\index{code!Morse} in
+Is the Morse code\index{Morse code} in
 Table~\ref{tab:trees_forests:Morse_code} uniquely decodable? Why or
 why not?
 \end{example}
@@ -1930,23 +2093,24 @@ $4$. Other commonly occurring symbols used~(the digits $0$ through
 $9$, punctuation symbols, and some others) are also encodable in Morse
 code, but they use longer codewords.
 
-Let $\cA$ denote the English alphabet, $\B = \{0, 1\}$ the binary
-alphabet, and $c: \cA \to \B^*$ the Morse code. Since
-$c(ET) = 01 = c(A)$, it is clear that the Morse code is \emph{not}
-uniquely decodable.
+Let $\cA$ denote the English alphabet, $\B = \{0, 1\}$ the
+binary\index{alphabet!binary} alphabet, and $c: \cA \to \B^*$ the
+Morse\index{Morse code} code. Since $c(ET) = 01 = c(A)$, it is clear
+that the Morse code is \emph{not} uniquely decodable.
 \end{proof}
 
 In fact, prefix-free implies uniquely decodable.
 
 \begin{theorem}
+\index{code!prefix-free}
 If a code $c: \cA \to \cB^*$ is prefix-free, then it is uniquely
 decodable.
 \end{theorem}
 
 \begin{proof}
-We use induction on the length of a message. We want to show that if
-$x_1 \cdots x_k$ and $y_1 \cdots y_\ell$ are messages with
-$c(x_1) \cdots c(x_k) = c(y_1) \cdots c(y_\ell)$, then
+We use induction\index{induction} on the length of a message. We want
+to show that if $x_1 \cdots x_k$ and $y_1 \cdots y_\ell$ are messages
+with $c(x_1) \cdots c(x_k) = c(y_1) \cdots c(y_\ell)$, then
 $x_1 \cdots x_k = y_1 \cdots y_\ell$. This in turn implies $k = \ell$
 and $x_i = y_i$ for all $i$.
 
@@ -1973,9 +2137,10 @@ satisfies $\sum_{a \in \cA} p(a) = 1$, and a code $c: \cA \to \cB^*$.
 In other words, $p$ is a probability distribution on $\cA$. Think of
 $p(a)$ as the probability that the symbol $a$ arises in a typical
 message. The \emph{average word length} $L(c)$ is\footnote{
-  In probability terminology, this is the expected value $\E(X)$ of
-  the random variable $X$, which assigns to a randomly selected symbol
-  in $\cA$ the length of the associated codeword in $c$.
+  In probability\index{probability} terminology, this is the
+  expected\index{probability!expectation} value $\E(X)$ of the random
+  variable $X$, which assigns to a randomly selected symbol in $\cA$
+  the length of the associated codeword in $c$.
 }
 \[
 L(c)
@@ -1983,12 +2148,13 @@ L(c)
 \sum_{a \in \cA} p(a) \cdot |c(a)|
 \]
 where $|\cdot|$ is the length\index{codeword!length} of a codeword.
-Given a weighted alphabet $(\cA, p)$ as above, a code
-$c: \cA \to \cB^*$ is called \emph{optimal}\index{code!optimal} if
-there is no such code with a smaller average word length. Optimal
-codes satisfy the following amazing property. For a proof, which is
-very easy and highly recommended for anyone who is curious to
-see more, refer to section~3.6 of Biggs~\cite{Biggs2009}.
+Given a weighted\index{alphabet!weighted} alphabet $(\cA, p)$ as
+above, a code $c: \cA \to \cB^*$ is called
+\emph{optimal}\index{code!optimal} if there is no such code with a
+smaller average word length. Optimal codes satisfy the following
+amazing property. For a proof, which is very easy and highly
+recommended for anyone who is curious to see more, refer to
+section~3.6 of Biggs\index{Biggs, Norman}~\cite{Biggs2009}.
 
 \begin{lemma}
 \label{lem:trees_forests:binary_optimal_prefix_free_code}
@@ -2013,20 +2179,25 @@ contains two codewords of the form $b0$ and $b1$ for some $b \in \B^*$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Huffman coding}
+\index{Huffman code}
 
-The Huffman code construction is based on the second property in
+The Huffman\index{Huffman code} code construction is based on the
+second property in
 Lemma~\ref{lem:trees_forests:binary_optimal_prefix_free_code}. Using
-this property, in 1952 David Huffman~\cite{Huffman1952} presented an
-optimal prefix-free binary code, which has since been named Huffman
-code.
+this property, in 1952 David
+Huffman\index{Huffman, David}~\cite{Huffman1952} presented an optimal
+prefix-free binary code, which has since been named Huffman code.
 
-Here is the recursive/inductive construction of a Huffman code. We
-shall regard the binary Huffman code as a tree, as described
-above. Suppose that the weighted alphabet $(\cA, p)$ has $n$
-symbols. We assume inductively that there is an optimal prefix-free
-binary code for any weighted alphabet $(\cA', p')$ having $<n$ symbols.
+Here is the recursive/inductive\index{recursion}\index{induction}
+construction of a Huffman\index{Huffman code} code. We shall regard
+the binary Huffman\index{Huffman code!binary} code as a tree, as
+described above. Suppose that the weighted\index{alphabet!weighted}
+alphabet $(\cA, p)$ has $n$ symbols. We assume inductively that there
+is an optimal prefix-free binary code for any weighted alphabet
+$(\cA', p')$ having $< n$ symbols.
 
 \begin{description}
+\index{Huffman code!tree construction}
 \item[Huffman's rule 1] Let $a,a' \in \cA$ be symbols with the
   smallest weights. Construct a new weighted alphabet with $a,a'$
   replaced by the single symbol $a^* = aa'$ and having weight
@@ -2059,10 +2230,12 @@ Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes}, which
 outlines steps to construct a binary tree corresponding to the Huffman
 code of an alphabet.
 Line~\ref{alg:Huffman_tree:initialize_priority_queue} initializes a
-minimum priority queue $Q$ with the symbols in the alphabet $A$.
-Line~\ref{alg:Huffman_tree:empty_binary_tree} creates an empty binary
-tree that will be used to represent the Huffman code corresponding to
-$A$. The for loop from lines~\ref{alg:Huffman_tree:for_loop:start}
+minimum-priority\index{queue!minimum-priority} queue $Q$ with the
+symbols in the alphabet
+$A$. Line~\ref{alg:Huffman_tree:empty_binary_tree} creates an empty
+binary tree that will be used to represent the Huffman code
+corresponding to $A$. The for loop from
+lines~\ref{alg:Huffman_tree:for_loop:start}
 to~\ref{alg:Huffman_tree:insert_into_queue} repeatedly extracts from
 $Q$ two elements $a$ and $b$ of minimum weights. We then create a new
 vertex $z$ for the tree $T$ and also let $a$ and $b$ be vertices of
@@ -2071,20 +2244,23 @@ $b$. We let $z$ be the parent of $a$ and $b$, and insert the new edges
 $za$ and $zb$ into $T$. The newly created vertex $z$ is now inserted
 into $Q$ with priority $W[z]$. After $n - 1$ rounds of the for loop,
 the priority queue has only one element in it, namely the root $r$ of
-the binary tree $T$. We extract $r$ from
+the binary\index{tree!binary} tree $T$. We extract $r$ from
 $Q$~(line~\ref{alg:Huffman_tree:extract_tree_root}) and return it
 together with $T$~(line~\ref{alg:Huffman_tree:return_tree_and_root}).
 
 \begin{algorithm}[!htbp]
+\index{Huffman code!tree representation}
+\index{tree!binary}
 \input{algorithm/trees-forests/binary-tree-Huffman-codes.tex}
 \caption{Binary tree representation of Huffman codes.}
 \label{alg:trees_forests:binary_tree_Huffman_codes}
 \end{algorithm}
 
-The running time analysis of
+The runtime analysis of
 Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} depends on
-the implementation of the priority queue $Q$. Suppose $Q$ is a simple
-unsorted list. The initialization on
+the implementation of the priority\index{queue!priority} queue
+$Q$. Suppose $Q$ is a simple unsorted list\index{list}. The
+initialization on
 line~\ref{alg:Huffman_tree:initialize_priority_queue} requires $O(n)$
 time. The for loop from line~\ref{alg:Huffman_tree:for_loop:start}
 to~\ref{alg:Huffman_tree:insert_into_queue} is executed exactly
@@ -2093,29 +2269,33 @@ weight requires time at most $O(n)$. Determining two elements of
 minimum weights requires time $O(2n)$. The for loop requires time
 $O(2n^2)$, which is also the time requirement for the algorithm. An
 efficient implementation of the priority queue $Q$, e.g. as a binary
-minimum heap, can lower the running time of
+minimum heap\index{heap!binary minimum}, can lower the running time of
 Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} down to
 $O(n \log_2(n))$.
 
 Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} represents
-the Huffman code of an alphabet as a binary tree $T$ rooted at $r$. To
-determine the actual encoding of each symbol in the alphabet, we feed
-$T$ and $r$ to
+the Huffman\index{Huffman code} code of an alphabet as a
+binary\index{Huffman code!tree representation} tree $T$ rooted at
+$r$. To determine the actual encoding of each symbol in the alphabet,
+we feed $T$ and $r$ to
 Algorithm~\ref{alg:trees_forests:Huffman_encoding_alphabet} to obtain
 the encoding of each symbol. Starting from the root $r$ whose
-designated label is the empty string $\varepsilon$, the algorithm
-traverses the vertices of $T$ in a breadth-first search fashion. If
-$v$ is an internal vertex with label \verb!e!, the label of its left
-child is the concatenation \verb!e0! and for the right child of $v$ we
-assign the label \verb!e1!. If $v$ happens to be a leaf vertex, we
-take its label to be its Huffman encoding. Any Huffman encoding
-assigned to a symbol of an alphabet is not unique. Either of the two
-children of an internal vertex can be designated as the left
-(resp. right) vertex. The running time of
+designated label is the empty\index{string!empty} string
+$\varepsilon$\index{$\varepsilon$}, the algorithm traverses the
+vertices of $T$ in a breadth-first\index{breadth-first search} search
+fashion. If $v$ is an internal vertex with label \tte, the label of
+its left-child\index{child!left} is the concatenation \verb!e0! and
+for the right-child\index{child!right} of $v$ we assign the label
+\verb!e1!. If $v$ happens to be a leaf vertex, we take its label to be
+its Huffman encoding. Any Huffman encoding assigned to a symbol of an
+alphabet is not unique. Either of the two children of an internal
+vertex can be designated as the left-~(respectively, right-)
+child. The runtime of
 Algorithm~\ref{alg:trees_forests:Huffman_encoding_alphabet} is
 $O(|V|)$, where $V$ is the vertex set of $T$.
 
 \begin{algorithm}[!htbp]
+\index{Huffman code!encoding}
 \input{algorithm/trees-forests/Huffman-encoding-alphabet.tex}
 \caption{Huffman encoding of an alphabet.}
 \label{alg:trees_forests:Huffman_encoding_alphabet}
@@ -2144,6 +2324,8 @@ Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings
 
 \begin{figure}[!htbp]
 \centering
+\index{Huffman code}
+\index{Huffman code!tree representation}
 \input{image/trees-forests/binary-tree-Huffman-encodings.tex}
 \caption{Binary tree representation of an alphabet and its Huffman encodings.}
 \label{fig:trees_forests:eg:binary_tree_Huffman_encodings}
@@ -2154,162 +2336,188 @@ Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings
 
 \section{Tree traversals}
 \label{sec:trees_forests:tree_traversals}
+\index{tree!traversal}
 
-In computer science, \emph{tree traversal}\index{tree traversal}
-refers to the process of examining each vertex in a tree data
-structure. Starting at the root of an ordered tree $T$, we can
-traverse the vertices of $T$ in one of various ways.
+In computer\index{computer science} science,
+\emph{tree traversal}\index{tree!traversal} refers to the process of
+examining each vertex in a tree data structure. Starting at the root
+of an ordered\index{tree!ordered} tree $T$, we can traverse the
+vertices of $T$ in one of various ways.
 
-A \emph{level-order} traversal of an ordered tree $T$ examines the
-vertices in increasing order of depth, with vertices of equal depth
-being examined according to their prescribed order. One way to think
-about level-order traversal is to consider vertices of $T$ having the
-same depth as being ordered from left to right in decreasing order of
-importance. If $[v_1, v_2, \dots, v_n]$ lists the vertices from left
-to right at depth $k$, a decreasing order of importance can be
-realized by assigning each vertex a numeric label using a labelling
-function $L: V(T) \to \R$ such that
+A \emph{level-order traversal}\index{traversal!level-order} of an
+ordered tree $T$ examines the vertices in increasing order of depth,
+with vertices of equal depth being examined according to their
+prescribed order. One way to think about
+level-order\index{traversal!level-order} traversal is to consider
+vertices of $T$ having the same depth as being ordered from left to
+right in decreasing order of importance. If $[v_1, v_2, \dots, v_n]$
+lists the vertices from left to right at depth $k$, a decreasing order
+of importance can be realized by assigning each vertex a numeric label
+using a labelling function $L: V(T) \to \R$ such that
 $L(v_1) < L(v_2) < \cdots < L(v_n)$. In this way, a vertex with a
 lower numeric label is examined prior to a vertex with a higher
-numeric label. A level-order traversal of $T$, whose vertices of equal
-depth are prioritized according to $L$, is an examination of the
-vertices of $T$ from top to bottom, left to right. As an example, the
-level-order traversal of the tree in
-Figure~\ref{fig:trees_forests:tree_traversal} is
+numeric label. A level-order\index{traversal!level-order} traversal of
+$T$, whose vertices of equal depth are prioritized according to $L$,
+is an examination of the vertices of $T$ from top to bottom, left to
+right. As an example, the level-order\index{traversal!level-order}
+traversal of the tree in Figure~\ref{fig:trees_forests:tree_traversal}
+is
 \[
 42,\, 4,\, 15,\, 2,\, 3,\, 5,\, 7,\, 10,\, 11,\, 12,\, 13,\, 14.
 \]
 Our discussion is formalized in
 Algorithm~\ref{alg:trees_forests:level_order_traversal}, whose general
-structure mimics that of breadth-first search. For this reason,
-level-order traversal is also known as \emph{breadth-first traversal}.
-Each vertex is enqueued and dequeued exactly once. The while loop is
-executed $n$ times, hence we have a runtime of $O(n)$. Another name
-for level-order traversal is \emph{top-down traversal} because we
-first visit the root node and then work our way down the tree,
-increasing the depth as we move downward.
+structure mimics that of breadth-first\index{breadth-first search}
+search. For this reason, level-order traversal is also known as
+\emph{breadth-first traversal}. Each vertex is
+enqueued\index{queue!enqueue} and dequeued\index{queue!dequeue}
+exactly once. The while loop is executed $n$ times, hence we have a
+runtime of $O(n)$. Another name for level-order traversal is
+\emph{top-down traversal} because we first visit the root node and
+then work our way down the tree, increasing the depth as we move
+downward.
 
 \begin{figure}[!htbp]
 \centering
+\index{tree!traversal}
 \input{image/trees-forests/tree-traversal.tex}
 \caption{Traversing a tree.}
 \label{fig:trees_forests:tree_traversal}
 \end{figure}
 
 \begin{algorithm}[!htbp]
+\index{traversal!level-order}
 \input{algorithm/trees-forests/level-order-traversal.tex}
 \caption{Level-order traversal.}
 \label{alg:trees_forests:level_order_traversal}
 \end{algorithm}
 
-\emph{Pre-order traversal} is a traversal of an ordered tree using a
-general strategy similar to depth-first search. For this reason,
-pre-order traversal is also referred to as
+\emph{Pre-order traversal}\index{traversal!pre-order} is a traversal
+of an ordered tree using a general strategy similar to
+depth-first\index{depth-first search} search. For this reason,
+pre-order\index{traversal!pre-order} traversal is also referred to as
 \emph{depth-first traversal}. Parents are visited prior to their
 respective children and siblings are visited according to their
-prescribed order. The pseudocode for pre-order traversal is presented
-in Algorithm~\ref{alg:trees_forests:pre_order_traversal}. Note the
+prescribed order. The pseudocode for
+pre-order\index{traversal!pre-order} traversal is presented in
+Algorithm~\ref{alg:trees_forests:pre_order_traversal}. Note the
 close resemblance to
 Algorithm~\ref{alg:trees_forests:level_order_traversal}; the only
-significant change is to use a stack instead of a queue. Each vertex
-is pushed and popped exactly once, so the while loop is executed $n$
-times, resulting in the runtime $O(n)$. Using
-Algorithm~\ref{alg:trees_forests:pre_order_traversal}, a pre-order
-traversal of the tree in
+significant change is to use a stack\index{stack} instead of a
+queue\index{queue}. Each vertex is pushed\index{stack!push} and
+popped\index{stack!pop} exactly once, so the while loop is executed
+$n$ times, resulting in a runtime of $O(n)$. Using
+Algorithm~\ref{alg:trees_forests:pre_order_traversal}, a
+pre-order\index{traversal!pre-order} traversal of the tree in
 Figure~\ref{fig:trees_forests:tree_traversal} is
 \[
 42,\, 4,\, 2,\, 3,\, 10,\, 11,\, 14,\, 5,\, 12,\, 13,\, 15,\, 7.
 \]
 
 \begin{algorithm}[!htbp]
+\index{traversal!pre-order}
 \input{algorithm/trees-forests/pre-order-traversal.tex}
 \caption{Pre-order traversal.}
 \label{alg:trees_forests:pre_order_traversal}
 \end{algorithm}
 
 Whereas pre-order traversal lists a vertex $v$ the first time we visit
-it, \emph{post-order traversal} lists $v$ the last time we visit
-it. In other words, children are visited prior to their respective
-parents, with siblings being visited in their prescribed order. The
-prefix ``pre'' in ``pre-order traversal'' means ``before'', i.e. visit
-parents before visiting children. On the other hand, the prefix
-``post'' in ``post-order traversal'' means ``after'', i.e. visit
-parents after having visited their children. The pseudocode for
-post-order traversal is presented in
+it, \emph{post-order traversal}\index{traversal!post-order} lists $v$
+the last time we visit it. In other words, children are visited prior
+to their respective parents, with siblings being visited in their
+prescribed order. The prefix ``pre'' in ``pre-order traversal'' means
+``before'', i.e. visit parents before visiting children. On the other
+hand, the prefix ``post'' in ``post-order traversal'' means ``after'',
+i.e. visit parents after having visited their children. The pseudocode
+for post-order\index{traversal!post-order} traversal is presented in
 Algorithm~\ref{alg:trees_forests:post_order_traversal}, whose general
 structure bears close resemblance to
 Algorithm~\ref{alg:trees_forests:pre_order_traversal}. The while loop
-of the former is executed $n$ times because each vertex is pushed and
-popped exactly once, resulting in a runtime of $O(n)$. The post-order
-traversal of the tree in Figure~\ref{fig:trees_forests:tree_traversal}
-is
+of the former is executed $n$ times because each vertex is
+pushed\index{stack!push} and popped\index{stack!pop} exactly once,
+resulting in a runtime of $O(n)$. The
+post-order\index{traversal!post-order} traversal of the tree in
+Figure~\ref{fig:trees_forests:tree_traversal} is
 \[
 2,\, 10,\, 14,\, 11,\, 3,\, 12,\, 13,\, 5,\, 4,\, 7,\, 15,\, 42.
 \]
 
 \begin{algorithm}[!htbp]
+\index{traversal!post-order}
 \input{algorithm/trees-forests/post-order-traversal.tex}
 \caption{Post-order traversal.}
 \label{alg:trees_forests:post_order_traversal}
 \end{algorithm}
 
 Instead of traversing a tree $T$ from top to bottom as is the case
-with level-order traversal, we can reverse the direction of our
-traversal by traversing a tree from bottom to top. Called
-\emph{bottom-up traversal}, we first visit all the leaves of $T$ and
-consider the subtree $T_1$ obtained by vertex deletion of those
-leaves. We then recursively perform bottom-up traversal of $T_1$ by
-visiting all of its leaves and obtain the subtree $T_2$ resulting from
-vertex deletion of those leaves of $T_1$. Apply bottom-up traversal to
-$T_2$ and its vertex deletion subtrees until we have visited all
-vertices, including the root vertex. The result is a procedure for
-bottom-up traversal as presented in
-Algorithm~\ref{alg:trees_forests:bottom_up_traversal}. In
+with level-order\index{traversal!level-order} traversal, we can
+reverse the direction of our traversal by traversing a tree from
+bottom to top. Called
+\emph{bottom-up traversal}\index{traversal!bottom-up}, we first visit
+all the leaves of $T$ and consider the subtree\index{subtree} $T_1$
+obtained by vertex\index{vertex!deletion} deletion of those
+leaves\index{vertex!leaf}. We then recursively\index{recursion} perform
+bottom-up\index{traversal!bottom-up} traversal of $T_1$ by visiting
+all of its leaves and obtain the subtree $T_2$ resulting from
+vertex\index{vertex!deletion} deletion of those leaves of $T_1$. Apply
+bottom-up\index{traversal!bottom-up} traversal to $T_2$ and its vertex
+deletion subtrees until we have visited all vertices, including the
+root vertex. The result is a procedure for bottom-up traversal as
+presented in Algorithm~\ref{alg:trees_forests:bottom_up_traversal}. In
 lines~\ref{alg:bottom_up_traversal:children_count}
 to~\ref{alg:bottom_up_traversal:children_count_end}, we initialize the
-list $C$ to contain the number of children of vertex
-$i$. This takes $O(m)$ time, where $m = |E(T)|$.
-Lines~\ref{alg:bottom_up_traversal:empty_queue_R}
+list $C$ to contain the number of children of vertex $i$. This takes
+$O(m)$ time, where $m =
+|E(T)|$. Lines~\ref{alg:bottom_up_traversal:empty_queue_R}
 to~\ref{alg:bottom_up_traversal:enqueue_R_w} extract all the leaves
 of $T$ and add them to the queue $Q$. From
 lines~\ref{alg:bottom_up_traversal:empty_list_L}
 to~\ref{alg:bottom_up_traversal:enqueue_Q_u}, we repeatedly apply
-bottom-up traversal to subtrees of $T$. As each vertex is enqueued and
-dequeued exactly once, the two loops together run in time $O(n)$ and
-therefore Algorithm~\ref{alg:trees_forests:bottom_up_traversal} has a
-runtime of $O(n + m)$. As an example, a bottom-up traversal of the
-tree in Figure~\ref{fig:trees_forests:tree_traversal} is
+bottom-up\index{traversal!bottom-up} traversal to subtrees of $T$. As
+each vertex is enqueued\index{queue!enqueue} and
+dequeued\index{queue!dequeue} exactly once, the two loops together run
+in time $O(n)$ and therefore
+Algorithm~\ref{alg:trees_forests:bottom_up_traversal} has a runtime of
+$O(n + m)$. As an example, a bottom-up\index{traversal!bottom-up}
+traversal of the tree in Figure~\ref{fig:trees_forests:tree_traversal}
+is
 \[
 2,\, 7,\, 10,\, 12,\, 13,\, 14,\, 15,\, 5,\, 11,\, 3,\, 4,\, 42.
 \]
 
 \begin{algorithm}[!htbp]
+\index{traversal!bottom-up}
 \input{algorithm/trees-forests/bottom-up-traversal.tex}
 \caption{Bottom-up traversal.}
 \label{alg:trees_forests:bottom_up_traversal}
 \end{algorithm}
 
 \begin{algorithm}[!htbp]
+\index{traversal!in-order}
 \input{algorithm/trees-forests/in-order-traversal.tex}
 \caption{In-order traversal.}
 \label{alg:trees_forests:in_order_traversal}
 \end{algorithm}
 
 Yet another common tree traversal technique is called
-\emph{in-order traversal}. However, in-order traversal is only
-applicable to binary trees, whereas the other traversal techniques we
-considered above can be applied to any tree with at least one
-vertex. Given a binary tree $T$ having at least one vertex, in-order
-traversal first visits the root of $T$ and consider its left- and
-right-children. We then recursively apply in-order traversal to the
-left and right subtrees of the root vertex. Notice the symmetry in our
-description of in-order traversal: start at the root, then traverse
-the left and right subtrees in in-order. For this reason, in-order
-traversal is sometimes referred to as \emph{symmetric traversal}. Our
-discussion is summarized in
+\emph{in-order traversal}\index{traversal!in-order}. However, in-order
+traversal is only applicable to binary\index{tree!binary} trees,
+whereas the other traversal techniques we considered above can be
+applied to any tree with at least one vertex. Given a binary tree $T$
+having at least one vertex, in-order traversal first visits the root
+of $T$ and consider its left-\index{child!left} and
+right-children\index{child!right}. We then
+recursively\index{recursion} apply in-order\index{traversal!in-order}
+traversal to the left\index{subtree!left} and
+right\index{subtree!right} subtrees of the root vertex. Notice the
+symmetry in our description of in-order\index{traversal!in-order}
+traversal: start at the root, then traverse the left and right
+subtrees in in-order. For this reason, in-order traversal is sometimes
+referred to as \emph{symmetric traversal}. Our discussion is
+summarized in
 Algorithm~\ref{alg:trees_forests:in_order_traversal}. Since each
-vertex is pushed and popped exactly once, it follows that in-order
-traversal runs in time $O(n)$. Using
+vertex is pushed\index{stack!push} and popped\index{stack!pop} exactly
+once, it follows that in-order traversal runs in time $O(n)$. Using
 Algorithm~\ref{alg:trees_forests:in_order_traversal}, an in-order
 traversal of the tree in
 Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings}
@@ -2352,8 +2560,8 @@ is
     spanning trees of the $n \times n$ grid graph.
 
   \item Explain and provide pseudocode of an algorithm for
-    constructing all spanning trees of the $n \times n$ grid graph,
-    where $n > 0$.
+    constructing all spanning\index{spanning tree} trees of the
+    $n \times n$ grid\index{grid graph} graph, where $n > 0$.
 
   \item In general, if $n$ is a positive integer, how many
     nonisomorphic spanning trees are there in the $n \times n$ grid
@@ -2361,24 +2569,25 @@ is
   \end{enumerate}
 
 \item Theorem~\ref{thm:trees_forests:recursive_construction_trees}
-  shows how to recursively construct a new tree from a given
-  collection of trees, hence it can be considered as a recursive
-  definition of trees. To prove theorems based upon recursive
-  definitions, we use a proof technique called
-  \emph{structural induction}. Let $S(C)$   be a statement about the
-  collection of structures $C$, each of which is defined by a
-  recursive definition. In the base case, prove $S(C)$ for the basis
-  structure(s) $C$. For the inductive case, let $X$ be a structure
-  formed using the recursive definition from the structures
-  $Y_1, Y_2, \dots, Y_k$. Assume for induction that the statements
-  $S(Y_1),\, S(Y_2), \dots, S(Y_k)$ hold and use the inductive
-  hypotheses $S(Y_i)$ to prove $S(X)$. Hence conclude that $S(X)$ is
-  true for all $X$. Apply structural induction to show that any graph
-  constructed using
+  shows how to recursively\index{recursion} construct a new tree from
+  a given collection of trees, hence it can be considered as a
+  recursive\index{tree!recursive definition} definition of trees. To
+  prove theorems based upon recursive definitions, we use a proof
+  technique called
+  \emph{structural induction}\index{induction!structural}. Let $S(C)$
+  be a statement about the collection of structures $C$, each of which
+  is defined by a recursive definition. In the base case, prove $S(C)$
+  for the basis structure(s) $C$. For the inductive\index{induction}
+  case, let $X$ be a structure formed using the recursive definition
+  from the structures $Y_1, Y_2, \dots, Y_k$. Assume for induction
+  that the statements $S(Y_1),\, S(Y_2), \dots, S(Y_k)$ hold and use
+  the inductive hypotheses $S(Y_i)$ to prove $S(X)$. Hence conclude
+  that $S(X)$ is true for all $X$. Apply structural induction to show
+  that any graph constructed using
   Theorem~\ref{thm:trees_forests:recursive_construction_trees} is
   indeed a tree.
 
-\item In Kruskal's
+\item In Kruskal's\index{Kruskal!algorithm}
   Algorithm~\ref{alg:trees_forests:Kruskal_algorithm},
   line~\ref{alg:Kruskal:edge_not_in_T_acyclic} requires that the
   addition of a new edge to $T$ does not result in $T$ having a
@@ -2394,13 +2603,16 @@ is
   minimum spanning tree or why the algorithm would fail to do so.
 
 \item Figure~\ref{fig:trees_forests:weighted_Chvatal_graph} shows a
-  weighted version of the Chv\'atal graph, which has $12$ vertices and
-  $24$ edges. Use this graph as input to Kruskal's, Prim's, and
-  Bor\r{u}vka's algorithms and compare the resulting minimum spanning
-  trees.
+  weighted version of the Chv\'atal\index{Chv\'atal graph} graph,
+  which has $12$ vertices and $24$ edges. Use this graph as input to
+  Kruskal's\index{Kruskal!algorithm},
+  Prim's\index{Prim!algorithm}, and
+  Bor\r{u}vka's\index{Bor\r{u}vka!algorithm} algorithms and compare
+  the resulting minimum\index{spanning tree!minimum} spanning trees.
 
 \begin{figure}[!htbp]
 \centering
+\index{Chv\'atal graph}
 \input{image/trees-forests/weighted-Chvatal-graph.tex}
 \caption{Weighted Chv\'atal graph.}
 \label{fig:trees_forests:weighted_Chvatal_graph}
@@ -2419,46 +2631,50 @@ is
   that it generates a random $k$-ary tree of order $n > 0$, where
   $k \geq 3$.
 
-\item Show by giving an example that the Morse code is not
-  prefix-free.
+\item Show by giving an example that the Morse\index{Morse code} code
+  is not prefix-free\index{code!prefix-free}.
 
 \item Consider the alphabet $\cA = \{a,b,c\}$ with corresponding
   probabilities~(or weights) $p(a) = 0.5$, $p(b) = 0.3$, and
-  $p(c) = 0.2$. Generate two different Huffman codes for $\cA$ and
-  illustrate the tree representations of those codes.
+  $p(c) = 0.2$. Generate two different Huffman\index{Huffman code}
+  codes for $\cA$ and illustrate the tree representations of those
+  codes.
 
-\item Find the Huffman code for the letters of the English alphabet
-  weighted by the frequency of common American usage.\footnote{
+\item Find the Huffman\index{Huffman code} code for the letters of the
+  English\index{alphabet!English} alphabet weighted by the frequency
+  of common American usage.\footnote{
     You can find this on the Internet or in the literature. Part of
     this exercise is finding this frequency distribution yourself.
   }
 
 \item Let $G = (V_1, E_2)$ be a graph and $T = (V_2, E_2)$ a spanning
   tree of $G$. Show that there is a one-to-one correspondence between
-  fundamental cycles in $G$ and edges not in $T$.
+  fundamental\index{cycle!fundamental} cycles in $G$ and edges not in
+  $T$.
 
-\item Let $G = (V,E)$ be the $3 \times 3$ grid graph and
-  $T_1 = (V_1, E_1)$, $T_2 = (V_2, E_2)$ be spanning trees of $G$ in
-  Example~\ref{eg:trees_forests:spanning_tree}. Find a fundamental
+\item Let $G = (V,E)$ be the $3 \times 3$ grid\index{grid graph} graph
+  and $T_1 = (V_1, E_1)$, $T_2 = (V_2, E_2)$ be spanning trees of $G$
+  in Example~\ref{eg:trees_forests:spanning_tree}. Find a fundamental
   cycle in $G$ for $T_1$ that is not a fundamental cycle in $G$ for
   $T_2$.
 
-\item Usually there exist many spanning trees of a graph. Can you
-  classify those graphs for which there is only one spanning tree? In
-  other words, find necessary and sufficient conditions for a graph
-  $G$ such that if $T$ is a spanning tree then $T$ is unique.
+\item Usually there exist many spanning trees of a graph. Classify
+  those graphs for which there is only one spanning tree. In other
+  words, find necessary and sufficient conditions for a graph $G$ such
+  that if $T$ is a spanning tree of $G$ then $T$ is unique.
 
-\item Convert the above function \texttt{graycodeword} into a pure
-  Python function.
+\item Convert the function \texttt{graycodeword} into a pure Python
+  function.
 
 \item Example~\ref{eg:trees_forests:Euler_phi_function_tree} verifies
   that for any positive integer $n > 1$, repeated iteration of the
-  Euler phi function $\varphi(n)$ eventually produces $1$. Show that
-  this is the case or provide an explanation why it is in general
-  false.
+  Euler\index{Euler!phi function} phi function $\varphi(n)$ eventually
+  produces $1$. Show that this is the case or provide an explanation
+  why it is in general false.
 
-\item The Collatz conjecture~\cite{Lagarias1985} asserts that for any
-  integer $n > 0$, repeated iteration of the function
+\item The Collatz\index{Collatz!conjecture}
+  conjecture~\cite{Lagarias1985} asserts that for any integer $n > 0$,
+  repeated iteration of the function
   \[
   T(n)
   =
@@ -2475,13 +2691,14 @@ is
   22,\, 11,\, 17,\, 26,\, 13,\, 20,\, 10,\, 5,\, 8,\, 4,\, 2,\, 1.
   \end{equation}
   %%
-  One way to think about the Collatz conjecture is to consider the
-  digraph $G$ produced by considering $(a_i,\, T(a_i))$ as a directed
-  edge of $G$. Then the Collatz conjecture can be rephrased to say
-  that there is some integer $k > 0$ such that
-  $(a_k,\, T(a_k)) = (2, 1)$ is a directed edge of $G$. The graph
-  obtained in this manner is called the \emph{Collatz graph} of
-  $T(n)$. Given a collection of positive integers
+  One way to think about the Collatz\index{Collatz!conjecture}
+  conjecture is to consider the digraph $G$ produced by considering
+  $(a_i,\, T(a_i))$ as a directed edge of $G$. Then the Collatz
+  conjecture can be rephrased to say that there is some integer
+  $k > 0$ such that $(a_k,\, T(a_k)) = (2, 1)$ is a directed edge of
+  $G$. The graph obtained in this manner is called the
+  \emph{Collatz graph}\index{Collatz!graph} of $T(n)$. Given a
+  collection of positive integers
   $\alpha_1, \alpha_2, \dots, \alpha_k$, let $G_{\alpha_i}$ be the
   Collatz graph of the function $T(\alpha_i)$ with initial iteration
   value $\alpha_i$. Then the union of the $G_{\alpha_i}$ is the
@@ -2489,33 +2706,34 @@ is
   \[
   \bigcup_i G_{\alpha_i}
   \]
-  rooted at $1$, called the \emph{Collatz tree} of
+  rooted at $1$, called the \emph{Collatz tree}\index{Collatz!tree} of
   $(\alpha_1, \alpha_2, \dots, \alpha_k)$.
   Figure~\ref{fig:trees_forests:Collatz_graph_union} shows such a tree
   for the collection of initial iteration values $1024$, $336$, $340$,
   $320$, $106$, $104$, and $96$. See
-  Lagarias~\cite{Lagarias2009a,Lagarias2009b} for a comprehensive
-  survey of the Collatz conjecture.
+  Lagarias\index{Lagarias, Jeffrey C.}~\cite{Lagarias2009a,Lagarias2009b}
+  for a comprehensive survey of the Collatz\index{Collatz!conjecture}
+  conjecture.
   %%
   \begin{enumerate}[(a)]
-  \item The \emph{Collatz sequence} of a positive integer $n > 1$ is
-    the integer sequence produced by repeated iteration of $T(n)$ with
-    initial iteration value $n$. For example, the Collatz sequence
-    of $n = 22$ is the
+  \item The \emph{Collatz sequence}\index{Collatz!sequence} of a
+    positive integer $n > 1$ is the integer sequence produced by
+    repeated iteration of $T(n)$ with initial iteration value $n$. For
+    example, the Collatz sequence of $n = 22$ is the
     sequence~\eqref{eqn:trees_forests:Collatz_sequence_22}. Write a
     Sage function to produce the Collatz sequence of an integer $n > 1$.
 
-  \item The \emph{Collatz length} of $n > 1$ is the number of terms in
-    the Collatz sequence of $n$, inclusive of the starting iteration
-    value and the final integer $1$. For instance, the Collatz length
-    of $22$ is $12$, that of $106$ is $11$, and that of $51$ is
-    $18$. Write a Sage function to compute the Collatz length of a
-    positive integer $n > 1$. If $n > 1$ is a vertex in a Collatz
-    tree, verify that the Collatz length of $n$ is the distance
-    $d(n,1)$.
+  \item The \emph{Collatz length}\index{Collatz!length} of $n > 1$ is
+    the number of terms in the Collatz sequence of $n$, inclusive of
+    the starting iteration value and the final integer $1$. For
+    instance, the Collatz length of $22$ is $12$, that of $106$ is
+    $11$, and that of $51$ is $18$. Write a Sage function to compute
+    the Collatz length of a positive integer $n > 1$. If $n > 1$ is a
+    vertex in a Collatz tree, verify that the Collatz length of $n$ is
+    the distance $d(n,1)$.
 
-  \item Describe the Collatz graph produced by the function $T(n)$
-    with initial iteration value $n = 1$.
+  \item Describe the Collatz\index{Collatz!graph} graph produced by
+    the function $T(n)$ with initial iteration value $n = 1$.
 
   \item Fix a positive integer $n > 1$ and let $L_i$ be the Collatz
     length of the integer $1 \leq i \leq n$. Plot the pairs $(i, L_i)$
@@ -2524,16 +2742,19 @@ is
 
 \begin{figure}[!htbp]
 \centering
+\index{Collatz!graph}
+\index{Collatz!tree}
 \input{image/trees-forests/collatz-graph-union.tex}
 \caption{The union of Collatz graphs is a tree.}
 \label{fig:trees_forests:Collatz_graph_union}
 \end{figure}
 
 \item The following result was first published in
-  Wiener~\cite{Wiener1947}. Let $T = (V,E)$ be a tree of order $n > 0$.
-  For each edge $e \in E$, let $n_1(e)$ and $n_2(e) = n - n_1(e)$ be
-  the orders of the two components of the edge-deletion subgraph
-  $T - e$. Show that the Wiener number of $T$ is
+  Wiener\index{Wiener!Harry}~\cite{Wiener1947}. Let $T = (V,E)$ be a
+  tree of order $n > 0$. For each edge $e \in E$, let $n_1(e)$ and
+  $n_2(e) = n - n_1(e)$ be the orders of the two components of the
+  edge-deletion\index{subgraph!edge-deletion} subgraph $T - e$. Show
+  that the Wiener\index{Wiener!number} number of $T$ is
   \[
   W(T)
   =
@@ -2542,10 +2763,12 @@ is
 
 \item The following result~\cite{MoharEtAl1993} was independently
   discovered in the late~1980s by Merris and McKay, and is known as
-  the Merris-McKay theorem. Let $T$ be a tree of order $n$ and let
-  $\mathcal{L}$ be its Laplacian matrix having eigenvalues
-  $\lambda_1, \lambda_2, \dots, \lambda_n$. Show that the Wiener
-  number of $T$ is
+  the Merris-McKay\index{Merris-McKay theorem} theorem. Let $T$ be a
+  tree of order $n$ and let $\mathcal{L}$ be its
+  Laplacian\index{Laplacian matrix} matrix having
+  eigenvalues\index{eigenvalue}
+  $\lambda_1, \lambda_2, \dots, \lambda_n$. Show that the
+  Wiener\index{Wiener!number} number of $T$ is
   \[
   W(T)
   =
@@ -2558,35 +2781,40 @@ is
   multidigraphs.
   %%
   \begin{enumerate}[(a)]
-  \item Randomized spanning tree construction
+  \item Randomized\index{spanning tree!randomized construction}
+    spanning tree construction
     Algorithm~\ref{alg:trees_forests:randomized_spanning_tree_construction}.
 
-  \item Kruskal's Algorithm~\ref{alg:trees_forests:Kruskal_algorithm}.
+  \item Kruskal's\index{Kruskal!algorithm}
+    Algorithm~\ref{alg:trees_forests:Kruskal_algorithm}.
 
-  \item Prim's Algorithm~\ref{alg:trees_forests:prim}.
+  \item Prim's\index{Prim!algorithm}
+    Algorithm~\ref{alg:trees_forests:prim}.
 
-  \item Bor\r{u}vka's Algorithm~\ref{alg:trees_forests:Boruvka}.
+  \item Bor\r{u}vka's\index{Bor\r{u}vka!algorithm}
+    Algorithm~\ref{alg:trees_forests:Boruvka}.
   \end{enumerate}
 
 \item Section~\ref{sec:trees_forests:tree_traversals} provides
   iterative algorithms for the following tree traversal techniques:
   %%
   \begin{enumerate}[(a)]
-  \item Level-order traversal:
+  \item Level-order\index{traversal!level-order} traversal:
     Algorithm~\ref{alg:trees_forests:level_order_traversal}.
 
-  \item Pre-order traversal:
+  \item Pre-order\index{traversal!pre-order} traversal:
     Algorithm~\ref{alg:trees_forests:pre_order_traversal}.
 
-  \item Post-order traversal:
+  \item Post-order\index{traversal!post-order} traversal:
     Algorithm~\ref{alg:trees_forests:post_order_traversal}.
 
-  \item Bottom-up traversal:
+  \item Bottom-up\index{traversal!bottom-up} traversal:
     Algorithm~\ref{alg:trees_forests:bottom_up_traversal}.
 
-  \item In-order traversal:
+  \item In-order\index{traversal!in-order} traversal:
     Algorithm~\ref{alg:trees_forests:in_order_traversal}.
   \end{enumerate}
   %%
-  Rewrite each of the above as recursive algorithms.
+  Rewrite each of the above as recursive\index{algorithm!recursive}
+  algorithms.
 \end{problem}
