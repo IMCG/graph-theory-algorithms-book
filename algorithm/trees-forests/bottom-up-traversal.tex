@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{An ordered tree $T$ on $n > 0$ vertices.}
+\Output{A list of the vertices of $T$ in bottom-up order.}
+\BlankLine
+%%
+%% algorithm body
+$Q \assign$ empty queue\;
+$r \assign$ root of $T$\;
+$C \assign [0, 0, \dots, 0]$\tcc*[f]{$n$ copies of $0$}\;
+\For{\rm each edge $(u,v) \in E(T)$}{
+  $C[u] \assign C[u] + 1$\;
+}
+$R \assign$ empty queue\;
+$\enqueue(R, r)$\;
+\While{$\length(R) > 0$}{
+  $v \assign \dequeue(R)$\;
+  \For{\rm each $w \in \children(v)$}{
+    \eIf{$C[w] = 0$}{
+      $\enqueue(Q, w)$\;
+    }{
+      $\enqueue(R, w)$\;
+    }
+  }
+}
+$L \assign [\,]$\;
+\While{$\length(Q) > 0$}{
+  $v \assign \dequeue(Q)$\;
+  $\append(L, v)$\;
+  \If{$v \neq r$}{
+    $C[\parent(v)] \assign C[\parent(v)] - 1$\;
+    \If{$C[\parent(v)] = 0$}{
+      $u \assign \parent(v)$\;
+      $\enqueue(Q, u)$\;
+    }
+  }
+}
+\Return $L$\;
