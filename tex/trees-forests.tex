@@ -2288,6 +2288,37 @@ tree in Figure~\ref{fig:trees_forests:tree_traversal} is
 \label{alg:trees_forests:bottom_up_traversal}
 \end{algorithm}
 
+\begin{algorithm}[!htbp]
+\input{algorithm/trees-forests/in-order-traversal.tex}
+\caption{In-order traversal.}
+\label{alg:trees_forests:in_order_traversal}
+\end{algorithm}
+
+Yet another common tree traversal technique is called
+\emph{in-order traversal}. However, in-order traversal is only
+applicable to binary trees, whereas the other traversal techniques we
+considered above can be applied to any tree with at least one
+vertex. Given a binary tree $T$ having at least one vertex, in-order
+traversal first visits the root of $T$ and consider its left- and
+right-children. We then recursively apply in-order traversal to the
+left and right subtrees of the root vertex. Notice the symmetry in our
+description of in-order traversal: start at the root, then traverse
+the left and right subtrees in in-order. For this reason, in-order
+traversal is sometimes referred to as \emph{symmetric traversal}. Our
+discussion is summarized in
+Algorithm~\ref{alg:trees_forests:in_order_traversal}. Since each
+vertex is pushed and popped exactly once, it follows that in-order
+traversal runs in time $O(n)$. Using
+Algorithm~\ref{alg:trees_forests:in_order_traversal}, an in-order
+traversal of the tree in
+Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings}
+is
+\[
+\varepsilon,\, \texttt{1},\, \texttt{11},\, \texttt{10},\, \texttt{0},
+\texttt{01},\, \texttt{00},\, \texttt{001},\, \texttt{000},\, \texttt{0001},
+\texttt{0000}.
+\]
+
 \begin{itemize}
 \item symmetric, or in-order, traversal
 \end{itemize}
