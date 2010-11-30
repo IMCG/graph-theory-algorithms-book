@@ -123,8 +123,7 @@ undirected\index{graph!undirected} graph without
 multiple\index{edge!multiple} edges.''
 
 \begin{definition}
-(Version 1)
-{\rm
+\rm
 A \emph{graph}\index{graph} $G = (V, E)$ is an ordered pair of finite
 sets. Elements of $V$ are called \emph{vertices}\index{vertex} or
 \emph{nodes}\index{node}, and elements of $E \subseteq V^{(2)}$ are
@@ -136,7 +135,6 @@ called the \emph{order}\index{order} of $G$, and $|E|$ is called the
 the edges and consider $(u,v)$ and $(v,u)$ as one and the same edge in
 $G$. In that case, $G$ is referred to as an
 \emph{undirected graph}\index{graph!undirected}.
-}
 \end{definition}
 
 One can label a graph by attaching labels to its vertices.
@@ -158,7 +156,7 @@ $v_2$.
 \begin{example}
 \label{eg:introduction:house_graph}
 Consider the graph in Figure~\ref{fig:introduction:house_graph}.
-%
+%%
 \begin{enumerate}
 \item List the vertex and edge sets of the graph.
 
@@ -177,18 +175,20 @@ Consider the graph in Figure~\ref{fig:introduction:house_graph}.
 \end{example}
 
 \begin{proof}[Solution]
-(1) Let $G = (V, E)$ denote the graph in
+(1)~Let $G = (V, E)$ denote the graph in
 Figure~\ref{fig:introduction:house_graph}. Then the vertex set of $G$
 is $V = \{ a, b, c, d, e \}$. The edge set of $G$ is given by
+%%
 \begin{equation}
 \label{eqn:introduction:edges_of_house_graph}
 E
 =
 \{ab,\, ae,\, ba,\, bc,\, be,\, cb,\, cd,\, dc,\, de,\, ed,\, eb,\, ea\}.
 \end{equation}
+%%
 We can also use Sage to construct the graph $G$ and list its vertex
 and edge sets:
-%
+%%
 \begin{lstlisting}
 sage: G = Graph({"a":["b","e"], "b":["a","c","e"], "c":["b","d"],
 ...   "d":["c","e"], "e":["a","b","d"]})
@@ -199,17 +199,16 @@ sage: G.vertices()
 sage: G.edges(labels=False)
 [('a', 'b'), ('a', 'e'), ('b', 'e'), ('c', 'b'), ('c', 'd'), ('e', 'd')]
 \end{lstlisting}
-%
+%%
 The graph $G$ is undirected, meaning that we do not impose direction
 on any edges. Without any direction on the edges, the edge $ab$ is the
 same as the edge $ba$. That is why \texttt{G.edges()} returns six
 edges instead of the 12 edges listed
 in~\eqref{eqn:introduction:edges_of_house_graph}.
 
-\index{$\adj$}
-(2) Let $\adj(v)$ be the set of all vertices that are adjacent
-to $v$. Then we have
-%
+(2)~Let $\adj(v)$\index{$\adj$} be the set of all vertices that are
+adjacent to $v$. Then we have
+%%
 \begin{align*}
 \text{adj}(a) &= \{ b, e \} \\
 \text{adj}(b) &= \{ a, c, e \} \\
@@ -217,11 +216,11 @@ to $v$. Then we have
 \text{adj}(d) &= \{ c, e \} \\
 \text{adj}(e) &= \{ a, b, d \}.
 \end{align*}
-%
+%%
 The vertices adjacent to $v$ are also referred to as its
 \emph{neighbors}. We can use the function \texttt{G.neighbors()} to
 list all the neighbors of each vertex.
-%
+%%
 \begin{lstlisting}
 sage: G.neighbors("a")
 ['b', 'e']
@@ -235,18 +234,18 @@ sage: G.neighbors("e")
 ['a', 'b', 'd']
 \end{lstlisting}
 
-(3) Taking the cardinalities of the above five sets, we get
+(3)~Taking the cardinalities of the above five sets, we get
 $|\text{adj}(a)| = |\text{adj}(c)| = |\text{adj}(d)| = 2$ and
 $|\text{adj}(b)| = |\text{adj}(e)| = 3$. Thus $a$, $c$ and $d$ have
 the smallest number of adjacent vertices, while $b$ and $e$ have the
 largest number of adjacent vertices.
 
-(4) If all the edges in $G$ are removed, the result is still a graph,
+(4)~If all the edges in $G$ are removed, the result is still a graph,
 although one without any edges. By definition, the edge set of any
 graph is a subset of $V^{(2)}$. Removing all edges of $G$ leaves us
 with the empty set $\emptyset$, which is a subset of every set.
 
-(5) Say we remove all of the vertices from the graph in
+(5)~Say we remove all of the vertices from the graph in
 Figure~\ref{fig:introduction:house_graph} and in the process all edges
 are removed as well. The result is that both of the vertex and edge
 sets are empty. This is a special graph known as the \emph{empty} or
@@ -256,7 +255,8 @@ sets are empty. This is a special graph known as the \emph{empty} or
 \begin{example}
 Consider the illustration in
 Figure~\ref{fig:introduction:self_loop}. Does
-Figure~\ref{fig:introduction:self_loop} represent a graph? Why or why not?
+Figure~\ref{fig:introduction:self_loop} represent a graph? Why or why
+not?
 \end{example}
 
 \begin{proof}[Solution]
@@ -315,14 +315,15 @@ all those vertices that contribute to the indegree of $v$. Similarly,
 the set of \emph{out-neighbors}\index{out-neighbor}
 $\oadj(v) \subseteq \adj(v)$\index{$\oadj$} of $v \in V$ are those
 vertices that contribute to the outdegree of $v$. Then
-%%
 \[
 \iadj(v) \cap \oadj(v)
 =
 \{u \mid uv \in E \text{ and } vu \in E\}
 \]
-%%
 and $\adj(v) = \iadj(v) \cup \oadj(v)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Multigraphs}
 
@@ -346,12 +347,11 @@ is a multigraph that is undirected. Similarly, a
 As we indicated above, a graph may have ``weighted''\index{edge!weight}
 edges.
 
-\begin{definition} (Version 2)
-{\rm
+\begin{definition}
+\rm
 A \emph{weighted graph}\index{graph!weighted} is a graph $G = (V, E)$
 where each set $V$ and $E$ is a pair consisting of a vertex and a real
 number called the \emph{weight}\index{weight!graph}.
-}
 \end{definition}
 
 The illustration in
@@ -359,12 +359,12 @@ Figure~\ref{fig:introduction:seven_bridges_Konigsberg} is actually a
 multigraph, a graph with multiple edges, called the
 K\"onigsberg\index{K\"onigsberg!graph} graph.
 
-\begin{definition} (Version 3)
+\begin{definition}
 \label{def:introduction:graph-version3}
 \rm
 For a weighted multigraph\index{weight!multigraph} $G$, we are
 given:
-%
+%%
 \begin{itemize}
 \item A finite set $V$ whose elements are pairs $(v, w_v)$, where $v$
   is called a \emph{vertex}\index{vertex!multigraph} and $w_v \in \R$
@@ -382,7 +382,7 @@ given:
   }
 
 \item An incidence\index{incidence!function} function
-
+%%
 \begin{equation}
 \label{eqn:introduction:edge_incidence}
 i: E \to V^{(2)}.
@@ -488,6 +488,9 @@ weighted outdegree of that vertex. In other words, it is the sum of
 the weights of the edges incident to that vertex, regarding the graph
 as an undirected weighted graph.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Simple graphs}
 
 A \emph{simple graph}\index{graph!simple}\index{simple graph} is a
@@ -527,7 +530,7 @@ connected by $\lfloor (n + 1) / 2 \rfloor$ edges.
 \label{fig:introduction:Shannon_multigraphs}
 \end{figure}
 
-\paragraph{Notational convention:}
+\paragraph{Notational convention}
 Unless stated otherwise, all graphs are simple graphs in the remainder
 of this book.
 
@@ -571,7 +574,7 @@ and $\Delta(G) = 3$. In the following Sage session, we construct the
 digraph in Figure~\ref{fig:introduction:triangle_digraph} and computes
 its maximum and minimum number of degrees.
 \index{K\"onigsberg!seven bridges puzzle}
-%
+%%
 \begin{lstlisting}
 sage: G = DiGraph({"a":"b", "b":"c", "c":"a"})
 sage: G
@@ -583,7 +586,7 @@ sage: G.degree("b")
 sage: G.degree("c")
 2
 \end{lstlisting}
-%
+%%
 So for the graph $G$ in
 Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}, we have
 $\delta(G) = \Delta(G) = 2$.
@@ -832,7 +835,7 @@ graph is said to have infinite girth.
 \begin{example}
 \label{eg:introduction:walks_paths_trails}
 Consider the graph in Figure~\ref{fig:introduction:types_of_walks}.
-%
+%%
 \begin{enumerate}
 \item Find two distinct walks that are not trails and determine their
   lengths.
@@ -850,21 +853,21 @@ Consider the graph in Figure~\ref{fig:introduction:types_of_walks}.
 \end{example}
 
 \begin{proof}[Solution]
-(1) Here are two distinct walks that are not trails:
+(1)~Here are two distinct walks that are not trails:
 $w_1: g, b, e, a, b, e$ and $w_2: f, d, c, e, f, d$. The length of
 walk $w_1$ is 5 and the length of walk $w_2$ is also 5.
 
-(2) Here are two distinct trails that are not paths:
+(2)~Here are two distinct trails that are not paths:
 $t_1: a,b,c,e,b$ and $t_2: b,e,f,d,c,e$. The length of trail $t_1$ is
 4 and the length of trail $t_2$ is 5.
 
-(3) Here are two distinct paths: $p_1: a, b, c, d, f, e$ and
+(3)~Here are two distinct paths: $p_1: a, b, c, d, f, e$ and
 $p_2: g, b, a, e, f, d$. The length of path $p_1$ is 5 and the length
 of path $p_2$ is also 5.
 
-(4) Here is a closed trail that is not a cycle: $d, c, e, b, a, e, f, d$.
+(4)~Here is a closed trail that is not a cycle: $d, c, e, b, a, e, f, d$.
 
-(5) Left to the reader.
+(5)~Left to the reader.
 \end{proof}
 
 \begin{theorem}
@@ -940,7 +943,7 @@ Figure~\ref{fig:introduction:types_of_walks} and use the method
 \verb!is_connected()! to determine whether or not the graph is
 connected. Finally, we use the method \verb!shortest_path()! to find
 a geodesic path between $g$ and $d$.
-%
+%%
 \begin{lstlisting}
 sage: g = Graph({"a":["b","e"], "b":["a","g","e","c"], \
 ...   "c":["b","e","d"], "d":["c","f"], "e":["f","a","b","c"], \
@@ -950,7 +953,7 @@ True
 sage: g.shortest_path("g", "d")
 ['g', 'f', 'd']
 \end{lstlisting}
-%
+%%
 This shows that $g, f, d$ is a shortest path from $g$ to $d$. In fact,
 any other $g$-$d$ path has length greater than $2$, so we can say that
 $g, f, d$ is the shortest path between $g$ and $d$.
@@ -1023,7 +1026,7 @@ We now consider several standard classes of graphs. The
 vertices is a graph such that any two distinct vertices are
 adjacent. As $|V(K_n)| = n$, then $|E(K_n)|$ is equivalent to the
 total number of 2-combinations from a set of $n$ objects:
-%
+%%
 \begin{equation}
 \label{eqn:introduction:size_of_K_n}
 |E(K_n)|
@@ -1032,17 +1035,17 @@ total number of 2-combinations from a set of $n$ objects:
 =
 \frac{n(n-1)}{2}.
 \end{equation}
-%
+%%
 Thus for any simple graph $G$ with $n$ vertices, its total number of
 edges $|E(G)|$ is bounded above by
-%
+%%
 \begin{equation}
 \label{eqn:introduction:upper_bound_total_edges_simple_graph}
 |E(G)|
 \leq
 \frac{n(n - 1)}{2}.
 \end{equation}
-%
+%%
 Figure~\ref{fig:introduction:five_complete_graphs} shows complete
 graphs each of whose total number of vertices is bounded by
 $1 \leq n \leq 5$. The complete graph $K_1$ has one vertex with
@@ -1068,21 +1071,21 @@ $G$ has at most $\frac{1}{2} (n - k)(n - k + 1)$ edges.
 If $n_i$ is the number of vertices in component $i$, then $n_i > 0$
 and it can be shown~(see the proof of Lemma~2.1
 in~\cite[pp.21--22]{Foulds1992}) that
-%
+%%
 \begin{equation}
 \label{eqn:introduction:inequality_set_positive_integers}
 \sum n_i^2
 \leq
 \left(\sum n_i\right)^2 - (k - 1) \left(2 \sum n_i - k\right).
 \end{equation}
-%
+%%
 (This result holds true for any nonempty but finite set of positive
 integers.) Note that $\sum n_i = n$ and
 by~\eqref{eqn:introduction:upper_bound_total_edges_simple_graph} each
 component $i$ has at most $\frac{1}{2} n_i (n_i - 1)$
 edges. Apply~\eqref{eqn:introduction:inequality_set_positive_integers}
 to get
-%
+%%
 \begin{align*}
 \sum \frac{n_i (n_i - 1)}{2}
 &=
@@ -1092,7 +1095,7 @@ to get
 &=
 \frac{(n - k) (n - k + 1)}{2}
 \end{align*}
-%
+%%
 as required.
 \end{proof}
 
@@ -1132,12 +1135,12 @@ started. Thus, any cycle in $G$ must have even length.
 Sufficiency~($\Longleftarrow$): Assume $G = (V, E)$ has order
 $n \geq 2$ and no odd cycles. If $G$ is connected, choose any vertex
 $u \in V$ and define a partition of $V$ thus:
-%
+%%
 \begin{align*}
-X &= \{x \in V \;|\; d(u,x) \text{ is even}\}, \\
-Y &= \{y \in V \;|\; d(u,y) \text{ is odd}\}
+X &= \{x \in V \mid d(u,x) \text{ is even}\}, \\
+Y &= \{y \in V \mid d(u,y) \text{ is odd}\}
 \end{align*}
-%
+%%
 where $d(u,v)$ denotes the distance (or length of the shortest path)
 from $u$ to $v$. If $(X, Y)$ is a bipartition of $G$, then we are
 done. Otherwise, $(X, Y)$ is not a bipartition of $G$. Then one of $X$
@@ -1191,7 +1194,7 @@ the resulting graph is $K_{3,3}$.
 \section{Representing graphs as matrices}
 \label{sec:introduction:matrix_representation}
 
-An $m \times n$ matrix $A$ can be represented as
+An $m \times n$ matrix\index{matrix} $A$ can be represented as
 \[
 A
 =
@@ -1206,7 +1209,6 @@ The positive integers $m$ and $n$ are the row and column dimensions of
 $A$, respectively. The entry in row $i$ column $j$ is denoted
 $a_{ij}$. Where the dimensions of $A$ are clear from context, $A$ is
 also written as $A = [a_{ij}]$.
-\index{matrix}
 
 Representing a graph as a matrix is very inefficient in some cases and
 not so in other cases. Imagine you walk into a large room full of
@@ -1277,7 +1279,7 @@ Figure~\ref{fig:introduction:adjacency_matrices}.
 Define the graphs in Figure~\ref{fig:introduction:adjacency_matrices}
 using \verb!DiGraph! and \verb!Graph!. Then call the method
 \verb!adjacency_matrix()!.
-%
+%%
 \begin{lstlisting}
 sage: G1 = DiGraph({1:[2], 2:[1], 3:[2,6], 4:[1,5], 5:[6], 6:[5]})
 sage: G2 = Graph({"a":["b","c"], "b":["a","d"], "c":["a","e"], \
@@ -1301,7 +1303,7 @@ False
 sage: m2.is_symmetric()
 True
 \end{lstlisting}
-%
+%%
 In general, the adjacency matrix of a digraph is not symmetric, while
 that of an undirected graph is symmetric.
 \end{proof}
@@ -1326,7 +1328,7 @@ w_{ij}, & \text{if $v_i v_j \in E$}, \\
 \]
 For example, Sage allows you to easily compute a weighted adjacency
 matrix.
-%
+%%
 \begin{lstlisting}
 sage: G = Graph(sparse=True, weighted=True)
 sage: G.add_edges([(0,1,1), (1,2,2), (0,2,3), (0,3,4)])
@@ -1379,7 +1381,7 @@ Tanner\index{Tanner graph} graph. Tanner graphs are used in the theory
 of error-correcting\index{code!error-correcting} codes. For example,
 Sage allows you to easily compute such a bipartite graph from its
 matrix.
-%
+%%
 \begin{lstlisting}
 sage: H = Matrix([(1,1,1,0,0), (0,0,1,0,1), (1,0,0,1,1)])
 sage: B = BipartiteGraph(H)
@@ -1389,7 +1391,7 @@ sage: B.reduced_adjacency_matrix()
 [1 0 0 1 1]
 sage: B.plot(graph_border=True)
 \end{lstlisting}
-%
+%%
 The corresponding graph is similar to that in
 Figure~\ref{fig:introduction:tanner_graph}.
 
@@ -1450,7 +1452,7 @@ Let $G$ be a digraph with edge set $E = \{ e_1, \dots, e_m \}$ and
 vertex set $V = \{ v_1, \dots, v_n \}$. The
 \emph{incidence matrix}\index{incidence!matrix} of $G$ is the
 $n \times m$ matrix $B = [b_{ij}]$ defined by
-%
+%%
 \begin{equation}
 \label{eqn:introduction:incidence_matrix_digraph}
 b_{ij}
@@ -1462,7 +1464,7 @@ b_{ij}
 0,  & \text{otherwise}.
 \end{cases}
 \end{equation}
-%
+%%
 Each column of $B$ corresponds to an edge and each row corresponds to
 a vertex. The definition of incidence matrix of a digraph as contained
 in expression~\eqref{eqn:introduction:incidence_matrix_digraph} is
@@ -1473,7 +1475,6 @@ $E = \{ e_1, \dots, e_m \}$ and vertex set
 $V = \{ v_1, \dots, v_n \}$. The
 \emph{unoriented incidence matrix}\index{incidence matrix!unoriented}
 of $G$ is the $n \times m$ matrix $B = [b_{ij}]$ defined by
-
 \[
 b_{ij}
 =
@@ -1543,7 +1544,7 @@ d_i, & \text{if $i = j$}, \\
 where $d_i = \deg(v_i)$ is the degree of vertex $v_i$.
 
 Sage allows you to compute the Laplacian matrix of a graph:
-%
+%%
 \begin{lstlisting}
 sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: G.laplacian_matrix()
@@ -1554,7 +1555,7 @@ sage: G.laplacian_matrix()
 [ 0 -1  0 -1  2  0]
 [-1  0 -1  0  0  2]
 \end{lstlisting}
-%
+%%
 There are many remarkable properties of the Laplacian matrix. It shall
 be discussed further in Chapter~\ref{chap:distance_connectivity}.
 
@@ -1568,7 +1569,7 @@ vertices $v,w \in V$ in a connected graph $G = (V,E)$ is the number of
 edges in a shortest path connecting them. The $n \times n$ matrix
 $[d(v_i, v_j)]$ is the \emph{distance matrix}\index{distance!matrix}
 of $G$. Sage helps you to compute the distance matrix of a graph:
-%
+%%
 \begin{lstlisting}
 sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: d = [[G.distance(i,j) for i in range(1,7)] for j in range(1,7)]
@@ -1646,7 +1647,7 @@ If \verb!G! is a Sage graph, one can use the method
 \verb!G.is_isomorphic()! to determine whether or not the graph
 \verb!G! is isomorphic to another graph. The following Sage session
 illustrates how to use \verb!G.is_isomorphic()!.
-%
+%%
 \begin{lstlisting}
 sage: C6 = Graph({"a":["b","c"], "b":["a","d"], "c":["a","e"], \
 ...   "d":["b","f"], "e":["c","f"], "f":["d","e"]})
@@ -1661,7 +1662,7 @@ False
 sage: G1.is_isomorphic(G2)
 False
 \end{lstlisting}
-%
+%%
 Thus, for the graphs $C_6$, $G_1$ and $G_2$ in
 Figure~\ref{fig:introduction:isomorphic_graphs}, $C_6$ and $G_1$ are
 isomorphic, but $G_1$ and $G_2$ are not isomorphic.
@@ -1816,14 +1817,14 @@ for as many times as there are distinct terms in $S$.
 Let $d = (d_1, d_2, \dots, d_n)$ be a sequence of positive integers
 such that $d_i \geq d_{i+1}$. Then $d$ is realized by a simple graph
 if and only if $\sum_i d_i$ is even and
-%
+%%
 \begin{equation}
 \label{eqn:introduction:Erdos_Gallai_1961:graphical_sequence}
 \sum_{i=1}^k d_i
 \leq
 k(k + 1) + \sum_{j=k+1}^n \min\{k, d_i\}
 \end{equation}
-%
+%%
 for all $1 \leq k \leq n - 1$.
 \end{theorem}
 
@@ -1882,7 +1883,7 @@ sequence $S_1$.
 
 On the other hand, suppose $S_1$ is graphical and let $G_1$ be a graph
 with degree sequence $S_1$ such that
-%
+%%
 \begin{enumerate}[(i)]
 \item The graph $G_1$ has the vertex set
   $V(G_1) = \{v_1, v_2, \dots, v_n\}$ and $\deg(v_i) = d_i$ for
@@ -1890,7 +1891,7 @@ with degree sequence $S_1$ such that
 
 \item The degree sum of all vertices adjacent to $v_1$ is a maximum.
 \end{enumerate}
-%
+%%
 To obtain a contradiction, suppose $v_1$ is not adjacent to vertices
 having degrees
 \[
@@ -1936,7 +1937,7 @@ Algorithm~\ref{alg:introduction:Havel_Hakimi_degree_sequence}
 determines whether or not a sequence of integers is realizable by a
 simple graph. Our input is a sequence $S = (d_1, d_2, \dots, d_n)$
 arranged in non-increasing order, where each $d_i \geq 0$. The first
-test as contained in the ``if'' block, otherwise known as a
+test as contained in the if block, otherwise known as a
 conditional, on line~\ref{alg:Havel_Hakimi:handshaking_lemma} uses the
 handshaking
 lemma~(Theorem~\ref{thm:introduction:hand_shaking}). During the first
@@ -2055,7 +2056,7 @@ sage: G1u2.adjacency_matrix()
 [0 0 0 0 0 0 0 1 0 1 0 0]
 [0 0 0 0 0 0 1 0 1 0 0 0]
 \end{lstlisting}
-%
+%%
 In the case where $V_1 = V_2$, then $G_1 \cup G_2$ is simply the graph
 consisting of all edges in $G_1$ or in $G_2$. In general, the union of
 two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ is defined as
@@ -2165,7 +2166,7 @@ deleting a vertex $v \in V$ and also all the edges incident to that
 vertex. The vertex deletion subgraph of $G$ is sometimes denoted
 $G - \{v\}$.
 Sage can compute vertex deletions, as the following example shows.
-%
+%%
 \begin{lstlisting}
 sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: G.vertices()
@@ -2182,7 +2183,7 @@ sage: E2 = Set(G.edges(labels=False)); E2
 sage: E1.difference(E2) == E4
 True
 \end{lstlisting}
-%
+%%
 Figure~\ref{fig:introduction:vertex_deletion_subgraphs}
 presents a sequence of subgraphs obtained by repeatedly deleting
 vertices. As the figure shows, when a vertex is deleted from a graph,
@@ -2206,7 +2207,7 @@ If $G = (V,E)$ is any graph with at least $1$ edge, then the
 deleting an edge $e \in E$, but not the vertices incident to that edge.
 The edge deletion subgraph of $G$ is sometimes denoted $G - \{e\}$.
 Sage can compute edge deletions, as the following example shows.
-%
+%%
 \begin{lstlisting}
 sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: E1 = Set(G.edges(labels=False)); E1
@@ -2221,7 +2222,7 @@ sage: E2 = Set(G.edges(labels=False)); E2
 sage: E1.difference(E2) == E14
 True
 \end{lstlisting}
-%
+%%
 Figure~\ref{fig:introduction:edge_deletion_subgraphs} shows a sequence
 of graphs resulting from edge deletion. Unlike vertex deletion, when
 an edge is deleted the vertices incident on that edge are left
@@ -2329,7 +2330,7 @@ unlike edge deletion, edge contraction also merges together the two
 vertices the edge used to connect. For a graph $G = (V, E)$ and an
 edge $uv = e \in E$, the edge contraction $G/e$ is the graph obtained
 as follows:
-%
+%%
 \begin{enumerate}
 \item Delete the vertices $u,v$ from $G$.
 
@@ -2355,7 +2356,7 @@ uw \in E \backslash \{e\} \;\text{or}\; vw \in E \backslash \{e\}
 \big\}.
 \]
 Make the substitutions
-%
+%%
 \begin{align*}
 E_1 &= \big\{
 wx \in E \;\left.\right|\; \{w,x\} \cap \{u,v\} = \emptyset \big\} \\
@@ -2363,7 +2364,7 @@ E_2 &= \big\{
 v_e w \;\left.\right|\;
 uw \in E \backslash \{e\} \;\text{or}\; vw \in E \backslash \{e\} \big\}.
 \end{align*}
-%
+%%
 Let $G$ be the wheel graph $W_6$ in
 Figure~\ref{fig:introduction:contracting_wheel_graph_W6} and consider
 the edge contraction $G/ab$, where $ab$ is the gray colored edge in
@@ -2409,7 +2410,7 @@ $H$ be a subgraph of $G$. The
 is the edge deletion subgraph $G - E(H)$. That is, we delete from $G$
 all edges in $H$. Sage can compute edge complements, as the following
 example shows.
-%
+%%
 \begin{lstlisting}
 sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
 sage: Gc = G.complement()
@@ -2477,13 +2478,12 @@ is connected.
 The \emph{Cartesian product}\index{Cartesian product}
 $G \square H$\index{$\square$} of graphs $G$ and $H$ is a graph such
 that the vertex set of $G \square H$ is the Cartesian product
-
 \[
 V(G \square H) = V(G) \times V(H).
 \]
 Any two vertices $(u, u')$ and $(v, v')$
 are adjacent in $G \square H$ if and only if either
-%
+%%
 \begin{enumerate}
 \item $u = v$ and $u'$ is adjacent with $v'$ in $H$; or
 
@@ -2496,9 +2496,8 @@ E(G \square H)
 =
 \big(V(G) \times E(H)\big) \cup \big(E(G) \times V(H)\big).
 \]
-%
 Sage can compute Cartesian products, as the following example shows.
-%
+%%
 \begin{lstlisting}
 sage: Z = graphs.CompleteGraph(2); len(Z.vertices()); len(Z.edges())
 2
@@ -2607,7 +2606,7 @@ contractions on a subgraph of $G$.  The order in which a sequence of
 such contractions is performed on $G$ does not affect the resulting
 graph $H$. A graph minor is not in general a subgraph. However, if
 $G_1$ is a minor of $G_2$ and $G_2$ is a minor of $G_3$, then $G_1$ is
-a minor of $G_3$. Therefore, the relation``being a minor of'' is a
+a minor of $G_3$. Therefore, the relation ``being a minor of'' is a
 partial ordering on the set of graphs. For example, the graph in
 Figure~\ref{fig:introduction:contracting_wheel_graph_W4} is a minor of
 the graph in Figure~\ref{fig:introduction:contracting_wheel_graph_W6}.
@@ -2764,10 +2763,10 @@ economics, and operation research.
   \end{enumerate}
 
   \begin{figure}[!htbp]
-    \centering
-    \input{image/introduction/social-network.tex}
-    \caption{Graph representation of a social network.}
-    \label{fig:introduction:social_network}
+  \centering
+  \input{image/introduction/social-network.tex}
+  \caption{Graph representation of a social network.}
+  \label{fig:introduction:social_network}
   \end{figure}
 
 \item In the friendship network of
@@ -2777,10 +2776,10 @@ economics, and operation research.
   longer a mutual friend of Alice and Bob?
 
   \begin{figure}[!htbp]
-    \centering
-    \input{image/introduction/routing-network.tex}
-    \caption{Graph representation of a routing network.}
-    \label{fig:introduction:routing_network}
+  \centering
+  \input{image/introduction/routing-network.tex}
+  \caption{Graph representation of a routing network.}
+  \label{fig:introduction:routing_network}
   \end{figure}
 
 \item The routing network of German cities in
@@ -2807,7 +2806,7 @@ economics, and operation research.
   $\deg(v) < n$ for all $v \in V(G)$.
 
 \item Let $G$ be a graph of order $n$ and size $m$. Then $G$ is called
-  an \emph{overfull graph} if
+  an \emph{overfull graph}\index{overfull graph} if
   $m > \Delta(G) \cdot \left\lfloor n / 2 \right\rfloor$. If
   $m = \Delta(G) \cdot \left\lfloor n / 2 \right\rfloor + 1$, then $G$
   is said to be \emph{just overfull}. It can be shown that overfull
@@ -2936,10 +2935,10 @@ economics, and operation research.
     \]
   \end{enumerate}
 
-\item A graph is said to be \emph{planar} if it can be drawn on the
-  plane in such a way that no two edges cross each other. For example,
-  the complete graph $K_n$ is planar for $n = 1, 2, 3, 4$, but $K_5$
-  is not planar~(see
+\item A graph is said to be \emph{planar}\index{planar graph} if it
+  can be drawn on the plane in such a way that no two edges cross each
+  other. For example, the complete graph $K_n$ is planar for
+  $n = 1, 2, 3, 4$, but $K_5$ is not planar~(see
   Figure~\ref{fig:introduction:five_complete_graphs}).
   %%
   \begin{enumerate}[(a)]
