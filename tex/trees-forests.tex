@@ -72,7 +72,7 @@ which is also referred to as the root
 directory\index{root directory}. Other examples of trees include the
 organism classification\index{classification tree} tree in
 Figure~\ref{fig:trees_forests:classification_tree_organisms}, the
-family\index{tree!family} tree in
+family\index{family tree} tree in
 Figure~\ref{fig:introduction:family_tree}, and the
 expression\index{tree!expression} tree in
 Figure~\ref{fig:trees_forests:expression_tree_perfect_square}.
@@ -135,7 +135,7 @@ $G$.
 \begin{example}
 \label{eg:trees_forests:spanning_tree}
 {\rm
-Consider the $4 \times 4$ grid\index{grid graph} graph with $16$
+Consider the $4 \times 4$ grid\index{grid!graph} graph with $16$
 vertices and $24$ edges. Two examples of a
 spanning\index{spanning tree} tree are given in
 Figure~\ref{fig:trees_forests:grid_graph_spanning_trees} by using a
@@ -145,7 +145,7 @@ darker line shading for its edges.}
 
 \begin{figure}[!htbp]
 \centering
-\index{grid graph}
+\index{grid!graph}
 \index{spanning tree}
 \input{image/trees-forests/grid-graph-spanning-trees.tex}
 \caption{Two spanning trees for the $4 \times 4$ grid graph.}
@@ -495,7 +495,7 @@ equivalent:
   connected and has $n - 1$ edges\index{size!tree}.
 
 \item\label{enu:trees_forests:each_edge_is_cut_set} Every edge of $T$
-  is a cut\index{cut set} set.
+  is a cut\index{cut!set} set.
 \end{enumerate}
 \end{corollary}
 
@@ -800,7 +800,7 @@ $\varphi(n)$.
 \index{spanning tree!minimum}
 
 Suppose we want to design an electronic
-circuit\index{electronic circuit} connecting several components. If
+circuit\index{circuit!electronic} connecting several components. If
 these components represent the vertices of a graph and a wire
 connecting two components represents an edge of the graph, then for
 economical reasons we will want to connect the components together
@@ -1057,7 +1057,7 @@ def kruskal(G):
 \end{lstlisting}
 \index{Kruskal!algorithm}
 
-Here is an example. We start with the grid\index{grid graph}
+Here is an example. We start with the grid\index{grid!graph}
 graph. This is implemented in Sage such that the vertices are given by
 the coordinates of the grid the graph lies on, as opposed to
 $0, 1, \dots, n-1$. Since the above implementation of
@@ -1081,7 +1081,7 @@ Figure~\ref{fig:trees-forests:Kruskal_example}.
 
 \begin{figure}[!htbp]
 \centering
-\index{grid graph}
+\index{grid!graph}
 \index{Kruskal!algorithm}
 \input{image/trees-forests/Kruskal-example.tex}
 \caption{Kruskal's algorithm for the $4 \times 4$ grid graph.}
@@ -1599,7 +1599,7 @@ vertex $v$ currently has $k$ children.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Binary codes}
-\index{binary code}
+\index{code!binary}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1790,7 +1790,7 @@ computational aspects of linear\index{code!linear} codes).
 \subsubsection{Binary Gray codes}
 \index{Gray code!binary}
 
-Consider the so-called $n$-hypercube\index{graph!hypercube} graph
+Consider the so-called $n$-hypercube\index{hypercube graph} graph
 $Q_n$, whose first few instances are illustrated in
 Figure~\ref{fig:introduction:hypercube_graphs}. This can be envisioned
 as the graph whose vertices are the vertices of a cube in
@@ -1802,7 +1802,7 @@ and whose edges are those line segments in $\R^n$ connecting two
 \emph{neighboring} vertices, i.e. two vertices that differ in exactly
 one coordinate. A binary\index{Gray code!binary} Gray code of length
 $n$ can be regarded as a
-path on the hypercube\index{graph!hypercube} graph $Q_n$ that visits
+path on the hypercube\index{hypercube graph} graph $Q_n$ that visits
 each vertex of the cube exactly once. In other words, a binary Gray
 code of length $n$ may be identified with a
 Hamiltonian\index{path!Hamiltonian} path on the graph $Q_n$. For
@@ -1811,7 +1811,7 @@ Hamiltonian\index{path!Hamiltonian} path on $Q_3$.
 
 \begin{figure}[!htbp]
 \centering
-\index{graph!hypercube}
+\index{hypercube graph}
 \index{path!Hamiltonian}
 \input{image/trees-forests/gray-code-cube.tex}
 \caption{Viewing $\Gamma_3$ as a Hamiltonian path on $Q_3$.}
@@ -2561,7 +2561,7 @@ is
 
   \item Explain and provide pseudocode of an algorithm for
     constructing all spanning\index{spanning tree} trees of the
-    $n \times n$ grid\index{grid graph} graph, where $n > 0$.
+    $n \times n$ grid\index{grid!graph} graph, where $n > 0$.
 
   \item In general, if $n$ is a positive integer, how many
     nonisomorphic spanning trees are there in the $n \times n$ grid
@@ -2652,7 +2652,7 @@ is
   fundamental\index{cycle!fundamental} cycles in $G$ and edges not in
   $T$.
 
-\item Let $G = (V,E)$ be the $3 \times 3$ grid\index{grid graph} graph
+\item Let $G = (V,E)$ be the $3 \times 3$ grid\index{grid!graph} graph
   and $T_1 = (V_1, E_1)$, $T_2 = (V_2, E_2)$ be spanning trees of $G$
   in Example~\ref{eg:trees_forests:spanning_tree}. Find a fundamental
   cycle in $G$ for $T_1$ that is not a fundamental cycle in $G$ for
