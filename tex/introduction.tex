@@ -25,20 +25,24 @@
 
 \noindent
 Our journey into graph theory starts with a puzzle that was solved
-over 250 years ago by
-Leonhard Euler~(1707--1783)\index{Euler!Leonhard}. The Pregel River
-flowed through the town of K\"onigsberg, which is present day
-Kaliningrad in Russia. Two islands protruded from the river. On either
-side of the mainland, two bridges joined one side of the mainland with
-one island and a third bridge joined the same side of the mainland
-with the other island. A bridge connected the two islands. In total,
-seven bridges connected the two islands with both sides of the
-mainland. A popular exercise among the citizens of K\"onigsberg was
-determining if it was possible to cross each bridge exactly once during
-a single walk\index{K\"onigsberg!seven bridges puzzle}. For
-historical perspectives on this puzzle and Euler's solution, see
-Gribkovskaia~et~al.~\cite{GribkovskaiaEtAl2007} and Hopkins and
-Wilson~\cite{HopkinsWilson2004}.
+over 250 years ago by Leonhard
+Euler~(1707--1783)\index{Euler!Leonhard}. The
+Pregel\index{Pregel River} River flowed through the town of
+K\"onigsberg\index{K\"onigsberg}, which is present day
+Kaliningrad\index{Kaliningrad} in Russia\index{Russia}. Two islands
+protruded from the river. On either side of the mainland, two bridges
+joined one side of the mainland with one island and a third bridge
+joined the same side of the mainland with the other island. A bridge
+connected the two islands. In total, seven bridges connected the two
+islands with both sides of the mainland. A popular exercise among the
+citizens of K\"onigsberg\index{K\"onigsberg} was determining if it was
+possible to cross each bridge exactly once during a single
+walk\index{K\"onigsberg!seven bridges puzzle}. For historical
+perspectives on this puzzle and Euler's\index{Euler!Leonhard}
+solution, see\index{Gribkovskaia, Irina}\index{Halskau Sr., {\O}yvind}
+Gribkovskaia\index{Laporte, Gilbert}~et~al.~\cite{GribkovskaiaEtAl2007}
+and Hopkins\index{Hopkins, Brian} and
+Wilson\index{Wilson, Robin}~\cite{HopkinsWilson2004}.
 
 To visualize this puzzle in a slightly different way, consider
 Figure~\ref{fig:introduction:seven_bridges_Konigsberg}. Imagine that
@@ -51,6 +55,7 @@ solution he laid the foundation of what is now known as graph theory.
 
 \begin{figure}[!htbp]
 \centering
+\index{K\"onigsberg!graph}
 \input{image/introduction/seven-bridges-Konigsberg.tex}
 \caption{The seven bridges of K\"onigsberg puzzle.}
 \label{fig:introduction:seven_bridges_Konigsberg}
@@ -81,20 +86,22 @@ shown in Figure~\ref{fig:introduction:graphs_as_plots}.
 
 \begin{figure}[!htbp]
 \centering
+\index{function plot}
+\index{scatterplot}
 \input{image/introduction/graphs-as-plots.tex}
 \caption{Visual representations of datasets as plots.}
 \label{fig:introduction:graphs_as_plots}
 \end{figure}
 
-This book is
-not about graphs in the sense of plots of functions or
+This book is not about graphs in the sense of plots of functions or
 datasets. Rather, our focus is on
 \emph{combinatorial graphs}\index{combinatorial graphs} or
 \emph{graphs} for short. A graph in the combinatorial sense is a
 collection of discrete interconnected elements, an example of which is
 shown in Figure~\ref{fig:introduction:seven_bridges_Konigsberg}. How
 can we elaborate on this brief description of combinatorial graphs? To
-paraphrase what Felix Klein said about curves,\footnote{
+paraphrase what Felix Klein\index{Klein, Felix} said about
+curves,\footnote{
   ``Everyone knows what a curve is, until he has studied enough
   mathematics to become confused through the countless number of
   possible exceptions.''
@@ -102,13 +109,14 @@ paraphrase what Felix Klein said about curves,\footnote{
 it is easy to define a graph until we realize the countless number of
 exceptions. There are directed graphs, weighted graphs, multigraphs,
 simple graphs, and so on. Where do we begin?
-\index{Klein, Felix}
 
 \paragraph{Notation}
-If $S$ is a set, let $S^{(n)}$ denote the set of unordered $n$-tuples
-(with possible repetition). We shall sometimes refer to an unordered
-$n$-tuple as an \emph{$n$-set}.
+If $S$ is a set, let $S^{(n)}$ denote the set of unordered
+$n$-tuples\index{tuple}~(with possible repetition). We shall sometimes
+refer to an unordered $n$-tuple as an
+\emph{$n$-set}\index{set!$n$-set}. \\
 
+\noindent
 We start by calling a ``graph'' what some call an
 ``unweighted\index{graph!unweighted},
 undirected\index{graph!undirected} graph without
@@ -141,11 +149,11 @@ $v_2$.
 
 \begin{figure}[!htbp]
 \centering
+\index{house graph}
 \input{image/introduction/house-graph.tex}
 \caption{A house graph.}
 \label{fig:introduction:house_graph}
 \end{figure}
-\index{house graph}
 
 \begin{example}
 \label{eg:introduction:house_graph}
@@ -242,10 +250,8 @@ with the empty set $\emptyset$, which is a subset of every set.
 Figure~\ref{fig:introduction:house_graph} and in the process all edges
 are removed as well. The result is that both of the vertex and edge
 sets are empty. This is a special graph known as the \emph{empty} or
-\emph{null} graph.
+\emph{null}\index{null graph} graph.
 \end{proof}
-\index{graph!null}
-\index{null graph}
 
 \begin{example}
 Consider the illustration in
@@ -256,10 +262,9 @@ Figure~\ref{fig:introduction:self_loop} represent a graph? Why or why not?
 \begin{proof}[Solution]
 If $V = \{ a, b, c \}$ and $E = \{ aa, bc \}$, it is clear that $E
 \subseteq V^{(2)}$. Then $(V, E)$ is a graph. The edge $aa$ is
-called a \emph{self-loop} of the graph. In general, any edge of the
-form $vv$ is a self-loop.
+called a \emph{self-loop}\index{self-loop} of the graph. In general,
+any edge of the form $vv$ is a self-loop.
 \end{proof}
-\index{self-loop}
 
 \begin{figure}[!htbp]
 \centering
@@ -279,11 +284,12 @@ definition captures the situation where the direction of the edges are
 taken into account.
 
 A \emph{directed edge}\index{edge!directed} is an edge such that one
-vertex incident with it is designated as the head vertex and the other
-incident vertex is designated as the tail vertex. In this situation,
-we may assume that the set of edges is a subset of the ordered pairs
-$V \times V$. A directed edge $uv$ is said to be directed from its
-tail $u$ to its head $v$. A
+vertex incident with it is designated as the
+\emph{head}\index{vertex!head} vertex and the other incident vertex is
+designated as the \emph{tail}\index{vertex!tail} vertex. In this
+situation, we may assume that the set of edges is a subset of the
+ordered pairs $V \times V$. A directed edge $uv$ is said to be
+directed from its tail $u$ to its head $v$. A
 \emph{directed graph}\index{graph!directed} or
 \emph{digraph}\index{digraph} $G$ is a graph each of whose edges is
 directed. The \emph{indegree}\index{indegree} $\id(v)$\index{$\id$} of
@@ -375,7 +381,7 @@ given:
     \emph{weight}\index{edge!weight} of the edge.
   }
 
-\item An incidence\index{incidence function} function
+\item An incidence\index{incidence!function} function
 
 \begin{equation}
 \label{eqn:introduction:edge_incidence}
@@ -398,9 +404,9 @@ $i(e) = \{h(e),\, t(e)\}$. The element $v = t(e)$ is called the
 \emph{tail}\index{edge!tail} of $i(e)$. For self-loops, we set
 $t(e) = h(e)$. A multigraph with an orientation\index{orientation} can
 therefore be described as the $4$-tuple $(V, E, i, h)$. In other
-words, $G = (V,E,i,h)$ is a
-multidigraph. Figure~\ref{fig:introduction:weighted_multigraph}
-illustrates a weighted multigraph.
+words, $G = (V,E,i,h)$ is a multidigraph.
+Figure~\ref{fig:introduction:weighted_multigraph} illustrates a
+weighted multigraph.
 \end{definition}
 
 \begin{figure}[!htbp]
@@ -490,10 +496,9 @@ Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}
 illustrates a simple graph and its digraph version, together with a
 multidigraph version of the K\"onigsberg graph. The edges of a digraph
 can be visually represented as directed arrows, similar to the digraph
-in
-Figure~\ref{fig:introduction:triangle_digraph} and the multidigraph in
-Figure~\ref{fig:introduction:Konigsberg_multidigraph}. The digraph in
-Figure~\ref{fig:introduction:triangle_digraph} has the vertex set
+in Figure~\ref{fig:introduction:triangle_digraph} and the multidigraph
+in Figure~\ref{fig:introduction:Konigsberg_multidigraph}. The digraph
+in Figure~\ref{fig:introduction:triangle_digraph} has the vertex set
 $\{a, b, c\}$ and the edge set $\{ab, bc, ca\}$. There is an arrow
 from vertex $a$ to vertex $b$, hence $ab$ is in the edge set. However,
 there is no arrow from $b$ to $a$, so $ba$ is not in the edge set of
@@ -587,22 +592,21 @@ The graph $G$ in
 Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph}
 has the special property that its minimum degree is the same as its
 maximum degree, i.e. $\delta(G) = \Delta(G)$. Graphs with this
-property are referred to as \emph{regular}. An $r$-\emph{regular}
+property are referred to as
+\emph{regular}\index{regular graph}. An
+$r$-\emph{regular}\index{regular graph!$r$-regular}
 graph is a regular graph each of whose vertices has degree $r$. For
 instance, $G$ is a $2$-regular graph. The following result, due to
 Euler, counts the total number of degrees in any graph.
-\index{graph!regular}
-\index{$r$-regular}
-\index{regular graph}
 
 \begin{theorem}
 \label{thm:introduction:degree_sum}
 \label{thm:introduction:hand_shaking}
+\index{Euler!Leonhard}
+\index{handshaking lemma}
 \textbf{Euler 1736.}
 If $G = (V, E)$ is a graph, then $\sum_{v \in V} \deg(v) = 2 |E|$.
 \end{theorem}
-\index{Euler!Leonhard}
-\index{handshaking lemma}
 
 \begin{proof}
 Each edge $e = v_1 v_2 \in E$ is incident with two vertices, so $e$ is
@@ -720,10 +724,11 @@ where each edge $e_i = v_{i-1} v_i$ and the length\index{walk!length}
 $n$ refers to the number of~(not necessarily distinct) edges in the
 walk. The vertex $v_0$ is the starting vertex of the walk and $v_n$ is
 the end vertex, so we refer to $W$ as a $v_0$-$v_n$ walk. The
-\emph{trivial walk} is the walk of length $n = 0$ in which the start
-and end vertices are one and the same vertex. If the graph has no
-multiple edges then, for brevity, we omit the edges in a walk and
-usually write the walk as the following sequence of vertices:
+\emph{trivial walk}\index{walk!trivial} is the walk of length $n = 0$
+in which the start and end vertices are one and the same vertex. If
+the graph has no multiple edges then, for brevity, we omit the edges
+in a walk and usually write the walk as the following sequence of
+vertices:
 \[
 W: v_0, v_1, v_2, \dots, v_{n-1}, v_n.
 \]
@@ -813,15 +818,16 @@ Figure~\ref{fig:introduction:butterfly_graph}.
 
 \begin{figure}[!htbp]
 \centering
+\index{bowtie graph}
+\index{butterfly graph}
 \input{image/introduction/butterfly-graph.tex}
 \caption{Butterfly graph with $5$ vertices.}
 \label{fig:introduction:butterfly_graph}
 \end{figure}
 
-The length of the shortest cycle in a graph is called the \emph{girth}
-of the graph. An acyclic graph is said to have infinite girth, by
-convention.
-\index{girth}
+The length of the shortest cycle in a graph is called the
+\emph{girth}\index{girth} of the graph. By convention, an acyclic
+graph is said to have infinite girth.
 
 \begin{example}
 \label{eg:introduction:walks_paths_trails}
@@ -892,12 +898,11 @@ them. A graph that is not connected is referred to as
 The empty graph is disconnected and so is any non-empty graph with an
 isolated vertex. However, the graph in
 Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph} is
-connected. A
-\emph{geodesic path}\index{path!geodesic} or
-\emph{shortest path}\index{shortest path} between two
-distinct vertices $u,v$ of a graph is a $u$-$v$ path of minimum
-length. A non-empty graph may have several shortest paths between some
-distinct pair of vertices. For the graph in
+connected. A \emph{geodesic path}\index{path!geodesic} or
+\emph{shortest path}\index{shortest path} between two distinct
+vertices $u,v$ of a graph is a $u$-$v$ path of minimum length. A
+non-empty graph may have several shortest paths between some distinct
+pair of vertices. For the graph in
 Figure~\ref{fig:introduction:types_of_walks}, both $a,b,c$ and $a,e,c$
 are geodesic paths between $a$ and $c$. Let $H$ be a connected
 subgraph of a graph $G$ such that $H$ is not a proper subgraph of any
@@ -977,6 +982,7 @@ Chapter~\ref{chap:trees_forests} covers trees in more details.
 
 \begin{figure}[!htbp]
 \centering
+\index{family tree}
 \input{image/introduction/family-tree.tex}
 \caption{A family tree.}
 \label{fig:introduction:family_tree}
@@ -997,13 +1003,13 @@ referred to as a \emph{supergraph}\index{supergraph} of $H$.
 
 Starting from $G$, one can obtain its subgraph $H$ by deleting edges
 and/or vertices from $G$. Note that when a vertex $v$ is removed from
-$G$, then all edges incident with $v$ are also removed. If $V(H) =
-V(G)$, then $H$ is called a \emph{spanning} subgraph of $G$. In
+$G$, then all edges incident with $v$ are also removed. If
+$V(H) = V(G)$, then $H$ is called a
+\emph{spanning subgraph}\index{spanning subgraph} of $G$. In
 Figure~\ref{fig:introduction:star_subgraph}, let $G$ be the left-hand
 side graph and let $H$ be the right-hand side graph. Then it is clear
 that $H$ is a spanning subgraph of $G$. To obtain a spanning subgraph
 from a given graph, we delete edges from the given graph.
-\index{spanning subgraph}
 
 \begin{figure}[!htbp]
 \centering
@@ -1012,14 +1018,11 @@ from a given graph, we delete edges from the given graph.
 \label{fig:introduction:star_subgraph}
 \end{figure}
 
-\index{$K_n$}
-\index{complete graph}
-\index{graph!complete}
-We now consider several standard classes of graphs. The \emph{complete}
-graph $K_n$ on $n$ vertices is a graph such that any two distinct
-vertices are adjacent. As $|V(K_n)| = n$, then $|E(K_n)|$ is
-equivalent to the total number of 2-combinations from a set of $n$
-objects:
+We now consider several standard classes of graphs. The
+\emph{complete graph}\index{complete graph} $K_n$\index{$K_n$} on $n$
+vertices is a graph such that any two distinct vertices are
+adjacent. As $|V(K_n)| = n$, then $|E(K_n)|$ is equivalent to the
+total number of 2-combinations from a set of $n$ objects:
 %
 \begin{equation}
 \label{eqn:introduction:size_of_K_n}
@@ -1043,9 +1046,8 @@ edges $|E(G)|$ is bounded above by
 Figure~\ref{fig:introduction:five_complete_graphs} shows complete
 graphs each of whose total number of vertices is bounded by
 $1 \leq n \leq 5$. The complete graph $K_1$ has one vertex with
-no edges. It is also called the \emph{trivial} graph.
-\index{graph!trivial}
-\index{trivial graph}
+no edges. It is also called the
+\emph{trivial graph}\index{trivial graph}.
 
 \begin{figure}[!htbp]
 \centering
@@ -1094,12 +1096,12 @@ to get
 as required.
 \end{proof}
 
-The \emph{cycle}\index{cycle!graph} graph on $n \geq 3$ vertices,
+The \emph{cycle graph}\index{cycle graph} on $n \geq 3$ vertices,
 denoted $C_n$\index{$C_n$}, is the connected $2$-regular graph on $n$
 vertices. Each vertex in $C_n$ has degree exactly $2$ and $C_n$ is
 connected. Figure~\ref{fig:introduction:four_cycle_graphs} shows
 cycles graphs $C_n$ where $3 \leq n \leq 6$. The
-\emph{path}\index{path!graph} graph on $n \geq 1$ vertices is denoted
+\emph{path graph}\index{path graph} on $n \geq 1$ vertices is denoted
 $P_n$\index{$P_n$}. For $n = 1, 2$ we have $P_1 = K_1$ and
 $P_2 = K_2$. Where $n \geq 3$, then $P_n$ is a spanning subgraph of
 $C_n$ obtained by deleting one edge.
@@ -1111,7 +1113,7 @@ $C_n$ obtained by deleting one edge.
 \label{fig:introduction:four_cycle_graphs}
 \end{figure}
 
-A \emph{bipartite}\index{bipartite graph} graph $G$ is a graph with at
+A \emph{bipartite graph}\index{bipartite graph} $G$ is a graph with at
 least two vertices such that $V(G)$ can be split into two disjoint
 subsets $V_1$ and $V_2$, both non-empty. Every edge $uv \in E(G)$ is
 such that $u \in V_1$ and $v \in V_2$, or $v \in V_1$ and $u \in V_2$.
@@ -1163,7 +1165,7 @@ $|V_1| = m$ and $|V_2| = n$. Any vertex in $V_1$ is adjacent to each
 vertex in $V_2$, and any two distinct vertices in $V_i$ are not
 adjacent to each other. If $m = n$, then $K_{n,n}$ is
 $n$-regular. Where $m = 1$ then $K_{1,n}$ is called the
-\emph{star}\index{star graph} graph.
+\emph{star graph}\index{star graph}.
 Figure~\ref{fig:introduction:bipartite_complete_bipartite_graphs}
 shows a bipartite graph together with the complete bipartite graphs
 $K_{4,3}$ and $K_{3,3}$, and the star graph $K_{1,4}$.
@@ -1247,9 +1249,8 @@ is, $A$ is a square matrix such that $a_{ij} = a_{ji}$.
 
 Now let $G$ be a directed graph with vertices
 $V = \{ v_1, \dots, v_n \}$ and edge set $E$. The
-$(0, -1, 1)$-\emph{adjacency matrix} of $G$ is the $n \times n$ matrix
-$A = [a_{ij}]$ defined by
-\index{adjacency matrix}
+$(0, -1, 1)$-\emph{adjacency matrix}\index{adjacency matrix} of $G$ is
+the $n \times n$ matrix $A = [a_{ij}]$ defined by
 \[
 a_{ij}
 =
@@ -1365,19 +1366,19 @@ also uses the terms ``transfer matrix'' or the ambiguous term
 
 \subsubsection{Tanner graphs}
 
-If $H$ is an $m \times n$ $(0,1)$-matrix, then the \emph{Tanner graph}
-of $H$ is the bipartite graph $G = (V,E)$ whose set of vertices
-$V = V_1 \cup V_2$ is partitioned into two sets: $V_1$ corresponding
-to the $m$ rows of $H$ and $V_2$ corresponding to the $n$ columns of $H$.
-For any $i,j$ with $1 \leq i \leq m$ and $1 \leq j \leq n$, there is
-an edge $ij \in E$ if and only if the $(i,j)$-th entry of $H$ is
-$1$. This matrix $H$ is sometimes called the
-reduced adjacency matrix or the \emph{check matrix} of the Tanner
-graph. Tanner graphs are used in the theory of error-correcting
-codes. For example, Sage allows you to easily compute such a bipartite
-graph from its matrix.
-\index{check matrix}
-\index{Tanner graph}
+If $H$ is an $m \times n$ $(0,1)$-matrix, then the
+\emph{Tanner graph}\index{Tanner graph} of $H$ is the bipartite graph
+$G = (V,E)$ whose set of vertices $V = V_1 \cup V_2$ is partitioned
+into two sets: $V_1$ corresponding to the $m$ rows of $H$ and $V_2$
+corresponding to the $n$ columns of $H$. For any $i,j$ with
+$1 \leq i \leq m$ and $1 \leq j \leq n$, there is an edge $ij \in E$
+if and only if the $(i,j)$-th entry of $H$ is $1$. This matrix $H$ is
+sometimes called the reduced adjacency matrix or the
+\emph{check matrix}\index{check matrix} of the
+Tanner\index{Tanner graph} graph. Tanner graphs are used in the theory
+of error-correcting\index{code!error-correcting} codes. For example,
+Sage allows you to easily compute such a bipartite graph from its
+matrix.
 %
 \begin{lstlisting}
 sage: H = Matrix([(1,1,1,0,0), (0,0,1,0,1), (1,0,0,1,1)])
@@ -1394,6 +1395,7 @@ Figure~\ref{fig:introduction:tanner_graph}.
 
 \begin{figure}[!htbp]
 \centering
+\index{Tanner graph}
 \input{image/introduction/tanner-graph.tex}
 \caption{Tanner graph for $H$.}
 \label{fig:introduction:tanner_graph}
@@ -1445,9 +1447,9 @@ finite plane geometry. This incidence structure gives rise to another
 way to describe a graph using a matrix.
 
 Let $G$ be a digraph with edge set $E = \{ e_1, \dots, e_m \}$ and
-vertex set $V = \{ v_1, \dots, v_n \}$. The \emph{incidence matrix} of
-$G$ is the $n \times m$ matrix $B = [b_{ij}]$ defined by
-\index{incidence matrix}
+vertex set $V = \{ v_1, \dots, v_n \}$. The
+\emph{incidence matrix}\index{incidence!matrix} of $G$ is the
+$n \times m$ matrix $B = [b_{ij}]$ defined by
 %
 \begin{equation}
 \label{eqn:introduction:incidence_matrix_digraph}
@@ -1468,9 +1470,9 @@ applicable to digraphs with self-loops as well as multidigraphs.
 
 For the undirected case, let $G$ be an undirected graph with edge set
 $E = \{ e_1, \dots, e_m \}$ and vertex set
-$V = \{ v_1, \dots, v_n \}$. The \emph{unoriented incidence matrix} of
-\index{incidence matrix!unoriented}
-$G$ is the $n \times m$ matrix $B = [b_{ij}]$ defined by
+$V = \{ v_1, \dots, v_n \}$. The
+\emph{unoriented incidence matrix}\index{incidence matrix!unoriented}
+of $G$ is the $n \times m$ matrix $B = [b_{ij}]$ defined by
 
 \[
 b_{ij}
@@ -1518,15 +1520,17 @@ at $v_i$.
 
 \subsection{Laplacian matrix}
 
-The \emph{degree matrix} of a graph $G = (V,E)$ is an $n \times n$
-diagonal matrix $D$ whose $i$-th diagonal entry is the degree of the
-$i$-th vertex in $V$. The \emph{Laplacian matrix} $\mathcal{L}$ of $G$
-is the difference between the degree matrix and the adjacency matrix:
+The \emph{degree matrix}\index{degree!matrix} of a graph $G = (V,E)$
+is an $n \times n$ diagonal matrix $D$ whose $i$-th diagonal entry is
+the degree of the $i$-th vertex in $V$. The
+\emph{Laplacian matrix}\index{Laplacian matrix} $\cL$\index{$\cL$} of
+$G$ is the difference between the degree matrix and the adjacency
+matrix:
 \[
-\mathcal{L} = D - A.
+\cL = D - A.
 \]
 In other words, for an undirected unweighted simple graph,
-$\mathcal{L} = [\ell_{ij}]$ is given by
+$\cL = [\ell_{ij}]$ is given by
 \[
 \ell_{ij}
 =
@@ -1537,9 +1541,6 @@ d_i, & \text{if $i = j$}, \\
 \end{cases}
 \]
 where $d_i = \deg(v_i)$ is the degree of vertex $v_i$.
-\index{$\mathcal{L}$}
-\index{degree!matrix}
-\index{Laplacian matrix}
 
 Sage allows you to compute the Laplacian matrix of a graph:
 %
@@ -1562,12 +1563,11 @@ be discussed further in Chapter~\ref{chap:distance_connectivity}.
 
 \subsection{Distance matrix}
 
-\index{distance!matrix}
 Recall that the distance (or geodesic distance) $d(v,w)$ between two
 vertices $v,w \in V$ in a connected graph $G = (V,E)$ is the number of
 edges in a shortest path connecting them. The $n \times n$ matrix
-$[d(v_i, v_j)]$ is the \emph{distance matrix} of $G$. Sage helps you
-to compute the distance matrix of a graph:
+$[d(v_i, v_j)]$ is the \emph{distance matrix}\index{distance!matrix}
+of $G$. Sage helps you to compute the distance matrix of a graph:
 %
 \begin{lstlisting}
 sage: G = Graph({1:[2,4], 2:[1,4], 3:[2,6], 4:[1,3], 5:[4,2], 6:[3,1]})
@@ -1597,15 +1597,14 @@ Determining whether or not two graphs are, in some sense, the ``same''
 is a hard but important problem. Two graphs $G$ and $H$ are
 \emph{isomorphic} if there is a bijection
 $f: V(G) \to V(H)$ such that whenever $uv \in E(G)$ then
-$f(u) f(v) \in E(H)$. The function $f$ is an \emph{isomorphism}
-between $G$ and $H$. Otherwise, $G$ and $H$ are non-isomorphic. If
-$G$ and $H$ are isomorphic, we write $G \cong H$.
-\index{$\cong$}
-\index{graph!isomorphic}
-\index{graph isomorphism}
+$f(u) f(v) \in E(H)$. The function $f$ is an
+\emph{isomorphism}\index{graph isomorphism} between $G$ and
+$H$. Otherwise, $G$ and $H$ are non-isomorphic. If $G$ and $H$ are
+isomorphic, we write $G \cong H$\index{$\cong$}.
 
 \begin{figure}[!htbp]
 \centering
+\index{Franklin graph}
 \input{image/introduction/Franklin-graph.tex}
 \caption{Two representations of the Franklin graph.}
 \label{fig:introduction:isomorphic_Franklin_graph}
@@ -1669,15 +1668,13 @@ isomorphic, but $G_1$ and $G_2$ are not isomorphic.
 \end{proof}
 
 An important notion in graph theory is the idea of an ``invariant''.
-An \emph{invariant} is an object $f = f(G)$ associated to a
-graph $G$ which has the property
+An \emph{invariant}\index{invariant} is an object $f = f(G)$
+associated to a graph $G$ which has the property
 \[
 G \cong H \implies f(G) = f(H).
 \]
 For example, the number of vertices of a graph, $f(G) = |V(G)|$, is an
 invariant.
-\index{invariant}
-\index{graph invariant}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1685,12 +1682,11 @@ invariant.
 \subsection{Adjacency matrices}
 
 Two $n \times n$ matrices $A_1$ and $A_2$ are
-\emph{permutation equivalent} if there is a permutation matrix $P$
-such that $A_1 = P A_2 P^{-1}$. In other words, $A_1$ is the same as
-$A_2$ after a suitable re-ordering of the rows and a corresponding
-re-ordering of the columns. This notion of permutation equivalence is
-an equivalence relation.
-\index{permutation equivalent}
+\emph{permutation equivalent}\index{permutation equivalent} if there
+is a permutation matrix $P$ such that $A_1 = P A_2 P^{-1}$. In other
+words, $A_1$ is the same as $A_2$ after a suitable re-ordering of the
+rows and a corresponding re-ordering of the columns. This notion of
+permutation equivalence is an equivalence relation.
 
 To show that two undirected graphs are isomorphic depends on the
 following result.
@@ -1735,6 +1731,8 @@ is presented in
 Algorithm~\ref{alg:introduction:graph_isomorphism_canonical_labels}.
 
 \begin{algorithm}[!htpb]
+\index{canonical label}
+\index{graph isomorphism}
 \input{algorithm/introduction/graph-isomorphism-canonical-labels.tex}
 \caption{Computing graph isomorphism using canonical labels.}
 \label{alg:introduction:graph_isomorphism_canonical_labels}
@@ -1774,10 +1772,9 @@ and the complete bipartite graph $K_{m,n}$ has the degree sequence
 \]
 
 Let $S$ be a non-increasing sequence of non-negative integers. Then
-$S$ is said to be \emph{graphical} if it is the degree sequence of
-some graph. If $G$ is a graph with degree sequence $S$, we say that
-$G$ \emph{realizes} $S$.
-\index{graphical sequence}
+$S$ is said to be \emph{graphical}\index{graphical sequence} if it is
+the degree sequence of some graph. If $G$ is a graph with degree
+sequence $S$, we say that $G$ \emph{realizes} $S$.
 
 %% Should we give examples of how NetworkX can
 %% take a graphical degree sequence and construct a
@@ -1792,7 +1789,8 @@ $d_i \geq d_j$ for all $i \leq j$ such that $1 \leq i, j \leq n$. From
 Corollary~\ref{cor:introduction:degree_sum_even} we see that
 $\sum_{d_i \in S} d_i = 2k$ for some integer $k \geq 0$. In other
 words, the sum of a graphical sequence is non-negative and
-even. In 1961, Erd\H{o}s and Gallai~\cite{ErdosGallai1960} used this
+even. In 1961, Erd\H{o}s\index{Erd\H{o}s, Paul} and
+Gallai\index{Gallai, Tibor}~\cite{ErdosGallai1960} used this
 observation as part of a theorem that provides necessary and
 sufficient conditions for a sequence to be realized by a simple
 graph. The result is stated in
@@ -1803,17 +1801,17 @@ degree sequence. For a simple graph that has a degree sequence with
 repeated elements, e.g. the degree sequences of $C_n$, $P_n$, $K_n$,
 and $K_{m,n}$, it is redundant to verify
 inequality~\eqref{eqn:introduction:Erdos_Gallai_1961:graphical_sequence}
-for repeated elements of that sequence. In 2003, Tripathi and
-Vijay~\cite{TripathiVijay2003} showed that one only needs to verify
+for repeated elements of that sequence. In 2003,
+Tripathi\index{Tripathi, Amitabha} and
+Vijay\index{Vijay, Sujith}~\cite{TripathiVijay2003} showed that one
+only needs to verify
 inequality~\eqref{eqn:introduction:Erdos_Gallai_1961:graphical_sequence}
 for as many times as there are distinct terms in $S$.
-\index{Erd\H{o}s, Paul}
-\index{Gallai, Tibor}
-\index{Tripathi, Amitabha}
-\index{Vijay, Sujith}
 
 \begin{theorem}
 \label{thm:introduction:Erdos_Gallai_1961:graphical_sequence}
+\index{Erd\H{o}s, Paul}
+\index{Gallai, Tibor}
 \textbf{Erd\H{o}s \& Gallai~1961~\cite{ErdosGallai1960}.}
 Let $d = (d_1, d_2, \dots, d_n)$ be a sequence of positive integers
 such that $d_i \geq d_{i+1}$. Then $d$ is realized by a simple graph
@@ -1832,24 +1830,26 @@ for all $1 \leq k \leq n - 1$.
 As noted above,
 Theorem~\ref{thm:introduction:Erdos_Gallai_1961:graphical_sequence} is
 an existence result showing that something exists without providing a
-construction of the object under consideration. Havel~\cite{Havel1955}
-and Hakimi~\cite{Hakimi1962,Hakimi1963} independently provided an
-algorithmic approach that allows for constructing a simple graph with
-a given degree sequence. See Sierksma and
-Hoogeveen~\cite{SierksmaHoogeveen1991} for a coverage of seven
+construction of the object under consideration.
+Havel\index{Hakimi, S. L.}~\cite{Havel1955}
+and Hakimi\index{Havel, V{\'a}clav}~\cite{Hakimi1962,Hakimi1963}
+independently provided an algorithmic approach that allows for
+constructing a simple graph with a given degree sequence. See Sierksma
+and Hoogeveen~\cite{SierksmaHoogeveen1991} for a coverage of seven
 criteria for a sequence of integers to be graphic.
-See~\cite{ErdosEtAl2010} for an extension of the Havel-Hakimi theorem
-to digraphs.
+See~\cite{ErdosEtAl2010} for an extension of the
+Havel-Hakimi\index{Havel-Hakimi theorem} theorem to digraphs.
 %% The proof of
 %% Theorem~\ref{thm:introduction:Havel1955_Hakimi1962:graphical_sequence}
 %% and an algorithmic version of that proof are adapted from section~1.5
 %% of Gould~\cite{Gould1988}. See also section~1.5 of Chartrand and
 %% Oellermann~\cite{ChartrandOellermann1993}.
-\index{Hakimi, S. L.}
-\index{Havel, V{\'a}clav}
 
 \begin{theorem}
 \label{thm:introduction:Havel1955_Hakimi1962:graphical_sequence}
+\index{Havel-Hakimi theorem}
+\index{Hakimi, S. L.}
+\index{Havel, V{\'a}clav}
 \textbf{Havel~1955~\cite{Havel1955} \&
   Hakimi~1962--3~\cite{Hakimi1962,Hakimi1963}.}
 Consider the non-increasing sequence $S_1 = (d_1, d_2, \dots, d_n)$ of
@@ -1924,6 +1924,8 @@ sequence. These ideas are summarized in
 Algorithm~\ref{alg:introduction:Havel_Hakimi_degree_sequence}.
 
 \begin{algorithm}[!htpb]
+\index{graphical sequence}
+\index{Havel-Hakimi test}
 \input{algorithm/introduction/Havel-Hakimi-degree-sequence.tex}
 \caption{Havel-Hakimi test for sequences realizable by simple graphs.}
 \label{alg:introduction:Havel_Hakimi_degree_sequence}
@@ -1968,16 +1970,16 @@ a sequence with a negative term or a sequence of zeros.
 \subsection{Invariants revisited}
 
 In some cases, one can distinguish non-isomorphic graphs by
-considering graph invariants. For instance, the graphs $C_6$ and $G_1$
-in Figure~\ref{fig:introduction:isomorphic_graphs} are isomorphic so
-they have the same number of vertices and edges. Also, $G_1$ and $G_2$
-in Figure~\ref{fig:introduction:isomorphic_graphs}  are non-isomorphic
+considering graph invariants\index{invariant}. For instance, the
+graphs $C_6$ and $G_1$ in
+Figure~\ref{fig:introduction:isomorphic_graphs} are isomorphic so they
+have the same number of vertices and edges. Also, $G_1$ and $G_2$ in
+Figure~\ref{fig:introduction:isomorphic_graphs}  are non-isomorphic
 because the former is connected, while the latter is not connected. To
 prove that two graphs are non-isomorphic, one could show that they
 have different values for a given graph invariant. The following list
 contains some items to check off when showing that two graphs are
 non-isomorphic:
-\index{graph invariant}
 
 \begin{enumerate}
 \item the number of vertices,
@@ -2084,9 +2086,9 @@ components\index{component}, i.e. $G = \bigcup G_i$.
 \label{fig:introduction:union_intersection_graphs_overlapping_vertex_sets}
 \end{figure}
 
-The \emph{intersection} of graphs is defined as follows. For two
-graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$, their intersection
-is the graph
+The \emph{intersection}\index{graph!intersection} of graphs is defined
+as follows. For two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$,
+their intersection is the graph
 \[
 G_1 \cap G_2
 =
@@ -2094,17 +2096,17 @@ G_1 \cap G_2
 \]
 Figure~\ref{fig:introduction:intersection_graphs_overlapping_vertex_sets}
 illustrates the intersection of two graphs whose vertex sets overlap.
-\index{graph!intersection}
 
-The \emph{symmetric difference} of graphs is defined as follows. For
-two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$, their symmetric
-difference is the graph
+The \emph{symmetric difference}\index{symmetric difference} of graphs
+is defined as follows. For two graphs $G_1 = (V_1, E_1)$ and
+$G_2 = (V_2, E_2)$, their symmetric difference is the graph
 \[
 G_1 \Delta G_2
 =
 (V, E)
 \]
-where $V = V_1 \Delta V_2$ and the edge set is given by
+where $V = V_1 \Delta V_2$\index{$\Delta$} and the edge set is given
+by
 \[
 E
 =
@@ -2123,9 +2125,6 @@ S_1 \Delta S_2
 In the case where $V_1 = V_2$, then $G_1 \Delta G_2$ is simply the
 empty graph. See Figure~\ref{fig:introduction:symmetric_difference}
 for an illustration of the symmetric difference of two graphs.
-\index{$\Delta$}
-\index{symmetric difference}
-\index{graph!symmetric difference}
 
 \begin{figure}[!htbp]
 \centering
@@ -2134,14 +2133,13 @@ for an illustration of the symmetric difference of two graphs.
 \label{fig:introduction:symmetric_difference}
 \end{figure}
 
-The \emph{join} of two disjoint graphs $G_1$ and $G_2$, denoted
-$G_1 + G_2$, is their graph union, with each vertex of one graph
-connecting to each vertex of the other graph. For example, the join of
-the cycle graph $C_{n-1}$ with a single vertex graph is the
-\emph{wheel graph} $W_n$. Figure~\ref{fig:introduction:wheel_graphs}
-shows various wheel graphs.
-\index{graph!join}
-\index{wheel graph}
+The \emph{join}\index{graph!join} of two disjoint graphs $G_1$ and
+$G_2$, denoted $G_1 + G_2$, is their graph union, with each vertex of
+one graph connecting to each vertex of the other graph. For example,
+the join of the cycle graph $C_{n-1}$ with a single vertex graph is
+the \emph{wheel graph}\index{wheel graph}
+$W_n$\index{$W_n$}. Figure~\ref{fig:introduction:wheel_graphs} shows
+various wheel graphs.
 
 \begin{figure}[!htbp]
 \centering
@@ -2201,8 +2199,8 @@ all edges incident on that vertex are deleted as well.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Edge deletion subgraph}
-
 \index{edge!deletion subgraph}
+
 If $G = (V,E)$ is any graph with at least $1$ edge, then the
 \emph{edge deletion subgraph} is the subgraph obtained from $G$ by
 deleting an edge $e \in E$, but not the vertices incident to that edge.
@@ -2240,7 +2238,6 @@ intact.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Vertex cut, cut vertex, or cutpoint}
-\index{cut}
 
 A \emph{vertex cut}\index{vertex!cut}~(or
 \emph{separating set}\index{separating set}) of a connected graph
@@ -2326,11 +2323,12 @@ $G$.
 
 \subsubsection{Edge contraction}
 
-An \emph{edge contraction} is an operation which, like edge deletion,
-removes an edge from a graph. However, unlike edge deletion, edge
-contraction also merges together the two vertices the edge used to
-connect. For a graph $G = (V, E)$ and an edge $uv = e \in E$, the edge
-contraction $G/e$ is the graph obtained as follows:
+An \emph{edge contraction}\index{edge!contraction} is an operation
+which, like edge deletion, removes an edge from a graph. However,
+unlike edge deletion, edge contraction also merges together the two
+vertices the edge used to connect. For a graph $G = (V, E)$ and an
+edge $uv = e \in E$, the edge contraction $G/e$ is the graph obtained
+as follows:
 %
 \begin{enumerate}
 \item Delete the vertices $u,v$ from $G$.
@@ -2340,7 +2338,7 @@ contraction $G/e$ is the graph obtained as follows:
 \item The vertex $v_e$ is adjacent to vertices that were adjacent
   to $u$, $v$, or both $u$ and $v$.
 \end{enumerate}
-\index{edge!contraction}
+%%
 The vertex set of $G/e = (V', E')$ is defined as
 $V' = \big(V \backslash \{u,v\}\big) \cup \{v_e\}$ and its edge set is
 \[
@@ -2396,15 +2394,15 @@ contracts it to the trivial graph $K_1$.
 \subsection{Complements}
 
 The \emph{complement}\index{complement} of a simple graph has the same
-vertices, but
-exactly those edges that are not in the original graph. In other
-words, if $G^c = (V, E^c)$\index{$G^c$} is the complement of
-$G = (V,E)$, then two distinct vertices $v,w \in V$ are adjacent in
-$G^c$ if and only if they are not adjacent in $G$. We also write the
-complement of $G$ as $\overline{G}$\index{$\overline{G}$}. The sum of
-the adjacency matrix of $G$ and that of $G^c$ is the matrix with $1$'s
-everywhere, except for $0$'s on the main diagonal. A simple graph that
-is isomorphic to its complement is called a
+vertices, but exactly those edges that are not in the original
+graph. In other words, if $G^c = (V, E^c)$\index{$G^c$} is the
+complement of $G = (V,E)$, then two distinct vertices $v,w \in V$ are
+adjacent in $G^c$ if and only if they are not adjacent in $G$. We also
+write the complement of $G$ as
+$\overline{G}$\index{$\overline{G}$}. The sum of the adjacency matrix
+of $G$ and that of $G^c$ is the matrix with $1$'s everywhere, except
+for $0$'s on the main diagonal. A simple graph that is isomorphic to
+its complement is called a
 \emph{self-complementary graph}\index{self-complementary graph}. Let
 $H$ be a subgraph of $G$. The
 \emph{relative complement}\index{relative complement} of $G$ and $H$
@@ -2475,12 +2473,10 @@ is connected.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Cartesian product}
-\index{$\square$}
-\index{Cartesian product}
 
-The \emph{Cartesian product} $G \square H$ of graphs $G$ and $H$ is a
-graph such that the vertex set of $G \square H$ is the Cartesian
-product
+The \emph{Cartesian product}\index{Cartesian product}
+$G \square H$\index{$\square$} of graphs $G$ and $H$ is a graph such
+that the vertex set of $G \square H$ is the Cartesian product
 
 \[
 V(G \square H) = V(G) \times V(H).
@@ -2515,8 +2511,8 @@ sage: P = C.cartesian_product(Z); len(P.vertices()); len(P.edges())
 15
 \end{lstlisting}
 
-The \emph{path graph}\index{path!graph} $P_n$ is a tree with $n$
-vertices $V = \{v_1, v_2, \dots, v_n\}$ and edges
+The \emph{path graph}\index{path!graph} $P_n$\index{$P_n$} is a tree
+with $n$ vertices $V = \{v_1, v_2, \dots, v_n\}$ and edges
 $E = \{ (v_i, v_{i+1}) \;|\; 1 \leq i \leq n-1 \}$. In this case,
 $\deg(v_1) = \deg(v_n) = 1$ and $\deg(v_i) = 2$ for $1 < i < n$. The
 path graph $P_n$ can be obtained from the cycle graph $C_n$ by
@@ -2575,12 +2571,13 @@ hypercube, i.e. $Q_i \square Q_j = Q_{i+j}$. \qed
 \end{example}
 
 Another family of graphs that can be constructed via Cartesian product
-is the \emph{mesh}. Such a graph is also referred to as \emph{grid} or
-\emph{lattice}. The $2$-mesh is denoted $M(m,n)$ and is defined as the
-Cartesian product $M(m,n) = P_m \square P_n$. Similarly, the $3$-mesh
-is defined as $M(k,m,n) = P_k \square P_m \square P_n$. In general,
-for a sequence $a_1, a_2, \dots, a_n$ of $n > 0$ positive integers,
-the $n$-mesh is given by
+is the \emph{mesh}\index{mesh}. Such a graph is also referred to as
+\emph{grid}\index{grid} or \emph{lattice}\index{lattice}. The $2$-mesh
+is denoted $M(m,n)$ and is defined as the Cartesian product
+$M(m,n) = P_m \square P_n$. Similarly, the $3$-mesh is defined as
+$M(k,m,n) = P_k \square P_m \square P_n$. In general, for a sequence
+$a_1, a_2, \dots, a_n$ of $n > 0$ positive integers, the $n$-mesh is
+given by
 \[
 M(a_1, a_2, \dots, a_n)
 =
@@ -2591,9 +2588,6 @@ positive integer $k$. Figure~\ref{fig:introduction:2_mesh_M34}
 illustrates the $2$-mesh $M(3,4) = P_3 \square P_4$, while the
 $3$-mesh $M(3,2,3) = P_3 \square P_2 \square P_3$ is presented in
 Figure~\ref{fig:introduction:3_mesh_M323}.
-\index{grid}
-\index{lattice}
-\index{mesh}
 
 \begin{figure}[!htbp]
 \centering
@@ -2636,10 +2630,9 @@ of $G_j$.
 \end{theorem}
 
 Many classes of graphs can be characterized by
-\emph{forbidden minors}: a graph belongs to the class if and only if
-it does not have a minor from a certain specified list. We shall see
-examples of this in Chapter~\ref{chap:planar_graphs}.
-\index{forbidden minor}
+\emph{forbidden minors}\index{forbidden minor}: a graph belongs to the
+class if and only if it does not have a minor from a certain specified
+list. We shall see examples of this in Chapter~\ref{chap:planar_graphs}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2650,6 +2643,7 @@ examples of this in Chapter~\ref{chap:planar_graphs}.
 
 \begin{figure}[!htbp]
 \centering
+\index{molecular graph}
 \input{image/introduction/molecular-graphs.tex}
 \caption{Two molecular graphs.}
 \label{fig:introduction:molecular_graphs}
@@ -2659,24 +2653,25 @@ examples of this in Chapter~\ref{chap:planar_graphs}.
 Graph theory, and especially undirected graphs, is used in chemistry
 to study the structure of molecules. The graph theoretical
 representation of the structure of a molecule is called a
-\emph{molecular graph}; two such examples are illustrated in
-Figure~\ref{fig:introduction:molecular_graphs}. Below we list a few
-common problems arising in applications of graph theory. See
-Foulds~\cite{Foulds1992} and Walther~\cite{Walther1984} for surveys of
+\emph{molecular graph}\index{molecular graph}; two such examples are
+illustrated in Figure~\ref{fig:introduction:molecular_graphs}. Below
+we list a few common problems arising in applications of graph
+theory. See Foulds\index{Foulds, L. R.}~\cite{Foulds1992} and
+Walther\index{Walther, Hansjoachim}~\cite{Walther1984} for surveys of
 applications of graph theory in science, engineering, social sciences,
 economics, and operation research.
 
 \begin{itemize}
 \item If the edge weights are all non-negative, find a ``cheapest''
   closed path which contains all the vertices. This is related to the
-  famous traveling salesman problem and is further discussed in
-  Chapters~\ref{chap:graph_algorithms} and~\ref{chap:optimal_traversals}.
-  \index{traveling salesman problem}
+  famous traveling\index{traveling salesman problem} salesman problem
+  and is further discussed in Chapters~\ref{chap:graph_algorithms}
+  and~\ref{chap:optimal_traversals}.
 
 \item Find a walk that visits each vertex, but contains as few edges
   as possible and contains no cycles. This type of problem is related
-  to ``spanning trees'' and is discussed in further details in
-  Chapter~\ref{chap:trees_forests}.
+  to \emph{spanning trees}\index{spanning tree} and is discussed in
+  further details in Chapter~\ref{chap:trees_forests}.
 
 \item Determine which vertices are ``more central'' than others. This
   is connected with various applications to
@@ -2684,56 +2679,65 @@ economics, and operation research.
   covered in more details in Chapters~\ref{chap:distance_connectivity}
   and~\ref{chap:random_graphs}. An example of a social network is shown
   in Figure~\ref{fig:introduction:marriage_ties_Renaissance}, which
-  illustrates the marriage ties among Renaissance Florentine
+  illustrates the marriage\index{marriage ties} ties among
+  Renaissance\index{Renaissance} Florentine\index{Florentine families}
   families~\cite{Borgatti2005}. Note that one family has been removed
   because its inclusion would create a disconnected graph.
 
 \begin{figure}[!htbp]
 \centering
+\index{Florentine families}
+\index{marriage ties}
 \input{image/introduction/marriage-ties-Renaissance.tex}
 \caption{Marriage ties among Renaissance Florentine families.}
 \label{fig:introduction:marriage_ties_Renaissance}
 \end{figure}
 
-\item A \emph{planar graph} is a graph that can be drawn on the plane
-  in such a way that its edges intersect only at their endpoints. Can
-  a graph be drawn entirely in the plane, with no crossing edges? In
-  other words, is a given graph planar? This problem is important for
-  designing computer chips and wiring diagrams. Further discussion is
-  contained in Chapter~\ref{chap:planar_graphs}.
-  \index{graph!planar}
+\item A \emph{planar graph}\index{planar graph} is a graph that can be
+  drawn on the plane in such a way that its edges intersect only at
+  their endpoints. Can a graph be drawn entirely in the plane, with no
+  crossing edges? In other words, is a given graph planar? This
+  problem is important for designing computer chips and wiring
+  diagrams. Further discussion is contained in
+  Chapter~\ref{chap:planar_graphs}.
 
 \item Can you label or color all the vertices of a graph in such a
   way that no adjacent vertices have the same color? If so, this is
-  called a \emph{vertex coloring}. Can you label or color all the
-  edges of a graph in such a way that no incident edges have the same
-  color? If so, this is called an \emph{edge coloring}.
+  called a \emph{vertex coloring}\index{coloring!vertex}. Can you
+  label or color all the edges of a graph in such a way that no
+  incident edges have the same color? If so, this is called an
+  \emph{edge coloring}\index{coloring!edge}.
   Figure~\ref{fig:vertex_coloring:wheel_graph_W_4} shows a vertex
-  coloring of the wheel graph $W_4$ using two colors;
-  Figure~\ref{fig:vertex_coloring:Petersen_graph} shows a vertex
-  coloring of the Petersen graph using three colors. Graph coloring
-  has several remarkable applications, one of which is to scheduling
-  of jobs relying on a shared resource. This is discussed further in
+  coloring of the wheel\index{wheel graph} graph $W_4$ using two
+  colors; Figure~\ref{fig:vertex_coloring:Petersen_graph} shows a
+  vertex coloring of the Petersen graph\index{Petersen!graph} using
+  three colors. Graph coloring has several remarkable applications,
+  one of which is to scheduling of jobs relying on a shared
+  resource. This is discussed further in
   Chapter~\ref{chap:graph_coloring}.
 
 \begin{figure}[!htbp]
 \centering
+\index{coloring!vertex}
+\index{Petersen!graph}
 \input{image/introduction/vertex-coloring.tex}
 \caption{Vertex coloring with two and three colors.}
 \label{fig:introduction:vertex_coloring}
 \end{figure}
 
-\item In some fields, such as operations research, a directed graph
-  with non-negative edge weights is called a \emph{network}, the
-  vertices are called \emph{nodes}, the edges are called \emph{arcs},
-  and the weight on an edge is called its \emph{capacity}. A
-  ``network flow'' must satisfy the restriction that the amount of
-  flow into a node equals the amount of flow out of it, except when it
-  is a ``source node'', which has more outgoing flow, or a ``sink
-  node'', which has more incoming flow. The flow along an edge must
-  not exceed the capacity. What is the maximum flow on a network
-  and how to you find it? This problem, which has many industrial
-  applications, is discussed in Chapter~\ref{chap:network_flows}.
+\item In some fields, such as operations\index{operations research}
+  research, a directed graph with non-negative edge weights is called
+  a \emph{network}\index{network}, the vertices are called
+  \emph{nodes}, the edges are called \emph{arcs}, and the weight on an
+  edge is called its \emph{capacity}. A
+  \emph{network flow}\index{network!flow} must satisfy the restriction
+  that the amount of flow into a node equals the amount of flow out of
+  it, except when it is a \emph{source node}, which has more outgoing
+  flow, or a \emph{sink node}, which has more incoming flow. The flow
+  along an edge must not exceed the capacity. What is the maximum flow
+  on a network and how to you find it? This problem, which has many
+  industrial applications, is discussed in
+  Chapter~\ref{chap:network_flows}.
 \end{itemize}
 
 
@@ -2852,7 +2856,7 @@ economics, and operation research.
 
 \item Let $G$ be an undirected graph without self-loops and let $M$
   and its oriented incidence matrix. Show that the Laplacian matrix
-  $\mathcal{L}$ of $G$ satisfies $\mathcal{L} = M \times M^T$, where
+  $\cL$ of $G$ satisfies $\cL = M \times M^T$, where
   $M^T$ is the transpose of $M$.
 
 \item Let $J_1$ denote the incidence matrix of $G_1$ and let $J_2$
