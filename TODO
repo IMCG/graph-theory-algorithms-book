@@ -13,3 +13,5 @@ This is a list of possible enhancements to the book.
 
 * Prufer encoding and Cayley's formula
   Discuss these in the context of generating a random tree.
+
+* Binomial heaps
