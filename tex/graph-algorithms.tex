@@ -774,7 +774,7 @@ Tarjan~\cite{HopcroftTarjan1973,Tarjan1972}\index{Tarjan, Robert Endre}.
 
 \begin{figure}[!htbp]
 \centering
-\index{knight's tour}
+\index{chess!knight's tour}
 \input{image/graph-algorithms/one-knight-tour.tex}
 \caption{The knight's tour from a given starting position.}
 \label{fig:graph_algorithms:one_knight_tour}
@@ -789,7 +789,7 @@ objective is to find a sequence of knight\index{chess!knight piece}
 moves that visits each and every square exactly once, while obeying
 the rules of chess\index{chess} that govern the movement of the knight
 piece\index{chess!knight piece}. Such a sequence of moves, if one
-exists, is called a \emph{knight's tour}\index{knight's tour}. How do
+exists, is called a \emph{knight's tour}\index{chess!knight's tour}. How do
 we find such a tour? We could make one knight\index{chess!knight} move
 after another, recording each move to ensure that we do not step on a
 square that is already visited, until we could not make any more
@@ -800,7 +800,7 @@ backtracking\index{backtrack} a few more moves and traverse yet
 another path, hoping to make further progress. Repeat this strategy
 until a tour is found or until we have exhausted all possible
 moves. The above strategy for finding a knight's
-tour\index{knight's tour} is an example of depth-first
+tour\index{chess!knight's tour} is an example of depth-first
 search\index{depth-first search}, sometimes called
 \emph{backtracking}. Figure~\ref{fig:graph_algorithms:one_knight_tour:a_tour}
 shows a knight's tour with the starting position as shown in
@@ -921,24 +921,24 @@ other vertex in the tree $T$.
 
 \begin{figure}[!htbp]
 \centering
-\index{Petersen graph}
+\index{Petersen!graph}
 \input{image/graph-algorithms/Petersen-graph.tex}
 \caption{The Petersen graph.}
 \label{fig:graph_algorithms:Petersen_graph}
 \end{figure}
 
 \begin{example}
-In 1898, Julius Petersen\index{Petersen, Julius}
+In 1898, Julius Petersen\index{Petersen!Julius}
 published~\cite{Petersen1898} a graph that now bears his name: the
-Petersen graph\index{Petersen graph} shown in
+Petersen graph\index{Petersen!graph} shown in
 Figure~\ref{fig:graph_algorithms:Petersen_graph}. Compare the search
 trees resulting from running breadth-\index{breadth-first search} and
 depth-first searches\index{depth-first search} on the Petersen
-graph\index{Petersen graph} with starting vertex $0$.
+graph\index{Petersen!graph} with starting vertex $0$.
 \end{example}
 
 \begin{proof}[Solution]
-The Petersen graph\index{Petersen graph} in
+The Petersen graph\index{Petersen!graph} in
 Figure~\ref{fig:graph_algorithms:Petersen_graph}
 can be constructed and searched as follows.
 %%
@@ -968,7 +968,7 @@ Figure~\ref{fig:graph_algorithms:search_Petersen_graph}.
 \centering
 \index{breadth-first search}
 \index{depth-first search}
-\index{Petersen graph}
+\index{Petersen!graph}
 \input{image/graph-algorithms/search-Petersen-graph.tex}
 \caption{Traversing the Petersen graph starting from vertex $0$.}
 \label{fig:graph_algorithms:search_Petersen_graph}
@@ -1168,16 +1168,16 @@ be applied where each edge has unit weight\index{weight!unit}. Moving
 on to the general case of graphs with positive edge
 weights\index{weight!positive}, algorithms for determining shortest
 paths\index{path!shortest} in such graphs can be classified as
-\emph{weight-setting}\index{weight-setting} or
-\emph{weight-correcting}~\cite{GalloPallottino1986}\index{weight-correcting}.
-A weight-setting\index{weight-setting} method traverses a graph and
+\emph{weight-setting}\index{weight!setting} or
+\emph{weight-correcting}~\cite{GalloPallottino1986}\index{weight!correcting}.
+A weight-setting\index{weight!setting} method traverses a graph and
 assigns weights that, once assigned, remain unchanged for the duration
-of the algorithm. Weight-setting\index{weight-setting} algorithms
+of the algorithm. Weight-setting\index{weight!setting} algorithms
 cannot deal with negative weights\index{weight!negative}. On the other
-hand, a weight-correcting\index{weight-correcting} method is able to
+hand, a weight-correcting\index{weight!correcting} method is able to
 change the value of a weight many times while traversing a graph. In
-contrast to a weight-setting\index{weight-setting} algorithm, a
-weight-correcting\index{weight-correcting} algorithm is able to deal
+contrast to a weight-setting\index{weight!setting} algorithm, a
+weight-correcting\index{weight!correcting} algorithm is able to deal
 with negative weights\index{weight!negative}, provided that the weight
 sum of any cycle\index{cycle} is
 nonnegative\index{weight!nonnegative}. The term
@@ -1185,7 +1185,7 @@ nonnegative\index{weight!nonnegative}. The term
 $s$ of a cycle\index{cycle} such that $s < 0$. Some algorithms halt
 upon detecting a negative cycle; examples of such algorithms include
 the Bellman-Ford\index{Bellman-Ford algorithm} and
-Johnson's\index{Johnson's algorithm} algorithms. See
+Johnson's\index{Johnson!algorithm} algorithms. See
 Yamada\index{Yamada, Takeo} and
 Kinoshita\index{Kinoshita, Harunobu}~\cite{YamadaKinoshita2002} for an
 algorithm to detect all the negative cycles in a digraph.
@@ -1209,10 +1209,10 @@ breadth-first searches\index{breadth-first search}.
 
 \section{Dijkstra's algorithm}
 \label{sec:graph_algorithms:Dijkstra_algorithm}
-\index{Dijkstra's algorithm}
+\index{Dijkstra!algorithm}
 
 Dijkstra's algorithm~\cite{Dijkstra1959}, discovered by
-E. W.~Dijkstra\index{Dijkstra, E. W.} in 1959, is a graph search
+E. W.~Dijkstra\index{Dijkstra!E. W.} in 1959, is a graph search
 algorithm that solves the single-source shortest
 path\index{single-source shortest path} problem for a graph with
 nonnegative edge weights\index{weight!nonnegative}. The algorithm is a
@@ -1220,7 +1220,7 @@ generalization of breadth-first\index{breadth-first search}
 search. Imagine that the vertices of a weighted graph represent cities
 and edge weights represent distances\index{distance} between pairs of
 cities connected by a direct road. Dijkstra's
-algorithm\index{Dijkstra's algorithm} can be used to find a shortest
+algorithm\index{Dijkstra!algorithm} can be used to find a shortest
 route from a fixed city to any other city.
 
 Let $G = (V,E)$ be a (di)graph with nonnegative edge
@@ -1260,7 +1260,7 @@ elements to $Q$. Eventually, we would exit the while loop and the
 algorithm returns the lists $D$ and $P$.
 
 \begin{algorithm}[!htpb]
-\index{Dijkstra's algorithm}
+\index{Dijkstra!algorithm}
 \input{algorithm/graph-algorithms/dijkstra-general.tex}
 \caption{A general template for Dijkstra's algorithm.}
 \label{alg:graph_algorithms:dijkstra_general}
@@ -1268,7 +1268,7 @@ algorithm returns the lists $D$ and $P$.
 
 \begin{figure}[!htbp]
 \centering
-\index{Dijkstra's algorithm}
+\index{Dijkstra!algorithm}
 \input{image/graph-algorithms/Dijkstra-algorithm-digraph.tex}
 \caption{Searching a weighted digraph using Dijkstra's algorithm.}
 \label{fig:graph_algorithms:Dijkstra_algorithm_digraph}
@@ -1287,14 +1287,14 @@ algorithm returns the lists $D$ and $P$.
 
 \begin{table}[!htbp]
 \centering
-\index{Dijkstra's algorithm}
+\index{Dijkstra!algorithm}
 \input{data/graph-algorithms/working-through-Dijkstra-algorithm.tex}
 \caption{Stepping through Dijkstra's algorithm.}
 \label{tab:graph_algorithms:working_through_Dijkstra_algorithm}
 \end{table}
 
 \begin{example}
-Apply Dijkstra's algorithm\index{Dijkstra's algorithm} to the graph in
+Apply Dijkstra's algorithm\index{Dijkstra!algorithm} to the graph in
 Figure~\ref{fig:Dijkstra_digraph:original_digraph}, with starting
 vertex $v_1$.
 \end{example}
@@ -1311,7 +1311,7 @@ Table~\ref{tab:graph_algorithms:working_through_Dijkstra_algorithm}. For
 any column $v_i$ in the table, each 2-tuple represents the
 distance\index{distance} and parent vertex of $v_i$. As we move along
 the graph, processing vertices according to Dijkstra's
-algorithm\index{Dijkstra's algorithm}, the distance and parent vertex
+algorithm\index{Dijkstra!algorithm}, the distance and parent vertex
 of a column are updated. The underlined 2-tuple represents the final
 distance and parent vertex produced by Dijkstra's algorithm. From
 Table~\ref{tab:graph_algorithms:working_through_Dijkstra_algorithm},
@@ -1329,13 +1329,13 @@ $v$ and work backward using the parent of $v$, then the parent of the
 parent, and so on.
 \end{proof}
 
-Dijkstra's algorithm\index{Dijkstra's algorithm} is an example of a
-\emph{greedy algorithm}\index{greedy algorithm}. Whenever it tries to
+Dijkstra's algorithm\index{Dijkstra!algorithm} is an example of a
+\emph{greedy algorithm}\index{algorithm!greedy}. Whenever it tries to
 find the next vertex, it chooses only that vertex that minimizes the
 total weight\index{weight!minimum} so far. Greedy
-algorithms\index{greedy algorithm} may not produce the best possible
+algorithms\index{algorithm!greedy} may not produce the best possible
 result. However, as the following theorem shows, Dijkstra's
-algorithm\index{Dijkstra's algorithm} does indeed produce shortest
+algorithm\index{Dijkstra!algorithm} does indeed produce shortest
 paths\index{path!shortest}.
 
 \begin{theorem}
@@ -1343,7 +1343,7 @@ paths\index{path!shortest}.
   Algorithm~\ref{alg:graph_algorithms:dijkstra_general}.}
 Let $G = (V, E)$ be a weighted (di)graph with a nonnegative
 weight\index{weight!nonnegative} function $w$. When Dijkstra's
-algorithm\index{Dijkstra's algorithm} is applied to $G$ with source
+algorithm\index{Dijkstra!algorithm} is applied to $G$ with source
 vertex $s \in V$, the algorithm terminates with $D[u] = d(s,u)$ for
 all $u \in V$. Furthermore, if $D[v] \neq \infty$ and $v \neq s$, then
 $s=u_1, u_2, \dots, u_k = v$ is a shortest $s$-$v$ path such that
@@ -1416,7 +1416,7 @@ Algorithm~\ref{alg:graph_algorithms:dijkstra_general} has running time
 $O(n^2 + n) = O(n^2)$.
 
 Can we improve the run time of Dijkstra's
-algorithm\index{Dijkstra's algorithm}? The time complexity of
+algorithm\index{Dijkstra!algorithm}? The time complexity of
 Dijkstra's algorithm depends on its implementation. With a simple
 list\index{list} implementation as presented in
 Algorithm~\ref{alg:graph_algorithms:dijkstra_general}, we have a worst
@@ -1460,7 +1460,7 @@ implementation~\cite{FredmanTarjan1987} yields the best runtime.
 \end{quote}
 
 \noindent
-A disadvantage of Dijkstra's\index{Dijkstra's algorithm}
+A disadvantage of Dijkstra's\index{Dijkstra!algorithm}
 Algorithm~\ref{alg:graph_algorithms:dijkstra_general} is that it
 cannot handle graphs with negative edge
 weights\index{weight!negative}. The
@@ -1475,8 +1475,8 @@ Jr.~\cite{Ford1956}\index{Ford, Lester Randolph, Jr.} in
 1956. Shimbel~\cite{Shimbel1955}\index{Shimbel, A.} independently
 discovered the same method in~1955, and
 Moore~\cite{Moore1959}\index{Moore, Edward F.} in~1959. In contrast to
-the ``greedy''\index{greedy algorithm} approach that Dijkstra's
-algorithm\index{Dijkstra's algorithm} takes, i.e. searching for the
+the ``greedy''\index{algorithm!greedy} approach that Dijkstra's
+algorithm\index{Dijkstra!algorithm} takes, i.e. searching for the
 ``cheapest'' path, the Bellman-Ford
 algorithm\index{Bellman-Ford algorithm} searches over all edges and
 keeps track of the shortest one found as it searches.
@@ -1685,7 +1685,7 @@ redundant rounds of updates.
 \index{Floyd-Roy-Warshall algorithm}
 
 Let $D$ be a weighted digraph of order $n$ and size $m$.
-Dijkstra's\index{Dijkstra's algorithm}
+Dijkstra's\index{Dijkstra!algorithm}
 Algorithm~\ref{alg:graph_algorithms:dijkstra_general} and the
 Bellman-Ford\index{Bellman-Ford algorithm}
 Algorithm~\ref{alg:graph_algorithms:Bellman_Ford} can be used to
@@ -1698,15 +1698,14 @@ algorithms that run in time $O(n^3)$ and $O(n^2m)$, respectively.
 
 The\index{Floyd-Roy-Warshall algorithm}
 \emph{Floyd-Roy-Warshall algorithm}~(FRW)\index{FRW}, or the
-Floyd-Warshall algorithm\index{Floyd-Warshall algorithm}, is an
-algorithm for finding shortest paths\index{path!shortest} in a
-weighted, directed graph. Like the Bellman-Ford
-algorithm\index{Bellman-Ford algorithm}, it allows for negative edge
-weights\index{weight!negative} and detects a negative weight
-cycle\index{cycle!negative} if one exists. Assuming that there are no
-negative weight cycles, a single execution of the FRW\index{FRW}
-algorithm will find the shortest paths between all pairs of
-vertices. It was discovered independently by Bernard
+Floyd-Warshall algorithm, is an algorithm for finding shortest
+paths\index{path!shortest} in a weighted, directed graph. Like the
+Bellman-Ford algorithm\index{Bellman-Ford algorithm}, it allows for
+negative edge weights\index{weight!negative} and detects a negative
+weight cycle\index{cycle!negative} if one exists. Assuming that there
+are no negative weight cycles, a single execution of the
+FRW\index{FRW} algorithm will find the shortest paths between all
+pairs of vertices. It was discovered independently by Bernard
 Roy~\cite{Roy1959}\index{Roy, Bernard} in~1959, Robert
 Floyd~\cite{Floyd1962}\index{Floyd, Robert} in~1962, and by Stephen
 Warshall~\cite{Warshall1962}\index{Warshall, Stephen} in~1962.
@@ -2085,8 +2084,8 @@ is due to Stephen
 Warshall~\cite{Warshall1962}\index{Warshall, Stephen}. It is a special
 case of a more general algorithm in automata
 theory\index{automata theory} due to Stephen
-Kleene~\cite{Kleene1956}\index{Kleene, Stephen}, called Kleene's
-algorithm\index{Kleene's algorithm}.
+Kleene~\cite{Kleene1956}\index{Kleene!Stephen}, called Kleene's
+algorithm\index{Kleene!algorithm}.
 
 \begin{algorithm}[!htpb]
 \input{algorithm/graph-algorithms/Floy-Roy-Warshall-transitive-closure.tex}
@@ -2098,19 +2097,19 @@ algorithm\index{Kleene's algorithm}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Johnson's algorithm}
-\index{Johnson's algorithm}
+\index{Johnson!algorithm}
 
 Let $G = (V,E)$ be a sparse\index{graph!sparse} digraph with edge
 weights but no negative cycles\index{cycle!negative}.
-\emph{Johnson's algorithm}\index{Johnson's algorithm}~\cite{Johnson1977}
+\emph{Johnson's algorithm}\index{Johnson!algorithm}~\cite{Johnson1977}
 finds a shortest path between each pair of vertices in $G$. First
-published in~1977 by Donald B. Johnson\index{Johnson, Donald B.}, the
-main insight of Johnson's algorithm\index{Johnson's algorithm} is to
-combine the technique of edge reweighting\index{reweight} with the
+published in~1977 by Donald B. Johnson\index{Johnson!Donald B.}, the
+main insight of Johnson's algorithm\index{Johnson!algorithm} is to
+combine the technique of edge reweighting\index{weight!reweight} with the
 Bellman-Ford\index{Bellman-Ford algorithm} and
-Dijkstra's\index{Dijkstra's algorithm} algorithms. The Bellman-Ford
+Dijkstra's\index{Dijkstra!algorithm} algorithms. The Bellman-Ford
 algorithm is first used to ensure that $G$ has no negative
-cycles\index{cycle!negative}. Next, we reweight\index{reweight} edges
+cycles\index{cycle!negative}. Next, we reweight\index{weight!reweight} edges
 in such a manner as to preserve shortest
 paths\index{path!shortest}. The final stage makes use of Dijkstra's
 algorithm for computing shortest paths between all vertex
@@ -2128,7 +2127,7 @@ show that the new set of edge weights produced by $\hat{w}$ must
 satisfy two properties:
 %%
 \begin{enumerate}
-\item The reweighted\index{reweight} edges preserve shortest
+\item The reweighted\index{weight!reweight} edges preserve shortest
   paths. That is, let $p$ be a $u$-$v$ path for $u,v \in V$. Then $p$
   is a shortest weighted path\index{path!weighted}\index{path!shortest}
   using weight function $w$ if and only if $p$ is also a shortest
@@ -2143,7 +2142,9 @@ Both of these properties are proved in
 Lemma~\ref{lem:graph_algorithms:reweighting_preserves_shortest_paths}.
 
 \begin{algorithm}[!htbp]
-\index{Johnson's algorithm}
+\index{Bellman-Ford algorithm}
+\index{Dijkstra!algorithm}
+\index{Johnson!algorithm}
 \index{graph!sparse}
 \input{algorithm/graph-algorithms/Johnson-algorithm.tex}
 \caption{Johnson's algorithm for sparse graphs.}
@@ -2152,7 +2153,7 @@ Lemma~\ref{lem:graph_algorithms:reweighting_preserves_shortest_paths}.
 
 \begin{lemma}
 \label{lem:graph_algorithms:reweighting_preserves_shortest_paths}
-\textbf{Reweighting preserves shortest paths.}\index{reweight}
+\textbf{Reweighting preserves shortest paths.}\index{weight!reweight}
 Let $G = (V,E)$ be a weighted digraph having weight function
 $w: E \to \R$ and let $h: V \to \R$ be a mapping of vertices to real
 numbers. Let $\hat{w}$ be another weight function for $G$ such that
@@ -2578,7 +2579,7 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Let
     those distances be the weights of the edges shown in
     Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Repeatedly
-    run Dijkstra's\index{Dijkstra's algorithm} algorithm over this
+    run Dijkstra's\index{Dijkstra!algorithm} algorithm over this
     undirected, weighted graph with each city as the start vertex. Use
     the procedure from the previous exercise to obtain a directed
     version of the graph in
@@ -2587,13 +2588,13 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 
   \item Repeat the previous exercise, but use the
     Bellman-Ford\index{Bellman-Ford algorithm} algorithm instead of
-    Dijkstra's\index{Dijkstra's algorithm} algorithm. Compare the
+    Dijkstra's\index{Dijkstra!algorithm} algorithm. Compare the
     results you obtain using these two different algorithms.
 
   \item Consider a weighted digraph version of the graph in
     Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Run the
     Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm} and
-    Johnson's\index{Johnson's algorithm} algorithms over the weighted
+    Johnson's\index{Johnson!algorithm} algorithms over the weighted
     digraph. Compare the results output by these two algorithms to the
     results of the previous exercise.
   \end{enumerate}
@@ -2914,7 +2915,7 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 
 \begin{figure}[!htbp]
 \centering
-\index{knight's tour}
+\index{chess!knight's tour}
 \input{image/graph-algorithms/montmort-moivre-knight-tour-strategy.tex}
 \caption{De~Montmort and De~Moivre's solution strategy for the
   $8 \times 8$ knight's tour problem.}
@@ -2923,7 +2924,7 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 
 \begin{figure}[!htbp]
 \centering
-\index{knight's tour}
+\index{chess!knight's tour}
 \input{image/graph-algorithms/reentrant-knight-tour.tex}
 \caption{Initial positions of re-entrant knight's tours.}
 \label{fig:graph_algorithms:reentrant_knight_tour}
