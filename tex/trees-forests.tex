@@ -2624,6 +2624,34 @@ is
   present pseudocode of a randomized algorithm to \emph{grow} a
   spanning tree via edge addition.
 
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{complete graph}
+\index{spanning tree!randomized construction}
+\input{algorithm/trees-forests/random-spanning-tree-Kn.tex}
+\caption{Random spanning tree of $K_n$.}
+\label{alg:trees_forests:random_spanning_tree_K_n}
+\end{algorithm}
+
+\item Algorithm~\ref{alg:trees_forests:random_spanning_tree_K_n}
+  constructs a random spanning tree of the complete graph $K_n$ on
+  $n > 0$ vertices. Its runtime is dependent on efficient algorithms
+  for obtaining a random permutation of a set of objects, and choosing
+  a random element from a given set.
+  %%
+  \begin{enumerate}[(a)]
+  \item Describe and analyze the runtime of a procedure to construct a
+    random permutation of a set of nonnegative integers.
+
+  \item Describe an algorithm for randomly choosing an element of a
+    set of nonnegative integers. Analyze the runtime of this
+    algorithm.
+
+  \item Taking into consideration the previous two algorithms, what is
+    the runtime of
+    Algorithm~\ref{alg:trees_forests:random_spanning_tree_K_n}?
+  \end{enumerate}
+
 \item Enumerate all the different binary trees on $5$ vertices.
 
 \item Algorithm~\ref{alg:trees_forests:random_binary_tree} generates a
