@@ -505,7 +505,7 @@ presents a general template for the BFS\index{BFS} strategy. The tree
 resulting from the BFS\index{BFS} algorithm is called a
 \emph{breadth-first search tree}\index{breadth-first search!tree}.
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \index{breadth-first search}\index{BFS}
 \input{algorithm/graph-algorithms/breadth-first-search-template.tex}
 \caption{A general breadth-first search template.}
@@ -820,7 +820,7 @@ corrected by McKay~\cite{McKay1997}\index{McKay, Brendan D.} to be
 for\index{Elkies, Noam D.}\index{Stanley, Richard P.} a discussion of
 the knight's tour and its relationship to mathematics.
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \index{depth-first search}\index{DFS}
 \input{algorithm/graph-algorithms/depth-first-search-template.tex}
 \caption{A general depth-first search template.}
@@ -997,7 +997,7 @@ connected. Otherwise, we conclude that $G$ is disconnected. This
 procedure is summarized in
 Algorithm~\ref{alg:graph_algorithms:graph_connectivity}.
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \index{graph!connected}
 \input{algorithm/graph-algorithms/graph-connectivity.tex}
 \caption{Determining whether an undirected graph is connected.}
@@ -1155,7 +1155,7 @@ of lower weight. Since the final path is acyclic, it must have no more
 than $n - 1$ edges.
 \end{proof}
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \input{algorithm/graph-algorithms/generic-shortest-path-algorithm.tex}
 \caption{A template for shortest path algorithms.}
 \label{alg:graph_algorithms:generic_shortest_path_algorithm}
@@ -1261,7 +1261,7 @@ loop decreases the number of elements in $Q$ by one without adding any
 elements to $Q$. Eventually, we would exit the while loop and the
 algorithm returns the lists $D$ and $P$.
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \index{Dijkstra!algorithm}
 \input{algorithm/graph-algorithms/dijkstra-general.tex}
 \caption{A general template for Dijkstra's algorithm.}
@@ -1483,7 +1483,7 @@ algorithm\index{Dijkstra!algorithm} takes, i.e. searching for the
 algorithm\index{Bellman-Ford algorithm} searches over all edges and
 keeps track of the shortest one found as it searches.
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \index{Bellman-Ford algorithm}
 \input{algorithm/graph-algorithms/Bellman-Ford.tex}
 \caption{The Bellman-Ford algorithm.}
@@ -1515,7 +1515,7 @@ presents a modification of the Bellman-Ford\index{Bellman-Ford algorithm}
 Algorithm~\ref{alg:graph_algorithms:Bellman_Ford} that avoids
 redundant rounds of updates.
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \index{Bellman-Ford algorithm}
 \input{algorithm/graph-algorithms/Bellman-Ford-redundant-updates.tex}
 \caption{The Bellman-Ford algorithm with checks for redundant updates.}
@@ -1785,7 +1785,7 @@ the same as $P_n(i,j)$ and $D_n(i,j)$,
 respectively. Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}
 summarizes the above discussion into an algorithmic presentation.
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \index{Floyd-Roy-Warshall algorithm}
 \input{algorithm/graph-algorithms/Floy-Roy-Warshall.tex}
 \caption{The Floyd-Roy-Warshall algorithm for all-pairs shortest paths.}
@@ -2089,7 +2089,7 @@ theory\index{automata theory} due to Stephen
 Kleene~\cite{Kleene1956}\index{Kleene!Stephen}, called Kleene's
 algorithm\index{Kleene!algorithm}.
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \input{algorithm/graph-algorithms/Floy-Roy-Warshall-transitive-closure.tex}
 \caption{Variant of the Floyd-Roy-Warshall algorithm for transitive closure.}
 \label{alg:graph_algorithms:Floy_Roy_Warshall:transitive_closure}
@@ -2375,13 +2375,13 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
   \item Why must the input list $L$ be nonempty?
   \end{enumerate}
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \input{algorithm/graph-algorithms/linear-search.tex}
 \caption{Linear search for lists.}
 \label{alg:graph_algorithms:linear_search}
 \end{algorithm}
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \input{algorithm/graph-algorithms/binary-search.tex}
 \caption{Binary search for lists of positive integers.}
 \label{alg:graph_algorithms:binary_search}
@@ -2868,7 +2868,7 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     Algorithm~\ref{alg:graph_algorithms:bracket_parser}?
   \end{enumerate}
 
-\begin{algorithm}[!htpb]
+\begin{algorithm}[!htbp]
 \index{balanced bracket problem}
 \input{algorithm/graph-algorithms/bracket-parser.tex}
 \caption{A brackets parser.}
