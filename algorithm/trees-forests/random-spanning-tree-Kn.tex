@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A positive integer $n$ representing the order of $K_n$, with
+  vertex set $V = \{0, 1, \dots, n-1\}$.}
+\Output{A random spanning tree of $K_n$.}
+\BlankLine
+%%
+%% algorithm body
+\If{$n = 1$}{
+  \Return $K_1$\;
+}
+$P \assign$ random permutation of $V$\;
+$T \assign$ null tree\;
+\For{$i \assign 1, 2, \dots, n-1$}{
+  $j \assign$ random element from $\{0, 1, \dots, i-1\}$\;
+  add edge $(P[j],\, P[i])$ to $T$\;
+}
+\Return $T$\;
