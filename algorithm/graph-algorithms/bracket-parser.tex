@@ -30,24 +30,24 @@ $T \assign \text{empty stack}$\;
 $c \assign 1$\;
 $n \assign |S|$\;
 \For{$i \assign 0, 1, \dots, n$}{
-  \uIf{$S[i+1]$ \rm{is a left bracket}}{
-    \text{append $c$ to $L$}\;
-    \text{push $(S[i+1],\, c)$ onto $T$}\;
+  \If{\rm $S[i+1]$ is a left bracket}{
+    $\append(L, c)$\;
+    push $(S[i+1],\, c)$ onto $T$\;
     $c \assign c + 1$\;
   }
-  \uIf{$S[i+1]$ \rm{is a right bracket}}{
-    \uIf{$T$ \rm{is empty}}{
+  \If{\rm $S[i+1]$ is a right bracket}{
+    \If{\rm $T$ is empty}{
       \Return $\varepsilon$\;
     }
-    $(\Left,\, d) \assign \text{pop } T$\;
-    \eIf{\rm{\Left matches $S[i+1]$}}{
-      \text{append $d$ to $L$}\;
+    $(\Left,\, d) \assign \pop(T)$\;
+    \eIf{\rm $\Left$ matches $S[i+1]$}{
+      $\append(L, d)$\;
     }{
       \Return $\varepsilon$\;
     }
   }
 }
-\uIf{$T$ \rm{is empty}}{
+\If{\rm $T$ is empty}{
   \Return $L$\;
 }
 \Return $\varepsilon$\;
