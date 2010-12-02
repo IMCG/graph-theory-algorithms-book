@@ -3017,4 +3017,54 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
   \item Johnson's
     Algorithm~\ref{alg:graph_algorithms:Johnson_algorithm}.
   \end{enumerate}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/graph-algorithms/grid-graphs.tex}
+\caption{Grid graphs for $n = 2, 3, 4$.}
+\label{fig:graph_algorithms:grid_graphs}
+\end{figure}
+
+\item Let $n$ be a positive integer. An $n \times n$
+  \emph{grid graph}\index{grid!graph} is a graph on the
+  Euclidean plane\index{plane}, where each vertex is an ordered pair
+  from $\Z \times \Z$. In particular, the vertices are ordered pairs
+  $(i,j) \in \Z \times \Z$ such that
+  %%
+  \begin{equation}
+  \label{eqn:graph_algorithms:grid_graph_vertex_inequality}
+  0 \leq i,j < n.
+  \end{equation}
+  %%
+  Each vertex $(i,j)$ is adjacent to any of the following vertices
+  provided that
+  expression~\eqref{eqn:graph_algorithms:grid_graph_vertex_inequality}
+  is satisfied: the vertex $(i-1,\, j)$ immediately to its left, the
+  vertex $(i+1,\, j)$ immediately to its right, the vertex
+  $(i,\, j+1)$ immediately above it, or the vertex $(i,\, j-1)$
+  immediately below it. Figure~\ref{fig:graph_algorithms:grid_graphs}
+  illustrates some examples of grid graphs. The $1 \times 1$ grid
+  graph is the trivial graph $K_1$.
+  %%
+  \begin{enumerate}[(a)]
+  \item Fix a positive integer $n > 1$. Describe and provide
+    pseudocode of an algorithm to generate all nonisomorphic
+    $n \times n$ grid graphs. What is the worst-case runtime of your
+    algorithm?
+
+  \item How many $n \times n$ grid graphs are there? How many of those
+    graphs are nonisomorphic to each other?
+
+  \item Describe and provide pseudocode of an algorithm to generate a
+    random\index{algorithm!random} $n \times n$ grid graph. Analyze
+    the worst-case runtime of your algorithm.
+
+  \item Extend the grid graph by allowing edges to be diagonals. That
+    is, a vertex $(i,j)$ can also be adjacent to any of the following
+    vertices so long as
+    expression~\eqref{eqn:graph_algorithms:grid_graph_vertex_inequality}
+    holds: $(i-1,\, j-1)$, $(i-1,\, j+1)$, $(i+1,\, j+1)$,
+    $(i+1,\, j-1)$. With this extension, repeat the previous
+    exercises.
+  \end{enumerate}
 \end{problem}
