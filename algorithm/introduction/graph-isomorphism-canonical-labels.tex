@@ -27,8 +27,8 @@
 %% algorithm body
 \For{$i \assign 1, 2$}{
   $A_i \assign$ adjacency matrix of $G_i$\;
-  $A_i' \assign$ lexicographically maximal element of permutation
-  equivalence class of $A_i$\;
+  $p_i \assign$ permutation equivalence class of $A_i$\;
+  $A_i' \assign$ lexicographically maximal element of $p_i$\;
 }
 \If{$A_1' = A_2'$}{
   \Return \MyTrue\;
