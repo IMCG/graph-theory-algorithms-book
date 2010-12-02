@@ -2654,6 +2654,24 @@ is
     Algorithm~\ref{alg:trees_forests:random_spanning_tree_K_n}?
   \end{enumerate}
 
+\item We want to generate a random\index{algorithm!random} undirected,
+  connected simple\index{simple graph} graph on $n$ vertices and
+  having $m$ edges. Start by generating a random
+  spanning\index{spanning tree} tree $T$ of
+  $K_n$\index{complete graph}. Then add random edges to $T$ until the
+  requirements are satisfied.
+  %%
+  \begin{enumerate}[(a)]
+  \item Present pseudocode to realize the above procedure. What is the
+    worst-case runtime of your algorithm?
+
+  \item Modify your algorithm to handle the case where $m < n-1$. Why
+    must $m \geq n-1$?
+
+  \item Modify your algorithm to handle the case where each edge has a
+    weight within the closed interval $[\alpha, \beta]$.
+  \end{enumerate}
+
 \item Enumerate all the different binary\index{binary tree} trees on
   $5$ vertices.
 
