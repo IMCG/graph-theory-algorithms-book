@@ -2279,9 +2279,10 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 
 \item\label{prob:graph_algorithms:Horner_method} Given a polynomial
   $p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$ of degree
-  $n$, we can use Horner's method~\cite{Horner1819} to efficiently
-  evaluate $p$ at a specific value $x = x_0$. Horner's method evaluates
-  $p(x)$ by expressing the polynomial as
+  $n$, we can use Horner's\index{Horner!W. G.}
+  method~\cite{Horner1819} to efficiently evaluate $p$ at a specific
+  value $x = x_0$. Horner's method evaluates $p(x)$ by expressing the
+  polynomial as
   \[
   p(x)
   =
@@ -2307,6 +2308,8 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
   \end{enumerate}
 
 \begin{algorithm}[!htbp]
+\index{Horner!method}
+\index{Horner!W. G.}
 \input{algorithm/graph-algorithms/Horner-method.tex}
 \caption{Polynomial evaluation using Horner's method.}
 \label{alg:graph_algorithms:Horner_method}
