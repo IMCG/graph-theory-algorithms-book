@@ -41,12 +41,8 @@
 }
 $G \assign$ null graph\;
 $W \assign [0, 0, \dots, 0]$\tcc*[f]{$m$ copies of $0$}\;
-$A \assign n \times n$ adjacency matrix\;
-\For{$i \assign 0, 1, \dots, n-1$}{
-  \For{$j \assign 0, 1, \dots, n-1$}{
-    $A[i,j] \assign \MyFalse$\;
-  }
-}
+$A \assign n \times n$ adjacency matrix with entries $a_{ij}$\;
+$a_{ij} \assign \MyFalse$ for $0 \leq i,j < n$\;
 \If{$\Simple = \MyTrue$}{
   $M \assign n(n-1)$\;
   \If{$\Directed = \MyFalse$}{
@@ -81,9 +77,9 @@ $i \assign 0$\;
     $u \assign P[u]$\;
     $v \assign P[v]$\;
   }
-  \If{\rm $\Simple = \MyFalse$ or ($\Simple = \MyTrue$ and $A[u,v] = \MyFalse$)}{
+  \If{\rm $\Simple = \MyFalse$ or ($\Simple = \MyTrue$ and $a_{uv} = \MyFalse$)}{
     add edge $(u,v)$ to $G$\;
-    $A[u,v] \assign \MyTrue$\;
+    $a_{uv} \assign \MyTrue$\;
     \If{$\Weighted = \MyTrue$}{
       $W[i] \assign$ random element from closed interval $[\alpha, \beta]$\;
     }
