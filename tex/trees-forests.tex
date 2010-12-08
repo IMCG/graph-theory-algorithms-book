@@ -2536,6 +2536,23 @@ is
 \begin{problem}
 \item Construct all nonisomorphic trees of order $7$.
 
+\item Let $G$ be a weighted connected graph and let $T$ be a subgraph
+  of $G$. Then $T$ is a
+  \emph{maximum spanning tree}\index{spanning tree!maximum} of $G$
+  provided that the following conditions are satisfied:
+  %%
+  \begin{enumerate}[(a)]
+  \item $T$ is a spanning tree of $G$.
+
+  \item The total weight of $T$ is maximum among all spanning trees of
+    $G$.
+  \end{enumerate}
+  %%
+  Modify Kruskal's\index{Kruskal!algorithm},
+  Prim's\index{Prim!algorithm}, and
+  Bor\r{u}vka's\index{Bor\r{u}vka!algorithm} algorithms to return a
+  maximum spanning tree of $G$.
+
 \item Describe and present pseudocode of an algorithm that constructs
   all the nonisomorphic spanning trees of a given connected graph.
 
