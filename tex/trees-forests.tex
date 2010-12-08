@@ -2626,9 +2626,20 @@ is
 \item Algorithm~\ref{alg:trees_forests:randomized_spanning_tree_construction}
   presents a randomized procedure to construct a
   spanning\index{spanning tree!randomized construction} tree of a
-  given connected graph via repeated edge deletion. Describe and
-  present pseudocode of a randomized\index{algorithm!random} algorithm
-  to \emph{grow} a spanning tree via edge addition.
+  given connected graph via repeated edge deletion.
+  %%
+  \begin{enumerate}[(a)]
+  \item Describe and present pseudocode of a
+    randomized\index{algorithm!random} algorithm to \emph{grow} a
+    spanning tree via edge addition.
+
+  \item Would
+    Algorithm~\ref{alg:trees_forests:randomized_spanning_tree_construction}
+    still work if the input graph $G$ has self-loops or multiple
+    edges? Explain why or why not. If not, modify
+    Algorithm~\ref{alg:trees_forests:randomized_spanning_tree_construction}
+    to handle the case where $G$ has self-loops and multiple edges.
+  \end{enumerate}
 
 \begin{algorithm}[!htbp]
 \index{algorithm!random}
