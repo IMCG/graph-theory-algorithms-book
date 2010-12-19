@@ -74,6 +74,26 @@ priority comparison, we define two operations on a priority queue:
   smallest priority.
 \end{itemize}
 
+An immediate application of priority queues is sorting a finite
+sequence of items. Suppose $L$ is a finite list of $n > 0$ items on
+which a total order is defined. Let $Q$ be an empty priority queue. In
+the first phase of the priority queue sorting algorithm, we extract
+each element $e \in L$ from $L$ and insert $e$ into $Q$ with priority
+$e$ itself. In other words, each element $e$ is its own priority. This
+first phase of the sorting algorithm requires $n$ element extractions
+from $L$ and $n$ element insertions into $Q$. The second phase of the
+algorithm involves extracting elements from $Q$ via the $\extractMin$
+operation. Queue elements are extracted via $\extractMin$ and inserted
+back into $L$ in the order in which they are extracted from
+$Q$. Algorithm~\ref{alg:tree_data_structures:priority_queue_sort}
+presents pseudocode of our discussion.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/priority-queue-sort.tex}
+\caption{Sorting a sequence via priority queue.}
+\label{alg:tree_data_structures:priority_queue_sort}
+\end{algorithm}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
