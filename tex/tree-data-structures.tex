@@ -26,9 +26,9 @@ ordinary queue $Q$ has the following basic accompanying functions for
 assessing and managing its elements:
 %%
 \begin{itemize}
-\item $\dequeue$ --- removing the front of $Q$.
+\item $\dequeue(Q)$ --- Remove the front of $Q$.
 
-\item $\enqueue$ --- appending a new element to the end of $Q$.
+\item $\enqueue(Q, e)$ --- Append the element $e$ to the end of $Q$.
 \end{itemize}
 
 If $Q$ is now a priority queue, each element is associated with a
@@ -46,15 +46,33 @@ properties hold for all $a,b,c \in X$:
 \end{itemize}
 %%
 If the above three properties hold for the relation ``$\leq$'', then we
-say that ``$\leq$'' is a total order\index{total order} on $X$ and that
-$X$ is a totally ordered set. In all, if the priority of each element
-of $Q$ belongs to the same totally ordered set $X$, we use the total
-order defined on $X$ to compare the priorities of the queue
-elements. For example, the set $\Z$ of integers is totally ordered by
-the ``less than or equal to'' relation. If the priority of each
-$e \in Q$ is an element of $\Z$, we use the latter relation to compare
-the priorities of elements of $Q$. In the case of an ordinary queue,
-the priority of each queue element is its position index.
+say that ``$\leq$'' is a \emph{total order}\index{total order} on $X$
+and that $X$ is a
+\emph{totally ordered set}\index{set!totally ordered}. In all, if the
+priority of each element of $Q$ belongs to the same totally ordered
+set $X$, we use the total order defined on $X$ to compare the
+priorities of the queue elements. For example, the set $\Z$ of
+integers is totally ordered by the ``less than or equal to''
+relation. If the priority of each $e \in Q$ is an element of $\Z$, we
+use the latter relation to compare the priorities of elements of
+$Q$. In the case of an ordinary queue, the priority of each queue
+element is its position index.
+
+To extract from a priority\index{queue!priority} queue $Q$ an element
+of lowest priority, we need to define the notion of smallest
+priority. Let $p_i$ be the priority assigned to element $e_i$ of
+$Q$. Then $p_{\min}$ is the lowest priority if $p_{\min} \leq p$ for
+any element priority $p$. The element with corresponding priority
+$p_{\min}$ is the minimum priority element. Based upon the notion of
+priority comparison, we define two operations on a priority queue:
+%%
+\begin{itemize}
+\item $\insertElem(Q, e, p)$ --- Insert into $Q$ the element $e$ with
+  priority $p$.
+
+\item $\extractMin(Q)$ --- Extract from $Q$ an element having the
+  smallest priority.
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
