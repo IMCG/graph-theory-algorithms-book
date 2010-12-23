@@ -105,6 +105,42 @@ on how the priority queue $Q$ is implemented.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Sequence implementation}
+
+A simple way to implement a priority queue is to maintain a sorted
+sequence. Let $e_0, e_1, \dots, e_n$ be a sequence of $n - 1$ elements
+with corresponding keys $k_0, k_1, \dots, k_n$ and suppose that the
+$k_i$ all belong to the same totally ordered set $X$ having total
+order $\leq$. Using the total order, we assume that the $k_i$ are
+sorted as
+\[
+k_0 \leq k_1 \leq \cdots \leq k_n
+\]
+and $e_i \leq e_j$ if and only if $k_i \leq k_j$. Then we can consider
+the queue $Q = [e_0, e_1, \dots, e_n]$ as a priority queue in which
+the head is always the minimum element and the tail is always the
+maximum element. Extracting the minimum element is simply a dequeue
+operation that can be accomplished in constant time $O(1)$. However,
+inserting a new element into $Q$ takes linear time.
+
+Let $e$ be an element with corresponding key $k \in X$. Inserting $e$
+into $Q$ requires that we maintain elements of $Q$ sorted according to
+the total order $\leq$. If $Q$ is empty, we simply enqueue $e$ into
+$Q$. Suppose now that $Q$ is a nonempty priority queue. If
+$k \leq k_0$, then $e$ becomes the new head of $Q$. If $k_n \leq k$,
+then $e$ becomes the new tail of $Q$. Inserting a new head or tail
+into $Q$ each requires constant time $O(1)$. However, if
+$k_1 \leq k \leq k_{n-1}$ then we need to traverse $Q$ starting from
+$e_1$, searching for a position at which to insert $e$. Let $e_i$ be
+the queue element at position $i$ within $Q$. If $k \leq k_i$ then we
+insert $e$ into $Q$ at position $i$, thus moving $e_i$ to position
+$i + 1$. Otherwise we next consider $e_{i+1}$ and repeat the above
+comparison process. By hypothesis, $k_1 \leq k \leq k_{n-1}$ and
+therefore inserting $e$ into $Q$ takes a worst-case runtime of $O(n)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Binary search trees}
 
 See section~3.6 of Gross and Yellen~\cite{GrossYellen1999}, and
