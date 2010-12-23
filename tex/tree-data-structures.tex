@@ -141,6 +141,26 @@ therefore inserting $e$ into $Q$ takes a worst-case runtime of $O(n)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Binary heaps}
+
+A sequence implementation of priority queues has the advantage of
+being simple to understand. Inserting an element into a sequence-based
+priority queue requires linear time, which can quickly become
+infeasible for queues containing hundreds of thousands or even
+millions of elements. Can we do any better? Rather than using a sorted
+sequence, we can use a binary tree to realize an implementation of
+priority queues that is much more efficient than a sequence-based
+implementation. In particular, we use a data structure called a
+\emph{binary heap}\index{binary heap}, which allows us to perform
+element insertion in logarithmic time.
+
+In~\cite{Williams1964}, Williams introduced the heapsort algorithm and
+described how to implement a priority queue using a binary heap. The
+basic idea is to consider queue elements as nodes in a binary tree.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Binary search trees}
 
 See section~3.6 of Gross and Yellen~\cite{GrossYellen1999}, and
