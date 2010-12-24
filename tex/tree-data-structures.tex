@@ -228,6 +228,13 @@ $\leq 2^h$ vertices. The vertices at level $h$ are filled from left to
 right.
 \end{definition}
 
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/sample-binary-heaps.tex}
+\caption{Examples of binary heaps with integer keys.}
+\label{fig:tree_data_structures:binary_heaps_integer_keys}
+\end{figure}
+
 If a binary tree $T$ satisfies both the heap-order and heap-structure
 properties, then $T$ is referred to as a binary heap. By insisting
 that $T$ satisfy the heap-order\index{heap-order property} property,
@@ -237,14 +244,48 @@ heap-structure\index{heap-structure property} property allows us to
 determine the last vertex of $T$. The last vertex of $T$ is identified
 as the right-most internal vertex of $T$ having the greatest depth.
 Figure~\ref{fig:tree_data_structures:binary_heaps_integer_keys}
-illustrates various examples of binary heaps.
+illustrates various examples of binary heaps. The heap-structure
+property together with
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}
+results in the following corollary on the height of a binary heap.
 
-\begin{figure}[!htbp]
-\centering
-\input{image/tree-data-structures/sample-binary-heaps.tex}
-\caption{Examples of binary heaps with integer keys.}
-\label{fig:tree_data_structures:binary_heaps_integer_keys}
-\end{figure}
+\begin{corollary}
+A binary heap $T$ with $n$ internal vertices has height
+\[
+h
+=
+\big\lceil \lg(n + 1) \big\rceil.
+\]
+\end{corollary}
+
+\begin{proof}
+Level $h - 1$ has at least one internal vertex. Apply
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order} to
+see that $T$ has at least
+\[
+2^{h - 2 + 1} - 1 + 1
+=
+2^{h - 1}
+\]
+internal vertices. On the other hand, level $h - 1$ has at most
+$2^{h-1}$ internal vertices. Another application of
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order} shows
+that $T$ has at most
+\[
+2^{h - 1 + 1} - 1
+=
+2^h - 1
+\]
+internal vertices. Thus $n$ is bounded by
+\[
+2^{h - 1} \leq n \leq 2^h - 1.
+\]
+Taking logarithms of each side in the latter bound results in
+\[
+\lg(n + 1) \leq h \leq \lg n + 1
+\]
+and the corollary follows.
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
