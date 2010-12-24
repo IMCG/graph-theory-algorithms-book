@@ -171,12 +171,13 @@ tree $T$ satisfies two further properties:
 %%
 The relational property of $T$ can be expressed as follows:
 
-\begin{proposition}
+\begin{definition}
 \textbf{Heap-order property.}\index{heap-order property}
-Let $T$ be a binary heap and let $v$ be a vertex of $T$ other than the
+Let $T$ be a binary tree and let $v$ be a vertex of $T$ other than the
 root. If $p$ is the parent of $v$ and these vertices have corresponding
-keys $k_p$ and $k_v$, respectively, then $k_p \leq k_v$.
-\end{proposition}
+keys $k_p$ and $k_v$, respectively, then $k_p \leq k_v$. The latter
+property is called the \emph{heap-order property}.
+\end{definition}
 
 The heap-order property\index{heap-order property} is defined in terms
 of the total order used to compare the keys of the internal
@@ -208,6 +209,35 @@ k_r \leq k_{v_0} \leq k_{v_1} \leq \cdots \leq k_{v_n} \leq k_v.
 \]
 In other words, the keys encountered on the path from $r$ to $v$ are
 arranged in nondecreasing order.
+
+The structural property of $T$ is used to enforce that $T$ be of as
+small a height as possible. Before stating the structural property, we
+first define the level\index{binary tree!level} of a binary
+tree. Recall that the depth of a vertex in $T$ is its distance from
+the root. Level\index{binary tree!level} $i$ of a binary tree $T$
+refers to all vertices of $T$ that have the same depth $i$. We are now
+ready to state the heap-structure property.
+
+\begin{definition}
+\textbf{Heap-structure property.}\index{heap-structure property}
+Let $T$ be a binary tree with height $h$. Then $T$ satisfies the
+heap-structure property if $T$ is nearly a
+complete\index{binary tree!complete} binary tree. That is, level
+$0 \leq i \leq h - 1$ has $2^i$ vertices, whereas level $h$ has
+$\leq 2^h$ vertices. The vertices at level $h$ are filled from left to
+right.
+\end{definition}
+
+If a binary tree $T$ satisfies both the heap-order and heap-structure
+properties, then $T$ is referred to as a binary heap. By insisting
+that $T$ satisfy the heap-order\index{heap-order property} property,
+we are able to determine the minimum vertex of $T$ in constant time
+$O(1)$. Requiring that $T$ also satisfy the
+heap-structure\index{heap-structure property} property allows us to
+determine the maximum vertex of $T$ in constant time $O(1)$ as
+well. The maximum vertex of $T$ is the vertex whose key is maximum
+among all keys of vertices in $T$. The maximum vertex is identified as
+the right-most internal vertex of $T$ having the greatest depth.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
