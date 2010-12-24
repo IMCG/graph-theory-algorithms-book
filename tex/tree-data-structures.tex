@@ -142,6 +142,7 @@ therefore inserting $e$ into $Q$ takes a worst-case runtime of $O(n)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Binary heaps}
+\index{heap!binary}
 
 A sequence implementation of priority queues has the advantage of
 being simple to understand. Inserting an element into a sequence-based
@@ -151,12 +152,62 @@ millions of elements. Can we do any better? Rather than using a sorted
 sequence, we can use a binary tree to realize an implementation of
 priority queues that is much more efficient than a sequence-based
 implementation. In particular, we use a data structure called a
-\emph{binary heap}\index{binary heap}, which allows us to perform
+\emph{binary heap}\index{heap!binary}, which allows us to perform
 element insertion in logarithmic time.
 
-In~\cite{Williams1964}, Williams introduced the heapsort algorithm and
-described how to implement a priority queue using a binary heap. The
-basic idea is to consider queue elements as nodes in a binary tree.
+In~\cite{Williams1964}, Williams\index{Williams, J. W. J.} introduced
+the heapsort\index{heapsort} algorithm and described how to implement
+a priority queue using a binary\index{heap!binary} heap. A basic idea
+is to consider queue elements as internal vertices in a binary tree
+$T$, with external vertices or leaves being ``place-holders''. The
+tree $T$ satisfies two further properties:
+%%
+\begin{enumerate}
+\item A relational property specifying the relative ordering and
+  placement of queue elements.
+
+\item A structural property that specifies the structure of $T$.
+\end{enumerate}
+%%
+The relational property of $T$ can be expressed as follows:
+
+\begin{proposition}
+\textbf{Heap-order property.}\index{heap-order property}
+Let $T$ be a binary heap and let $v$ be a vertex of $T$ other than the
+root. If $p$ is the parent of $v$ and these vertices have corresponding
+keys $k_p$ and $k_v$, respectively, then $k_p \leq k_v$.
+\end{proposition}
+
+The heap-order property\index{heap-order property} is defined in terms
+of the total order used to compare the keys of the internal
+vertices. Taking the total order to be the ordinary
+``less than or equal to'' relation, it follows from the heap-order
+property that the root of $T$ is always the vertex with a minimum
+key. Similary, if the total order is the usual
+``greater than or equal to'' relation, then the root of $T$ is always
+the vertex with a maximum key. In general, if $\leq$ is a total order
+defined on the keys of $T$ and $u$ and $v$ are vertices of $T$, we say
+that $u$ is less than or equal to $v$ if and only if $u \leq v$.
+Furthermore, $u$ is said to be a minimum vertex of $T$ if and only if
+$u \leq v$ for all vertices of $T$. From our discussion above, the
+root is always a minimum vertex of $T$ and is said to be ``at the top
+of the heap'', from which we derive the name ``heap'' for this data
+structure.
+
+Another consequence of the heap-order\index{heap-order property}
+property becomes apparent when we trace out a path from the root of
+$T$ to any internal vertex. Let $r$ be the root of $T$ and let $v$ be
+any internal vertex of $T$. If $r, v_0, v_1, \dots, v_n, v$ is an
+$r$-$v$ path with corresponding keys
+\[
+k_r, k_{v_0}, k_{v_1}, \dots, k_{v_n}, k_v
+\]
+then we have
+\[
+k_r \leq k_{v_0} \leq k_{v_1} \leq \cdots \leq k_{v_n} \leq k_v.
+\]
+In other words, the keys encountered on the path from $r$ to $v$ are
+arranged in nondecreasing order.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
