@@ -108,7 +108,7 @@ on how the priority queue $Q$ is implemented.
 \subsection{Sequence implementation}
 
 A simple way to implement a priority queue is to maintain a sorted
-sequence. Let $e_0, e_1, \dots, e_n$ be a sequence of $n - 1$ elements
+sequence. Let $e_0, e_1, \dots, e_n$ be a sequence of $n + 1$ elements
 with corresponding keys $k_0, k_1, \dots, k_n$ and suppose that the
 $k_i$ all belong to the same totally ordered set $X$ having total
 order $\leq$. Using the total order, we assume that the $k_i$ are
@@ -116,12 +116,12 @@ sorted as
 \[
 k_0 \leq k_1 \leq \cdots \leq k_n
 \]
-and $e_i \leq e_j$ if and only if $k_i \leq k_j$. Then we can consider
-the queue $Q = [e_0, e_1, \dots, e_n]$ as a priority queue in which
-the head is always the minimum element and the tail is always the
-maximum element. Extracting the minimum element is simply a dequeue
-operation that can be accomplished in constant time $O(1)$. However,
-inserting a new element into $Q$ takes linear time.
+and $e_i \leq e_j$ if and only if $k_i \leq k_j$. Then we consider the
+queue $Q = [e_0, e_1, \dots, e_n]$ as a priority queue in which the
+head is always the minimum element and the tail is always the maximum
+element. Extracting the minimum element is simply a dequeue operation
+that can be accomplished in constant time $O(1)$. However, inserting a
+new element into $Q$ takes linear time.
 
 Let $e$ be an element with corresponding key $k \in X$. Inserting $e$
 into $Q$ requires that we maintain elements of $Q$ sorted according to
