@@ -234,10 +234,17 @@ that $T$ satisfy the heap-order\index{heap-order property} property,
 we are able to determine the minimum vertex of $T$ in constant time
 $O(1)$. Requiring that $T$ also satisfy the
 heap-structure\index{heap-structure property} property allows us to
-determine the maximum vertex of $T$ in constant time $O(1)$ as
-well. The maximum vertex of $T$ is the vertex whose key is maximum
-among all keys of vertices in $T$. The maximum vertex is identified as
-the right-most internal vertex of $T$ having the greatest depth.
+determine the last vertex of $T$. The last vertex of $T$ is identified
+as the right-most internal vertex of $T$ having the greatest depth.
+Figure~\ref{fig:tree_data_structures:binary_heaps_integer_keys}
+illustrates various examples of binary heaps.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/sample-binary-heaps.tex}
+\caption{Examples of binary heaps with integer keys.}
+\label{fig:tree_data_structures:binary_heaps_integer_keys}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
