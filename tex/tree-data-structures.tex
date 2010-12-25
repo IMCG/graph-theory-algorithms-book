@@ -444,6 +444,18 @@ percolate all the way down to the level that is immediately above the
 last level after undergoing a number of swaps that is proportional to
 the height of $T$. Therefore, deleting the minimum vertex of $T$ can
 be achieved in time $O(\lg n)$.
+Figure~\ref{fig:tree_data_structures:delete_sift_down_binary_heap}
+illustrates the deletion of the minimum vertex of a binary heap with
+at least two internal vertices and the resulting sift-down process
+that percolates vertices down through various levels of the heap in
+order to maintain the heap-order property.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binary-heap-delete.tex}
+\caption{Delete and sift-down in a binary heap.}
+\label{fig:tree_data_structures:delete_sift_down_binary_heap}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
