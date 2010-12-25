@@ -310,6 +310,8 @@ heaps in
 Figure~\ref{fig:tree_data_structures:binary_heaps_integer_keys} can be
 represented as the corresponding lists in
 Figure~\ref{fig:tree_data_structures:sequence_representations_binary_heaps}.
+Note that it is not necessary to store the leaves of $T$ in the
+sequence representation.
 
 \begin{figure}[!htbp]
 \centering
@@ -337,6 +339,36 @@ Figure~\ref{fig:tree_data_structures:insert_vertex_into_empty_binary_heap}.
 \caption{Inserting a vertex into an empty binary heap.}
 \label{fig:tree_data_structures:insert_vertex_into_empty_binary_heap}
 \end{figure}
+
+Let $T$ now be a nonempty binary heap, i.e. $T$ has at least one
+internal vertex, and suppose we want to insert into $T$ an internal
+vertex $v$. We must identify the correct leaf of $T$ at which to
+insert $v$. If the $n$ internal vertices of $T$ are
+$r = v_0, v_1, \dots, v_{n-1}$, then by the sequence representation of
+$T$ we can identify the last internal vertex $v_{n-1}$ in constant
+time. The correct leaf at which to insert $v$ is the sequence element
+immediately following $v_{n-1}$, i.e. the element at position $n$ in
+the sequence representation of $T$. We replace with $v$ the leaf at
+position $n$ in the sequence so that $v$ now becomes the last vertex
+of $T$.
+
+The binary heap $T$ augmented with the new last vertex $v$ satisfies
+the heap-structure property, but may violate the heap-order
+property. To ensure that $T$ satisfies the heap-order property, we
+perform an operation on $T$ called \emph{sift-up} that involves
+possibly moving $v$ up through various levels of $T$. Let $k_v$ be the
+key of $v$ and let $k_{p(v)}$ be the key of $v$'s parent. If the
+relation $k_{p(v)} \leq k_v$ holds, then $T$ satisfies the heap-order
+property. Otherwise we swap $v$ with its parent, effectively moving
+$v$ up one level to be at the position previously occupied by its
+parent. The parent of $v$ is moved down one level and now occupies the
+position where $v$ was previously. With $v$ in its new position, we
+perform the same key comparison process with $v$'s new parent. The key
+comparison and swapping continue until the heap-order property holds
+for $T$. In the worst case, $v$ would become the new root of $T$ after
+undergoing a number of swaps that is proportional to the height of
+$T$. Therefore, inserting a new internal vertex into $T$ can be
+achieved in time $O(\lg n)$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
