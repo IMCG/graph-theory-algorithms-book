@@ -369,6 +369,17 @@ for $T$. In the worst case, $v$ would become the new root of $T$ after
 undergoing a number of swaps that is proportional to the height of
 $T$. Therefore, inserting a new internal vertex into $T$ can be
 achieved in time $O(\lg n)$.
+Figure~\ref{fig:tree_data_structures:insert_sift_up_binary_heap}
+illustrates the insertion of a new internal vertex into a nonempty
+binary heap and the resulting sift-up operation in order to maintain
+the heap-order property.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binary-heap-insert.tex}
+\caption{Insert and sift-up in a binary heap.}
+\label{fig:tree_data_structures:insert_sift_up_binary_heap}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
