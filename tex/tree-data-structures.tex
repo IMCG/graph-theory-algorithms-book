@@ -287,6 +287,13 @@ Taking logarithms of each side in the latter bound results in
 and the corollary follows.
 \end{proof}
 
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/sample-binary-heaps-array.tex}
+\caption{Sequence representations of various binary heaps.}
+\label{fig:tree_data_structures:sequence_representations_binary_heaps}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -312,13 +319,6 @@ represented as the corresponding lists in
 Figure~\ref{fig:tree_data_structures:sequence_representations_binary_heaps}.
 Note that it is not necessary to store the leaves of $T$ in the
 sequence representation.
-
-\begin{figure}[!htbp]
-\centering
-\input{image/tree-data-structures/sample-binary-heaps-array.tex}
-\caption{Sequence representations of various binary heaps.}
-\label{fig:tree_data_structures:sequence_representations_binary_heaps}
-\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -389,6 +389,32 @@ a nonempty binary heap.
 \caption{Inserting a new internal vertex into a binary heap.}
 \label{alg:tree_data_structures:binary_heap_insert}
 \end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Deletion and sift-down}
+
+The process for deleting the minimum vertex of a binary heap bears
+some resemblance to that of inserting a new internal vertex into the
+heap. Having removed the minimum vertex, we must then ensure that the
+resulting binary heap satisfies the heap-order property. Let $T$ be a
+binary heap. By the heap-order property, the root of $T$ has a key
+that is minimum among all keys of internal vertices in $T$. If the
+root $r$ of $T$ is the only internal vertex of $T$, i.e. $T$ is the
+trivial binary heap, we simply remove $r$ and $T$ now becomes the
+empty binary heap or the trivial tree, for which the heap-order
+property vacuously holds.
+Figure~\ref{fig:tree_data_structures:deleting_root_trivial_binary_heap}
+illustrates the case of removing the root of a binary heap having one
+internal vertex.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binary-heap-delete-empty.tex}
+\caption{Deleting the root of a trivial binary heap.}
+\label{fig:tree_data_structures:deleting_root_trivial_binary_heap}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
