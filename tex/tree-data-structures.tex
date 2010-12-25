@@ -418,18 +418,32 @@ internal vertex.
 \label{fig:tree_data_structures:deleting_root_trivial_binary_heap}
 \end{figure}
 
-We now turn to the case where $T$ has more than one internal
-vertex. Let $r$ be the root of $T$ and let $v$ be the last internal
-vertex of $T$. Deleting $r$ would disconnect $T$. So we instead
-replace the key and information at $r$ with the key and other relevant
-information pertaining to $v$. The root $r$ now has the key of the
-last internal vertex, and $v$ becomes a leaf. 
+We now turn to the case where $T$ has $n > 1$ internal vertice. Let
+$r$ be the root of $T$ and let $v$ be the last internal vertex of
+$T$. Deleting $r$ would disconnect $T$. So we instead replace the key
+and information at $r$ with the key and other relevant information
+pertaining to $v$. The root $r$ now has the key of the last internal
+vertex, and $v$ becomes a leaf.
 
 At this point, $T$ satisifies the heap-structure property but may
 violate the heap-order property. To restore the heap-order property,
 we perform an operation on $T$ called
 \emph{sift-down}\index{sift-down} that may possibly move $r$ down
-through various levels of $T$.
+through various levels of $T$. Let $c(r)$ be the child of $r$ with key
+that is minimum among all the children of $r$, and let $k_r$ and
+$k_{c(r)}$ be the keys of $r$ and $c(r)$, respectively. If
+$k_r \leq k_{c(r)}$, then the heap-order property is
+satisfied. Otherwise we swap $r$ with $c(r)$, moving $r$ down one
+level to the position previously occupied by $c(r)$. Furthermore,
+$c(r)$ is moved up one level to the position previously occupied by
+$r$. With $r$ in its new position, we perform the same key comparison
+process with a child of $r$ that has minimum key among all of $r$'s
+children. The key comparison and swapping continue until the
+heap-order property holds for $T$. In the worst case, $r$ would
+percolate all the way down to the level that is immediately above the
+last level after undergoing a number of swaps that is proportional to
+the height of $T$. Therefore, deleting the minimum vertex of $T$ can
+be achieved in time $O(\lg n)$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
