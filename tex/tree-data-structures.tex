@@ -250,6 +250,7 @@ Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}
 result in the following corollary on the height of a binary heap.
 
 \begin{corollary}
+\label{cor:tree_data_structures:height_binary_heap}
 A binary heap $T$ with $n$ internal vertices has height
 \[
 h
@@ -533,6 +534,34 @@ subtree. Once we have heapified all subtrees rooted at $T[i]$ for
 $0 \leq i \leq \lfloor n / 2 \rfloor - 1$, the resulting tree $T$ is a
 binary heap. Our discussion is summarized in
 Algorithm~\ref{alg:tree_data_structures:heapify_binary_tree}.
+
+Earlier in this section, we claimed that
+Algorithm~\ref{alg:tree_data_structures:heapify_binary_tree} can be
+used to construct a binary heap in worst-case linear time. To prove
+this, let $T$ is a binary tree satisfying the heap-structure property
+and having $n$ internal vertices. By
+Corollary~\ref{cor:tree_data_structures:height_binary_heap}, $T$ has
+height $h = \lceil \lg(n + 1) \rceil$. We perform a sift-down for at
+most $2^i$ vertices of depth $i$, where each sift-down for a subtree
+rooted at a vertex of depth $i$ takes $O(h - i)$ time. Then the total
+time for Algorithm~\ref{alg:tree_data_structures:heapify_binary_tree}
+is
+%%
+\begin{align*}
+O\left( \sum_{0 \leq i < h} 2^i (h - i) \right)
+&=
+O\left( 2^h \sum_{0 \leq i < h} \frac{2 - i} {2^{h - i}} \right) \\[4pt]
+&=
+O\left( 2^h \sum_{k > 0} \frac{k}{2^k} \right) \\[4pt]
+&=
+O\left( 2^{h + 1} \right) \\[4pt]
+&=
+O(n)
+\end{align*}
+%%
+where we used the closed form $\sum_{k > 0} k / 2^k = 2$ for a
+geometric series and
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
