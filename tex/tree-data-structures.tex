@@ -448,7 +448,11 @@ Figure~\ref{fig:tree_data_structures:delete_sift_down_binary_heap}
 illustrates the deletion of the minimum vertex of a binary heap with
 at least two internal vertices and the resulting sift-down process
 that percolates vertices down through various levels of the heap in
-order to maintain the heap-order property.
+order to maintain the heap-order
+property. Algorithm~\ref{alg:tree_data_structures:binary_heap_delete}
+summarizes our discussion of the process for extracting the minimum
+vertex of $T$ while also ensuring that $T$ satisfies the heap-order
+property.
 
 \begin{figure}[!htbp]
 \centering
@@ -456,6 +460,12 @@ order to maintain the heap-order property.
 \caption{Delete and sift-down in a binary heap.}
 \label{fig:tree_data_structures:delete_sift_down_binary_heap}
 \end{figure}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-heap-delete.tex}
+\caption{Extract the minimum vertex of a binary heap.}
+\label{alg:tree_data_structures:binary_heap_delete}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
