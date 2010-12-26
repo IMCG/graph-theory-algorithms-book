@@ -452,7 +452,10 @@ order to maintain the heap-order
 property. Algorithm~\ref{alg:tree_data_structures:binary_heap_delete}
 summarizes our discussion of the process for extracting the minimum
 vertex of $T$ while also ensuring that $T$ satisfies the heap-order
-property.
+property. With some minor changes,
+Algorithm~\ref{alg:tree_data_structures:binary_heap_delete} can be
+used to change the key of the root vertex and maintain the heap-order
+property for the resulting binary tree.
 
 \begin{figure}[!htbp]
 \centering
@@ -466,6 +469,67 @@ property.
 \caption{Extract the minimum vertex of a binary heap.}
 \label{alg:tree_data_structures:binary_heap_delete}
 \end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Constructing a binary heap}
+
+Given a collection of $n$ vertices $v_0, v_1, \dots, v_{n-1}$ with
+corresponding keys $k_0, k_1, \dots, k_{n-1}$, we want to construct a
+binary heap containing exactly those vertices. A basic approach is to
+start with a trivial tree and build up a binary heap via successive
+insertions. As each insertion requires $O(\lg n)$ time, the method of
+binary heap construction via successive insertion of each of the $n$
+vertices requires $O(n \cdot \lg n)$ time. It turns out we could
+achieve the same result in linear time.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-heap-heapify.tex}
+\caption{Heapify a binary tree.}
+\label{alg:tree_data_structures:heapify_binary_tree}
+\end{algorithm}
+
+A better approach starts by letting $v_0, v_1, \dots, v_{n-1}$ be the
+internal vertices of a binary tree $T$. The tree $T$ need not satisfy
+the heap-order property, but it must satisfy the heap-structure
+property. Suppose $T$ is given in sequence representation so that we
+have the correspondence $v_i = T[i]$ and the last internal vertex of
+$T$ has index $n - 1$. The parent of $T[n-1]$ has index
+\[
+j
+=
+\left\lfloor \frac{n - 1}{2} \right\rfloor.
+\]
+Any vertex of $T$ with sequence index beyond $n - 1$ is a leaf. In
+other words, if an internal vertex has index $> j$, then the children
+of that vertex are leaves and have indices $\geq n$. Thus any internal
+vertex with index $\geq \lfloor n/2 \rfloor$ has leaves for its
+children. Conclude that internal vertices with indices
+%%
+\begin{equation}
+\label{eqn:tree_data_structures:index_internal_vertices_with_leaves}
+\left\lfloor \frac{n}{2} \right\rfloor,\,
+\left\lfloor \frac{n}{2} \right\rfloor + 1,\,
+\left\lfloor \frac{n}{2} \right\rfloor + 2,
+\dots,
+n - 1.
+\end{equation}
+%%
+have only leaves for their children.
+
+Our next task is to ensure that the heap-order property holds for
+$T$. If $v$ is an internal vertex with index
+in~\eqref{eqn:tree_data_structures:index_internal_vertices_with_leaves},
+then the subtree rooted at $v$ is trivially a binary heap. Consider
+the indices from $\lfloor n / 2 \rfloor - 1$ all the way down to
+$0$ and let $i$ be such an index, i.e. let
+$0 \leq i \leq \lfloor n / 2 \rfloor - 1$. We heapify the subtree of
+$T$ rooted at $T[i]$, effectively performing a sift-down on this
+subtree. Once we have heapified all subtrees rooted at $T[i]$ for
+$0 \leq i \leq \lfloor n / 2 \rfloor - 1$, the resulting tree $T$ is a
+binary heap. Our discussion is summarized in
+Algorithm~\ref{alg:tree_data_structures:heapify_binary_tree}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,54 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{MyLeft}{left}
+\SetKwData{MyRight}{right}
+\SetKwData{MyTrue}{true}
+%%
+%% input/output
+\Input{A binary tree $T$, given in sequence representation, having
+  $n > 1$ internal vertices.}
+\Output{The binary tree $T$ heapified so that it satisfies the
+  heap-order property.}
+\BlankLine
+%%
+%% algorithm body
+\For{$i \assign \lfloor n/2 \rfloor - 1, \dots, 0$}{
+  $v \assign T[i]$\;
+  $j \assign 0$\;
+  \While{$\MyTrue$}{
+    $\MyLeft \assign 2i + 1$\;
+    $\MyRight \assign 2i + 2$\;
+    \If{\rm $\MyLeft < n$ and $k_{T[\MyLeft]} \leq k_v$}{
+      \eIf{\rm $\MyRight < n$ and $k_{T[\MyRight]} \leq k_{T[\MyLeft]}$}{
+        $j \assign \MyRight$\;
+      }{
+        $j \assign \MyLeft$\;
+      }
+    }
+    \ElseIf{\rm $\MyRight < n$ and $k_{T[\MyRight]} \leq k_v$}{
+      $j \assign \MyRight$\;
+    }
+    \Else{
+      $T[i] \assign v$\;
+      exit the while loop\;
+    }
+    $T[i] \assign T[j]$\;
+    $i \assign j$\;
+  }
+}
+\Return $T$\;
