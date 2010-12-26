@@ -484,8 +484,8 @@ binary heap containing exactly those vertices. A basic approach is to
 start with a trivial tree and build up a binary heap via successive
 insertions. As each insertion requires $O(\lg n)$ time, the method of
 binary heap construction via successive insertion of each of the $n$
-vertices requires $O(n \cdot \lg n)$ time. It turns out we could
-achieve the same result in linear time.
+vertices requires $O(n \cdot \lg n)$ time. It turns out we could do a
+bit better and achieve the same result in linear time.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binary-heap-heapify.tex}
