@@ -377,7 +377,9 @@ binary heap and the resulting sift-up operation to maintain the
 heap-order property.
 Algorithm~\ref{alg:tree_data_structures:binary_heap_insert} presents
 pseudocode of our discussion for inserting a new internal vertex into
-a nonempty binary heap.
+a nonempty binary heap. The pseudocode is adapted from
+Howard~\cite{Howard2010}, which provides a C implementation of binary
+heaps.
 
 \begin{figure}[!htbp]
 \centering
@@ -452,7 +454,8 @@ order to maintain the heap-order
 property. Algorithm~\ref{alg:tree_data_structures:binary_heap_delete}
 summarizes our discussion of the process for extracting the minimum
 vertex of $T$ while also ensuring that $T$ satisfies the heap-order
-property. With some minor changes,
+property. The pseudocode is adapted from the C implementation of
+binary heaps in Howard~\cite{Howard2010}. With some minor changes,
 Algorithm~\ref{alg:tree_data_structures:binary_heap_delete} can be
 used to change the key of the root vertex and maintain the heap-order
 property for the resulting binary tree.
