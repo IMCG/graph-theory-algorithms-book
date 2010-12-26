@@ -297,16 +297,16 @@ and the corollary follows.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Sequence representation of binary heaps}
+\subsection{Sequence representation}
 
 Any binary heap can be represented as a binary tree. Each vertex in
 the tree must know about its parent and its two children. However, a
 more common approach is to represent a binary heap as a sequence such
 as a list, array, or vector. Let $T$ be a binary heap consisting of
-$n + 1$ internal vertices and let $L$ be a list of $n + 1$
-elements. The root vertex is represented as the list element
-$L[0]$. For each index $i$, the children of $L[i]$ are $L[2i + 1]$ and
-$L[2i + 2]$ and the parent of $L[i]$ is
+$n$ internal vertices and let $L$ be a list of $n$ elements. The root
+vertex is represented as the list element $L[0]$. For each index $i$,
+the children of $L[i]$ are $L[2i + 1]$ and $L[2i + 2]$ and the parent
+of $L[i]$ is
 \[
 L\left[ \left\lfloor \frac{i - 1}{2} \right\rfloor \right].
 \]
