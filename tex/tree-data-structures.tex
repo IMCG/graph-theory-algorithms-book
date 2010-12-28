@@ -325,6 +325,7 @@ sequence representation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Insertion and sift-up}
+\label{subsec:tree_data_structures:insertion_sift_up}
 
 We now consider the problem of inserting a vertex $v$ into a binary
 heap $T$. If $T$ is empty, inserting a vertex simply involves the
@@ -759,4 +760,13 @@ This BST represents the sorting of the list $L$.
   Algorithm~\ref{alg:tree_data_structures:binary_heap_delete} for
   modifying the key of the root of a binary heap, without extracting
   any vertex from the heap.
+
+\item Section~\ref{subsec:tree_data_structures:insertion_sift_up}
+  describes how to insert an element into a binary heap $T$. The
+  general strategy is to choose the first leaf following the last
+  internal vertex of $T$, replace that leaf with the new element so
+  that it becomes an internal vertex, and perform a sift-up operation
+  from there. If instead we choose any leaf of $T$ and replace that
+  leaf with the new element, explain why we cannot do any better than
+  Algorithm~\ref{alg:tree_data_structures:binary_heap_insert}.
 \end{problem}
