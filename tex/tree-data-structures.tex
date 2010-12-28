@@ -106,6 +106,7 @@ on how the priority queue $Q$ is implemented.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Sequence implementation}
+\label{subsec:tree_data_structures:sequence_implementation}
 
 A simple way to implement a priority queue is to maintain a sorted
 sequence. Let $e_0, e_1, \dots, e_n$ be a sequence of $n + 1$ elements
@@ -754,6 +755,24 @@ This BST represents the sorting of the list $L$.
 \section{Problems}
 
 \begin{problem}
+\item Let $Q$ be a priority queue of $n > 1$ elements, given in
+  sequence representation. From
+  section~\ref{subsec:tree_data_structures:sequence_implementation},
+  we know that inserting an element into $Q$ takes $O(n)$ time and
+  deleting an element from $Q$ takes $O(1)$ time.
+  %%
+  \begin{enumerate}[(a)]
+  \item Suppose $Q$ is an empty priority queue and let
+    $e_0, e_1, \dots, e_n$ be $n + 1$ elements we want to insert into
+    $Q$. What is the total runtime required to insert all the $e_i$
+    into $Q$ while also ensuring that the resulting queue is a
+    priority queue?
+
+  \item Let $Q = [e_0, e_1, \dots, e_n]$ be a priority queue of
+    $n + 1$ elements. What is the total time required to remove all
+    the elements of $Q$?
+  \end{enumerate}
+
 \item Prove the correctness of
   Algorithms~\ref{alg:tree_data_structures:binary_heap_insert}
   and~\ref{alg:tree_data_structures:binary_heap_delete}.
