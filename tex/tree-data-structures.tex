@@ -400,6 +400,7 @@ heaps.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Deletion and sift-down}
+\label{subsec:tree_data_structures:deletion_sift_down}
 
 The process for deleting the minimum vertex of a binary heap bears
 some resemblance to that of inserting a new internal vertex into the
@@ -769,4 +770,12 @@ This BST represents the sorting of the list $L$.
   from there. If instead we choose any leaf of $T$ and replace that
   leaf with the new element, explain why we cannot do any better than
   Algorithm~\ref{alg:tree_data_structures:binary_heap_insert}.
+
+\item Section~\ref{subsec:tree_data_structures:deletion_sift_down}
+  shows how to extract the minimum vertex from a binary heap
+  $T$. Instead of replacing the root with the last internal vertex of
+  $T$, we could replace the root with any other vertex of $T$ that is
+  not a leaf and then proceed to maintain the heap-structure and
+  heap-order properties. Explain why the latter strategy is not better
+  than Algorithm~\ref{alg:tree_data_structures:binary_heap_delete}.
 \end{problem}
