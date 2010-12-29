@@ -570,6 +570,65 @@ Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Binomial heaps}
+
+We are given two binary heaps $T_1$ and $T_2$ and we want to merge
+them into a single heap. We could start by choosing to insert each
+element of $T_2$ into $T_1$, successively extracting the minimum
+element from $T_2$ and insert that minimum element into $T_1$. If
+$T_1$ and $T_2$ have $m$ and $n$ elements, respectively, we would
+perform $n$ extractions from $T_2$ totalling
+\[
+O\left( \sum_{0 < k \leq n} \lg k \right)
+\]
+time and inserting all of the extracted elements from $T_2$ into
+$T_1$ requires a total runtime of
+%%
+\begin{equation}
+\label{eqn:tree_data_structures:total_runtime_inserting_n_extra_elements}
+O\left( \sum_{n \leq k < n + m} \lg k \right).
+\end{equation}
+%%
+We approximate the addition of the two sums by
+\[
+\int_0^{n + m} \lg k \; dk
+=
+\left. \frac{k \cdot \ln k - k} {\ln 2} + C \right|_{k=0}^{k=n+m}
+\]
+for some constant $C$. The above method of successive extraction and
+insertion therefore has a total runtime of
+\[
+O\left( \frac{(n + m) \cdot \ln(n + m) - n - m} {\ln 2} \right).
+\]
+for merging two binary heaps.
+
+Alternatively, we could slightly improve the latter runtime for
+merging $T_1$ and $T_2$ by successively extracting the last internal
+vertex of $T_2$. The whole process of extracting all elements from
+$T_2$ in this way takes $O(n)$ time and inserting each of the
+extracted elements into $T_1$ still requires the runtime in
+expression~\eqref{eqn:tree_data_structures:total_runtime_inserting_n_extra_elements}.
+We approximate the sum
+in~\eqref{eqn:tree_data_structures:total_runtime_inserting_n_extra_elements}
+by
+\[
+\int_{k=n}^{k=n+m} \lg k \; dk
+=
+\left. \frac{k \cdot \ln k - k} {\ln 2} + C \right|_{k=n}^{k=n+m}
+\]
+for some constant $C$. Therefore, the improved extraction and
+insertion method requires
+\[
+O\left(
+\frac{(n+m) \cdot \ln(n+m) - n \cdot \ln n - m} {\ln 2} - n
+\right)
+\]
+time in order to merge $T_1$ and $T_2$. Can we improve on the latter
+runtime for merging two binary heaps?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Binary search trees}
 
 See section~3.6 of Gross and Yellen~\cite{GrossYellen1999}, and
