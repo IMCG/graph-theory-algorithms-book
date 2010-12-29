@@ -648,6 +648,20 @@ recursively as follows:
   left to right the children of the root are binomial trees of orders
   $k - 1, k - 2, \dots, 2, 1, 0$.
 \end{enumerate}
+%%
+Various examples of binomial trees are shown in
+Figure~\ref{fig:tree_data_structures:binomial_trees_k0_4}. The
+binomial tree $B_k$ can also be defined as follows. Let $T_1$ and
+$T_2$ be two copies of $B_{k-1}$ with root vertices $r_1$ and $r_2$,
+respectively. Then $B_k$ is obtained by letting, say, $r_1$ be the
+left-most child of $r_2$.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binomial-trees-order-0-3.tex}
+\caption{Binomial trees $B_k$ for $k = 0, 1, 2, 3, 4$.}
+\label{fig:tree_data_structures:binomial_trees_k0_4}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
