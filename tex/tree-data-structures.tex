@@ -634,6 +634,24 @@ logarithmic time.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Binomial trees}
+\index{binomial tree}
+
+A binomial heap can be considered as a collection of binomial
+trees. The binomial tree of order $k$ is denoted $B_k$ and defined
+recursively as follows:
+%%
+\begin{enumerate}
+\item The binomial tree of order $0$ is the trivial tree.
+
+\item The binomial tree of order $k > 0$ is a rooted tree, where from
+  left to right the children of the root are binomial trees of orders
+  $k - 1, k - 2, \dots, 2, 1, 0$.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Binary search trees}
 
 See section~3.6 of Gross and Yellen~\cite{GrossYellen1999}, and
