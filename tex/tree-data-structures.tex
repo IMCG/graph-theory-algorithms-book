@@ -571,6 +571,7 @@ Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Binomial heaps}
+\index{binomial heap}
 
 We are given two binary heaps $T_1$ and $T_2$ and we want to merge
 them into a single heap. We could start by choosing to insert each
@@ -623,8 +624,12 @@ O\left(
 \frac{(n+m) \cdot \ln(n+m) - n \cdot \ln n - m} {\ln 2} - n
 \right)
 \]
-time in order to merge $T_1$ and $T_2$. Can we improve on the latter
-runtime for merging two binary heaps?
+time in order to merge $T_1$ and $T_2$.
+
+Can we improve on the latter runtime for merging two binary heaps? It
+turns out we can by using a type of mergeable heap called
+binomial\index{binomial heap} heap that supports merging two heaps in
+logarithmic time.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
