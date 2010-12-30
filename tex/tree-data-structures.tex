@@ -645,8 +645,8 @@ recursively as follows:
 \item The binomial tree of order $0$ is the trivial tree.
 
 \item The binomial tree of order $k > 0$ is a rooted tree, where from
-  left to right the children of the root are binomial trees of orders
-  $k - 1, k - 2, \dots, 2, 1, 0$.
+  left to right the children of the root of $B_k$ are roots of
+  $B_{k-1}, B_{k-2}, \dots, B_0$.
 \end{enumerate}
 %%
 Various examples of binomial trees are shown in
@@ -655,13 +655,81 @@ binomial tree $B_k$ can also be defined as follows. Let $T_1$ and
 $T_2$ be two copies of $B_{k-1}$ with root vertices $r_1$ and $r_2$,
 respectively. Then $B_k$ is obtained by letting, say, $r_1$ be the
 left-most child of $r_2$.
+Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
+lists various basic properties of binomial trees.
 
 \begin{figure}[!htbp]
 \centering
 \input{image/tree-data-structures/binomial-trees-order-0-3.tex}
-\caption{Binomial trees $B_k$ for $k = 0, 1, 2, 3, 4$.}
+\caption{Binomial trees $B_k$ for $k = 0, 1, 2, 3, 4, 5$.}
 \label{fig:tree_data_structures:binomial_trees_k0_4}
 \end{figure}
+
+\begin{lemma}
+\label{lem:tree_data_structures:basic_properties_binomial_trees}
+\textbf{Basic properties of binomial trees.}
+Let $B_k$ be a binomial tree of order $k \geq 0$. Then the following
+properties hold:
+%%
+\begin{enumerate}
+\item The order of $B_k$ is $2^k$.
+
+\item The height of $B_k$ is $k$.
+
+\item For $0 \leq i \leq k$, we have $\binom{k}{i}$ vertices at depth
+  $i$.
+
+\item The root of $B_k$ is the only vertex with maximum degre
+  $\Delta(B_k) = k$. If the children of the root are numbered
+  $k - 1, k - 2, \dots, 0$ from left to right, then child $i$ is the
+  root of the subtree $B_i$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We use induction on $k$. The base case for each of the above
+properties is $B_0$, which trivially holds.
+
+(1)~By our inductive hypothesis, $B_{k-1}$ has order $2^{k-1}$. Since
+$B_k$ is comprised of two copies of $B_{k-1}$, conclude that $B_k$ has
+order
+\[
+2^{k-1} + 2^{k-1}
+=
+2^k.
+\]
+
+(2)~The binomial tree $B_k$ is comprised of two copies of $B_{k-1}$,
+the root of one copy being the left-most child of the root of the
+other copy. Then the height of $B_k$ is one greater than the height of
+$B_{k-1}$. By our inductive hypothesis, $B_{k-1}$ has height $k - 1$
+and therefore $B_k$ has height $(k - 1) + 1 = k$.
+
+(3)~Denote by $D(k,i)$ the number of vertices of depth $i$ in
+$B_k$. As $B_k$ is comprised of two copies of $B_{k-1}$, a vertex at
+depth $i$ in $B_{k-1}$ appears once in $B_k$ at depth $i$ and a second
+time at depth $i + 1$. By our inductive hypothesis,
+%%
+\begin{align*}
+D(k,i)
+&=
+D(k-1, i) + D(k-1, i-1) \\[4pt]
+&=
+\binom{k-1}{i} + \binom{k-1}{i-1} \\[4pt]
+&=
+\binom{k}{i}
+\end{align*}
+%%
+where we used Pascal's\index{Pascal!formula} formula which states that
+\[
+\binom{n+1}{r}
+=
+\binom{n}{r-1} + \binom{n}{r}
+\]
+for any positive integers $n$ and $r$ with $r \leq n$.
+
+(4)~This property follows from the defintion of $B_k$.
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
