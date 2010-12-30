@@ -101,3 +101,66 @@
   child {node {}};
 \end{tikzpicture}
 }
+%%
+%%
+\subfigure[$B_5$]{
+\begin{tikzpicture}
+[-,thick,%
+  every node/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=0.6]
+\node {}
+  [sibling distance=4.7cm]
+  child {node {}
+    [sibling distance=2cm]
+    child {node {}
+      [sibling distance=1cm]
+      child {node {}
+        child {node {}
+          child {node {}}
+        }
+        child {node {}}
+      }
+      child {node {}
+        child {node {}}
+      }
+      child {node {}}
+    }
+    child {node {}
+      [sibling distance=1cm]
+      child {node {}
+        child {node {}}
+      }
+      child {node {}}
+    }
+    child {node {}
+      [sibling distance=1cm]
+      child {node {}}
+    }
+    child {node {}}
+  }
+  child {node {}
+    [sibling distance=1cm]
+    child {node {}
+      child {node {}
+        child {node {}}
+      }
+      child {node {}}
+    }
+    child {node {}
+      child {node {}}
+    }
+    child {node {}}
+  }
+  child {node {}
+    [sibling distance=1cm]
+    child {node {}
+      child {node {}}
+    }
+    child {node {}}
+  }
+  child {node {}
+    child {node {}}
+  }
+  child {node {}};
+\end{tikzpicture}
+}
