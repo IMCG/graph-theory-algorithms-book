@@ -656,7 +656,10 @@ $T_2$ be two copies of $B_{k-1}$ with root vertices $r_1$ and $r_2$,
 respectively. Then $B_k$ is obtained by letting, say, $r_1$ be the
 left-most child of $r_2$.
 Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
-lists various basic properties of binomial trees.
+lists various basic properties of binomial trees. Property~(3) of
+Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
+uses the binomial\index{binomial coefficient} coefficient, from whence
+$B_k$ derives its name.
 
 \begin{figure}[!htbp]
 \centering
@@ -729,6 +732,16 @@ where we used Pascal's\index{Pascal!formula} formula which states that
 for any positive integers $n$ and $r$ with $r \leq n$.
 
 (4)~This property follows from the defintion of $B_k$.
+\end{proof}
+
+\begin{corollary}
+If a binomial tree has order $n \geq 0$, then the degree of any vertex
+$i$ is bounded by $\deg(i) \leq \lg n$.
+\end{corollary}
+
+\begin{proof}
+Apply properties~(1) and~(4) of
+Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}.
 \end{proof}
 
 
