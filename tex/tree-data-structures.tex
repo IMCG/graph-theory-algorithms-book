@@ -771,6 +771,13 @@ total order $\leq$. The heap also satisfies the following
   whose root has degree $k$.
 \end{description}
 
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/sample-binomial-heaps.tex}
+\caption{Forest and tree representations of a binomial heap.}
+\label{fig:tree_data_structures:binomial_heap_forest_tree_representations}
+\end{figure}
+
 If $H$ is comprised of the binomial trees
 $B_{k_0}, B_{k_1}, \dots, B_{k_n}$ for nonnegative integers $k_i$, we
 can consider $H$ as a forest made up of the trees $B_{k_i}$. We can
@@ -779,7 +786,11 @@ trees of $H$ as $B_{k_0}, B_{k_1}, \dots, B_{k_n}$ in nondecreasing
 order of root degrees, i.e. the root of $B_{k_i}$ has order less than
 or equal to the root of $B_{k_j}$ if and only if $k_i \leq k_j$. The
 root of $H$ is the root of $B_{k_0}$ and the root of each $B_{k_i}$
-has for its child the root of $B_{k_{i+1}}$.
+has for its child the root of $B_{k_{i+1}}$. Both the forest and tree
+representations are illustrated in
+Figure~\ref{fig:tree_data_structures:binomial_heap_forest_tree_representations}
+for the binomial heap comprised of the binomial trees
+$B_0, B_1, B_3$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
