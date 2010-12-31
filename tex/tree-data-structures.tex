@@ -829,6 +829,34 @@ $1 + \lfloor \lg n \rfloor$ binomial trees.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Construction and management}
+
+Let $H$ be a binomial heap comprised of the binomial trees
+$B_{k_0}, B_{k_1}, \dots, B_{k_n}$ where the root of $B_{k_i}$ has
+order less than or equal to the root of $B_{k_j}$ if and only if
+$k_i \leq k_j$. Denote by $r_{k_i}$ the root of the binomial tree
+$B_{k_i}$. If $v$ is a vertex of $H$, denote by $\child(v)$ the
+left-most child of $v$ and by $\sibling(v)$ we mean the sibling
+immediately to the right of $v$. Furthermore, let $\parent(v)$ be the
+parent of $v$. If $v$ has no children, we set
+$\child(v) = \texttt{NULL}$. If $v$ is one of the roots $r_{k_i}$,
+we set $\parent(v) = \texttt{NULL}$. And if $v$ is the right-most
+child of its parent, then we set $\sibling(v) = \texttt{NULL}$.
+
+The roots $r_{k_0}, r_{k_1}, \dots, r_{k_n}$ can be organized as a
+linked list with two functions for accessing the next root and the
+previous root. The root immediately following $r_{k_i}$ is denoted
+$\nextElem(r_{k_i}) = \sibling(v) = r_{k_{i+1}}$ and the root
+immediately before $r_{k_i}$ is written
+$\prevElem(r_{k_i}) = r_{k_{i-1}}$. For $r_{k_0}$ and $r_{k_n}$, we
+set $\nextElem(r_{k_n}) = \sibling(v) = \texttt{NULL}$ and
+$\prevElem(r_{k_0}) = \texttt{NULL}$. We also define the function
+$\headElem(H)$ that simply returns $r_{k_0}$ whenever $H$ has at least
+one element, and $\headElem(H) = \texttt{NULL}$ otherwise.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Binary search trees}
 
 See section~3.6 of Gross and Yellen~\cite{GrossYellen1999}, and
