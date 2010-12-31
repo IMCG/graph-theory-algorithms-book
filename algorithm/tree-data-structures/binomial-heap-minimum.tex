@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{MyMin}{min}
+%%
+%% input/output
+\Input{A binomial heap $H$ of order $n > 0$.}
+\Output{The minimum vertex of $H$.}
+\BlankLine
+%%
+%% algorithm body
+$u \assign \texttt{NULL}$\;
+$v \assign \headElem(H)$\;
+$\MyMin \assign \infty$\;
+\While{\rm $v \neq \texttt{NULL}$}{
+  \If{$\kappa_v < \MyMin$}{
+    $\MyMin \assign \kappa_v$\;
+    $u \assign v$\;
+  }
+  $v \assign \sibling(v)$\;
+}
+\Return $u$\;

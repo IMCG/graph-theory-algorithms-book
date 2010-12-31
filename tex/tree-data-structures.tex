@@ -854,6 +854,21 @@ $\prevElem(r_{k_0}) = \texttt{NULL}$. We also define the function
 $\headElem(H)$ that simply returns $r_{k_0}$ whenever $H$ has at least
 one element, and $\headElem(H) = \texttt{NULL}$ otherwise.
 
+To find the minimum vertex, we find the minimum among
+$r_{k_0}, r_{k_1}, \dots, r_{k_m}$ because by definition the root
+$r_{k_i}$ is the minimum vertex of the binomial tree $B_{k_i}$. If $H$
+has $n$ vertices, we need to check at most $1 + \lfloor \lg n \rfloor$
+vertices to find the minimum vertex of $H$. Therefore, determining the
+minimum vertex of $H$ takes $O(\lg n)$ time.
+Algorithm~\ref{alg:tree_data_structures:binomial_heap_minimum_vertex}
+summarizes our discussion.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-minimum.tex}
+\caption{Determine the minimum vertex of a binomial heap.}
+\label{alg:tree_data_structures:binomial_heap_minimum_vertex}
+\end{algorithm}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
