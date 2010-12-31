@@ -835,24 +835,30 @@ Let $H$ be a binomial heap comprised of the binomial trees
 $B_{k_0}, B_{k_1}, \dots, B_{k_n}$ where the root of $B_{k_i}$ has
 order less than or equal to the root of $B_{k_j}$ if and only if
 $k_i \leq k_j$. Denote by $r_{k_i}$ the root of the binomial tree
-$B_{k_i}$. If $v$ is a vertex of $H$, denote by $\child(v)$ the
-left-most child of $v$ and by $\sibling(v)$ we mean the sibling
-immediately to the right of $v$. Furthermore, let $\parent(v)$ be the
-parent of $v$. If $v$ has no children, we set
-$\child(v) = \texttt{NULL}$. If $v$ is one of the roots $r_{k_i}$,
-we set $\parent(v) = \texttt{NULL}$. And if $v$ is the right-most
-child of its parent, then we set $\sibling(v) = \texttt{NULL}$.
+$B_{k_i}$. If $v$ is a vertex of $H$, denote by $\child[v]$ the
+left-most child of $v$ and by $\sibling[v]$ we mean the sibling
+immediately to the right of $v$. Furthermore, let $\parent[v]$ be the
+parent of $v$ and let $\degree[v]$ denote the degree of $v$. If $v$
+has no children, we set $\child[v] = \texttt{NULL}$. If $v$ is one of
+the roots $r_{k_i}$, we set $\parent[v] = \texttt{NULL}$. And if $v$
+is the right-most child of its parent, then we set
+$\sibling[v] = \texttt{NULL}$.
 
 The roots $r_{k_0}, r_{k_1}, \dots, r_{k_n}$ can be organized as a
 linked list with two functions for accessing the next root and the
 previous root. The root immediately following $r_{k_i}$ is denoted
-$\nextElem(r_{k_i}) = \sibling(v) = r_{k_{i+1}}$ and the root
+$\nextElem[r_{k_i}] = \sibling[v] = r_{k_{i+1}}$ and the root
 immediately before $r_{k_i}$ is written
-$\prevElem(r_{k_i}) = r_{k_{i-1}}$. For $r_{k_0}$ and $r_{k_n}$, we
-set $\nextElem(r_{k_n}) = \sibling(v) = \texttt{NULL}$ and
-$\prevElem(r_{k_0}) = \texttt{NULL}$. We also define the function
-$\headElem(H)$ that simply returns $r_{k_0}$ whenever $H$ has at least
-one element, and $\headElem(H) = \texttt{NULL}$ otherwise.
+$\prevElem[r_{k_i}] = r_{k_{i-1}}$. For $r_{k_0}$ and $r_{k_n}$, we
+set $\nextElem[r_{k_n}] = \sibling[v] = \texttt{NULL}$ and
+$\prevElem[r_{k_0}] = \texttt{NULL}$. We also define the function
+$\headElem[H]$ that simply returns $r_{k_0}$ whenever $H$ has at least
+one element, and $\headElem[H] = \texttt{NULL}$ otherwise.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Minimum vertex}
 
 To find the minimum vertex, we find the minimum among
 $r_{k_0}, r_{k_1}, \dots, r_{k_m}$ because by definition the root
@@ -867,6 +873,24 @@ summarizes our discussion.
 \input{algorithm/tree-data-structures/binomial-heap-minimum.tex}
 \caption{Determine the minimum vertex of a binomial heap.}
 \label{alg:tree_data_structures:binomial_heap_minimum_vertex}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Merging heaps}
+
+Recall that $B_k$ is constructed by linking the root of one copy of
+$B_{k-1}$ with the root of another copy of $B_{k-1}$. When merging two
+binomial heaps whose roots have the same degree, we need to repeatedly
+link the respective roots. The root linking procedure runs in constant
+time $O(1)$ and is rather straightforward, as presented in
+Algorithm~\ref{alg:tree_data_structures:link_roots}.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-link-roots.tex}
+\caption{Linking the roots of binomial heaps.}
+\label{alg:tree_data_structures:link_roots}
 \end{algorithm}
 
 
