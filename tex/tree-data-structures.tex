@@ -110,34 +110,35 @@ on how the priority queue $Q$ is implemented.
 
 A simple way to implement a priority queue is to maintain a sorted
 sequence. Let $e_0, e_1, \dots, e_n$ be a sequence of $n + 1$ elements
-with corresponding keys $k_0, k_1, \dots, k_n$ and suppose that the
-$k_i$ all belong to the same totally ordered set $X$ having total
-order $\leq$. Using the total order, we assume that the $k_i$ are
-sorted as
+with corresponding keys $\kappa_0, \kappa_1, \dots, \kappa_n$ and
+suppose that the $\kappa_i$ all belong to the same totally ordered set
+$X$ having total order $\leq$. Using the total order, we assume that
+the $\kappa_i$ are sorted as
 \[
-k_0 \leq k_1 \leq \cdots \leq k_n
+\kappa_0 \leq \kappa_1 \leq \cdots \leq \kappa_n
 \]
-and $e_i \leq e_j$ if and only if $k_i \leq k_j$. Then we consider the
-queue $Q = [e_0, e_1, \dots, e_n]$ as a priority queue in which the
-head is always the minimum element and the tail is always the maximum
-element. Extracting the minimum element is simply a dequeue operation
-that can be accomplished in constant time $O(1)$. However, inserting a
-new element into $Q$ takes linear time.
+and $e_i \leq e_j$ if and only if $\kappa_i \leq \kappa_j$. Then we
+consider the queue $Q = [e_0, e_1, \dots, e_n]$ as a priority queue in
+which the head is always the minimum element and the tail is always
+the maximum element. Extracting the minimum element is simply a
+dequeue operation that can be accomplished in constant time
+$O(1)$. However, inserting a new element into $Q$ takes linear time.
 
-Let $e$ be an element with corresponding key $k \in X$. Inserting $e$
-into $Q$ requires that we maintain elements of $Q$ sorted according to
-the total order $\leq$. If $Q$ is empty, we simply enqueue $e$ into
-$Q$. Suppose now that $Q$ is a nonempty priority queue. If
-$k \leq k_0$, then $e$ becomes the new head of $Q$. If $k_n \leq k$,
-then $e$ becomes the new tail of $Q$. Inserting a new head or tail
-into $Q$ each requires constant time $O(1)$. However, if
-$k_1 \leq k \leq k_{n-1}$ then we need to traverse $Q$ starting from
-$e_1$, searching for a position at which to insert $e$. Let $e_i$ be
-the queue element at position $i$ within $Q$. If $k \leq k_i$ then we
-insert $e$ into $Q$ at position $i$, thus moving $e_i$ to position
-$i + 1$. Otherwise we next consider $e_{i+1}$ and repeat the above
-comparison process. By hypothesis, $k_1 \leq k \leq k_{n-1}$ and
-therefore inserting $e$ into $Q$ takes a worst-case runtime of $O(n)$.
+Let $e$ be an element with corresponding key $\kappa \in X$. Inserting
+$e$ into $Q$ requires that we maintain elements of $Q$ sorted
+according to the total order $\leq$. If $Q$ is empty, we simply
+enqueue $e$ into $Q$. Suppose now that $Q$ is a nonempty priority
+queue. If $\kappa \leq \kappa_0$, then $e$ becomes the new head of
+$Q$. If $\kappa_n \leq \kappa$, then $e$ becomes the new tail of
+$Q$. Inserting a new head or tail into $Q$ each requires constant time
+$O(1)$. However, if $\kappa_1 \leq \kappa \leq \kappa_{n-1}$ then we
+need to traverse $Q$ starting from $e_1$, searching for a position at
+which to insert $e$. Let $e_i$ be the queue element at position $i$
+within $Q$. If $\kappa \leq \kappa_i$ then we insert $e$ into $Q$ at
+position $i$, thus moving $e_i$ to position $i + 1$. Otherwise we next
+consider $e_{i+1}$ and repeat the above comparison process. By
+hypothesis, $\kappa_1 \leq \kappa \leq \kappa_{n-1}$ and therefore
+inserting $e$ into $Q$ takes a worst-case runtime of $O(n)$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -177,8 +178,8 @@ The relational property of $T$ can be expressed as follows:
 \textbf{Heap-order property.}\index{heap-order property}
 Let $T$ be a binary tree and let $v$ be a vertex of $T$ other than the
 root. If $p$ is the parent of $v$ and these vertices have corresponding
-keys $k_p$ and $k_v$, respectively, then $k_p \leq k_v$. The latter
-property is called the \emph{heap-order property}.
+keys $\kappa_p$ and $\kappa_v$, respectively, then
+$\kappa_p \leq \kappa_v$.
 \end{definition}
 
 The heap-order property\index{heap-order property} is defined in terms
@@ -203,11 +204,12 @@ $T$ to any internal vertex. Let $r$ be the root of $T$ and let $v$ be
 any internal vertex of $T$. If $r, v_0, v_1, \dots, v_n, v$ is an
 $r$-$v$ path with corresponding keys
 \[
-k_r, k_{v_0}, k_{v_1}, \dots, k_{v_n}, k_v
+\kappa_r, \kappa_{v_0}, \kappa_{v_1}, \dots, \kappa_{v_n}, \kappa_v
 \]
 then we have
 \[
-k_r \leq k_{v_0} \leq k_{v_1} \leq \cdots \leq k_{v_n} \leq k_v.
+\kappa_r \leq \kappa_{v_0} \leq \kappa_{v_1} \leq \cdots \leq
+\kappa_{v_n} \leq \kappa_v.
 \]
 In other words, the keys encountered on the path from $r$ to $v$ are
 arranged in nondecreasing order.
@@ -363,14 +365,14 @@ the heap-structure property, but may violate the heap-order
 property. To ensure that $T$ satisfies the heap-order property, we
 perform an operation on $T$ called \emph{sift-up}\index{sift-up} that
 involves possibly moving $v$ up through various levels of $T$. Let
-$k_v$ be the key of $v$ and let $k_{p(v)}$ be the key of $v$'s
-parent. If the relation $k_{p(v)} \leq k_v$ holds, then $T$ satisfies
-the heap-order property. Otherwise we swap $v$ with its parent,
-effectively moving $v$ up one level to be at the position previously
-occupied by its parent. The parent of $v$ is moved down one level and
-now occupies the position where $v$ was previously. With $v$ in its
-new position, we perform the same key comparison process with $v$'s
-new parent. The key comparison and swapping continue until the
+$\kappa_v$ be the key of $v$ and let $\kappa_{p(v)}$ be the key of
+$v$'s parent. If the relation $\kappa_{p(v)} \leq \kappa_v$ holds,
+then $T$ satisfies the heap-order property. Otherwise we swap $v$ with
+its parent, effectively moving $v$ up one level to be at the position
+previously occupied by its parent. The parent of $v$ is moved down one
+level and now occupies the position where $v$ was previously. With $v$
+in its new position, we perform the same key comparison process with
+$v$'s new parent. The key comparison and swapping continue until the
 heap-order property holds for $T$. In the worst case, $v$ would become
 the new root of $T$ after undergoing a number of swaps that is
 proportional to the height of $T$. Therefore, inserting a new internal
@@ -437,9 +439,9 @@ violate the heap-order property. To restore the heap-order property,
 we perform an operation on $T$ called
 \emph{sift-down}\index{sift-down} that may possibly move $r$ down
 through various levels of $T$. Let $c(r)$ be the child of $r$ with key
-that is minimum among all the children of $r$, and let $k_r$ and
-$k_{c(r)}$ be the keys of $r$ and $c(r)$, respectively. If
-$k_r \leq k_{c(r)}$, then the heap-order property is
+that is minimum among all the children of $r$, and let $\kappa_r$ and
+$\kappa_{c(r)}$ be the keys of $r$ and $c(r)$, respectively. If
+$\kappa_r \leq \kappa_{c(r)}$, then the heap-order property is
 satisfied. Otherwise we swap $r$ with $c(r)$, moving $r$ down one
 level to the position previously occupied by $c(r)$. Furthermore,
 $c(r)$ is moved up one level to the position previously occupied by
@@ -484,13 +486,14 @@ property for the resulting binary tree.
 \subsection{Constructing a binary heap}
 
 Given a collection of $n$ vertices $v_0, v_1, \dots, v_{n-1}$ with
-corresponding keys $k_0, k_1, \dots, k_{n-1}$, we want to construct a
-binary heap containing exactly those vertices. A basic approach is to
-start with a trivial tree and build up a binary heap via successive
-insertions. As each insertion requires $O(\lg n)$ time, the method of
-binary heap construction via successive insertion of each of the $n$
-vertices requires $O(n \cdot \lg n)$ time. It turns out we could do a
-bit better and achieve the same result in linear time.
+corresponding keys $\kappa_0, \kappa_1, \dots, \kappa_{n-1}$, we want
+to construct a binary heap containing exactly those vertices. A basic
+approach is to start with a trivial tree and build up a binary heap
+via successive insertions. As each insertion requires $O(\lg n)$ time,
+the method of binary heap construction via successive insertion of
+each of the $n$ vertices requires $O(n \cdot \lg n)$ time. It turns
+out we could do a bit better and achieve the same result in linear
+time.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binary-heap-heapify.tex}

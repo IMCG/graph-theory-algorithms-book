@@ -36,14 +36,14 @@ $j \assign 0$\;
 \While{$\MyTrue$}{
   $\MyLeft \assign 2i + 1$\;
   $\MyRight \assign 2i + 2$\;
-  \If{\rm $\MyLeft < n$ and $k_{T[\MyLeft]} \leq k_v$}{
-    \eIf{\rm $\MyRight < n$ and $k_{T[\MyRight]} \leq k_{T[\MyLeft]}$}{
+  \If{\rm $\MyLeft < n$ and $\kappa_{T[\MyLeft]} \leq \kappa_v$}{
+    \eIf{\rm $\MyRight < n$ and $\kappa_{T[\MyRight]} \leq \kappa_{T[\MyLeft]}$}{
       $j \assign \MyRight$\;
     }{
       $j \assign \MyLeft$\;
     }
   }
-  \ElseIf{\rm $\MyRight < n$ and $k_{T[\MyRight]} \leq k_v$}{
+  \ElseIf{\rm $\MyRight < n$ and $\kappa_{T[\MyRight]} \leq \kappa_v$}{
     $j \assign \MyRight$\;
   }
   \Else{
