@@ -792,13 +792,33 @@ Figure~\ref{fig:tree_data_structures:binomial_heap_forest_tree_representations}
 for the binomial heap comprised of the binomial trees
 $B_0, B_1, B_3$.
 
-The heap-order property for binomial heaps is analogous to the
-heap-order property for binary heaps. In the case of binomial heaps,
-the heap-order property implies that the root of a binomial tree has a
-key that is minimum among all vertices in that tree. However, the
-similarity more or less ends there. In a tree representation of a
-binomial heap, the root of the heap may not necessarily have the
-minimum key among all vertices of the heap.
+The heap-order\index{heap-order property} property for binomial heaps
+is analogous to the heap-order property for binary heaps. In the case
+of binomial heaps, the heap-order property implies that the root of a
+binomial tree has a key that is minimum among all vertices in that
+tree. However, the similarity more or less ends there. In a tree
+representation of a binomial heap, the root of the heap may not
+necessarily have the minimum key among all vertices of the heap.
+
+The root-degree\index{root-degree property} property can be used to
+derive an upper bound on the number of binomial trees in a binomial
+heap. If $H$ is a binomial heap with $n$ vertices, then $H$ has at
+most $1 + \lfloor \lg n \rfloor$ binomial trees. To prove this result,
+note that~(see Theorem~2.1 and Corollary~2.1.1 in
+\cite[pp.40--42]{Rosen2000}) $n$ can be uniquely written in binary
+representation as the polynomial
+\[
+n
+=
+a_k 2^k + a_{k-1} 2^{k-1} + \cdots + a_1 2 + a_0.
+\]
+The binary representation of $n$ requires $1 + \lfloor \lg n \rfloor$
+bits, hence $n = \sum_{i=0}^{\lfloor \lg n \rfloor} a_i 2^i$. Apply
+property~(1) of
+Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
+to see that the binomial tree $B_i$ is in $H$ if and only if the
+$i$-th bit is $b_i = 1$. Conclude that $H$ has at most
+$1 + \lfloor \lg n \rfloor$ binomial trees.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
