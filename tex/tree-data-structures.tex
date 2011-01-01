@@ -956,7 +956,15 @@ Let $v$ be a vertex with corresponding key $\kappa_v$ and let $H_1$ be
 a binomial heap of $n$ vertices. The single vertex $v$ can be
 considered as a binomial heap $H_2$ comprised of exactly the binomial
 tree $B_0$. Then inserting $v$ into $H_1$ is equivalent to merging the
-heaps $H_i$ and can be accomplished in $O(\lg n)$ time.
+heaps $H_i$ and can be accomplished in $O(\lg n)$ time. Refer to
+Algorithm~\ref{alg:tree_data_structures:binomial_heap_insert} for
+pseudocode of this straightforward procedure.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-insert.tex}
+\caption{Insert a vertex into a binomial heap.}
+\label{alg:tree_data_structures:binomial_heap_insert}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

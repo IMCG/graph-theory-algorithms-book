@@ -1,0 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A binomial heap $H$ and a vertex $v$.}
+\Output{The heap $H$ with $v$ inserted into it.}
+\BlankLine
+%%
+%% algorithm body
+$H_1 \assign$ empty binomial heap\;
+$\headElem[H_1] \assign v$\;
+$\parent[v] \assign \texttt{NULL}$\;
+$\child[v] \assign \texttt{NULL}$\;
+$\sibling[v] \assign \texttt{NULL}$\;
+$\degree[v] \assign 0$\;
+$H \assign$ merge $H$ and $H_1$ as per Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps}\;
