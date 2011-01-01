@@ -12,7 +12,8 @@
 \subfigure[Binomial heap as a forest.]{
 \begin{tikzpicture}
 [-,thick,%
-  every node/.style={shape=circle,inner sep=2pt,draw,thick}]
+  every node/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=0.9]
 \node {};
 \end{tikzpicture}
 %%
@@ -49,22 +50,28 @@
 \subfigure[Binomial heap as a tree.]{
 \begin{tikzpicture}
 [-,thick,%
-  every node/.style={shape=circle,inner sep=2pt,draw,thick}]
-\node {}
+  every node/.style={shape=circle,inner sep=2pt,draw,thick},%
+  scale=0.9]
+\node (a) at (0,0) {};
+%%
+\node (b) at (2,0) {}
+  child {node {}};
+%%
+\node (c) at (5,0) {}
   child {node {}
-    child {node {}}
-    child {node{}
-      child {node {}
-        child {node {}
-          child {node {}}
-        }
-        child {node {}}
-      }
-      child {node {}
-        child {node {}}
-      }
+    child {node {}
       child {node {}}
     }
-  };
+    child {node {}}
+  }
+  child {node {}
+    child {node {}}
+  }
+  child {node {}};
+\path
+\foreach \startNode/\endNode in {a/b, b/c}
+{
+  (\startNode) edge[-,thick] (\endNode)
+};
 \end{tikzpicture}
 }
