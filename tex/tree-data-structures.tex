@@ -993,13 +993,22 @@ in $O(\lg n)$ time as per
 Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps}. In
 total we can extract the minimum vertex of $H$ in $O(\lg n)$ time. Our
 discussion is summarized in
-Algorithm~\ref{alg:tree_data_structures:binomial_heap_extract}.
+Algorithm~\ref{alg:tree_data_structures:binomial_heap_extract} and an
+illustration of the extraction process is presented in
+Figure~\ref{fig:tree_data_structures:binomial_heap_extract}.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binomial-heap-extract.tex}
 \caption{Extract the minimum vertex from a binomial heap.}
 \label{alg:tree_data_structures:binomial_heap_extract}
 \end{algorithm}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binomial-heap-extract.tex}
+\caption{Extracting the minimum vertex from a binomial heap.}
+\label{fig:tree_data_structures:binomial_heap_extract}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
