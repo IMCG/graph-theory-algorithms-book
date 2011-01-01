@@ -845,8 +845,9 @@ is the right-most child of its parent, then we set
 $\sibling[v] = \texttt{NULL}$.
 
 The roots $r_{k_0}, r_{k_1}, \dots, r_{k_n}$ can be organized as a
-linked list with two functions for accessing the next root and the
-previous root. The root immediately following $r_{k_i}$ is denoted
+linked list, called a \emph{root list}\index{root list}, with two
+functions for accessing the next root and the previous root. The root
+immediately following $r_{k_i}$ is denoted
 $\nextElem[r_{k_i}] = \sibling[v] = r_{k_{i+1}}$ and the root
 immediately before $r_{k_i}$ is written
 $\prevElem[r_{k_i}] = r_{k_{i-1}}$. For $r_{k_0}$ and $r_{k_n}$, we
@@ -892,6 +893,23 @@ Algorithm~\ref{alg:tree_data_structures:link_roots}.
 \caption{Linking the roots of binomial heaps.}
 \label{alg:tree_data_structures:link_roots}
 \end{algorithm}
+
+Besides linking the roots of two copies of $B_{k-1}$, we also need to
+merge the root lists of these two copies. The resulting merged list is
+sorted in nondecreasing order of degree. Let $L_1$ be the root list of
+one copy of $B_{k-1}$ and let $L_2$ be the root list of the other
+copy. First we create an empty list $L$. As the lists $L_i$ are
+already sorted in nondecreasing order of vertex degree, we take in
+turn to append one element of $L_1$ to $L$ and then one element of
+$L_2$. The whole procedure for merging the $L_i$ takes linear time
+$O(n)$, where $n$ is twice the length of any of the $L_i$.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-merge-root-lists.tex}
+\caption{Merging two root lists.}
+\label{alg:tree_data_structures:merge_root_lists}
+\end{algorithm}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

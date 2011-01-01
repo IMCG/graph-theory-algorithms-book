@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{Two root lists $L_1$ and $L_2$, each containing the roots of
+  binomial trees in $B_{k-1}$. Each root list $L_i$ is sorted in
+  increasing order of vertex degree.}
+\Output{A single list $L$ that merges the root lists $L_i$ and sorted
+  in nondecreasing order of degree.}
+\BlankLine
+%%
+%% algorithm body
+$L \assign [\;]$\;
+$m = |L_1| - 1$\;
+\For{$i \assign 0, 1, \dots, m$}{
+  $\append(L,\, L_1[i])$\;
+  $\append(L,\, L_2[i])$\;
+}
+\Return $L$\;
