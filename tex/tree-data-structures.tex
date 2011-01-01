@@ -969,6 +969,33 @@ pseudocode of this straightforward procedure.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Delete minimum vertex}
+
+Extracting the minimum vertex from a binomial heap $H$ consists of
+several phases. Let $H$ be comprised of the binomial trees
+$B_{k_0}, B_{k_1}, \dots, B_{k_m}$ with corresponding roots
+$r_{k_0}, r_{k_1}, \dots, r_{k_m}$ and let $n$ be the number of
+vertices in $H$. In the first phase, from among the $r_{k_i}$ we
+identify the root $v$ with minimum key and remove $v$ from $H$, an
+operation that runs in $O(\lg n)$ time because we need to process at
+most $1 + \lfloor \lg n \rfloor$ roots. With the binomial tree $B_k$
+rooted at $v$ thus severed from $H$, we now have a forest consisting
+of the heap without $B_k$~(denote this heap by $H_1$) and the binomial
+tree $B_k$. By construction, $v$ is the root of $B_k$ and the children
+of $v$ from left to right can be considered as roots of binomial trees
+as well, say $B_{\ell_s}, B_{\ell_{s-1}}, \dots, B_{\ell_0}$ where
+$\ell_s > \ell_{s-1} > \dots > \ell_0$. Now sever the root $v$ from
+its children. The $B_{\ell_j}$ together can be viewed as a binomial
+heap $H_2$ with, from left to right, binomial trees
+$B_{\ell_0}, B_{\ell_1}, \dots, B_{\ell_s}$. Finally the binomial heap
+resulting from removing $v$ can be obtained by merging $H_1$ and $H_2$
+in $O(\lg n)$ time as per
+Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps}. In
+total we can extract the minimum vertex of $H$ in $O(\lg n)$ time.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Binary search trees}
 
 See section~3.6 of Gross and Yellen~\cite{GrossYellen1999}, and
