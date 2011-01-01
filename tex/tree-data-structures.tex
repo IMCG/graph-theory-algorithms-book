@@ -1268,9 +1268,18 @@ This BST represents the sorting of the list $L$.
   \]
   Prove Pascal's formula.
 
-\item Let $n,r,m$ be positive integers such that $r \leq n$. Derive a
-  formula for $\binom{n+m}{r}$ in terms of $\binom{n}{k}$ for integers 
-  $0 \leq k \leq r$.
+\item Let $m,n,r$ be nonnegative integers such that $r \leq n$. Prove
+  the Vandermonde\index{Vandermonde!convolution} convolution
+  \[
+  \binom{m + n}{r}
+  =
+  \sum_{k=0}^r \binom{m}{k} \binom{n}{r-k}.
+  \]
+  The latter equation, also known as Vandermonde's identity, was
+  already known as early as 1303 in China by Chu\index{Chu Shi-Chieh}
+  Shi-Chieh. Alexandre-Th\'eophile
+  Vandermonde\index{Vandermonde!Alexandre-Th\'eophile} independently
+  discovered it and his result was published in 1772.
 
 \item Let $n$ be a positive integer. How many distinct binomial heaps
   having $n$ vertices are there?
