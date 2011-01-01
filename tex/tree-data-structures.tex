@@ -950,6 +950,17 @@ in-place without making copies of those heaps.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Vertex insertion}
+
+Let $v$ be a vertex with corresponding key $\kappa_v$ and let $H_1$ be
+a binomial heap of $n$ vertices. The single vertex $v$ can be
+considered as a binomial heap $H_2$ comprised of exactly the binomial
+tree $B_0$. Then inserting $v$ into $H_1$ is equivalent to merging the
+heaps $H_i$ and can be accomplished in $O(\lg n)$ time.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Binary search trees}
 
 See section~3.6 of Gross and Yellen~\cite{GrossYellen1999}, and
