@@ -912,6 +912,12 @@ pseudocode of the procedure just described.
 \label{alg:tree_data_structures:merge_root_lists}
 \end{algorithm}
 
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-merge.tex}
+\caption{Merging two binomial heaps}
+\label{alg:tree_data_structures:merge_binomial_heaps}
+\end{algorithm}
+
 Having clarified the root linking and root lists merging procedures,
 we are now ready to describe a procedure for merging two nonempty
 binomial heaps $H_1$ and $H_2$ into a single binomial heap
@@ -931,7 +937,15 @@ that merging $H_1$ and $H_2$ requires
 \max(1 + \lfloor \lg n_1 \rfloor,\, 1 + \lfloor \lg n_2 \rfloor)
 \]
 steps. Letting $N = \max(n_1,\, n_2)$, we see that merging $H_1$ and
-$H_2$ takes logarithmic time $O(\lg N)$.
+$H_2$ takes logarithmic time $O(\lg N)$. The operation of merging two
+binomial heaps is presented in pseudocode as
+Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps}, which
+is adapted from Cormen~et~al.~\cite[p.463]{CormenEtAl2001} and the C
+implementation of binomial queues in~\cite{Howard2010}. A word of
+warning is order here.
+Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps} is
+destructive in the sense that it modifies the input heaps $H_i$
+in-place without making copies of those heaps.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

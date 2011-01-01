@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{MyNextV}{nextv}
+\SetKwData{MyPrevV}{prevv}
+%%
+%% input/output
+\Input{Two binomial heaps $H_1$ and $H_2$.}
+\Output{A binomial heap $H$ that results from merging the $H_i$.}
+\BlankLine
+%%
+%% algorithm body
+$H \assign$ empty binomial heap\;
+$\headElem[H] \assign$ merge sort the root lists of $H_1$ and $H_2$\;
+\If{\rm $\headElem[H] = \texttt{NULL}$}{
+  \Return $H$\;
+}
+$\MyPrevV \assign \texttt{NULL}$\;
+$v \assign \headElem[H]$\;
+$\MyNextV \assign \sibling[v]$\;
+\While{\rm $\MyNextV \neq \texttt{NULL}$}{
+  \If{\rm $\degree[v] \neq \degree[\MyNextV]$ or ($\sibling[\MyNextV] \neq \texttt{NULL}$ and $\degree[\sibling[\MyNextV]] = \degree[v]$)}{
+    $\MyPrevV \assign v$\;
+    $v \assign \MyNextV$\;
+  }
+  \ElseIf{$\kappa_v \leq \kappa_{\MyNextV}$}{
+    $\sibling[v] \assign \sibling[\MyNextV]$\;
+    link the roots $\MyNextV$ and $v$ as per Algorithm~\ref{alg:tree_data_structures:link_roots}\;
+  }
+  \Else{
+    \eIf{\rm $\MyPrevV = \texttt{NULL}$}{
+      $\headElem[H] \assign \MyNextV$\;
+    }{
+      $\sibling[\MyPrevV] \assign \MyNextV$\;
+    }
+    link the roots $v$ and $\MyNextV$ as per Algorithm~\ref{alg:tree_data_structures:link_roots}\;
+    $v \assign \MyNextV$\;
+  }
+  $\MyNextV \assign \sibling[v]$\;
+}
+\Return $H$\;
