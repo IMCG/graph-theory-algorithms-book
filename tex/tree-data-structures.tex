@@ -895,14 +895,14 @@ Algorithm~\ref{alg:tree_data_structures:link_roots}.
 \end{algorithm}
 
 Besides linking the roots of two copies of $B_{k-1}$, we also need to
-merge the root lists of these two copies. The resulting merged list is
-sorted in nondecreasing order of degree. Let $L_1$ be the root list of
-one copy of $B_{k-1}$ and let $L_2$ be the root list of the other
-copy. First we create an empty list $L$. As the lists $L_i$ are
-already sorted in nondecreasing order of vertex degree, we take in
-turn to append one element of $L_1$ to $L$ and then one element of
-$L_2$. The whole procedure for merging the $L_i$ takes linear time
-$O(n)$, where $n$ is twice the length of any of the $L_i$.
+merge the root lists of two binomial heaps $H_1$ and $H_2$. The
+resulting merged list is sorted in nondecreasing order of degree. Let
+$L_1$ be the root list of $H_1$ and let $L_2$ be the root list of
+$H_2$. First we create an empty list $L$. As the lists $L_i$ are
+already sorted in nondecreasing order of vertex degree, we use
+merge\index{merge sort} sort to merge the $L_i$ into a single sorted
+list. The whole procedure for merging the $L_i$ takes linear time
+$O(n)$, where $n = |L_1| + |L_2| - 1$.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binomial-heap-merge-root-lists.tex}
