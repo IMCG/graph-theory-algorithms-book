@@ -902,7 +902,9 @@ $H_2$. First we create an empty list $L$. As the lists $L_i$ are
 already sorted in nondecreasing order of vertex degree, we use
 merge\index{merge sort} sort to merge the $L_i$ into a single sorted
 list. The whole procedure for merging the $L_i$ takes linear time
-$O(n)$, where $n = |L_1| + |L_2| - 1$.
+$O(n)$, where $n = |L_1| + |L_2| - 1$. Refer to
+Algorithm~\ref{alg:tree_data_structures:merge_root_lists} for
+pseudocode of the procedure just described.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binomial-heap-merge-root-lists.tex}
@@ -910,6 +912,26 @@ $O(n)$, where $n = |L_1| + |L_2| - 1$.
 \label{alg:tree_data_structures:merge_root_lists}
 \end{algorithm}
 
+Having clarified the root linking and root lists merging procedures,
+we are now ready to describe a procedure for merging two nonempty
+binomial heaps $H_1$ and $H_2$ into a single binomial heap
+$H$. Initially there are at most two copies of $B_0$, one from each of
+the $H_i$. If two copies of $B_0$ are present, we let the root of one
+be the parent of the other as per
+Algorithm~\ref{alg:tree_data_structures:link_roots}, producing $B_1$
+as a result. From thereon, we generally have at most three copies of
+$B_k$ for some integer $k > 0$: one from $H_1$, one from $H_2$, and
+the third from a previous merge of two copies of $B_{k-1}$. In the
+presence of two or more copies of $B_k$, we merge two copies as per
+Algorithm~\ref{alg:tree_data_structures:link_roots} to produce
+$B_{k+1}$. If $H_i$ has $n_i$ vertices, then $H_i$ has at most
+$1 + \lfloor \lg n_i \rfloor$ binomial trees, from which it is clear
+that merging $H_1$ and $H_2$ requires
+\[
+\max(1 + \lfloor \lg n_1 \rfloor,\, 1 + \lfloor \lg n_2 \rfloor)
+\]
+steps. Letting $N = \max(n_1,\, n_2)$, we see that merging $H_1$ and
+$H_2$ takes logarithmic time $O(\lg N)$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
