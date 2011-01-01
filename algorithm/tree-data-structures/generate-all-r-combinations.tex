@@ -1,0 +1,41 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{MyMax}{max}
+%%
+%% input/output
+\Input{Two nonnegative integers $n$ and $r$.}
+\Output{A list $L$ containing all the $r$-combinations of the set
+  $\{1, 2, \dots, n\}$ in increasing lexicographic order.}
+\BlankLine
+%%
+%% algorithm body
+$L \assign [\,]$\;
+$c_i \assign i$ for $i = 1, 2, \dots, r$\;
+$\append(L,\, c_1 c_2 \cdots c_r)$\;
+\For{$i \assign 2, 3, \dots, \binom{n}{r}$}{
+  $m \assign r$\;
+  $\MyMax \assign n$\;
+  \While{$c_m = \MyMax$}{
+    $m \assign m - 1$\;
+    $\MyMax \assign \MyMax - 1$\;
+  }
+  $c_m \assign c_m + 1$\;
+  $c_j \assign c_{j-1} + 1$ for $j = m + 1, m + 2, \dots, r$\;
+  $\append(L,\, c_1 c_2 \cdots c_r)$\;
+}
+\Return $L$\;
