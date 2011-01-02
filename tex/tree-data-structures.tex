@@ -1277,6 +1277,19 @@ This BST represents the sorting of the list $L$.
 \label{alg:tree_data_structures:generate_all_r_combinations}
 \end{algorithm}
 
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/generate-all-permutations.tex}
+\caption{Generating all the permutations of $\{1, 2, \dots, n\}$.}
+\label{alg:tree_data_structures:generate_all_permutations}
+\end{algorithm}
+
+\item A problem related to the $r$-combinations of the set
+  $S = \{1, 2, \dots, n\}$ is that of generating the permutations of
+  $S$. Algorithm~\ref{alg:tree_data_structures:generate_all_permutations}
+  presents pseudocode to generate all the permutations of $S$ in
+  increasing lexicographic order. Find the worst-case runtime of this
+  algorithm and prove its correctness.
+
 \item The proof of
   Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
   relies on Pascal's\index{Pascal!formula} formula, which states that
