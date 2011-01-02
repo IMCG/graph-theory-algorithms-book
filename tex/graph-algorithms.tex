@@ -2895,12 +2895,14 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \item An arithmetic expression written in the form $a + b$ is said to
   be in \emph{infix notation}\index{infix notation} because the
   operator is in between the operands. The same expression can also be
-  written in \emph{Polish notation}\index{Polish notation} as
+  written in
+  \emph{reverse Polish notation}\index{reverse Polish notation} (or
+  \emph{postfix notation}\index{postfix notation}) as
   \[
   a\; b\; +
   \]
-  with the operator following its two operands. Given an
-  arithmetic expression $A = e_0 e_1 \cdots e_n$ written in Polish
+  with the operator following its two operands. Given an arithmetic
+  expression $A = e_0 e_1 \cdots e_n$ written in reverse Polish
   notation, we can use the stack data structure to evaluate the
   expression. Let $P = [e_0, e_1, \dots, e_n]$ be the stack
   representation of $A$, where traversing $P$ from left to right we
