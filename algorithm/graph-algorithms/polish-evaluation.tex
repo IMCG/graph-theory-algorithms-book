@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A Polish stack $P$ containing an arithmetic expression in
+  Polish notation.}
+\Output{An evaluation of the arithmetic expression represented by $P$.}
+\BlankLine
+%%
+%% algorithm body
+$E \assign$ empty stack\;
+$v \assign \texttt{NULL}$\;
+\While{\rm $P$ is not empty}{
+  $x \assign \pop(P)$\;
+  \eIf{\rm $x$ is an operator}{
+    $b \assign \pop(E)$\;
+    $a \assign \pop(E)$\;
+    \If{\rm $x$ is addition operator}{
+      $v \assign a + b$\;
+    }
+    \ElseIf{\rm $x$ is subtraction operator}{
+      $v \assign a - b$\;
+    }
+    \ElseIf{\rm $x$ is multiplication operator}{
+      $v \assign a \times b$\;
+    }
+    \ElseIf{\rm $x$ is division operator}{
+      $v \assign a / b$\;
+    }
+    \Else{
+      print(``Unrecognized operator'')\;
+      exit algorithm\;
+    }
+    $\push(E, v)$\;
+  }{
+    $\push(E, x)$\;
+  }
+}
+$v \assign \pop(E)$\;
+\Return $v$\;

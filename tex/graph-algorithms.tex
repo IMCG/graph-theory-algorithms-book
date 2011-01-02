@@ -2892,6 +2892,48 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \label{alg:graph_algorithms:bracket_parser}
 \end{algorithm}
 
+\item An arithmetic expression written in the form $a + b$ is said to
+  be in \emph{infix notation}\index{infix notation} because the
+  operator is in between the operands. The same expression can also be
+  written in \emph{Polish notation}\index{Polish notation} as
+  \[
+  a\; b\; +
+  \]
+  with the operator following its two operands. Given an
+  arithmetic expression $A = e_0 e_1 \cdots e_n$ written in Polish
+  notation, we can use the stack data structure to evaluate the
+  expression. Let $P = [e_0, e_1, \dots, e_n]$ be the stack
+  representation of $A$, where traversing $P$ from left to right we
+  are moving from the top of the stack to the bottom of the stack. We
+  call $P$ the Polish stack and the stack $E$ containing intermediate
+  results the evaluation stack. While $P$ is not empty, pop the Polish
+  stack and assign the extracted result to $x$. If $x$ is an operator,
+  we pop the evaluation stack twice: the result of the first pop is
+  assigned to $b$ and the result of the second pop is assigned to
+  $a$. Compute the infix expression $a\; x\; b$ and push the result
+  onto $E$. However, if $x$ is an operand, we push $x$ onto
+  $E$. Iterate the above process until $P$ is empty, at which point
+  the top of $E$ contains the evaluation of $A$. Refer to
+  Algorithm~\ref{alg:graph_algorithms:Polish_evaluation} for
+  pseudocode of the above discussion.
+  %%
+  \begin{enumerate}[(a)]
+  \item Prove the correctness of
+    Algorithm~\ref{alg:graph_algorithms:Polish_evaluation}.
+
+  \item What is the worst-case runtime of
+    Algorithm~\ref{alg:graph_algorithms:Polish_evaluation}?
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:Polish_evaluation}
+    to support the exponentiation operator.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/polish-evaluation.tex}
+\caption{Evaluate arithmetic expressions in Polish notation.}
+\label{alg:graph_algorithms:Polish_evaluation}
+\end{algorithm}
+
 \item Figure~\ref{fig:graph_algorithms:one_knight_tour} provides a
   knight's tour for the knight piece with initial position as in
   Figure~\ref{fig:graph_algorithms:one_knight_tour:initial_position}. By
