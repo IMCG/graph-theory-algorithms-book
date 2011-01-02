@@ -5,7 +5,7 @@ This is a list of possible enhancements to the book.
 
 * Balanced trees: 2-3-4 trees, red-black trees, B-trees
 
-* Priority queues: heaps, binary heaps, Fibonacci heaps
+* Priority queues: Fibonacci heaps
   Discuss heaps and how these relate to realizing efficient
   implementations of Dijkstra's algorithm.
 
@@ -13,5 +13,3 @@ This is a list of possible enhancements to the book.
 
 * Prufer encoding and Cayley's formula
   Discuss these in the context of generating a random tree.
-
-* Binomial heaps
