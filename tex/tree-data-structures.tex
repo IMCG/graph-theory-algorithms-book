@@ -1302,9 +1302,10 @@ This BST represents the sorting of the list $L$.
 \item Provide a description and pseudocode of an algorithm to generate
   a random permutation of $\{1, 2, \dots, n\}$.
 
-\item Takaoka~\cite{Takaoka1999b} presents a general method for
-  combinatorial generation that runs in $O(1)$ time. How can Takaoka's
-  method be applied to generating combinations and permutations?
+\item Takaoka\index{Takaoka, Tadao}~\cite{Takaoka1999b} presents a
+  general method for combinatorial\index{combinatorial generation}
+  generation that runs in $O(1)$ time. How can Takaoka's method be
+  applied to generating combinations and permutations?
 
 \item The proof of
   Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
@@ -1338,8 +1339,8 @@ This BST represents the sorting of the list $L$.
   \sum_{k=0}^n \binom{m + k}{k}.
   \]
 
-\item Let $n$ be a positive integer. How many distinct binomial heaps
-  having $n$ vertices are there?
+\item Let $n$ be a positive integer. How many distinct
+  binomial\index{binomial heap} heaps having $n$ vertices are there?
 
 \item The algorithms described in
   section~\ref{sec:tree_data_structures:binomial_heaps} are formally
@@ -1351,10 +1352,10 @@ This BST represents the sorting of the list $L$.
 \item If $H$ is a binomial\index{binomial heap} heap, what is the
   total time required to extract all elements from $H$?
 
-\item Frederickson~\cite{Frederickson1993} describes an $O(k)$ time
-  algorithm for finding the $k$-th smallest element in a binary
-  heap. Provide a description and pseudocode of Frederickson's
-  algorithm and prove its correctness.
+\item Frederickson\index{Frederickson, Greg N.}~\cite{Frederickson1993}
+  describes an $O(k)$ time algorithm for finding the $k$-th smallest
+  element in a binary heap. Provide a description and pseudocode of
+  Frederickson's algorithm and prove its correctness.
 
 \item Fibonacci heaps~\cite{FredmanTarjan1984} allow for amortized
   $O(1)$ time with respect to finding the minimum element,
@@ -1364,21 +1365,22 @@ This BST represents the sorting of the list $L$.
   the above Fibonacci heap operations and prove the correctness of the
   procedures.
 
-\item Takaoka~\cite{Takaoka1999a} introduces another type of heap
-  called a $2$-$3$ heap. Deleting the minimum element takes amortized
-  $O(\lg n)$ time with $n$ being the number of vertices in the $2$-$3$
-  heap. Inserting an element into the heap takes amortized $O(1)$
-  time. Descibe and provide pseudocode of the above $2$-$3$ heap
-  operations. Under which conditions would $2$-$3$ heaps be more
-  efficient than Fibonacci heaps?
+\item Takaoka\index{Takaoka, Tadao}~\cite{Takaoka1999a} introduces
+  another type of heap called a $2$-$3$ heap. Deleting the minimum
+  element takes amortized $O(\lg n)$ time with $n$ being the number of
+  vertices in the $2$-$3$ heap. Inserting an element into the heap
+  takes amortized $O(1)$ time. Descibe and provide pseudocode of the
+  above $2$-$3$ heap operations. Under which conditions would $2$-$3$
+  heaps be more efficient than Fibonacci heaps?
 
-\item In 2000, Chazelle~\cite{Chazelle2000a} introduced the soft heap,
-  which can perform common heap operations in amortized $O(1)$
-  time. He then applied~\cite{Chazelle2000b} the soft heap to realize
-  a very efficient implementation of an algorithm for finding minimum
-  spanning trees. In 2009, Kaplan and Zwick~\cite{KaplanZwick2009}
-  provided a simple implementation and analysis of Chazelle's soft
-  heap.
+\item In 2000, Chazelle\index{Chazelle, Bernard}~\cite{Chazelle2000a}
+  introduced the soft heap, which can perform common heap operations
+  in amortized $O(1)$ time. He then applied~\cite{Chazelle2000b} the
+  soft heap to realize a very efficient implementation of an algorithm
+  for finding minimum spanning trees. In 2009,
+  Kaplan\index{Kaplan, Haim} and
+  Zwick\index{Zwick, Uri}~\cite{KaplanZwick2009} provided a simple
+  implementation and analysis of Chazelle's soft heap.
   %%
   \begin{enumerate}[(a)]
   \item Describe soft heaps and provide pseudocode of common heap
