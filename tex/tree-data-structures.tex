@@ -1035,20 +1035,23 @@ chapter~12 of Cormen~et~al.~\cite{CormenEtAl2001}. See also
 \item sorting using BST
 \end{itemize}
 
-A {\it binary search tree} (BST) is a rooted binary tree
-$T=(V,E)$ having weighted vertices ${\rm wt}:V\to \R$ satisfying:
-\index{binary search tree}
-\index{BST}
-
+A \emph{binary search tree}\index{binary search tree}~(BST)\index{BST}
+is a rooted binary tree $T = (V,E)$ having weighted vertices
+$\kappa: V \to \R$. The weight of each vertex $v$ is referred to as
+its key, denoted $\kappa_v$. Each vertex $v$ of $T$ satisfies the
+following properties:
+%%
 \begin{itemize}
-\item
- The left subtree of a vertex $v$ contains only vertices whose label
-(or ``key'') is less than the label of $v$.
-\item
-The right subtree of a vertex $v$ contains only vertices whose label
-  is greater than the label of $v$.
-\item
-Both the left and right subtrees must also be binary search trees.
+\item The left subtree of $v$ contains only vertices whose keys are at
+  most $\kappa_v$. That is, if $u$ is a vertex in the left subtree of
+  $v$, then $\kappa_u \leq \kappa_v$.
+
+\item The right subtree of $v$ contains only vertices whose keys are
+  at least $\kappa_v$. In other words, any vertex $u$ in the right
+  subtree of $v$ satisfies $\kappa_v \leq \kappa_u$.
+
+\item Both the left and right subtrees of $v$ must also be binary
+  search trees.
 \end{itemize}
 
 From the above properties it naturally follows that:
