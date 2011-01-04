@@ -2514,8 +2514,10 @@ symmetry in our description of in-order\index{traversal!in-order}
 traversal: start at the root, then traverse the left and right
 subtrees in in-order. For this reason, in-order traversal is sometimes
 referred to as \emph{symmetric traversal}. Our discussion is
-summarized in
-Algorithm~\ref{alg:trees_forests:in_order_traversal}. Since each
+summarized in Algorithm~\ref{alg:trees_forests:in_order_traversal}.
+In the latter algorithm, if a vertex does not have a left-child, then
+the operation of finding its left-child returns \texttt{NULL}. The
+same holds when the vertex does not have a right-child. Since each
 vertex is pushed\index{stack!push} and popped\index{stack!pop} exactly
 once, it follows that in-order traversal runs in time $O(n)$. Using
 Algorithm~\ref{alg:trees_forests:in_order_traversal}, an in-order
@@ -2523,9 +2525,9 @@ traversal of the tree in
 Figure~\ref{fig:trees_forests:eg:binary_tree_Huffman_encodings:Huffman_encodings}
 is
 \[
-\varepsilon,\, \texttt{1},\, \texttt{11},\, \texttt{10},\, \texttt{0},
-\texttt{01},\, \texttt{00},\, \texttt{001},\, \texttt{000},\, \texttt{0001},
-\texttt{0000}.
+\texttt{0000},\, \texttt{000},\, \texttt{0001},\, \texttt{00},\,
+\texttt{001}, \texttt{0},\, \texttt{01},\, \varepsilon,\,
+\texttt{10},\, \texttt{1},\texttt{11}.
 \]
 
 

@@ -15,6 +15,7 @@
 %% data section
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
+\SetKwData{MyTrue}{true}
 %%
 %% input/output
 \Input{A binary tree $T$ on $n > 0$ vertices.}
@@ -24,18 +25,18 @@
 %% algorithm body
 $L \assign [\,]$\;
 $S \assign$ empty stack\;
-$r \assign$ root of $T$\;
-$\push(S, r)$\;
-\While{$\length(S) > 0$}{
-  $v \assign \pop(S)$\;
-  \If{\rm $v$ has a left-child}{
-    $u \assign$ left-child of $v$\;
-    $\push(S, u)$\;
-  }
-  $\append(L, v)$\;
-  \If{\rm $v$ has a right-child}{
-    $u \assign$ right-child of $v$\;
-    $\push(S, u)$\;
+$v \assign$ root of $T$\;
+\While{$\MyTrue$}{
+  \eIf{\rm $v \neq \texttt{NULL}$}{
+    $\push(S, v)$\;
+    $v \assign$ left child of $v$\;
+  }{
+    \If{$\length(S) = 0$}{
+      exit the loop\;
+    }
+    $v \assign \pop(S)$\;
+    $\append(L, v)$\;
+    $v \assign$ right child of $v$\;
   }
 }
 \Return $L$\;
