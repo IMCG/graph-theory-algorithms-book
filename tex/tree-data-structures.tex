@@ -1125,6 +1125,28 @@ key $10$, i.e. the root, even though $v$ is an ancestor of $u$. The
 predecessor of the vertex $a$ with key $4$ is the vertex $b$ with key
 $3$, i.e. the minimum vertex, even though $b$ is a descendant of $a$.
 
+We now describe a method to systematically locate the successor of a
+given vertex. Let $T$ be a nonempty BST and $v \in V(T)$ not a maximum
+vertex of $T$. If $v$ has a right subtree, then we find a minimum
+vertex of $v$'s right subtree. In case $v$ does not have a right
+subtree, we backtrack up one level to $v$'s parent
+$u = \parent(v)$. If $v$ is the root of the right subtree of $u$, we
+backtrack up one level again to $u$'s parent, making the assignments
+$v \assign u$ and $u \assign \parent(u)$. Otherwise we return $v$'s
+parent. Repeat the above backtracking procedure until the required
+successor is found. Our discussion is summarized in
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_successors}.
+Each time we backtrack to a vertex's parent, we move up one
+level, hence the worst-case runtime of
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_successors}
+is $O(h)$ with $h$ being the height of $T$.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-successors.tex}
+\caption{Finding successors in a binary search tree.}
+\label{alg:tree_data_structures:binary_search_tree_successors}
+\end{algorithm}
+
 
 \subsubsection{Insertion}
 
