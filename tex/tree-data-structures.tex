@@ -1219,6 +1219,13 @@ illustrates how to insert a vertex into a BST.
 
 \subsection{Deletion}
 
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-delete.tex}
+\caption{Deleting a vertex from a binary search tree.}
+\label{alg:tree_data_structures:binary_search_tree_delete}
+\end{algorithm}
+
+\noindent
 Whereas insertion into a BST is straightforward, removing a vertex
 requires much more work. Let $T$ be a nonempty binary search tree and
 suppose we want to remove $v \in V(T)$ from $T$. Having located the
@@ -1249,12 +1256,16 @@ two children.
 The above procedure is summarized in
 Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete},
 which is adapted from~\cite[p.262]{CormenEtAl2001}.
+Figure~\ref{fig:tree_data_structures:binary_search_tree_delete}
+illustrates the various cases to be considered when removing a vertex
+from a BST.
 
-\begin{algorithm}[!htbp]
-\input{algorithm/tree-data-structures/binary-search-tree-delete.tex}
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binary-search-tree-delete.tex}
 \caption{Deleting a vertex from a binary search tree.}
-\label{alg:tree_data_structures:binary_search_tree_delete}
-\end{algorithm}
+\label{fig:tree_data_structures:binary_search_tree_delete}
+\end{figure}
 
 
 \subsubsection{Sorting}
