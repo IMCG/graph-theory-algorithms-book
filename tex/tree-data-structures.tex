@@ -1086,6 +1086,14 @@ the input BST is empty then \texttt{NULL} is returned.
 \label{alg:tree_data_structures:binary_search_tree_locate}
 \end{algorithm}
 
+From the binary search tree property, deduce that a vertex of a BST
+$T$ with minimum key can be found by repeatedly traversing left
+subtrees. When we have reached the left-most vertex $v$ of $T$,
+querying for the left subtree of $v$ should return \texttt{NULL}. At
+this point, we conclude that $v$ is a vertex with minimum key. Each
+query for the left subtree moves us one level down $T$, resulting in a
+worst-case runtime of $O(h)$ with $h$ being the height of $T$.
+
 
 \subsubsection{Insertion}
 
