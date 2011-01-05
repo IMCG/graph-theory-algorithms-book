@@ -1078,13 +1078,22 @@ locating the root of $v$'s left subtree should return \texttt{NULL}. A
 similar comment applies when $v$ does not have a right
 subtree. Furthermore, from the structure of
 Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate}, if
-the input BST is empty then \texttt{NULL} is returned.
+the input BST is empty then \texttt{NULL} is returned. See
+Figure~\ref{fig:tree_data_structures:binary_search_tree_search} for an
+illustration of locating vertices with given keys in a BST.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binary-search-tree-locate.tex}
 \caption{Locate a key in a binary search tree.}
 \label{alg:tree_data_structures:binary_search_tree_locate}
 \end{algorithm}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binary-search-tree-search-examples.tex}
+\caption{Finding vertices with given keys in a BST.}
+\label{fig:tree_data_structures:binary_search_tree_search}
+\end{figure}
 
 From the binary search tree property, deduce that a vertex of a BST
 $T$ with minimum key can be found by starting from the root of $T$ and
