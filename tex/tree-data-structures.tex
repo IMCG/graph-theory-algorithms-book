@@ -1071,7 +1071,20 @@ $k = \kappa_v$ or the indicated subtree is empty. Whenever the target
 key is different from the key of the vertex we are currently
 considering, we move down one level of $T$. Thus if $h$ is the height
 of $T$, it follows that searching $T$ takes a worst-case runtime of
-$O(h)$.
+$O(h)$. The above procedure is presented in pseudocode as
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate}. Note
+that if a vertex $v$ does not have a left subtree, the operation of
+locating the root of $v$'s left subtree should return \texttt{NULL}. A
+similar comment applies when $v$ does not have a right
+subtree. Furthermore, from the structure of
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate}, if
+the input BST is empty then \texttt{NULL} is returned.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-locate.tex}
+\caption{Locate a key in a binary search tree.}
+\label{alg:tree_data_structures:binary_search_tree_locate}
+\end{algorithm}
 
 
 \subsubsection{Insertion}
