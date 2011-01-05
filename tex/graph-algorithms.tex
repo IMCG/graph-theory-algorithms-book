@@ -2404,16 +2404,19 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \label{alg:graph_algorithms:binary_search}
 \end{algorithm}
 
-\item Binary search is a much faster searching algorithm than linear
-  search. The binary search algorithm assumes that its input list is
-  ordered in some manner. For simplicity, we assume that the input
-  list $L$ consists of positive integers. The main idea of binary
-  search is to partition $L$ into two halves: the left half and the
-  right half. Our task now is to determine whether the object $E$ of
-  interest is in the left half or the right half, and apply binary
-  search recursively to the half in which $E$ is
-  located. Algorithm~\ref{alg:graph_algorithms:binary_search} provides
-  pseudocode of our discussion of binary search.
+\item\label{prob:graph_algorithms:binary_search}
+  Binary\index{Binary search} search is a much faster searching
+  algorithm than linear\index{linear search} search. The
+  binary\index{Binary search} search algorithm assumes that its input
+  list is ordered in some manner. For simplicity, we assume that the
+  input list $L$ consists of positive integers. The main idea of
+  binary\index{Binary search} search is to partition $L$ into two
+  halves: the left half and the right half. Our task now is to
+  determine whether the object $E$ of interest is in the left half or
+  the right half, and apply binary search recursively to the half in
+  which $E$ is located.
+  Algorithm~\ref{alg:graph_algorithms:binary_search} provides
+  pseudocode of our discussion of binary\index{Binary search} search.
   %%
   \begin{enumerate}[(a)]
   \item Implement Algorithm~\ref{alg:graph_algorithms:binary_search}
@@ -2436,15 +2439,17 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     search still work if we use the ceiling function instead of the
     floor function?
 
-  \item An improvement on the time complexity of binary search is to
-    not blindly use the middle value of the interval of interest, but
-    to guess more precisely where the target falls within this
-    interval. Interpolation search uses this heuristic to improve on
-    the runtime of binary search. Provide an algorithm for
-    interpolation search, analyze its worst-case runtime, and compare
-    its theoretical runtime efficiency with that of binary search~(see
-    pages~419--420 in Knuth~\cite{Knuth1998c} and pages~201--202 in
-    Sedgewick~\cite{Sedgewick1990}).
+  \item An improvement on the time complexity of
+    binary\index{Binary search} search is to not blindly use the
+    middle value of the interval of interest, but to guess more
+    precisely where the target falls within this interval.
+    Interpolation\index{interpolation search} search uses this
+    heuristic to improve on the runtime of binary search. Provide an
+    algorithm for interpolation\index{interpolation search} search,
+    analyze its worst-case runtime, and compare its theoretical
+    runtime efficiency with that of binary\index{binary search}
+    search~(see pages~419--420 in Knuth~\cite{Knuth1998c} and
+    pages~201--202 in Sedgewick~\cite{Sedgewick1990}).
   \end{enumerate}
 
 \item Let $G$ be a simple undirected graph having distance matrix
