@@ -2405,18 +2405,18 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 \end{algorithm}
 
 \item\label{prob:graph_algorithms:binary_search}
-  Binary\index{Binary search} search is a much faster searching
+  Binary\index{binary search} search is a much faster searching
   algorithm than linear\index{linear search} search. The
-  binary\index{Binary search} search algorithm assumes that its input
+  binary\index{binary search} search algorithm assumes that its input
   list is ordered in some manner. For simplicity, we assume that the
   input list $L$ consists of positive integers. The main idea of
-  binary\index{Binary search} search is to partition $L$ into two
+  binary\index{binary search} search is to partition $L$ into two
   halves: the left half and the right half. Our task now is to
   determine whether the object $E$ of interest is in the left half or
   the right half, and apply binary search recursively to the half in
   which $E$ is located.
   Algorithm~\ref{alg:graph_algorithms:binary_search} provides
-  pseudocode of our discussion of binary\index{Binary search} search.
+  pseudocode of our discussion of binary\index{binary search} search.
   %%
   \begin{enumerate}[(a)]
   \item Implement Algorithm~\ref{alg:graph_algorithms:binary_search}
@@ -2440,7 +2440,7 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     floor function?
 
   \item An improvement on the time complexity of
-    binary\index{Binary search} search is to not blindly use the
+    binary\index{binary search} search is to not blindly use the
     middle value of the interval of interest, but to guess more
     precisely where the target falls within this interval.
     Interpolation\index{interpolation search} search uses this
