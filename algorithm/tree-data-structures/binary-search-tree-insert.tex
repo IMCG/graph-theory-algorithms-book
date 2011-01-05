@@ -1,0 +1,44 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A binary search tree $T$ and a vertex $x$ to be inserted into $T$.}
+\Output{The same BST $T$ but augmeneted with $x$.}
+\BlankLine
+%%
+%% algorithm body
+$u \assign$ \texttt{NULL}\;
+$v \assign$ root of $T$\;
+\While{\rm $v \neq \texttt{NULL}$}{
+  $u \assign v$\;
+  \eIf{$\kappa_x < \kappa_v$}{
+    $v \assign$ left-child of $v$\;
+  }{
+    $v \assign$ right-child of $v$\;
+  }
+}
+$\parent[x] \assign u$\;
+\eIf{\rm $u = \texttt{NULL}$}{
+  $x$ is the root of $T$\;
+}{
+  \eIf{$\kappa_x < \kappa_u$}{
+    $x$ is the left-child of $u$\;
+  }{
+    $x$ is the right-child of $u$\;
+  }
+}

@@ -1192,7 +1192,18 @@ the above key comparison process until the operation of locating the
 root of a left or right subtree returns \texttt{NULL}. At this point,
 a candidate parent for $v$ is the last non-\texttt{NULL} value of
 $u$. If $\kappa_v < \kappa_u$ then we let $v$ be $u$'s
-left-child. Otherwise $v$ is the right-child of $u$.
+left-child. Otherwise $v$ is the right-child of $u$. After each key
+comparison, we move down at most one level so that in the worst-case
+inserting a vertex in $T$ takes $O(h)$ time, where $h$ is the height
+of $T$.
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_insert}
+presents pseudocode of our discussion.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-insert.tex}
+\caption{Inserting a vertex into a binary search tree.}
+\label{alg:tree_data_structures:binary_search_tree_insert}
+\end{algorithm}
 
 
 \subsubsection{Deletion}
