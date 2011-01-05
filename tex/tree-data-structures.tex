@@ -1095,6 +1095,13 @@ illustration of locating vertices with given keys in a BST.
 \label{fig:tree_data_structures:binary_search_tree_search}
 \end{figure}
 
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binary-search-tree-minimum-maximum.tex}
+\caption{Locating minimum and maximum vertices in a BST.}
+\label{fig:tree_data_structures:binary_search_tree_minimum_maximum}
+\end{figure}
+
 From the binary search tree property, deduce that a vertex of a BST
 $T$ with minimum key can be found by starting from the root of $T$ and
 repeatedly traversing left subtrees. When we have reached the
@@ -1111,6 +1118,9 @@ that for finding one with minimum key. Starting from the root of $T$,
 we repeatedly traverse right subtrees until we encounter the
 right-most vertex, which by the binary search tree property has
 maximum key. This procedure has the same worst-case runtime of $O(h)$.
+Figure~\ref{fig:tree_data_structures:binary_search_tree_minimum_maximum}
+illustrates the process of locating the minimum and maximum vertices
+of a BST.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binary-search-tree-minimum.tex}
