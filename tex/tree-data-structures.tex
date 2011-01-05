@@ -1052,19 +1052,26 @@ nondecreasing order of keys.
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsubsection{Searching}
 
-We are given a BST (i.e., a binary rooted tree with weighted vertices
-having distinct weights satisfying the above criteria) $T$ and a
-label $\ell$. For this search, we are looking for a vertex in $T$
-whose label is $\ell$, if one exists.
-
-We begin by examining the root vertex, $v_0$. If $\ell={\rm wt}(v_0)$,
-the search is successful. If the $\ell<{\rm wt}(v_0)$,
-search the left subtree. Similarly, if $\ell>{\rm wt}(v_0)$,
-search the right subtree. This process is repeated until a vertex
-$v\in V$ is found for which $\ell={\rm wt}(v)$,
-or the indicated subtree is empty.
+Given a BST $T$ and a key $k$, we want to locate a vertex~(if one
+exists) in $T$ whose key is $k$. The search procedure for a BST is
+reminiscent of the binary\index{binary search} search algorithm
+discussed in
+problem~\ref{chap:graph_algorithms}.\ref{prob:graph_algorithms:binary_search}.
+We begin by examining the root $v_0$ of $T$. If $\kappa_{v_0} = k$,
+the search is successful. However, if $\kappa_{v_0} \neq k$ then we
+have two cases to consider. In the first case, if $k < \kappa_{v_0}$
+then we search the left subtree of $v_0$. The second case occurs when
+$k > \kappa_{v_0}$, in which case we search the right subtree of
+$v_0$. Repeat the process until a vertex $v$ in $T$ is found for which
+$k = \kappa_v$ or the indicated subtree is empty. Whenever the target
+key is different from the key of the vertex we are currently
+considering, we move down one level of $T$. Thus if $h$ is the height
+of $T$, it follows that searching $T$ takes a worst-case runtime of
+$O(h)$.
 
 
 \subsubsection{Insertion}
