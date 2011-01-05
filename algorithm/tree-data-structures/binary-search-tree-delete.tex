@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{A nonempty binary search tree $T$ and a vertex $x \in V(T)$ to
+  be removed from $T$.}
+\Output{The same BST $T$ but without $x$.}
+\BlankLine
+%%
+%% algorithm body
+$u \assign \texttt{NULL}$\;
+$v \assign \texttt{NULL}$\;
+\eIf{\rm $x$ has a left-child or $x$ has a right-child}{
+  $v \assign x$\;
+}{
+  $v \assign$ successor of $x$\;
+}
+\eIf{\rm $v$ has a left-child}{
+  $u \assign$ left-child of $v$\;
+}{
+  $u \assign$ right-child of $v$\;
+}
+\If{\rm $u \neq \texttt{NULL}$}{
+  $\parent[u] \assign \parent[v]$\;
+}
+\eIf{\rm $\parent[v] = \texttt{NULL}$}{
+  let $u$ be the root of $T$\;
+}{
+  \eIf{\rm $v$ is the left-child of $\parent[v]$}{
+    let $u$ be the left-child of $\parent[v]$\;
+  }{
+    let $u$ be the right-child of $\parent[v]$\;
+  }
+}
+\If{$v \neq x$}{
+  $\kappa_x \assign \kappa_v$\;
+  copy $v$'s auxilary data into $x$\;
+}
