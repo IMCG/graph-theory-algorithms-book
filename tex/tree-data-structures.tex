@@ -1215,23 +1215,37 @@ illustrates how to insert a vertex into a BST.
 \end{figure}
 
 
-\subsubsection{Deletion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As above, we are given a BST $T$ and a
-label $\ell$. We assume $\ell$ is between the
-lowest weight of $T$ and the highest weight.
-For this procedure, we are looking for a vertex $v$ of
-$T$ which has weight $\ell$. We want to remove $v$ from
-$T$ (and therefore also the weight $\ell$ from the list of weights),
-thereby creating a ``smaller'' tree $T- v$ satisfying
-the criteria above.
+\subsection{Deletion}
 
-Deletion proceeds as a search does. However, in this case, you are
-searching for vertex $v\in V$ for which
-${\rm wt}(v)=\ell$. Once found, we remove $v$ from $V$
-and any edge $(u,v)\in E$ is replaced by $(u,w_1)$
-and $(u,w_2)$, where $w_1.w_2\in V$ were the children of $v$
-in $T$.
+Whereas insertion into a BST is straightforward, removing a vertex
+requires much more work. Let $T$ be a nonempty binary search tree and
+suppose we want to remove $v \in V(T)$ from $T$. Having located the
+position that $v$ occupies within $T$, we need to consider three
+separate cases: (1)~$v$ is a leaf; (2)~$v$ has one child; (3)~$v$ has
+two children.
+%%
+\begin{enumerate}
+\item If $v$ is a leaf, we simply remove $v$ from $T$ and the
+  procedure is complete. The resulting tree without $v$ satisfies the
+  binary search tree property.
+
+\item Suppose $v$ has the single child $u$. Removing $v$ would
+  disconnect $T$, a situation that can be prevented by splicing out
+  $u$ and letting $u$ occupy the position previously held by $v$. The
+  resulting tree with $v$ removed as described satisfies the binary
+  search tree property.
+
+\item Finally suppose $v$ has two children and let $s$ and $p$ be the
+  successor and predecessor of $v$, respectively. It can be shown that
+  $s$ has no left-child and $p$ has no right-child. We can choose to
+  either splice out $s$ or $p$. Say we choose to splice out $s$. Then
+  we remove $v$ and let $s$ hold the position previously occupied by
+  $v$. The resulting tree with $v$ thus removed satisfies the binary
+  search tree property.
+\end{enumerate}
+
 
 \subsubsection{Sorting}
 
