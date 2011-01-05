@@ -17,17 +17,17 @@
 \scriptsize
 \node[blue,very thick] {$10$}
   [sibling distance=4cm]
-  child[blue,very thick] {node[blue,very thick] {$5$}
+  child[->,>=stealth,blue,very thick] {node[blue,very thick] {$5$}
     [sibling distance=2cm]
     child {node[blue,very thick] {$4$}
       [sibling distance=1cm]
       child {node[blue,very thick] {$3$}
         child {node[blue,very thick] {$2$}}
-        child[black,thick] {node {$3$}}
+        child[-,black,thick] {node {$3$}}
       }
-      child[black,thick] {node {$5$}}
+      child[-,black,thick] {node {$5$}}
     }
-    child[black,thick] {node {$7$}
+    child[-,black,thick] {node {$7$}
       [sibling distance=1cm]
       child {node {$5$}}
       child[black,thick] {node {$8$}
@@ -84,18 +84,18 @@
       }
     }
   }
-  child[blue,very thick] {node[blue,very thick] {$15$}
+  child[->,>=stealth,blue,very thick] {node[blue,very thick] {$15$}
     [sibling distance=2cm]
-    child[black,thick] {node {$13$}
+    child[-,black,thick] {node {$13$}
       [sibling distance=1cm]
       child {node {$11$}}
       child[missing]
     }
     child {node[blue,very thick] {$20$}
-      child[black,thick] {node {$19$}}
+      child[-,black,thick] {node {$19$}}
       child {node[blue,very thick] {$23$}
         [sibling distance=1cm]
-        child[black,thick] {node {$22$}}
+        child[-,black,thick] {node {$22$}}
         child {node[blue,very thick] {$26$}}
       }
     }
