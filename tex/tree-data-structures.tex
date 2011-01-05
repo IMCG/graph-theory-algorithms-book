@@ -1102,6 +1102,13 @@ illustration of locating vertices with given keys in a BST.
 \label{fig:tree_data_structures:binary_search_tree_minimum_maximum}
 \end{figure}
 
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binary-search-tree-successor-predecessor.tex}
+\caption{Searching for successor and predecessor.}
+\label{fig:tree_data_structures:binary_search_tree_successor_predecessor}
+\end{figure}
+
 From the binary search tree property, deduce that a vertex of a BST
 $T$ with minimum key can be found by starting from the root of $T$ and
 repeatedly traversing left subtrees. When we have reached the
@@ -1159,7 +1166,9 @@ Each time we backtrack to a vertex's parent, we move up one
 level, hence the worst-case runtime of
 Algorithm~\ref{alg:tree_data_structures:binary_search_tree_successors}
 is $O(h)$ with $h$ being the height of $T$. The procedure for finding
-predecessors is similar.
+predecessors is similar. Refer to
+Figure~\ref{fig:tree_data_structures:binary_search_tree_successor_predecessor}
+for an illustration of locating successors and predecessors.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binary-search-tree-successors.tex}
