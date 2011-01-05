@@ -1258,7 +1258,13 @@ Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete},
 which is adapted from~\cite[p.262]{CormenEtAl2001}.
 Figure~\ref{fig:tree_data_structures:binary_search_tree_delete}
 illustrates the various cases to be considered when removing a vertex
-from a BST.
+from a BST. Note that in
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete},
+the process of finding the successor dominates the runtime of the
+entire algorithm. Other operations in the algorithm take at most
+constant time. Therefore deleting a vertex from a binary search tree
+can be accomplished in worst-case $O(h)$ time, where $h$ is the height
+of the BST under consideration.
 
 \begin{figure}[!htbp]
 \centering
