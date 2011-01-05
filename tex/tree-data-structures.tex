@@ -1274,21 +1274,6 @@ of the BST under consideration.
 \end{figure}
 
 
-\subsubsection{Sorting}
-
-A binary search tree can be used to implement a simple but efficient
-sorting algorithm. Suppose we wish to sort a list of numbers
-$L = [\ell_1, \ell_2,\dots, \ell_n]$. First, let $V=\{1,2,\dots,n\}$
-be the vertices of a tree and weight vertex $i$ with $\ell_i$,
-for $1\leq i\leq n$. In this case, we can traverse this tree
-in order of its weights, thereby building a BST recursively.
-This BST represents the sorting of the list $L$.
-Generally, the information represented by each vertex is a
-record (or list or dictionary), rather than a single data element. However,
-for sequencing purposes, vertices are compared according to their
-labels rather than any part of their associated records.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Problems}
@@ -1523,4 +1508,8 @@ labels rather than any part of their associated records.
   children. If $s$ and $p$ are the successor and predecessor of $v$,
   respectively, show that $s$ has no left-child and $p$ has no
   right-child.
+
+\item Let $L = [e_0, e_1, \dots, e_n]$ be a list of $n + 1$ elements
+  from a totally ordered set $X$ with total order $\leq$. How can
+  binary search trees be used to sort $L$?
 \end{problem}
