@@ -14,7 +14,7 @@
 %% nodes or vertices
 \foreach \nodename/\x/\y in {0/0/0, 1/0/7, 2/4/3.5, 3/-4/3.5}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[->,>=stealth,thick]
@@ -24,7 +24,7 @@
   1/2/bend left/2, 1/3/bend right/1, 2/0/bend left=0/-0.5,
   2/3/bend right/3, 3/0/bend left=0/1, 3/2/bend left=0/1}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}

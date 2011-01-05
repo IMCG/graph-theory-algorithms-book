@@ -14,11 +14,12 @@
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
+\scriptsize
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/3/1.5, 2/6/3, 3/0/3, 4/3/4.5, 5/0/6, 6/3/7.5}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
@@ -27,7 +28,6 @@
   0/1/7, 0/3/5, 1/2/8, 1/3/9, 1/4/7, 2/4/5, 3/4/15, 3/5/6, 4/5/8,
   4/6/9, 5/6/11}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -40,11 +40,12 @@
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
+\scriptsize
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/3/1.5, 2/6/3, 3/0/3, 4/3/4.5, 5/0/6, 6/3/7.5}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% light edges or lines
 \tikzstyle{EdgeStyle}=[-,thick,color=gray!30]
@@ -52,14 +53,12 @@
 \foreach \startnode/\endnode/\weight in {
   0/1/7, 0/3/5, 1/2/8, 1/3/9, 1/4/7, 2/4/5, 3/4/15, 4/6/9}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 %% dark edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
 \foreach \startnode/\endnode/\weight in {3/5/6, 4/5/8, 5/6/11}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -71,11 +70,12 @@
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
+\scriptsize
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/3/1.5, 2/6/3, 3/0/3, 4/3/4.5, 5/0/6, 6/3/7.5}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% light edges or lines
 \tikzstyle{EdgeStyle}=[-,thick,color=gray!30]
@@ -83,14 +83,12 @@
 \foreach \startnode/\endnode/\weight in {
   0/1/7, 1/2/8, 1/3/9, 1/4/7, 2/4/5, 3/4/15, 4/6/9}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 %% dark edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
 \foreach \startnode/\endnode/\weight in {0/3/5, 1/3/9, 3/5/6, 4/5/8, 5/6/11}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -103,11 +101,12 @@
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
+\scriptsize
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/3/1.5, 2/6/3, 3/0/3, 4/3/4.5, 5/0/6, 6/3/7.5}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% light edges or lines
 \tikzstyle{EdgeStyle}=[-,thick,color=gray!30]
@@ -115,14 +114,12 @@
 \foreach \startnode/\endnode/\weight in {
   1/2/8, 1/3/9, 1/4/7, 2/4/5, 3/4/15, 4/6/9}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 %% dark edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
 \foreach \startnode/\endnode/\weight in {0/1/7, 0/3/5, 3/5/6, 4/5/8, 5/6/11}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -134,18 +131,18 @@
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
+\scriptsize
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/3/1.5, 2/6/3, 3/0/3, 4/3/4.5, 5/0/6, 6/3/7.5}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% light edges or lines
 \tikzstyle{EdgeStyle}=[-,thick,color=gray!30]
 \tikzstyle{LabelStyle}=[fill=white]
 \foreach \startnode/\endnode/\weight in {1/3/9, 2/4/5, 3/4/15, 4/5/8, 4/6/9}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 %% dark edges or lines
@@ -153,7 +150,6 @@
 \foreach \startnode/\endnode/\weight in {
   0/1/7, 0/3/5, 1/2/8, 1/4/7, 3/5/6, 5/6/11}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -166,11 +162,12 @@
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   scale=0.8]
+\scriptsize
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   0/0/0, 1/3/1.5, 2/6/3, 3/0/3, 4/3/4.5, 5/0/6, 6/3/7.5}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[-,thick]
@@ -178,7 +175,6 @@
 \foreach \startnode/\endnode/\weight in {
   0/1/7, 1/4/7, 3/0/5, 4/2/5, 4/6/9, 5/3/6}
 {
-  \footnotesize
   \Edge[label=$\weight$](\startnode)(\endnode)
 }
 \end{tikzpicture}

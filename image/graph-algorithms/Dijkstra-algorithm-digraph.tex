@@ -18,7 +18,7 @@
 %% nodes or vertices
 \foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% edges or lines
 \tikzstyle{EdgeStyle}=[->,>=stealth,thick]
@@ -28,7 +28,7 @@
   v_2/v_4/bend left/2, v_3/v_2/bend left/4, v_3/v_4/bend left=0/8,
   v_3/v_5/bend right/2, v_4/v_5/bend left/7, v_5/v_4/bend left/9}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -45,7 +45,7 @@
 %% nodes or vertices
 \foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% light edges or lines
 \tikzstyle{EdgeStyle}=[lightArrow]
@@ -55,7 +55,7 @@
   v_3/v_4/bend left=0/8, v_3/v_5/bend right/2, v_4/v_5/bend left/7,
   v_5/v_4/bend left/9}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 %% dark edges or lines
@@ -63,7 +63,7 @@
 \foreach \startnode/\endnode/\bend/\weight in {
   v_1/v_2/bend left/10, v_1/v_3/bend right/3}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -79,7 +79,7 @@
 %% nodes or vertices
 \foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% light edges or lines
 \tikzstyle{EdgeStyle}=[lightArrow]
@@ -88,7 +88,7 @@
   v_1/v_2/bend left/10, v_2/v_3/bend left/1, v_2/v_4/bend left/2,
   v_4/v_5/bend left/7, v_5/v_4/bend left/9}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 %% dark edges or lines
@@ -97,7 +97,7 @@
    v_1/v_3/bend right/3, v_3/v_2/bend left/4, v_3/v_4/bend left=0/8,
    v_3/v_5/bend right/2}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -114,7 +114,7 @@
 %% nodes or vertices
 \foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% light edges or lines
 \tikzstyle{EdgeStyle}=[lightArrow]
@@ -123,7 +123,7 @@
   v_1/v_2/bend left/10, v_2/v_3/bend left/1, v_2/v_4/bend left/2,
   v_4/v_5/bend left/7, v_5/v_4/bend left/9}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 %% dark edges or lines
@@ -132,7 +132,7 @@
    v_1/v_3/bend right/3, v_3/v_2/bend left/4, v_3/v_4/bend left=0/8,
    v_3/v_5/bend right/2}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -148,7 +148,7 @@
 %% nodes or vertices
 \foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% light edges or lines
 \tikzstyle{EdgeStyle}=[lightArrow]
@@ -157,7 +157,7 @@
   v_1/v_2/bend left/10, v_2/v_3/bend left/1, v_3/v_4/bend left=0/8,
   v_4/v_5/bend left/7, v_5/v_4/bend left/9}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 %% dark edges or lines
@@ -166,7 +166,7 @@
    v_1/v_3/bend right/3, v_2/v_4/bend left/2, v_3/v_2/bend left/4,
    v_3/v_5/bend right/2}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
@@ -183,7 +183,7 @@
 %% nodes or vertices
 \foreach \nodename/\x/\y in {v_1/0/0, v_2/2/2.5, v_3/4/0, v_4/6/2.5, v_5/8/0}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {\footnotesize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% dark edges or lines
 \tikzstyle{EdgeStyle}=[darkArrow]
@@ -192,7 +192,7 @@
    v_1/v_3/bend right/3, v_2/v_4/bend left/2, v_3/v_2/bend left/4,
    v_3/v_5/bend right/2}
 {
-  \footnotesize
+  \scriptsize
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
