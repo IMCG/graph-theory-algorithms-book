@@ -1087,12 +1087,27 @@ the input BST is empty then \texttt{NULL} is returned.
 \end{algorithm}
 
 From the binary search tree property, deduce that a vertex of a BST
-$T$ with minimum key can be found by repeatedly traversing left
-subtrees. When we have reached the left-most vertex $v$ of $T$,
-querying for the left subtree of $v$ should return \texttt{NULL}. At
-this point, we conclude that $v$ is a vertex with minimum key. Each
-query for the left subtree moves us one level down $T$, resulting in a
-worst-case runtime of $O(h)$ with $h$ being the height of $T$.
+$T$ with minimum key can be found by starting from the root of $T$ and
+repeatedly traversing left subtrees. When we have reached the
+left-most vertex $v$ of $T$, querying for the left subtree of $v$
+should return \texttt{NULL}. At this point, we conclude that $v$ is a
+vertex with minimum key. Each query for the left subtree moves us one
+level down $T$, resulting in a worst-case runtime of $O(h)$ with $h$
+being the height of $T$. See
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_minimum_key}
+for pseudocode of the procedure.
+
+The procedure for finding a vertex with maximum key is analogous to
+that for finding one with minimum key. Starting from the root of $T$,
+we repeatedly traverse right subtrees until we encounter the
+right-most vertex, which by the binary search tree property has
+maximum key. This procedure has the same worst-case runtime of $O(h)$.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-minimum.tex}
+\caption{Finding a vertex with minimum key in a BST.}
+\label{alg:tree_data_structures:binary_search_tree_minimum_key}
+\end{algorithm}
 
 
 \subsubsection{Insertion}
