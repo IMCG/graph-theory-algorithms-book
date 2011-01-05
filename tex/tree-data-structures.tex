@@ -1177,21 +1177,23 @@ for an illustration of locating successors and predecessors.
 \end{algorithm}
 
 
-\subsubsection{Insertion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We are given a BST (i.e., a binary rooted tree with weighted vertices
-having distinct weights satisfying the above criteria) $T$ and a
-label $\ell$. We assume $\ell$ is between the
-lowest weight of $T$ and the highest weight.
-For this procedure, we are looking for a ``parent''
-vertex in $T$ which can ``adopt'' a new vertex $v$ having weight $\ell$
-and for which this augmented tree $T\cup v$ satisfies
-the criteria above.
+\subsection{Insertion}
 
-Insertion proceeds as a search does. However, in this case, you are
-searching for vertices $v_1,v_2\in V$ for which
-${\rm wt}(v_1)<\ell < {\rm wt}(v_2)$. Once found, these
-vertices will tell you where to insert $v$.
+Inserting a vertex $v$ into a BST $T$ is rather straightforward. If
+$T$ is empty, we let $v$ be the root of $T$. Otherwise $T$ has at
+least one vertex. In that case, we need to locate a vertex in $T$ that
+can act as a parent and ``adopt'' $v$ as a child. To find a candidate
+parent, let $u$ be the root of $T$. If $\kappa_v < \kappa_u$ then we
+assign the root of the left subtree of $u$ to $u$ itself. Otherwise we
+assign the root of the right subtree of $u$ to $u$. We then carry on
+the above key comparison process until the operation of locating the
+root of a left or right subtree returns \texttt{NULL}. At this point,
+a candidate parent for $v$ is the last non-\texttt{NULL} value of
+$u$. If $\kappa_v < \kappa_u$ then we let $v$ be $u$'s
+left-child. Otherwise $v$ is the right-child of $u$.
+
 
 \subsubsection{Deletion}
 
