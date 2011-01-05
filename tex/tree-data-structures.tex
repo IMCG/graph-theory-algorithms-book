@@ -1197,13 +1197,22 @@ comparison, we move down at most one level so that in the worst-case
 inserting a vertex in $T$ takes $O(h)$ time, where $h$ is the height
 of $T$.
 Algorithm~\ref{alg:tree_data_structures:binary_search_tree_insert}
-presents pseudocode of our discussion.
+presents pseudocode of our discussion and
+Figure~\ref{fig:tree_data_structures:binary_search_tree_insert}
+illustrates how to insert a vertex into a BST.
 
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/binary-search-tree-insert.tex}
 \caption{Inserting a vertex into a binary search tree.}
 \label{alg:tree_data_structures:binary_search_tree_insert}
 \end{algorithm}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/tree-data-structures/binary-search-tree-insert.tex}
+\caption{Inserting into a binary search tree.}
+\label{fig:tree_data_structures:binary_search_tree_insert}
+\end{figure}
 
 
 \subsubsection{Deletion}
