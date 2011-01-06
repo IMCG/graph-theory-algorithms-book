@@ -2256,6 +2256,15 @@ together with $T$~(line~\ref{alg:Huffman_tree:return_tree_and_root}).
 \label{alg:trees_forests:binary_tree_Huffman_codes}
 \end{algorithm}
 
+\begin{figure}[!htbp]
+\centering
+\index{Huffman code}
+\index{Huffman code!tree representation}
+\input{image/trees-forests/construct-Huffman-tree.tex}
+\caption{Constructing a Huffman tree.}
+\label{fig:trees_forests:construct_Huffman_tree}
+\end{figure}
+
 The runtime analysis of
 Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} depends on
 the implementation of the priority\index{queue!priority} queue
@@ -2276,8 +2285,10 @@ $O(n \log_2(n))$.
 Algorithm~\ref{alg:trees_forests:binary_tree_Huffman_codes} represents
 the Huffman\index{Huffman code} code of an alphabet as a
 binary\index{Huffman code!tree representation} tree $T$ rooted at
-$r$. To determine the actual encoding of each symbol in the alphabet,
-we feed $T$ and $r$ to
+$r$. For an illustration of the process of constructing a Huffman
+tree, see Figure~\ref{fig:trees_forests:construct_Huffman_tree}. To
+determine the actual encoding of each symbol in the alphabet, we feed
+$T$ and $r$ to
 Algorithm~\ref{alg:trees_forests:Huffman_encoding_alphabet} to obtain
 the encoding of each symbol. Starting from the root $r$ whose
 designated label is the empty\index{string!empty} string
