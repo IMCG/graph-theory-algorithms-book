@@ -20,10 +20,38 @@
 \url{http://xkcd.com/835/}
 \end{quote}
 
+\noindent
+In chapters~\ref{chap:graph_algorithms} and~\ref{chap:trees_forests},
+we discussed various algorithms that rely on
+priority\index{priority queue} queues as one of their fundamental data
+structures. Such algorithms include
+Dijkstra's\index{Dijkstra!algorithm} algorithm,
+Prim's\index{Prim!algorithm} algorithm, and the algorithm for
+constructing Huffman\index{Huffman tree} trees. The runtime of any
+algorithm that uses priority queues crucially depends on an efficient
+implementation of the priority queue data\index{data structure}
+structure. This chapter discusses the general priority queue data
+structure and various efficient implementations based on trees.
+Section~\ref{sec:tree_data_structures:priority_queues} provides some
+theoretical underpinning of priority queues and considers a simple
+implementation of priority queues as sorted lists.
+Section~\ref{sec:tree_data_structures:binary_heaps} discusses how to
+use binary\index{binary tree} trees to realize an efficient
+implementation of priority queues called a binary\index{binary heap}
+heap. Although very useful in practice, binary heaps do not lend
+themselves to being merged in an efficient manner, a setback rectified
+in section~\ref{sec:tree_data_structures:binomial_heaps} by a priority
+queue implementation called binomial\index{binomial heap} heaps. As a
+further application of binary\index{binary tree} trees,
+section~\ref{sec:tree_data_structures:binary_search_trees} discusses
+binary\index{binary search trees} search trees as a general data
+structure for managing data in a sorted order.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Priority queues}
+\label{sec:tree_data_structures:priority_queues}
 
 A \emph{priority queue}\index{queue!priority} is essentially a queue
 data structure with various accompanying rules regarding how to access
