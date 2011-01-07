@@ -29,14 +29,14 @@ $v \assign$ root of $T$\;
 \While{$\MyTrue$}{
   \eIf{\rm $v \neq \texttt{NULL}$}{
     $\push(S, v)$\;
-    $v \assign$ left child of $v$\;
+    $v \assign$ left-child of $v$\;
   }{
     \If{$\length(S) = 0$}{
       exit the loop\;
     }
     $v \assign \pop(S)$\;
     $\append(L, v)$\;
-    $v \assign$ right child of $v$\;
+    $v \assign$ right-child of $v$\;
   }
 }
 \Return $L$\;
