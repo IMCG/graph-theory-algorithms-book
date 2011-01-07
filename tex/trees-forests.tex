@@ -2954,4 +2954,22 @@ is
   provide efficient algorithms for speeding up the Merkle signature
   scheme. Investigate this scheme and how it uses binary trees to
   generate digital signatures.
+
+\item Consider the finite alphabet
+  $\cA = \{a_1, a_2, \dots, a_r\}$. If $C$ is a subset of $\cA^\ast$,
+  then we say that $C$ is an $r$-ary\index{code!$r$-ary} code and call
+  $r$ the radix\index{code!radix} of the code.
+  McMillan's\index{McMillan!Brockway}
+  theorem~\cite{McMillan1956}\index{McMillan!theorem}, first published
+  in~1956, relates codeword lengths to unique decipherability. In
+  particular, let $C = \{c_1, c_2, \dots, c_q\}$ be an $r$-ary code
+  where each $c_i$ has length $\ell_i$. If $C$ is uniquely
+  decipherable, McMillan's theorem states that the codeword lengths
+  $\ell_i$ must satisfy Kraft's\index{Kraft!inequality} inequality
+  \[
+  \sum_{i=1}^q \frac{1}{r^{\ell_i}}
+  \leq
+  1.
+  \]
+  Prove McMillan's theorem.
 \end{problem}
