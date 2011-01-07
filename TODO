@@ -9,3 +9,23 @@ This is a list of possible enhancements to the book.
 
 * Prufer encoding and Cayley's formula
   Discuss these in the context of generating a random tree.
+  Other algorithms for coding labelled trees can be found in the
+  following:
+
+@phdthesis{Caminiti2007,
+  author  = {Saverio Caminiti},
+  title   = {On Coding Labeled Trees},
+  school  = {Computer Science Department},
+  address = {Sapienza University of Rome, Italy},
+  year    = {2007},
+}
+
+@article{CaminitiEtAl2007,
+  author    = {Saverio Caminiti and Irene Finocchi and Rossella Petreschi},
+  title     = {On coding labeled trees},
+  journal   = {Theoretical Computer Science},
+  year      = {2007},
+  volume    = {382},
+  number    = {2},
+  pages     = {97--108},
+}
