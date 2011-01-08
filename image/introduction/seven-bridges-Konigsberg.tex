@@ -25,11 +25,7 @@
 {
   (\startnode) edge[lineDecorate] node {} (\endnode)
 }
-\foreach \startnode/\endnode in {a/b, b/c}
-{
-  (\startnode) edge[lineDecorate,bend left] node {} (\endnode)
-}
-\foreach \startnode/\endnode in {c/b, b/a}
+\foreach \startnode/\endnode in {a/b, b/c, c/b, b/a}
 {
   (\startnode) edge[lineDecorate,bend left] node {} (\endnode)
 };
