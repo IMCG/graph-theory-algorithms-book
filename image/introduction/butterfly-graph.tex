@@ -12,14 +12,12 @@
 
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick}]
+\scriptsize
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {
-  0/0/2/left/west, 1/0/0/left/west, 2/2.5/1/above/north,
-  3/5/0/right/east, 4/5/2/right/east}
+\foreach \nodename/\x/\y in {0/0/2, 1/0/0, 2/2.5/1, 3/5/0, 4/5/2}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {};
-  \node [\direction] at (\nodename.\navigate) {\scriptsize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
 }
 %% edges or lines
 \path
