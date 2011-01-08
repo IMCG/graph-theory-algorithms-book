@@ -12,44 +12,51 @@
 %% pentagon with star and inner pentagon
 \subfigure[]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick},%
   scale=2]
 %% nodes or vertices
-\foreach \nodename/\x/\y in {1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090,
-  4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/-0.2244/0.3090,
-  7/0.2244/0.3090, 8/-0.3632/-0.1180, 9/0/-0.3819, 10/0.3632/-0.1180}
+\foreach \nodename/\x/\y in {
+  1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090, 4/-0.5877/-0.8090,
+  5/0.5877/-0.8090, 6/-0.2244/0.3090, 7/0.2244/0.3090,
+  8/-0.3632/-0.1180, 9/0/-0.3819, 10/0.3632/-0.1180}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {1/2, 1/5, 1/7, 1/10, 2/3, 2/6, 2/7,
-  3/4, 3/6, 3/8, 4/5, 4/8, 4/9, 5/9, 5/10, 6/7, 6/8, 7/10, 8/9, 9/10}
+\foreach \startnode/\endnode in {
+  1/2, 1/5, 1/7, 1/10, 2/3, 2/6, 2/7, 3/4, 3/6, 3/8, 4/5, 4/8, 4/9,
+  5/9, 5/10, 6/7, 6/8, 7/10, 8/9, 9/10}
 {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
-\qquad
 %%
+%%
+\qquad
 %% star and inner pentagon
 \subfigure[]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},%
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick},%
   scale=2]
 %% nodes or vertices
-\foreach \nodename/\x/\y in {1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090,
-  4/-0.5877/-0.8090, 5/0.5877/-0.8090, 6/-0.2244/0.3090,
-  7/0.2244/0.3090, 8/-0.3632/-0.1180, 9/0/-0.3819, 10/0.3632/-0.1180} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+\foreach \nodename/\x/\y in {
+  1/0.9510/0.3090, 2/0/1, 3/-0.9510/0.3090, 4/-0.5877/-0.8090,
+  5/0.5877/-0.8090, 6/-0.2244/0.3090, 7/0.2244/0.3090,
+  8/-0.3632/-0.1180, 9/0/-0.3819, 10/0.3632/-0.1180}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
-\foreach \startnode/\endnode in {1/7, 1/10, 2/6, 2/7, 3/6, 3/8, 4/8,
-  4/9, 5/9, 5/10, 6/7, 6/8, 7/10, 8/9, 9/10} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+\foreach \startnode/\endnode in {
+  1/7, 1/10, 2/6, 2/7, 3/6, 3/8, 4/8, 4/9, 5/9, 5/10, 6/7, 6/8, 7/10,
+  8/9, 9/10}
+{
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
