@@ -11,15 +11,15 @@
 
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick}]
+\scriptsize
 %% nodes or vertices
 \foreach \nodename/\nodelabel/\x/\y/\direction/\navigate in {
   c1/1/0/4/left/west, c2/2/0/3/left/west, c3/3/0/2/left/west,
   c4/4/0/1/left/west, c5/5/0/0/left/west, r1/1/4/4/right/east,
   r2/2/4/2/right/east, r3/3/4/0/right/east}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {};
-  \node [\direction] at (\nodename.\navigate) {\scriptsize$\nodelabel$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodelabel$};
 }
 %% edges or lines
 \path
