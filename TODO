@@ -29,3 +29,35 @@ This is a list of possible enhancements to the book.
   number    = {2},
   pages     = {97--108},
 }
+
+* Other references for consideration:
+
+@article{ChartrandEtAl1988,
+  author    = {Gary Chartrand and Paul Erd\H{o}s and Ortrud R. Oellermann},
+  title     = {How to Define an Irregular Graph},
+  journal   = {College Mathematics Journal},
+  year      = {1988},
+  volume    = {19},
+  number    = {1},
+  pages     = {36--42},
+}
+
+@article{FanEtAl1997,
+  author    = {C. Kenneth Fan and Bjorn Poonen and George Poonen},
+  title     = {How to Spread Rumors Fast},
+  journal   = {Mathematics Magazine},
+  year      = {1997},
+  volume    = {70},
+  number    = {1},
+  pages     = {40--42},
+}
+
+@article{Hayes1998,
+  author    = {Brian Hayes},
+  title     = {How to Avoid Yourself},
+  journal   = {American Scientist},
+  year      = {1998},
+  volume    = {86},
+  number    = {4},
+  pages     = {314--319},
+}
