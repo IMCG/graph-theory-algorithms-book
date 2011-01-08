@@ -3058,7 +3058,7 @@ economics, and operation research.
   the same cardinality. Here we use bipartite\index{bipartite graph}
   graphs and other graph theoretic concepts to prove the
   Cantor-Schr\"oder-Bernstein theorem. The full proof can be found in
-  Yegnanarayanan~\cite{Yegnanarayanan2005}.
+  Yegnanarayanan\index{Yegnanarayanan, V.}~\cite{Yegnanarayanan2005}.
   %%
   \begin{enumerate}[(a)]
   \item Is it possible for $A$ and $B$ to be bipartitions of $V$ and
@@ -3073,5 +3073,28 @@ economics, and operation research.
   \item Let $C$ be a component of $G$ and let $A' \subseteq A$ and
     $B' \subseteq B$ contain all vertices in the component $C$. Show
     that $|A'| = |B'|$.
+  \end{enumerate}
+
+\item Fermat's\index{Fermat's little theorem} little theorem states
+  that if $p$ is prime and $a$ is an integer not divisible by $p$,
+  then $p$ divides $a^p - a$. Here we cast the problem within the
+  context of graph theory and prove it using graph theoretic
+  concepts. The full proof can be found in
+  Heinrich\index{Heinrich, Katherine} and
+  Horak\index{Hor\'ak, Peter}~\cite{HeinrichHorak1994} and
+  Yegnanarayanan\index{Yegnanarayanan, V.}~\cite{Yegnanarayanan2005}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Let $G = (V,E)$ be a graph with $V$ being the set of all
+    sequences $(a_1, a_2, \dots, a_p)$ of integers
+    $1 \leq a_i \leq a$ and $a_j \neq a_k$ for some $j \neq k$. Show
+    that $G$ has $a^p - a$ vertices.
+
+  \item Define the edge set of $G$ as follows. If $u,v \in V$ such
+    that $u = (u_1, u_2, \dots, u_p)$ and
+    $v = (u_p, u_1, \dots, u_{p-1})$, then $uv \in E$. Show that each
+    component of $G$ is a cycle of length $p$.
+
+  \item Show that $G$ has $(a^p - a) / p$ components.
   \end{enumerate}
 \end{problem}
