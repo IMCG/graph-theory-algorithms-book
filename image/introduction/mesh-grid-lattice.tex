@@ -13,8 +13,8 @@
 \subfigure[$M(3, 4)$]{
 \label{fig:introduction:2_mesh_M34}
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   1/0/0,  2/1.5/0,  3/3/0,
@@ -22,7 +22,7 @@
   7/0/2,  8/1.5/2,  9/3/2,
   10/0/3, 11/1.5/3, 12/3/3}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
@@ -32,18 +32,19 @@
   3/6, 6/9, 9/12,
   1/2, 2/3, 4/5, 5/6, 7/8, 8/9, 10/11, 11/12}
 {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
-\qquad
 %%
+%%
+\qquad
 %% mesh M(3,2,3)
 \subfigure[$M(3, 2, 3)$]{
 \label{fig:introduction:3_mesh_M323}
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {
   1/0/0,      2/1.5/0,  3/3/0,
@@ -53,7 +54,7 @@
   13/0.5/2.5, 14/2/2.5, 15/3.5/2.5,
   16/0.5/4.5, 17/2/4.5, 18/3.5/4.5}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
@@ -64,7 +65,7 @@
   1/4, 4/7, 2/5, 5/8, 3/6, 6/9,
   10/13, 13/16, 11/14, 14/17, 12/15, 15/18}
 {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
