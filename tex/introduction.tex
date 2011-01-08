@@ -3049,4 +3049,26 @@ economics, and operation research.
 \item Describe and present pseudocode to generate a
   random\index{algorithm!random} regular\index{regular graph}
   graph. What is the worst-case runtime of your algorithm?
+
+\item The Cantor-Schr\"oder-Bernstein theorem states that if $A,B$ are
+  sets and we have an injection $f: A \to B$ and an injection
+  $g: B \to A$, then there is a bijection between $A$ and $B$, thus
+  proving that $A$ and $B$ have the same cardinality. Here we use
+  bipartite graphs and other graph theoretic concepts to prove the
+  Cantor-Schr\"oder-Bernstein theorem. The full proof can be found in
+  Yegnanarayanan~\cite{Yegnanarayanan2005}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Consider the case where $A \cap B \neq \emptyset$.
+
+  \item Now assume that $A \cap B = \emptyset$ and define a bipartite
+    graph $G = (V, E)$ with $A$ and $B$ being the two partitions of
+    $V$, where for any $x \in A$ and $y \in B$ we have $xy \in E$ if
+    and only if either $f(x) = y$ or $g(y) = x$. Show that
+    $\deg(v) = 1$ or $\deg(v) = 2$ for each $v \in V$.
+
+  \item Let $C$ be a component of $G$ and let $A' \subseteq A$ and
+    $B' \subseteq B$ contain all vertices in the component $C$. Show
+    that $|A'| = |B'|$.
+  \end{enumerate}
 \end{problem}
