@@ -2468,10 +2468,11 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
   and column $j$.
   %%
   \begin{enumerate}[(a)]
-  \item The \emph{total distance} $td(u)$ of a fixed vertex
-    $u \in V(G)$ is the sum of distances from $u$ to each vertex in $G$:
+  \item The \emph{total distance}\index{distance!total}
+    $\totalDist(u)$\index{$\totalDist$} of a fixed vertex $u \in V(G)$
+    is the sum of distances from $u$ to each vertex in $G$:
     \[
-    td(u)
+    \totalDist(u)
     =
     \sum_{v \in V(G)} d(u,v).
     \]
@@ -2481,7 +2482,7 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     %%
     \begin{equation}
     \label{eqn:graph_algorithms:total_distance_vertex}
-    td(u)
+    \totalDist(u)
     =
     \sum_k d_{i,k}
     =
@@ -2490,14 +2491,15 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
 
   \item Let the vertices of $G$ be labeled
     $V = \{v_1, v_2, \dots, v_n\}$, where $n = |V(G)|$ is the order of
-    $G$. The \emph{total distance} $td(G)$ of $G$ is obtained by
-    summing all the $d(v_i, v_j)$ for $i < j$. If $G$ is connected,
-    show that the total distance of $G$ is equal to the sum of all
-    entries in the upper (or lower) triangular of $D$:
+    $G$. The \emph{total distance}\index{distance!total}
+    $\totalDist(G)$ of $G$ is obtained by summing all the
+    $d(v_i, v_j)$ for $i < j$. If $G$ is connected, show that the
+    total distance of $G$ is equal to the sum of all entries in the
+    upper (or lower) triangular of $D$:
     %%
     \begin{equation}
     \label{eqn:graph_algorithms:total_distance_graph}
-    td(G)
+    \totalDist(G)
     =
     \sum_{i < j} d_{i,j}
     =
@@ -2509,7 +2511,7 @@ thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
     Hence show that the total distance of $G$ is equal to its Wiener
     number:
     \[
-    td(G)
+    \totalDist(G)
     =
     W(G).
     \]
