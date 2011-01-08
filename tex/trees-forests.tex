@@ -25,12 +25,27 @@ In section~\ref{subsec:introduction:walks_trails_paths}, we briefly
 touched upon trees\index{tree} and provided examples of how trees
 could be used to model hierarchical\index{hierarchical structure}
 structures. This chapter provides an in-depth study of
-trees\index{tree}, their properties, and various applications.
+trees\index{tree}, their properties, and various applications. After
+defining trees and related concepts in
+section~\ref{sec:trees_forests:definitions_examples}, we then present
+various basic properties of trees in
+section~\ref{sec:trees_forests:properties_trees}. Each connected graph
+$G$ has an underlying subgraph called a spanning tree that contains
+all the vertices of $G$. Spanning trees are discussed in
+section~\ref{sec:trees_forests:minimum_spanning_trees} together with
+various common algorithms for finding spanning trees. We then discuss
+binary trees in section~\ref{sec:trees_forests:binary_trees}, followed
+by an application of binary trees to coding theory in
+section~\ref{sec:trees_forests:Huffman_codes}. Whereas breadth- and
+depth-first searches are general methods for traversing a graph, trees
+require specialized techniques in order to visit their vertices, a
+topic that is taken up in section~\ref{sec:trees_forests:tree_traversals}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Definitions and examples}
+\label{sec:trees_forests:definitions_examples}
 
 Recall that a path\index{path} in a graph $G = (V, E)$ whose start and
 end vertices are the same is called a cycle\index{cycle}. We say $G$ is
@@ -453,6 +468,7 @@ $G = (V, E)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Properties of trees}
+\label{sec:trees_forests:properties_trees}
 
 By Theorem~\ref{thm:inroduction:edge_is_bridge_iff_edge_not_on_cycle},
 each edge of a tree is a bridge\index{bridge}. Removing any edge of a
@@ -808,6 +824,7 @@ $\varphi(n)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Minimum spanning trees}
+\label{sec:trees_forests:minimum_spanning_trees}
 \index{spanning tree!minimum}
 
 Suppose we want to design an electronic
@@ -1452,6 +1469,7 @@ sage: boruvka(G).edges()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Binary trees}
+\label{sec:trees_forests:binary_trees}
 \index{binary tree}
 
 A \emph{binary tree}\index{binary tree} is a rooted\index{tree!rooted}
