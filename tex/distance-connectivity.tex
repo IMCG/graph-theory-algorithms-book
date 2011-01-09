@@ -41,9 +41,9 @@ W(P)
 \sum_{i=1}^m W(e_i).
 \]
 The \emph{distance function}\index{distance!function}
-$\partial: V \times V \to \R \cup \{\infty\}$ on $G$ is defined by
+$d: V \times V \to \R \cup \{\infty\}$ on $G$ is defined by
 \[
-\partial(v_1, v_2)
+d(v_1, v_2)
 =
 \infty
 \]
@@ -51,7 +51,7 @@ if $v_1$ and $v_2$ lie in distinct connected components of $G$, and by
 %%
 \begin{equation}
 \label{eqn:distance_connectivity:distance_as_minimum_path_weight}
-\partial(v_1, v_2)
+d(v_1, v_2)
 =
 \min_P W(P)
 \end{equation}
@@ -60,25 +60,24 @@ otherwise, where the minimum is taken over all paths $P$ from $v_1$ to
 $v_2$. By hypothesis, $G$ has no negative weight cycles so the minimum
 in~\eqref{eqn:distance_connectivity:distance_as_minimum_path_weight}
 exists. It follows by definition of the distance function that
-$\partial(u,v) = \infty$ if and only if there is no path between $u$
-and $v$.
+$d(u,v) = \infty$ if and only if there is no path between $u$ and $v$.
 
-How we interpret the distance function $\partial$ depends on the
-meaning of the weight function $W$. In practical applications,
-vertices can represent physical locations such as cities, sea ports,
-or landmarks. An edge weight could be interpreted as the physical
+How we interpret the distance function $d$ depends on the meaning of
+the weight function $W$. In practical applications, vertices can
+represent physical locations such as cities, sea ports, or
+landmarks. An edge weight could be interpreted as the physical
 distance in kilometers between two cities, the monetary cost of
 shipping goods from one sea port to another, or the time required to
-travel from one landmark to another. Then $\partial(u,v)$ could mean
-the shortest route in kilometers between two cities, the lowest cost
+travel from one landmark to another. Then $d(u,v)$ could mean the
+shortest route in kilometers between two cities, the lowest cost
 incurred in transporting goods from one sea port to another, or the
 least time required to travel from one landmark to another.
 
-The distance function\index{distance!function} $\partial$ is not in
-general a metric\index{metric}, i.e. the triangle
+The distance function\index{distance!function} $d$ is not in general a
+metric\index{metric}, i.e. the triangle
 inequality\index{triangle inequality} does not in general hold for
-$\partial$. However, when the distance function is a metric then $G$
-is called a \emph{metric graph}\index{metric graph}. The theory of
+$d$. However, when the distance function is a metric then $G$ is
+called a \emph{metric graph}\index{metric graph}. The theory of
 metric\index{metric graph} graphs, due to their close connection with
 tropical curves, is an active area of research. For more information
 on metric graphs, see Baker\index{Baker, Matthew} and
