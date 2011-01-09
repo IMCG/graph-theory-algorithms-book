@@ -87,6 +87,43 @@ Faber\index{Faber, Xander}~\cite{BakerFaber2006}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Radius and diameter}
+
+The {\it eccentricity} $\epsilon:V \to  \R$ is defined as follows:
+$\epsilon (v)$ (for a vertex $v$) is the greatest distance between $v$
+and any other vertex in $G$.
+\index{eccentricity}
+
+The {\it diameter} of $G$, $\partial(G)$, is the maximum
+eccentricity of any vertex in the graph. To compute
+$\partial(G)$, first find the shortest path (see Chapter
+\ref{chap:graph_algorithms}) between each pair of
+vertices. The maximum weight of any of
+these paths is the diameter of the graph:
+
+\[
+\partial(G) = \max_{v_1,v_2\in V} \partial(v_1,v_2).
+\]
+\index{diameter}
+
+To compute the diameter of a graph, use the Floyd-Roy-Warshall
+algorithm to compute the shortest distance between any
+two pairs of vertices. The maximum of these distances is the
+diameter.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Trees: distance, center, centroid}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Distance in self-complementary graphs}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Distance matrix}
 
 There are two uses of this term in the literature.
@@ -243,43 +280,6 @@ def distance_matrix(Gamma):
                 dist_mat[v1][v2] = D[v1][v2]
     return matrix(dist_mat)
 \end{lstlisting}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Radius and diameter}
-
-The {\it eccentricity} $\epsilon:V \to  \R$ is defined as follows:
-$\epsilon (v)$ (for a vertex $v$) is the greatest distance between $v$
-and any other vertex in $G$.
-\index{eccentricity}
-
-The {\it diameter} of $G$, $\partial(G)$, is the maximum
-eccentricity of any vertex in the graph. To compute
-$\partial(G)$, first find the shortest path (see Chapter
-\ref{chap:graph_algorithms}) between each pair of
-vertices. The maximum weight of any of
-these paths is the diameter of the graph:
-
-\[
-\partial(G) = \max_{v_1,v_2\in V} \partial(v_1,v_2).
-\]
-\index{diameter}
-
-To compute the diameter of a graph, use the Floyd-Roy-Warshall
-algorithm to compute the shortest distance between any
-two pairs of vertices. The maximum of these distances is the
-diameter.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Trees: distance, center, centroid}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Distance in self-complementary graphs}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
