@@ -2863,6 +2863,15 @@ state, but this lower bound does not necessarily apply to its set of
 final states. It is possible that the set of final states be empty, in
 which case $\cA$ has no accepting states.
 
+Let $q_1, q_2 \in Q$. The finite-state automaton $\cA$ is said to be a
+\emph{deterministic finite-state automaton}~(DFA)\index{DFA}
+if\index{finite automaton!deterministic} for all
+$(q,a) \in Q \times \Sigma$, the mappings $(q,a) \mapsto q_1$ and
+$(q,a) \mapsto q_2$ imply that $q_1 = q_2$. Furthermore, for each
+state $q \in Q$ and each input symbol $a \in \Sigma$, we have
+$(q,a) \mapsto q^\prime$ for some $q^\prime \in Q$. In other words
+$|\delta(q,a)| = 1$.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
