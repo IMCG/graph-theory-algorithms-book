@@ -2863,6 +2863,26 @@ state, but this lower bound does not necessarily apply to its set of
 final states. It is possible that the set of final states be empty, in
 which case $\cA$ has no accepting states.
 
+Figure~\ref{fig:introduction:vending_machine_state_diagram}
+illustrates a finite-automaton representation of a basic vending
+machine. The initial state is depicted as a circle with an arrow
+pointing to it, with no other state at the tail of the arrow. The
+final state is shown as a circle with two concentric rings. We can
+consider the visual representation in
+Figure~\ref{fig:introduction:vending_machine_state_diagram}, also
+called a \emph{state diagram}\index{state!diagram}, as a multidigraph
+where each vertex is a state and each directed edge is a transition
+from one state to another.
+
+\begin{figure}[!htbp]
+\centering
+\index{state!diagram}
+\index{vending machine}
+\input{image/introduction/vending-machine-state-diagram.tex}
+\caption{State diagram of a simple vending machine.}
+\label{fig:introduction:vending_machine_state_diagram}
+\end{figure}
+
 Let $q_1, q_2 \in Q$. The finite-state automaton $\cA$ is said to be a
 \emph{deterministic finite-state automaton}~(DFA)\index{DFA}
 if\index{finite automaton!deterministic} for all

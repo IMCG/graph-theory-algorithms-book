@@ -1,0 +1,44 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}
+[node distance=2.5cm,on grid,>=stealth,thick,initial text=,%
+  every state/.style={draw,thick}]
+\scriptsize
+%% nodes or states
+\node[state,initial] (0) {$0$\textcent};
+\node[state] (70) [right=of 0] {$70$\textcent};
+\node[state] (20) [above=of 70] {$20$\textcent};
+\node[state] (50) [below=of 70] {$50$\textcent};
+\node[state] (40) [right=of 20] {$40$\textcent};
+\node[state] (90) [right=of 70] {$90$\textcent};
+\node[state,accepting] (1) [right=of 50] {$\geq \$1$};
+\node[state] (60) [right=of 40] {$60$\textcent};
+\node[state] (80) [below right=of 60] {$80$\textcent};
+%% transitions or edges
+\path[->,thick]
+(0) edge node[above left] {$20$\textcent} (20)
+(0) edge node[below left] {$50$\textcent} (50)
+(20) edge node[left] {$50$\textcent} (70)
+(50) edge[bend left] node[above left] {$20$\textcent} (70)
+(20) edge node[above] {$20$\textcent} (40)
+(40) edge node[left] {$50$\textcent} (90)
+(70) edge node[above] {$20$\textcent} (90)
+(50) edge node[below] {$50$\textcent} (1)
+(90) edge[bend right=60] node[above left] {$20$\textcent} (1)
+(90) edge node[left] {$50$\textcent} (1)
+(40) edge node[above] {$20$\textcent} (60)
+(60) edge node[above right] {$20$\textcent} (80)
+(80) edge node[above left] {$20$\textcent} (1)
+(80) edge[bend left] node[below right] {$50$\textcent} (1)
+(60) edge node[above left] {$50$\textcent} (1)
+(70) edge[bend right] node[below left] {$50$\textcent} (1);
+\end{tikzpicture}
