@@ -35,37 +35,43 @@
 
 \subsection{Distance and metrics on graphs}
 
-Consider an edge-weighted simple
-graph $G=(V,E,i,h)$ without negative weight
-cycles. Here $E\subset V^{(2)}$,
-$i$ is an incidence function as in~\eqref{eqn:edge-incidence}, which
-we regard as the identity function, and $h$ is an
-orientation function as in~\eqref{eqn:edge-orientation}.
-Let ${\rm wt}: E \to \R$ be the weight function.
-(if $G$ is not provided with a weight function on the edges,
-then assume that ${\rm wt}(e)=1$, for all $e\in E$.)
-If $v_1,v_2\in V$ are two vertices and $P=(e_1,\dots,e_m)$ is
-a path from $v_1$ to $v_2$ (so $v_1$ is incident to $e_1$
-nd $v_2$ is incident to $e_m$), we define the {\it weight of $P$}
-to be the sum of the weights of the edges in $P$:
-
+Consider an edge-weighted simple graph $G = (V,E,i,h)$ without
+negative weight cycles. Here $E \subseteq V^{(2)}$, $i: E \to V^{(2)}$
+is an incidence function as in~\eqref{eqn:introduction:edge_incidence},
+which we regard as the identity function, and $h: E \to V$ is an
+orientation function as in~\eqref{eqn:introduction:edge_orientation}.
+Let $W: E \to \R$ be the weight function. (If $G$ is not provided with
+a weight function on the edges, we assume that each edge has unit
+weight.) If $v_1, v_2 \in V$ are two vertices and
+$P = (e_1, e_2, \dots, e_m)$ is a $v_1$-$v_2$ path~(so $v_1$ is
+incident to $e_1$ and $v_2$ is incident to $e_m$), define the
+\emph{weight}\index{weight!path} of $P$ to be the sum of the weights
+of the edges in $P$:
 \[
-{\rm wt}(P)=\sum_{i=1}^m {\rm wt}(e_i).
+W(P)
+=
+\sum_{i=1}^m W(e_i).
 \]
-The {\it distance function} $\partial:V\times V \to  \R\cup
-\{\infty\}$ on
-\index{distance function}
-$G$ is defined by $\partial(v_1,v_2) = \infty$,
-if $v_1$ and $v_2$ lie in distinct connected
-components of $G$, and by
-
+The \emph{distance function}\index{distance!function}
+$\partial: V \times V \to \R \cup \{\infty\}$ on $G$ is defined by
 \[
-\partial(v_1,v_2) =
-\min_P {\rm wt}(P),
+\partial(v_1, v_2)
+=
+\infty
 \]
-otherwise, where the minimum is taken over all paths $P$
-from $v_1$ to $v_2$ (this minimum exists since
-$G$ has no negative weight cycles.
+if $v_1$ and $v_2$ lie in distinct connected components of $G$, and by
+%%
+\begin{equation}
+\label{eqn:distance_connectivity:distance_as_minimum_path_weight}
+\partial(v_1, v_2)
+=
+\min_P W(P)
+\end{equation}
+%%
+otherwise, where the minimum is taken over all paths $P$ from $v_1$ to
+$v_2$. By hypothesis, $G$ has no negative weight cycles so the minimum
+in~\eqref{eqn:distance_connectivity:distance_as_minimum_path_weight}
+exists.
 
 This distance function is not in general a metric
 (that is, the triangle inequality is not true in general).
