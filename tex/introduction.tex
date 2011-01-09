@@ -2793,60 +2793,66 @@ economics, and operation research.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Application: finite automata}
+\index{automata theory}
+\index{finite automata}
 
-In theoretical computer science, automata are used as idealized
-mathematical models of computation. The studies of
+In theoretical computer\index{computer science} science, automata are
+used as idealized mathematical models of computation. The studies of
 computability~(i.e. what can be computed) and complexity~(i.e. the
 time and space requirements of a computation) are based on automata
 theory to provide precise mathematical models of computers. For an
-intuitive appreciation of automata, consider a vending machine that
-dispenses food or beverages. We insert a fixed amount of money into
-the vending machine and make our choice of food or beverage by
-pressing buttons that correspond to our choice. If the amount of money
-inserted is sufficient to cover the cost of our choice of food or
-beverage, the machine dispenses the item of our choice. Otherwise we
-need to insert more money until the required amount is reached and
-then make our selection again. Embodied in the above vending machine
-example are notions of input~(money), machine states~(has a selection
-been made? has sufficient money been inserted?), state
-transition~(move from money insertion state to food/beverage selection
-state), and output~(dispense item of choice).
+intuitive appreciation of automata, consider a
+vending machine\index{vending machine} that dispenses food or
+beverages. We insert a fixed amount of money into the vending machine
+and make our choice of food or beverage by pressing buttons that
+correspond to our choice. If the amount of money inserted is
+sufficient to cover the cost of our choice of food or beverage, the
+machine dispenses the item of our choice. Otherwise we need to insert
+more money until the required amount is reached and then make our
+selection again. Embodied in the above vending machine example are
+notions of input~(money), machine states~(has a selection been made?
+has sufficient money been inserted?), state transition~(move from
+money insertion state to food/beverage selection state), and
+output~(dispense item of choice).
 
-In the above vending machine example, we should note that the vending
-machine only accepts a finite number of objects as legitimate
-input. The vending machine can accept dollar bills and coins of a
-fixed variety of denominations and belonging to a specific locale,
-e.g. Australia. Thus we say that the vending machine has finite input
-and the automaton that models the vending machine is referred to as a
-finite automaton having a finite alphabet.
+In the above vending\index{vending machine} machine example, we should
+note that the vending machine only accepts a finite number of objects
+as legitimate input. The vending machine can accept dollar bills and
+coins of a fixed variety of denominations and belonging to a specific
+locale, e.g. Australia. Thus we say that the vending machine has
+finite input and the automaton that models the vending machine is
+referred to as a finite automaton having a finite alphabet.
 
 Before presenting a precise definition of finite automata, we take a
 detour to describe notations associated with valid input to finite
-automata. Let $\Sigma$ be a nonempty finite alphabet. By $\Sigma^\ast$
-we mean the set of all finite strings over $\Sigma$. Each element of
-$\Sigma^\ast$ is a string or word of finite length whose components
-are elements of $\Sigma$. That is, if $w \in \Sigma^\ast$ then
-$w = w_1 w_2 \cdots w_n$ for some integer $n \geq 0$ and each
+automata. Let $\Sigma$ be a nonempty finite
+alphabet\index{alphabet}. By $\Sigma^\ast$ we mean the set of all
+finite strings\index{string} over $\Sigma$. Each element of
+$\Sigma^\ast$ is a string or word\index{word} of finite length whose
+components are elements of $\Sigma$. That is, if $w \in \Sigma^\ast$
+then $w = w_1 w_2 \cdots w_n$ for some integer $n \geq 0$ and each
 $w_i \in \Sigma$. It follows that $\Sigma \subseteq \Sigma^{\ast}$.
 We also consider the empty string $\varepsilon$ as a valid string over
 $\Sigma$. The string $\varepsilon$ is sometimes called the null string.
 
 \begin{definition}
-\textbf{Finite automata.}
+\textbf{Finite automata.}\index{finite automata}
 Let $Q$ and $\Sigma$ be nonempty finite sets.  A
 \emph{finite automaton} is a $5$-tuple
 $\cA = (Q, \Sigma, \delta, q_0, F)$ where
 %%
 \begin{enumerate} \parskip=0.0in
-  \item $Q$ is a finite set of states.
+  \item $Q$ is a finite set of states\index{state}.
 
-  \item $\Sigma$ is a finite set of input alphabet.
+  \item $\Sigma$ is a finite set of input alphabet\index{alphabet}.
 
-  \item $\delta : Q \times \Sigma \to Q$ is the transition function.
+  \item $\delta : Q \times \Sigma \to Q$ is the
+    transition\index{transition function} function.
 
-  \item $q_0 \in Q$ is the start or initial state.
+  \item $q_0 \in Q$ is the start or initial\index{state!initial} state.
 
-  \item $F \subseteq Q$ is the set of accepting or final states.
+  \item $F \subseteq Q$ is the set of accepting\index{state!accepting}
+    or final\index{state!final} states.
 \end{enumerate}
 \end{definition}
 
