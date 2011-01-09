@@ -2872,6 +2872,29 @@ state $q \in Q$ and each input symbol $a \in \Sigma$, we have
 $(q,a) \mapsto q^\prime$ for some $q^\prime \in Q$. In other words
 $|\delta(q,a)| = 1$.
 
+\begin{definition}
+\textbf{Nondeterministic finite-state automata.}
+A \emph{nondeterministic finite-state automaton}~(NFA)\index{NFA} is a
+$5$-tuple\index{finite automaton!nondeterministic}
+$\cA = (Q, \Sigma, \delta, Q_0, F)$ where
+%%
+\begin{enumerate} \parskip=0.0in
+  \item $Q$ is a finite set of states\index{state}.
+
+  \item $\Sigma$ is a finite set of input alphabet\index{alphabet}.
+
+  \item $\delta$ is a transition\index{transition function} function
+    defined by $\delta: Q \times \Sigma \to 2^Q$, where $2^Q$ is the
+    power set of $Q$.
+
+  \item $Q_0 \subseteq Q$ is a set of initial\index{state!initial}
+    states.
+
+  \item $F \subseteq Q$ is a set of accepting\index{state!accepting}
+    or final\index{state!final} states.
+\end{enumerate}
+\end{definition}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
