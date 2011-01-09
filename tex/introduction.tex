@@ -2831,6 +2831,25 @@ $w_i \in \Sigma$. It follows that $\Sigma \subseteq \Sigma^{\ast}$.
 We also consider the empty string $\varepsilon$ as a valid string over
 $\Sigma$. The string $\varepsilon$ is sometimes called the null string.
 
+\begin{definition}
+\textbf{Finite automata.}
+Let $Q$ and $\Sigma$ be nonempty finite sets.  A
+\emph{finite automaton} is a $5$-tuple
+$\cA = (Q, \Sigma, \delta, q_0, F)$ where
+%%
+\begin{enumerate} \parskip=0.0in
+  \item $Q$ is a finite set of states.
+
+  \item $\Sigma$ is a finite set of input alphabet.
+
+  \item $\delta : Q \times \Sigma \to Q$ is the transition function.
+
+  \item $q_0 \in Q$ is the start or initial state.
+
+  \item $F \subseteq Q$ is the set of accepting or final states.
+\end{enumerate}
+\end{definition}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
