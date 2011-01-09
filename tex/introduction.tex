@@ -2895,6 +2895,13 @@ $\cA = (Q, \Sigma, \delta, Q_0, F)$ where
 \end{enumerate}
 \end{definition}
 
+Intuitively, $\cA$ is said to be an NFA if there exist some
+$(q,a) \in Q \times \Sigma$ and $q_1, q_2 \in Q$ such that the
+transitions $(q,a) \mapsto q_1$ and $(q,a) \mapsto q_2$ imply
+$q_1 \neq q_2$. That is, corresponding to each state/input pair is a
+multitude of subsequent states. Note the contrast to DFA, where it is
+required that each state/input pair has at most one subsequent state.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
