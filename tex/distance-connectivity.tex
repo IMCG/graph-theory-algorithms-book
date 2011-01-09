@@ -89,10 +89,16 @@ Faber\index{Faber, Xander}~\cite{BakerFaber2006}.
 
 \subsection{Radius and diameter}
 
-The {\it eccentricity} $\epsilon:V \to  \R$ is defined as follows:
-$\epsilon (v)$ (for a vertex $v$) is the greatest distance between $v$
-and any other vertex in $G$.
-\index{eccentricity}
+Let $G = (V,E)$ be a graph. The \emph{eccentricity}\index{eccentricity}
+$\epsilon: V \to \R$\index{$\epsilon$} is defined as follows. For any
+vertex $v$, the eccentricity $\epsilon(v)$ is the greatest distance
+between $v$ and any other vertex in $G$. In symbols, the eccentricity
+is can be expressed as
+\[
+\epsilon(v)
+=
+\max_{u \in V} d(u,v).
+\]
 
 The {\it diameter} of $G$, $\partial(G)$, is the maximum
 eccentricity of any vertex in the graph. To compute
