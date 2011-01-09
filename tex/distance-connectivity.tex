@@ -98,6 +98,8 @@ is can be expressed as
 =
 \max_{u \in V} d(u,v).
 \]
+For example, in a tree $T$ with root $r$ the eccentricity of $r$ is
+the height of $T$.
 
 The {\it diameter} of $G$, $\partial(G)$, is the maximum
 eccentricity of any vertex in the graph. To compute
@@ -1307,4 +1309,20 @@ internally disjoint paths between them.
 \item Let $G = (V,E)$ be an undirected, unweighted simple graph. Show
   that $V$ and the distance\index{distance!function} function on $G$
   form a metric space if and only if $G$ is connected.
+
+\item Let $u$ and $v$ be two distinct vertices in the same connected
+  component of $G$. If $P$ is a $u$-$v$ path such that
+  $d(u,v) = \epsilon(u)$, we say that $P$ is an
+  \emph{eccentricity path}\index{eccentricity!path} for $u$.
+  %%
+  \begin{enumerate}[(a)]
+  \item If $r$ is the root of a tree $T$, show that the end-vertex of
+    an eccentricity path for $r$ is a leaf.
+
+  \item If $v$ is a leaf of $T$, show that any eccentricity path for
+    $v$ must contain $r$ and has a leaf as the end-vertex.
+
+  \item If $v$ is a vertex of $T$ distinct from $r$, show that any
+    eccentricity path for $v$ must contain $r$.
+  \end{enumerate}
 \end{problem}
