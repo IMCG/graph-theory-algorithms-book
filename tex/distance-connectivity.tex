@@ -99,10 +99,20 @@ is expressible as
 \max_{u \in V} d(u,v).
 \]
 For example, in a tree $T$ with root $r$ the eccentricity of $r$ is
-the height of $T$. The eccentricity of a vertex $v$ can be thought of
-as an upper bound on the distance from $v$ to any other vertex in
-$G$. Furthermore, we have at least one vertex in $G$ whose distance
-from $v$ is $\epsilon(v)$.
+the height of $T$. In the graph of
+Figure~\ref{fig:distance_connectivity:find_eccentricity_center_radius_diameter},
+the eccentricity of $2$ is $5$ and the shortest paths that yield
+$\epsilon(2)$ are
+%%
+\begin{align*}
+P_1: 2, 3, 4, 14, 15, 16 \\
+P_2: 2, 3, 4, 14, 15, 17.
+\end{align*}
+%%
+The eccentricity of a vertex $v$ can be thought of as an upper bound
+on the distance from $v$ to any other vertex in $G$. Furthermore, we
+have at least one vertex in $G$ whose distance from $v$ is
+$\epsilon(v)$.
 
 \begin{figure}[!htbp]
 \centering
