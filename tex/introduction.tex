@@ -3108,7 +3108,7 @@ $\cA^\prime$ is $q_0^\prime = [Q_0]$. Now define the transition
 function $\delta^\prime$ by
 %%
 \begin{equation}
-\label{def:determinize_automata_delta_maps}
+\label{eqn:introduction:determinize_automata_delta_maps}
 \begin{array}{r@{\quad}l}
 & \delta^\prime \left( [q_1, q_2, \dots, q_i], s \right)
 =
@@ -3239,6 +3239,103 @@ $2^n - n$ elements in $Q^\prime$. In the best-case, none of those
 remaining $2^n - n$ states are reachable from $q_0^\prime$, hence it
 is redundant to generate transitions starting at each of those
 $2^n - n$ states.
+Example~\ref{eg:determinize_NFA_3_states_3_input_symbols}
+concretizes our discussion.
+
+\begin{example}
+\label{eg:introduction:determinize_NFA_3_states_3_input_symbols}
+Use the procedure in Theorem~\ref{thm:introduction:determinize_NFA} to
+determinize the NFA in
+Figure~\ref{fig:introduction:NFA_3_states_3_input_symbols}.
+\end{example}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/introduction/NFA-3-states-3-input-symbols.tex}
+\caption{An NFA with $3$ states and $3$ input symbols.}
+\label{fig:introduction:NFA_3_states_3_input_symbols}
+\end{figure}
+
+\begin{proof}[Solution]
+The NFA $\cA = (Q, \Sigma, \delta, q_0, F)$ in
+Figure~\ref{fig:introduction:NFA_3_states_3_input_symbols} has the
+states $Q = \{1, 2, 3\}$, the initial state $q_0 = 1$, the final state
+set $F = \{3\}$, and the input alphabet $\Sigma = \{a, b, c\}$. Its
+transitions are contained in
+Table~\ref{tab:introduction:NFA_3_states_3_input_symbols}.
+%%
+\begin{table}[!htbp]
+\centering
+\input{data/introduction/NFA-3-states-3-input-symbols.tex}
+\caption{Transition table for the NFA in
+  Figure~\ref{fig:introduction:NFA_3_states_3_input_symbols}.}
+\label{tab:introduction:NFA_3_states_3_input_symbols}
+\end{table}
+%%
+To determinize $\cA$, we construct a DFA
+$
+\cA^\prime
+=
+(Q^\prime, \Sigma, \delta^\prime, q_0^\prime, F^\prime)
+$. As $Q^\prime$ is the power set of $Q$, then all the possible states
+of $\cA^\prime$ are contained in
+$
+Q^\prime
+=
+\left\{
+  \emptyset, [1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]
+\right\}$.
+The alphabet of $\cA^\prime$ is the same as the alphabet of $\cA$,
+namely $\Sigma$. The initial state of
+$\cA^\prime$ is $q_0^\prime = [q_0] = [1]$. All the possible accepting
+states of $\cA^\prime$ are contained in
+$F^\prime = \{[3], [1,3], [2,3], [1,2,3]\}$. Next, we
+apply~\eqref{eqn:introduction:determinize_automata_delta_maps} to
+construct all the possible transitions of $\cA^\prime$. These
+transitions are contained in
+Table~\ref{tab:introduction:DFA_version_of_NFA_3_states_3_input_symbols}.
+Using those transitions, we obtain the digraph representation in
+Figure~\ref{fig:introduction:DFA_accepting_same_language_as_NFA_3_states_3_input_symbols},
+from which 
+%%
+\begin{table}[!htbp]
+\centering
+\input{data/introduction/DFA-version-NFA-3-states-3-input-symbols.tex}
+\caption{Transition table of a deterministic version of the
+  NFA in Figure~\ref{fig:introduction:NFA_3_states_3_input_symbols}.}
+\label{tab:introduction:DFA_version_of_NFA_3_states_3_input_symbols}
+\end{table}
+%%
+it is clear that the states $[1]$, $[2]$, $[3]$, and $[1,2]$ are the
+only states reachable from the initial state $q_0^\prime = [1]$. The
+remaining states $[1,3]$, $[2,3]$, and $[1,2,3]$ are not reachable from
+$q_0^\prime = [1]$. In other words, starting at
+$q_0^\prime = [1]$ there are no input strings that would result in a
+transition to any of $[1,3]$, $[2,3]$, and $[1,2,3]$. Therefore these
+states, and the transitions starting from them, can be deleted from
+Figure~\ref{fig:introduction:DFA_accepting_same_language_as_NFA_3_states_3_input_symbols}
+without affecting the language of $\cA^\prime$.
+Figure~\ref{fig:introduction:another_DFA_accepting_same_language_as_NFA_3_states_3_input_symbols}
+shows an equivalent DFA with redundant states removed.
+\end{proof}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/introduction/DFA-accepting-same-language-as-NFA.tex}
+\caption{A DFA accepting the same language as the NFA in
+  Figure~\ref{fig:introduction:NFA_3_states_3_input_symbols}.}
+\label{fig:introduction:DFA_accepting_same_language_as_NFA_3_states_3_input_symbols}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/introduction/another-DFA-accepting-same-language-as-NFA.tex}
+\caption{A DFA equivalent to that in
+  Figure~\ref{fig:introduction:DFA_accepting_same_language_as_NFA_3_states_3_input_symbols},
+  with redundant states removed.}
+\label{fig:introduction:another_DFA_accepting_same_language_as_NFA_3_states_3_input_symbols}
+\end{figure}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
