@@ -3029,6 +3029,37 @@ one $b$, and finally zero or more occurrences of $a$ or $b$. We can
 describe this language using the regular\index{regular expression}
 expression $a^\ast b (a|b)^\ast$.
 
+For NFAs, we can similarly define a transition function operating on
+finite strings. Each input is a string over $\Sigma$ and the
+transition function $\hat{\delta}$ returns a subset of $Q$. Formally,
+our transition function for NFAs operating on finite strings is the
+map
+\[
+\hat{\delta} : Q \times \Sigma^\ast \to 2^Q.
+\]
+Let $q \in Q$ and let $w = xa$, where $x \in \Sigma^\ast$ and
+$a \in \Sigma$. The input symbol $a$ can be interpreted as being the
+very last symbol in the string $w$. Then $x$ is interpreted as being the
+substring of $w$ excluding the symbol $a$. In the case of the empty
+string, we have $\hat{\delta}(q, \varepsilon) = \{q\}$. For the
+inductive case, assume that
+$\hat{\delta}(q, x) = \{p_1, p_2, \dots, p_k\}$ where each
+$p_i \in Q$. Then $\hat{\delta}(q, w)$ is defined by
+%%
+\begin{align*}
+\hat{\delta}(q,w)
+&=
+\hat{\delta} \left( \hat{\delta}(q,x),\, a \right) \\[4pt]
+&=
+\hat{\delta} \left( \{p_1, p_2, \dots, p_k\}, a \right) \\[4pt]
+&=
+\bigcup_{i=1}^k \delta (p_i, a).
+\end{align*}
+%%
+It may happen that for some state $p_i$, there are no transitions from
+$p_i$ with input $a$. We cater for this possibility by writing
+$\delta(p_i, a) = \emptyset$.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
