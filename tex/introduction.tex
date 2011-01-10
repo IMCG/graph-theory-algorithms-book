@@ -2947,6 +2947,32 @@ definition that $\cA$ is indeed a DFA\index{DFA}. \qed
 \end{figure}
 
 
+\begin{example}
+\rm
+Let $\cA = (Q, \Sigma, \delta, Q_0, F)$ be defined by
+$Q = \{1, 2\}$, $\Sigma = \{a, b\}$, $Q_0 = \{1\}$,
+$F = \{2\}$, and the transition function $\delta$ given by
+\[
+\delta(1,a) = 1,\quad
+\delta(1,a) = 2,\quad
+\delta(2,a) = 2,\quad
+\delta(2,b) = 2.
+\]
+Figure~\ref{fig:introduction:nondeterministic_finite_state_automaton}
+shows a digraph representation of $\cA$. Note that $\delta(1,a) = 1$
+and $\delta(1,a) = 2$. It follows by definition that $\cA$ is an
+NFA\index{NFA}. \qed
+\end{example}
+
+\begin{figure}[!htbp]
+\centering
+\index{finite automaton!nondeterministic}
+\input{image/introduction/example-nondeterministic-finite-automaton.tex}
+\caption{A nondeterministic finite-state automaton.}
+\label{fig:introduction:nondeterministic_finite_state_automaton}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Problems}
