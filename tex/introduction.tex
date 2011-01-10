@@ -3077,6 +3077,7 @@ construction of an equivalent DFA and then showing that the language
 of the DFA is the same as that of the NFA.
 
 \begin{theorem}
+\label{thm:introduction:determinize_NFA}
 \textbf{Determinize an NFA.}
 If $\cA$ is a nondeterministic finite-state automaton, then there
 exists a deterministic finite-state automaton $\cA^\prime$ such that
@@ -3208,6 +3209,18 @@ $\delta^\prime (q_0^\prime, w) \in F^\prime$ if and only if there is
 some $p \in \delta(Q_0, w)$ such that $p \in F$. Therefore
 $\cL(\cA) = \cL (\cA^\prime)$.
 \end{proof}
+
+Theorem~\ref{thm:introduction:determinize_NFA} tells us that any NFA
+corresponds to some DFA that accepts the same language. For this
+reason, the theorem is said to provide us with a procedure for
+\emph{determinizing} NFAs. The actual procedure itself is contained in
+the proof of the theorem, although it must be noted that the procedure
+is inefficient since it potentially yields transitions from states that are
+unreachable from the initial state. If $q \in Q^\prime$ is a state of
+$\cA^\prime$ that is unreachable from $q_0^\prime$, then there are no
+input strings $w$ such that $\delta^\prime (q_0^\prime, w) = q$. Such
+unreachable states are redundant insofar as they do not affect
+$\cL(\cA^\prime)$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
