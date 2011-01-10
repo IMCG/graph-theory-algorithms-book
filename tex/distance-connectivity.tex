@@ -175,22 +175,29 @@ graph to represent the geography of the city wherein the hospital is
 to be situated and select a location that is in the center of the
 graph.
 
-The {\it diameter} of $G$, $\partial(G)$, is the maximum
-eccentricity of any vertex in the graph. To compute
-$\partial(G)$, first find the shortest path (see Chapter
-\ref{chap:graph_algorithms}) between each pair of
-vertices. The maximum weight of any of
-these paths is the diameter of the graph:
-
+Consider now the maximum eccentricity of a
+graph. In~\eqref{eqn:graph_algorithms:graph_diameter} we defined the
+\emph{diameter} of a graph $G = (V,E)$ by
 \[
-\partial(G) = \max_{v_1,v_2\in V} \partial(v_1,v_2).
+\diam(G)
+=
+\max_{\substack{u,v \in V \\ u \neq v}} d(u,v).
 \]
-\index{diameter}
-
-To compute the diameter of a graph, use the Floyd-Roy-Warshall
-algorithm to compute the shortest distance between any
-two pairs of vertices. The maximum of these distances is the
-diameter.
+The diameter of $G$ can also be defined as the maximum eccentricity of
+any vertex in $G$:
+\[
+\diam(G)
+=
+\max_{v \in V} \epsilon(v).
+\]
+To compute $\diam(G)$, use the Floyd-Roy-Warshall algorithm~(see
+section~\ref{sec:graph_algorithms:Floyd_Roy_Warshall_algorithm}) to
+compute the shortest distance between each pair of vertices. The
+maximum of these distances is the diameter. The set of vertices of $G$
+with maximum eccentricity is called the \emph{periphery} of $G$,
+written $\per(G)$. The graph in
+Figure~\ref{fig:distance_connectivity:find_eccentricity_center_radius_diameter}
+has diameter $7$ and periphery $\{7, 8, 11, 12, 16, 17\}$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

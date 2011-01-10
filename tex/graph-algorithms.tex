@@ -678,11 +678,14 @@ section~\ref{sec:graph_algorithms:weights_distances} and
 Chapter~\ref{chap:distance_connectivity}. The
 \emph{diameter}\index{diameter} $\diam(G)$ of a graph $G = (V,E)$ is
 defined as
-\[
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:graph_diameter}
 \diam(G)
 =
 \max_{\substack{u,v \in V \\ u \neq v}} d(u,v).
-\]
+\end{equation}
+%%
 Using the above definition, to find the diameter\index{diameter} we
 first determine the distance\index{distance} between each pair of
 distinct vertices, then we compute the maximum of all such
@@ -1717,6 +1720,7 @@ redundant rounds of updates.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Floyd-Roy-Warshall algorithm}
+\label{sec:graph_algorithms:Floyd_Roy_Warshall_algorithm}
 \index{Floyd-Roy-Warshall algorithm}
 
 \begin{quote}
