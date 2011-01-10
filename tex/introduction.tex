@@ -2922,6 +2922,30 @@ $q_1 \neq q_2$. That is, corresponding to each state/input pair is a
 multitude of subsequent states. Note the contrast to DFA, where it is
 required that each state/input pair has at most one subsequent state.
 
+\begin{example}
+\rm
+Let $\mathcal{A} = (Q, \Sigma, \delta, q_0, F)$ be defined by $Q =
+\{ 1, 2 \}$, $\Sigma = \{ a, b \}$, $q_0 = 1$, $F = \{ 2 \}$
+and the transition function $\delta$ given by
+\[
+\delta(1,a) = 1,\quad
+\delta(1,b) = 2,\quad
+\delta(2,a) = 2,\quad
+\delta(2,b) = 2.
+\]
+Figure~\ref{fig:introduction:deterministic_finite_state_automaton}
+shows a digraph representation of $\cA$. It is easily verifiable by
+definition that $\cA$ is indeed a DFA\index{DFA}. \qed
+\end{example}
+
+\begin{figure}[!htbp]
+\centering
+\index{finite automaton!deterministic}
+\input{image/introduction/example-deterministic-finite-automaton.tex}
+\caption{A deterministic finite-state automaton.}
+\label{fig:introduction:deterministic_finite_state_automaton}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
