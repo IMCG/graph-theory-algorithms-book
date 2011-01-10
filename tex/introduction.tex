@@ -3076,6 +3076,139 @@ after reading an input symbol. The formal proof depends on this
 construction of an equivalent DFA and then showing that the language
 of the DFA is the same as that of the NFA.
 
+\begin{theorem}
+\textbf{Determinize an NFA.}
+If $\cA$ is a nondeterministic finite-state automaton, then there
+exists a deterministic finite-state automaton $\cA^\prime$ such that
+$\cL(\cA) = \cL(\cA^\prime)$.
+\end{theorem}
+
+\begin{proof}
+Let the NFA $\cA$ be defined by $\cA = (Q, \Sigma, \delta, Q_0, F)$
+and define a DFA
+$\cA^\prime = (Q^\prime, \Sigma, \delta^\prime, q_0^\prime, F^\prime)$
+as follows. The state space of $\cA^\prime$ is the power set of $Q$,
+i.e. $Q^\prime = 2^Q$. The accepting state space $F^\prime$ of
+$\cA^\prime$ is a subset of $Q^\prime$, where each $f \in F^\prime$
+is a set containing at least an accepting state of $\cA$. In symbols,
+we write $F^\prime \subseteq Q^\prime$ where
+\[
+F^\prime
+=
+\left\{
+  q \in Q^\prime
+  \,\left|\right.\,
+  p \in F \text{ for some } p \in q
+\right\}.
+\]
+Denote each element $q \in Q^\prime$ by $q = [q_1, q_2, \dots, q_i]$
+where $q_1, q_2, \dots, q_i \in Q$. Thus the initial state of
+$\cA^\prime$ is $q_0^\prime = [Q_0]$. Now define the transition
+function $\delta^\prime$ by
+%%
+\begin{equation}
+\label{def:determinize_automata_delta_maps}
+\begin{array}{r@{\quad}l}
+& \delta^\prime \left( [q_1, q_2, \dots, q_i], s \right)
+=
+[p_1, p_2, \dots, p_j] \\[4pt]
+\Longleftrightarrow
+& \delta \left( \{q_1, q_2, \dots, q_i\}, s \right)
+=
+\displaystyle{\bigcup_{k=1}^i} \delta(q_k,s)
+=
+\{p_1, p_2, \dots, p_j\}.
+\end{array}
+\end{equation}
+%%
+For any input string $w$, we now show by induction on the length of
+$w$ that
+%%
+\begin{equation}
+\label{eqn:introduction:determinize_automata_equivalent_delta_maps}
+\begin{array}{r@{\quad}l}
+& \delta^\prime (q_0^\prime, w)
+=
+[q_1, q_2, \dots, q_i] \\[4pt]
+\Longleftrightarrow
+& \delta(Q_0, w)
+=
+\{q_1, q_2, \dots, q_i\}.
+\end{array}
+\end{equation}
+%%
+For the basis step, let $|w| = 0$ so that $w = \varepsilon$. Then it
+is clear that
+%%
+\begin{align*}
+&\quad \delta^\prime (q_0^\prime, w)
+=
+\delta^\prime (q_0^\prime, \varepsilon)
+=
+[q_0^\prime] \\
+\Longleftrightarrow
+&\quad \delta (Q_0, w)
+=
+\delta(Q_0, \varepsilon)
+=
+Q_0.
+\end{align*}
+%%
+Next, assume for induction that
+statement~\eqref{eqn:introduction:determinize_automata_equivalent_delta_maps}
+holds for all strings of length less than or equal to $m > 0$. Let $w$
+be a string of length $m$ and let $a \in \Sigma$ so that
+$|wa| = m + 1$. Then
+$
+\delta^\prime (q_0^\prime, wa)
+=
+\delta^\prime \big( \delta^\prime (q_0^\prime, w),\, a \big)
+$. By our inductive hypothesis, we have
+%%
+\begin{align*}
+&\quad \delta^\prime (q_0^\prime, w)
+=
+[p_1, p_2, \dots, p_j] \\
+\Longleftrightarrow
+&\quad \delta(Q_0, w)
+=
+\{p_1, p_2, \dots, p_j\}
+\end{align*}
+%%
+and
+applying~\eqref{eqn:introduction:determinize_automata_equivalent_delta_maps}
+we get
+%%
+\begin{align*}
+&\quad \delta^\prime \left( [p_1, p_2, \dots, p_j], a \right)
+=
+[r_1, r_2, \dots, r_k] \\
+\Longleftrightarrow
+&\quad \delta \left( \{p_1, p_2, \dots, p_j\}, a \right)
+=
+\{r_1, r_2, \dots, r_k\}.
+\end{align*}
+%%
+Hence
+%%
+\begin{align*}
+&\quad \delta^\prime (q_0^\prime, wa)
+=
+[r_1, r_2, \dots, r_k] \\
+\Longleftrightarrow
+&\quad \delta (Q_0, wa)
+=
+\{r_1, r_2, \dots, r_k\}
+\end{align*}
+%%
+which establishes that
+statement~(\ref{eqn:introduction:determinize_automata_equivalent_delta_maps})
+holds for all finite strings over $\Sigma$. Finally,
+$\delta^\prime (q_0^\prime, w) \in F^\prime$ if and only if there is
+some $p \in \delta(Q_0, w)$ such that $p \in F$. Therefore
+$\cL(\cA) = \cL (\cA^\prime)$.
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
