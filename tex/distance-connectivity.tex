@@ -121,6 +121,43 @@ $\epsilon(v)$.
 \label{fig:distance_connectivity:find_eccentricity_center_radius_diameter}
 \end{figure}
 
+\begin{table}[!htbp]
+\centering
+\input{data/distance-connectivity/eccentricity-distribution.tex}
+\caption{Eccentricity distribution.}
+\label{tab:distance_connectivity:eccentricity_distribution}
+\end{table}
+
+To motivate the notion of the radius of a graph, consider the
+distribution of eccentricity among vertices of the graph $G$ in
+Figure~\ref{fig:distance_connectivity:find_eccentricity_center_radius_diameter}.
+The required eccentricity distribution is shown in
+Table~\ref{tab:distance_connectivity:eccentricity_distribution}. Among
+the eccentricities in the latter table, the minimum eccentricity is
+$\epsilon(3) = \epsilon(4) = 4$. An intuitive interpretation is that
+both of the vertices $3$ and $4$ have the shortest distance to any
+other vertices in $G$. We can invoke an analogy with plane geometry as
+follows. If a circle has radius $r$, then the distance from the center
+of the circle to any point within the circle is at most $r$. The
+minimum eccentricity in graph theory plays a role similar to the
+radius of a circle. If an object is strategically
+positioned---e.g. a vertex with minimum eccentricity or the center of
+a circle---then its greatest distance to any other object is
+guaranteed to be minimum. With the above analogy in mind, we define
+the \emph{radius} of a graph $G = (V,E)$, written $\radius(G)$, to be
+the minimum eccentricity among the eccentricity distribution of
+$G$. In symbols,
+\[
+\radius(G)
+=
+\min_{v \in V} \epsilon(v).
+\]
+The \emph{center} of $G$, written $C(G)$, is the set of vertices with
+minimum eccentricity. Thus the graph in
+Figure~\ref{fig:distance_connectivity:find_eccentricity_center_radius_diameter}
+has radius $4$ and center $\{3, 4\}$. As should be clear from the
+latter example, the radius is a number whereas the center is a set.
+
 The {\it diameter} of $G$, $\partial(G)$, is the maximum
 eccentricity of any vertex in the graph. To compute
 $\partial(G)$, first find the shortest path (see Chapter
