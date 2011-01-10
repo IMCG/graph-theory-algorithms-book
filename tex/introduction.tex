@@ -3070,6 +3070,12 @@ $\delta(p_i, a) = \emptyset$.
 
 \subsection{Simulating NFAs using DFAs}
 
+Any NFA can be simulated by a DFA. One way of accomplishing this is to
+allow the DFA to keep track of all the states that the NFA can be in
+after reading an input symbol. The formal proof depends on this
+construction of an equivalent DFA and then showing that the language
+of the DFA is the same as that of the NFA.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
