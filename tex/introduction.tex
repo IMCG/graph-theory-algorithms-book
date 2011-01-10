@@ -2874,7 +2874,9 @@ consider the visual representation in
 Figure~\ref{fig:introduction:vending_machine_state_diagram}, also
 called a \emph{state diagram}\index{state!diagram}, as a
 multidigraph\index{multidigraph} where each vertex is a state and each
-directed edge is a transition from one state to another. \qed
+directed edge is a transition from one state to another. The state
+diagram can also be represented in tabular form as shown in
+Table~\ref{tab:introduction:vending_machine_transition_table}. \qed
 \end{example}
 
 \begin{figure}[!htbp]
@@ -2885,6 +2887,15 @@ directed edge is a transition from one state to another. \qed
 \caption{State diagram of a simple vending machine.}
 \label{fig:introduction:vending_machine_state_diagram}
 \end{figure}
+
+\begin{table}
+\centering
+\index{vending machine}
+\index{transition table}
+\input{data/introduction/vending-machine-transition.tex}
+\caption{Transition table of a simple vending machine.}
+\label{tab:introduction:vending_machine_transition_table}
+\end{table}
 
 Let $q_1, q_2 \in Q$. The finite-state automaton $\cA$ is said to be a
 \emph{deterministic finite-state automaton}~(DFA)\index{DFA}
