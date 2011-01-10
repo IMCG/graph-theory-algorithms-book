@@ -190,7 +190,9 @@ any vertex in $G$:
 =
 \max_{v \in V} \epsilon(v).
 \]
-To compute $\diam(G)$, use the Floyd-Roy-Warshall algorithm~(see
+In case $G$ is disconnected, define its diameter to be
+$\diam(G) = \infty$. To compute $\diam(G)$, use the Floyd-Roy-Warshall
+algorithm~(see
 section~\ref{sec:graph_algorithms:Floyd_Roy_Warshall_algorithm}) to
 compute the shortest distance between each pair of vertices. The
 maximum of these distances is the diameter. The set of vertices of $G$
