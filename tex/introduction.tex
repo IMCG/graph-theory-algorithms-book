@@ -2937,6 +2937,7 @@ multitude of subsequent states. Note the contrast to DFA, where it is
 required that each state/input pair has at most one subsequent state.
 
 \begin{example}
+\label{eg:introduction:deterministic_finite_automaton}
 \rm
 Let $\mathcal{A} = (Q, \Sigma, \delta, q_0, F)$ be defined by $Q =
 \{ 1, 2 \}$, $\Sigma = \{ a, b \}$, $q_0 = 1$, $F = \{ 2 \}$
@@ -2985,6 +2986,48 @@ NFA\index{NFA}. \qed
 \caption{A nondeterministic finite-state automaton.}
 \label{fig:introduction:nondeterministic_finite_state_automaton}
 \end{figure}
+
+We can inductively define a transition function $\hat{\delta}$ of a
+DFA $\cA = (Q, \Sigma, \delta, q_0, F)$ operating on finite strings
+over $\Sigma$. That is,
+%%
+\begin{equation}
+\hat{\delta} : Q \times \Sigma^\ast \to Q.
+\end{equation}
+%%
+Let $q \in Q$ and let $s = s_1 s_2 \cdots s_n \in \Sigma^\ast$. In the
+case of the empty string, define
+$\hat{\delta} (q, \varepsilon) = q$. When $i = 1$, we have
+$\hat{\delta}(q, s_1) = \delta(q, s_1)$. For $1 < i \leq n$, define
+\[
+\hat{\delta}(q,\, s_1 s_2 \cdots s_i)
+=
+\hat{\delta}
+\left(
+  \hat{\delta}(q,\, s_1 s_2 \cdots s_{i-1}),\, s_i
+\right).
+\]
+For convenience, we write $\delta(q,s)$ instead of
+$\hat{\delta}(q,s)$. Where $\delta(q_0,s) \in F$, we say that the
+string $s$ is \emph{accepted}\index{string!accepted} by $\cA$. Any
+subset of $\Sigma^\ast$ is said to be a
+\emph{language}\index{language} over $\Sigma$. The language $\cL$ of
+$\cA$ is the set of all finite strings accepted by $\cA$,
+i.e.
+\[
+\cL(\cA)
+=
+\left\{
+  s \in \Sigma^\ast \;\left|\right.\; \delta(q_0,s) \in F
+\right\}.
+\]
+The special language $\cL(\cA)$ is also referred to as a
+\emph{regular language}\index{language!regular}. Referring back to
+example~\ref{eg:introduction:deterministic_finite_automaton}, any
+string accepted by $\cA$ has zero or more $a$, followed by exactly
+one $b$, and finally zero or more occurrences of $a$ or $b$. We can
+describe this language using the regular\index{regular expression}
+expression $a^\ast b (a|b)^\ast$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
