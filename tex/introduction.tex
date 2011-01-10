@@ -3222,6 +3222,24 @@ input strings $w$ such that $\delta^\prime (q_0^\prime, w) = q$. Such
 unreachable states are redundant insofar as they do not affect
 $\cL(\cA^\prime)$.
 
+Another inefficiency of the procedure in the proof of
+Theorem~\ref{thm:introduction:determinize_NFA} is the problem of state
+space explosion. As $Q^\prime = 2^Q$ is the power set of $Q$, the
+resulting DFA can potentially have exponentially more states than the
+NFA it is simulating. In the worse case, each element of $Q^\prime$ is
+a state of the resulting DFA that is reachable from
+$q_0^\prime = [Q_0]$. The best-case scenario is when each state of the
+DFA is a singleton, hence the DFA has the same number of states as its
+corresponding NFA. However, according to the procedure in the proof of
+Theorem~\ref{thm:introduction:determinize_NFA}, we generate all the
+possible $2^n$ states of the DFA, where $n = |Q|$. After considering
+all the transitions whose starting states are singletons, we then
+consider all transitions starting from each of the remaining
+$2^n - n$ elements in $Q^\prime$. In the best-case, none of those
+remaining $2^n - n$ states are reachable from $q_0^\prime$, hence it
+is redundant to generate transitions starting at each of those
+$2^n - n$ states.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
