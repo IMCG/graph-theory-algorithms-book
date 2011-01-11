@@ -201,6 +201,32 @@ written $\per(G)$. The graph in
 Figure~\ref{fig:distance_connectivity:find_eccentricity_center_radius_diameter}
 has diameter $7$ and periphery $\{7, 8, 11, 12, 16, 17\}$.
 
+\begin{theorem}
+\textbf{Eccentricities of adjacent vertices.}
+Let $G = (V,E)$ be an undirected, connected graph having nonnegative
+edge weights. If $uv \in E$ and $W$ is a weight function for $G$, then
+$|\epsilon(u) - \epsilon(v)| \leq W(uv)$.
+\end{theorem}
+
+\begin{proof}
+By definition, we have $d(u,x) \leq \epsilon(u)$ and
+$d(v,x) \leq \epsilon(v)$ for all $x \in V$. Let $w \in V$ such that
+$d(u,w) = \epsilon(u)$. Apply the triangle inequality to obtain
+%%
+\begin{align*}
+d(u,w) &\leq d(u,v) + d(v,w) \\
+\epsilon(u) &\leq W(uv) + d(v,w) \\
+            &\leq W(uv) + \epsilon(v)
+\end{align*}
+%%
+from which we have $\epsilon(u) - \epsilon(v) \leq W(uv)$. Repeating
+the above argument with the role of $u$ and $v$ interchanged yields
+$\epsilon(v) - \epsilon(u) \leq W(uv)$. Both
+$\epsilon(u) - \epsilon(v) \leq W(uv)$ and
+$\epsilon(v) - \epsilon(u) \leq W(uv)$ together yields the inequality
+$|\epsilon(u) - \epsilon(v)| \leq W(uv)$ as required.
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
