@@ -24,13 +24,13 @@
 %%
 %% algorithm body
 $u \assign \texttt{NULL}$\;
-$v \assign \headElem(H)$\;
+$v \assign \headElem[H]$\;
 $\MyMin \assign \infty$\;
 \While{\rm $v \neq \texttt{NULL}$}{
   \If{$\kappa_v < \MyMin$}{
     $\MyMin \assign \kappa_v$\;
     $u \assign v$\;
   }
-  $v \assign \sibling(v)$\;
+  $v \assign \sibling[v]$\;
 }
 \Return $u$\;

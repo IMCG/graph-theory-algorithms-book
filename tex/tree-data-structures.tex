@@ -632,7 +632,7 @@ We approximate the addition of the two sums by
 for some constant $C$. The above method of successive extraction and
 insertion therefore has a total runtime of
 \[
-O\left( \frac{(n + m) \cdot \ln(n + m) - n - m} {\ln 2} \right).
+O\left( \frac{(n + m) \cdot \ln(n + m) - n - m} {\ln 2} \right)
 \]
 for merging two binary heaps.
 
@@ -650,7 +650,7 @@ by
 =
 \left. \frac{k \cdot \ln k - k} {\ln 2} + C \right|_{k=n}^{k=n+m}
 \]
-for some constant $C$. Therefore, the improved extraction and
+for some constant $C$. Therefore the improved extraction and
 insertion method requires
 \[
 O\left(
@@ -847,7 +847,7 @@ representation as the polynomial
 \[
 n
 =
-a_k 2^k + a_{k-1} 2^{k-1} + \cdots + a_1 2 + a_0.
+a_k 2^k + a_{k-1} 2^{k-1} + \cdots + a_1 2^1 + a_0 2^0.
 \]
 The binary representation of $n$ requires $1 + \lfloor \lg n \rfloor$
 bits, hence $n = \sum_{i=0}^{\lfloor \lg n \rfloor} a_i 2^i$. Apply
@@ -896,7 +896,7 @@ To find the minimum vertex, we find the minimum among
 $r_{k_0}, r_{k_1}, \dots, r_{k_m}$ because by definition the root
 $r_{k_i}$ is the minimum vertex of the binomial tree $B_{k_i}$. If $H$
 has $n$ vertices, we need to check at most $1 + \lfloor \lg n \rfloor$
-vertices to find the minimum vertex of $H$. Therefore, determining the
+vertices to find the minimum vertex of $H$. Therefore determining the
 minimum vertex of $H$ takes $O(\lg n)$ time.
 Algorithm~\ref{alg:tree_data_structures:binomial_heap_minimum_vertex}
 summarizes our discussion.
@@ -1048,7 +1048,7 @@ Figure~\ref{fig:tree_data_structures:binomial_heap_extract}.
 \label{sec:tree_data_structures:binary_search_trees}
 
 A \emph{binary search tree}\index{binary search tree}~(BST)\index{BST}
-is a rooted binary tree $T = (V,E)$ having weighted vertices
+is a rooted binary tree $T = (V,E)$ having vertex weight function
 $\kappa: V \to \R$. The weight of each vertex $v$ is referred to as
 its key, denoted $\kappa_v$. Each vertex $v$ of $T$ satisfies the
 following properties:
