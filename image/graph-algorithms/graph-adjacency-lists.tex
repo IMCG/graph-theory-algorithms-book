@@ -11,15 +11,12 @@
 
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
-  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+  nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick}]
 %% nodes or vertices
-\foreach \nodename/\x/\y/\direction/\navigate in {
-  1/0/0/left/west, 2/4/0/right/east, 3/4/3.5/right/east,
-  4/0/3.5/left/west, 5/2/1/below/south, 6/3/2/above/north,
-  7/2/3/below/south, 8/1/2/above/north}
+\foreach \nodename/\x/\y in {
+  1/0/0, 2/4/0, 3/4/3.5, 4/0/3.5, 5/2/1, 6/3/2, 7/2/3, 8/1/2}
 {
-  \node (\nodename) at (\x,\y) [nodeDecorate] {};
-  \node [\direction] at (\nodename.\navigate) {\scriptsize$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {\scriptsize$\nodename$};
 }
 %% adjacency lists
 \node (L1) at (5,2.1) [] {};
