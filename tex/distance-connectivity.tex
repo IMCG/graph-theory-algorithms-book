@@ -237,9 +237,12 @@ number of vertices that comprise the center of $T$. A graph in general
 can have one, two, or more number of vertices for its center. Indeed,
 for any integer $n > 0$ we can construct a graph whose center has
 cardinality $n$. The cases for $n = 1, 2, 3$ are illustrated in
-Figure~\ref{fig:distance_connectivity:graphs_arbitrarily_large_centers}. But 
+Figure~\ref{fig:distance_connectivity:graphs_arbitrarily_large_centers}. But
 can we do the same for trees? That is, given any positive integer $n$
-does there exist a tree whose center has $n$ vertices?
+does there exist a tree whose center has $n$ vertices? It turns out
+that the center of a tree cannot have more than two vertices, a result
+first discovered~\cite{Jordan1869} by Camille
+Jordan\index{Jordan, Camille} in~1869.
 
 \begin{figure}[!htbp]
 \centering
@@ -247,6 +250,25 @@ does there exist a tree whose center has $n$ vertices?
 \caption{Constructing graphs with arbitrarily large centers.}
 \label{fig:distance_connectivity:graphs_arbitrarily_large_centers}
 \end{figure}
+
+\begin{theorem}
+\textbf{Jordan~\cite{Jordan1869}.}
+If a tree $T$ has order $\geq 3$, then the center of $T$ is either a
+single vertex or two adjacent vertices.
+\end{theorem}
+
+\begin{proof}
+As all eccentric vertices of $T$ are leaves~(see
+problem~\ref{chap:distance_connectivity}.\ref{prob:distance_connectivity:eccentric_vertices_laves}),
+removing all the leaves of $T$ decreases the eccentricities of the
+remaining vertices by one. The tree comprised of the surviving
+vertices has the same center as $T$. Continue pruning leaves as
+described above and note that the tree comprised of the surviving
+vertices has the same center as the previous tree. After a finite
+number of leaf pruning stages, we eventually end up with a tree made
+up of either one vertex or two adjacent vertices. The vertex set of
+this final tree is the center of $T$.
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1482,5 +1504,6 @@ other people. \\
 \item Let $v_1, v_2, \dots, v_k$ be the leaves of a tree $T$. Show
   that $\per(T) = \{v_1, v_2, \dots, v_k\}$.
 
-\item Show that all the eccentric vertices of a tree are leaves.
+\item\label{prob:distance_connectivity:eccentric_vertices_laves} Show
+  that all the eccentric vertices of a tree are leaves.
 \end{problem}
