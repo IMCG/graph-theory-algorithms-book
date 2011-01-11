@@ -685,7 +685,7 @@ As $E \subseteq V^{(2)}$, then $E$ can be the empty set, in which
 case the total degree of $G = (V, E)$ is zero. Where $E \neq
 \emptyset$, then the total degree of $G$ is greater than zero. By
 Theorem~\ref{thm:introduction:degree_sum}, the total degree of $G$ is
-non-negative and even. This result is an immediate consequence of
+nonnegative and even. This result is an immediate consequence of
 Theorem~\ref{thm:introduction:degree_sum} and is captured in the
 following corollary.
 
@@ -921,13 +921,13 @@ A graph is said to be
 every pair of distinct vertices $u, v$ there is a $u$-$v$ path joining
 them. A graph that is not connected is referred to as
 \emph{disconnected}\index{disconnected graph}\index{graph!disconnected}.
-The empty graph is disconnected and so is any non-empty graph with an
+The empty graph is disconnected and so is any nonempty graph with an
 isolated vertex. However, the graph in
 Figure~\ref{fig:introduction:simple_graph_digraph_multidigraph} is
 connected. A \emph{geodesic path}\index{path!geodesic} or
 \emph{shortest path}\index{shortest path} between two distinct
 vertices $u,v$ of a graph is a $u$-$v$ path of minimum length. A
-non-empty graph may have several shortest paths between some distinct
+nonempty graph may have several shortest paths between some distinct
 pair of vertices. For the graph in
 Figure~\ref{fig:introduction:types_of_walks}, both $a,b,c$ and $a,e,c$
 are geodesic paths between $a$ and $c$. Let $H$ be a connected
@@ -1143,7 +1143,7 @@ $C_n$ obtained by deleting one edge.
 
 A \emph{bipartite graph}\index{bipartite graph} $G$ is a graph with at
 least two vertices such that $V(G)$ can be split into two disjoint
-subsets $V_1$ and $V_2$, both non-empty. Every edge $uv \in E(G)$ is
+subsets $V_1$ and $V_2$, both nonempty. Every edge $uv \in E(G)$ is
 such that $u \in V_1$ and $v \in V_2$, or $v \in V_1$ and $u \in V_2$.
 See Kalman~\cite{Kalman1999} for an application of bipartite graphs to
 the problem of allocating satellites to radio stations.
@@ -1190,7 +1190,7 @@ $G$ is bipartite.
 
 The \emph{complete bipartite}\index{bipartite graph!complete} graph
 $K_{m,n}$\index{$K_{m,n}$} is the bipartite graph whose vertex set is
-partitioned into two non-empty disjoint sets $V_1$ and $V_2$ with
+partitioned into two nonempty disjoint sets $V_1$ and $V_2$ with
 $|V_1| = m$ and $|V_2| = n$. Any vertex in $V_1$ is adjacent to each
 vertex in $V_2$, and any two distinct vertices in $V_i$ are not
 adjacent to each other. If $m = n$, then $K_{n,n}$ is
@@ -1830,7 +1830,7 @@ Let $S = (d_1, d_2, \dots, d_n)$ be a graphical sequence, i.e.
 $d_i \geq d_j$ for all $i \leq j$ such that $1 \leq i, j \leq n$. From
 Corollary~\ref{cor:introduction:degree_sum_even} we see that
 $\sum_{d_i \in S} d_i = 2k$ for some integer $k \geq 0$. In other
-words, the sum of a graphical sequence is non-negative and
+words, the sum of a graphical sequence is nonnegative and
 even. In 1961, Erd\H{o}s\index{Erd\H{o}s, Paul} and
 Gallai\index{Gallai, Tibor}~\cite{ErdosGallai1960} used this
 observation as part of a theorem that provides necessary and
@@ -1879,7 +1879,7 @@ independently provided an algorithmic approach that allows for
 constructing a simple graph with a given degree sequence. See Sierksma
 and Hoogeveen~\cite{SierksmaHoogeveen1991} for a coverage of seven
 criteria for a sequence of integers to be graphic.
-See~\cite{ErdosEtAl2010} for an extension of the
+See Erdos~et~al.~\cite{ErdosEtAl2010} for an extension of the
 Havel-Hakimi\index{Havel-Hakimi theorem} theorem to digraphs.
 %% The proof of
 %% Theorem~\ref{thm:introduction:Havel1955_Hakimi1962:graphical_sequence}
@@ -1895,7 +1895,7 @@ Havel-Hakimi\index{Havel-Hakimi theorem} theorem to digraphs.
 \textbf{Havel~1955~\cite{Havel1955} \&
   Hakimi~1962--3~\cite{Hakimi1962,Hakimi1963}.}
 Consider the non-increasing sequence $S_1 = (d_1, d_2, \dots, d_n)$ of
-non-negative integers, where $n \geq 2$ and $d_1 \geq 1$. Then $S_1$ is
+nonnegative integers, where $n \geq 2$ and $d_1 \geq 1$. Then $S_1$ is
 graphical if and only if the sequence
 \[
 S_2
@@ -1954,7 +1954,7 @@ $G_1 - v_1$ has degree sequence $S_2$.
 The proof of
 Theorem~\ref{thm:introduction:Havel1955_Hakimi1962:graphical_sequence}
 can be adapted into an algorithm to determine whether or not a
-sequence of non-negative integers can be realized by a simple
+sequence of nonnegative integers can be realized by a simple
 graph. If $G$ is a simple graph, the degree of any vertex in $V(G)$
 cannot exceed the order of $G$. By the handshaking
 lemma~(Theorem~\ref{thm:introduction:hand_shaking}), the sum of all
@@ -1984,9 +1984,9 @@ handshaking
 lemma~(Theorem~\ref{thm:introduction:hand_shaking}). During the first
 run of the while loop, the conditional on
 line~\ref{alg:Havel_Hakimi:non_negative} ensures that the sequence $S$
-only consists of non-negative integers. At the conditional on
+only consists of nonnegative integers. At the conditional on
 line~\ref{alg:Havel_Hakimi:all_zeros}, we know that $S$ is arranged in
-non-increasing order and has non-negative integers. If this
+non-increasing order and has nonnegative integers. If this
 conditional holds true, then $S$ is a sequence of zeros and it is
 realizable by a graph with only isolated vertices. Such a graph is
 simple by definition. The conditional on
@@ -2475,7 +2475,7 @@ sage: EG.intersection(EGc)
 
 \begin{theorem}
 If $G = (V, E)$ is self-complementary, then the order of $G$ is
-$|V| = 4k$ or $|V| = 4k + 1$ for some non-negative integer
+$|V| = 4k$ or $|V| = 4k + 1$ for some nonnegative integer
 $k$. Furthermore, if $n = |V|$ is the order of $G$, then the size of
 $G$ is $|E| = n(n - 1) / 4$.
 \end{theorem}
@@ -2496,8 +2496,8 @@ $K_n$. From~\eqref{eqn:introduction:size_of_K_n}, we have
 Then $n \;|\; n(n - 1)$, with one of $n$ and $n - 1$ being even and
 the other odd. If $n$ is even, $n - 1$ is odd so $\gcd(4, n-1) = 1$,
 hence by~\cite[Theorem~1.9]{Shoup2008} we have $4 \;|\; n$ and so
-$n = 4k$ for some non-negative $k \in \Z$. If $n - 1$ is even, use a
-similar argument to conclude that $n = 4k + 1$ for some non-negative
+$n = 4k$ for some nonnegative $k \in \Z$. If $n - 1$ is even, use a
+similar argument to conclude that $n = 4k + 1$ for some nonnegative
 $k \in \Z$.
 \end{proof}
 
@@ -2711,7 +2711,7 @@ applications of graph theory in science, engineering, social sciences,
 economics, and operation research.
 
 \begin{itemize}
-\item If the edge weights are all non-negative, find a ``cheapest''
+\item If the edge weights are all nonnegative, find a ``cheapest''
   closed path which contains all the vertices. This is related to the
   famous traveling\index{traveling salesman problem} salesman problem
   and is further discussed in Chapters~\ref{chap:graph_algorithms}
@@ -2775,7 +2775,7 @@ economics, and operation research.
 \end{figure}
 
 \item In some fields, such as operations\index{operations research}
-  research, a directed graph with non-negative edge weights is called
+  research, a directed graph with nonnegative edge weights is called
   a \emph{network}\index{network}, the vertices are called
   \emph{nodes}, the edges are called \emph{arcs}, and the weight on an
   edge is called its \emph{capacity}. A
@@ -3394,11 +3394,16 @@ problem with a solution---you'll hatch out dozens. \\
   of distinct cities are connected by a flight path. The weight of
   each edge is the flight distance in kilometers between the two
   corresponding cities. In particular, there is a flight path
-  connecting Karlsruhe and Stuttgart. What is the shortest route
-  between Karlsruhe and Stuttgart? Suppose we can remove at least one
-  edge from this network. How many possible ways are there to remove
-  edges such that, in the resulting network, Karlsruhe is no longer
-  connected to Stuttgart via a flight path?
+  connecting Karlsruhe and Stuttgart.
+  %%
+  \begin{enumerate}[(a)]
+  \item What is the shortest route between Karlsruhe and Stuttgart?
+
+  \item Suppose we can remove at least one edge from this network. How
+    many possible ways are there to remove edges such that, in the
+    resulting network, Karlsruhe is no longer connected to Stuttgart
+    via a flight path?
+  \end{enumerate}
 
 \item Let $D = (V, E)$ be a digraph of size $q$. Show that
   \[
