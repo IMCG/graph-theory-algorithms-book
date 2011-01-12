@@ -1382,6 +1382,61 @@ examples of Fibonacci trees.
 \label{fig:tree_data_structures:Fibonacci_trees_1_to_6}
 \end{figure}
 
+\begin{theorem}
+\textbf{Logarithmic height.}
+The height $h$ of an AVL tree with $n$ internal vertices is bounded by
+\[
+\lg(n + 1) \leq h < 2 \cdot \lg n + 1.
+\]
+\end{theorem}
+
+\begin{proof}
+Any binary tree of height $h$ has at most $2^i$ leaves. From the proof
+of Corollary~\ref{cor:tree_data_structures:height_binary_heap}, we see
+that $n$ is bounded by $2^{h - 1} \leq n \leq 2^h - 1$ and in
+particular $n + 1 \leq 2^h$. Take the logarithm of both sides to get
+$h \geq \lg(n + 1)$.
+
+Now instead of deriving an upper bound for $h$, we find the minimum
+order of an AVL tree and from there derive the required upper bound
+for $h$. Let $T$ be an AVL tree of minimum order. One subtree of $T$
+has height $h - 1$. The other subtree has height $h - 1$ or
+$h - 2$. Our objective is to construct $T$ to have as small a number
+of vertices as possible. Without loss of generality, let the left and
+right subtrees of $T$ have heights $h - 2$ and $h - 1$,
+respectively. The Fibonacci tree $\cF_h$ of height $h$ fits the above
+requirements for $T$. If $N(h)$ denote the number of internal vertices
+of $\cF_h$, then $N(h) = 1 + N(h - 1) + N(h - 2)$ is strictly
+increasing so
+%%
+\begin{equation}
+\label{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes}
+N(h)
+>
+N(h - 2) + N(h - 2)
+=
+2 \cdot N(h - 2).
+\end{equation}
+%%
+Repeated application
+of~\eqref{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes}
+shows that
+%%
+\begin{equation}
+\label{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes_general}
+N(h)
+>
+2^i \cdot N(h - 2i)
+\end{equation}
+%%
+for any integer $i$ such that $h - 2i \geq 1$. Choose $i$ so that
+$h - 2i = 1$ or $h - 2i = 2$, say the former. Substitute
+$i = (h - 1) / 2$
+into~\eqref{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes_general}
+yields $N(h) > 2^{(h - 1) / 2}$. That is, $n > 2^{(h - 1) / 2}$ and
+taking logarithm of both sides yields $h < 2 \cdot \lg n + 1$.
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
