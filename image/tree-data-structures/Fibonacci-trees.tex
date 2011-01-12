@@ -9,7 +9,7 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subfigure[$F_0$]{
+\subfigure[$\cF_0$]{
 \begin{tikzpicture}
 [-,thick,%
   nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
@@ -24,21 +24,24 @@
 %%
 %%
 \qquad
-\subfigure[$F_1$]{
+\subfigure[$\cF_1$]{
 \begin{tikzpicture}
 [-,thick,%
-  every node/.style={shape=circle,inner sep=2pt,draw,thick},%
+  every node/.style={shape=circle,inner sep=2pt},%
   scale=0.5]
-\node {}
+\node[draw,thick] {}
   [sibling distance=1cm]
-  child {node {}}
-  child {node {}};
+  child {node[draw,thick] {}}
+  child {node[draw,thick] {}};
+%% stub nodes that should not be visible
+\node at (-0.6,0) {};
+\node at (0.6,0) {};
 \end{tikzpicture}
 }
 %%
 %%
 \qquad
-\subfigure[$F_2$]{
+\subfigure[$\cF_2$]{
 \begin{tikzpicture}
 [-,thick,%
   every node/.style={shape=circle,inner sep=2pt,draw,thick},%
@@ -55,7 +58,7 @@
 %%
 %%
 \qquad
-\subfigure[$F_3$]{
+\subfigure[$\cF_3$]{
 \begin{tikzpicture}
 [-,thick,%
   every node/.style={shape=circle,inner sep=2pt,draw,thick},%
@@ -80,7 +83,7 @@
 %%
 %%
 \qquad
-\subfigure[$F_4$]{
+\subfigure[$\cF_4$]{
 \begin{tikzpicture}
 [-,thick,%
   every node/.style={shape=circle,inner sep=2pt,draw,thick},%
@@ -116,7 +119,7 @@
 %%
 %%
 \qquad
-\subfigure[$F_5$]{
+\subfigure[$\cF_5$]{
 \begin{tikzpicture}
 [-,thick,%
   every node/.style={shape=circle,inner sep=2pt,draw,thick},%
@@ -171,7 +174,7 @@
 %%
 %%
 \qquad
-\subfigure[$F_6$]{
+\subfigure[$\cF_6$]{
 \begin{tikzpicture}
 [-,thick,%
   every node/.style={shape=circle,inner sep=2pt,draw,thick},%
