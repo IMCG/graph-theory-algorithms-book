@@ -255,7 +255,7 @@ ready to state the heap-structure property.
 \textbf{Heap-structure property.}\index{binary heap!structure property}
 Let $T$ be a binary tree with height $h$. Then $T$ satisfies the
 heap-structure property if $T$ is nearly a
-complete\index{binary tree!complete} binary tree. That is, level
+complete\index{binary tree!nearly complete} binary tree. That is, level
 $0 \leq i \leq h - 1$ has $2^i$ vertices, whereas level $h$ has
 $\leq 2^h$ vertices. The vertices at level $h$ are filled from left to
 right.
@@ -1321,13 +1321,16 @@ of the BST under consideration.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{AVL trees}
+\index{AVL tree}
 
-To motivate the need for AVL trees, note the lack of a structural
-property for binary search trees similar to the structural property
-for binary heaps. Unlike binary heaps, a BST is not required to have
-as small a height as possible. As a consequence, any given nonempty
-collection $C = \{v_0, v_1, \dots, v_k\}$ of weighted vertices can be
-represented by various BSTs with different heights; see
+To motivate the need for AVL\index{AVL tree} trees, note the lack of a
+structural property for binary\index{binary search tree} search trees
+similar to the structural\index{binary heap!heap-structure property}
+property for binary\index{binary heap} heaps. Unlike binary heaps, a
+BST is not required to have as small a height as possible. As a
+consequence, any given nonempty collection
+$C = \{v_0, v_1, \dots, v_k\}$ of weighted vertices can be represented
+by various BSTs with different heights; see
 Figure~\ref{fig:tree_data_structures:BST_different_structural_representations}.
 Some BST representations of $C$ have heights smaller than other BST
 representations of $C$. Those BST representations with smaller heights
@@ -1336,6 +1339,21 @@ insertion, and deletion and out-perform BST representations having
 larger heights. To achieve logarithmic or near-logarithmic time
 complexity for basic operations, it is desirable to maintain a BST
 with as small a height as possible.
+
+Adel'son-Vel'ski\u{\i}\index{Adel'son-Vel'ski\u{\i}, G. M.} and
+Landis\index{Landis, E. M.}~\cite{AdelsonVelskiiLandis1962}
+introduced in~1962 a criterion for constructing and maintaining binary
+search trees having logarithmic heights. Recall that the height of a
+tree is the maximum depth of the tree. Then the
+Adel'son-Vel'ski\u{\i}-Landis criterion can be expressed as follows.
+
+\begin{definition}
+\textbf{Height-balance property.}\index{AVL tree!height-balance property}
+Let $T$ be a binary tree and suppose $v$ is an internal vertex of
+$T$. Let $h_\ell$ be the height of the left subtree of $v$ and let
+$h_r$ be the height of $v$'s right subtree. Then $T$ is said to be
+\emph{height-balanced} if $|h_\ell - h_r| \leq 1$.
+\end{definition}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
