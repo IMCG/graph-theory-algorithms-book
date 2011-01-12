@@ -45,7 +45,7 @@ in section~\ref{sec:tree_data_structures:binomial_heaps} by a priority
 queue implementation called binomial\index{binomial heap} heaps. As a
 further application of binary\index{binary tree} trees,
 section~\ref{sec:tree_data_structures:binary_search_trees} discusses
-binary\index{binary search trees} search trees as a general data
+binary\index{binary search tree} search trees as a general data
 structure for managing data in a sorted order.
 
 
@@ -54,7 +54,7 @@ structure for managing data in a sorted order.
 \section{Priority queues}
 \label{sec:tree_data_structures:priority_queues}
 
-A \emph{priority queue}\index{queue!priority} is essentially a queue
+A \emph{priority queue}\index{priority queue} is essentially a queue
 data structure with various accompanying rules regarding how to access
 and manage elements of the queue. Recall from
 section~\ref{subsec:graph_algorithms:breadth_first_search} that an
@@ -93,7 +93,7 @@ $e \in Q$ is an element of $\Z$, we use the latter relation to compare
 the keys of elements of $Q$. In the case of an ordinary queue, the
 key of each queue element is its position index.
 
-To extract from a priority\index{queue!priority} queue $Q$ an element
+To extract from a priority\index{priority queue} queue $Q$ an element
 of lowest priority, we need to define the notion of smallest
 priority or key. Let $p_i$ be the priority or key assigned to element
 $e_i$ of $Q$. Then $p_{\min}$ is the lowest key if $p_{\min} \leq p$
@@ -174,7 +174,7 @@ inserting $e$ into $Q$ takes a worst-case runtime of $O(n)$.
 
 \section{Binary heaps}
 \label{sec:tree_data_structures:binary_heaps}
-\index{heap!binary}
+\index{binary heap}
 
 A sequence implementation of priority queues has the advantage of
 being simple to understand. Inserting an element into a sequence-based
@@ -184,12 +184,12 @@ millions of elements. Can we do any better? Rather than using a sorted
 sequence, we can use a binary tree to realize an implementation of
 priority queues that is much more efficient than a sequence-based
 implementation. In particular, we use a data structure called a
-\emph{binary heap}\index{heap!binary}, which allows for element
+\emph{binary heap}\index{binary heap}, which allows for element
 insertion in logarithmic time.
 
 In~\cite{Williams1964}, Williams\index{Williams, J. W. J.} introduced
 the heapsort\index{heapsort} algorithm and described how to implement
-a priority queue using a binary\index{heap!binary} heap. A basic idea
+a priority queue using a binary\index{binary heap} heap. A basic idea
 is to consider queue elements as internal vertices in a binary tree
 $T$, with external vertices or leaves being ``place-holders''. The
 tree $T$ satisfies two further properties:
@@ -392,16 +392,17 @@ of $T$.
 The binary heap $T$ augmented with the new last vertex $v$ satisfies
 the heap-structure property, but may violate the heap-order
 property. To ensure that $T$ satisfies the heap-order property, we
-perform an operation on $T$ called \emph{sift-up}\index{sift-up} that
-involves possibly moving $v$ up through various levels of $T$. Let
-$\kappa_v$ be the key of $v$ and let $\kappa_{p(v)}$ be the key of
-$v$'s parent. If the relation $\kappa_{p(v)} \leq \kappa_v$ holds,
-then $T$ satisfies the heap-order property. Otherwise we swap $v$ with
-its parent, effectively moving $v$ up one level to be at the position
-previously occupied by its parent. The parent of $v$ is moved down one
-level and now occupies the position where $v$ was previously. With $v$
-in its new position, we perform the same key comparison process with
-$v$'s new parent. The key comparison and swapping continue until the
+perform an operation on $T$ called
+\emph{sift-up}\index{binary heap!sift-up} that involves possibly
+moving $v$ up through various levels of $T$. Let $\kappa_v$ be the key
+of $v$ and let $\kappa_{p(v)}$ be the key of $v$'s parent. If the
+relation $\kappa_{p(v)} \leq \kappa_v$ holds, then $T$ satisfies the
+heap-order property. Otherwise we swap $v$ with its parent,
+effectively moving $v$ up one level to be at the position previously
+occupied by its parent. The parent of $v$ is moved down one level and
+now occupies the position where $v$ was previously. With $v$ in its
+new position, we perform the same key comparison process with $v$'s
+new parent. The key comparison and swapping continue until the
 heap-order property holds for $T$. In the worst case, $v$ would become
 the new root of $T$ after undergoing a number of swaps that is
 proportional to the height of $T$. Therefore, inserting a new internal
@@ -466,32 +467,32 @@ vertex, and $v$ becomes a leaf.
 At this point, $T$ satisfies the heap-structure property but may
 violate the heap-order property. To restore the heap-order property,
 we perform an operation on $T$ called
-\emph{sift-down}\index{sift-down} that may possibly move $r$ down
-through various levels of $T$. Let $c(r)$ be the child of $r$ with key
-that is minimum among all the children of $r$, and let $\kappa_r$ and
-$\kappa_{c(r)}$ be the keys of $r$ and $c(r)$, respectively. If
-$\kappa_r \leq \kappa_{c(r)}$, then the heap-order property is
-satisfied. Otherwise we swap $r$ with $c(r)$, moving $r$ down one
-level to the position previously occupied by $c(r)$. Furthermore,
-$c(r)$ is moved up one level to the position previously occupied by
-$r$. With $r$ in its new position, we perform the same key comparison
-process with a child of $r$ that has minimum key among all of $r$'s
-children. The key comparison and swapping continue until the
-heap-order property holds for $T$. In the worst case, $r$ would
-percolate all the way down to the level that is immediately above the
-last level after undergoing a number of swaps that is proportional to
-the height of $T$. Therefore, deleting the minimum vertex of $T$ can
-be achieved in time $O(\lg n)$.
+\emph{sift-down}\index{binary heap!sift-down} that may possibly move
+$r$ down through various levels of $T$. Let $c(r)$ be the child of $r$
+with key that is minimum among all the children of $r$, and let
+$\kappa_r$ and $\kappa_{c(r)}$ be the keys of $r$ and $c(r)$,
+respectively. If $\kappa_r \leq \kappa_{c(r)}$, then the heap-order
+property is satisfied. Otherwise we swap $r$ with $c(r)$, moving $r$
+down one level to the position previously occupied by
+$c(r)$. Furthermore, $c(r)$ is moved up one level to the position
+previously occupied by $r$. With $r$ in its new position, we perform
+the same key comparison process with a child of $r$ that has minimum
+key among all of $r$'s children. The key comparison and swapping
+continue until the heap-order property holds for $T$. In the worst
+case, $r$ would percolate all the way down to the level that is
+immediately above the last level after undergoing a number of swaps
+that is proportional to the height of $T$. Therefore, deleting the
+minimum vertex of $T$ can be achieved in time $O(\lg n)$.
 Figure~\ref{fig:tree_data_structures:delete_sift_down_binary_heap}
 illustrates the deletion of the minimum vertex of a binary heap with
 at least two internal vertices and the resulting sift-down process
 that percolates vertices down through various levels of the heap in
-order to maintain the heap-order
-property. Algorithm~\ref{alg:tree_data_structures:binary_heap_delete}
-summarizes our discussion of the process for extracting the minimum
-vertex of $T$ while also ensuring that $T$ satisfies the heap-order
-property. The pseudocode is adapted from the C implementation of
-binary heaps in Howard~\cite{Howard2010}. With some minor changes,
+order to maintain the heap-order property.
+Algorithm~\ref{alg:tree_data_structures:binary_heap_delete} summarizes
+our discussion of the process for extracting the minimum vertex of $T$
+while also ensuring that $T$ satisfies the heap-order property. The
+pseudocode is adapted from the C implementation of binary heaps in
+Howard~\cite{Howard2010}. With some minor changes,
 Algorithm~\ref{alg:tree_data_structures:binary_heap_delete} can be
 used to change the key of the root vertex and maintain the heap-order
 property for the resulting binary tree.
@@ -802,7 +803,7 @@ total order $\leq$. The heap also satisfies the following
   corresponding keys $\kappa_v$ and $\kappa_p$, respectively, then
   $\kappa_p \leq \kappa_v$.
 
-\item \textbf{Root-degree property.}\index{root-degree property}
+\item \textbf{Root-degree property.}\index{binomial heap!root-degree property}
   For any integer $k \geq 0$, $H$ contains at most one binomial tree
   whose root has degree $k$.
 \end{itemize}
@@ -837,12 +838,12 @@ there. In a tree representation of a binomial heap, the root of the
 heap may not necessarily have the minimum key among all vertices of
 the heap.
 
-The root-degree\index{root-degree property} property can be used to
-derive an upper bound on the number of binomial trees in a binomial
-heap. If $H$ is a binomial heap with $n$ vertices, then $H$ has at
-most $1 + \lfloor \lg n \rfloor$ binomial trees. To prove this result,
-note that~(see Theorem~2.1 and Corollary~2.1.1 in
-\cite[pp.40--42]{Rosen2000}) $n$ can be uniquely written in binary
+The root-degree\index{binomial heap!root-degree property} property can
+be used to derive an upper bound on the number of binomial trees in a
+binomial heap. If $H$ is a binomial heap with $n$ vertices, then $H$
+has at most $1 + \lfloor \lg n \rfloor$ binomial trees. To prove this
+result, note that~(see Theorem~2.1 and Corollary~2.1.1
+in~\cite[pp.40--42]{Rosen2000}) $n$ can be uniquely written in binary
 representation as the polynomial
 \[
 n
