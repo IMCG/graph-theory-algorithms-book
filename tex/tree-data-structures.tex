@@ -1355,6 +1355,24 @@ $h_r$ be the height of $v$'s right subtree. Then $T$ is said to be
 \emph{height-balanced} if $|h_\ell - h_r| \leq 1$.
 \end{definition}
 
+Binary trees having the height-balance property are called
+AVL\index{AVL tree} trees. The structure of such trees is such that
+given any internal vertex $v$ of an AVL tree, the heights of the left
+and right subtrees of $v$ differ by at most $1$.
+Complete\index{binary tree!complete} binary trees are trivial examples
+of AVL trees, as are nearly\index{binary tree!nearly complete}
+complete binary trees. A less trivial example of AVL trees are what is
+known as \emph{Fibonacci trees}\index{Fibonacci!tree} because the
+construction of Fibonacci trees bears some resemblance to how
+Fibonacci numbers\index{Fibonacci!number} are produced. Fibonacci
+trees can be constructed recursively in the following manner. The
+Fibonacci tree $F_0$ of height $0$ is the trivial tree. The Fibonacci
+tree $F_1$ of height $1$ is a binary tree whose left and right
+subtrees are both $F_0$. For $n > 1$, the Fibonacci tree $F_n$ of
+height $n$ is a binary tree whose left and right subtrees are
+$F_{n-2}$ and $F_{n-1}$, respectively.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
