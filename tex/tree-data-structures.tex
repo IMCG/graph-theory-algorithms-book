@@ -1820,7 +1820,8 @@ No problem is so formidable that you can't walk away from it. \\
 \item The upper bound in
   Theorem~\ref{thm:tree_data_structures:AVL_tree_logarithmic_height}
   can be improved as follows. From the proof of the theorem, we have
-  the recurrence relation $N(h) > N(h - 1) + N(h - 2)$.
+  the recurrence\index{recurrence relation} relation
+  $N(h) > N(h - 1) + N(h - 2)$.
   %%
   \begin{enumerate}[(a)]
   \item If $h \leq 2$, show that there exists some $c > 0$ such that
@@ -1835,7 +1836,8 @@ No problem is so formidable that you can't walk away from it. \\
     c^{h-1} + c^{h-2}
     \]
     for some $h > 2$. If $c > 0$, show that $c^2 - c - 1 = 0$ is a
-    solution to the recurrence relation $c^{h-1} + c^{h-2}$ and that
+    solution to the recurrence\index{recurrence relation} relation
+    $c^{h-1} + c^{h-2}$ and that
     \[
     N(h)
     >
@@ -1848,8 +1850,9 @@ No problem is so formidable that you can't walk away from it. \\
     <
     \frac{1}{\lg \varphi} \cdot \lg n
     \]
-    where $\varphi = (1 + \sqrt{5}) / 2$ is the golden ratio and $n$
-    counts the number of internal vertices of an AVL tree of height
+    where $\varphi = (1 + \sqrt{5}) / 2$ is the
+    golden\index{golden ratio} ratio and $n$ counts the number of
+    internal vertices of an AVL\index{AVL tree} tree of height
     $h$.
   \end{enumerate}
 \end{problem}
