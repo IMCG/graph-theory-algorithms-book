@@ -1855,4 +1855,25 @@ No problem is so formidable that you can't walk away from it. \\
     internal vertices of an AVL\index{AVL tree} tree of height
     $h$.
   \end{enumerate}
+
+\item The Fibonacci\index{Fibonacci!sequence} sequence $F_n$ is
+  defined as follows. We have initial values $F_0 = 0$ and
+  $F_1 = 1$. For $n > 1$, the $n$-th term in the sequence can be
+  obtained via the recurrence\index{recurrence relation} relation
+  $F_n = F_{n-1} + F_{n-2}$. Show that
+  %%
+  \begin{equation}
+  \label{eqn:tree_data_structures:closed_form_Fibonacci}
+  F_n
+  =
+  \frac{\varphi^n - (-1 / \varphi)^n} {\sqrt{5}}
+  \end{equation}
+  %%
+  where $\varphi$ is the golden\index{golden ratio} ratio. The closed
+  form solution~\eqref{eqn:tree_data_structures:closed_form_Fibonacci}
+  to the Fibonacci sequence is known as Binet's\index{Binet!formula}
+  formula, named after Jacques Philippe Marie
+  Binet\index{Binet!Jacques Philippe Marie}, even through Abraham de
+  Moivre\index{de Moivre, Abraham} knew about this formula long before
+  Binet did.
 \end{problem}
