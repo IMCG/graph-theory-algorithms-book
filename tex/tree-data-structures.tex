@@ -1502,12 +1502,14 @@ heights by one. One of two cases can occur with respect to $T_v$.
   further. A simple way to detect this is to consider the subtree $S$
   rooted at $u$, the parent of $v$. If $S$ has two children, then no
   height adjustment need to take place for vertices in $P_u$, hence
-  $T_v$ is an AVL tree. Otherwise we perform any necessary height
-  adjustment for vertices in $P_u$, starting from $u_k = u$ and
-  working our way up to the root $r = u_0$. After adjusting the height
-  of $u_i$, we test to see whether $u_i$~(with its new height) is
-  height-balanced. If each of the $u_i$ with their new heights are
-  height-balanced, then $T_v$ is height-balanced.
+  $T_v$ is an AVL tree~(see
+  Figure~\ref{fig:tree_data_structures:augmented_tree_balanced_after_insertion}).
+  Otherwise we perform any necessary height adjustment for vertices in
+  $P_u$, starting from $u_k = u$ and working our way up to the root
+  $r = u_0$. After adjusting the height of $u_i$, we test to see
+  whether $u_i$~(with its new height) is height-balanced. If each of
+  the $u_i$ with their new heights are height-balanced, then $T_v$ is
+  height-balanced.
 
 \item\label{item:tree_data_structures:height_unbalanced}
   Height-unbalanced: During the height adjustment phase, it may happen
@@ -1523,6 +1525,15 @@ Case~\ref{item:tree_data_structures:height_balanced} is relatively
 straightforward, but it is
 case~\ref{item:tree_data_structures:height_unbalanced} that involves
 much intricate work.
+
+\begin{figure}[!htbp]
+\centering
+\index{Fibonacci!tree}
+\input{image/tree-data-structures/AVL-tree-balanced-after-insertion.tex}
+\caption{Augmented tree is balanced after insertion; vertex labels are
+  heights.}
+\label{fig:tree_data_structures:augmented_tree_balanced_after_insertion}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
