@@ -1474,7 +1474,18 @@ $O(\lg N_2)$.
 
 \subsection{Insertion}
 
-
+The algorithm for insertion into a BST can be modified and extended to
+support insertion into an AVL tree. Let $T$ be an AVL tree having the
+binary\index{binary search tree!property} search tree property, and
+$v$ a vertex to be inserted into $T$. In the trivial case, $T$ is the
+null tree so inserting $v$ into $T$ is equivalent to letting $T$ be
+the trivial tree rooted at $v$. Consider now the case where $T$ has at
+least one vertex. Apply
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_insert} to
+insert $v$ into $T$ and call the resulting augmented tree $T_v$. But
+our problem is not yet over; $T_v$ is not height-balanced. To complete
+the insertion procedure, we require a technique to restore the
+height-balance property to $T_v$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
