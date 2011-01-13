@@ -1393,6 +1393,7 @@ shows $\cF_6$ together with subtree heights for vertex labels.
 \end{figure}
 
 \begin{theorem}
+\label{thm:tree_data_structures:AVL_tree_logarithmic_height}
 \textbf{Logarithmic height.}
 The height $h$ of an AVL tree with $n$ internal vertices is bounded by
 \[
@@ -1446,6 +1447,23 @@ into~\eqref{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes_general}
 yields $N(h) > 2^{(h - 1) / 2}$. That is, $n > 2^{(h - 1) / 2}$ and
 taking logarithm of both sides yields $h < 2 \cdot \lg n + 1$.
 \end{proof}
+
+An immediate consequence of
+Theorem~\ref{thm:tree_data_structures:AVL_tree_logarithmic_height} is
+that any binary\index{binary search tree} search tree implemented as
+an AVL tree should have at most logarithmic height. Contrast this with
+a general BST of order $N_1$, whose height can be as low as
+logarithmic in $N_1$ or as high as linear in $N_1$. Translating to
+search time, we see that searching a general BST using
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate} is
+in the worst case $O(N_1)$, which is no better than searching a sorted
+list. However, if $N_2$ is the order of an AVL tree endowed with the
+binary\index{binary search tree!property} search tree property, then
+searching the AVL tree using
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate} has
+worst-case $O(\lg N_2)$ runtime. While the worst-case runtime of a
+general BST can vary between $O(\lg N_1)$ and $O(N_1)$, that of an AVL
+tree with the binary search tree property is at most $O(\lg N_2)$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
