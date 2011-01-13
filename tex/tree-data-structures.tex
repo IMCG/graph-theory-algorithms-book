@@ -1816,4 +1816,40 @@ No problem is so formidable that you can't walk away from it. \\
 \item Describe and present pseudocode of an algorithm to construct a
   Fibonacci\index{Fibonacci!tree} tree of height $n$ for some integer
   $n \geq 0$. Analyze the worst-case runtime of your algorithm.
+
+\item The upper bound in
+  Theorem~\ref{thm:tree_data_structures:AVL_tree_logarithmic_height}
+  can be improved as follows. From the proof of the theorem, we have
+  the recurrence relation $N(h) > N(h - 1) + N(h - 2)$.
+  %%
+  \begin{enumerate}[(a)]
+  \item If $h \leq 2$, show that there exists some $c > 0$ such that
+    $N(h) \geq c^h$.
+
+  \item Assume for induction that
+    \[
+    N(h)
+    >
+    N(h - 1) + N(h - 2)
+    \geq
+    c^{h-1} + c^{h-2}
+    \]
+    for some $h > 2$. If $c > 0$, show that $c^2 - c - 1 = 0$ is a
+    solution to the recurrence relation $c^{h-1} + c^{h-2}$ and that
+    \[
+    N(h)
+    >
+    \left( \frac{1 + \sqrt{5}} {2} \right)^h.
+    \]
+
+  \item Use the previous two parts to show that
+    \[
+    h
+    <
+    \frac{1}{\lg \varphi} \cdot \lg n
+    \]
+    where $\varphi = (1 + \sqrt{5}) / 2$ is the golden ratio and $n$
+    counts the number of internal vertices of an AVL tree of height
+    $h$.
+  \end{enumerate}
 \end{problem}
