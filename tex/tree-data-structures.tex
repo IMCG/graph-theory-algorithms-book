@@ -1351,8 +1351,11 @@ Adel'son-Vel'ski\u{\i}-Landis criterion can be expressed as follows.
 \textbf{Height-balance property.}\index{AVL tree!height-balance property}
 Let $T$ be a binary tree and suppose $v$ is an internal vertex of
 $T$. Let $h_\ell$ be the height of the left subtree of $v$ and let
-$h_r$ be the height of $v$'s right subtree. Then $T$ is said to be
-\emph{height-balanced} if $|h_\ell - h_r| \leq 1$.
+$h_r$ be the height of $v$'s right subtree. Then the subtree rooted at
+$v$ is said to be \emph{height-balanced} if
+$|h_\ell - h_r| \leq 1$. For each internal vertex $u$ of $T$, if the
+subtree rooted at $u$ is height-balanced, then the whole tree $T$ is
+height-balanced.
 \end{definition}
 
 Binary trees having the height-balance property are called
@@ -1470,6 +1473,8 @@ $O(\lg N_2)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Insertion}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
