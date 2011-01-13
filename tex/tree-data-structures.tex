@@ -1351,11 +1351,10 @@ Adel'son-Vel'ski\u{\i}-Landis criterion can be expressed as follows.
 \textbf{Height-balance property.}\index{AVL tree!height-balance property}
 Let $T$ be a binary tree and suppose $v$ is an internal vertex of
 $T$. Let $h_\ell$ be the height of the left subtree of $v$ and let
-$h_r$ be the height of $v$'s right subtree. Then the subtree rooted at
-$v$ is said to be \emph{height-balanced} if
-$|h_\ell - h_r| \leq 1$. For each internal vertex $u$ of $T$, if the
-subtree rooted at $u$ is height-balanced, then the whole tree $T$ is
-height-balanced.
+$h_r$ be the height of $v$'s right subtree. Then $v$ is said to be
+\emph{height-balanced} if $|h_\ell - h_r| \leq 1$. For each internal
+vertex $u$ of $T$, if $u$ is height-balanced then the whole tree $T$
+is height-balanced.
 \end{definition}
 
 Binary trees having the height-balance property are called
@@ -1483,9 +1482,40 @@ the trivial tree rooted at $v$. Consider now the case where $T$ has at
 least one vertex. Apply
 Algorithm~\ref{alg:tree_data_structures:binary_search_tree_insert} to
 insert $v$ into $T$ and call the resulting augmented tree $T_v$. But
-our problem is not yet over; $T_v$ is not height-balanced. To complete
-the insertion procedure, we require a technique to restore the
-height-balance property to $T_v$.
+our problem is not yet over; $T_v$ may violate the height-balance
+property. To complete the insertion procedure, we require a technique
+to restore, if necessary, the height-balance property to $T_v$.
+
+To see why the augmented tree $T_v$ may not necessarily be
+height-balanced, let $u$ be the parent of $v$ in $T_v$, where
+previously $u$ was a vertex $T$~(and possibly a leaf). In the original
+AVL tree $T$, let $P_u: r = u_0, u_1, \dots, u_k = u$ be the path from
+the root $r$ of $T$ to $u$ with corresponding subtree heights $H(u_i)
+= h_i$ for $i = 0, 1, \dots, k$. An effect of the insertion is to
+extend the path $P_u$ to the longer path
+$P_v: r = u_0, u_1, \dots, u_k = u, v$ and possibly increase subtree
+heights by one. One of two cases can occur with respect to $T_v$.
+%%
+\begin{enumerate}
+\item Height-balanced: $T_v$ is height-balanced so no need to do
+  anything further. A simple way to detect this is to consider the
+  subtree $S$ rooted at $u$, the parent of $v$. If $S$ is a complete
+  binary tree, then no height adjustment need to take place for
+  vertices in $P_u$, hence $T_v$ is an AVL tree. Otherwise we perform
+  any necessary height adjustment for vertices in $P_u$, starting from
+  $u_k = u$ and working our way up to the root $r = u_0$. After
+  adjusting the height of $u_i$, we test to see whether $u_i$~(with
+  its new height) is height-balanced. If each of the $u_i$ with their
+  new heights are height-balanced, then $T_v$ is height-balanced.
+
+\item Height-unbalanced: During the height adjustment phase, it may
+  happen that some $u_j$ with its new height is not
+  height-balanced. Among all such height-unbalanced vertices, let
+  $u_\ell$ be the first height-unbalanced vertex detected during the
+  process of height adjustment starting from $u_k = u$ and going up
+  towards $r = u_0$. We need to rebalance the subtree rooted at
+  $u_\ell$ and perform another round of height adjustment.
+\end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
