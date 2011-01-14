@@ -54,10 +54,10 @@
 \scriptsize
 \node[draw] {$4$}
   [sibling distance=4cm]
-  child {node[draw] (3) {$3$}
+  child {node[red,very thick,draw] (3) {$3$}
     [sibling distance=2cm]
-    child {node[red,very thick,draw] {$0$}}
-    child {node[red,very thick,draw] (2) {$2$}
+    child {node[draw] {$0$}}
+    child {node[draw] (2) {$2$}
       child {node[draw] (1) {$1$}
         child[missing]
         child {node[blue,very thick,draw] (0) {$0$}}
@@ -96,9 +96,9 @@
   every node/.style={shape=circle,inner sep=1.5pt,thick},%
   scale=0.5]
 \scriptsize
-\node[draw] {$5$}
+\node[red,very thick,draw] {$5$}
   [sibling distance=4cm]
-  child {node[red,very thick,draw] {$2$}
+  child {node[draw] {$2$}
     [sibling distance=2cm]
     child {node[draw] {$0$}}
     child {node[draw] {$1$}
@@ -108,12 +108,12 @@
   }
   child {node[red,very thick,draw] (4) {$4$}
     [sibling distance=2cm]
-    child {node[red,very thick,draw] {$1$}
+    child {node[draw] {$1$}
       [sibling distance=1cm]
       child {node[draw] {$0$}}
       child {node[draw] {$0$}}
     }
-    child {node[red,very thick,draw] (3) {$3$}
+    child {node[draw] (3) {$3$}
       child[missing]
       child {node[draw] (2) {$2$}
         [sibling distance=1cm]
