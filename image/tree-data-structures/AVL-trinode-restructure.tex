@@ -1,0 +1,165 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subfigure[Left rotation of $y$ over $z$.]{
+\begin{tikzpicture}
+[-,thick,%
+  lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=regular polygon,regular polygon sides=3,inner sep=6pt,draw,thick},%
+scale=0.5]
+\scriptsize
+%% nodes and edges
+\node at (0,0) {}
+  [sibling distance=6cm]
+  child[missing]
+  child {node[shape=circle,inner sep=2pt,draw] (z) {}
+    child[missing]
+    child {node[shape=circle,inner sep=2pt,draw] (y) {}
+      child[missing]
+      child {node[shape=circle,inner sep=2pt,draw] (x) {}}
+    }
+  };
+%% node labels
+\node[above right] at (z.east) {$a = z$};
+\node[above right] at (y.east) {$b = y$};
+\node[above right] at (x.east) {$c = x$};
+%% generic trees and their labels
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  T_0/1/-4/below/south, T_1/4/-5.5/below/south, T_2/7/-7/below/south,
+  T_3/11/-7/below/south}
+{
+  \node[nodeDecorate] (\nodename) at (\x,\y) {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% connect nodes to generic trees
+\path
+(z) edge[lineDecorate] node {} (1,-2.795)
+(y) edge[lineDecorate] node {} (4,-4.28)
+(x) edge[lineDecorate] node {} (7,-5.8)
+(x) edge[lineDecorate] node {} (11,-5.8);
+\end{tikzpicture}
+%%
+%%
+\qquad\qquad
+%%
+%%
+\begin{tikzpicture}
+[-,thick,%
+  lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=regular polygon,regular polygon sides=3,inner sep=6pt,draw,thick},%
+scale=0.5]
+\scriptsize
+%% nodes and edges
+\node at (0,0) {}
+  [sibling distance=6cm]
+  child[missing]
+  child {node[shape=circle,inner sep=2pt,draw] (y) {}
+    child {node[shape=circle,inner sep=2pt,draw] (z) {}}
+    child {node[shape=circle,inner sep=2pt,draw] (x) {}}
+  };
+%% node labels
+\node[above left] at (z.west) {$a = z$};
+\node[above right] at (y.east) {$b = y$};
+\node[above right] at (x.east) {$c = x$};
+%% generic trees and their labels
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  T_0/-1.5/-5.5/below/south, T_1/1.5/-5.5/below/south,
+  T_2/4.5/-5.5/below/south, T_3/7.5/-5.5/below/south}
+{
+  \node[nodeDecorate] (\nodename) at (\x,\y) {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% connect nodes to generic trees
+\path
+(z) edge[lineDecorate] node {} (-1.5,-4.3)
+(z) edge[lineDecorate] node {} (1.5,-4.3)
+(x) edge[lineDecorate] node {} (4.5,-4.3)
+(x) edge[lineDecorate] node {} (7.5,-4.3);
+\end{tikzpicture}
+}
+%%
+%%
+\subfigure[Right rotation of $y$ over $z$.]{
+\begin{tikzpicture}
+[-,thick,%
+  lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=regular polygon,regular polygon sides=3,inner sep=6pt,draw,thick},%
+scale=0.5]
+\scriptsize
+%% nodes and edges
+\node at (0,0) {}
+  [sibling distance=6cm]
+  child {node[shape=circle,inner sep=2pt,draw] (z) {}
+    child {node[shape=circle,inner sep=2pt,draw] (y) {}
+      child {node[shape=circle,inner sep=2pt,draw] (x) {}}
+      child[missing]
+    }
+    child[missing]
+  }
+  child[missing];
+%% node labels
+\node[above left] at (z.west) {$c = z$};
+\node[above left] at (y.west) {$b = y$};
+\node[above left] at (x.west) {$a = x$};
+%% generic trees and their labels
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  T_0/-11/-7/below/south, T_1/-7/-7/below/south,
+  T_2/-4/-5.5/below/south, T_3/-1/-4/below/south}
+{
+  \node[nodeDecorate] (\nodename) at (\x,\y) {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% connect nodes to generic trees
+\path
+(z) edge[lineDecorate] node {} (-1,-2.79)
+(y) edge[lineDecorate] node {} (-4,-4.3)
+(x) edge[lineDecorate] node {} (-7,-5.79)
+(x) edge[lineDecorate] node {} (-11,-5.79);
+\end{tikzpicture}
+%%
+%%
+\qquad\qquad
+%%
+%%
+\begin{tikzpicture}
+[-,thick,%
+  lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=regular polygon,regular polygon sides=3,inner sep=6pt,draw,thick},%
+scale=0.5]
+\scriptsize
+%% nodes and edges
+\node at (0,0) {}
+  [sibling distance=6cm]
+  child[missing]
+  child {node[shape=circle,inner sep=2pt,draw] (y) {}
+    child {node[shape=circle,inner sep=2pt,draw] (x) {}}
+    child {node[shape=circle,inner sep=2pt,draw] (z) {}}
+  };
+%% node labels
+\node[above right] at (z.east) {$c = z$};
+\node[above right] at (y.east) {$b = y$};
+\node[above left] at (x.west) {$a = x$};
+%% generic trees and their labels
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  T_0/-1.5/-5.5/below/south, T_1/1.5/-5.5/below/south,
+  T_2/4.5/-5.5/below/south, T_3/7.5/-5.5/below/south}
+{
+  \node[nodeDecorate] (\nodename) at (\x,\y) {};
+  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+}
+%% connect nodes to generic trees
+\path
+(x) edge[lineDecorate] node {} (-1.5,-4.3)
+(x) edge[lineDecorate] node {} (1.5,-4.3)
+(z) edge[lineDecorate] node {} (4.5,-4.3)
+(z) edge[lineDecorate] node {} (7.5,-4.3);
+\end{tikzpicture}
+}
