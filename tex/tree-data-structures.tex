@@ -1535,6 +1535,31 @@ much intricate work.
 \label{fig:tree_data_structures:augmented_tree_balanced_after_insertion}
 \end{figure}
 
+We now turn to the case where inserting a vertex $v$ into a nonempty
+AVL tree $T$ results in an augmented tree $T_v$ that is not
+height-balanced. A general idea for rebalancing~(and hence restoring
+the height-balance property to) $T_v$ is to determine where in $T_v$
+the height-balance property is first violated~(the search phase), and
+then to locally rebalance subtrees at and around the point of
+violation~(the repair phase). A description of the search phase
+follows. Let
+\[
+P_v: r = u_0, u_1, \dots, u_k = u, v
+\]
+be the path from the root $r$ of $T_v$~(and hence of $T$) to
+$v$. Traversing upward from $v$ to $r$, let $z$ be the first
+height-unbalanced vertex. Among the children of $z$, let $y$ be the
+child of higher height and hence an ancestor of $v$. Similarly, among
+the children of $y$ let $x$ be the child of higher height. In case a
+tie occurs, let $x$ be the child of $y$ that is also an ancestor of
+$v$. As each vertex is an ancestor of itself, it is possible that
+$x = v$. Furthermore, $x$ is a grandchild of $z$ because $x$ is a
+child of $y$, which in turn is a child of $z$. The vertex $z$ is not
+height-balanced due to inserting $v$ in the subtree rooted at $y$,
+hence the height of $y$ is $2$ greater than its sibling. We have
+determined the location at which the height-balance property is first
+violated.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
