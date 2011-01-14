@@ -1,0 +1,133 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subfigure[Insert a vertex.]{
+\begin{tikzpicture}
+[-,thick,%
+  every node/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  scale=0.5]
+\scriptsize
+\node {$4$}
+  [sibling distance=4cm]
+  child {node {$2$}
+    [sibling distance=2cm]
+    child {node {$0$}}
+    child {node {$1$}
+      child {node {$0$}}
+      child[missing]
+    }
+  }
+  child {node {$3$}
+    [sibling distance=2cm]
+    child {node {$1$}
+      [sibling distance=1cm]
+      child {node {$0$}}
+      child {node {$0$}}
+    }
+    child {node {$2$}
+      child[missing]
+      child {node {$1$}
+        [sibling distance=1cm]
+        child {node {$0$}}
+        child {node {$0$}}
+      }
+    }
+  };
+\end{tikzpicture}
+}
+%%
+%%
+\qquad
+\subfigure[Vertex inserted.]{
+\begin{tikzpicture}
+[-,thick,%
+  every node/.style={shape=circle,inner sep=1.5pt,thick},%
+  scale=0.5]
+\scriptsize
+\node[draw] {$4$}
+  [sibling distance=4cm]
+  child {node[draw] (3) {$3$}
+    [sibling distance=2cm]
+    child {node[red,very thick,draw] {$0$}}
+    child {node[red,very thick,draw] (2) {$2$}
+      child {node[draw] (1) {$1$}
+        child[missing]
+        child {node[blue,very thick,draw] (0) {$0$}}
+      }
+      child[missing]
+    }
+  }
+  child {node[draw] {$3$}
+    [sibling distance=2cm]
+    child {node[draw] {$1$}
+      [sibling distance=1cm]
+      child {node[draw] {$0$}}
+      child {node[draw] {$0$}}
+    }
+    child {node[draw] {$2$}
+      child[missing]
+      child {node[draw] {$1$}
+        [sibling distance=1cm]
+        child {node[draw] {$0$}}
+        child {node[draw] {$0$}}
+      }
+    }
+  };
+\node[right] at (0.east) {$v$};
+\node[right] at (1.east) {$x$};
+\node[right] at (2.east) {$y$};
+\node[right] at (3.east) {$z$};
+\end{tikzpicture}
+}
+%%
+%%
+\qquad
+\subfigure[Vertex inserted.]{
+\begin{tikzpicture}
+[-,thick,%
+  every node/.style={shape=circle,inner sep=1.5pt,thick},%
+  scale=0.5]
+\scriptsize
+\node[draw] {$5$}
+  [sibling distance=4cm]
+  child {node[red,very thick,draw] {$2$}
+    [sibling distance=2cm]
+    child {node[draw] {$0$}}
+    child {node[draw] {$1$}
+      child {node[draw] {$0$}}
+      child[missing]
+    }
+  }
+  child {node[red,very thick,draw] (4) {$4$}
+    [sibling distance=2cm]
+    child {node[red,very thick,draw] {$1$}
+      [sibling distance=1cm]
+      child {node[draw] {$0$}}
+      child {node[draw] {$0$}}
+    }
+    child {node[red,very thick,draw] (3) {$3$}
+      child[missing]
+      child {node[draw] (2) {$2$}
+        [sibling distance=1cm]
+        child {node[draw] {$1$}
+          child {node[blue,very thick,draw] (0) {$0$}}
+          child[missing]
+        }
+        child {node[draw] {$0$}}
+      }
+    }
+  };
+\node[right] at (0.east) {$v$};
+\node[right] at (2.east) {$x$};
+\node[right] at (3.east) {$y$};
+\node[right] at (4.east) {$z$};
+\end{tikzpicture}
+}
