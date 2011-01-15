@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{Three vertices $x,y,z$ of an augmented AVL tree $T_v$, where
+  $z$ is the first height-unbalanced vertex in the path from $v$ up to
+  the root of $T_v$. The left subtree of $y$ is denoted $T_1$.}
+\Output{A single left rotation to height-balance the subtree rooted at
+  $z$.}
+\BlankLine
+%%
+%% algorithm body
+$\rightChild[\parent[z]] \assign y$\;
+$\parent[y] \assign \parent[z]$\;
+$\parent[z] \assign y$\;
+$\leftChild[y] \assign z$\;
+$\parent[\rootElem[T_1]] \assign z$\;
+$\rightChild[z] \assign \rootElem[T_1]$\;

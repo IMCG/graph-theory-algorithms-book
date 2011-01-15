@@ -1573,9 +1573,63 @@ first violated.
 \begin{figure}[!htbp]
 \centering
 \input{image/tree-data-structures/AVL-trinode-restructure.tex}
-\caption{Single rotation in the trinode restructure process.}
-\label{fig:tree_data_structures:}
+\caption{Rotations in the trinode restructuring process.}
+\label{fig:tree_data_structures:AVL_trinode_restructure}
 \end{figure}
+
+We now turn to the repair phase. The central question is: How are we
+to restore the height-balance property to the subtree rooted at $z$?
+By \emph{trinode restructuring} is meant the process whereby the
+height-balance property is restored; the prefix ``tri'' refers to the
+three vertices $x,y,z$ that are central to this process. A common name
+for the trinode restructuring is \emph{rotation} in view of the
+geometric interpretation of the process.
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure}
+distinguishes four rotation possibilities, two of which are
+symmetrical to the other two. The single left rotation in
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:single_left_rotate}
+occurs when $\height(x) = \height(\rootElem(T_0)) + 1$ and detailed in
+Algorithm~\ref{alg:tree_data_structures:single_left_rotation}. The
+single right rotation in
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:single_right_rotate}
+occurs when $\height(x) = \height(\rootElem(T_3)) + 1$; see
+Algorithm~\ref{alg:tree_data_structures:single_right_rotation} for
+pseudocode.
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:right_left_rotate}
+illustrates the case of a right-left double rotation and occurs when
+$\height(\rootElem(T_3)) = \height(\rootElem(T_0))$; see
+Algorithm~\ref{alg:tree_data_structures:right_left_rotation} for
+pseudocode to handle the rotation. The fourth case is illustrated in
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:left_right_rotate}
+and occurs when $\height(\rootElem(T_0)) = \height(\rootElem(T_3))$;
+refer to Algorithm~\ref{alg:tree_data_structures:right_left_rotation}
+for pseudocode to handle this left-right double rotation. Each of the
+four algorithms mentioned above run in constant time $O(1)$ and
+preserves the in-order traversal ordering of all vertices in $T_v$.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-single-left-rotation.tex}
+\caption{Single left rotation in the trinode restructure process.}
+\label{alg:tree_data_structures:single_left_rotation}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-single-right-rotation.tex}
+\caption{Single right rotation in the trinode restructure process.}
+\label{alg:tree_data_structures:single_right_rotation}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-right-left-rotation.tex}
+\caption{Double rotation: right rotation followed by left rotation.}
+\label{alg:tree_data_structures:right_left_rotation}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-left-right-rotation.tex}
+\caption{Double rotation: left rotation followed by right rotation.}
+\label{alg:tree_data_structures:right_left_rotation}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
