@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{An AVL tree $T$ and a vertex $v$.}
+\Output{The AVL tree $T$ with $v$ inserted into it.}
+\BlankLine
+%%
+%% algorithm body
+insert $v$ into $T$ as per Algorithm~\ref{alg:tree_data_structures:binary_search_tree_insert}\;
+$\height[v] \assign 0$\;
+$u \assign v$\tcc*[f]{begin height adjustment}\;
+$x \assign \texttt{NULL}$\;
+$y \assign \texttt{NULL}$\;
+$z \assign \texttt{NULL}$\;
+\While{\rm $\parent[u] \neq \texttt{NULL}$}{
+  $u \assign \parent[u]$\;
+  \If{\rm $\leftChild[u] \neq \texttt{NULL}$ and $\rightChild[u] \neq \texttt{NULL}$}{
+    $h_\ell \assign \height[\leftChild[u]]$\;
+    $h_r \assign \height[\rightChild[u]]$\;
+    $\height[u] \assign 1 + \max(h_\ell,\, h_r)$\;
+    \If{$|h_\ell - h_r| > 1$}{
+      \If{$\height[\rightChild[\rightChild[u]]] = \height[\leftChild[u]] + 1$}{
+        $z \assign u$\;
+        $y \assign \rightChild[z]$\;
+        $x \assign \rightChild[y]$\;
+        trinode restructuring as per Algorithm~\ref{alg:tree_data_structures:single_left_rotation}\;
+        continue with next iteration of loop\;
+      }
+      \If{$\height[\leftChild[\leftChild[u]]] = \height[\rightChild[u]] + 1$}{
+        $z \assign u$\;
+        $y \assign \leftChild[z]$\;
+        $x \assign \leftChild[y]$\;
+        trinode restructuring as per Algorithm~\ref{alg:tree_data_structures:single_right_rotation}\;
+        continue with next iteration of loop\;
+      }
+      \If{$\height[\rightChild[\rightChild[u]]] = \height[\leftChild[u]]$}{
+        $z \assign u$\;
+        $y \assign \rightChild[z]$\;
+        $x \assign \leftChild[y]$\;
+        trinode restructuring as per Algorithm~\ref{alg:tree_data_structures:right_left_rotation}\;
+        continue with next iteration of loop\;
+      }
+      \If{$\height[\leftChild[\leftChild[u]]] = \height[\rightChild[u]]$}{
+        $z \assign u$\;
+        $y \assign \leftChild[z]$\;
+        $x \assign \rightChild[y]$\;
+        trinode restructuring as per Algorithm~\ref{alg:tree_data_structures:left_right_rotation}\;
+        continue with next iteration of loop\;
+      }
+    }
+  }
+  \If{\rm $\leftChild[u] \neq \texttt{NULL}$}{
+    $\height[u] \assign 1 + \height[\leftChild[u]]$\;
+    continue with next iteration of loop\;
+  }
+  \If{\rm $\rightChild[u] \neq \texttt{NULL}$}{
+    $\height[u] \assign 1 + \height[\rightChild[u]]$\;
+    continue with next iteration of loop\;
+  }
+}
