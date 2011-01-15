@@ -25,26 +25,26 @@
 %% algorithm body
 $u \assign \texttt{NULL}$\;
 $v \assign \texttt{NULL}$\;
-\eIf{\rm $x$ has a left-child or $x$ has a right-child}{
+\eIf{\rm $\leftChild[x] \neq \texttt{NULL}$ or $\rightChild[x] \neq \texttt{NULL}$}{
   $v \assign x$\;
 }{
   $v \assign$ successor of $x$\;
 }
-\eIf{\rm $v$ has a left-child}{
-  $u \assign$ left-child of $v$\;
+\eIf{\rm $\leftChild[v] \neq \texttt{NULL}$}{
+  $u \assign \leftChild[v]$\;
 }{
-  $u \assign$ right-child of $v$\;
+  $u \assign \rightChild[v]$\;
 }
 \If{\rm $u \neq \texttt{NULL}$}{
   $\parent[u] \assign \parent[v]$\;
 }
 \eIf{\rm $\parent[v] = \texttt{NULL}$}{
-  let $u$ be the root of $T$\;
+  $\rootElem[T] \assign u$\;
 }{
-  \eIf{\rm $v$ is the left-child of $\parent[v]$}{
-    let $u$ be the left-child of $\parent[v]$\;
+  \eIf{\rm $v = \leftChild[\parent[v]]$}{
+    $\leftChild[\parent[v]] \assign u$\;
   }{
-    let $u$ be the right-child of $\parent[v]$\;
+    $\rightChild[\parent[v]] \assign u$\;
   }
 }
 \If{$v \neq x$}{
