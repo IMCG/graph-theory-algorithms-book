@@ -23,12 +23,12 @@
 \BlankLine
 %%
 %% algorithm body
-$v \assign$ root of $T$\;
+$v \assign \rootElem[T]$\;
 \While{\rm $v \neq \texttt{NULL}$ and $k \neq \kappa_v$}{
   \eIf{$k < \kappa_v$}{
-    $v \assign$ root of left subtree of $v$\;
+    $v \assign \leftChild[v]$\;
   }{
-    $v \assign$ root of right subtree of $v$\;
+    $v \assign \rightChild[v]$\;
   }
 }
 \Return $v$\;
