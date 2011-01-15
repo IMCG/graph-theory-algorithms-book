@@ -23,11 +23,11 @@
 \BlankLine
 %%
 %% algorithm body
-\If{\rm $v$ has a right subtree}{
+\If{\rm $\rightChild[v] \neq \texttt{NULL}$}{
   \Return minimum vertex of $v$'s right subtree as per Algorithm~\ref{alg:tree_data_structures:binary_search_tree_minimum_key}\;
 }
 $u \assign \parent(v)$\;
-\While{\rm $u \neq \texttt{NULL}$ and $v$ is the root of $u$'s right subtree}{
+\While{\rm $u \neq \texttt{NULL}$ and $v = \rightChild[u]$}{
   $v \assign u$\;
   $u \assign \parent(u)$\;
 }
