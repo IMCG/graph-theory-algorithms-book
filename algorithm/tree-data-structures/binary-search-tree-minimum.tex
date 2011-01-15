@@ -23,7 +23,7 @@
 %%
 %% algorithm body
 $v \assign$ root of $T$\;
-\While{\rm $v$ has a left subtree}{
-  $v \assign$ root of left subtree of $v$\;
+\While{\rm $\leftChild[v] \neq \texttt{NULL}$}{
+  $v \assign \leftChild[v]$\;
 }
 \Return $v$\;
