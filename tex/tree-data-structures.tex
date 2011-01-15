@@ -1517,8 +1517,9 @@ heights by one. One of two cases can occur with respect to $T_v$.
   all such height-unbalanced vertices, let $u_\ell$ be the first
   height-unbalanced vertex detected during the process of height
   adjustment starting from $u_k = u$ and going up towards
-  $r = u_0$. We need to rebalance the subtree rooted at $u_\ell$ and
-  perform another round of height adjustment.
+  $r = u_0$. We need to rebalance the subtree rooted at $u_\ell$. Then
+  we continue on adjusting heights of the remaining vertices in
+  $P_u$, also performing height-rebalancing where necessary.
 \end{enumerate}
 %%
 Case~\ref{item:tree_data_structures:height_balanced} is relatively
@@ -1602,7 +1603,7 @@ Algorithm~\ref{alg:tree_data_structures:right_left_rotation} for
 pseudocode to handle the rotation. The fourth case is illustrated in
 Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:left_right_rotate}
 and occurs when $\height(\rootElem(T_0)) = \height(\rootElem(T_3))$;
-refer to Algorithm~\ref{alg:tree_data_structures:right_left_rotation}
+refer to Algorithm~\ref{alg:tree_data_structures:left_right_rotation}
 for pseudocode to handle this left-right double rotation. Each of the
 four algorithms mentioned above run in constant time $O(1)$ and
 preserves the in-order traversal ordering of all vertices in $T_v$.
@@ -1628,7 +1629,7 @@ preserves the in-order traversal ordering of all vertices in $T_v$.
 \begin{algorithm}[!htbp]
 \input{algorithm/tree-data-structures/AVL-left-right-rotation.tex}
 \caption{Double rotation: left rotation followed by right rotation.}
-\label{alg:tree_data_structures:right_left_rotation}
+\label{alg:tree_data_structures:left_right_rotation}
 \end{algorithm}
 
 
