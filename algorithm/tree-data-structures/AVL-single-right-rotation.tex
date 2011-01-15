@@ -19,7 +19,9 @@
 %% input/output
 \Input{Three vertices $x,y,z$ of an augmented AVL tree $T_v$, where
   $z$ is the first height-unbalanced vertex in the path from $v$ up to
-  the root of $T_v$. The right subtree of $y$ is denoted $T_2$.}
+  the root of $T_v$. The left subtree of $z$ is $T_3$ and the right
+  subtree of $y$ is $T_2$. The left and right subtrees of $x$ are
+  $T_0$ and $T_1$, respectively.}
 \Output{A single right rotation to height-balance the subtree rooted at
   $z$.}
 \BlankLine
@@ -31,3 +33,6 @@ $\parent[z] \assign y$\;
 $\rightChild[y] \assign z$\;
 $\parent[\rootElem[T_2]] \assign z$\;
 $\leftChild[z] \assign \rootElem[T_2]$\;
+$\height[x] \assign 1 + \max(\height[\rootElem[T_0]],\, \height[\rootElem[T_1]])$\;
+$\height[z] \assign 1 + \max(\height[\rootElem[T_2]],\, \height[\rootElem[T_3]])$\;
+$\height[y] \assign 1 + \max(\height[x],\, \height[z])$\;
