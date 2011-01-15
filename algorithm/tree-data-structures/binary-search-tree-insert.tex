@@ -27,18 +27,18 @@ $v \assign$ root of $T$\;
 \While{\rm $v \neq \texttt{NULL}$}{
   $u \assign v$\;
   \eIf{$\kappa_x < \kappa_v$}{
-    $v \assign$ left-child of $v$\;
+    $v \assign \leftChild[v]$\;
   }{
-    $v \assign$ right-child of $v$\;
+    $v \assign \rightChild[v]$\;
   }
 }
 $\parent[x] \assign u$\;
 \eIf{\rm $u = \texttt{NULL}$}{
-  $x$ is the root of $T$\;
+  $\rootElem[T] \assign x$\;
 }{
   \eIf{$\kappa_x < \kappa_u$}{
-    $x$ is the left-child of $u$\;
+    $\leftChild[u] \assign x$\;
   }{
-    $x$ is the right-child of $u$\;
+    $\rightChild[u] \assign x$\;
   }
 }
