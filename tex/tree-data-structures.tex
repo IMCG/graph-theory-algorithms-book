@@ -1672,7 +1672,21 @@ path from the root $r$ of $T_v$ to $u$. Adjust the height of $u$ and,
 traversing from $u$ up to $r$, perform height adjustment to each
 vertex in $P$ and where necessary carry out trinode restructuring. The
 resulting algorithm is very similar to
-Algorithm~\ref{alg:tree_data_structures:AVL-insert}.
+Algorithm~\ref{alg:tree_data_structures:AVL-insert}; see
+Algorithm~\ref{alg:tree_data_structures:AVL-delete} for
+pseudocode. The deletion procedure via
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete}
+requires worst-case runtime $O(\lg n)$, where $n$ is the number of
+vertices in $T$, and the height-adjustment process runs in worst-case
+$O(\lg n)$ time as well. Thus
+Algorithm~\ref{alg:tree_data_structures:AVL-delete} has worst-case
+runtime of $O(\lg n)$.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-delete.tex}
+\caption{Delete a vertex from an AVL tree.}
+\label{alg:tree_data_structures:AVL-delete}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
