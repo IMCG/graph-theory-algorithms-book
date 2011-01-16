@@ -344,19 +344,15 @@ see also~\cite{EdelbergEtAl1976}.
 
 \section{Vertex and edge connectivity}
 
-If $G=(V,E)$ is a graph and $v\in V$ is a vertex with the property
-that $G-v$ has more connected components than $G$ then
-we call $v$ a {\it cut-vertex} (or {\it articulation point} or {\it vertex-cut}).
-\index{cut!vertex}
-\index{vertex-cut}
-\index{articulation point}
-A {\it non-separable graph} is one having no cut-vertex.
-\index{non-separable graph}
-\index{graph!non-separable}
-Otherwise, the graph is called {\it separable}.
-\index{graph!separable}
-A {\it block} of a graph is a maximal non-separable subgraph.
-\index{block}
+If $G = (V,E)$ is a graph and $U \subseteq V$ is a vertex set with the
+property that $G - U$ has more connected components than $G$, then we
+call $U$ a \emph{vertex-cut}\index{vertex-cut}. The term
+\emph{cut-vertex}\index{cut-vertex} or
+\emph{cut-point}\index{cut-point} is used when the vertex-cut consists
+of exactly one vertex. For an intuitive appreciation of vertex-cut,
+suppose $G = (V,E)$ is a connected graph. Then $U \subseteq V$ is a
+vertex-cut if the vertex\index{vertex!deletion subgraph} deletion
+subgraph $G - U$ is disconnected.
 
 \begin{example}
 {\rm
