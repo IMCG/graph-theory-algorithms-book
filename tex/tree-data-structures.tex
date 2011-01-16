@@ -1647,6 +1647,19 @@ $T$, insertion takes worst-case $O(\lg n)$ time.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Deletion}
+
+The process of removing a vertex from an AVL tree is similar to the
+insertion procedure. However, instead of using the insertion algorithm
+for BST, we use the deletion
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete} for
+BST to remove the target vertex from an AVL tree. The resulting tree
+may violate the height-balance property, which can be restored using
+trinode restructuring.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Problems}
 
 \begin{quote}
