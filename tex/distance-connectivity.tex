@@ -324,56 +324,6 @@ Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm} algorithm to
 compute the distance between each pair of vertices and assign the
 resulting distance to the corresponding matrix $A_i$.
 
-\begin{lstlisting}
-def distance_matrices(Gamma):
-    """
-    Returns the distance matrices of a graph.
-
-    INPUT:
-        Gamma is a graph.
-    OUTPUT:
-        The sequence of distance matrices
-
-    EXAMPLES:
-        sage: A = matrix([[0,1,1,0,0],[1,0,1,0,0],[1,1,0,1,0],[0,0,1,0,1],[0,0,0,1,0]])
-        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
-        sage: print distance_matrices(G)
-        [[1 0 0 0 0]
-         [0 1 0 0 0]
-         [0 0 1 0 0]
-         [0 0 0 1 0]
-         [0 0 0 0 1],
-         [0 1 1 0 0]
-         [1 0 1 0 0]
-         [1 1 0 1 0]
-         [0 0 1 0 1]
-         [0 0 0 1 0],
-         [0 0 0 1 0]
-         [0 0 0 1 0]
-         [0 0 0 0 1]
-         [1 1 0 0 0]
-         [0 0 1 0 0],
-         [0 0 0 0 1]
-         [0 0 0 0 1]
-         [0 0 0 0 0]
-         [0 0 0 0 0]
-         [1 1 0 0 0]]
-    """
-    g = Gamma.diameter()
-    V = Gamma.vertices()
-    n = len(V)
-    D = G.distance_all_pairs()
-    dist_mats = []
-    for i in range(g+1):
-        dist_mati = [[0 for j in range(n)] for k in range(n)]
-        for v1 in V:
-            for v2 in V:
-                if D[v1][v2]==i:
-                    dist_mati[v1][v2] = 1
-        dist_mats.append(matrix(dist_mati))
-    return dist_mats
-\end{lstlisting}
-
 The {\it distance matrix} $D(G)$ of $G$ is
 the $n\times n$ matrix
 
