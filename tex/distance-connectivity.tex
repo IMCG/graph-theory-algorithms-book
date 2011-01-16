@@ -325,26 +325,19 @@ compute the distance between each pair of vertices and assign the
 resulting distance to the corresponding matrix $A_i$.
 
 The distance matrix arises in several applications, including
-communication network design (see for example
-\cite{GrahamPollak1971})
-and network flow algorithms (see for example \cite{Dijkstra1959}).
-
-\begin{remark}
-{\rm
-Thanks to R. Graham and H. Pollak, the following unusual fact is
-known:
-If $T$ is any tree then
-
+communication network design~\cite{GrahamPollak1971} and network flow
+algorithms~\cite{Dijkstra1959}. Thanks to Graham\index{Graham, R. L.}
+and Pollak\index{Pollak, O.}~\cite{GrahamPollak1971}, the following
+unusual fact is known. If $T$ is any tree then
 \[
-\det D(T)=(-1)^{n-1}(n-1)2^{n-2},
+\det D(T)
+=
+(-1)^{n - 1} (n - 1) 2^{n - 2}
 \]
-where $n$ denotes the number of vertices of $T$.
-In particular, the determinant of the distance matrix of a tree is
-independent of the structure of the tree.  This fact is proven in the
-paper \cite{GrahamPollak1971}, but see also
-\cite{EdelbergEtAl1976}.
-}
-\end{remark}
+where $n$ denotes the order of $T$. In particular, the determinant of
+the distance matrix of a tree is independent of the structure of the
+tree.  This fact is proven in the paper~\cite{GrahamPollak1971}, but
+see also~\cite{EdelbergEtAl1976}.
 
 \begin{lstlisting}
 def distance_matrix(Gamma):
