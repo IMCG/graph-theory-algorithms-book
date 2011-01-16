@@ -275,6 +275,16 @@ this final tree is the center of $T$.
 
 \subsection{Distance matrix}
 
+In sections~\ref{sec:introduction:distance_matrix}
+and~\ref{sec:graph_algorithms:weights_distances}, the distance matrix
+$D$ of a graph $G$ was defined to be $D = [d_{ij}]$, where
+$d_{ij} = d(v_i, v_j)$ and the vertices of $G$ are indexed by
+$V = \{v_0, v_1, \dots, v_k\}$. The matrix $D$ is square where we set
+$d_{ij} = 0$ for entries along the main diagonal. If there is no path
+from $v_i$ to $v_j$, then we set $d_{ij} = \infty$. If $G$ is
+undirected, then $D$ is symmetric and is equal to its transpose,
+i.e. $D^T = D$.
+
 There are two uses of this term in the literature.
 
 Consider an edge-weighted graph $G=(V,E)$ without negative weight
