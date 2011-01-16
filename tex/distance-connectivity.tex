@@ -361,7 +361,13 @@ would either disconnect $G$ or reduce $G$ to the trivial graph. The
 vertex connectivity of the graph in
 Figure~\ref{fig:distance_connectivity:claw_graph} is
 $\kappa_v(G) = 1$ because we only need to remove vertex $0$ in order
-to disconnect the graph.
+to disconnect the graph. The vertex connectivity of a connected graph
+$G$ is thus the vertex-cut of minimum cardinality. And $G$ is said to
+be $k$-\emph{connected} if $\kappa_v(G) \geq k$. From the latter
+definition, it immediately follows that if $G$ is $k$-connected then
+any vertex-cut of $G$ has at least cardinality $k$. For instance, the
+graph in Figure~\ref{fig:distance_connectivity:claw_graph} is
+$1$-connected.
 
 \begin{figure}[!htbp]
 \centering
