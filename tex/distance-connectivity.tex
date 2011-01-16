@@ -358,12 +358,24 @@ vertex $0$.
 
 \begin{figure}[!htbp]
 \centering
+\index{cut-edge}
 \index{cut-vertex}
 \index{claw graph}
 \input{image/distance-connectivity/claw-graph.tex}
 \caption{A claw graph with $4$ vertices.}
 \label{fig:distance_connectivity:claw_graph}
 \end{figure}
+
+The notions of edge-cut and cut-edge are similarly defined. Let
+$G = (V,E)$ be a graph and $D \subseteq E$ an edge set such that the
+edge deletion subgraph $G - D$ has more components than $G$. Then $D$
+is called an \emph{edge-cut}\index{edge-cut}. The term
+\emph{cut-edge}\index{cut-edge} or \emph{bridge}\index{bridge} is
+reserved for the case where the set $D$ is a singleton. Think of a
+cut-edge as an edge whose removal from a connected graph would result
+in that graph being disconnected. Going back to the case of the graph
+in Figure~\ref{fig:distance_connectivity:claw_graph}, each edge of the
+graph is a cut-edge.
 
 If $G$ has at least $3$ vertices and there is a $v\in V$
 which is a cut-vertex then we say $G$ is {\it $1$-connected}.
