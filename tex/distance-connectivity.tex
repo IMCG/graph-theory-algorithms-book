@@ -286,8 +286,8 @@ undirected, then $D$ is symmetric and is equal to its transpose,
 i.e. $D^T = D$. Refer to
 Figure~\ref{fig:distance_connectivity:distance_matrix_directed_undirected_graphs}
 for examples of distance matrices of directed and undirected
-graphs. In the remainder of this section, ``graph'' refers to
-undirected graphs unless otherwise specified.
+graphs. In the remainder of this section, ``graph'' refers to an
+undirected graph unless otherwise specified.
 
 \begin{figure}[!htbp]
 \centering
@@ -298,26 +298,23 @@ undirected graphs unless otherwise specified.
 \end{figure}
 
 Instead of one distance matrix, we can define several distance
-matrices on $G$.
-
-There are two uses of this term in the literature.
-
-Consider an edge-weighted graph $G=(V,E)$ without negative weight
-cycles with distance function $\partial$. Let $d=\partial(G)$
-denote the diameter of $G$ and index the
-set of vertices in some arbitrary but fixed way,
-$V=\{v_1,v_2,\dots, v_n\}$.
-The {\it distance matrices} of $G$ are a sequence of $n\times n$ matrices
-$\{A_1,\dots, A_d)$, where
-
+matrices on $G$. Consider an edge-weighted graph $G = (V,E)$ without
+negative weight cycles and let
 \[
-(A_k)_{ij} =
-\left\{
-\begin{array}{ll}
-1,& {\rm if}\ \partial(v_i,v_j)=k,\\
-0,& {\rm otherwise}.
-\end{array}
-\right.
+d: V \times V \to \R \cup \{\infty\}
+\]
+be a distance function of $G$. Let $\partial = \diam(G)$ be the
+diameter of $G$ and index the vertices of $G$ in some arbitrary but
+fixed manner, say $V = \{v_0, v_1, \dots, v_n\}$. The
+\emph{distance matrices}\index{matrix!distance} of $G$ are a sequence
+of $(n - 1) \times (n - 1)$ matrices $A_1, A_2, \dots, A_\partial$ where
+\[
+(A_k)_{ij}
+=
+\begin{cases}
+1, & \text{if $d(v_i, v_j) = k$}, \\
+0, & \text{otherwise}.
+\end{cases}
 \]
 In particular, $A_1$ is the usual adjacency matrix $A$.
 
