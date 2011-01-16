@@ -390,7 +390,17 @@ reserved for the case where the set $D$ is a singleton. Think of a
 cut-edge as an edge whose removal from a connected graph would result
 in that graph being disconnected. Going back to the case of the graph
 in Figure~\ref{fig:distance_connectivity:claw_graph}, each edge of the
-graph is a cut-edge.
+graph is a cut-edge. The \emph{edge connectivity} of a connected graph
+$G$, written $\kappa_e(G)$, is the minimum number of edges whose
+removal would disconnect $G$. In other words, $\kappa_e(G)$ is the
+minimum cardinality among all edge-cuts of $G$. Furthermore, $G$ is
+said to be $k$-\emph{edge-connected} if $\kappa_e(G) \geq k$. A
+connected graph that is $k$-edge-connected is guaranteed to be
+connected after removing $\leq k - 1$ edges from it. When we have
+removed $k$ or more edges, then the graph would become
+disconnected. The graph in
+Figure~\ref{fig:distance_connectivity:claw_graph} has edge
+connectivity $\kappa_e(G) = 1$ and is $1$-edge-connected.
 
 \begin{example}
 The $1$-skeleton of any $k$-dimensional convex polytope forms
