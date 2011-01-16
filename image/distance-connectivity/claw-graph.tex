@@ -10,18 +10,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick},scale=1.5]
+[nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
+  lineDecorate/.style={-,thick},%
+  scale=1.5]
+\scriptsize
 %% nodes or vertices
-\foreach \nodename/\direction/\navigate/\x/\y in {1/below/south/0/0,
-  2/below/south/1/0, 3/below/south/2/0, 0/above/north/1/2}
+\foreach \nodename/\x/\y in {1/0/0, 2/1/0, 3/2/0, 0/1/2}
 {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
-  \node [\direction] at (\nodename.\navigate) {$\nodename$};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {$\nodename$};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {0/1, 0/2, 0/3} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}

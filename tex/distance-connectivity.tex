@@ -352,28 +352,18 @@ call $U$ a \emph{vertex-cut}\index{vertex-cut}. The term
 of exactly one vertex. For an intuitive appreciation of vertex-cut,
 suppose $G = (V,E)$ is a connected graph. Then $U \subseteq V$ is a
 vertex-cut if the vertex\index{vertex!deletion subgraph} deletion
-subgraph $G - U$ is disconnected.
-
-\begin{example}
-{\rm
-The cut-vertex of the graph in Figure~\ref{fig:distance_connectivity:claw_graph}
-is the vertex $0$, as the following Sage example
-demonstrates.
-
-\begin{lstlisting}
-sage: G = graphs.clawgraph()
-sage: G.blocks_and_cut_vertices()
-([[1, 0], [2, 0], [3, 0]], [0])
-\end{lstlisting}
+subgraph $G - U$ is disconnected. For example, the cut-vertex of the
+graph in Figure~\ref{fig:distance_connectivity:claw_graph} is the
+vertex $0$.
 
 \begin{figure}[!htbp]
 \centering
+\index{cut-vertex}
+\index{claw graph}
 \input{image/distance-connectivity/claw-graph.tex}
 \caption{A claw graph with $4$ vertices.}
 \label{fig:distance_connectivity:claw_graph}
 \end{figure}
-}
-\end{example}
 
 If $G$ has at least $3$ vertices and there is a $v\in V$
 which is a cut-vertex then we say $G$ is {\it $1$-connected}.
