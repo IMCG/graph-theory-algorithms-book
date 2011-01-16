@@ -283,7 +283,9 @@ $V = \{v_0, v_1, \dots, v_k\}$. The matrix $D$ is square where we set
 $d_{ij} = 0$ for entries along the main diagonal. If there is no path
 from $v_i$ to $v_j$, then we set $d_{ij} = \infty$. If $G$ is
 undirected, then $D$ is symmetric and is equal to its transpose,
-i.e. $D^T = D$. Refer to
+i.e. $D^T = D$. To compute the distance matrix $D$, apply the
+Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm} algorithm to
+determine the distances between all pairs of vertices. Refer to
 Figure~\ref{fig:distance_connectivity:distance_matrix_directed_undirected_graphs}
 for examples of distance matrices of directed and undirected
 graphs. In the remainder of this section, ``graph'' refers to an
@@ -316,13 +318,11 @@ of $(n - 1) \times (n - 1)$ matrices $A_1, A_2, \dots, A_\partial$ where
 0, & \text{otherwise}.
 \end{cases}
 \]
-In particular, $A_1$ is the usual adjacency matrix $A$.
-
-To compute the distance matrices of a graph, use the Floyd-Roy-Warshall
-algorithm to compute the shortest distance
-$\partial(v_i,v_j)$ between any two pairs of vertices,
-$v_i,v_j\in V$. This data determines the entries of
-the distance matrices.
+In particular, $A_1$ is the usual adjacency matrix $A$. To compute the
+sequence of distance matrices of $G$, use the
+Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm} algorithm to
+compute the distance between each pair of vertices and assign the
+resulting distance to the corresponding matrix $A_i$.
 
 \begin{lstlisting}
 def distance_matrices(Gamma):
