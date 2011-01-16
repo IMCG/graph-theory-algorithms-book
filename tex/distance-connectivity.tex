@@ -324,31 +324,11 @@ Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm} algorithm to
 compute the distance between each pair of vertices and assign the
 resulting distance to the corresponding matrix $A_i$.
 
-The {\it distance matrix} $D(G)$ of $G$ is
-the $n\times n$ matrix
-
-\[
-D(G)=(\partial(v_j,v_j))_{1\leq i,j\leq n}.
-\]
 The distance matrix arises in several applications, including
 communication network design (see for example
 \cite{GrahamPollak1971})
 and network flow algorithms (see for example \cite{Dijkstra1959}).
 
-To compute the distance matrix of a graph, is very
-similar to computing the distance matrices.
-Again, use the Floyd-Roy-Warshall
-algorithm to compute the shortest distance
-$\partial(v_i,v_j)$ between any two pairs of vertices,
-$v_i,v_j\in V$. This data determines the entries of
-the distance matrix.
-
-% R. L. Graham and H. O. Pollak, {\it on the addressing problem for
-% loop switching}, Bell Tech J 50(1971)2495-2519.
-% and
-% E. W. Dijkstra, {\it A note on two problems in connection with
-% graphs}, Numer. Math. 1 (1959)269-271.
-% [(this is [Dijkstra1959] )!
 \begin{remark}
 {\rm
 Thanks to R. Graham and H. Pollak, the following unusual fact is
@@ -365,10 +345,6 @@ paper \cite{GrahamPollak1971}, but see also
 \cite{EdelbergEtAl1976}.
 }
 \end{remark}
-% this lemma is proven in the above paper by Graham-Pollak
-% see however:
-% M. Edelberg, M. R. Garey, R. L. Graham, {\it On the
-% distance matrix of a tree}, Discrete Math. 14 (1976)23-39.
 
 \begin{lstlisting}
 def distance_matrix(Gamma):
