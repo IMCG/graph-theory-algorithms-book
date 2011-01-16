@@ -364,10 +364,12 @@ $\kappa_v(G) = 1$ because we only need to remove vertex $0$ in order
 to disconnect the graph. The vertex connectivity of a connected graph
 $G$ is thus the vertex-cut of minimum cardinality. And $G$ is said to
 be $k$-\emph{connected} if $\kappa_v(G) \geq k$. From the latter
-definition, it immediately follows that if $G$ is $k$-connected then
-any vertex-cut of $G$ has at least cardinality $k$. For instance, the
-graph in Figure~\ref{fig:distance_connectivity:claw_graph} is
-$1$-connected.
+definition, it immediately follows that if $G$ has at least $3$
+vertices and is $k$-connected then any vertex-cut of $G$ has at least
+cardinality $k$. For instance, the graph in
+Figure~\ref{fig:distance_connectivity:claw_graph} is $1$-connected. In
+other words, $G$ is $k$-connected if the graph remains connected even
+after removing any $k - 1$ or fewer vertices from $G$.
 
 \begin{figure}[!htbp]
 \centering
@@ -398,9 +400,6 @@ which is a cut-vertex then we say $G$ is {\it $1$-connected}.
 \index{vertex-connected}
 if the graph $G-X$ is connected for each $X\subset V$
 such that $|X|\leq k-1$.
-In other words, $G$ is $k$-vertex-connected
-if the graph remains connected even after removing
-any $k-1$ or fewer vertices from $G$.
 
 \begin{example}
 The $1$-skeleton of any $k$-dimensional convex polytope forms
