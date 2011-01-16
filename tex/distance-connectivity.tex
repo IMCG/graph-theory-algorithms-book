@@ -179,7 +179,7 @@ Consider now the maximum eccentricity of a
 graph. In~\eqref{eqn:graph_algorithms:graph_diameter} we defined the
 \emph{diameter} of a graph $G = (V,E)$ by
 \[
-\diam(G)
+\diam(G)\index{$\diam(G)$}
 =
 \max_{\substack{u,v \in V \\ u \neq v}} d(u,v).
 \]
@@ -285,7 +285,9 @@ from $v_i$ to $v_j$, then we set $d_{ij} = \infty$. If $G$ is
 undirected, then $D$ is symmetric and is equal to its transpose,
 i.e. $D^T = D$. Refer to
 Figure~\ref{fig:distance_connectivity:distance_matrix_directed_undirected_graphs}
-for examples of distance matrices of directed and undirected graphs.
+for examples of distance matrices of directed and undirected
+graphs. In the remainder of this section, ``graph'' refers to
+undirected graphs unless otherwise specified.
 
 \begin{figure}[!htbp]
 \centering
@@ -294,6 +296,9 @@ for examples of distance matrices of directed and undirected graphs.
 \caption{Distance matrices of directed and undirected graphs.}
 \label{fig:distance_connectivity:distance_matrix_directed_undirected_graphs}
 \end{figure}
+
+Instead of one distance matrix, we can define several distance
+matrices on $G$.
 
 There are two uses of this term in the literature.
 
