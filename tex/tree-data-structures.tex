@@ -1657,6 +1657,23 @@ BST to remove the target vertex from an AVL tree. The resulting tree
 may violate the height-balance property, which can be restored using
 trinode restructuring.
 
+Let $T$ be an AVL tree having vertex $v$ and suppose we want to remove
+$v$ from $T$. In the trivial case, $T$ is the trivial tree whose sole
+vertex is $v$. Deleting $v$ is simply removing it from $T$ so that $T$
+becomes the null tree. On the other hand, suppose $T$ has at least
+$n > 1$ vertices. Apply
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete} to
+remove $v$ from $T$ and call the resulting tree with $v$ removed
+$T_v$. It is possible that $T_v$ does not satisfy the height-balance
+property. To restore the height-balance property to $T_v$, let $u$ be
+the parent of $v$ in $T$ prior to deleting $v$ from $T$. Having
+deleted $v$ from $T$, let $P: r = u_0, u_1, \dots, u_k = u$ be the
+path from the root $r$ of $T_v$ to $u$. Adjust the height of $u$ and,
+traversing from $u$ up to $r$, perform height adjustment to each
+vertex in $P$ and where necessary carry out trinode restructuring. The
+resulting algorithm is very similar to
+Algorithm~\ref{alg:tree_data_structures:AVL-insert}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
