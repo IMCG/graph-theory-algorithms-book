@@ -403,15 +403,19 @@ become disconnected. The graph in
 Figure~\ref{fig:distance_connectivity:claw_graph} has edge
 connectivity $\kappa_e(G) = 1$ and is $1$-edge-connected.
 
-\begin{example}
-The $1$-skeleton of any $k$-dimensional convex polytope forms
-a $k$-vertex-connected graph
-(\cite{Balinski1961}). As a partial converse, Steinitz's theorem
-states that any $3$-vertex-connected planar graph forms
-the skeleton of a convex polyhedron.
-
-\end{example}
-
+Vertex and edge connectivity are intimately related to the reliability
+and survivability of computer networks. If a computer network
+$G$~(which is a connected graph) is $k$-connected, then it would
+remain connected despite the failure of at most $k - 1$ network
+nodes. Similarly, $G$ is $k$-edge-connected if the network remains
+connected after the failure of at most $k - 1$ network links. In
+practical terms, a network with redundant nodes and/or links can
+afford to endure the failure of a number of nodes and/or links and
+still be connected, whereas a network with very few redundant nodes
+and/or links~(e.g. something close to a spanning tree) is more prone
+to be disconnected. A $k$-connected or $k$-edge-connected network is
+more robust (i.e. can withstand) against node and/or link failures
+than is a $j$-connected or $j$-edge-connected network, where $j < k$.
 
 \begin{theorem}
 (Dirac's theorem)
