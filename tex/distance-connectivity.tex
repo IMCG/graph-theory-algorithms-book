@@ -417,6 +417,18 @@ to be disconnected. A $k$-connected or $k$-edge-connected network is
 more robust (i.e. can withstand) against node and/or link failures
 than is a $j$-connected or $j$-edge-connected network, where $j < k$.
 
+\begin{proposition}
+If $\delta(G)$ is the minimum degree of an undirected connected graph
+$G$, then the edge connectivity of $G$ satisfies
+$\kappa_e(G) \leq \delta(G)$.
+\end{proposition}
+
+\begin{proof}
+Choose a vertex $v \in V(G)$ whose degree is
+$\deg(v) = \delta(G)$. Deleting the $\delta(G)$ edges incident on $v$
+suffices to separate $v$ from the remaining vertices of $G$.
+\end{proof}
+
 \begin{theorem}
 (Dirac's theorem)
 {\rm
