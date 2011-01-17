@@ -384,8 +384,9 @@ after removing any $k - 1$ or fewer vertices from $G$.
 The notions of edge-cut and cut-edge are similarly defined. Let
 $G = (V,E)$ be a graph and $D \subseteq E$ an edge set such that the
 edge deletion subgraph $G - D$ has more components than $G$. Then $D$
-is called an \emph{edge-cut}\index{edge-cut}. The term
-\emph{cut-edge}\index{cut-edge} or \emph{bridge}\index{bridge} is
+is called an \emph{edge-cut}\index{edge-cut}. An edge-cut $D$ is said
+to be \emph{minimal} if no proper subset of $D$ is an edge-cut. The
+term \emph{cut-edge}\index{cut-edge} or \emph{bridge}\index{bridge} is
 reserved for the case where the set $D$ is a singleton. Think of a
 cut-edge as an edge whose removal from a connected graph would result
 in that graph being disconnected. Going back to the case of the graph
@@ -436,6 +437,28 @@ endpoint in $X_1$ and the other endpoint in $X_2$. If $G$ is a
 bipartite graph with bipartition $X_1$ and $X_2$, then
 $\langle X_1, X_2 \rangle$ is a partition-cut of $G$. It follows that
 a partition-cut is also an edge-cut.
+
+\begin{proposition}
+An undirected connected graph $G$ is $k$-edge-connected if and only if
+any partition-cut of $G$ has at least $k$ edges.
+\end{proposition}
+
+\begin{proof}
+Assume that $G$ is $k$-edge-connected. Then each edge-cut has at least
+$k$ edges. As a partition-cut is an edge-cut, then any partition-cut
+of $G$ has at least $k$ edges.
+
+On the other hand, suppose each partition-cut has at least $k$
+edges. If $D$ is a minimal edge-cut of $G$ and $X_1$ and $X_2$ are the
+vertex sets of the two components of $G - D$, then
+$D = \langle X_1, X_2 \rangle$. To see this, note that
+$D \subseteq \langle X_1, X_2 \rangle$. If
+$\langle X_1, X_2 \rangle - D \neq \emptyset$ then choose some
+$e \in \langle X_1, X_2 \rangle$ such that $e \notin D$. The endpoints
+of $e$ belong to the same component of $G - D$, in contradiction of
+the definition of $X_1$ and $X_2$. Thus any minimal edge-cut is a
+partition-cut and conclude that any edge-cut has at least $k$ edges.
+\end{proof}
 
 \begin{theorem}
 (Dirac's theorem)
