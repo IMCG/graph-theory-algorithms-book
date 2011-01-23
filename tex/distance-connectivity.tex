@@ -550,22 +550,6 @@ partition-cut and conclude that any edge-cut has at least $k$ edges.
 %% This forces $k\leq s$, a contradiction.
 %% \end{proof}
 
-\begin{lemma}
-{\rm
-If $v\in V$ then we have
-
-\[
-\kappa(G)-1\leq \kappa(G-v)\leq \kappa(G).
-\]
-}
-\end{lemma}
-
-\begin{proof}[Solution]
-
-...
-\end{proof}
-
-
 If $G=(V,E)$ is a graph and $e\in E$ is an edge with the property
 that $G-e$ has more connected components than $G$ then
 we call $e$ a {\it cut-edge} (or an {\it isthmus} or an {\it edge-cut}).
@@ -1486,4 +1470,14 @@ other people. \\
 
 \item Determine the sequence of distance matrices for the graphs in
   Figure~\ref{fig:distance_connectivity:distance_matrix_directed_undirected_graphs}.
+
+\item If $G = (V,E)$ is an undirected connected graph and $v \in V$,
+  show that
+  \[
+  \kappa(G) - 1
+  \leq
+  \kappa(G - v)
+  \leq
+  \kappa(G).
+  \]
 \end{problem}
