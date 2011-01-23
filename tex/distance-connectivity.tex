@@ -358,8 +358,9 @@ vertex $0$. By $\kappa_v(G)$\index{$\kappa_v(G)$} we mean the
 \emph{vertex connectivity}\index{vertex connectivity} of a connected
 graph $G$, defined as the minimum number of vertices whose removal
 would either disconnect $G$ or reduce $G$ to the trivial graph. The
-vertex connectivity of the graph in
-Figure~\ref{fig:distance_connectivity:claw_graph} is
+vertex connectivity $\kappa_v(G)$ is also written as
+$\kappa(G)$\index{$\kappa(G)$}. The vertex connectivity of the graph
+in Figure~\ref{fig:distance_connectivity:claw_graph} is
 $\kappa_v(G) = 1$ because we only need to remove vertex $0$ in order
 to disconnect the graph. The vertex connectivity of a connected graph
 $G$ is thus the vertex-cut of minimum cardinality. And $G$ is said to
@@ -392,11 +393,11 @@ cut-edge as an edge whose removal from a connected graph would result
 in that graph being disconnected. Going back to the case of the graph
 in Figure~\ref{fig:distance_connectivity:claw_graph}, each edge of the
 graph is a cut-edge. The \emph{edge connectivity} of a connected graph
-$G$, written $\kappa_e(G)$\index{$\kappa_e(G)$}, is the minimum number
-of edges whose removal would disconnect $G$. In other words,
-$\kappa_e(G)$ is the minimum cardinality among all edge-cuts of
-$G$. Furthermore, $G$ is said to be
-$k$-\emph{edge-connected}\index{$k$-edge-connected} if
+$G$, written $\kappa_e(G)$\index{$\kappa_e(G)$} and sometimes denoted
+by $\lambda(G)$\index{$\lambda(G)$}, is the minimum number of edges
+whose removal would disconnect $G$. In other words, $\kappa_e(G)$ is
+the minimum cardinality among all edge-cuts of $G$. Furthermore, $G$
+is said to be $k$-\emph{edge-connected}\index{$k$-edge-connected} if
 $\kappa_e(G) \geq k$. A connected graph that is $k$-edge-connected is
 guaranteed to be connected after removing $\leq k - 1$ edges from
 it. When we have removed $k$ or more edges, then the graph would
