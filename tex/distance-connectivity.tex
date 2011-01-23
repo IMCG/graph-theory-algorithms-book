@@ -519,14 +519,22 @@ partition-cut and conclude that any edge-cut has at least $k$ edges.
 %% This forces $k\leq s$, a contradiction.
 %% \end{proof}
 
-Here is a Sage example concerning
-$\kappa(G)$ using the Petersen graph
-depicted in Figure \ref{fig:distance_connectivity:petersen_graph}.
-(A linear programming
-Sage package, such as GLPK, must be installed
-for the commands below to work. At the time of this writing, it is
-expected that GLPK will be a standard part of Sage soon.)
-%
+\begin{figure}[!htbp]
+\centering
+\index{Petersen graph}
+\input{image/distance-connectivity/petersen-graph.tex}
+\caption{The Petersen graph on $10$ vertices.}
+\label{fig:distance_connectivity:petersen_graph}
+\end{figure}
+
+\begin{example}
+\rm
+Here is a Sage example concerning $\kappa(G)$ using the
+Petersen\index{Petersen graph} graph depicted in
+Figure~\ref{fig:distance_connectivity:petersen_graph}. A linear
+programming Sage package, such as GLPK, must be installed for the
+commands below to work.
+%%
 \begin{lstlisting}
 sage: G = graphs.PetersenGraph()
 sage: len(G.vertices())
@@ -539,6 +547,8 @@ sage: len(G.vertices())
 sage: G.vertex_connectivity()
 2.0
 \end{lstlisting}
+\qed
+\end{example}
 
 \begin{lemma}
 {\rm
@@ -638,13 +648,6 @@ sage: min(G.degree_sequence())
 \end{lstlisting}
 %
 This graph is depicted in Figure~\ref{fig:distance_connectivity:petersen_graph}.
-
-\begin{figure}[!htbp]
-\centering
-\input{image/distance-connectivity/petersen-graph.tex}
-\caption{The Petersen graph with $10$ vertices.}
-\label{fig:distance_connectivity:petersen_graph}
-\end{figure}
 }
 \end{example}
 The the minimum degree of a graph $G=(V,E)$ is
