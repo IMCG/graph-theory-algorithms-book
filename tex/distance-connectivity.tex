@@ -461,62 +461,63 @@ the definition of $X_1$ and $X_2$. Thus any minimal edge-cut is a
 partition-cut and conclude that any edge-cut has at least $k$ edges.
 \end{proof}
 
-\begin{theorem}
-(Bondy's theorem)
-{\rm
-Suppose
+%% NOTE: need to polish up statement and proof of Bondy's theorem.
+%% \begin{theorem}
+%% (Bondy's theorem)
+%% {\rm
+%% Suppose
 
-\begin{itemize}
-\item
-$G=(V,E)$ is a connected simple graph with $n=|V|$,
-\item
-$0<k<n$,
-\item
-the (non-decreasing) degree sequence
-$[d_1,d_2,\dots, d_n]$ satisfies
-$d_j\geq j+k-1$, for $1\leq j\leq n-1-d_{n-k+1}$,
-\end{itemize}
-then $G$ is $k$-vertex-connected.
-}
-\end{theorem}
-\index{Bondy's theorem}
+%% \begin{itemize}
+%% \item
+%% $G=(V,E)$ is a connected simple graph with $n=|V|$,
+%% \item
+%% $0<k<n$,
+%% \item
+%% the (non-decreasing) degree sequence
+%% $[d_1,d_2,\dots, d_n]$ satisfies
+%% $d_j\geq j+k-1$, for $1\leq j\leq n-1-d_{n-k+1}$,
+%% \end{itemize}
+%% then $G$ is $k$-vertex-connected.
+%% }
+%% \end{theorem}
+%% \index{Bondy's theorem}
 
-\begin{proof}[Solution]
-Suppose not, so $\kappa(G)<k$. Then there exists an
-$S\subset V$, $|S|=s<k$, such that $G'=G-S$ has more
-than one connected component. Let $H$ be connected
-component of $G'$ of minimal number of
-vertices, $j=V(H)$. If $v\in V(H)$ then
-$\deg_G(v)\leq j-1+s$, since $v$ is not adjacent to any
-vertex in any other connected component of $G'$.
+%% \begin{proof}[Solution]
+%% Suppose not, so $\kappa(G)<k$. Then there exists an
+%% $S\subset V$, $|S|=s<k$, such that $G'=G-S$ has more
+%% than one connected component. Let $H$ be connected
+%% component of $G'$ of minimal number of
+%% vertices, $j=V(H)$. If $v\in V(H)$ then
+%% $\deg_G(v)\leq j-1+s$, since $v$ is not adjacent to any
+%% vertex in any other connected component of $G'$.
 
-Since $H$ was chosen minimally, $j\leq n-s-j$, so
-$\deg_G(v)\leq n-j-1$. This proves the following claim.
+%% Since $H$ was chosen minimally, $j\leq n-s-j$, so
+%% $\deg_G(v)\leq n-j-1$. This proves the following claim.
 
-\noindent
-{\bf Claim}: If $\deg_G(v) > n-j-1$ then $v\in S$.
+%% \noindent
+%% {\bf Claim}: If $\deg_G(v) > n-j-1$ then $v\in S$.
 
-A vertex of degree $d_{n-s}$ cannot belong to
-$S$ because $S$ has $|S|=s$ vertices and the
-vertices of degree $d_n$, $d_{n-1}$, \dots,
-$d_{n-s-1}$ already exhaust the vertices in $S$. Therefore,
+%% A vertex of degree $d_{n-s}$ cannot belong to
+%% $S$ because $S$ has $|S|=s$ vertices and the
+%% vertices of degree $d_n$, $d_{n-1}$, \dots,
+%% $d_{n-s-1}$ already exhaust the vertices in $S$. Therefore,
 
-\[
-d_{n-s}\leq n-j-1.
-\]
-We have $s\leq k-1$, so $d_{n-(k-1)}\leq d_{n-s}\leq n-j-1$,
-so $j\leq n-1-d_{n-k+1}$.
+%% \[
+%% d_{n-s}\leq n-j-1.
+%% \]
+%% We have $s\leq k-1$, so $d_{n-(k-1)}\leq d_{n-s}\leq n-j-1$,
+%% so $j\leq n-1-d_{n-k+1}$.
 
-Recall $v\in V(H)$ implies $\deg_G(v)\leq j-1+s$.
-Since $j=|V(H)|$, we have
-$d_j\leq j-1-s$.
-By hypothesis, $d_j\geq j+k-1$, so together we have
+%% Recall $v\in V(H)$ implies $\deg_G(v)\leq j-1+s$.
+%% Since $j=|V(H)|$, we have
+%% $d_j\leq j-1-s$.
+%% By hypothesis, $d_j\geq j+k-1$, so together we have
 
-\[
-j+k-1\leq d_j \leq j-1+s.
-\]
-This forces $k\leq s$, a contradiction.
-\end{proof}
+%% \[
+%% j+k-1\leq d_j \leq j-1+s.
+%% \]
+%% This forces $k\leq s$, a contradiction.
+%% \end{proof}
 
 
 If $G$ is $k$-vertex-connected, but not
