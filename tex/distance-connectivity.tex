@@ -382,6 +382,37 @@ after removing any $k - 1$ or fewer vertices from $G$.
 \label{fig:distance_connectivity:claw_graph}
 \end{figure}
 
+\begin{figure}[!htbp]
+\centering
+\index{Petersen graph}
+\input{image/distance-connectivity/petersen-graph.tex}
+\caption{The Petersen graph on $10$ vertices.}
+\label{fig:distance_connectivity:petersen_graph}
+\end{figure}
+
+\begin{example}
+\rm
+Here is a Sage example concerning $\kappa(G)$ using the
+Petersen\index{Petersen graph} graph depicted in
+Figure~\ref{fig:distance_connectivity:petersen_graph}. A linear
+programming Sage package, such as GLPK, must be installed for the
+commands below to work.
+%%
+\begin{lstlisting}
+sage: G = graphs.PetersenGraph()
+sage: len(G.vertices())
+10
+sage: G.vertex_connectivity()
+3.0
+sage: G.delete_vertex(0)
+sage: len(G.vertices())
+9
+sage: G.vertex_connectivity()
+2.0
+\end{lstlisting}
+\qed
+\end{example}
+
 The notions of edge-cut and cut-edge are similarly defined. Let
 $G = (V,E)$ be a graph and $D \subseteq E$ an edge set such that the
 edge deletion subgraph $G - D$ has more components than $G$. Then $D$
@@ -518,37 +549,6 @@ partition-cut and conclude that any edge-cut has at least $k$ edges.
 %% \]
 %% This forces $k\leq s$, a contradiction.
 %% \end{proof}
-
-\begin{figure}[!htbp]
-\centering
-\index{Petersen graph}
-\input{image/distance-connectivity/petersen-graph.tex}
-\caption{The Petersen graph on $10$ vertices.}
-\label{fig:distance_connectivity:petersen_graph}
-\end{figure}
-
-\begin{example}
-\rm
-Here is a Sage example concerning $\kappa(G)$ using the
-Petersen\index{Petersen graph} graph depicted in
-Figure~\ref{fig:distance_connectivity:petersen_graph}. A linear
-programming Sage package, such as GLPK, must be installed for the
-commands below to work.
-%%
-\begin{lstlisting}
-sage: G = graphs.PetersenGraph()
-sage: len(G.vertices())
-10
-sage: G.vertex_connectivity()
-3.0
-sage: G.delete_vertex(0)
-sage: len(G.vertices())
-9
-sage: G.vertex_connectivity()
-2.0
-\end{lstlisting}
-\qed
-\end{example}
 
 \begin{lemma}
 {\rm
