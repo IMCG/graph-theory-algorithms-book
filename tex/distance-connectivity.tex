@@ -599,33 +599,6 @@ If $e\in E$ then
 
 \end{proof}
 
-\begin{example}
-{\rm
-Sage can compute the edge-connectivity and the vertex-connectivity,
-provided an optional linear programming package
-(such as GLPK) is installed.
-
-\begin{lstlisting}
-sage: G = graphs.PetersenGraph()
-sage: G.vertex_connectivity()
-3.0
-sage: G.edge_connectivity()
-3.0
-sage: min(G.degree_sequence())
-3
-\end{lstlisting}
-%
-This graph is depicted in Figure~\ref{fig:distance_connectivity:petersen_graph}.
-}
-\end{example}
-The the minimum degree of a graph $G=(V,E)$ is
-denoted
-
-\[
-\delta(G) = \min_{v\in V} \deg(v).
-\]
-\index{$\delta(G)$}
-
 \begin{proposition}
 {\rm
 In general,
