@@ -583,22 +583,6 @@ partition-cut and conclude that any edge-cut has at least $k$ edges.
 %% This forces $k\leq s$, a contradiction.
 %% \end{proof}
 
-\begin{lemma}
-{\rm
-If $e\in E$ then
-
-\[
-\lambda(G)-1\leq \lambda(G-e)\leq \lambda(G).
-\]
-}
-\end{lemma}
-
-\begin{proof}[Solution]
-
-...
-
-\end{proof}
-
 \begin{proposition}
 {\rm
 In general,
@@ -1429,12 +1413,22 @@ other people. \\
   Figure~\ref{fig:distance_connectivity:distance_matrix_directed_undirected_graphs}.
 
 \item If $G = (V,E)$ is an undirected connected graph and $v \in V$,
-  show that
+  prove the following vertex connectivity inequality:
   \[
   \kappa(G) - 1
   \leq
   \kappa(G - v)
   \leq
   \kappa(G).
+  \]
+
+\item If $G = (V,E)$ is an undirected connected graph and $e \in E$,
+  prove the following edge connectivity inequality:
+  \[
+  \lambda(G) - 1
+  \leq
+  \lambda(G - e)
+  \leq
+  \lambda(G).
   \]
 \end{problem}
