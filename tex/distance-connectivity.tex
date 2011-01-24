@@ -586,6 +586,20 @@ partition-cut and conclude that any edge-cut has at least $k$ edges.
 %% \end{proof}
 
 \begin{proposition}
+If $G = (V,E)$ is an undirected connected graph with vertex
+connectivity $\kappa(G)$ and edge connectivity $\lambda(G)$, then we
+have $\kappa(G) \leq \lambda(G)$.
+\end{proposition}
+
+\begin{proof}
+Let $S$ be an edge-cut of $G$ with cardinality
+$k = |S| = \lambda(G)$. Removing $k$ suitably chosen vertices of $G$
+suffice to delete the edges of $S$ and hence disconnect $G$. It is
+also possible to have a smaller vertex-cut elsewhere in $G$. Hence the
+inequality follows.
+\end{proof}
+
+\begin{proposition}
 {\rm
 In general,
 
