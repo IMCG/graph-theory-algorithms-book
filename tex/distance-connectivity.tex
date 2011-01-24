@@ -621,6 +621,53 @@ Propositions~\ref{prop:distance_connectivity:edge_degree_inequality}
 and~\ref{prop:distance_connectivity:vertex_edge_inequality}.
 \end{proof}
 
+\begin{proposition}
+Let $G$ be an undirected connected graph that is $k$-connected for
+some $k \geq 3$. If $e$ is an edge of $G$, then the edge-deletion
+subgraph $G - e$ is $(k - 1)$-connected.
+\end{proposition}
+
+\begin{proof}
+Let $V = \{v_1, v_2, \dots, v_{k-2}\}$ be a set of $k - 2$ vertices in
+$G - e$. It suffice to show the existence of a $u$-$v$ walk in
+$(G - e) - V$ for any distinct vertices $u$ and $v$ in
+$(G - e) - V$. We need to consider two cases:~(i) at least one of the
+endpoints of $e$ is in $V$; and~(ii) neither endpoints of $e$ is in
+$V$.
+
+(i)~Assume that $V$ has at least one endpoint of $e$. As $G - V$ is
+$2$-connected, any distinct pair of vertices $u$ and $v$ in $G - V$ is
+connected by a $u$-$v$ path that excludes $e$. Hence the $u$-$v$ path
+is also in $(G - e) - V$.
+
+(ii)~Assume that neither endpoints of $e$ is in $V$. If $u$ and $v$
+are distinct vertices in $(G - e) - V$, then either:~(1) both $u$ and
+$v$ are endpoints of $e$; or~(2) at least one of $u$ and $v$ is an
+endpoint of $e$.
+%%
+\begin{enumerate}[(1)]
+\item Suppose $u$ and $v$ are both endpoints of $e$. As $G$ is
+  $k$-connected, then $G$ has at least $k + 1$ vertices so that the
+  vertex set of $G - \{v_1, v_2, \dots, v_{k-2}, u, v\}$ is
+  nonempty. Let $w$ be a vertex of
+  $G - \{v_1, v_2, \dots, v_{k-2}, u, v\}$. Then there is a $u$-$w$
+  path in $G - \{v_1, v_2, \dots, v_{k-2}, v\}$ and a $w$-$v$ path in
+  $G - \{v_1, v_2, \dots, v_{k-2}, u\}$. Neither the $u$-$w$ nor the
+  $w$-$v$ paths contain $e$. The concatenation of these two paths is a
+  $u$-$v$ walk in $(G - e) - V$.
+
+\item Now suppose at least one of $u$ and $v$, say $u$, is an endpoint
+  of $e$. Let $w$ be the other endpoint of $e$. As $G$ is
+  $k$-connected, then $G - \{v_1, v_2, \dots, v_{k-2}, w\}$ is
+  connected and we can find a $u$-$v$ path $P$ in
+  $G - \{v_1, v_2, \dots, v_{k-2}, w\}$. Futhermore $P$ is a $u$-$v$
+  path in $G - \{v_1, v_2, \dots, v_{k-2}\}$ that neither contain $w$
+  nor $e$. Hence $P$ is a $u$-$v$ path in $(G - e) - V$.
+\end{enumerate}
+%%
+Conclude that $G - e$ is $(k - 1)$-connected.
+\end{proof}
+
 \begin{theorem}
 {\rm
 If $G=(V,E)$ is a connected graph with $n=|V|$ and if
