@@ -444,6 +444,31 @@ simply a connected graph. The graph in
 Figure~\ref{fig:distance_connectivity:claw_graph} has edge
 connectivity $\kappa_e(G) = 1$ and is $1$-edge-connected.
 
+\begin{example}
+\rm
+Here is a Sage example concerning $\lambda(G)$ using the
+Petersen\index{Petersen graph} graph shown in
+Figure~\ref{fig:distance_connectivity:petersen_graph}. You must
+install an optional linear programming Sage package such as GLPK for
+the commands below to work.
+%%
+\begin{lstlisting}
+sage: G = graphs.PetersenGraph()
+sage: len(G.vertices())
+10
+sage: E = G.edges(); len(E)
+15
+sage: G.edge_connectivity()
+3.0
+sage: G.delete_edge(E[0])
+sage: len(G.edges())
+14
+sage: G.edge_connectivity()
+2.0
+\end{lstlisting}
+\qed
+\end{example}
+
 Vertex and edge connectivity are intimately related to the reliability
 and survivability of computer networks. If a computer network
 $G$~(which is a connected graph) is $k$-connected, then it would
@@ -557,27 +582,6 @@ partition-cut and conclude that any edge-cut has at least $k$ edges.
 %% \]
 %% This forces $k\leq s$, a contradiction.
 %% \end{proof}
-
-Here is a Sage example concerning
-$\lambda(G)$ using the Petersen graph
-depicted in Figure \ref{fig:distance_connectivity:petersen_graph}.
-(You must install an optional linear programming
-Sage package such as GLPK for the commands below to work.)
-
-\begin{lstlisting}
-sage: G = graphs.PetersenGraph()
-sage: len(G.vertices())
-10
-sage: E = G.edges(); len(E)
-15
-sage: G.edge_connectivity()
-3.0
-sage: G.delete_edge(E[0])
-sage: len(G.edges())
-14
-sage: G.edge_connectivity()
-2.0
-\end{lstlisting}
 
 \begin{lemma}
 {\rm
