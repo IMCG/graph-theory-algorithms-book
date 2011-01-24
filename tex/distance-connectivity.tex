@@ -679,6 +679,42 @@ $m \leq k - 1$, then the edge-deletion subgraph $G - E$ is
 $(k - m)$-connected.
 \end{corollary}
 
+What does it mean for a communications\index{communications network}
+network to be fault-tolerant\index{fault-tolerant}? In~1932,
+Hassler\index{Whitney!Hassler} Whitney provided~\cite{Whitney1932} a
+characterization of $2$-connected graphs whereby he showed that a
+graph $G$ is $2$-connected if and only if each pair of distinct
+vertices in $G$ has two different paths connecting those two
+vertices. A key to understanding Whitney's characterization of
+$2$-connected graphs is the notion of internal vertex of a path. Given
+a path $P$ in a graph, a vertex along that path is said to be an
+\emph{internal vertex}\index{vertex!internal} if it is neither the
+initial nor the final vertex of $P$. In other words, a path $P$ has an
+internal vertex if and only if $P$ has at least two edges. Building
+upon the notion of internal vertices, we now discuss what it means for
+two paths to be internally disjoint. Let $u$ and $v$ be distinct
+vertices in a graph $G$ and suppose $P_1$ and $P_2$ are two paths from
+$u$ to $v$. Then $P_1$ and $P_2$ are said to be
+\emph{internally distjoint}\index{path!internally distjoint} if they
+do not share any common internal vertex. Two $u$-$v$ paths are
+internally disjoint in the sense that both $u$ and $v$ are the only
+vertices to be found in common between those paths. The notion of
+internally disjoint paths can be easily extended to a collection of
+$u$-$v$ paths. Whitney's characterization essentially says that a
+graph is $2$-connected if and only if any two $u$-$v$ paths are
+internally disjoint.
+
+Consider the notion of internally disjoint paths within the context of
+communications\index{communications network} network. As a first
+requirement for fault-tolerant communications network, we want the
+network to remain connected despite the failure of any network
+node. By Whitney's characterization, this is possible if the original
+communications network is $2$-connected. That is, we say that a
+communications network is \emph{fault-tolerant}\index{fault-tolerant}
+provided that any pair of distinct nodes is connected by two
+internally disjoint paths. The failure of any node should at least
+guarantee that any two distinct nodes are still connected.
+
 \begin{theorem}
 {\rm
 If $G=(V,E)$ is a connected graph with $n=|V|$ and if
