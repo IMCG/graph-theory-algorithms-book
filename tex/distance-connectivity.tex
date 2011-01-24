@@ -484,6 +484,7 @@ more robust (i.e. can withstand) against node and/or link failures
 than is a $j$-connected or $j$-edge-connected network, where $j < k$.
 
 \begin{proposition}
+\label{prop:distance_connectivity:edge_degree_inequality}
 If $\delta(G)$ is the minimum degree of an undirected connected graph
 $G = (V,E)$, then the edge connectivity of $G$ satisfies
 $\lambda(G) \leq \delta(G)$.
@@ -586,6 +587,7 @@ partition-cut and conclude that any edge-cut has at least $k$ edges.
 %% \end{proof}
 
 \begin{proposition}
+\label{prop:distance_connectivity:vertex_edge_inequality}
 If $G = (V,E)$ is an undirected connected graph with vertex
 connectivity $\kappa(G)$ and edge connectivity $\lambda(G)$, then we
 have $\kappa(G) \leq \lambda(G)$.
@@ -599,23 +601,24 @@ also possible to have a smaller vertex-cut elsewhere in $G$. Hence the
 inequality follows.
 \end{proof}
 
-\begin{proposition}
-{\rm
-In general,
-
+\begin{theorem}
+\textbf{Whitney's inequality~\cite{Whitney1932}.}\index{Whitney's inequality}
+Let $G$ be an undirected connected graph with vertex connectivity
+$\kappa(G)$, edge connectivity $\lambda(G)$, and minimum degree
+$\delta(G)$. Then we have the following inequality:
 \[
-\kappa(G)\leq \lambda(G)\leq \delta(G).
+\kappa(G)
+\leq
+\lambda(G)
+\leq
+\delta(G).
 \]
-}
-\end{proposition}
+\end{theorem}
 
-This is called {\it Whitney's inequality}.
-\index{Whitney's inequality}
-
-\begin{proof}[Solution]
-
-...
-
+\begin{proof}
+The inequality follows from
+Propositions~\ref{prop:distance_connectivity:edge_degree_inequality}
+and~\ref{prop:distance_connectivity:vertex_edge_inequality}.
 \end{proof}
 
 \begin{theorem}
