@@ -622,6 +622,7 @@ and~\ref{prop:distance_connectivity:vertex_edge_inequality}.
 \end{proof}
 
 \begin{proposition}
+\label{prop:distance_connectivity:edge_removal_subgraph_k_minus_1_connected}
 Let $G$ be an undirected connected graph that is $k$-connected for
 some $k \geq 3$. If $e$ is an edge of $G$, then the edge-deletion
 subgraph $G - e$ is $(k - 1)$-connected.
@@ -667,6 +668,17 @@ endpoint of $e$.
 %%
 Conclude that $G - e$ is $(k - 1)$-connected.
 \end{proof}
+
+Repeated application of
+Proposition~\ref{prop:distance_connectivity:edge_removal_subgraph_k_minus_1_connected}
+results in the following corollary.
+
+\begin{corollary}
+Let $G$ be an undirected connected graph that is $k$-connected for
+some $k \geq 3$. If $E$ is any set of $m$ edges of $G$, for
+$m \leq k - 1$, then the edge-deletion subgraph $G - E$ is
+$(k - m)$-connected.
+\end{corollary}
 
 \begin{theorem}
 {\rm
