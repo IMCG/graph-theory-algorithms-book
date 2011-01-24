@@ -486,13 +486,15 @@ than is a $j$-connected or $j$-edge-connected network, where $j < k$.
 \begin{proposition}
 If $\delta(G)$ is the minimum degree of an undirected connected graph
 $G$, then the edge connectivity of $G$ satisfies
-$\kappa_e(G) \leq \delta(G)$.
+$\kappa(G) \leq \delta(G)$.
 \end{proposition}
 
 \begin{proof}
 Choose a vertex $v \in V(G)$ whose degree is
 $\deg(v) = \delta(G)$. Deleting the $\delta(G)$ edges incident on $v$
-suffices to separate $v$ from the remaining vertices of $G$.
+suffices to separate $v$ from the remaining vertices of $G$. It is
+possible that $G$ has an edge-cut whose cardinality is smaller than
+$\delta(G)$. Hence the proposition follows.
 \end{proof}
 
 Let $G = (V,E)$ be a graph and suppose $X_1$ and $X_2$ comprise a
