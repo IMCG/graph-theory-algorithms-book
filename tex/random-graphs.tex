@@ -72,20 +72,17 @@ where all such events are mutually independent. Equivalently the model
 $G(n,p)$ considers the collection of all undirected graphs on $n$
 vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
 actual edges, and an associated probability
-%%
-\begin{equation}
-\label{eqn:random_graphs:probability_distribution_binomial_random_graph}
+\[
 p^m (1 - p)^{\binom{n}{2} - m}.
-\end{equation}
-%%
+\]
 Notice the latter's resemblance to the
 binomial\index{binomial distribution} distribution. By
 $G \in G(n,p)$ we mean that $G$ is a random graph of the space
 $G(n,p)$ and having probability
-distribution~\eqref{eqn:random_graphs:probability_distribution_binomial_random_graph}.
+distribution $G(n,p)$.
 
-To generate a random graph in $G(n,p)$, start with $G$ being the
-null\index{null graph} graph. Consider each of the $\binom{n}{2}$
+To generate a random graph in $G(n,p)$, start with $G$ being a graph
+on $n$ vertices but no edges. Consider each of the $\binom{n}{2}$
 possible edges in some order and add it independently to $G$ with
 probability $p$. Repeat the process until $G$ contains the desired
 number of edges. The expected number of edges in the resulting graph
@@ -103,13 +100,22 @@ pn(n - 1).
 \]
 Then the expected degree of each edge is $p(n - 1)$.
 
-Let $N$ be a fixed nonnegative integer. Like the model $G_{n,p}$, in
-the model $G_{n,N}$ we consider all undirected graphs on $n$
-vertices. However, each such graph in $G_{n,N}$ has exactly $N$ edges,
-hence $G_{n,N}$ is a collection of $\binom{\binom{n}{2}} {N}$ graphs
-on exactly $N$ edges, each of which is selected with equal
-probability. To generate a graph in $G_{n,N}$, choose $N$ of the
-possible $\binom{n}{2}$ edges independently and uniformly at random.
+Let $N$ be a fixed nonnegative integer. The
+\emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1960}
+(or\index{random graph!Erd\H{o}s-R\'enyi}
+\emph{uniform})\index{random graph!uniform} random graph model,
+denoted $G(n,N)$, is a probability space over the set of undirected
+graphs on $n$ vertices and exactly $N$ edges. Hence $G(n,N)$ can be
+considered as a collection of $\binom{\binom{n}{2}} {N}$ undirected
+graphs on exactly $N$ edges, each such graph being selected with equal
+probability. To generate a graph in $G(n,N)$, start with $G$ being a
+graph on $n$ vertices but no edges. Then choose $N$ of the possible
+$\binom{n}{2}$ edges independently and uniformly at random and let
+the chosen edges be the edge set of $G$. Each graph $G \in G(n,N)$ is
+associated with a probability
+\[
+1 \left/ \binom{\binom{n}{2}} {N} \right..
+\]
 
 One of the first properties of random graphs which makes them so pleasant to work with is the following
 
