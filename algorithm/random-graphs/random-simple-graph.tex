@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
+%%
+%% input/output
+\Input{Positive integers $n$ and $m$ specifying the order and size,
+  respectively, of the output graph.}
+\Output{A random simple undirected graph with $n$ vertices and $m$
+  edges. If $m$ exceeds the size of $K_n$, then $K_n$ is returned.}
+\BlankLine
+%%
+%% algorithm body
+\If{$n = 1$}{
+  \Return $K_1$\;
+}
+$M \assign n(n - 1) / 2$\;
+\If{$m > M$}{
+  \Return $K_n$\;
+}
+$G \assign$ null graph\;
+$A \assign n \times n$ adjacency matrix with entries $a_{ij}$\;
+$a_{ij} \assign \MyFalse$ for $0 \leq i,j < n$\;
+$i \assign 0$\;
+\While{$i < m$}{
+  $u \assign$ random element from $\{0, 1, \dots, n-1\}$\;
+  $v \assign$ random element from $\{0, 1, \dots, n-1\}$\;
+  \If{$u = v$}{
+    continue with next iteration of loop\;
+  }
+  \If{$u > v$}{
+    swap values of $u$ and $v$\;
+  }
+  \If{$a_{uv} = \MyFalse$}{
+    add edge $uv$ to $G$\;
+    $a_{uv} \assign \MyTrue$\;
+    $i \assign i + 1$\;
+  }
+}
+\Return $G$\;

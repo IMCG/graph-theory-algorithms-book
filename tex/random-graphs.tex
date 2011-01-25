@@ -21,7 +21,11 @@ positive integer $n$ and let $\cT$ be a collection of all binary trees
 on $n$ vertices. It can be infeasible to generate all members of
 $\cT$, so for most purposes we are only interested in randomly
 generating a member of $\cT$. A binary tree of order $n$ generated in
-this manner is said to be a random\index{random graph} graph.
+this manner is said to be a random\index{random graph} graph. For
+example, Algorithm~\ref{alg:random_graphs:random_simple_graph}
+presents a procedure to construct a random graph that is simple and
+undirected; the procedure is adapted from pages~4--7 of
+Lau~\cite{Lau2007}.
 
 \begin{itemize}
 \item See Bollob{\'a}s~\cite{Bollobas2001}.
@@ -35,19 +39,24 @@ this manner is said to be a random\index{random graph} graph.
 \item See Broutin~\cite{Broutin2007} on random trees.
 \end{itemize}
 
-Algorithm~\ref{alg:random_graphs:random_graph} is adapted from
-pages~4--7 of Lau~\cite{Lau2007}.
-
 \begin{algorithm}[!htbp]
-\index{acyclic!graph!random}
 \index{algorithm!random}
-\index{directed graph!random}
 \index{simple graph!random}
-\index{weight!graph!random}
-\input{algorithm/random-graphs/random-graph.tex}
-\caption{Random simple, directed, acyclic, or weighted graph.}
-\label{alg:random_graphs:random_graph}
+\input{algorithm/random-graphs/random-simple-graph.tex}
+\caption{Random simple undirected graph.}
+\label{alg:random_graphs:random_simple_graph}
 \end{algorithm}
+
+%% \begin{algorithm}[!htbp]
+%% \index{acyclic!graph!random}
+%% \index{algorithm!random}
+%% \index{directed graph!random}
+%% \index{simple graph!random}
+%% \index{weight!graph!random}
+%% \input{algorithm/random-graphs/random-graph.tex}
+%% \caption{Random simple, directed, acyclic, or weighted graph.}
+%% \label{alg:random_graphs:random_graph}
+%% \end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
