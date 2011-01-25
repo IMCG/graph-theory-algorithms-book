@@ -52,20 +52,44 @@ Lau~\cite{Lau2007}.
 
 \section{Binomial and Erd\H{o}s-R{\'e}nyi models}
 
-Fix a positive integer $n$ and a probability $p$. Two closely related
-models of random graphs are $G_{n,p}$ and $G_{n,N}$. The model
-$G_{n,p}$ considers the collection of all undirected graphs on $n$
+This section considers two closely related common models of random
+graphs: the binomial model and the Erd\H{o}s-R\'enyi model. Fix a
+positive integer $n$, a probability $p$, and a vertex set
+$V = \{1, 2, \dots, n\}$. The
+\emph{binomial}\index{random graph!binomial}~(or
+\emph{Bernoulli})\index{random graph!Bernoulli} random graph model,
+denoted $G(n,p)$, is formally a probability\index{probability space}
+space over the set of undirected graphs on $n$ vertices. If $G$ is any
+element of the probability space $G(n,p)$ and $ij$ is any edge, then
+$ij$ occurs as an edge of $G$ independently with probability $p$. In
+symbols, for any $i,j \in V$ we have
+\[
+\Pr[ij \in E(G)]
+=
+p
+\]
+where all such events are mutually independent. Equivalently the model
+$G(n,p)$ considers the collection of all undirected graphs on $n$
 vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
 actual edges, and an associated probability
-\[
+%%
+\begin{equation}
+\label{eqn:random_graphs:probability_distribution_binomial_random_graph}
 p^m (1 - p)^{\binom{n}{2} - m}.
-\]
-Notice the resemblance to the binomial\index{binomial distribution}
-distribution. To generate a random graph in $G_{n,p}$, start with $G$
-being the null\index{null graph} graph. Consider each of the
-$\binom{n}{2}$ possible edges in some order and add it independently
-to $G$ with probability $p$. The expected number of edges in the
-resulting graph is
+\end{equation}
+%%
+Notice the latter's resemblance to the
+binomial\index{binomial distribution} distribution. By
+$G \in G(n,p)$ we mean that $G$ is a random graph of the space
+$G(n,p)$ and having probability
+distribution~\eqref{eqn:random_graphs:probability_distribution_binomial_random_graph}.
+
+To generate a random graph in $G(n,p)$, start with $G$ being the
+null\index{null graph} graph. Consider each of the $\binom{n}{2}$
+possible edges in some order and add it independently to $G$ with
+probability $p$. Repeat the process until $G$ contains the desired
+number of edges. The expected number of edges in the resulting graph
+is
 \[
 p \cdot \binom{n}{2}
 =
