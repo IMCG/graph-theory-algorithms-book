@@ -716,6 +716,54 @@ internally disjoint paths. The failure of any node should at least
 guarantee that any two distinct nodes are still connected.
 
 \begin{theorem}
+\textbf{Whitney's theorem~\cite{Whitney1932}.}
+Let $G$ be an undirected connected graph having at least $3$
+vertices. Then $G$ is $2$-connected if and only if any two distinct
+vertices in $G$ are connected by two internally disjoint paths.
+\end{theorem}
+
+\begin{proof}
+($\Longleftarrow$)
+For the case of necessity, argue by contraposition. That is, suppose
+$G$ is not $2$-connected. Let $v$ be a cut-vertex of $G$, from which
+it follows that $G - v$ is disconnected. We can find two vertices $w$
+and $x$ such that there is no $w$-$x$ path in $G - v$. Therefore $v$
+is an internal vertex of any $w$-$x$ path in $G$.
+
+($\Longrightarrow$)
+For the case of sufficiency, let $G$ be $2$-connected and let $u$ and
+$v$ be any two distinct vertices in $G$. Argue by induction on
+$d(u,v)$ that $G$ has at least two internally disjoint $u$-$v$
+paths. For the base case, suppose $u$ and $v$ are connected by an edge
+$e$ so that $d(u,v) = 1$. Adapt the proof of
+Proposition~\ref{prop:distance_connectivity:edge_removal_subgraph_k_minus_1_connected}
+to see that $G - e$ is connected. Hence we can find a $u$-$v$ path $P$
+in $G - e$ such that $P$ and $e$ are two internally disjoint $u$-$v$
+paths in $G$.
+
+Assume for induction that $G$ has two internally disjoint $u$-$v$
+paths where $d(u,v) < k$ for some $k \geq 2$. Let $w$ and $x$ be two
+distinct vertices in $G$ such that $d(w,x) = k$ and hence there is a
+$w$-$x$ path in $G$ of length $k$, i.e. we have a $w$-$x$ path
+\[
+W: w = w_1, w_2, \dots, w_{k-1}, w_k = x.
+\]
+Note that $d(w, w_{k-1}) < k$ and apply the induction hypothesis to
+see that we have two internally disjoint $w$-$w_{k-1}$ paths in $G$;
+call these paths $P$ and $Q$. As $G$ is $2$-connected, we have a
+$w$-$x$ path $R$ in $G - w_{k-1}$ and hence $R$ is also a $w$-$x$ path
+in $G$. Let $z$ be the vertex on $R$ that immediately precedes $x$ and
+assume without loss of generality that $z$ is on $P$. We claim that
+$G$ has two internally disjoint $w$-$x$ paths. One of these paths is
+the concatenation of the subpath of $P$ from $w$ to $z$ with the
+subpath of $R$ from $z$ to $x$. If $x$ is not on $Q$, then construct a
+second $w$-$x$ path, internally disjoint from the first one, as
+follows: concatenate the path $Q$ with the edge $w_{k-1} w$. In case
+$x$ is on $Q$, take the subpath of $Q$ from $w$ to $x$ as the required
+second path.
+\end{proof}
+
+\begin{theorem}
 {\rm
 If $G=(V,E)$ is a connected graph with $n=|V|$ and if
 $\deg(v)\geq (n+k-2)/2$, for all $v\in V$, then
