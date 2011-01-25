@@ -716,6 +716,7 @@ internally disjoint paths. The failure of any node should at least
 guarantee that any two distinct nodes are still connected.
 
 \begin{theorem}
+\label{thm:distance_connectivity:Whitney_characterization_2_connected_graphs}
 \textbf{Whitney's characterization of $2$-connected graphs~\cite{Whitney1932}.}
 Let $G$ be an undirected connected graph having at least $3$
 vertices. Then $G$ is $2$-connected if and only if any two distinct
@@ -762,6 +763,27 @@ follows: concatenate the path $Q$ with the edge $w_{k-1} w$. In case
 $x$ is on $Q$, take the subpath of $Q$ from $w$ to $x$ as the required
 second path.
 \end{proof}
+
+From
+Theorem~\ref{thm:distance_connectivity:Whitney_characterization_2_connected_graphs},
+an undirected connected graph $G$ is $2$-connected if and only if any
+two distinct vertices of $G$ are connected by two internally disjoint
+paths. In particular, let $u$ and $v$ be any two distinct vertices of
+$G$ and let $P$ and $Q$ be two internally disjoint $u$-$v$ paths as
+guaranteed by
+Theorem~\ref{thm:distance_connectivity:Whitney_characterization_2_connected_graphs}.
+Starting from $u$, travel along the path $P$ to arrive at $v$. Then
+start from $v$ and travel along the path $Q$ to arrive at $u$. The
+concatenation of the internally disjoint paths $P$ and $Q$ is hence a
+cycle passing through $u$ and $v$. We have proved the following
+corollary to
+Theorem~\ref{thm:distance_connectivity:Whitney_characterization_2_connected_graphs}.
+
+\begin{corollary}
+Let $G$ be an undirected connected graph having at least $3$
+vertices. Then $G$ is $2$-connected if and only if any two distinct
+vertices of $G$ lie on a common cycle.
+\end{corollary}
 
 \begin{theorem}
 {\rm
