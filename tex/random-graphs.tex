@@ -54,6 +54,40 @@ pages~4--7 of Lau~\cite{Lau2007}.
 
 \section{Erd\H{o}s-R{\'e}nyi graphs}
 
+Fix a positive integer $n$ and a probability $p$. Two closely related
+models of random graphs are $G_{n,p}$ and $G_{n,N}$. The model
+$G_{n,p}$ considers the collection of all undirected graphs on $n$
+vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
+actual edges, and an associated probability
+\[
+p^m (1 - p)^{\binom{n}{2} - m}.
+\]
+Notice the resemblance to the binomial\index{binomial distribution}
+distribution. To generate a random graph in $G_{n,p}$, start with $G$
+being the null\index{null graph} graph. Consider each of the
+$\binom{n}{2}$ possible edges in some order and add it independently
+to $G$ with probability $p$. The expected number of edges in the
+resulting graph is
+\[
+p \cdot \binom{n}{2}
+=
+\frac{p \cdot n!} {2! (n - 2)!}
+\]
+and the expected total degree is
+\[
+2p \cdot \binom{n}{2}
+=
+pn(n - 1).
+\]
+Then the expected degree of each edge is $p(n - 1)$.
+
+Let $N$ be a fixed nonnegative integer. Like the model $G_{n,p}$, in
+the model $G_{n,N}$ we consider all undirected graphs on $n$
+vertices. However, each such graph in $G_{n,N}$ has exactly $N$ edges,
+hence $G_{n,N}$ is a collection of $\binom{\binom{n}{2}} {N}$ graphs
+on exactly $N$ edges, each of which is selected with equal
+probability. To generate a graph in $G_{n,N}$, choose $N$ of the
+possible $\binom{n}{2}$ edges independently and uniformly at random.
 
 \begin{definition}[Random Graph] A random graph $G_{n,p}$ can be built by taking a vertex set of cardinality $n$ and, for each pair of vertices, draw an edge between them with probability $p$.
 
