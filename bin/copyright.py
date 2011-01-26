@@ -84,7 +84,7 @@ def update_copyright(f):
     infile = open(f, "r")
     has_copyright = False  # assume that f doesn't have copyright information
     for line in infile:
-if "Copyright (C)" in line and ", 2011 Minh Van Nguyen <nguyenminh2" in line:
+        if "Copyright (C)" in line and ", 2011 Minh Van Nguyen <nguyenminh2" in line:
             has_copyright = True
             # substring preceding "Minh Van Nguyen <nguyenminh2"
             s = line.split("Minh Van Nguyen <nguyenminh2")[0].strip()
