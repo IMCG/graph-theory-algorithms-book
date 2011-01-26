@@ -92,6 +92,7 @@ def update_copyright(f):
             s = line.split("Minh Van Nguyen <nguyenminh2")[0].strip()
             latest_year = s.split()[-1].strip()
             if latest_year == year:
+                output += line
                 continue
             # substring following s
             t = line.split(s)[-1].strip()
