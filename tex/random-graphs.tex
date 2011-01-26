@@ -53,25 +53,28 @@ Lau~\cite{Lau2007}.
 \section{Binomial and Erd\H{o}s-R{\'e}nyi models}
 
 This section considers two closely related common models of random
-graphs: the binomial model and the Erd\H{o}s-R\'enyi model. Fix a
-positive integer $n$, a probability $p$, and a vertex set
+graphs: the binomial model and the Erd\H{o}s-R\'enyi model. Both
+models are considered to be processes for generating undirected simple
+graphs satisfying certain parameters.
+
+Fix a positive integer $n$, a probability $p$, and a vertex set
 $V = \{1, 2, \dots, n\}$. The
 \emph{binomial}\index{random graph!binomial}~(or
 \emph{Bernoulli})\index{random graph!Bernoulli} random graph model,
 denoted $G(n,p)$ and introduced by Gilbert~\cite{Gilbert1959}, is
 formally a probability\index{probability space} space over the set of
-undirected graphs on $n$ vertices. If $G$ is any element of the
-probability space $G(n,p)$ and $ij$ is any edge, then $ij$ occurs as
-an edge of $G$ independently with probability $p$. In symbols, for any
-$i,j \in V$ we have
+undirected simple graphs on $n$ vertices. If $G$ is any element of the
+probability space $G(n,p)$ and $ij$ is any edge for distinct
+$i,j \in V$, then $ij$ occurs as an edge of $G$ independently with
+probability $p$. In symbols, for any distinct pair $i,j \in V$ we have
 \[
 \Pr[ij \in E(G)]
 =
 p
 \]
 where all such events are mutually independent. Equivalently the model
-$G(n,p)$ considers the collection of all undirected graphs on $n$
-vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
+$G(n,p)$ considers the collection of all undirected simple graphs on
+$n$ vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
 actual edges, and an associated probability
 %%
 \begin{equation}
@@ -103,13 +106,38 @@ pn(n - 1).
 \]
 Then the expected degree of each edge is $p(n - 1)$. From
 problem~\ref{chap:introduction}.\ref{prob:introduction:number_simple_graphs}
-we know that the number of simple graphs on $n$ vertices is given by
+we know that the number of undirected simple graphs on $n$ vertices is
+given by
 \[
 2^{n(n-1) / 2}
 \]
-where the probability of any of these graphs being the output of the
-above procedure is given
-by~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}.
+where~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
+is the probability of any of these graphs being the output of the
+above procedure. Let $\kappa(n,m)$ be the number of graphs from
+$G(n,p)$ that are connected and have size $m$, and by $\Pr[G_\kappa]$
+is meant the probability that $G \in G(n,p)$ is connected. Apply
+expression~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
+to see that
+\[
+\Pr[G_\kappa]
+=
+\sum_{i=n-1}^{\binom{n}{2}}
+\kappa(n,i) \cdot p^i (1 - p)^{\binom{n}{2} - i}
+\]
+where $n - 1$ is the least number of edges of any undirected connected
+graph on $n$ vertices, i.e. the size of any spanning tree of a
+connected graph in $G(n,p)$. Similarly define $\Pr[\kappa_{i,j}]$ to
+be the probability that two distinct vertices $i,j$ of
+$G \in G(n,p)$ are connected. Gilbert~\cite{Gilbert1959} showed that
+as $n \to \infty$, the probabilities $\Pr[G_\kappa]$ and
+$\Pr[\kappa_{i,j}]$ approach
+\[
+\Pr[G_\kappa] \to 1 - n(1 - p)^{n-1}
+\]
+and
+\[
+\Pr[\kappa_{i,j}] \to 1 - 2(1 - p)^{n-1}.
+\]
 
 Let $N$ be a fixed nonnegative integer. The
 \emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1960}
