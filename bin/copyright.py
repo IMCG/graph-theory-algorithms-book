@@ -43,36 +43,18 @@ def is_blacklisted(f):
 
     True if f is blacklisted; False otherwise.
     """
+    blacklist = (".hgignore", ".hgtags", ".jpg", ".pdf", ".png",
+                 "bibliography.bst", "bin/copyright.py",
+                 "image/graph-algorithms/worldmap-capital-cities.svg",
+                 "LICENSE", "style/tkz-arith.tex", "tex/license-gfdl.tex",
+                 "tex/version.tex", "TODO")
     if ".hg/" in f:
-        return True
-    if f.endswith(".hgignore"):
-        return True
-    if f.endswith(".hgtags"):
-        return True
-    if f.endswith(".jpg"):
-        return True
-    if f.endswith(".pdf"):
-        return True
-    if f.endswith(".png"):
         return True
     if f.endswith(".sty") and not f.endswith("mystyle.sty"):
         return True
-    if f.endswith("bibliography.bst"):
-        return True
-    if f.endswith("bin/copyright.py"):
-        return True
-    if f.endswith("image/graph-algorithms/worldmap-capital-cities.svg"):
-        return True
-    if  f.endswith("LICENSE"):
-        return True
-    if f.endswith("style/tkz-arith.tex"):
-        return True
-    if f.endswith("tex/license-gfdl.tex"):
-        return True
-    if f.endswith("tex/version.tex"):
-        return True
-    if f.endswith("TODO"):
-        return True
+    for e in blacklist:
+        if f.endswith(e):
+            return True
     return False
 
 def update_copyright(f):
