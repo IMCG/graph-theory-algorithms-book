@@ -1,3 +1,5 @@
+# Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+#
 # Figure created using the following code.
 # sage: def phi_length(n):
 # ...       """
