@@ -25,7 +25,8 @@ BOOK_ROOT=`pwd`; export BOOK_ROOT
 usage() {
     echo "Usage: $0 <options>"
     echo "Optional arguments:"
-    echo "--dist [VER]   Wrap up a source distribution with version number VER."
+    echo "--copyright    Manage the copyright headers"
+    echo "--dist [VER]   Wrap up a source distribution with version number VER"
 }
 
 # You must provide an argument to this script.
@@ -49,8 +50,20 @@ if [ "$1" = "--dist" ]; then
     # An argument is provided to --dist, so wrap up a version release.
     elif [ "$#" -eq 2 ]; then
     	"$BOOK_ROOT/bin/sdist.sh" "$2" "$BOOK_ROOT"
+    else
+	usage
+	exit 1
     fi
     exit 0
+# Managing the copyright headers.
+elif [ "$1" = "--copyright" ]; then
+    # Argument must be of the form "--copyright".
+    if [ "$#" -eq 1 ]; then
+	"$BOOK_ROOT/bin/copyright.py" "$BOOK_ROOT"
+    else
+	usage
+	exit 1
+    fi
 else
     usage
     exit 1
