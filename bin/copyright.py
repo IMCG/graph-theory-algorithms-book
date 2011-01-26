@@ -22,12 +22,50 @@
 # updating to reflect the current year. This script helps in automating the
 # updating process.
 
+from copy import copy
+from datetime import date
 import os
 import sys
 
 ###################################
 # helper functions
 ###################################
+
+def is_blacklisted(f):
+    """
+    Determine whether the given file is blacklisted.
+
+    INPUT:
+
+    - f --- a file.
+
+    OUTPUT:
+
+    True if f is blacklisted; False otherwise.
+    """
+    if ".hg/" in f:
+        return True
+    if f.endswith(".hgignore"):
+        return True
+    if f.endswith(".hgtags"):
+        return True
+    if f.endswith(".jpg"):
+        return True
+    if f.endswith(".pdf"):
+        return True
+    if f.endswith(".png"):
+        return True
+    if f.endswith(".sty") and not f.endswith("mystyle.sty"):
+        return True
+    if f.endswith("bibliography.bst"):
+        return True
+    if  f.endswith("LICENSE"):
+        return True
+    if f.endswith("style/tkz-arith.tex"):
+        return True
+    if f.endswith("TODO"):
+        return True
+    return False
 
 def update_copyright(f):
     """
@@ -41,18 +79,33 @@ def update_copyright(f):
 
     The copyright information of f updated.
     """
-    # ofile := updated file
-    # output := all information to be written to ofile
-    # year := the current year
-    # for each line in f
-    #     if line has the substrings "Copyright (C)" and "Minh Van Nguyen <nguyenminh2@gmail.com>"
-    #         s := substring preceding "Minh Van Nguyen <nguyenminh2@gmail.com>"
-    #         t := substring following s
-    #         s := append ", year" to s
-    #         s := concatenate s and t
-    #         output := append s to output
-    #     output := append line to output
-    # write output to ofile
+    output = ""
+    year = str(date.today().year)
+    infile = open(f, "r")
+    has_copyright = False  # assume that f doesn't have copyright information
+    for line in infile:
+if "Copyright (C)" in line and ", 2011 Minh Van Nguyen <nguyenminh2" in line:
+            has_copyright = True
+            # substring preceding "Minh Van Nguyen <nguyenminh2"
+            s = line.split("Minh Van Nguyen <nguyenminh2")[0].strip()
+            latest_year = s.split()[-1].strip()
+            if latest_year == year:
+                continue
+            # substring following s
+            t = line.split(s)[-1].strip()
+            s = s + ", " + year
+            s = s + " " + t
+            output += s + "\n"
+            continue
+        output += line
+    infile.close()
+    ofile = open(f, "w")
+    ofile.write(output)
+    ofile.close()
+    # alert to any file without copyright information
+    if not has_copyright:
+        print(f)
+        sys.stdout.flush()
 
 def usage():
     """
@@ -79,12 +132,15 @@ if __name__ == "__main__":
     # traverse directory tree BOOK_ROOT and update copyright information
     BOOK_ROOT = sys.argv[1]
     os.chdir(BOOK_ROOT)
-    # T := directory tree of BOOK_ROOT where T[i] is either a directory or file
-    #      under BOOKT_ROOT
-    # for each e in T
-    #     if e is a directory
-    #         continue with next iteration of loop
-    #     if e is a regular file
-    #         update_copyright(e)
-    #     continue with next iteration of loop
+    blacklist = ()
+    for root, _, files in os.walk(BOOK_ROOT):
+        # ignore anything under .hg/
+        if ".hg" in root:
+            continue
+        for f in files:
+            p = os.path.join(root, f)
+            if is_blacklisted(p):
+                continue
+            if os.path.isfile(p):
+                update_copyright(p)
     sys.exit(0)
