@@ -59,6 +59,8 @@ def is_blacklisted(f):
         return True
     if f.endswith("bibliography.bst"):
         return True
+    if f.endswith("bin/copyright.py"):
+        return True
     if  f.endswith("LICENSE"):
         return True
     if f.endswith("style/tkz-arith.tex"):
