@@ -73,9 +73,12 @@ where all such events are mutually independent. Equivalently the model
 $G(n,p)$ considers the collection of all undirected graphs on $n$
 vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
 actual edges, and an associated probability
-\[
+%%
+\begin{equation}
+\label{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
 p^m (1 - p)^{\binom{n}{2} - m}.
-\]
+\end{equation}
+%%
 Notice the latter's resemblance to the
 binomial\index{binomial distribution} distribution. By
 $G \in G(n,p)$ we mean that $G$ is a random graph of the space
@@ -98,7 +101,15 @@ and the expected total degree is
 =
 pn(n - 1).
 \]
-Then the expected degree of each edge is $p(n - 1)$.
+Then the expected degree of each edge is $p(n - 1)$. From
+problem~\ref{chap:introduction}.\ref{prob:introduction:number_simple_graphs}
+we know that the number of simple graphs on $n$ vertices is given by
+\[
+2^{n(n-1) / 2}
+\]
+where the probability of any of these graphs being the output of the
+above procedure is given
+by~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}.
 
 Let $N$ be a fixed nonnegative integer. The
 \emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1960}
