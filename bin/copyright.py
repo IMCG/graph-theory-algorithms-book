@@ -134,4 +134,5 @@ if __name__ == "__main__":
                 update_copyright(p)
     # alert to any file whose copyright needs to be updated manually
     print("bin/copyright.py")
+    sys.stdout.flush()
     sys.exit(0)
