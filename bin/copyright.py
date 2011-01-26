@@ -118,7 +118,6 @@ if __name__ == "__main__":
     if not os.path.exists(sys.argv[1]):
         usage()
         sys.exit(1)
-
     # traverse directory tree BOOK_ROOT and update copyright information
     BOOK_ROOT = sys.argv[1]
     os.chdir(BOOK_ROOT)
