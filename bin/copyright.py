@@ -65,6 +65,8 @@ def is_blacklisted(f):
         return True
     if f.endswith("style/tkz-arith.tex"):
         return True
+    if f.endswith("tex/version.tex"):
+        return True
     if f.endswith("TODO"):
         return True
     return False
