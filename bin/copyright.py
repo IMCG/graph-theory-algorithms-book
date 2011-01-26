@@ -108,8 +108,6 @@ def update_copyright(f):
     if not has_copyright:
         print(f)
         sys.stdout.flush()
-    # alert to any file whose copyright needs to be updated manually
-    print("bin/copyright.py")
 
 def usage():
     """
@@ -147,4 +145,6 @@ if __name__ == "__main__":
                 continue
             if os.path.isfile(p):
                 update_copyright(p)
+    # alert to any file whose copyright needs to be updated manually
+    print("bin/copyright.py")
     sys.exit(0)
