@@ -22,7 +22,6 @@
 # updating to reflect the current year. This script helps in automating the
 # updating process.
 
-from copy import copy
 from datetime import date
 import os
 import sys
@@ -123,7 +122,6 @@ if __name__ == "__main__":
     # traverse directory tree BOOK_ROOT and update copyright information
     BOOK_ROOT = sys.argv[1]
     os.chdir(BOOK_ROOT)
-    blacklist = ()
     for root, _, files in os.walk(BOOK_ROOT):
         # ignore anything under .hg/
         if ".hg" in root:
