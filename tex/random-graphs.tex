@@ -47,6 +47,12 @@ Lau~\cite{Lau2007}.
 \label{alg:random_graphs:random_simple_graph}
 \end{algorithm}
 
+\begin{algorithm}[!htbp]
+\input{algorithm/random-graphs/naive-random-Gnp.tex}
+\caption{Generate a random graph in $G(n,p)$.}
+\label{alg:random_graphs:generate_random_Gnp}
+\end{algorithm}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -96,7 +102,14 @@ distribution $G(n,p)$.
 To generate a random graph in $G(n,p)$, start with $G$ being a graph
 on $n$ vertices but no edges. Consider each of the $\binom{n}{2}$
 possible edges in some order and add it independently to $G$ with
-probability $p$.
+probability $p$. See
+Algorithm~\ref{alg:random_graphs:generate_random_Gnp} for pseudocode
+of the procedure. The runtime of
+Algorithm~\ref{alg:random_graphs:generate_random_Gnp} depends on an
+efficient algorithm for generating all $2$-combinations of a set of
+$n$ objects. We could adapt
+Algorithm~\ref{alg:tree_data_structures:generate_all_r_combinations}
+to our needs or search for a more efficient algorithm.
 Figure~\ref{fig:random_graphs:binomial_random_graph_25_nodes}
 illustrates some graphs from $G(25,p)$ with $p = i/6$ for
 $i = 0, 1, \dots, 5$. The expected number of edges of any
