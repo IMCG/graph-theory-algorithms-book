@@ -27,7 +27,7 @@ $V \assign \{1, 2, \dots, n\}$\;
 $E \assign$ $\{2$-combinations of $V\}$\;
 \For{\rm each $e \in E$}{
   $r \assign$ draw uniformly at random from $[0,1)$\;
-  \If{$r \leq p$}{
+  \If{$r < p$}{
     add edge $e$ to $G$\;
   }
 }
