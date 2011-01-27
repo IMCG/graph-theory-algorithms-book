@@ -96,15 +96,26 @@ distribution $G(n,p)$.
 To generate a random graph in $G(n,p)$, start with $G$ being a graph
 on $n$ vertices but no edges. Consider each of the $\binom{n}{2}$
 possible edges in some order and add it independently to $G$ with
-probability $p$. The expected number of edges in the resulting graph
-is
+probability $p$.
+Figure~\ref{fig:random_graphs:binomial_random_graph_25_nodes}
+illustrates some graphs from $G(25,p)$ with $p = i/6$ for
+$i = 0, 1, \dots, 5$. The expected number of edges of any
+$G \in G(n,p)$ is
 \[
+\alpha
+=
+\E[|E|]
+=
 p \cdot \binom{n}{2}
 =
 \frac{p \cdot n!} {2! (n - 2)!}
 \]
 and the expected total degree is
 \[
+\beta
+=
+\E[\#\deg]
+=
 2p \cdot \binom{n}{2}
 =
 pn(n - 1).
@@ -143,6 +154,18 @@ and
 \[
 \Pr[\kappa_{i,j}] \to 1 - 2(1 - p)^{n-1}.
 \]
+
+\begin{figure}[!htbp]
+\centering
+\input{image/random-graphs/binomial-random-graphs-25-nodes.tex}
+\caption{Binomial random graphs $G(25,p)$ for various values of $p$.}
+\label{fig:random_graphs:binomial_random_graph_25_nodes}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Erd\H{o}s-R\'enyi model}
 
 Let $N$ be a fixed nonnegative integer. The
 \emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1960}
