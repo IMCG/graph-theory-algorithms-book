@@ -335,4 +335,36 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
 
   \item Simple weighted digraph.
   \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/random-graphs/quadratic-random-Gnp.tex}
+\caption{Quadratic generation of a random graph in $G(n,p)$.}
+\label{alg:random_graphs:quadratic_generate_random_Gnp}
+\end{algorithm}
+
+\item Algorithm~\ref{alg:random_graphs:generate_random_Gnp} can be
+  considered as a template for generating random graphs in
+  $G(n,p)$. The procedure does not specify how to generate all the
+  $2$-combinations of a set of $n > 1$ objects. Here we discuss how to
+  construct all such $2$-combinations and derive a quadratic time
+  algorithm for generating random graphs in $G(n,p)$.
+  %%
+  \begin{enumerate}[(a)]
+  \item Consider a vertex set $V = \{1, 2, \dots, n\}$ with $n > 1$
+    and let $E$ be the set of all $2$-combinations of $V$, where each
+    $2$-combination is written $ij$. Show that $ij \in E$ if and only
+    if $i < j$.
+
+  \item From the previous exercise, we know that if $1 \leq i < n$
+    then there are $n - i$ pairs $jk$ where either $i = j$ or
+    $i = k$. Show that
+    \[
+    \sum_{i=1}^{n-1} (n - i)
+    =
+    \frac{n^2 - n}{2}
+    \]
+    and conclude that
+    Algorithm~\ref{alg:random_graphs:quadratic_generate_random_Gnp}
+    has worst-case runtime $O((n^2 - n) / 2)$.
+  \end{enumerate}
 \end{problem}
