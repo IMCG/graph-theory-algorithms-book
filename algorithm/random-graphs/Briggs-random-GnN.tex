@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwData{MyMax}{max}
+\SetKwData{MyTrue}{True}
+%%
+%% input/output
+\Input{Positive integers $n$ and $N$ such that $1 \leq N \leq \binom{n}{2}$.}
+\Output{A random graph from $G(n,N)$.}
+\BlankLine
+%%
+%% algorithm body
+$\MyMax \assign \binom{n}{2}$\;
+\If{\rm $n = 1$ or $N = \MyMax$}{
+  \Return $K_n$\;
+}
+$G \assign \overline{K_n}$\;
+$u \assign 0$\;
+$v \assign 1$\;
+$t \assign 0$\;
+$k \assign 0$\;
+\While{$\MyTrue$}{
+  $r \assign$ draw uniformly at random from $\{0, 1, \dots, \MyMax - t\}$\;
+  \If{$r < N - k$}{
+    add edge $uv$ to $G$\;
+    $k \assign k + 1$\;
+    \If{$k = N$}{
+      \Return $G$\;
+    }
+  }
+  $t \assign t + 1$\;
+  $v \assign v + 1$\;
+  \If{$v = n$}{
+    $u \assign u + 1$\;
+    $v \assign u + 1$\;
+  }
+}

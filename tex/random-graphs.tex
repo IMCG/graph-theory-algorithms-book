@@ -255,6 +255,7 @@ size, respectively, of the resulting graph.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Erd\H{o}s-R\'enyi model}
+\label{sec:random_graphs:Erdos_Renyi_model}
 
 Let $N$ be a fixed nonnegative integer. The
 \emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1960}
@@ -503,6 +504,14 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
 \label{alg:random_graphs:quadratic_generate_random_Gnp}
 \end{algorithm}
 
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/Briggs-random-GnN.tex}
+\caption{Briggs' algorithm for random dense graph in $G(n,N)$.}
+\label{alg:random_graphs:Briggs_random_GnN}
+\end{algorithm}
+
 \item\label{prob:random_graphs:quadratic_generate_random_Gnp}
   Algorithm~\ref{alg:random_graphs:generate_random_Gnp} can be
   considered as a template for generating random graphs in
@@ -544,4 +553,22 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
 
 \item Repeat the previous problem for
   Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
+
+\item In~2006, Keith M. Briggs\index{Briggs, Keith M.}
+  provided~\cite{Briggs2011} an algorithm that generates a random
+  dense graph in $G(n,N)$, inspired by Knuth's Algorithm~S
+  (Selection sampling technique) as found on page~142 of
+  Knuth~\cite{Knuth1998b}. Pseudocode of Briggs' algorithm is
+  presented in Algorithm~\ref{alg:random_graphs:Briggs_random_GnN}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Provide runtime analysis of
+    Algorithm~\ref{alg:random_graphs:Briggs_random_GnN} and compare
+    your results with those presented in
+    section~\ref{sec:random_graphs:Erdos_Renyi_model}.
+
+  \item Under which conditions would Briggs' algorithm be more
+    efficient than
+    Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}?
+  \end{enumerate}
 \end{problem}
