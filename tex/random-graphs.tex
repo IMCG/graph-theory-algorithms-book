@@ -228,8 +228,24 @@ can choose $k$ to be
 \[
 k
 =
-1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor.
+1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor
 \]
+which is used as a basis of
+Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp}. In
+the latter algorithm, note that the vertex set is
+$V = \{0, 1, \dots, n-1\}$ and candidate edges are generated in
+lexicographic order. The Batagelj-Brandes
+Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp}
+has worst-case runtime $O(n + m)$, where $n$ and $m$ are the order and
+size, respectively, of the resulting graph.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/linear-random-sparse-Gnp.tex}
+\caption{Linear generation of a random sparse graph in $G(n,p)$.}
+\label{alg:random_graphs:linear_generate_random_sparse_Gnp}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
