@@ -344,7 +344,17 @@ expected linear runtime when the number $N$ of required edges
 satisfies $N \leq \binom{n}{2} / 2$. But for $N > \binom{n}{2} / 2$,
 we obtain expected linear runtime by generating the
 complete\index{complete graph} graph $K_n$ and randomly delete
-$\binom{n}{2} - N$ edges from the latter graph.
+$\binom{n}{2} - N$ edges from the latter graph. Our discussion is
+summarized in
+Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/expected-linear-random-GnN.tex}
+\caption{Generation of random graph in $G(n,N)$ in expected linear time.}
+\label{alg:random_graphs:expected_linear_generate_random_GnN}
+\end{algorithm}
 
 One of the first properties of random graphs which makes them so pleasant to work with is the following
 

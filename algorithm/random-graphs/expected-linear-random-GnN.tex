@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{Positive integer $n$ and integer $N$ with $0 \leq N \leq \binom{n}{2}$.}
+\Output{A random graph from $G(n,N)$.}
+\BlankLine
+%%
+%% algorithm body
+\If{$N \leq \binom{n}{2} / 2$}{
+  \Return result of Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN}\;
+}
+$G \assign K_n$\;
+\For{$i \assign 1, 2, \dots, \binom{n}{2} - N$}{
+  $e \assign$ draw uniformly at random from $E(G)$\;
+  remove edge $e$ from $G$\;
+}
+\Return $G$\;
