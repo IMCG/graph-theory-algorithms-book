@@ -210,14 +210,17 @@ stop when the first success occurs. Letting $X$ be the number of
 trials required until the first success occurs, then $X$ is a
 geometric random variable with parameter $p$ and probability mass
 function
-\[
+%%
+\begin{equation}
+\label{eqn:random_graphs:probability_mass_function_geometric_distribution}
 \Pr[X = k]
 =
-(1 - p)^{k - 1} p
-\]
+p (1 - p)^{k - 1}
+\end{equation}
+%%
 for integers $k \geq 1$, where
 \[
-\sum_{k=1}^\infty (1 - p)^{k - 1} p
+\sum_{k=1}^\infty p (1 - p)^{k - 1}
 =
 1.
 \]
@@ -286,6 +289,62 @@ a straightforward translation of the above procedure into pseudocode.
 \label{alg:random_graphs:linear_generate_random_GnN}
 \end{algorithm}
 
+The runtime of
+Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN} is
+probabilistic and can be analyzed via the geometric distribution. If
+$i$ be the number of edges chosen so far, then the probability of
+choosing a new edge in the next step is
+\[
+\frac{\binom{n}{2} - i} {\binom{n}{2}}.
+\]
+We repeatedly choose an edge uniformly at random from the collection
+of all possible edges, until we come across the first edge that is not
+already in the graph. The number of trials required until the first
+new edge is chosen can be modeled using the geometric distribution
+with probability mass
+function~\eqref{eqn:random_graphs:probability_mass_function_geometric_distribution}.
+Given a geometric random variable $X$, we have the expectation
+\[
+\E[X]
+=
+\sum_{n=1}^\infty n \cdot p(1 - p)^{n-1}
+=
+\frac{1}{p}.
+\]
+Therefore the expected number of trials until a new edge be chosen is
+\[
+\frac{\binom{n}{2}} {\binom{n}{2} - i}
+\]
+from which the expected total runtime is
+%%
+\begin{align*}
+\label{eqn:random_graphs:Erdos_Renyi_expected_total_runtime_sum}
+\sum_{i=1}^N \frac{\binom{n}{2}} {\binom{n}{2} - i}
+&\approx
+\int_0^N \frac{\binom{n}{2}} {\binom{n}{2} - x} \; dx \\[4pt]
+&=
+\binom{n}{2} \cdot \ln \frac{\binom{n}{2}} {\binom{n}{2} - N}.
+\end{align*}
+%%
+The denominator in the latter fraction becomes zero when
+$\binom{n}{2} = N$, which can be prevented by adding one to the
+denominator. Then we have the expected total runtime
+\[
+\sum_{i=1}^N \frac{\binom{n}{2}} {\binom{n}{2} - i}
+\in
+\Theta
+\left(
+  \binom{n}{2} \cdot \ln \frac{\binom{n}{2}} {\binom{n}{2} - N + 1}
+\right)
+\]
+which is $O(N)$ when $N \leq \binom{n}{2} / 2$, and $O(N \cdot \ln N)$
+when $N = \binom{n}{2}$. In other words,
+Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN} has
+expected linear runtime when the number $N$ of required edges
+satisfies $N \leq \binom{n}{2} / 2$. But for $N > \binom{n}{2} / 2$,
+we obtain expected linear runtime by generating the
+complete\index{complete graph} graph $K_n$ and randomly delete
+$\binom{n}{2} - N$ edges from the latter graph.
 
 One of the first properties of random graphs which makes them so pleasant to work with is the following
 
