@@ -275,6 +275,17 @@ each of the $\binom{n}{2}$ edges has a probability
 1 \left/ \binom{n}{2} \right.
 \]
 of being chosen.
+Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN} presents
+a straightforward translation of the above procedure into pseudocode.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/linear-random-GnN.tex}
+\caption{Generation of random graph in $G(n,N)$ in linear expected time.}
+\label{alg:random_graphs:linear_generate_random_GnN}
+\end{algorithm}
+
 
 One of the first properties of random graphs which makes them so pleasant to work with is the following
 
