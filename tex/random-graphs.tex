@@ -189,8 +189,47 @@ generating a random graph from $G(n,p)$ can be unsuitable when the
 number of vertices $n$ is in the hundreds of thousands or millions. In
 many applications of $G(n,p)$ we are only interested in
 sparse\index{sparse graph} random graphs. A linear time algorithm to
-generate a sparse random graph from $G(n,p)$ is presented in Batagelj
-and Brandes~\cite{BatageljBrandes2005}.
+generate a random sparse graph from $G(n,p)$ is presented in
+Batagelj\index{Batagelj, Vladimir} and
+Brandes\index{Brandes, Ulrik}~\cite{BatageljBrandes2005}.
+
+The Batagelj-Brandes\index{Batagelj-Brandes algorithm} algorithm for
+generating a random sparse graph $G \in G(n,p)$ uses what is known as
+a geometric method to skip over certain edges. Fix a probability
+$0 < p < 1$ that an edge will be in the resulting random sparse graph
+$G$. If $e$ is an edge of $G$, we can consider the events leading up
+to the choice of $e$ as
+\[
+e_1, e_2, \dots, e_k
+\]
+where in the $i$-th trial the event $e_i$ is a failure, for
+$1 \leq i < k$, but the event $e_k$ is the first success after
+$k - 1$ successive failures. In probabilistic terms, we perform a
+series of independent trials each having success probability $p$ and
+stop when the first success occurs. Letting $X$ be the number of
+trials required until the first success occurs, then $X$ is a
+geometric random variable with parameter $p$ and probability mass
+function
+\[
+\Pr[X = k]
+=
+(1 - p)^{k - 1} p
+\]
+for integers $k \geq 1$, where
+\[
+\sum_{k=1}^\infty (1 - p)^{k - 1} p
+=
+1.
+\]
+In other words, waiting times are geometrically distributed. If
+$r$ is chosen uniformly at random from the interval $[0,1)$,
+Batagelj and Brandes\index{Batagelj-Brandes algorithm} show that we
+can choose $k$ to be
+\[
+k
+=
+1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor.
+\]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
