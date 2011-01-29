@@ -259,18 +259,18 @@ size, respectively, of the resulting graph.
 \label{sec:random_graphs:Erdos_Renyi_model}
 
 Let $N$ be a fixed nonnegative integer. The
-\emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1960}
+\emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1959,ErdosRenyi1960}
 (or\index{random graph!Erd\H{o}s-R\'enyi}
 \emph{uniform})\index{random graph!uniform} random graph model,
 denoted $G(n,N)$, is a probability space over the set of undirected
-graphs on $n$ vertices and exactly $N$ edges. Hence $G(n,N)$ can be
-considered as a collection of $\binom{\binom{n}{2}} {N}$ undirected
-graphs on exactly $N$ edges, each such graph being selected with equal
-probability. To generate a graph in $G(n,N)$, start with $G$ being a
-graph on $n$ vertices but no edges. Then choose $N$ of the possible
-$\binom{n}{2}$ edges independently and uniformly at random and let
-the chosen edges be the edge set of $G$. Each graph $G \in G(n,N)$ is
-associated with a probability
+simple graphs on $n$ vertices and exactly $N$ edges. Hence $G(n,N)$
+can be considered as a collection of $\binom{\binom{n}{2}} {N}$
+undirected simple graphs on exactly $N$ edges, each such graph being
+selected with equal probability. To generate a graph in $G(n,N)$,
+start with $G$ being a graph on $n$ vertices but no edges. Then choose
+$N$ of the possible $\binom{n}{2}$ edges independently and uniformly
+at random and let the chosen edges be the edge set of $G$. Each graph
+$G \in G(n,N)$ is associated with a probability
 \[
 1 \left/ \binom{\binom{n}{2}} {N} \right.
 \]
