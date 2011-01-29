@@ -554,7 +554,7 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
 \item Repeat the previous problem for
   Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
 
-\item In~2006, Keith M. Briggs\index{Briggs, Keith M.}
+\item In~2006, Keith M. Briggs\index{Briggs!Keith M.}
   provided~\cite{Briggs2011} an algorithm that generates a random
   graph in $G(n,N)$, inspired by Knuth's Algorithm~S~(Selection
   sampling technique) as found on page~142 of
@@ -570,5 +570,27 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
   \item Under which conditions would Briggs' algorithm be more
     efficient than
     Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}?
+  \end{enumerate}
+
+\item Briggs'\index{Briggs!algorithm}
+  Algorithm~\ref{alg:random_graphs:Briggs_random_GnN} follows the
+  general template of an algorithm that samples without replacement
+  $n$ items from a pool of $N$ candidates. Here $0 < n \leq N$ and the
+  size $N$ of the candidate pool is known in advance. However there
+  are situations where the value of $N$ is not known beforehand, and
+  we wish to sample without replacement $n$ items from the candidate
+  pool. What we know is that the candidate pool has enough members to
+  allow us to select $n$ items. Vitter's\index{Vitter!Jeffrey Scott}
+  algorithm~R~\cite{Vitter1985}, called
+  reservoir\index{reservoir sampling} sampling, is suitable for the
+  situation and runs in $O(n (1 + \ln(N/n)))$ expected time.
+  %%
+  \begin{enumerate}[(a)]
+  \item Describe and provide pseudocode of
+    Vitter's\index{Vitter!algorithm} algorithm.
+
+  \item Prove the correctness of Vitter's algorithm.
+
+  \item Provide runtime analysis of Vitter's algorithm.
   \end{enumerate}
 \end{problem}
