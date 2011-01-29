@@ -16,6 +16,7 @@
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
 \SetKwData{MyFalse}{False}
+\SetKwData{MyMax}{max}
 \SetKwData{MyTrue}{True}
 %%
 %% input/output
@@ -29,8 +30,8 @@
 \If{$n = 1$}{
   \Return $K_1$\;
 }
-$M \assign n(n - 1) / 2$\;
-\If{$m > M$}{
+$\MyMax \assign n(n - 1) / 2$\;
+\If{$m > \MyMax$}{
   \Return $K_n$\;
 }
 $G \assign$ null graph\;
