@@ -2508,8 +2508,9 @@ as dumb as the next guy. \\
     algorithm for interpolation\index{interpolation search} search,
     analyze its worst-case runtime, and compare its theoretical
     runtime efficiency with that of binary\index{binary search}
-    search~(see pages~419--420 in Knuth~\cite{Knuth1998c} and
-    pages~201--202 in Sedgewick~\cite{Sedgewick1990}).
+    search~(see pages~419--420 in
+    Knuth\index{Knuth!Donald E.}~\cite{Knuth1998c} and pages~201--202
+    in Sedgewick\index{Sedgewick, Robert}~\cite{Sedgewick1990}).
   \end{enumerate}
 
 \item Let $G$ be a simple undirected graph having distance matrix
@@ -2737,8 +2738,8 @@ as dumb as the next guy. \\
 
 \item Various efficient search techniques exist that cater for special
   situations. Some of these are covered in chapter~6 in
-  Knuth~\cite{Knuth1998c} and chapters~14--18 in
-  Sedgewick~\cite{Sedgewick1990}.
+  Knuth\index{Knuth!Donald E.}~\cite{Knuth1998c} and chapters~14--18 in
+  Sedgewick\index{Sedgewick, Robert}~\cite{Sedgewick1990}.
   %%
   \begin{enumerate}[(a)]
   \item Investigate an algorithm for and time complexity of trie
@@ -2748,28 +2749,32 @@ as dumb as the next guy. \\
     time. Furthermore, hashing has important applications outside of the
     searching problem, a case in point being cryptology. Investigate how
     hashing can be used to speed up searches. For further information
-    on hashing and its application to cryptology, see
-    Menezes~et~al.~\cite{MenezesEtAl1996}, Stinson~\cite{Stinson2002},
-    or Trappe and Washington~\cite{TrappeWashington2006}.
+    on hashing and its application to cryptology,
+    see\index{van Oorschot, Paul C.}\index{Vanstone, Scott A.}
+    Menezes~et~al.\index{Menezes, Alfred J.}~\cite{MenezesEtAl1996},
+    Stinson\index{Stinson, Douglas R.}~\cite{Stinson2002},
+    or Trappe\index{Trappe, Wade} and
+    Washington\index{Washington, Lawrence C.}~\cite{TrappeWashington2006}.
   \end{enumerate}
 
 \item In addition to searching, there is the related problem of
   sorting a list according to an ordering relation. If the given list
   $L = [e_1, e_2, \dots, e_n]$ consists of real numbers, we want to
-  order elements in nondecreasing order. \emph{Bubble sort} is a basic
-  sorting algorithm that can be used to sort a list of real numbers,
-  indeed any collection of objects that can be ordered according to an
-  ordering relation. During each pass through the list $L$ from left
-  to right, we consider $e_i$ and its right neighbor $e_{i+1}$. If
+  order elements in nondecreasing order.
+  \emph{Bubble sort}\index{bubble sort} is a basic sorting algorithm
+  that can be used to sort a list of real numbers, indeed any
+  collection of objects that can be ordered according to an ordering
+  relation. During each pass through the list $L$ from left to right,
+  we consider $e_i$ and its right neighbor $e_{i+1}$. If
   $e_i \leq e_{i+1}$, then we move on to consider $e_{i+1}$ and its
   right neighbor $e_{i+2}$. If $e_i > e_{i+1}$, then we swap these two
   values around in the list and then move on to consider $e_{i+1}$ and
   its right neighbor $e_{i+2}$. Each successive pass pushes to the
   right end an element that is the next largest in comparison to the
   previous largest element pushed to the right end. Hence the name
-  bubble sort for the
-  algorithm. Algorithm~\ref{alg:graph_algorithms:bubble_sort}
-  summarizes our discussion.
+  bubble\index{bubble sort} sort for the algorithm.
+  Algorithm~\ref{alg:graph_algorithms:bubble_sort} summarizes our
+  discussion.
   %%
   \begin{algorithm}[!htbp]
     \input{algorithm/graph-algorithms/bubble-sort.tex}
@@ -2805,26 +2810,27 @@ as dumb as the next guy. \\
     \end{algorithm}
   \end{enumerate}
 
-\item \emph{Selection sort} is another simple sorting algorithm that
-  works as follows. Let $L = [e_1, e_2, \dots, e_n]$ be a list of
-  elements that can be ordered according to the relation ``$\leq$'',
-  e.g. the $e_i$ can all be real numbers or integers. On the first
-  scan of $L$ from left to right, among the elements
-  $L[2], \dots, L[n]$ we find the smallest element and exchange it
-  with $L[1]$. On the second scan, we find the smallest element among
-  $L[3], \dots, L[n]$ and exchange that smallest element with
-  $L[2]$. In general, during the $i$-th scan we find the smallest
-  element among $L[i+1], \dots, L[n]$ and exchange that with
-  $L[i]$. At the end of the $i$-th scan, the element $L[i]$ is in its
-  final position and would not be processed again. When the index
-  reaches $i = n$, the list would have been sorted in nondecreasing
-  order. The procedure is summarized in
+\item \emph{Selection sort}\index{selection sort} is another simple
+  sorting algorithm that works as follows. Let
+  $L = [e_1, e_2, \dots, e_n]$ be a list of elements that can be
+  ordered according to the relation ``$\leq$'', e.g. the $e_i$ can all
+  be real numbers or integers. On the first scan of $L$ from left to
+  right, among the elements $L[2], \dots, L[n]$ we find the smallest
+  element and exchange it with $L[1]$. On the second scan, we find the
+  smallest element among $L[3], \dots, L[n]$ and exchange that
+  smallest element with $L[2]$. In general, during the $i$-th scan we
+  find the smallest element among $L[i+1], \dots, L[n]$ and exchange
+  that with $L[i]$. At the end of the $i$-th scan, the element $L[i]$
+  is in its final position and would not be processed again. When the
+  index reaches $i = n$, the list would have been sorted in
+  nondecreasing order. The procedure is summarized in
   Algorithm~\ref{alg:graph_algorithms:selection_sort}.
   %%
   \begin{enumerate}[(a)]
   \item Analyze the worst-case runtime of
     Algorithm~\ref{alg:graph_algorithms:selection_sort} and compare
-    your result to the worst-case runtime of the bubble sort
+    your result to the worst-case runtime of the
+    bubble\index{bubble sort} sort
     Algorithm~\ref{alg:graph_algorithms:bubble_sort}.
 
   \item Modify Algorithm~\ref{alg:graph_algorithms:selection_sort} to
@@ -2841,30 +2847,36 @@ as dumb as the next guy. \\
   \end{enumerate}
 
 \begin{algorithm}[!htbp]
+\index{selection sort}
 \input{algorithm/graph-algorithms/selection-sort.tex}
 \caption{Selection sort.}
 \label{alg:graph_algorithms:selection_sort}
 \end{algorithm}
 
-\item In addition to bubble and selection sort, other algorithms exist
-  whose runtime is more efficient than these two basic sorting
-  algorithms. Chapter~5 in Knuth~\cite{Knuth1998c} describes various
+\item In addition to bubble\index{bubble sort} and
+  selection\index{selection sort} sort, other algorithms exist whose
+  runtime is more efficient than these two basic sorting
+  algorithms. Chapter~5 in
+  Knuth\index{Knuth!Donald E.}~\cite{Knuth1998c} describes various
   efficient sorting techniques. See also chapters~8--13 in
-  Sedgewick~\cite{Sedgewick1990}.
+  Sedgewick\index{Sedgewick, Robert}~\cite{Sedgewick1990}.
   %%
   \begin{enumerate}[(a)]
-  \item Investigate and provide pseudocode for insertion sort and
-    compare its runtime efficiency with that of selection
+  \item Investigate and provide pseudocode for
+    insertion\index{insertion sort} sort and compare its runtime
+    efficiency with that of selection\index{selection sort}
     sort. Compare the similarities and differences between insertion
     and selection sort.
 
-  \item Shellsort is a variation on insertion sort that can speed up
-    the runtime of insertion sort. Describe and provide pseudocode for
+  \item Shellsort\index{shellsort} is a variation on
+    insertion\index{insertion sort} sort that can speed up the runtime
+    of insertion sort. Describe and provide pseudocode for
     shellsort. Compare the time complexity of shellsort with that of
     insertion sort. In what ways is shellsort different from or
     similar to insertion sort?
 
-  \item The quicksort algorithm due to C.~A.~R. Hoare~\cite{Hoare1962}
+  \item The quicksort\index{quicksort} algorithm due to C.~A.~R.
+    Hoare\index{Hoare, C.~A.~R.}~\cite{Hoare1962}
     was published in~1962. Describe and provide pseudocode for
     quicksort and compare its runtime complexity with the other
     sorting algorithms covered in this chapter.
@@ -2872,10 +2884,11 @@ as dumb as the next guy. \\
 
 \item\label{prob:graph_algorithms:connectivity_with_DFS_BFS}
   Algorithm~\ref{alg:graph_algorithms:graph_connectivity} uses
-  breadth-first search to determine the connectivity of an undirected
-  graph. Modify this algorithm to use depth-first search. How can
+  breadth-first\index{breadth-first search} search to determine the
+  connectivity of an undirected graph. Modify this algorithm to use
+  depth-first\index{depth-first search} search. How can
   Algorithm~\ref{alg:graph_algorithms:graph_connectivity} be used or
-  modified to test the connectivity of a digraph?
+  modified to test the connectivity\index{connectivity} of a digraph?
 
 \item The following problem is known as the
   \emph{river crossing problem}\index{river crossing problem}. A man,
@@ -3067,25 +3080,30 @@ as dumb as the next guy. \\
 \label{fig:graph_algorithms:n_queens_solutions}
 \end{figure}
 
-\item The $n$-queens problem is concerned with the placement of $n$
-  queens on an $n \times n$ chessboard such that no two queens can
-  attack each other. Two queens can attack each other if they are in
-  the same row, column, diagonal, or antidiagonal of the chessboard.
-  The trivial case $n = 1$ is easily solved by placing the one queen
-  in the only given position. There are no solutions for the cases
+\item The $n$-queens\index{$n$-queens problem} problem is concerned
+  with the placement of $n$ queens on an $n \times n$
+  chessboard\index{chess} such that no two queens can attack each
+  other. Two queens can attack each other if they are in the same row,
+  column, diagonal, or antidiagonal of the chessboard. The trivial
+  case $n = 1$ is easily solved by placing the one queen in the only
+  given position. There are no solutions for the cases
   $n = 2, 3$. Solutions for the cases $n = 4, 8$ are shown in
   Figure~\ref{fig:graph_algorithms:n_queens_solutions}. Devise a
-  backtracking algorithm to solve the $n$-queens problem for the case
-  where $n > 3$. See Bell and Stevens~\cite{BellStevens2009} for a
-  survey of the $n$-queens problem and its solutions.
+  backtracking\index{backtracking algorithm} algorithm to solve the
+  $n$-queens problem for the case where $n > 3$. See
+  Bell\index{Bell, Jordan} and
+  Stevens\index{Stevens, Brett}~\cite{BellStevens2009} for a survey of
+  the $n$-queens problem and its solutions.
 
-\item Hampton Court Palace in England is well-known for its maze of
+\item Hampton\index{Hampton Court Palace} Court Palace in
+  England\index{England} is well-known for its maze\index{maze} of
   hedges. Figure~\ref{fig:graph_algorithms:maze_associated_graph}
   shows a maze and its graph representation; the figure is adapted
-  from page~434 in Sedgewick~\cite{Sedgewick1990}. To obtain the graph
-  representation, we use a vertex to represent an intersection in the
-  maze. An edge joining two vertices represents a path from one
-  intersection to another.
+  from page~434 in
+  Sedgewick\index{Sedgewick, Robert}~\cite{Sedgewick1990}. To obtain
+  the graph representation, we use a vertex to represent an
+  intersection in the maze\index{maze}. An edge joining two vertices
+  represents a path from one intersection to another.
   %%
   \begin{enumerate}[(a)]
   \item Suppose the entrance to the maze is represented by the
@@ -3184,12 +3202,13 @@ as dumb as the next guy. \\
     graphs are nonisomorphic to each other?
 
   \item Describe and provide pseudocode of an algorithm to generate a
-    random\index{algorithm!random} $n \times n$ grid graph. Analyze
-    the worst-case runtime of your algorithm.
+    random\index{algorithm!random} $n \times n$
+    grid\index{grid!graph} graph. Analyze the worst-case runtime of
+    your algorithm.
 
-  \item Extend the grid graph by allowing edges to be diagonals. That
-    is, a vertex $(i,j)$ can also be adjacent to any of the following
-    vertices so long as
+  \item Extend the grid\index{grid!graph} graph by allowing edges to
+    be diagonals. That is, a vertex $(i,j)$ can also be adjacent to
+    any of the following vertices so long as
     expression~\eqref{eqn:graph_algorithms:grid_graph_vertex_inequality}
     holds: $(i-1,\, j-1)$, $(i-1,\, j+1)$, $(i+1,\, j+1)$,
     $(i+1,\, j-1)$. With this extension, repeat the previous
