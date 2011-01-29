@@ -3053,4 +3053,35 @@ leaves. \\
 
 \item If a forest $F$ has $k$ trees totalling $n$ vertices altogether,
   how many edges does $F$ contain?
+
+\item The Lucas\index{Lucas!number} number $L_n$, named after
+  \'Eduoard Lucas\index{Lucas!\'Eduoard}, has the following recursive
+  definition:
+  \[
+  L_n
+  =
+  \begin{cases}
+  2, & \text{if } n = 0, \\
+  1, & \text{if } n = 1, \\
+  L_{n-1} + L_{n-2}, & \text{if } n > 1.
+  \end{cases}
+  \]
+  %%
+  \begin{enumerate}[(a)]
+  \item If $\varphi = (1 + \sqrt{5}) / 2$ is the
+    golden\index{golden ratio} ratio, show that
+    \[
+    L_n
+    =
+    \varphi^n + (-\varphi)^{-n}.
+    \]
+
+  \item Let $\tau(W_n)$ be the number of
+    spanning\index{spanning tree} trees of the
+    wheel\index{wheel graph} graph.
+    Benjamin\index{Benjamin, Arthur T.} and
+    Yerger\index{Yerger, Carl R.}~\cite{BenjaminYerger2006} provide a
+    combinatorial proof that $\tau(W_n) = L_{2n} - 2$. Present the
+    Benjamin-Yerger combinatorial proof.
+  \end{enumerate}
 \end{problem}
