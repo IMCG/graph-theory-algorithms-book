@@ -3075,21 +3075,22 @@ as dumb as the next guy. \\
 
 \begin{figure}[!htbp]
 \centering
+\index{chess!queen}
 \input{image/graph-algorithms/n-queens.tex}
 \caption{Solutions of the $n$-queens problem for $n = 4, 8$.}
 \label{fig:graph_algorithms:n_queens_solutions}
 \end{figure}
 
-\item The $n$-queens\index{$n$-queens problem} problem is concerned
-  with the placement of $n$ queens on an $n \times n$
-  chessboard\index{chess} such that no two queens can attack each
-  other. Two queens can attack each other if they are in the same row,
-  column, diagonal, or antidiagonal of the chessboard. The trivial
-  case $n = 1$ is easily solved by placing the one queen in the only
-  given position. There are no solutions for the cases
-  $n = 2, 3$. Solutions for the cases $n = 4, 8$ are shown in
+\item The $n$-queens\index{$n$-queens problem}\index{chess!queen}
+  problem is concerned with the placement of $n$ queens on an
+  $n \times n$ chessboard\index{chess} such that no two queens can
+  attack each other. Two queens can attack each other if they are in
+  the same row, column, diagonal, or antidiagonal of the
+  chessboard. The trivial case $n = 1$ is easily solved by placing the
+  one queen in the only given position. There are no solutions for the
+  cases $n = 2, 3$. Solutions for the cases $n = 4, 8$ are shown in
   Figure~\ref{fig:graph_algorithms:n_queens_solutions}. Devise a
-  backtracking\index{backtracking algorithm} algorithm to solve the
+  backtracking\index{backtrack!algorithm} algorithm to solve the
   $n$-queens problem for the case where $n > 3$. See
   Bell\index{Bell, Jordan} and
   Stevens\index{Stevens, Brett}~\cite{BellStevens2009} for a survey of
