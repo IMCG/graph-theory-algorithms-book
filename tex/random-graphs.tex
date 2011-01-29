@@ -358,6 +358,69 @@ Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
 \label{alg:random_graphs:expected_linear_generate_random_GnN}
 \end{algorithm}
 
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{oriented graph}
+\index{oriented graph!random}
+\input{algorithm/random-graphs/random-oriented-graph-Gnp.tex}
+\caption{Random oriented graph via $G(n,p)$.}
+\label{alg:random_graphs:random_oriented_graph_Gnp}
+\end{algorithm}
+
+\begin{example}
+Consider a digraph $D = (V,E)$ without self-loops or multiple
+edges. Then $D$ is said to be \emph{oriented}\index{oriented graph} if
+for any distinct pair $u,v \in V$ at most one of $uv, vu$ is an edge
+of $D$. Provide specific examples of oriented graphs.
+\end{example}
+
+\begin{proof}[Solution]
+If $u,v \in V$ is any pair of distinct vertices of an oriented graph
+$D = (V,E)$, we have various possibilities:
+%%
+\begin{enumerate}
+\item $uv \notin E$ and $vu \notin E$.
+
+\item $uv \in E$ and $vu \notin E$.
+
+\item $uv \notin E$ and $vu \in E$.
+\end{enumerate}
+%%
+Let $n > 0$ be the number of vertices in $D$ and let
+$0 < p < 1$. Generate a random oriented graph as follows. First we
+generate a binomial random graph $G \in G(n,p)$ where $G$ is simple
+and undirected. Then we consider the digraph version of $G$ and
+proceed to randomly prune either $uv$ or $vu$ from $G$, for each
+distinct pair of vertices $u,v$. Refer to
+Algorithm~\ref{alg:random_graphs:random_oriented_graph_Gnp} for
+pseudocode of our discussion. A Sage implementation follows:
+%%
+\begin{lstlisting}
+sage: G = graphs.RandomGNP(20, 0.1)
+sage: E = G.edges(labels=False)
+sage: G = G.to_directed()
+sage: cutoff = 0.5
+sage: for u, v in E:
+...       r = random()
+...       if r < cutoff:
+...           G.delete_edge(u, v)
+...       else:
+...           G.delete_edge(v, u)
+\end{lstlisting}
+%%
+which produced the random oriented graph in
+Figure~\ref{fig:random_graphs:random_oriented_graph}.
+\end{proof}
+
+\begin{figure}[!htbp]
+\centering
+\index{oriented graph!random}
+\input{image/random-graphs/random-oriented-graph.tex}
+\caption{A random oriented graph generated using a graph in
+  $G(20,\, 0.1)$ and cutoff probability $0.5$.}
+\label{fig:random_graphs:random_oriented_graph}
+\end{figure}
+
 %% One of the first properties of random graphs which makes them so pleasant to work with is the following
 
 %% \begin{theorem}
