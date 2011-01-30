@@ -30,6 +30,31 @@ This is a list of possible enhancements to the book.
   pages     = {97--108},
 }
 
+* Search techniques in artificial intelligence. Topics for inclusion
+  might be: A* search, alpha-beta pruning, bidirectional
+  search. References for consideration:
+
+@article{HartEtAl1968,
+  author    = {Peter E. Hart and Nils J. Nilsson and Bertram Raphael},
+  title     = {A Formal Basis for the Heuristic Determination of
+               Minimum Cost Paths},
+  journal   = {IEEE Transactions on Systems Science and Cybernetics},
+  year      = {1968},
+  volume    = {4},
+  number    = {2},
+  pages     = {100--107},
+}
+
+@article{KnuthMoore1975,
+  author    = {Donald E. Knuth and Ronald W. Moore},
+  title     = {An Analysis of Alpha-Beta Pruning},
+  journal   = {Artificial Intelligence},
+  year      = {1975},
+  volume    = {6},
+  number    = {4},
+  pages     = {293--326},
+}
+
 * Other references for consideration:
 
 @article{ChartrandEtAl1988,
