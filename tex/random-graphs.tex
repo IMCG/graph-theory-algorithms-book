@@ -266,11 +266,19 @@ denoted $G(n,N)$, is a probability space over the set of undirected
 simple graphs on $n$ vertices and exactly $N$ edges. Hence $G(n,N)$
 can be considered as a collection of $\binom{\binom{n}{2}} {N}$
 undirected simple graphs on exactly $N$ edges, each such graph being
-selected with equal probability. To generate a graph in $G(n,N)$,
-start with $G$ being a graph on $n$ vertices but no edges. Then choose
-$N$ of the possible $\binom{n}{2}$ edges independently and uniformly
-at random and let the chosen edges be the edge set of $G$. Each graph
-$G \in G(n,N)$ is associated with a probability
+selected with equal probability. A note of caution is in order
+here. Numerous papers on random graphs refer to $G(n,p)$ as the
+Erd\H{o}s-R\'eyi random graph model, where in fact this binomial random
+graph model should be called the Gilbert model in honor of
+E.~N.~Gilbert who introduced~\cite{Gilbert1959} it in~1959. Whenever
+a paper makes a reference to the Erd\H{o}s-R\'eyi model, one should
+question whether the paper is referring to $G(n,p)$ or $G(n,N)$.
+
+To generate a graph in $G(n,N)$, start with $G$ being a graph on $n$
+vertices but no edges. Then choose $N$ of the possible $\binom{n}{2}$
+edges independently and uniformly at random and let the chosen edges
+be the edge set of $G$. Each graph $G \in G(n,N)$ is associated with a
+probability
 \[
 1 \left/ \binom{\binom{n}{2}} {N} \right.
 \]
