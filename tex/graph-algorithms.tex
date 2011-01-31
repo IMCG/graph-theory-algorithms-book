@@ -1213,10 +1213,7 @@ nonnegative\index{weight!nonnegative}. The term
 $s$ of a cycle\index{cycle} such that $s < 0$. Some algorithms halt
 upon detecting a negative cycle; examples of such algorithms include
 the Bellman-Ford\index{Bellman-Ford algorithm} and
-Johnson's\index{Johnson!algorithm} algorithms. See
-Yamada\index{Yamada, Takeo} and
-Kinoshita\index{Kinoshita, Harunobu}~\cite{YamadaKinoshita2002} for an
-algorithm to detect all the negative cycles in a digraph.
+Johnson's\index{Johnson!algorithm} algorithms.
 
 Algorithm~\ref{alg:graph_algorithms:generic_shortest_path_algorithm}
 is a general template for many shortest path\index{path!shortest}
@@ -3215,4 +3212,15 @@ as dumb as the next guy. \\
     $(i+1,\, j-1)$. With this extension, repeat the previous
     exercises.
   \end{enumerate}
+
+\item Let $G = (V,E)$ be a digraph with integer weight function
+  $w: E \to \Z \backslash \{0\}$, where either $w(e) > 0$ or
+  $w(e) < 0$ for each $e \in E$. Yamada\index{Yamada, Takeo} and
+  Kinoshita\index{Kinoshita, Harunobu}~\cite{YamadaKinoshita2002}
+  provide a divide-and-conquer\index{divide and conquer} algorithm to
+  enumerate all the negative\index{cycle!negative} cycles in
+  $G$. Investigate the divide and conquer technique for algorithm
+  design. Describe and provide pseudocode of the Yamada-Kinoshita
+  algorithm. Analyze its runtime complexity and prove the correctness
+  of the algorithm.
 \end{problem}
