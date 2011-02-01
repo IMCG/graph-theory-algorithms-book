@@ -51,7 +51,7 @@ Lau~\cite{Lau2007}.
 \index{algorithm!random}
 \index{simple graph!random}
 \input{algorithm/random-graphs/naive-random-Gnp.tex}
-\caption{Generate a random graph in $G(n,p)$.}
+\caption{Generate a random graph in $\cG(n,p)$.}
 \label{alg:random_graphs:generate_random_Gnp}
 \end{algorithm}
 
@@ -70,10 +70,10 @@ Fix a positive integer $n$, a probability $p$, and a vertex set
 $V = \{0, 1, \dots, n - 1\}$. The
 \emph{binomial}\index{random graph!binomial}~(or
 \emph{Bernoulli})\index{random graph!Bernoulli} random graph model,
-denoted $G(n,p)$ and introduced by Gilbert~\cite{Gilbert1959}, is
+denoted $\cG(n,p)$ and introduced by Gilbert~\cite{Gilbert1959}, is
 formally a probability\index{probability!space} space over the set of
 undirected simple graphs on $n$ vertices. If $G$ is any element of the
-probability space $G(n,p)$ and $ij$ is any edge for distinct
+probability space $\cG(n,p)$ and $ij$ is any edge for distinct
 $i,j \in V$, then $ij$ occurs as an edge of $G$ independently with
 probability $p$. In symbols, for any distinct pair $i,j \in V$ we have
 \[
@@ -82,7 +82,7 @@ probability $p$. In symbols, for any distinct pair $i,j \in V$ we have
 p
 \]
 where all such events are mutually independent. Equivalently the model
-$G(n,p)$ considers the collection of all undirected simple graphs on
+$\cG(n,p)$ considers the collection of all undirected simple graphs on
 $n$ vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
 actual edges, and an associated probability
 %%
@@ -93,11 +93,11 @@ p^m (1 - p)^{\binom{n}{2} - m}.
 %%
 Notice the latter's resemblance to the
 binomial\index{binomial!distribution} distribution. By
-$G \in G(n,p)$ we mean that $G$ is a random graph of the space
-$G(n,p)$ and having probability
-distribution $G(n,p)$.
+$G \in \cG(n,p)$ we mean that $G$ is a random graph of the space
+$\cG(n,p)$ and having probability
+distribution $\cG(n,p)$.
 
-To generate a random graph in $G(n,p)$, start with $G$ being a graph
+To generate a random graph in $\cG(n,p)$, start with $G$ being a graph
 on $n$ vertices but no edges. Consider each of the $\binom{n}{2}$
 possible edges in some order and add it independently to $G$ with
 probability $p$. See
@@ -109,13 +109,13 @@ $n$ objects. We could adapt
 Algorithm~\ref{alg:tree_data_structures:generate_all_r_combinations}
 to our needs or search for a more efficient algorithm; see
 problem~\ref{chap:random_graphs}.\ref{prob:random_graphs:quadratic_generate_random_Gnp}
-for discussion of an algorithm to generate a graph in $G(n,p)$ in
+for discussion of an algorithm to generate a graph in $\cG(n,p)$ in
 quadratic
 time. Figure~\ref{fig:random_graphs:binomial_random_graph_25_nodes}
 illustrates some graphs from $G(25,p)$ with $p = i/6$ for
 $i = 0, 1, \dots, 5$.
 
-The expected number of edges of any $G \in G(n,p)$ is
+The expected number of edges of any $G \in \cG(n,p)$ is
 \[
 \alpha
 =
@@ -145,8 +145,8 @@ given by
 where~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
 is the probability of any of these graphs being the output of the
 above procedure. Let $\kappa(n,m)$ be the number of graphs from
-$G(n,p)$ that are connected and have size $m$, and by $\Pr[G_\kappa]$
-is meant the probability that $G \in G(n,p)$ is connected. Apply
+$\cG(n,p)$ that are connected and have size $m$, and by $\Pr[G_\kappa]$
+is meant the probability that $G \in \cG(n,p)$ is connected. Apply
 expression~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
 to see that
 \[
@@ -157,9 +157,9 @@ to see that
 \]
 where $n - 1$ is the least number of edges of any undirected connected
 graph on $n$ vertices, i.e. the size of any spanning tree of a
-connected graph in $G(n,p)$. Similarly define $\Pr[\kappa_{i,j}]$ to
+connected graph in $\cG(n,p)$. Similarly define $\Pr[\kappa_{i,j}]$ to
 be the probability that two distinct vertices $i,j$ of
-$G \in G(n,p)$ are connected. Gilbert~\cite{Gilbert1959} showed that
+$G \in \cG(n,p)$ are connected. Gilbert~\cite{Gilbert1959} showed that
 as $n \to \infty$, the probabilities $\Pr[G_\kappa]$ and
 $\Pr[\kappa_{i,j}]$ approach
 \[
@@ -181,21 +181,21 @@ and
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Efficient generation of sparse $G \in G(n,p)$}
+\subsubsection{Efficient generation of sparse $G \in \cG(n,p)$}
 
 The techniques discussed so
 far~(Algorithms~\ref{alg:random_graphs:generate_random_Gnp}
 and~\ref{alg:random_graphs:quadratic_generate_random_Gnp}) for
-generating a random graph from $G(n,p)$ can be unsuitable when the
+generating a random graph from $\cG(n,p)$ can be unsuitable when the
 number of vertices $n$ is in the hundreds of thousands or millions. In
-many applications of $G(n,p)$ we are only interested in
+many applications of $\cG(n,p)$ we are only interested in
 sparse\index{sparse graph} random graphs. A linear time algorithm to
-generate a random sparse graph from $G(n,p)$ is presented in
+generate a random sparse graph from $\cG(n,p)$ is presented in
 Batagelj\index{Batagelj, Vladimir} and
 Brandes\index{Brandes, Ulrik}~\cite{BatageljBrandes2005}.
 
 The Batagelj-Brandes\index{Batagelj-Brandes algorithm} algorithm for
-generating a random sparse graph $G \in G(n,p)$ uses what is known as
+generating a random sparse graph $G \in \cG(n,p)$ uses what is known as
 a geometric method to skip over certain edges. Fix a probability
 $0 < p < 1$ that an edge will be in the resulting random sparse graph
 $G$. If $e$ is an edge of $G$, we can consider the events leading up
@@ -248,7 +248,7 @@ size, respectively, of the resulting graph.
 \index{Batagelj-Brandes algorithm}
 \index{simple graph!random}
 \input{algorithm/random-graphs/linear-random-sparse-Gnp.tex}
-\caption{Linear generation of a random sparse graph in $G(n,p)$.}
+\caption{Linear generation of a random sparse graph in $\cG(n,p)$.}
 \label{alg:random_graphs:linear_generate_random_sparse_Gnp}
 \end{algorithm}
 
@@ -262,22 +262,22 @@ Let $N$ be a fixed nonnegative integer. The
 \emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1959,ErdosRenyi1960}
 (or\index{random graph!Erd\H{o}s-R\'enyi}
 \emph{uniform})\index{random graph!uniform} random graph model,
-denoted $G(n,N)$, is a probability space over the set of undirected
-simple graphs on $n$ vertices and exactly $N$ edges. Hence $G(n,N)$
+denoted $\cG(n,N)$, is a probability space over the set of undirected
+simple graphs on $n$ vertices and exactly $N$ edges. Hence $\cG(n,N)$
 can be considered as a collection of $\binom{\binom{n}{2}} {N}$
 undirected simple graphs on exactly $N$ edges, each such graph being
 selected with equal probability. A note of caution is in order
-here. Numerous papers on random graphs refer to $G(n,p)$ as the
+here. Numerous papers on random graphs refer to $\cG(n,p)$ as the
 Erd\H{o}s-R\'enyi random graph model, where in fact this binomial
 random graph model should be called the Gilbert model in honor of
 E.~N.~Gilbert who introduced~\cite{Gilbert1959} it in~1959. Whenever
 a paper makes a reference to the Erd\H{o}s-R\'enyi model, one should
-question whether the paper is referring to $G(n,p)$ or $G(n,N)$.
+question whether the paper is referring to $\cG(n,p)$ or $\cG(n,N)$.
 
-To generate a graph in $G(n,N)$, start with $G$ being a graph on $n$
+To generate a graph in $\cG(n,N)$, start with $G$ being a graph on $n$
 vertices but no edges. Then choose $N$ of the possible $\binom{n}{2}$
 edges independently and uniformly at random and let the chosen edges
-be the edge set of $G$. Each graph $G \in G(n,N)$ is associated with a
+be the edge set of $G$. Each graph $G \in \cG(n,N)$ is associated with a
 probability
 \[
 1 \left/ \binom{\binom{n}{2}} {N} \right.
@@ -295,7 +295,7 @@ a straightforward translation of the above procedure into pseudocode.
 \index{algorithm!random}
 \index{simple graph!random}
 \input{algorithm/random-graphs/linear-random-GnN.tex}
-\caption{Generation of random graph in $G(n,N)$.}
+\caption{Generation of random graph in $\cG(n,N)$.}
 \label{alg:random_graphs:linear_generate_random_GnN}
 \end{algorithm}
 
@@ -362,7 +362,7 @@ Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
 \index{algorithm!random}
 \index{simple graph!random}
 \input{algorithm/random-graphs/expected-linear-random-GnN.tex}
-\caption{Generation of random graph in $G(n,N)$ in expected linear time.}
+\caption{Generation of random graph in $\cG(n,N)$ in expected linear time.}
 \label{alg:random_graphs:expected_linear_generate_random_GnN}
 \end{algorithm}
 
@@ -371,7 +371,7 @@ Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
 \index{oriented graph}
 \index{oriented graph!random}
 \input{algorithm/random-graphs/random-oriented-graph-Gnp.tex}
-\caption{Random oriented graph via $G(n,p)$.}
+\caption{Random oriented graph via $\cG(n,p)$.}
 \label{alg:random_graphs:random_oriented_graph_Gnp}
 \end{algorithm}
 
@@ -397,7 +397,7 @@ $D = (V,E)$, we have various possibilities:
 %%
 Let $n > 0$ be the number of vertices in $D$ and let
 $0 < p < 1$. Generate a random oriented graph as follows. First we
-generate a binomial random graph $G \in G(n,p)$ where $G$ is simple
+generate a binomial random graph $G \in \cG(n,p)$ where $G$ is simple
 and undirected. Then we consider the digraph version of $G$ and
 proceed to randomly prune either $uv$ or $vu$ from $G$, for each
 distinct pair of vertices $u,v$. Refer to
@@ -580,7 +580,7 @@ another $u \in V$ different from $v$. With probability $p$, delete the
 edge $e$ and add the edge $vu$. The rewiring must produce a
 simple\index{simple graph} graph with the same order and size as
 $G$. As $p \to 1$, the graph $G$ goes from $k$-circulant to exhibiting
-properties of $G(n,p)$\index{random graph!binomial}. Small-world
+properties of $\cG(n,p)$\index{random graph!binomial}. Small-world
 networks are intermediate between $k$-circulant and binomial random
 graphs. The Watts-Strogatz model is said to provide a procedure for
 interpolating between the latter two types of graphs.
@@ -623,7 +623,7 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
 \index{algorithm!random}
 \index{simple graph!random}
 \input{algorithm/random-graphs/quadratic-random-Gnp.tex}
-\caption{Quadratic generation of a random graph in $G(n,p)$.}
+\caption{Quadratic generation of a random graph in $\cG(n,p)$.}
 \label{alg:random_graphs:quadratic_generate_random_Gnp}
 \end{algorithm}
 
@@ -631,17 +631,17 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
 \index{algorithm!random}
 \index{simple graph!random}
 \input{algorithm/random-graphs/Briggs-random-GnN.tex}
-\caption{Briggs' algorithm for random graph in $G(n,N)$.}
+\caption{Briggs' algorithm for random graph in $\cG(n,N)$.}
 \label{alg:random_graphs:Briggs_random_GnN}
 \end{algorithm}
 
 \item\label{prob:random_graphs:quadratic_generate_random_Gnp}
   Algorithm~\ref{alg:random_graphs:generate_random_Gnp} can be
   considered as a template for generating random graphs in
-  $G(n,p)$. The procedure does not specify how to generate all the
+  $\cG(n,p)$. The procedure does not specify how to generate all the
   $2$-combinations of a set of $n > 1$ objects. Here we discuss how to
   construct all such $2$-combinations and derive a quadratic time
-  algorithm for generating random graphs in $G(n,p)$.
+  algorithm for generating random graphs in $\cG(n,p)$.
   %%
   \begin{enumerate}[(a)]
   \item Consider a vertex set $V = \{0, 1, \dots, n - 1\}$ with at
@@ -679,7 +679,7 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
 
 \item In~2006, Keith M. Briggs\index{Briggs!Keith M.}
   provided~\cite{Briggs2011} an algorithm that generates a random
-  graph in $G(n,N)$, inspired by Knuth's\index{Knuth!Algorithm~S}
+  graph in $\cG(n,N)$, inspired by Knuth's\index{Knuth!Algorithm~S}
   Algorithm~S~(Selection sampling technique) as found on page~142 of
   Knuth\index{Knuth!Donald E.}~\cite{Knuth1998b}. Pseudocode of
   Briggs' algorithm is presented in
@@ -724,7 +724,7 @@ and Albert and Barab{\'a}si~\cite{AlbertBarabasi2002}.
 
 \item Diego Garlaschelli\index{Garlaschelli, Diego}
   introduced~\cite{Garlaschelli2009} in~2009 a weighted version of the
-  $G(n,p)$ model, called the weighted\index{random graph!weighted}
+  $\cG(n,p)$ model, called the weighted\index{random graph!weighted}
   random graph model. Denote by $G_W(n,p)$ the weighted random graph
   model.
   %%
