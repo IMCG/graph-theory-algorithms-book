@@ -86,3 +86,13 @@ This is a list of possible enhancements to the book.
   number    = {4},
   pages     = {314--319},
 }
+
+@article{KimVu2006,
+  author    = {Jeong Han Kim and Van H. Vu},
+  title     = {Generating random regular graphs},
+  journal   = {Combinatorica},
+  year      = {2006},
+  volume    = {26},
+  number    = {6},
+  pages     = {683--708},
+}
