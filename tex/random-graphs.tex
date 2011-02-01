@@ -566,6 +566,25 @@ and verified for many real-world networks including
   network~\cite{WattsStrogatz1998,WhiteEtAl1986}.
 \end{itemize}
 
+Watts and Strogatz~\cite{Watts1999a,Watts1999b,WattsStrogatz1998}
+proposed a network model that exhibits the small-world effect. Let $n$
+and $k$ be positive integers such that $n \gg k \gg \ln n \gg 1$~(in
+particular, $0 < k < n/2$), $k$ being even, and consider a probability
+$0 < p < 1$. Starting from an undirected
+$k$-circulant\index{regular graph!$k$-circulant} graph $G = (V,E)$ on
+$n$ vertices, the Watts-Strogatz\index{Watts-Strogatz model} model
+proceeds to rewire each edge with probability $p$. The rewiring
+procedure works as follows. Let $V$ be uniformly distributed. For each
+$v \in V$, let $e \in E$ be an edge having $v$ as an endpoint. Choose
+another $u \in V$ different from $v$. With probability $p$, delete the
+edge $e$ and add the edge $vu$. The rewiring must produce a
+simple\index{simple graph} graph with the same order and size as
+$G$. As $p \to 1$, the graph $G$ goes from $k$-circulant to exhibiting
+properties of $G(n,p)$\index{random graph!binomial}. Small-world
+networks are intermediate between $k$-circulant and binomial random
+graphs. The Watts-Strogatz model is said to provide a procedure for
+interpolating between the latter two types of graphs.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
