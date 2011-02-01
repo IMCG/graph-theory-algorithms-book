@@ -3736,4 +3736,54 @@ problem with a solution---you'll hatch out dozens. \\
 
   \item The set of final states $F \subseteq Q$.
   \end{enumerate}
+
+\begin{figure}[!htbp]
+\centering
+\index{regular graph!$r$-regular}
+\input{image/introduction/various-r-regular-graphs.tex}
+\caption{Various $3$-regular graphs on $10$ vertices.}
+\label{fig:introduction:3_regular_graphs_10_vertices}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{regular graph!$k$-circulant}
+\input{image/introduction/k-circulant-graphs.tex}
+\caption{Various $k$-circulant graphs for $k = 4, 6, 8$.}
+\label{fig:introduction:k_circulant_graphs}
+\end{figure}
+
+\item The cycle\index{cycle graph} graph $C_n$ is a $2$-regular
+  graph. If $2 < r < n/2$, unlike the cycle graph there are various
+  realizations of an $r$-regular graph; see
+  Figure~\ref{fig:introduction:3_regular_graphs_10_vertices} for the
+  case of $r = 3$ and $n = 10$. The
+  $k$-circulant\index{regular graph!$k$-circulant} graph on $n$
+  vertices can be considered as an intermediate graph between $C_n$
+  and a $k$-regular graph. Let $k$ and $n$ be positive integers
+  satisfying $k < n / 2$ with $k$ being even. Suppose $G = (V,E)$ is a
+  simple undirected graph with vertex set
+  $V = \{0, 1, \dots, n - 1\}$. Define the edge set of $G$ as
+  follows. Each $i \in V$ is incident with each of $i + j \bmod n$ and
+  $i - j \bmod n$ for $j \in \{1, 2, \dots, k/2\}$. With the latter
+  edge set, $G$ is said to be a $k$-circulant graph. Refer to
+  Figure~\ref{fig:introduction:k_circulant_graphs} for examples of
+  $k$-circulant graphs.
+  %%
+  \begin{enumerate}[(a)]
+  \item Describe and provide pseudocode of an algorithm to construct a
+    $k$-circulant graph on $n$ vertices.
+
+  \item Show that the cycle graph $C_n$ is $2$-circulant.
+
+  \item Show that the sum of all degrees of a $k$-circulant graph on
+    $n$ vertices is $nk$.
+
+  \item Show that a $k$-circulant graph is $k$-regular.
+
+  \item Let $\cC$ be the collection of all $k$-regular graphs on $n$
+    vertices. If each $k$-regular graph from $\cC$ is equally likely
+    to be chosen, what is the probability that a $k$-circulant graph
+    be chosen from $\cC$?
+  \end{enumerate}
 \end{problem}
