@@ -585,6 +585,22 @@ networks are intermediate between $k$-circulant and binomial random
 graphs. The Watts-Strogatz model is said to provide a procedure for
 interpolating between the latter two types of graphs.
 
+The last paragraph contains an algorithm for rewiring edges of a
+graph. While the algorithm is simple, in practice it potentially skips
+over a number of vertices to be considered for rewiring. If
+$G = (V,E)$ is a $k$-circulant graph on $n$ vertices and $p$ is the
+rewiring probability, the candidate vertices to be rewired follow a
+geometric distribution with parameter $p$. This geometric trick,
+essentially the same speed-up technique used by the Batagelj-Brandes
+Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp},
+can be used to speed up the rewiring algorithm. To elaborate, suppose
+$G$ has vertex set $V = \{0, 1, \dots, n-1\}$ and make the assignment
+$v \assign -1$. If $r$ is chosen uniformly at random from $[0,1)$,
+then the vertex to be rewired is given by
+\[
+v \assign v + 1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor.
+\]
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
