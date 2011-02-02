@@ -1154,9 +1154,9 @@ E.~W.~Dijkstra\index{Dijkstra!E. W.}~\cite{Dijkstra1959}. However,
 Prim\index{Prim!R. C.} was the first to present an implementation
 that runs in time $O(n^2)$. Using $2$-heaps\index{heap!$2$-heap}, the
 runtime can be reduced~\cite{KershenbaumVanSlyke1972} to
-$O(m \cdot \log n)$. With a Fibonacci\index{heap!Fibonacci} heap
+$O(m \log n)$. With a Fibonacci\index{heap!Fibonacci} heap
 implementation~\cite{FredmanTarjan1984,FredmanTarjan1987}, the runtime
-can be reduced even further to $O(m + n \cdot \log n)$.
+can be reduced even further to $O(m + n \log n)$.
 
 Pseudocode of Prim's\index{Prim!algorithm} algorithm is given in
 Algorithm~\ref{alg:trees_forests:prim}. For each $v \in V$, $\cost[v]$
