@@ -246,6 +246,35 @@ of the same graph.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Edge lists}
+\label{list!edge}
+
+Lists can also be used to store the edges of a graph. To create an
+edge list $L$ for a graph $G$, if $uv$ is an edge of $G$ then we let
+$uv$ or the ordered pair $(u,v)$ be an element of $L$. In general, let
+\[
+v_0 v_1,\, v_2 v_3,\, \dots,\, v_k v_{k+1}
+\]
+be all the edges of $G$, where $k$ is even. Then the edge list of $G$
+is given by
+\[
+L
+=
+[v_0 v_1,\, v_2 v_3,\, \dots,\, v_k v_{k+1}].
+\]
+In some cases, it is desirable to have the edges of $G$ be in
+contiguous\index{list!contiguous edge} list representation. If the
+edge list $L$ of $G$ is as given above, the contiguous edge list
+representation of the edges of $G$ is
+\[
+[v_0,\, v_1,\, v_2,\, v_3,\, \dots,\, v_k,\, v_{k+1}].
+\]
+That is, if $0 \leq i \leq k$ is even then $v_i v_{i+1}$ is an edge of
+$G$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{The \graphsix format}
 \label{sec:graph_algorithms:graph6_format}
 
