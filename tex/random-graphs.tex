@@ -600,6 +600,24 @@ then the vertex to be rewired is given by
 \[
 v \assign v + 1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor.
 \]
+The above geometric method is incorporated into
+Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph} to
+generate a Watts-Strogatz network in worst-case runtime
+$O(nk + m)$, where $n$ and $k$ are as per the input of the algorithm
+and $m$ is the size of the $k$-circulant graph on $n$ vertices.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{complete graph}
+\index{list!contiguous edge}
+\index{regular graph!$k$-circulant}
+\index{small-world!algorithm}
+\index{small-world!network}
+\index{Watts-Strogatz model}
+\input{algorithm/random-graphs/Watts-Strogatz-model.tex}
+\caption{Watts-Strogatz network model.}
+\label{alg:random_graphs:generate_Watts_Strogatz_graph}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
