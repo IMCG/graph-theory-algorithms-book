@@ -612,7 +612,10 @@ The above geometric method is incorporated into
 Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph} to
 generate a Watts-Strogatz network in worst-case runtime
 $O(nk + m)$, where $n$ and $k$ are as per the input of the algorithm
-and $m$ is the size of the $k$-circulant graph on $n$ vertices.
+and $m$ is the size of the $k$-circulant graph on $n$ vertices. Note
+that lines~\ref{alg:Watts_Strogatz:even_index}
+to~\ref{alg:Watts_Strogatz:choose_vertex_odd_index} are where we avoid
+self-loops and multiple edges.
 
 \begin{algorithm}[!htbp]
 \index{algorithm!random}

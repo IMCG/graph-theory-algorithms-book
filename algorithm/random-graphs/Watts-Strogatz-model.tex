@@ -31,6 +31,15 @@ $v \assign 1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor$\;
 $E \assign$ contiguous edge list of $k$-circulant graph on $n$ vertices\;
 \While{$v \leq M$}{
   $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\;
+  \eIf{\rm $v-1$ is even~\nllabel{alg:Watts_Strogatz:even_index}}{
+    \While{\rm $E[v] = u$ or $(u, E[v]) \in E$}{
+      $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\;
+    }
+  }{
+    \While{\rm $E[v-2] = u$ or $(E[v-2], u) \in E$}{
+      $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$~\nllabel{alg:Watts_Strogatz:choose_vertex_odd_index}\;
+    }
+  }
   $E[v-1] \assign u$\;
   $r \assign$ draw uniformly at random from $[0,1)$\;
   $v \assign v + 1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor$\;
