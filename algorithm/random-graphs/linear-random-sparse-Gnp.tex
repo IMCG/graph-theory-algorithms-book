@@ -26,8 +26,8 @@ $G \assign \overline{K_n}$\;
 $u \assign 1$\;
 $v \assign -1$\;
 \While{$u < n$}{
-  $r \assign$ draw uniformly at random from $[0,1)$\;
-  $v \assign v + 1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor$\;
+  $r \assign$ draw uniformly at random from interval $(0,1)$\;
+  $v \assign v + 1 + \lfloor \ln(1 - r) / \ln(1 - p) \rfloor$\;
   \While{\rm $v \geq u$ and $u < n$}{
     $v \assign v - u$\;
     $u \assign u + 1$\;
