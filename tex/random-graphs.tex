@@ -225,14 +225,55 @@ for integers $k \geq 1$, where
 =
 1.
 \]
-In other words, waiting times are geometrically distributed. If
-$r$ is chosen uniformly at random from the interval $[0,1)$,
-Batagelj and Brandes\index{Batagelj-Brandes algorithm} show that we
-can choose $k$ to be
+In other words, waiting times are geometrically distributed.
+
+Suppose we want to generate a random number from a geometric
+distribution, i.e. we want to simulate $X$ such that
+\[
+\Pr[X = k]
+=
+p (1 - p)^{k-1},
+\qquad
+k = 1, 2, 3, \dots
+\]
+Note that
+\[
+\sum_{k=1}^{\ell} \Pr[X=k]
+=
+1 - \Pr[X > \ell - 1]
+=
+1 - (1 - p)^{\ell - 1}.
+\]
+In other words, we can simulate a geometric random variable by
+generating $r$ uniformly at random from the interval $(0,1)$ and set
+$X$ to that value of $k$ for which
+\[
+1 - (1 - p)^{k-1} < r < 1 - (1 - p)^k
+\]
+or equivalently for which
+\[
+(1 - p)^k < 1 - r < (1 - p)^{k-1}
+\]
+where $1 - r$ and $r$ are both uniformly distributed. Thus we can
+define $X$ by
+%%
+\begin{align*}
+X
+&=
+\min\{k \mid (1 - p)^k < 1 - r\} \\[4pt]
+&=
+\min\left\{
+  k \;\left|\; k > \frac{\ln(1 - r)} {\ln(1 - p)} \right.
+\right\} \\[4pt]
+&=
+1 + \left\lfloor \frac{\ln(1 - r)} {\ln(1 - p)} \right\rfloor.
+\end{align*}
+%%
+That is, we can choose $k$ to be
 \[
 k
 =
-1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor
+1 + \left\lfloor \frac{\ln(1 - r)} {\ln(1 - p)} \right\rfloor
 \]
 which is used as a basis of
 Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp}. In
