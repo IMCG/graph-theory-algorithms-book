@@ -677,6 +677,27 @@ C(G)
 \label{fig:random_graphs:neighbor_graph}
 \end{figure}
 
+Consider the case where we have a $k$-circulant graph
+$G = (V,E)$ on $n$ vertices and a rewiring probability $p = 0$. That
+is, we do not rewire any edge of $G$. Each vertex of $G$ has degree
+$k$. Let  $k' = k/2$. Then the $k$ neighbors of each vertex in $G$ has
+$3k' (k' - 1) / 2$ edges between them, i.e. each neighbor graph
+$\cN_i$ has size $3k' (k' - 1) / 2$. Then the clustering coefficient
+of $G$ is
+\[
+\frac{3(k' - 1)} {2(2k' - 1)}.
+\]
+When the rewiring probability is $p > 0$, Barrat and
+Weigt~\cite{BarratWeigt2000} showed that the clustering coefficient of
+any graph $G'$ in the Watts-Strogatz network model~(see
+Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph}) can
+be approximated by
+\[
+C(G')
+\approx
+\frac{3(k' - 1)} {2(2k' - 1)} (1 - p)^3.
+\]
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
