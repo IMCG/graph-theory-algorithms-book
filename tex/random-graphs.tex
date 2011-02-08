@@ -756,6 +756,18 @@ characteristic path length can be expressed as
 %%
 which requires summing $\frac{n(n-1)}{2}$ distance values.
 
+Let $G = (V,E)$ be a Watts-Strogatz network with $n = |V|$. Set
+$k' = k/2$, where $k$ is as per
+Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph}. As
+the rewiring probability $p \to 0$, the average path length tends to
+\[
+\ell
+\to
+\frac{n}{4k'}
+=
+\frac{n}{2k}.
+\]
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
