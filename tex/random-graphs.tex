@@ -651,10 +651,10 @@ essentially the same speed-up technique used by the Batagelj-Brandes
 Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp},
 can be used to speed up the rewiring algorithm. To elaborate, suppose
 $G$ has vertex set $V = \{0, 1, \dots, n-1\}$. If $r$ is chosen
-uniformly at random from $[0,1)$, the index of the vertex to be
-rewired can be obtained from
+uniformly at random from the interval $(0,1)$, the index of the vertex
+to be rewired can be obtained from
 \[
-1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor.
+1 + \left\lfloor \frac{\ln(1 - r)} {\ln(1 - p)} \right\rfloor.
 \]
 The above geometric method is incorporated into
 Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph} to
