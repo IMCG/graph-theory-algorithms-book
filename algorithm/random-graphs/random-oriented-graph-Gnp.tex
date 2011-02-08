@@ -26,9 +26,9 @@
 $G \assign$ random graph in $G(n,p)$ as per Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp}\;
 $E \assign$ edge set of $G$\;
 $G \assign$ directed version of $G$\;
-$\MyCutOff \assign$ draw uniformly at random from $[0,1)$\;
+$\MyCutOff \assign$ draw uniformly at random from $(0,1)$\;
 \For{\rm each edge $uv \in E$}{
-  $r \assign$ draw uniformly at random from $[0,1)$\;
+  $r \assign$ draw uniformly at random from $(0,1)$\;
   \eIf{$r < \MyCutOff$}{
     remove $uv$ from $G$\;
   }{
