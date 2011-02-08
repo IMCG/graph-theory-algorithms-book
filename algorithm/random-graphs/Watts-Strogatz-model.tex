@@ -26,8 +26,8 @@
 %%
 %% algorithm body
 $M \assign nk$~\tcc*[f]{sum of all vertex degrees = twice number of edges}\;
-$r \assign$ draw uniformly at random from $[0,1)$\;
-$v \assign 1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor$\;
+$r \assign$ draw uniformly at random from interval $(0,1)$\;
+$v \assign 1 + \lfloor \ln(1 - r) / \ln(1 - p) \rfloor$\;
 $E \assign$ contiguous edge list of $k$-circulant graph on $n$ vertices\;
 \While{$v \leq M$}{
   $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\;
@@ -41,8 +41,8 @@ $E \assign$ contiguous edge list of $k$-circulant graph on $n$ vertices\;
     }
   }
   $E[v-1] \assign u$\;
-  $r \assign$ draw uniformly at random from $[0,1)$\;
-  $v \assign v + 1 + \lfloor \log(1 - r) / \log(1 - p) \rfloor$\;
+  $r \assign$ draw uniformly at random from interval $(0,1)$\;
+  $v \assign v + 1 + \lfloor \ln(1 - r) / \ln(1 - p) \rfloor$\;
 }
 $G \assign \overline{K_n}$\;
 $\ell \assign |E|$\;
