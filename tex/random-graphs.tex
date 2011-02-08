@@ -228,7 +228,8 @@ for integers $k \geq 1$, where
 In other words, waiting times are
 geometrically\index{distribution!geometric} distributed.
 
-Suppose we want to generate a random number from a
+Suppose we want to generate a random
+number\index{pseudorandom number} from a
 geometric\index{distribution!geometric} distribution, i.e. we want to
 simulate $X$ such that
 \[
@@ -315,9 +316,10 @@ selected with equal probability. A note of caution is in order
 here. Numerous papers on random graphs refer to $\cG(n,p)$ as the
 Erd\H{o}s-R\'enyi random graph model, where in fact this binomial
 random graph model should be called the Gilbert model in honor of
-E.~N.~Gilbert who introduced~\cite{Gilbert1959} it in~1959. Whenever
-a paper makes a reference to the Erd\H{o}s-R\'enyi model, one should
-question whether the paper is referring to $\cG(n,p)$ or $\cG(n,N)$.
+E.~N.~Gilbert\index{Gilbert, E.~N.} who introduced~\cite{Gilbert1959}
+it in~1959. Whenever a paper makes a reference to the
+Erd\H{o}s-R\'enyi model, one should question whether the paper is
+referring to $\cG(n,p)$ or $\cG(n,N)$.
 
 To generate a graph in $\cG(n,N)$, start with $G$ being a graph on $n$
 vertices but no edges. Then choose $N$ of the possible $\binom{n}{2}$
@@ -346,9 +348,10 @@ a straightforward translation of the above procedure into pseudocode.
 
 The runtime of
 Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN} is
-probabilistic and can be analyzed via the geometric distribution. If
-$i$ is the number of edges chosen so far, then the probability of
-choosing a new edge in the next step is
+probabilistic and can be analyzed via the
+geometric\index{distribution!geometric} distribution. If $i$ is the
+number of edges chosen so far, then the probability of choosing a new
+edge in the next step is
 \[
 \frac{\binom{n}{2} - i} {\binom{n}{2}}.
 \]
