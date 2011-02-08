@@ -709,19 +709,48 @@ computing the distance between each distinct pair of vertices, we
 should avoid double counting by computing $d_{ij}$ for $i < j$. Then
 the characteristic path length of $G$ is defined by
 %%
-\begin{align*}
+\begin{equation}
+\label{eqn:random_graphs:define_characteristic_path_length}
+\begin{aligned}
 \ell(G)
 &=
 \frac{1}{n(n-1)/2} \cdot \frac{1}{2} \sum_{i \neq j} d_{ij} \\[4pt]
 &=
-\frac{2}{n(n-1)} \cdot \frac{1}{2} \sum_{i \neq j} d_{ij} \\[4pt]
-&=
 \frac{1}{n(n-1)} \sum_{i \neq j} d_{ij}
-\end{align*}
+\end{aligned}
+\end{equation}
 %%
 which is averaged over all possible pairs of distinct vertices,
 i.e. the number of edges in the complete\index{complete graph} graph
 $K_n$.
+
+It is inefficient to compute the characteristic path length via
+equation~\eqref{eqn:random_graphs:define_characteristic_path_length}
+because we would effectively sum $n(n - 1)$ distance values. As $G$ is
+undirected, note that
+\[
+\frac{1}{2} \sum_{i \neq j} d_{ij}
+=
+\sum_{i < j} d_{ij}
+=
+\sum_{i > j} d_{ij}.
+\]
+The latter equation holds for the following reason. Let $D = [d_{ij}]$
+be a matrix of distances for $G$, where $i$ is the row index, $j$ is
+the column index, and $d_{ij}$ is the distance from $i$ to $j$. The
+required sum of distances can be obtained by summing all entries
+above~(or below) the main diagonal of $D$. Therefore the
+characteristic path length can be expressed as
+%%
+\begin{align*}
+\ell(G)
+&=
+\frac{2}{n(n-1)} \sum_{i < j} d_{ij} \\[4pt]
+&=
+\frac{2}{n(n-1)} \sum_{i > j} d_{ij}
+\end{align*}
+%%
+which requires summing $\frac{n(n-1)}{2}$ distance values.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
