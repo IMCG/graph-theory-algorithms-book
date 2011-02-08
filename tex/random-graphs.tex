@@ -854,6 +854,70 @@ C(G')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Degree distribution}
+
+For a Watts-Strogatz network without rewiring, each vertex has the
+same degree $k$. It easily follows that for each vertex $i$, we have
+the degree distribution
+\[
+\Pr[\deg(i) = j]
+=
+\begin{cases}
+1, & \text{if $j = k$}, \\[4pt]
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+A rewiring probability $p > 0$ introduces disorder in the network and
+broadens the degree distribution, while the expected degree is $k$. A
+$k$-circulant graph on $n$ vertices has $nk / 2$ edges. With the
+rewiring probability $p > 0$, a total of $pnk / 2$ edges would be
+rewired. However note that only one endpoint of an edge is rewired,
+thus after the rewiring process the degree of any vertex $v$ is
+$\deg(v) \geq k/2$. Therefore with $ k > 2$, a Watts-Strogatz network
+has no isolated vertices.
+
+For $p > 0$, Barrat and Weigt~\cite{BarratWeigt2000} showed that the
+degree of a vertex $v$ can be written as $\deg(v) = k/2 + n_i$ with
+$n_i \geq 0$, where $n_i$ can be divided into two parts $\alpha$ and
+$\beta$ as follows. First $\alpha \leq k/2$ edges are left intact
+after the rewiring process, the probability of this occurring is
+$1 - p$ for each edge. Second $\beta = n_i - \alpha$ edges have been
+rewired towards $i$, each with probability $1/n$. The probability
+distribution of $\alpha$ is
+\[
+P_1(\alpha)
+=
+\binom{k/2}{\alpha} (1 - p)^\alpha p^{k/2 - \alpha}
+\]
+and the probability distribution of $\beta$ is
+\[
+P_2(\beta)
+=
+\binom{pnk/2}{\beta} \left( \frac{1}{n} \right)^\beta
+\left( 1 - \frac{1}{n} \right)^{pnk/2 - \beta}
+\]
+where
+\[
+P_2(\beta)
+\to
+\frac{(pk/2)^\beta}{\beta!} \exp(-pk/2)
+\]
+for large $n$. Combine the above two factors to obtain the degree
+distribution
+\[
+\Pr[\deg(v) = \kappa]
+=
+\sum_{i=0}^{\min\{\kappa - k/2,\, k/2\}}
+\binom{k/2}{i} (1 - p)^i p^{k/2 - i}
+\frac{(pk/2)^{\kappa - k/2 - i}} {(\kappa - k/2 - i)!}
+\exp(-pk/2)
+\]
+for $\kappa \geq k/2$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Scale-free networks}
 
 The power-law degree distribution model of Barab{\'a}si and
