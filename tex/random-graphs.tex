@@ -98,11 +98,12 @@ $\cG(n,p)$ and having probability
 distribution $\cG(n,p)$.
 
 To generate a random graph in $\cG(n,p)$, start with $G$ being a graph
-on $n$ vertices but no edges. Consider each of the $\binom{n}{2}$
-possible edges in some order and add it independently to $G$ with
-probability $p$. See
-Algorithm~\ref{alg:random_graphs:generate_random_Gnp} for pseudocode
-of the procedure. The runtime of
+on $n$ vertices but no edges. That is, initially $G$ is
+$\overline{K_n}$, the complement of the complete\index{complete graph}
+graph on $n$ vertices. Consider each of the $\binom{n}{2}$ possible
+edges in some order and add it independently to $G$ with probability
+$p$. See Algorithm~\ref{alg:random_graphs:generate_random_Gnp} for
+pseudocode of the procedure. The runtime of
 Algorithm~\ref{alg:random_graphs:generate_random_Gnp} depends on an
 efficient algorithm for generating all $2$-combinations of a set of
 $n$ objects. We could adapt
@@ -157,17 +158,17 @@ to see that
 \]
 where $n - 1$ is the least number of edges of any undirected connected
 graph on $n$ vertices, i.e. the size of any spanning tree of a
-connected graph in $\cG(n,p)$. Similarly define $\Pr[\kappa_{i,j}]$ to
+connected graph in $\cG(n,p)$. Similarly define $\Pr[\kappa_{ij}]$ to
 be the probability that two distinct vertices $i,j$ of
 $G \in \cG(n,p)$ are connected. Gilbert~\cite{Gilbert1959} showed that
 as $n \to \infty$, the probabilities $\Pr[G_\kappa]$ and
-$\Pr[\kappa_{i,j}]$ approach
+$\Pr[\kappa_{ij}]$ approach
 \[
 \Pr[G_\kappa] \to 1 - n(1 - p)^{n-1}
 \]
 and
 \[
-\Pr[\kappa_{i,j}] \to 1 - 2(1 - p)^{n-1}.
+\Pr[\kappa_{ij}] \to 1 - 2(1 - p)^{n-1}.
 \]
 
 \begin{figure}[!htbp]
