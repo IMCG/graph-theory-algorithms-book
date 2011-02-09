@@ -1,0 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tikzset{every mark/.append style={scale=0.5}}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[%
+  enlargelimits=false,%
+  xlabel=\text{degree},%
+  ylabel=\text{probability}%
+]
+\addplot+[sharp plot] coordinates
+{
+  (1, 0.248127909330093)      (2, 0.335154826958103)
+  (3, 0.214531471362071)      (4, 0.0811576603926327)
+  (5, 0.0510018214936247)     (6, 0.0277271807326453)
+  (7, 0.0170006071645416)     (8, 0.00930985630439182)
+  (9, 0.00546448087431694)    (10, 0.00526209269378668)
+  (11, 0.00222626998583283)   (12, 0.00101194090265129)
+  (13, 0.00101194090265129)   (14, 0.000607164541590771)
+  (18, 0.000202388180530257)  (19, 0.000202388180530257)
+};
+\end{axis}
+\end{tikzpicture}
