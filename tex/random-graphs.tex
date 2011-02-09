@@ -600,8 +600,11 @@ must be passed to people whom the recipients knew on a first-name
 basis. Milgram found that on average six steps were required for a
 letter to reach its target recipient, a number now immortalized in the
 phrase\index{six degrees of separation} ``six degrees of
-separation''~\cite{Guare1990}. The small-world effect has been studied
-and verified for many real-world networks including
+separation''~\cite{Guare1990}.
+Figure~\ref{fig:random_graphs:Milgram_small_world_experiment_results}
+plots results of an experimental study of the small-world problem as
+reported in~\cite{TraversMilgram1969}. The small-world effect has been
+studied and verified for many real-world networks including
 %%
 \begin{itemize}
 \item social\index{network!social}: collaboration network of actors in
@@ -625,6 +628,20 @@ and verified for many real-world networks including
   web~\cite{HuxhamEtAl1996,Martinez1991}, neural
   network~\cite{WattsStrogatz1998,WhiteEtAl1986}.
 \end{itemize}
+
+\begin{figure}[!htbp]
+\centering
+\index{frequency distribution}
+\index{small-world!experimental results}
+\input{image/random-graphs/Milgram-small-world-experiment-results.tex}
+\caption{Frequency distribution of the number of intermediaries
+  required for letters to reach their intended addressees. The
+  distribution has a mean of $5.3$, interpreted as the average number
+  of intermediaries required for a letter to reach its intended
+  destination. The plot is adapted from Figure~1, page 432 in Travers
+  and Milgram~\cite{TraversMilgram1969}.}
+\label{fig:random_graphs:Milgram_small_world_experiment_results}
+\end{figure}
 
 Watts\index{Watts, Duncan J.} and\index{Strogatz, Steven H.}
 Strogatz~\cite{Watts1999a,Watts1999b,WattsStrogatz1998}
