@@ -1,0 +1,25 @@
+Western States Power Grid
+
+Compiled by Duncan Watts and Steven Strogatz
+
+Downloaded from http://www-personal.umich.edu/~mejn/netdata/ on 09th
+February 2011.
+
+The file power.gml contains an undirected unweighted representation of the
+topology of the Western States Power Grid of the United States, compiled by
+Duncan Watts and Steven Strogatz.  The data are from the web site of
+Prof. Duncan Watts at Columbia University,
+http://cdg.columbia.edu/cdg/datasets.  Node IDs are the same as those used
+by Prof. Watts.
+
+These data can be cited as:
+
+@article{WattsStrogatz1998,
+  author    = {Duncan J. Watts and Steven H. Strogatz},
+  title     = {Collective Dynamics of `Small-World' Networks},
+  journal   = {Nature},
+  year      = {1998},
+  volume    = {393},
+  number    = {6684},
+  pages     = {440--442},
+}
