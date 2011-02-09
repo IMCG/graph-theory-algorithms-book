@@ -628,23 +628,36 @@ and verified for many real-world networks including
 
 Watts\index{Watts, Duncan J.} and\index{Strogatz, Steven H.}
 Strogatz~\cite{Watts1999a,Watts1999b,WattsStrogatz1998}
-proposed a network model that exhibits the small-world effect. Let $n$
-and $k$ be positive integers such that $n \gg k \gg \ln n \gg 1$~(in
-particular, $0 < k < n/2$), $k$ being even, and consider a probability
-$0 < p < 1$. Starting from an undirected
-$k$-circulant\index{regular graph!$k$-circulant} graph $G = (V,E)$ on
-$n$ vertices, the Watts-Strogatz\index{Watts-Strogatz model} model
-proceeds to rewire each edge with probability $p$. The rewiring
-procedure works as follows. Let $V$ be uniformly distributed. For each
-$v \in V$, let $e \in E$ be an edge having $v$ as an endpoint. Choose
-another $u \in V$ different from $v$. With probability $p$, delete the
-edge $e$ and add the edge $vu$. The rewiring must produce a
+proposed a network model that produces graphs exhibiting the
+small-world effect. Let $n$ and $k$ be positive integers such that
+$n \gg k \gg \ln n \gg 1$~(in particular, $0 < k < n/2$), $k$ being
+even, and consider a probability $0 < p < 1$. Starting from an
+undirected $k$-circulant\index{regular graph!$k$-circulant} graph
+$G = (V,E)$ on $n$ vertices, the
+Watts-Strogatz\index{Watts-Strogatz model} model proceeds to rewire
+each edge with probability $p$. The rewiring procedure works as
+follows. Let $V$ be uniformly distributed. For each $v \in V$, let
+$e \in E$ be an edge having $v$ as an endpoint. Choose another
+$u \in V$ different from $v$. With probability $p$, delete the edge
+$e$ and add the edge $vu$. The rewiring must produce a
 simple\index{simple graph} graph with the same order and size as
 $G$. As $p \to 1$, the graph $G$ goes from $k$-circulant to exhibiting
 properties of $\cG(n,p)$\index{random graph!binomial}. Small-world
 networks are intermediate between $k$-circulant and binomial random
-graphs. The Watts-Strogatz model is said to provide a procedure for
-interpolating between the latter two types of graphs.
+graphs~(see
+Figure~\ref{fig:random_graphs:k_circulant_small_world_random}). The
+Watts-Strogatz model is said to provide a procedure for interpolating
+between the latter two types of graphs.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/random-graphs/k-circulant-small-world-random.tex}
+\caption{With increasing randomness, $k$-circulant graphs evolve to
+  exhibit properties of random graphs in $\cG(n,p)$. Small-world
+  networks are intermediate between $k$-circulant graphs and random
+  graphs in $\cG(n,p)$.}
+\label{fig:random_graphs:k_circulant_small_world_random}
+\end{figure}
 
 The last paragraph contains an algorithm for rewiring edges of a
 graph. While the algorithm is simple, in practice it potentially skips
