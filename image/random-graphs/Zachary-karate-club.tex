@@ -71,15 +71,13 @@
 %%
 %%
 \quad
-\subfigure[Degree distribution.]{
+\subfigure[Linear scaling.]{
 \label{fig:Zachary_karate_club:degree_distribution}
 \begin{tikzpicture}
 [every mark/.append style={scale=0.5},%
  scale=0.9]
 \begin{axis}[%
-  enlargelimits=false,%
-  xlabel=\text{degree},%
-  ylabel=\text{probability}%
+  enlargelimits=false%
 ]
 \addplot+[sharp plot] coordinates
 {
@@ -91,5 +89,27 @@
   (17, 0.0294117647058824)
 };
 \end{axis}
+\end{tikzpicture}
+}
+%%
+%%
+\subfigure[Log-log scaling.]{
+\label{fig:Zachary_karate_club:degree_distribution}
+\begin{tikzpicture}
+[every mark/.append style={scale=0.5},%
+ scale=0.9]
+\begin{loglogaxis}[%
+  enlargelimits=false%
+]
+\addplot+[sharp plot] coordinates
+{
+  (1, 0.0294117647058824)  (2, 0.323529411764706)
+  (3, 0.176470588235294)   (4, 0.176470588235294)
+  (5, 0.0882352941176471)  (6, 0.0588235294117647)
+  (9, 0.0294117647058824)  (10, 0.0294117647058824)
+  (12, 0.0294117647058824) (16, 0.0294117647058824)
+  (17, 0.0294117647058824)
+};
+\end{loglogaxis}
 \end{tikzpicture}
 }
