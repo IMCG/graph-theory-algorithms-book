@@ -10,7 +10,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{tikzpicture}
+[every mark/.append style={scale=0.3},%
+ scale=1]
 \begin{axis}
-\addplot+[only marks,mark size=0.8pt] file {data/trees-forests/gamma8.dat};
+\addplot+[only marks] file {data/trees-forests/gamma8.dat};
 \end{axis}
 \end{tikzpicture}
