@@ -628,12 +628,12 @@ We approximate the addition of the two sums by
 \[
 \int_0^{n + m} \lg k \; dk
 =
-\left. \frac{k \cdot \ln k - k} {\ln 2} + C \right|_{k=0}^{k=n+m}
+\left. \frac{k \ln k - k} {\ln 2} + C \right|_{k=0}^{k=n+m}
 \]
 for some constant $C$. The above method of successive extraction and
 insertion therefore has a total runtime of
 \[
-O\left( \frac{(n + m) \cdot \ln(n + m) - n - m} {\ln 2} \right)
+O\left( \frac{(n + m) \ln(n + m) - n - m} {\ln 2} \right)
 \]
 for merging two binary heaps.
 
@@ -649,13 +649,13 @@ by
 \[
 \int_{k=n}^{k=n+m} \lg k \; dk
 =
-\left. \frac{k \cdot \ln k - k} {\ln 2} + C \right|_{k=n}^{k=n+m}
+\left. \frac{k \ln k - k} {\ln 2} + C \right|_{k=n}^{k=n+m}
 \]
 for some constant $C$. Therefore the improved extraction and
 insertion method requires
 \[
 O\left(
-\frac{(n+m) \cdot \ln(n+m) - n \cdot \ln n - m} {\ln 2} - n
+\frac{(n+m) \ln(n+m) - n \ln n - m} {\ln 2} - n
 \right)
 \]
 time in order to merge $T_1$ and $T_2$.
