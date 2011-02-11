@@ -1198,19 +1198,13 @@ from~\cite{HeartEtAl1978} on the growth of ARPANET.
   graph in $\cG(n,N)$, inspired by Knuth's\index{Knuth!Algorithm~S}
   Algorithm~S~(Selection sampling technique) as found on page~142 of
   Knuth\index{Knuth!Donald E.}~\cite{Knuth1998b}. Pseudocode of
-  Briggs' algorithm is presented in
-  Algorithm~\ref{alg:random_graphs:Briggs_random_GnN}.
-  %%
-  \begin{enumerate}[(a)]
-  \item Provide runtime analysis of
-    Algorithm~\ref{alg:random_graphs:Briggs_random_GnN} and compare
-    your results with those presented in
-    section~\ref{sec:random_graphs:Erdos_Renyi_model}.
-
-  \item Under which conditions would Briggs' algorithm be more
-    efficient than
-    Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}?
-  \end{enumerate}
+  Briggs' procedure is presented in
+  Algorithm~\ref{alg:random_graphs:Briggs_random_GnN}. Provide runtime
+  analysis of Algorithm~\ref{alg:random_graphs:Briggs_random_GnN} and
+  compare your results with those presented in
+  section~\ref{sec:random_graphs:Erdos_Renyi_model}. Under which
+  conditions would Briggs' algorithm be more efficient than
+  Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}?
 
 \item Briggs'\index{Briggs!algorithm}
   Algorithm~\ref{alg:random_graphs:Briggs_random_GnN} follows the
@@ -1223,16 +1217,9 @@ from~\cite{HeartEtAl1978} on the growth of ARPANET.
   allow us to select $n$ items. Vitter's\index{Vitter!Jeffrey Scott}
   algorithm~R~\cite{Vitter1985}, called
   reservoir\index{reservoir sampling} sampling, is suitable for the
-  situation and runs in $O(n (1 + \ln(N/n)))$ expected time.
-  %%
-  \begin{enumerate}[(a)]
-  \item Describe and provide pseudocode of
-    Vitter's\index{Vitter!algorithm} algorithm.
-
-  \item Prove the correctness of Vitter's algorithm.
-
-  \item Provide runtime analysis of Vitter's algorithm.
-  \end{enumerate}
+  situation and runs in $O(n (1 + \ln(N/n)))$ expected time. Describe
+  and provide pseudocode of Vitter's\index{Vitter!algorithm} algorithm,
+  prove its correctness, and provide runtime analysis.
 
 \item Repeat Example~\ref{eg:random_graphs:random_oriented_graph} but
   using each of Algorithms~\ref{alg:random_graphs:generate_random_Gnp}
@@ -1242,33 +1229,20 @@ from~\cite{HeartEtAl1978} on the growth of ARPANET.
   introduced~\cite{Garlaschelli2009} in~2009 a weighted version of the
   $\cG(n,p)$ model, called the weighted\index{random graph!weighted}
   random graph model. Denote by $\cG_W(n,p)$ the weighted random graph
-  model.
-  %%
-  \begin{enumerate}[(a)]
-  \item Provide a description and pseudocode of a procedure to
-    generate a graph in $\cG_W(n,p)$.
-
-  \item Analyze the runtime complexity of the algorithm.
-
-  \item Describe various statistical physics properties of $\cG_W(n,p)$.
-  \end{enumerate}
+  model. Provide a description and pseudocode of a procedure to
+  generate a graph in $\cG_W(n,p)$ and analyze the runtime complexity
+  of the algorithm. Describe various statistical physics properties of
+  $\cG_W(n,p)$.
 
 \item Latora\index{Latora, V.} and
   Marchiori\index{Marchiori, M.}~\cite{LatoraMarchiori2003} extended
-  the Watts-Strogatz\index{Watts-Strogatz model} model to account for
-  weighted edges. A crucial idea in the
+  the Watts-Strogatz\index{Watts-Strogatz model} model to take into
+  account weighted edges. A crucial idea in the
   Latora-Marchiori\index{Latora-Marchiori model} model is the concept
-  of network efficiency.
-  %%
-  \begin{enumerate}[(a)]
-  \item Describe the Latora-Marchiori model and provide pseudocode of
-    an algorithm to construct Latora-Marchiori networks.
-
-  \item Explain the concepts of local and global efficiencies and how
-    the latter relate to clustering coefficient and characteristic
-    path length.
-
-  \item Compare and contrast the Watts-Strogatz and Latora-Marchiori
-    models.
-  \end{enumerate}
+  of network efficiency. Describe the Latora-Marchiori model and
+  provide pseudocode of an algorithm to construct Latora-Marchiori
+  networks. Explain the concepts of local and global efficiencies and
+  how these relate to clustering coefficient and characteristic path
+  length. Compare and contrast the Watts-Strogatz and Latora-Marchiori
+  models.
 \end{problem}
