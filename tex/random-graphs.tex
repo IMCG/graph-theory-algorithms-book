@@ -21,11 +21,7 @@ positive integer $n$ and let $\cT$ be a collection of all binary trees
 on $n$ vertices. It can be infeasible to generate all members of
 $\cT$, so for most purposes we are only interested in randomly
 generating a member of $\cT$. A binary tree of order $n$ generated in
-this manner is said to be a random\index{random graph} graph. For
-example, Algorithm~\ref{alg:random_graphs:random_simple_graph}
-presents a procedure to construct a random graph that is simple and
-undirected; the procedure is adapted from pages~4--7 of
-Lau~\cite{Lau2007}.
+this manner is said to be a random\index{random graph} graph.
 
 %% \begin{itemize}
 %% \item See Bollob{\'a}s~\cite{Bollobas2001}.
@@ -158,14 +154,6 @@ Figure~\ref{fig:random_graphs:degree_distribution:condensed_matter_collaboration
   Newman~\cite{Newman2001b}.}
 \label{fig:random_graphs:degree_distribution:condensed_matter_collaboration}
 \end{figure}
-
-\begin{algorithm}[!htbp]
-\index{algorithm!random}
-\index{simple graph!random}
-\input{algorithm/random-graphs/random-simple-graph.tex}
-\caption{Random simple undirected graph.}
-\label{alg:random_graphs:random_simple_graph}
-\end{algorithm}
 
 \begin{algorithm}[!htbp]
 \index{algorithm!random}
@@ -1118,6 +1106,22 @@ from~\cite{HeartEtAl1978} on the growth of ARPANET.
 \section{Problems}
 
 \begin{problem}
+\item Algorithm~\ref{alg:random_graphs:random_simple_graph} presents a
+  procedure to construct a random graph that is simple and undirected;
+  the procedure is adapted from pages~4--7 of
+  Lau~\cite{Lau2007}. Analyze the time complexity of
+  Algorithm~\ref{alg:random_graphs:random_simple_graph}. Compare and
+  contrast your results with that for
+  Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/random-simple-graph.tex}
+\caption{Random simple undirected graph.}
+\label{alg:random_graphs:random_simple_graph}
+\end{algorithm}
+
 \item Modify Algorithm~\ref{alg:random_graphs:random_simple_graph} to
   generate the following random graphs.
   %%
