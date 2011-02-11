@@ -59,6 +59,7 @@ underlying large networks.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Degree distribution}
+\label{subsec:random_graphs:degree_distribution}
 \index{degree distribution}
 
 The degree distribution of a graph $G = (V,E)$ quantifies the fraction
@@ -96,10 +97,10 @@ Figure~\ref{fig:random_graphs:degree_distribution:condensed_matter_collaboration
 \input{image/random-graphs/Zachary-karate-club.tex}
 \caption{The friendship network within a $34$-person karate club. This
   is more commonly known as the Zachary~\cite{Zachary1977} karate club
-  network. The network is an undirected unweighted graph having $34$
-  vertices and $78$ edges. The horizontal axis represents degree; the
-  vertical axis represents the probability that a vertex from the
-  network has the corresponding degree.}
+  network. The network is an undirected, connected, unweighted graph
+  having $34$ vertices and $78$ edges. The horizontal axis represents
+  degree; the vertical axis represents the probability that a vertex
+  from the network has the corresponding degree.}
 \label{fig:random_graphs:Zachary_karate_club}
 \end{figure}
 
@@ -110,11 +111,11 @@ Figure~\ref{fig:random_graphs:degree_distribution:condensed_matter_collaboration
 \index{network!biological}
 \input{image/random-graphs/degree-distribution-C-elegans.tex}
 \caption{Degree distribution of the neural network of the
-  Caenorhabditis elegans. The network is a directed weighted graph
-  with $297$ vertices and 2,359 edges. The horizontal axis represents
-  degree; the vertical axis represents the probability that a vertex
-  from the network has the corresponding degree. The degree
-  distribution is derived from dataset by Watts and
+  Caenorhabditis elegans. The network is a directed, not strongly
+  connected, weighted graph with $297$ vertices and 2,359 edges. The
+  horizontal axis represents degree; the vertical axis represents the
+  probability that a vertex from the network has the corresponding
+  degree. The degree distribution is derived from dataset by Watts and
   Strogatz~\cite{WattsStrogatz1998} and White et
   al.~\cite{WhiteEtAl1986}.}
 \label{fig:random_graphs:degree_distribution:neural_network_C_elegans}
@@ -127,11 +128,11 @@ Figure~\ref{fig:random_graphs:degree_distribution:condensed_matter_collaboration
 \index{network!technological}
 \input{image/random-graphs/degree-distribution-power-grid.tex}
 \caption{Degree distribution of the Western States Power Grid of the
-  United States\index{USA}. The network is an undirected unweighted
-  graph with 4,941 vertices and 6,594 edges. The horizontal axis
-  represents degree; the vertical axis represents the probability that
-  a vertex from the network has the corresponding degree. The degree
-  distribution is derived from dataset by Watts and
+  United States\index{USA}. The network is an undirected, connected,
+  unweighted graph with 4,941 vertices and 6,594 edges. The horizontal
+  axis represents degree; the vertical axis represents the probability
+  that a vertex from the network has the corresponding degree. The
+  degree distribution is derived from dataset by Watts and
   Strogatz~\cite{WattsStrogatz1998}.}
 \label{fig:random_graphs:degree_distribution:power_grid}
 \end{figure}
@@ -146,9 +147,9 @@ Figure~\ref{fig:random_graphs:degree_distribution:condensed_matter_collaboration
 \caption{Degree distribution of the network of coauthorships between
   scientists posting preprints on the condensed matter eprint archive
   at \url{http://arxiv.org/archive/cond-mat}. The network is a
-  weighted undirected graph having 40,421 vertices and 175,693
-  edges. The horizontal axis represents degree; the vertical axis
-  represents the probability that a vertex from the coauthorship
+  weighted, disconnected, undirected graph having 40,421 vertices and
+  175,693 edges. The horizontal axis represents degree; the vertical
+  axis represents the probability that a vertex from the coauthorship
   network has the corresponding degree. The degree distribution is
   derived from the 2005 update of the dataset by
   Newman~\cite{Newman2001b}.}
@@ -163,7 +164,7 @@ Figure~\ref{fig:random_graphs:degree_distribution:condensed_matter_collaboration
 In chapter~\ref{chap:distance_connectivity} we discussed various
 distance metrics such as radius, diameter, and eccentricity. To that
 distance statistics collection we add the average or characteristic
-distance $\overline{d}$, defined as the arithmetic mean of all
+distance $\cdis$, defined as the arithmetic mean of all
 distances in a graph. Let $G = (V,E)$ be a simple graph with
 $n = |V|$ and $m = |E|$, where $G$ can be either directed or
 undirected. Then $G$ has size at most $n(n - 1)$ because for any
@@ -172,7 +173,7 @@ the edge from $v$ to $u$. The
 \emph{characteristic distance}\index{distance!characteristic} of $G$
 is defined by
 \[
-\overline{d}(G)
+\cdis(G)
 =
 \frac{1}{n(n-1)}
 \sum_{u \neq v \in V} d(u,v)
@@ -187,6 +188,7 @@ d(u,v)
 k, & \text{where $k$ is the length of a shortest $u$-$v$ path}.
 \end{cases}
 \]
+
 If $G$ is strongly connected~(respectively, connected for the
 undirected case) then our distance function is of the form
 $d: V \times V \to \Z_{+} \cup \{0\}$, where the codomain is the set
@@ -194,10 +196,58 @@ of nonnegative integers. The case where $G$ is not strongly
 connected~(respectively, disconnected for the undirected version)
 requires special care. One way is to compute the characteristic
 distance for each component and then find the average of all such
-characteristic distances. Another way is to assign a large number as
-the distance of non-existing shortest paths. If there is no $u$-$v$
-path, we let $d(u,v) = n$ because $n = |V|$ is larger than the length
-of any shortest path between connected vertices.
+characteristic distances. Call the resulting characteristic distance
+$\cdis_c$, where $c$ means component. Another way is to assign
+a large number as the distance of non-existing shortest paths. If
+there is no $u$-$v$ path, we let $d(u,v) = n$ because $n = |V|$ is
+larger than the length of any shortest path between connected
+vertices. The resulting characteristic distance is denoted
+$\cdis_b$, where $b$ means big number. Furthermore denote by
+$d_\kappa$ the number of pairs $(u,v)$ such that $v$ is not reachable
+from $u$. For example, the Zachary~\cite{Zachary1977} karate club
+network has $\cdis = 2.4082$ and $d_\kappa = 0$; the C. elegans neural
+network~\cite{WattsStrogatz1998,WhiteEtAl1986} has
+$\cdis_b = 71.544533$, $\cdis_c = 3.991884$, and
+$d_\kappa = 20,268$; the Western States Power Grid
+network~\cite{WattsStrogatz1998} has $\cdis = 18.989185$ and
+$d_\kappa = 0$; and the condensed matter coauthorship
+network~\cite{Newman2001b} has $\cdis_b = 7541.74656$,
+$\cdis_c = 5.499329$, and $d_\kappa = 152,328,281$.
+
+We can also define the concept of distance distribution similar to how
+the degree distribution was defined in
+section~\ref{subsec:random_graphs:degree_distribution}. If $\ell$ is a
+positive integer with $u$ and $v$ being connected vertices in a graph
+$G = (V,E)$, denote by
+%%
+\begin{equation}
+\label{eqn:random_graphs:distance_distribution}
+p
+=
+\Pr[d(u,v) = \ell]
+\end{equation}
+%%
+the fraction of ordered pairs of connected vertices in $V \times V$
+having distance $\ell$ between them. As is evident from the above
+notation, we can think
+of~\eqref{eqn:random_graphs:distance_distribution} as the probability
+that a uniformly chosen connected pair $(u,v)$ of vertices in $G$ has
+distance $\ell$. The
+\emph{distance distribution}\index{distance distribution} of $G$ is
+hence a histogram of the distances between pairs of vertices in
+$G$. Figure~\ref{fig:random_graphs:distance_distribution} illustrates
+distance distributions of various real-world networks.
+
+\begin{figure}[!htbp]
+\centering
+\input{image/random-graphs/distance-distribution.tex}
+\caption{Distance distributions for various real-world networks. The
+  horizontal axis represents distance and the vertical axis represents
+  the probability that a uniformly chosen pair of distinct vertices
+  from the network has the corresponding distance between them.}
+\label{fig:random_graphs:distance_distribution}
+\end{figure}
+
 
 \begin{algorithm}[!htbp]
 \index{algorithm!random}
