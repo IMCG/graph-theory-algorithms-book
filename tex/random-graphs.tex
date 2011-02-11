@@ -160,6 +160,44 @@ Figure~\ref{fig:random_graphs:degree_distribution:condensed_matter_collaboration
 
 \subsection{Distance statistics}
 
+In chapter~\ref{chap:distance_connectivity} we discussed various
+distance metrics such as radius, diameter, and eccentricity. To that
+distance statistics collection we add the average or characteristic
+distance $\overline{d}$, defined as the arithmetic mean of all
+distances in a graph. Let $G = (V,E)$ be a simple graph with
+$n = |V|$ and $m = |E|$, where $G$ can be either directed or
+undirected. Then $G$ has size at most $n(n - 1)$ because for any
+distinct vertex pair $u,v \in V$ we count the edge from $u$ to $v$ and
+the edge from $v$ to $u$. The
+\emph{characteristic distance}\index{distance!characteristic} of $G$
+is defined by
+\[
+\overline{d}(G)
+=
+\frac{1}{n(n-1)}
+\sum_{u \neq v \in V} d(u,v)
+\]
+where the distance function $d$ is given by
+\[
+d(u,v)
+=
+\begin{cases}
+\infty, & \text{if there is no path from $u$ to $v$}, \\[4pt]
+0, & \text{if $u = v$}, \\[4pt]
+k, & \text{where $k$ is the length of a shortest $u$-$v$ path}.
+\end{cases}
+\]
+If $G$ is strongly connected~(respectively, connected for the
+undirected case) then our distance function is of the form
+$d: V \times V \to \Z_{+} \cup \{0\}$, where the codomain is the set
+of nonnegative integers. The case where $G$ is not strongly
+connected~(respectively, disconnected for the undirected version)
+requires special care. One way is to compute the characteristic
+distance for each component and then find the average of all such
+characteristic distances. Another way is to assign a large number as
+the distance of non-existing shortest paths. If there is no $u$-$v$
+path, we let $d(u,v) = n$ because $n = |V|$ is larger than the length
+of any shortest path between connected vertices.
 
 \begin{algorithm}[!htbp]
 \index{algorithm!random}
