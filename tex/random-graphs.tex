@@ -45,7 +45,7 @@ this manner is said to be a random\index{random graph} graph.
 \section{Network statistics}
 
 Numerous real-world networks are large, having from thousands up to
-millions of vertices and edges. Network statistics provide a way
+millions of vertices and edges. Network statistics provide a way to
 describe properties of networks without concerning ourselves with
 individual vertices and edges. A network statistic should describe
 essential properties of the network under consideration, provide a
@@ -592,8 +592,8 @@ denominator. Then we have the expected total runtime
   \binom{n}{2} \cdot \ln \frac{\binom{n}{2}} {\binom{n}{2} - N + 1}
 \right)
 \]
-which is $O(N)$ when $N \leq \binom{n}{2} / 2$, and $O(N \cdot \ln N)$
-when $N = \binom{n}{2}$. In other words,
+which is $O(N)$ when $N \leq \binom{n}{2} / 2$, and $O(N \ln N)$ when
+$N = \binom{n}{2}$. In other words,
 Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN} has
 expected linear runtime when the number $N$ of required edges
 satisfies $N \leq \binom{n}{2} / 2$. But for $N > \binom{n}{2} / 2$,
