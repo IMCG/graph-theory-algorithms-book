@@ -1373,15 +1373,19 @@ as you can. \\
   models.
 
 \item The following model for ``growing'' graphs is known as the
-  CHKNS\index{CHKNS model} model~\cite{CallawayEtAl2001}, named for
-  its original proponents. Start with the trivial\index{trivial graph}
-  graph $G$ at time step $t = 1$. For each subsequent time step
-  $t > 1$, add a new vertex to $G$. Furthermore choose two vertices
-  uniformly at random and with probability $\delta$ join them by an
-  undirected edge. The newly added edge does not necessarily have the
-  newly added vertex as an endpoint. Denote by $d_k(t)$ the expected
-  number of vertices with degree $k$ at time $t$. Assuming that no
-  self-loops are allowed, show that
+  CHKNS\index{CHKNS model} model~\cite{CallawayEtAl2001},\footnote{
+    Or the ``chickens'' model, depending on how you pronounce
+    ``CHKNS''.
+  }
+  named for its original proponents. Start with the
+  trivial\index{trivial graph} graph $G$ at time step $t = 1$. For
+  each subsequent time step $t > 1$, add a new vertex to $G$.
+  Furthermore choose two vertices uniformly at random and with
+  probability $\delta$ join them by an undirected edge. The newly
+  added edge does not necessarily have the newly added vertex as an
+  endpoint. Denote by $d_k(t)$ the expected number of vertices with
+  degree $k$ at time $t$. Assuming that no self-loops are allowed,
+  show that
   \[
   d_0(t + 1)
   =
