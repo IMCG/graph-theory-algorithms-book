@@ -1236,6 +1236,40 @@ networks:
 \item telephone call graphs~\cite{AielloEtAl2000,AielloEtAl2002}
 \end{itemize}
 
+But how do we get the whole process started in the first place? The
+original description of the
+Barab\'asi-Albert\index{Barab\'asi-Albert model} model as contained
+in~\cite{BarabasiAlbert1999} is rather ambiguous with respect to
+certain details. First, the whole process is supposed to begin with a
+small number of vertices. But as the degree of each of these vertices
+is zero, it is unclear how the network is to grow via preferential
+attachment from the initial pool of vertices. Second, Barab\'asi and
+Albert neglected to clearly specify how to select the neighbors for
+the newly added vertex. The above ambiguities are resolved in
+Bollobas~et~al.~\cite{BollobasEtAl2001}, wherein is given a precise
+statement of a random graph process that realizes the
+Barab\'asi-Albert model. Fix a sequence of vertices
+$v_1, v_2, \dots$ and consider the case where each newly added vertex
+is to be connected to $m = 1$ vertex already in a graph. Inductively
+define a random graph process $(G_1^t)_{t \geq 0}$ as follows, where
+$G_1^t$ is a digraph on $\{v_i \mid 1 \leq i \leq t\}$. Start with the
+null\index{null graph} graph $G_1^0$ or the graph $G_1^1$ with one
+vertex and one self-loop. Denote by $\deg_G(v)$ the total~(in and out)
+degree of vertex $v$ in the graph $G$. For $t > 1$ construct $G_1^t$
+from $G_1^{t-1}$ by adding the vertex $v_t$ and a directed edge from
+$v_t$ to $v_i$, where $i$ is randomly chosen with probability
+\[
+\Pr[i = s]
+=
+\begin{cases}
+\deg_{G_1^{t-1}}(v_s) / (2t - 1), & \text{if $1 \leq s \leq t - 1$}, \\
+1 / (2t - 1), & \text{if $s = t$}.
+\end{cases}
+\]
+The latter process generates a forest. For $m > 1$ the graph evolves
+as per the case $m = 1$; i.e. we add $m$ edges from $v_t$ one at a
+time. This process can result in self-loops and multiple edges.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
