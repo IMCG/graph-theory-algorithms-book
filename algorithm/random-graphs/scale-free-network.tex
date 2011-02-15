@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{Positive integer $n > 1$ and minimum degree $d \geq 1$.}
+\Output{Scale-free network on $n$ vertices.}
+\BlankLine
+%%
+%% algorithm body
+$G \assign \overline{K_n}$~\tcc*[f]{vertex set is $V = \{0, 1, \dots, n-1\}$}\;
+$M \assign$ list of length $2nd$\;
+\For{$v = 0, 1, \dots, n-1$}{
+  \For{$i = 0, 1, \dots, d-1$}{
+    $M[2(vd + i)] \assign v$\;
+    $r \assign$ draw uniformly at random from $\{0, 1, \dots, 2(vd + i)\}$\;
+    $M[2(vd + i) + 1] \assign M[r]$\;
+  }
+}
+add edge $(M[2i],\, M[2i+1])$ to $G$ for $i = 0, 1, \dots, nd-1$\;
+\Return $G$\;
