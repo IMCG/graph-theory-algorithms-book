@@ -1274,18 +1274,18 @@ plotted on log-log scales.
 \label{fig:random_graphs:real_world_scale_free_networks}
 \end{figure}
 
-But how do we get the whole process started in the first place? The
-original description of the
-Barab\'asi-Albert\index{Barab\'asi-Albert model} model as contained
-in~\cite{BarabasiAlbert1999} is rather ambiguous with respect to
-certain details. First, the whole process is supposed to begin with a
-small number of vertices. But as the degree of each of these vertices
-is zero, it is unclear how the network is to grow via preferential
-attachment from the initial pool of vertices. Second, Barab\'asi and
-Albert neglected to clearly specify how to select the neighbors for
-the newly added vertex. The above ambiguities are resolved in
-Bollobas~et~al.~\cite{BollobasEtAl2001}, wherein is given a precise
-statement of a random graph process that realizes the
+But how do we generate a scale-free graph as per the description in
+Barab\'asi and Albert~\cite{BarabasiAlbert1999}? The original
+description of the Barab\'asi-Albert\index{Barab\'asi-Albert model}
+model as contained in~\cite{BarabasiAlbert1999} is rather ambiguous
+with respect to certain details. First, the whole process is supposed
+to begin with a small number of vertices. But as the degree of each of
+these vertices is zero, it is unclear how the network is to grow via
+preferential attachment from the initial pool of vertices. Second,
+Barab\'asi and Albert neglected to clearly specify how to select the
+neighbors for the newly added vertex. The above ambiguities are
+resolved in Bollobas~et~al.~\cite{BollobasEtAl2001}, wherein is given
+a precise statement of a random graph process that realizes the
 Barab\'asi-Albert model. Fix a sequence of vertices
 $v_1, v_2, \dots$ and consider the case where each newly added vertex
 is to be connected to $m = 1$ vertex already in a graph. Inductively
