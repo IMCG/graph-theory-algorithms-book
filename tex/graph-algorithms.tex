@@ -450,8 +450,8 @@ is given by
 N(n)
 =
 \begin{cases}
-n + 63, & \text{if $0 \leq n \leq 62$}, \\
-126 \, R(v), & \text{if $63 \leq n \leq 258047$}, \\
+n + 63, & \text{if $0 \leq n \leq 62$}, \\[4pt]
+126 \, R(v), & \text{if $63 \leq n \leq 258047$}, \\[4pt]
 126 \, 126 \, R(v), & \text{if $258048 \leq n \leq 2^{36}-1$}.
 \end{cases}
 \end{equation}
@@ -1143,7 +1143,7 @@ $d: V \times V \to \R$ given by
 d(u,v)
 =
 \begin{cases}
-\infty, & \text{if there are no paths from $u$ to $v$}, \\
+\infty, & \text{if there are no paths from $u$ to $v$}, \\[4pt]
 \min\{w(W) \;|\; \text{$W$ is a $u$-$v$ walk}\}, & \text{otherwise}.
 \end{cases}
 \]
@@ -1802,8 +1802,8 @@ weight matrix of $G$ where
 w(i,j)
 =
 \begin{cases}
-w(ij), & \text{if $ij \in E(G)$}, \\
-0, & \text{if $i = j$}, \\
+w(ij), & \text{if $ij \in E(G)$}, \\[4pt]
+0, & \text{if $i = j$}, \\[4pt]
 \infty, & \text{otherwise}.
 \end{cases}
 \end{equation}
@@ -1835,7 +1835,7 @@ $D_k(i,j)$ of $P_k(i,j)$ using the expression
 D_k(i,j)
 =
 \begin{cases}
-w(i,j), & \text{if $k = 0$}, \\
+w(i,j), & \text{if $k = 0$}, \\[4pt]
 \min\{D_{k-1}(i,j),\, D_{k-1}(i,k) + D_{k-1}(k,j)\}, & \text{if $k > 0$}.
 \end{cases}
 \end{equation}
@@ -2135,7 +2135,7 @@ follows. For $k = 0$, we have
 T_0(i,j)
 =
 \begin{cases}
-0, & \text{if $i \neq j$ and $ij \notin E$}, \\
+0, & \text{if $i \neq j$ and $ij \notin E$}, \\[4pt]
 1, & \text{if $i = j$ or $ij \in E$}
 \end{cases}
 \]
@@ -2642,7 +2642,7 @@ as dumb as the next guy. \\
     W(C_n)
     =
     \begin{cases}
-    \frac{1}{8} n(n^2 - 1), & \text{if $n$ is odd,} \\
+    \frac{1}{8} n(n^2 - 1), & \text{if $n$ is odd,} \\[4pt]
     \frac{1}{8} n^3, & \text{if $n$ is even.}
     \end{cases}
     \]
@@ -2678,7 +2678,7 @@ as dumb as the next guy. \\
     \dir(v_i, v_j)
     =
     \begin{cases}
-    v_i v_j, & \text{if $p \leq \alpha$,} \\
+    v_i v_j, & \text{if $p \leq \alpha$,} \\[4pt]
     v_j v_i, & \text{otherwise.}
     \end{cases}
     \]
