@@ -1553,4 +1553,27 @@ as you can. \\
   \right)
   - 2\delta \frac{k N_k(t)}{t}.
   \]
+
+\item
+  Algorithm~\ref{alg:random_graphs:scale_free_network_preferential_attachment}
+  can easily be modified to generate other types of scale-free
+  networks. Based upon the latter algorithm, Batagelj and
+  Brandes~\cite{BatageljBrandes2005} presented a procedure for
+  generating bipartite scale-free networks; see
+  Algorithm~\ref{alg:random_graphs:bipartite_scale_free_network} for
+  pseudocode. Analyze the runtime efficiency of
+  Algorithm~\ref{alg:random_graphs:bipartite_scale_free_network}. Fix
+  positive integer values for $n$ and $d$, say $n = 10,000$ and
+  $d = 4$. Use
+  Algorithm~\ref{alg:random_graphs:bipartite_scale_free_network} to
+  generate a bipartite graph with your chosen values for $n$ and
+  $d$. Plot the degree distribution of the resulting graph using a
+  log-log scale and confirm that the generated graph is scale-free.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\input{algorithm/random-graphs/bipartite-scale-free-network.tex}
+\caption{Bipartite scale-free network via preferential attachment.}
+\label{alg:random_graphs:bipartite_scale_free_network}
+\end{algorithm}
 \end{problem}

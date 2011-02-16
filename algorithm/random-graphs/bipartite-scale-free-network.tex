@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009, 2010, 2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+%%
+%% input/output
+\Input{Positive integer $n > 1$ and minimum degree $d \geq 1$.}
+\Output{Bipartite scale-free multigraph. Each partition has $n$
+  vertices and each vertex has minimum degree $d$.}
+\BlankLine
+%%
+%% algorithm body
+$G \assign \overline{K_{2n}}$~\tcc*[f]{vertex set is $\{0, 1, \dots, 2n-1\}$}\;
+$M_1 \assign$ list of length $2nd$\;
+$M_2 \assign$ list of length $2nd$\;
+\For{$v = 0, 1, \dots, n-1$}{
+  \For{$i = 0, 1, \dots, d-1$}{
+    $M_1[2(vd+i)] \assign v$\;
+    $M_2[2(vd+i)] \assign n + v$\;
+    $r \assign$ draw uniformly at random from $\{0, 1, \dots, 2(vd+i)\}$\;
+    \eIf{\rm $r$ is even}{
+      $M_1[2(vd+i) + 1] \assign M_2[r]$\;
+    }{
+      $M_1[2(vd+i) + 1] \assign M_1[r]$\;
+    }
+    $r \assign$ draw uniformly at random from $\{0, 1, \dots, 2(vd+i)\}$\;
+    \eIf{\rm $r$ is even}{
+      $M_2[2(vd+i) + 1] \assign M_1[r]$\;
+    }{
+      $M_2[2(vd+i) + 1] \assign M_2[r]$\;
+    }
+  }
+}
+add edges $(M_1[2i],\, M_1[2i+1])$ and $(M_2[2i],\, M_2[2i+1])$ to $G$
+for $i = 0, 1, \dots, nd-1$\;
+\Return $G$\;
