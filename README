@@ -33,6 +33,40 @@ files resulting from the compilation process. The file util.sh is a script
 that interfaces with utilities under the directory bin/.
 
 
+FAQ
+===
+
+(1) Question: I'm getting error messages to the following effect when
+    compiling the book:
+
+    ! TeX capacity exceeded, sorry [main memory size=3000000].
+
+    What's going on?
+
+    Answer: This might mean that you need to increase TeX's main memory
+    because the book uses pgfplots for generating plots of large datasets. To
+    increase TeX's main memory, you need to locate the active texmf.cnf file
+    for your TeX/LaTeX distribution. For example, on Ubuntu you can do so via
+    the command
+
+    $ kpsewhich texmf.cnf
+
+    Then open the file as root with the command
+
+    $ sudo emacs /usr/share/texmf/web2c/texmf.cnf
+
+    which will most likely prompt you for an administrator password. Enter the
+    password and edit the line that begins with something such as
+
+    main_memory = 4000000 % words of inimemory available; also applies to inimf&mp
+
+    Save your edit and quit your editor. Then issue the command
+
+    $ sudo fmtutil-sys --all
+
+    and compile the book again.
+
+
 [1] http://www.gnu.org/copyleft/fdl.html
 [2] http://www.wdjoyner.org
 [3] http://sage.math.washington.edu/home/mvngu/
