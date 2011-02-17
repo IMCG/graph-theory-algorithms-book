@@ -1306,7 +1306,10 @@ $v_t$ to $v_i$, where $i$ is randomly chosen with probability
 \]
 The latter process generates a forest. For $m > 1$ the graph evolves
 as per the case $m = 1$; i.e. we add $m$ edges from $v_t$ one at a
-time. This process can result in self-loops and multiple edges.
+time. This process can result in self-loops and multiple edges. We
+write $\cG_m^n$ for the collection of all graphs on $n$ vertices and
+minimal degree $m$ in the Barab\'asi-Albert model, where a random
+graph from $\cG_m^n$ is denoted $G_m^n \in \cG_m^n$.
 
 Now consider the problem of translating the above procedure into
 pseudocode. Fix a positive integer $n > 1$ for the number of vertices
