@@ -524,6 +524,48 @@ size, respectively, of the resulting graph.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Degree distribution}
+\index{degree distribution}
+
+Consider a random graph $G \in \cG(n,p)$ and let $v$ be a vertex of
+$G$. With probability $p$, the vertex $v$ is incident with each of the
+remaining $n - 1$ vertices in $G$. Then the probability that $v$ has
+degree $k$ is given by the binomial\index{distribution!binomial}
+distribution
+%%
+\begin{equation}
+\label{eqn:random_graphs:Erdos_Renyi:probability_v_has_degree_k}
+\Pr[\deg(v) = k]
+=
+\binom{n-1}{k} p^k (1 - p)^{n-1-k}
+\end{equation}
+%%
+and the expected degree of $v$ is $\E[\deg(v)] = p(n-1)$. Setting
+$z = p(n-1)$, we can
+express~\eqref{eqn:random_graphs:Erdos_Renyi:probability_v_has_degree_k}
+as
+\[
+\Pr[\deg(v) = k]
+=
+\binom{n-1}{k}
+\left( \frac{z} {n-1-z} \right)^k
+\left( 1 - \frac{z}{n-1} \right)^{n-1}
+\]
+and thus
+\[
+\Pr[\deg(v) = k]
+\to
+\frac{z^k}{k!} \exp(-z)
+\]
+as $n \to \infty$. In the limit of large $n$, the probability that
+vertex $v$ has degree $k$ approaches the
+Poisson\index{distribution!Poisson} distribution. That is, as $n$ gets
+larger and larger any random graph in $\cG(n,p)$ has a Poisson degree
+distribution.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Erd\H{o}s-R\'enyi model}
 \label{sec:random_graphs:Erdos_Renyi_model}
 
@@ -700,48 +742,6 @@ Figure~\ref{fig:random_graphs:random_oriented_graph}.
   $G(20,\, 0.1)$ and cutoff probability $0.5$.}
 \label{fig:random_graphs:random_oriented_graph}
 \end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsubsection{Degree distribution}
-\index{degree distribution}
-
-Consider a random graph $G \in \cG(n,p)$ and let $v$ be a vertex of
-$G$. With probability $p$, the vertex $v$ is incident with each of the
-remaining $n - 1$ vertices in $G$. Then the probability that $v$ has
-degree $k$ is given by the binomial\index{distribution!binomial}
-distribution
-%%
-\begin{equation}
-\label{eqn:random_graphs:Erdos_Renyi:probability_v_has_degree_k}
-\Pr[\deg(v) = k]
-=
-\binom{n-1}{k} p^k (1 - p)^{n-1-k}
-\end{equation}
-%%
-and the expected degree of $v$ is $\E[\deg(v)] = p(n-1)$. Setting
-$z = p(n-1)$, we can
-express~\eqref{eqn:random_graphs:Erdos_Renyi:probability_v_has_degree_k}
-as
-\[
-\Pr[\deg(v) = k]
-=
-\binom{n-1}{k}
-\left( \frac{z} {n-1-z} \right)^k
-\left( 1 - \frac{z}{n-1} \right)^{n-1}
-\]
-and thus
-\[
-\Pr[\deg(v) = k]
-\to
-\frac{z^k}{k!} \exp(-z)
-\]
-as $n \to \infty$. In the limit of large $n$, the probability that
-vertex $v$ has degree $k$ approaches the
-Poisson\index{distribution!Poisson} distribution. That is, as $n$ gets
-larger and larger any random graph in $\cG(n,p)$ has a Poisson degree
-distribution.
 
 
 %% One of the first properties of random graphs which makes them so pleasant to work with is the following
