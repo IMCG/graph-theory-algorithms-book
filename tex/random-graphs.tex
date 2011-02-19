@@ -1267,7 +1267,9 @@ networks:
 %%
 Figure~\ref{fig:random_graphs:real_world_scale_free_networks}
 illustrates the degree distributions of various real-world networks,
-plotted on log-log scales.
+plotted on log-log scales. Corresponding distributions for various
+simulated Barab\'asi-Albert networks are illustrated in
+Figure~\ref{fig:random_graphs:simulated_scale_free_networks}.
 
 \begin{figure}[!htbp]
 \centering
@@ -1298,6 +1300,19 @@ plotted on log-log scales.
   self-loops are not taken into account and, where a graph is
   directed, we only consider the in-degree distribution.}
 \label{fig:random_graphs:real_world_scale_free_networks}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{degree distribution}
+\input{image/random-graphs/power-law-degree-distribution-simulation.tex}
+\caption{Degree distributions of simulated graphs in the classic
+  Barab\'asi-Albert model. The horizontal axis represents degree; the
+  vertical axis is the corresponding probability of a vertex having a
+  particular degree. Each generated graph is directed and has
+  minimum out-degree $m = 5$. The above degree distributions are only
+  for in-degrees and do not take into account self-loops.}
+\label{fig:random_graphs:simulated_scale_free_networks}
 \end{figure}
 
 But how do we generate a scale-free graph as per the description in
