@@ -336,7 +336,9 @@ for discussion of an algorithm to generate a graph in $\cG(n,p)$ in
 quadratic
 time. Figure~\ref{fig:random_graphs:binomial_random_graph_25_nodes}
 illustrates some random graphs from $\cG(25,p)$ with $p = i/6$ for
-$i = 0, 1, \dots, 5$.
+$i = 0, 1, \dots, 5$. See
+Figure~\ref{fig:random_graphs:Gnp_expected_and_experimental_values}
+for results for graphs in $\cG(2 \cdot 10^4,\, p)$.
 
 The expected number of edges of any $G \in \cG(n,p)$ is
 \[
@@ -399,6 +401,28 @@ and
 \input{image/random-graphs/binomial-random-graphs-25-nodes.tex}
 \caption{Binomial random graphs $\cG(25,p)$ for various values of $p$.}
 \label{fig:random_graphs:binomial_random_graph_25_nodes}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\input{image/random-graphs/Gnp-simulation.tex}
+\caption{Comparison of expected and experimental values of the number
+  of edges and total degree of random simple undirected graphs in
+  $\cG(n,p)$. The horizontal axis represents probability points; the
+  vertical axis represent the size and total degree~(expected or
+  experimental). Fix $n = 20,000$ and consider $r = 50$ probability
+  points chosen as follows. Let $p_{\rm min} = 0.000001$,
+  $p_{\rm max} = 0.999999$, and
+  $F = (p_{\rm max} / p_{\rm min})^{1 / (r-1)}$. For
+  $i = 1, 2, \dots, r=50$ the $i$-th probability point $p_i$ is defined
+  by $p_i = p_{\rm min} F^{i-1}$. Each experiment consists in
+  generating $M = 500$ random graphs from $\cG(n, p_i)$. We compute the
+  expected number of edges $\alpha$ and expected total degree $\beta$
+  of any graph in $\cG(n, p_i)$. For each $G_i \in \cG(n, p_i)$, where
+  $i = 1, 2, \dots, 500$, compute its actual size $\alpha_i$ and
+  actual total degree $\beta_i$. Then take the mean $\hat{\alpha}$ of
+  the $\alpha_i$ and the mean $\hat{\beta}$ of the $\beta_i$.}
+\label{fig:random_graphs:Gnp_expected_and_experimental_values}
 \end{figure}
 
 \begin{algorithm}[!htbp]
