@@ -56,11 +56,12 @@ FAQ
     $ sudo emacs /usr/share/texmf/web2c/texmf.cnf
 
     which will most likely prompt you for an administrator password. Enter the
-    password and edit the line that begins with something such as
+    password and search for the line that begins with something such as
 
-    main_memory = 10000000 % words of inimemory available; also applies to inimf&mp
+    main_memory = 3000000 % words of inimemory available; also applies to inimf&mp
 
-    Save your edit and quit your editor. Then issue the command
+    Change the value "3000000" to "10000000", i.e. change from 3 million to
+    10 million. Save your edit and quit your editor. Then issue the command
 
     $ sudo fmtutil-sys --all
 
