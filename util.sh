@@ -64,6 +64,7 @@ elif [ "$1" = "--copyright" ]; then
 	usage
 	exit 1
     fi
+    exit 0
 else
     usage
     exit 1
