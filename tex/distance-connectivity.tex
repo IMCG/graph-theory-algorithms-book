@@ -892,7 +892,12 @@ illustrations of separating sets.
 Consider two distinct, non-adjacent vertices $u,v$ in a connected
 graph $G$. If $\cP_{uv}$ is a collection of internally disjoint
 $u$-$v$ paths in $G$ and $S_{uv}$ is a $u$-$v$ separating set of
-vertices in $G$, then $|\cP_{uv}| \leq |S_{uv}|$.
+vertices in $G$, then
+%%
+\begin{equation}
+\label{eqn:distance_connectivity:upper_bound_internally_disjoint_paths}
+|\cP_{uv}| \leq |S_{uv}|.
+\end{equation}
 \end{proposition}
 
 \begin{proof}
@@ -901,6 +906,21 @@ $S_{uv}$ because $S_{uv}$ is a vertex cut of $G$. Any two distinct
 paths in $\cP_{uv}$ cannot contain the same vertex from $S_{uv}$. Thus
 the number of internally disjoint $u$-$v$ paths is at most $|S_{uv}|$.
 \end{proof}
+
+The
+bound~\eqref{eqn:distance_connectivity:upper_bound_internally_disjoint_paths}
+holds for any $u$-$v$ separating set $S_{uv}$ of vertices in $G$. In
+particular, we can choose $S_{uv}$ to be of minimum cardinality among
+all $u$-$v$ separating sets of vertices in $G$. Thus we have the
+following corollary.
+
+\begin{corollary}
+Consider any two distinct, non-adjacent vertices $u,v$ in a connected
+graph $G$. Let $\max(|\cP_{uv}|)$ be the maximum number of internally
+disjoint $u$-$v$ paths in $G$ and denote by $\min(|S_{uv}|)$ the
+minimum cardinality of a $u$-$v$ separating set of vertices in
+$G$. Then we have $\max(|\cP_{uv}|) \leq \min(|S_{uv}|)$.
+\end{corollary}
 
 \begin{theorem}
 \textbf{Menger's theorem.}\index{Menger's theorem}
