@@ -912,9 +912,15 @@ bound~\eqref{eqn:distance_connectivity:upper_bound_internally_disjoint_paths}
 holds for any $u$-$v$ separating set $S_{uv}$ of vertices in $G$. In
 particular, we can choose $S_{uv}$ to be of minimum cardinality among
 all $u$-$v$ separating sets of vertices in $G$. Thus we have the
-following corollary.
+following corollary. Menger's\index{Menger's theorem}
+Theorem~\ref{thm:distance_connectivity:Menger_theorem} provides a much
+stronger statement of
+Corollary~\ref{cor:distance_connectivity:upper_bound_internally_disjoint_paths},
+proving in effect that the two quantities $\max(|\cP_{uv}|)$ and
+$\min(|S_{uv}|)$ are equal.
 
 \begin{corollary}
+\label{cor:distance_connectivity:upper_bound_internally_disjoint_paths}
 Consider any two distinct, non-adjacent vertices $u,v$ in a connected
 graph $G$. Let $\max(|\cP_{uv}|)$ be the maximum number of internally
 disjoint $u$-$v$ paths in $G$ and denote by $\min(|S_{uv}|)$ the
@@ -923,6 +929,7 @@ $G$. Then we have $\max(|\cP_{uv}|) \leq \min(|S_{uv}|)$.
 \end{corollary}
 
 \begin{theorem}
+\label{thm:distance_connectivity:Menger_theorem}
 \textbf{Menger's theorem.}\index{Menger's theorem}
 Let $G$ be an undirected connected graph and let $u$ and $v$ be
 distinct, non-adjacent vertices of $G$. Then the maximum number of
