@@ -851,8 +851,28 @@ vertices. Then the following are equivalent.
 Menger's theorem has a number of different versions: an undirected,
 vertex-connectivity version; a directed, vertex-connectivity version;
 an undirected, edge-connectivity version; and a directed,
-edge-connectivity version. The following statement is the undirected,
-vertex-connectivity version.
+edge-connectivity version. In this section, we will prove the
+undirected, vertex-connectivity version. But first, let's consider a
+few technical results that will be of use for the purpose of this
+section.
+
+Let $u$ and $v$ be distinct vertices in a connected graph $G = (V,E)$
+and let $S \subseteq V$. Then $S$ is said to be $u$-$v$
+\emph{separating} if $u$ and $v$ lie in different components of the
+vertex deletion subgraph $G - S$. The vertices $u$ and $v$ are
+positioned such that after removing vertices in $S$ from $G$ and the
+corresponding edges, $u$ and $v$ are no longer connected nor strongly
+connected to each other. It is clear by definition that
+$u,v \notin S$. We also say that $S$ \emph{separates} $u$ and
+$v$, or $S$ is a vertex separating set. Similarly an edge set
+$T \subseteq E$ is $u$-$v$ separating~(or separates $u$ and $v$) if
+$u$ and $v$ lie in different components of the edge deletion subgraph
+$G - T$. But unlike the case of vertex separating sets, it is possible
+for $u$ and $v$ to be endpoints of edges in $T$ because the removal of
+edges does not result in deleting the corresponding endpoints. The set
+$T$ is also called an edge separating set. In other words, $S$ is a
+vertex cut and $T$ is an edge cut. When it is clear from context, we
+simply refer to a separating\index{separating set} set.
 
 \begin{theorem}
 \textbf{Menger's theorem.}\index{Menger's theorem}
