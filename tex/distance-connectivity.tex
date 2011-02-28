@@ -957,6 +957,29 @@ $|\cP_{uv}| \leq |T_{uv}|$ and $\cP_{uv} = |S_{uv}|$, a
 contradiction. Therefore $|T_{uv}| = |S_{uv}|$.
 \end{proof}
 
+\begin{lemma}
+Consider two distinct, non-adjacent vertices $u,v$ in a connected
+graph $G$ and let $k$ be the minimum number of vertices required to
+separate $u$ and $v$. If $G$ has a $u$-$v$ path of length $2$, then
+$G$ has $k$ internally disjoint $u$-$v$ paths.
+\end{lemma}
+
+\begin{proof}
+Argue by induction on $k$. For the base case, assume $k = 1$. Hence
+$G$ has a cut vertex $x$ such that $u$ and $v$ are disconnected in
+$G - x$. Any $u$-$v$ path must contain $x$. In particular, there can
+be only one internally disjoint $u$-$v$ path.
+
+Assume for induction that $k \geq 2$. Let $P: u,x,v$ be a path in $G$
+having length $2$ and suppose $S$ is a smallest $u$-$v$ separating set
+for $G - x$. Then $S \cup \{x\}$ is a $u$-$v$ separating set for
+$G$. By the minimality of $k$, we have $|S| \geq k - 1$. By the
+induction hypothesis, we have at least $k - 1$ internally disjoint
+$u$-$v$ paths in $G - x$. As $P$ is internally disjoint from any of
+the latter paths, conclude that $G$ has $k$ internally disjoint
+$u$-$v$ paths.
+\end{proof}
+
 \begin{theorem}
 \label{thm:distance_connectivity:Menger_theorem}
 \textbf{Menger's theorem.}\index{Menger's theorem}
