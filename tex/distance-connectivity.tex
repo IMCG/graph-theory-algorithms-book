@@ -889,6 +889,7 @@ illustrations of separating sets.
 \end{figure}
 
 \begin{proposition}
+\label{prop:distance_connectivity:upper_bound_internally_disjoint_paths}
 Consider two distinct, non-adjacent vertices $u,v$ in a connected
 graph $G$. If $\cP_{uv}$ is a collection of internally disjoint
 $u$-$v$ paths in $G$ and $S_{uv}$ is a $u$-$v$ separating set of
@@ -927,6 +928,34 @@ disjoint $u$-$v$ paths in $G$ and denote by $\min(|S_{uv}|)$ the
 minimum cardinality of a $u$-$v$ separating set of vertices in
 $G$. Then we have $\max(|\cP_{uv}|) \leq \min(|S_{uv}|)$.
 \end{corollary}
+
+\begin{corollary}
+Consider any two distinct, non-adjacent vertices $u,v$ in a connected
+graph $G$. Let $\cP_{uv}$ be a collection of internally disjoint
+$u$-$v$ paths in $G$ and let $S_{uv}$ be a $u$-$v$ separating set of
+vertices in $G$. If $|\cP_{uv}| = |S_{uv}|$, then $\cP_{uv}$ has
+maximum cardinality among all collections of internally disjoint
+$u$-$v$ paths in $G$ and $S_{uv}$ has minimum cardinality among all
+$u$-$v$ separating sets of vertices in $G$.
+\end{corollary}
+
+\begin{proof}
+Argue by contradiction. Let $\cQ_{uv}$ be another collection of
+internally disjoint $u$-$v$ paths in $G$ such that
+$|\cQ_{uv}| \geq |\cP_{uv}|$. Then
+$|\cP_{uv}| \leq |\cQ_{uv}| \leq |S_{uv}|$ by
+Proposition~\ref{prop:distance_connectivity:upper_bound_internally_disjoint_paths}.
+We cannot have $|\cQ_{uv}| > |\cP_{uv}|$, which would be contradictory
+to our hypothesis that $\cP_{uv} = |S_{uv}|$. Thus
+$|\cQ_{uv}| = |\cP_{uv}|$. Let $T_{uv}$ be another $u$-$v$
+separating set of vertices in $G$ such that
+$|T_{uv}| \leq |S_{uv}|$. Then we have
+$|\cP_{uv}| \leq |T_{uv}| \leq |S_{uv}|$ by
+Proposition~\ref{prop:distance_connectivity:upper_bound_internally_disjoint_paths}.
+We cannot have $|T_{uv}| < |S_{uv}|$ because we would then end up with
+$|\cP_{uv}| \leq |T_{uv}|$ and $\cP_{uv} = |S_{uv}|$, a
+contradiction. Therefore $|T_{uv}| = |S_{uv}|$.
+\end{proof}
 
 \begin{theorem}
 \label{thm:distance_connectivity:Menger_theorem}
