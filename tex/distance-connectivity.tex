@@ -888,6 +888,20 @@ illustrations of separating sets.
 \label{fig:distance_connectivity:vertex_edge_separating_sets}
 \end{figure}
 
+\begin{proposition}
+Consider two distinct, non-adjacent vertices $u,v$ in a connected
+graph $G$. If $\cP_{uv}$ is a collection of internally disjoint
+$u$-$v$ paths in $G$ and $S_{uv}$ is a $u$-$v$ separating set of
+vertices in $G$, then $|\cP_{uv}| \leq |S_{uv}|$.
+\end{proposition}
+
+\begin{proof}
+Each $u$-$v$ path in $\cP_{uv}$ must include at least one vertex from
+$S_{uv}$ because $S_{uv}$ is a vertex cut of $G$. Any two distinct
+paths in $\cP_{uv}$ cannot contain the same vertex from $S_{uv}$. Thus
+the number of internally disjoint $u$-$v$ paths is at most $|S_{uv}|$.
+\end{proof}
+
 \begin{theorem}
 \textbf{Menger's theorem.}\index{Menger's theorem}
 Let $G$ be an undirected connected graph and let $u$ and $v$ be
