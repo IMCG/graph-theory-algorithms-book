@@ -27,10 +27,12 @@ all:
 	make pdf
 	make clean
 
+# We distribute PGFPlots 1.4.1 with this book. The version of PGFPlots that
+# is distributed via TeXlive with Ubuntu 10.10 is rather old.
 pdf:
-	(TEXINPUTS=.:style:${TEXINPUTS:-:} && export TEXINPUTS && \
+	(TEXINPUTS=.:style:style/context/third/pgfplots:style/generic/pgfplots:style/generic/pgfplots/libs:style/generic/pgfplots/liststructure:style/generic/pgfplots/numtable:style/generic/pgfplots/oldpgfcompatib:style/generic/pgfplots/oldpgfplotscompatib:style/generic/pgfplots/sys:style/generic/pgfplots/util:style/latex/pgfplots:style/latex/pgfplots/libs:style/plain/pgfplots:${TEXINPUTS:-:} && export TEXINPUTS && \
 	 pdflatex -shell-escape $(TEX_MASTER))
-	(TEXINPUTS=.:style:${TEXINPUTS:-:} && export TEXINPUTS && \
+	(TEXINPUTS=.:style:style/context/third/pgfplots:style/generic/pgfplots:style/generic/pgfplots/libs:style/generic/pgfplots/liststructure:style/generic/pgfplots/numtable:style/generic/pgfplots/oldpgfcompatib:style/generic/pgfplots/oldpgfplotscompatib:style/generic/pgfplots/sys:style/generic/pgfplots/util:style/latex/pgfplots:style/latex/pgfplots/libs:style/plain/pgfplots:${TEXINPUTS:-:} && export TEXINPUTS && \
 	 pdflatex -shell-escape $(TEX_MASTER))
 
 clean:

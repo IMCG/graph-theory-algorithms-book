@@ -1,0 +1,444 @@
+
+% ======================================================
+% compatibility with PGF 2.0
+% ======================================================
+
+\expandafter\ifx\csname w@pgf@writea\endcsname\relax
+\newwrite\w@pgf@writea
+\fi
+
+\expandafter\ifx\csname r@pgf@reada\endcsname\relax
+\newread\r@pgf@reada
+\fi
+\let\pgfutil@inputcheck=\r@pgf@reada
+
+\pgfutil@ifundefined{pgf@texdist@protect}{%
+	\def\pgf@texdist@protect{}%
+}{}
+
+% from pgfutil-common.tex:
+
+% Usage:
+% \pgfutilstrreplace{<token>}{<replacement>}{<string>}
+%
+% -> will assign the modified string into \pgfretval.
+%
+% #1: the string to search (one or more tokens)
+% #2: zero, one or more tokens which will be inserted instead of '#1'.
+% #3: the string to search in
+\long\def\pgfutilstrreplace#1#2#3{%
+	\def\pgfretval{}%
+	\long\def\pgfutil@search@and@replace@@##1#1##2\pgf@EOI{%
+		\expandafter\def\expandafter\pgfretval\expandafter{\pgfretval ##1#2}%
+		\pgfutil@search@and@replace@loop{#1}{##2}%
+	}%
+	\pgfutil@search@and@replace@loop{#1}{#3}%
+}
+\long\def\pgfutil@search@and@replace@loop#1#2{%
+	\pgfutil@in@{#1}{#2}%
+	\ifpgfutil@in@
+		\def\pgf@loc@TMPa{\pgfutil@search@and@replace@@ #2\pgf@EOI}%
+	\else
+		\expandafter\def\expandafter\pgfretval\expandafter{\pgfretval #2}%
+		\let\pgf@loc@TMPa=\relax
+	\fi
+	\pgf@loc@TMPa
+}%
+% Solves a linear equation system of size 2x2 using gauss elimination.
+%
+% It employs TeX register arithmetics to do so.
+% #1: should contain 4 sets of braces with matrix entries, 
+% 	{<a11>}{<a12>}
+% 	{<a21>}{<a22>}
+% 	where each entry should be a number without unit.
+% #2: should contain 2 sets of braces with the right-hand-side,
+% 	{<r1>}{<r2>}
+% 	where each entry should be a number without unit.
+%
+% It will assign \pgfmathresult to contain two sets of braces with the
+% result.
+%
+% Example:
+% \pgfutilsolvetwotwoleq{
+% 	{0.24}{1}
+% 	{-0.97}{0}
+% }{
+% 	{-7}
+% 	{18}
+% }
+% -> yields \pgfmathresult={−18.55618}{−2.54642}
+%
+% The algorithm employs column pivotisation.
+\def\pgfutilsolvetwotwoleq#1#2{%
+	\begingroup
+		\dimendef\aa=0
+		\dimendef\ab=1
+		\dimendef\ba=2
+		\dimendef\bb=3
+		\dimendef\ra=4
+		\dimendef\rb=5
+		\dimendef\tmpa=6
+		\dimendef\tmpb=7
+		\edef\pgf@temp{#1}%
+		\expandafter\pgfutilsolvetwotwoleq@A\pgf@temp
+		\edef\pgf@temp{#2}%
+		\expandafter\pgfutilsolvetwotwoleq@r\pgf@temp
+		%
+		\pgfutilsolvetwotwoleq@ifislarger\aa\ba{%
+			% identity "permutation":
+			\def\Pa{a}%
+			\def\Pb{b}%
+		}{%
+			% permutation matrix: switch rows!
+			\def\Pa{b}%
+			\def\Pb{a}%
+		}%
+		% \pivot := 1/aa
+		\pgfmathreciprocal@
+			{\csname m\Pa a\endcsname}%
+		\let\pivot=\pgfmathresult
+		%
+		% \factor := 1/aa * ba 
+		\csname \Pb a\endcsname=\pivot\csname \Pb a\endcsname
+		\edef\factor{\expandafter\pgf@sys@tonumber\csname \Pb a\endcsname}%
+		%
+		% bb -= ba/aa * ab
+		\tmpa=-\factor\csname \Pa b\endcsname
+		\advance\csname \Pb b\endcsname by\tmpa
+		%
+		% rb -= ba/aa * ra
+		\tmpa=-\factor\csname r\Pa\endcsname
+		\advance\csname r\Pb\endcsname by\tmpa
+		%
+		% xb := rb / bb (the modified rb and modified bb!)
+		\pgfmathdivide@
+			{\expandafter\pgf@sys@tonumber\csname r\Pb\endcsname}
+			{\expandafter\pgf@sys@tonumber\csname \Pb b\endcsname}%
+		\expandafter\let\csname pgfmathresult\Pb\endcsname=\pgfmathresult
+		%
+		% ra -= xb * ab
+		\tmpa=\csname pgfmathresult\Pb\endcsname\csname \Pa b\endcsname
+		\advance\csname r\Pa\endcsname by-\tmpa
+		%
+		% xa := 1/aa * ra  (the modified ra!)
+		\tmpa=\pivot\csname r\Pa\endcsname
+		\expandafter\edef\csname pgfmathresult\Pa\endcsname{\pgf@sys@tonumber\tmpa}%
+		%
+		\edef\pgfmathresult{%
+			{\csname pgfmathresult\Pa\endcsname}%
+			{\csname pgfmathresult\Pb\endcsname}%
+		}%
+		\pgfmath@smuggleone\pgfmathresult
+	\endgroup
+}%
+\def\pgfutilsolvetwotwoleq@ifislarger#1#2#3#4{%
+	\tmpa=#1
+	\ifdim\tmpa<0pt
+		\multiply\tmpa by-1
+	\fi
+	\tmpb=#2
+	\ifdim\tmpb<0pt
+		\multiply\tmpb by-1
+	\fi
+	\ifdim\tmpa>\tmpb
+		#3%
+	\else
+		#4%
+	\fi
+}%
+\def\pgfutilsolvetwotwoleq@A#1#2#3#4{%
+	\def\maa{#1}\def\mab{#2}%
+	\def\mba{#3}\def\mbb{#3}%
+	\aa=#1pt \ab=#2pt
+	\ba=#3pt \bb=#4pt
+}
+\def\pgfutilsolvetwotwoleq@r#1#2{%
+	\ra=#1pt \rb=#2pt
+}%
+
+
+%%%%%%%
+%%%%%%%
+
+% from pgfmoduleshapes.code.tex:
+% Invoke an anchor
+\def\pgf@sh@reanchor#1#2{%
+  \pgfutil@ifundefined{pgf@anchor@#1@#2}%
+  {%
+    \pgfutil@ifundefined{pgf@anchor@generic@#2}{%
+	    \pgfmathsetcounter{pgf@counta}{#2}%
+	    \csname pgf@anchor@#1@border\endcsname{\pgfqpointpolar{\c@pgf@counta}{1pt}}%
+    }{%
+        \csname pgf@anchor@generic@#2\endcsname{#1}%
+    }%
+  }%
+  {\csname pgf@anchor@#1@#2\endcsname}%
+}
+
+% Defines a generic anchor, i.e. one which gets the associated shape
+% as first argument.
+%
+% #1: the anchor name.
+% #2: the code of the anchor. It may depend upon '##1', the shape's
+% name.
+%
+% The anchor will be defined locally in the current TeX scope.
+\def\pgfdeclaregenericanchor#1#2{%
+	\expandafter\def\csname pgf@anchor@generic@#1\endcsname##1{#2}%
+}%
+
+% from pgfcoretransformations.code.tex :
+\def\pgfgettransformentries#1#2#3#4#5#6{%
+	\edef#1{\pgf@pt@aa}%
+	\edef#2{\pgf@pt@ab}%
+	\edef#3{\pgf@pt@ba}%
+	\edef#4{\pgf@pt@bb}%
+	\edef#5{\the\pgf@pt@x}%
+	\edef#6{\the\pgf@pt@y}%
+}%
+\def\pgfsettransformentries#1#2#3#4#5#6{%
+	\pgfsettransform{{#1}{#2}{#3}{#4}{#5}{#6}}%
+}%
+
+% pgfutil@loop (from plain.tex)
+
+\def\pgfutil@loop#1\pgfutil@repeat{\def\pgfutil@body{#1}\pgfutil@iterate}
+\def\pgfutil@iterate{\pgfutil@body \let\pgfutil@next\pgfutil@iterate \else\let\pgfutil@next\relax\fi \pgfutil@next}
+\let\pgfutil@repeat=\fi % this makes \loop...\if...\repeat skippable
+
+\def\pgfqpointxy#1#2{%
+  \pgf@x=#1\pgf@xx%
+  \advance\pgf@x by #2\pgf@yx%
+  \pgf@y=#1\pgf@xy%
+  \advance\pgf@y by #2\pgf@yy}
+\def\pgfqpointxyz#1#2#3{%
+  \pgf@x=#1\pgf@xx%
+  \advance\pgf@x by #2\pgf@yx%
+  \advance\pgf@x by #3\pgf@zx%
+  \pgf@y=#1\pgf@xy%
+  \advance\pgf@y by #2\pgf@yy%
+  \advance\pgf@y by #3\pgf@zy}
+\def\pgfcoordinate#1#2{%
+  \edef\pgf@temp{#1}%
+  \ifx\pgf@temp\pgfutil@empty% do nothing
+  \else%
+    \pgf@process{\pgfpointtransformed{#2}}%
+    \expandafter\gdef\csname pgf@sh@ns@#1\endcsname{coordinate}%
+    \expandafter\xdef\csname pgf@sh@np@#1\endcsname{%
+      \noexpand\def\noexpand\centerpoint{\noexpand\pgfqpoint{\the\pgf@x}{\the\pgf@y}}%
+    }
+    \expandafter\gdef\csname pgf@sh@nt@#1\endcsname{{1}{0}{0}{1}{0pt}{0pt}}%
+    \expandafter\global\expandafter\let\csname pgf@sh@ma@#1\endcsname\pgfutil@empty%
+    \expandafter\gdef\csname pgf@sh@pi@#1\endcsname{\pgfpictureid}%
+  \fi%
+}
+% A "quick" variant of \pgfpointscale which doesn't invoke the math parser for '#1'.
+% #1 must be a number without units, no registers are accepted.
+\def\pgfqpointscale#1#2{%
+  \pgf@process{#2}%
+  \pgf@x=#1\pgf@x%
+  \pgf@y=#1\pgf@y%
+}
+% ======================================================
+
+\def\pgfutilensuremath#1{%
+	\ifmmode#1\else$#1$\fi
+}
+\def\tikzifinpicture#1#2{%
+	\pgfutil@ifundefined{filldraw}{#2}{#1}%
+}%
+
+\def\tikz@fig@scan@name(#1){%
+	\pgfkeysvalueof{/tikz/name/.@cmd}#1\pgfeov% CF : this is now ALWAYS consistent with 'name=' option; allows overrides.
+	\tikz@@scan@fig}%
+
+\tikzoption{ybar}[]{\let\tikz@plot@handler=\pgfplothandlerybar}
+\tikzoption{xbar}[]{\let\tikz@plot@handler=\pgfplothandlerxbar}
+\tikzoption{ybar interval}[]{\let\tikz@plot@handler=\pgfplothandlerybarinterval}
+\tikzoption{xbar interval}[]{\let\tikz@plot@handler=\pgfplothandlerxbarinterval}
+\tikzoption{const plot}[]{\let\tikz@plot@handler=\pgfplothandlerconstantlineto}
+\tikzoption{const plot mark left}[]{\let\tikz@plot@handler=\pgfplothandlerconstantlineto}
+\tikzoption{const plot mark right}[]{\let\tikz@plot@handler=\pgfplothandlerconstantlinetomarkright}
+\tikzoption{jump mark right}[]{\let\tikz@plot@handler=\pgfplothandlerjumpmarkright}
+\tikzoption{jump mark left}[]{\let\tikz@plot@handler=\pgfplothandlerjumpmarkleft}
+
+\def\tikz@plot@samples{25}
+\def\tikz@plot@domain{-5:5}
+\def\tikz@plot@var{\x}
+\def\tikz@plot@samplesat{-5,-4.5833333,...,5}
+
+\tikzoption{mark}{
+	\def\tikz@plot@mark{#1}%
+	\def\tikz@temp{none}% this check is relatively new
+	\ifx\tikz@temp\tikz@plot@mark
+		\let\tikz@plot@mark=\pgfutil@empty
+	\fi
+}
+
+% the 'pt' suffix is new:
+\pgfdeclareplotmark{ball}
+{%
+  \def\tikz@shading{ball}%
+  \shade (0pt,0pt) circle (\pgfplotmarksize);%
+}
+
+% the 'every mark' style is new:
+\tikzset{
+	no marks/.style={mark=none},%
+	every mark/.style={},
+	mark options/.style={%
+		every mark/.style={#1}%
+	}}
+\def\tikz@@@plot{%
+    \def\pgfplotlastpoint{\pgfpointorigin}%
+    \tikz@plot@handler%
+    \tikz@plot@data%
+    \global\let\tikz@@@temp=\pgfplotlastpoint%
+    \ifx\tikz@plot@mark\pgfutil@empty%
+    \else%
+      % Marks are drawn after the path.
+      \setbox\tikz@figbox=\hbox{%
+        \unhbox\tikz@figbox%
+        \hbox{{%
+          \pgfinterruptpath%
+            \pgfscope%
+              \let\tikz@options=\pgfutil@empty%
+              \let\tikz@transform=\pgfutil@empty%
+			  \tikzset{every mark}%
+              \tikz@options%
+              \ifx\tikz@mark@list\pgfutil@empty%
+                \pgfplothandlermark{\tikz@transform\pgfuseplotmark{\tikz@plot@mark}}%
+              \else
+                \pgfplothandlermarklisted{\tikz@transform\pgfuseplotmark{\tikz@plot@mark}}{\tikz@mark@list}%
+              \fi
+              \tikz@plot@data%
+            \endpgfscope
+          \endpgfinterruptpath%
+        }}%
+      }%
+    \fi%
+    \global\setbox\tikz@tempbox=\copy\tikz@figbox%
+    %\global\let\tikz@after@path@smuggle=\tikz@after@path
+  \endgroup%
+  \setbox\tikz@figbox=\box\tikz@tempbox%  
+  \tikz@make@last@position{\tikz@@@temp}%  
+  %\expandafter\tikz@scan@next@command\tikz@after@path@smuggle%
+  \tikz@scan@next@command%
+}
+
+
+
+
+% ======================================================
+
+
+\newif\ifpgfmathcomparison
+
+% Assigns \pgfmathresult to 1.0 if #1 ~= #1.
+%
+% It will also set the boolean \ifpgfmathcomparison accordingly
+% (globally).
+\def\pgfmathapproxequalto#1#2{%
+	\edef\pgfmath@marshal{%
+		\noexpand\pgfmathparse{#2}
+		\noexpand\let\noexpand\pgfmath@arg\noexpand\pgfmathresult%
+		\noexpand\pgfmathparse{#1}%
+	}%
+	\pgfmath@marshal%
+	\pgfmathapproxequalto@{\pgfmathresult}{\pgfmath@arg}}
+\def\pgfmathapproxequalto@#1#2{%
+	\begingroup%
+		\pgfmath@x#1pt%
+		\pgfmath@y#2pt%
+		\advance\pgfmath@x-\pgfmath@y%
+		\ifdim\pgfmath@x<0pt
+			\multiply\pgfmath@x by-1
+		\fi
+		\ifdim\pgfmath@x<0.0001pt\relax%
+			\def\pgfmathresult{1.0}%
+			\global\pgfmathcomparisontrue
+		\else%
+			\def\pgfmathresult{0.0}%
+			\global\pgfmathcomparisonfalse
+		\fi%
+	\pgfmath@smuggleone\pgfmathresult
+	\endgroup%
+}
+
+\newif\ifpgfmarktext@usetikznode
+\pgfkeys{
+	/pgf/text mark/.initial=p,
+	/pgf/text mark style/.initial=,
+	/pgf/text mark as node/.is if=pgfmarktext@usetikznode,
+	/pgf/text mark as node/.default=true,
+	%
+	% backw. compat: the extra search path confuses the '.unknown'
+	% handlers, so this here is deprecated:
+	/pgf/text mark/style/.style={/pgf/text mark style={#1}},%
+	/pgf/text mark/as node/.style={/pgf/text mark as node=#1},%
+}%
+
+\pgfdeclareplotmark{text}
+{
+	\pgfkeysgetvalue{/pgf/text mark style}\pgfmarktext@style
+	\pgfkeysgetvalue{/pgf/text mark}\pgfmarktext@
+	\ifpgfmarktext@usetikznode
+		\expandafter\node\expandafter[\pgfmarktext@style]{\pgfmarktext@};
+	\else
+		\expandafter\pgftext\expandafter[\pgfmarktext@style]{\pgfmarktext@}%
+	\fi
+}
+
+% A fix for the overlay option and matrices:
+\def\pgf@matrix@startcell{%
+  %
+  % Step 1: Init the list of nodes for this cell
+  %
+  \let\pgf@nodecallback=\pgf@matrix@nodecallback%
+  %
+  % Step 2: Setup the bounding box
+  %
+  \pgfinterruptboundingbox%
+  %
+  % Step 3: Reset the transformation matrix
+  %
+  \pgftransformreset%
+  %
+  % Step 4: Collect everything in a cell box
+  %
+  \setbox\pgf@matrix@cell=\hbox\bgroup\bgroup%
+	% make sure that cell pictures are not affected if matrizes have
+	% 'overlay' option on:
+	\pgf@relevantforpicturesizetrue
+    \pgfsys@beginpicture%
+    \normalbaselines%
+    % Find out whether the cell is empty:
+    \pgfutil@ifnextchar\let%
+    {% ok, candidate, check following symbol
+      \afterassignment\pgf@matrix@empty@check\let\pgf@matrix@temp=% get rid of \let
+    }%
+    {% no, not empty
+      \pgf@matrix@empty@cell@false%
+      \pgfmatrixbegincode%
+    }%
+}
+
+% From pgfmoduleplot.code.tex:
+{
+	\catcode`\%=12
+	\catcode`\"=12
+	\xdef\pgf@gnuplot@head@pgf@two@oo#1{set terminal table; set output "#1.table"; set format "%.5f"}
+	\ifx\pgf@gnuplot@head\pgf@gnuplot@head@pgf@two@oo
+		\xdef\pgf@gnuplot@head#1{set table "#1.table"; set format "%.5f"}
+	\else
+		\xdef\pgf@gnuplot@head{set table \noexpand\pgf@plottablefile@quoted; set format "%.5f"}
+	\fi
+}
+
+% From pgfcorescopes.code.tex:
+\def\pgfresetboundingbox{%
+    \global\pgf@picmaxx=-16000pt\relax%
+    \global\pgf@picminx=16000pt\relax%
+    \global\pgf@picmaxy=-16000pt\relax%
+    \global\pgf@picminy=16000pt\relax%
+}%

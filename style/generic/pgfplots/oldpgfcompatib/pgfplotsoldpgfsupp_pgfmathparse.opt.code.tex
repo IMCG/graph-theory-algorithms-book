@@ -1,0 +1,122 @@
+% A small optimization package which provides
+%
+% \beginpgfmathparsecheckfornumber
+% ...
+% \endpgfmathparsecheckfornumber
+%
+% in order to optimize \pgfmathparse. It works as follows: inside of
+% the environment (which doesn't use scopes), \pgfmathparse is
+% *replaced* by a different method which uses an extremely fast check
+% to decide whether the input is a number number. Is so, it returns
+% the number. Otherwise, it invokes the standard math parser.
+% It is about 400% faster than \pgfmathparse if the argument *is* a
+% number.
+%
+% The \endpgfmathparsecheckfornumber is optional (no groups are
+% introduced)
+%
+% Copyright 2010 by Christian Feuersänger.
+%
+% Replaces \pgfmathparse by the fast number checker.
+\def\beginpgfmathparsecheckfornumber{%
+	\let\pgfmathparse=\pgfmathparsehashedcheck
+}%
+\def\endpgfmathparsecheckfornumber{%
+	\let\pgfmathparse=\pgfmathparsehashedcheck@orig
+}%
+
+\def\pgfmp@EOI{\pgfmp@EOI}%
+\def\pgfmathparsehashedcheck@isnumber@gobble#1\pgfmp@EOI{}
+
+\newdimen\r@pgfmathparse@hashedcheck@
+\newcount\c@pgfmathparse@hashedcheck@
+\let\pgfmathparsehashedcheck@orig=\pgfmathparse
+
+\def\pgfmathparsehashedcheck#1{%
+	\edef\pgfmathparse@temp{#1}%
+	\expandafter\pgfmathparsehashedcheck@isnumber@loop\pgfmathparse@temp\pgfmp@EOI
+	\pgfmathparsehashedcheck@finalize{#1}%
+}%
+\def\pgfmathparsehashedcheck@finalize@isnonumber#1{%
+	\pgfmathparsehashedcheck@orig{#1}%
+	\let\pgfmathparsehashedcheck@finalize\pgfmathparsehashedcheck@finalize@isnumber
+}%
+\def\pgfmathparsehashedcheck@finalize@isnumber#1{%
+	\r@pgfmathparse@hashedcheck@=#1pt
+	\expandafter\pgfmathparsehashed@assign\the\r@pgfmathparse@hashedcheck@
+	%--------------------------------------------------
+	% %
+	% \let\KKK=\pgfmathresult
+	% \pgfmathparsehashedcheck@orig{#1}%
+	% \ifx\KKK\pgfmathresult
+	% \else
+	% 	\pgfplots@error{FAILED FOR #1: expected `\pgfmathresult'; got `\KKK' (temp = \pgf@temp)}%
+	% \fi
+	%-------------------------------------------------- 
+}%
+{\catcode`\p=12\catcode`\t=12\gdef\PGF@TEMP{pt}}
+\expandafter\def\expandafter\pgfmathparsehashed@assign\expandafter#\expandafter1\expandafter.\expandafter#\expandafter2\PGF@TEMP{%
+	\def\pgf@temp{#2}%
+	\ifx\pgf@temp0%
+		\def\pgfmathresult{#1}%
+	\else
+		\def\pgfmathresult{#1.#2}%
+	\fi
+}%
+\let\pgfmathparsehashedcheck@finalize\pgfmathparsehashedcheck@finalize@isnumber
+
+\expandafter\def\csname pgf@pp+\endcsname{1}
+\expandafter\def\csname pgf@pp-\endcsname{1}
+\expandafter\def\csname pgf@p0\endcsname{1}
+\expandafter\def\csname pgf@p1\endcsname{1}
+\expandafter\def\csname pgf@p2\endcsname{1}
+\expandafter\def\csname pgf@p3\endcsname{1}
+\expandafter\def\csname pgf@p4\endcsname{1}
+\expandafter\def\csname pgf@p5\endcsname{1}
+\expandafter\def\csname pgf@p6\endcsname{1}
+\expandafter\def\csname pgf@p7\endcsname{1}
+\expandafter\def\csname pgf@p8\endcsname{1}
+\expandafter\def\csname pgf@p9\endcsname{1}
+\expandafter\def\csname pgf@p.\endcsname{1}
+
+\pgfutil@ifundefined{ifcsname}{%
+	\def\pgfmathparsehashedcheck@isnumber@loop#1{%
+		\expandafter\ifx\csname pgf@pp\string#1\endcsname\relax
+			\expandafter\pgfmathparsehashedcheck@isnumber@loop
+		\else
+			\expandafter\pgfmathparsehashedcheck@isnumber@loop@\expandafter#1%
+		\fi
+	}%
+	\def\pgfmathparsehashedcheck@isnumber@loop@#1{%
+		\expandafter\ifx\csname pgf@p\string#1\endcsname\relax
+			\expandafter\pgfmathparsehashedcheck@isnumber@loop@
+		\else
+			\expandafter\pgfmathparsehashedcheck@isnumber@endfalse\expandafter#1%
+		\fi
+	}%
+}{%
+	\def\pgfmathparsehashedcheck@isnumber@loop#1{%
+		\ifcsname pgf@pp\string#1\endcsname
+			\expandafter\pgfmathparsehashedcheck@isnumber@loop
+		\else
+			\expandafter\pgfmathparsehashedcheck@isnumber@loop@\expandafter#1%
+		\fi
+	}%
+	\def\pgfmathparsehashedcheck@isnumber@loop@#1{%
+		\ifcsname pgf@p\string#1\endcsname
+			\expandafter\pgfmathparsehashedcheck@isnumber@loop@
+		\else
+			\expandafter\pgfmathparsehashedcheck@isnumber@endfalse\expandafter#1%
+		\fi
+	}%
+}%
+\def\pgfmathparsehashedcheck@isnumber@endfalse#1{%
+	\ifx#1\pgfmp@EOI
+	\else
+		\let\pgfmathparsehashedcheck@finalize=\pgfmathparsehashedcheck@finalize@isnonumber
+		\expandafter\pgfmathparsehashedcheck@isnumber@gobble
+	\fi
+}%
+
+
+\endinput
