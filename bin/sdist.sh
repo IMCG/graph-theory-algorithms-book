@@ -100,7 +100,9 @@ if [ -e "book.pdf" ] && [ -f "book.pdf" ]; then
     cd ..
     cp -rf "$BOOK_ROOT" "$NAME$VERSION"
     mv "$NAME$VERSION"/book.pdf "$NAME$VERSION".pdf
-    rm "$NAME$VERSION"/.hg/hgrc
+    rm -rf "$NAME$VERSION"/.hg
+    rm -rf "$NAME$VERSION"/.hgignore
+    rm -rf "$NAME$VERSION"/.hgtags
     tar -jcf "$NAME$VERSION".tar.bz2 "$NAME$VERSION"
     zip -q -r "$NAME$VERSION".zip "$NAME$VERSION"
     rm -rf "$NAME$VERSION"
