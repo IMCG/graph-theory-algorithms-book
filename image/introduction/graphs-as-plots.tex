@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{pgfplots}
+\usetikzlibrary{external}
+\tikzexternalize{graphs-as-plots}
+\usepackage{subfigure}
+
+\begin{document}
+
+\begin{figure}
 %% sin(x) and coordinates
 \subfigure[Plots of functions.]{
 \begin{tikzpicture}
@@ -45,3 +55,6 @@
 \end{axis}
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
