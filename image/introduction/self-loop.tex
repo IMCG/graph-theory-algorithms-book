@@ -9,6 +9,15 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{pgfplots}
+\usetikzlibrary{external}
+\tikzexternalize{self-loop}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [arrowDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
@@ -24,3 +33,6 @@
 (a) edge[arrowDecorate,loop below,min distance=10mm,out=310,in=230] node {} (a)
 (b) edge[arrowDecorate] node {} (c);
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
