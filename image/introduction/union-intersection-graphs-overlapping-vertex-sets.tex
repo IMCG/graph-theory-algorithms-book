@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{union-intersection-graphs-overlapping-vertex-sets}
+
+\begin{document}
+
+\begin{figure}
 %% graph G_1
 \subfigure[$G_1$]{
 \begin{tikzpicture}
@@ -104,3 +114,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
