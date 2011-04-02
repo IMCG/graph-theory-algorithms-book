@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{five-complete-graphs}
+
+\begin{document}
+
+\begin{figure}
 %% complete graph K_5
 \subfigure[$K_5$]{
 \begin{tikzpicture}
@@ -107,3 +117,6 @@
 \node at (0.5,0) {};
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
