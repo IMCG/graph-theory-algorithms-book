@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{star-subgraph}
+
+\begin{document}
+
+\begin{figure}
 %% pentagon with star and inner pentagon
 \subfigure[]{
 \begin{tikzpicture}
@@ -60,3 +70,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
