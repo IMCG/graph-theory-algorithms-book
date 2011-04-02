@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{adjacency-matrices}
+
+\begin{document}
+
+\begin{figure}
 %% digraph
 \subfigure[]{
 \begin{tikzpicture}
@@ -58,3 +68,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
