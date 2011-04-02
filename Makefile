@@ -55,6 +55,7 @@ clean:
 	rm -rfv *.lof
 	rm -rfv *.log
 	rm -rfv *.lot
+	rm -rfv *.orig
 	rm -rfv *.out
 	rm -rfv *.ps
 	rm -rfv *.table
