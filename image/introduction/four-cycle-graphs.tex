@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{four-cycle-graphs}
+
+\begin{document}
+
+\begin{figure}
 %% cycle graph C_6
 \subfigure[$C_6$]{
 \begin{tikzpicture}
@@ -97,3 +107,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
