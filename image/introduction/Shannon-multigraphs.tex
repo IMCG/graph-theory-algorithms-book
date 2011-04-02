@@ -9,19 +9,31 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{Shannon-multigraphs}
+\DeclareMathOperator*{\Sh}{Sh}  %% Shannon multigraphs
+
+\begin{document}
+
+\begin{figure}
 %% Shannon multigraph Sh(2)
 \subfigure[$\Sh(2)$]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/-2/0, b/2/0, c/0/3} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/b, b/c, c/a} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
 }
@@ -30,18 +42,18 @@
 %% Shannon multigraph Sh(3)
 \subfigure[$\Sh(3)$]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/-2/0, b/2/0, c/0/3} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/b, b/c, c/a} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
 }
-(a) edge[linedecorate,bend right] node {} (b);
+(a) edge[lineDecorate,bend right] node {} (b);
 \end{tikzpicture}
 }
 \quad
@@ -49,17 +61,17 @@
 %% Shannon multigraph Sh(4)
 \subfigure[$\Sh(4)$]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/-2/0, b/2/0, c/0/3} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/b, b/c, c/a} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-  (\startnode) edge[linedecorate,bend right] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate,bend right] node {} (\endnode)
 };
 \end{tikzpicture}
 }
@@ -67,19 +79,19 @@
 %% Shannon multigraph Sh(5)
 \subfigure[$\Sh(5)$]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/-2/0, b/2/0, c/0/3} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/b, b/c, c/a} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-  (\startnode) edge[linedecorate,bend right] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate,bend right] node {} (\endnode)
 }
-(a) edge[linedecorate,bend left] node {} (b);
+(a) edge[lineDecorate,bend left] node {} (b);
 \end{tikzpicture}
 }
 \quad
@@ -87,18 +99,18 @@
 %% Shannon multigraph Sh(6)
 \subfigure[$\Sh(6)$]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/-2/0, b/2/0, c/0/3} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/b, b/c, c/a} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-  (\startnode) edge[linedecorate,bend right] node {} (\endnode)
-  (\startnode) edge[linedecorate,bend left=25] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate,bend right] node {} (\endnode)
+  (\startnode) edge[lineDecorate,bend left=25] node {} (\endnode)
 };
 \end{tikzpicture}
 }
@@ -107,19 +119,22 @@
 %% Shannon multigraph Sh(7)
 \subfigure[$\Sh(7)$]{
 \begin{tikzpicture}
-[nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
-  linedecorate/.style={-,thick}]
+[nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+  lineDecorate/.style={-,thick}]
 %% nodes or vertices
 \foreach \nodename/\x/\y in {a/-2/0, b/2/0, c/0/3} {
-  \node (\nodename) at (\x,\y) [nodedecorate] {};
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
 }
 %% edges or lines
 \path
 \foreach \startnode/\endnode in {a/b, b/c, c/a} {
-  (\startnode) edge[linedecorate] node {} (\endnode)
-  (\startnode) edge[linedecorate,bend right] node {} (\endnode)
-  (\startnode) edge[linedecorate,bend left=25] node {} (\endnode)
+  (\startnode) edge[lineDecorate] node {} (\endnode)
+  (\startnode) edge[lineDecorate,bend right] node {} (\endnode)
+  (\startnode) edge[lineDecorate,bend left=25] node {} (\endnode)
 }
-(a) edge[linedecorate,bend right=50] node {} (b);
+(a) edge[lineDecorate,bend right=50] node {} (b);
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
