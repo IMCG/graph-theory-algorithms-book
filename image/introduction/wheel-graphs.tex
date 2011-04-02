@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{wheel-graphs}
+
+\begin{document}
+
+\begin{figure}
 %% wheel graph W_4
 \subfigure[$W_4$]{
 \begin{tikzpicture}
@@ -142,3 +152,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
