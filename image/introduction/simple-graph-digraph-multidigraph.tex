@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{simple-graph-digraph-multidigraph}
+
+\begin{document}
+
+\begin{figure}
 %% simple graph
 \subfigure[Simple graph.]{
 \label{fig:introduction:triangle_simple_graph}
@@ -83,3 +93,6 @@
 (c) edge[arrowDecorate,bend right=10] node {} (d);
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
