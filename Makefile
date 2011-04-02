@@ -40,10 +40,12 @@ clean:
 	rm -rfv *#
 	rm -rfv *~
 	rm -rfv *.aux
+	rm -rfv *.auxlock
 	rm -rfv *.bak
 	rm -rfv tex/*.bak
 	rm -rfv *.bbl
 	rm -rfv *.blg
+	rm -rfv *.dpth
 	rm -rfv *.dvi
 	rm -rfv *.gnuplot
 	rm -rfv *.idx
