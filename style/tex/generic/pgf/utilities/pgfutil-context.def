@@ -1,0 +1,336 @@
+% Copyright 2006 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/generic/pgf/licenses/LICENSE for more details.
+
+
+
+
+% The aux files, needed for reading back coordinates
+\def\pgfutil@aux@read@hook{
+  \pgfutil@IfFileExists{\jobname.pgf}{\input \jobname.pgf\relax}{}
+  \csname newwrite\endcsname\pgfutil@auxout
+  \csname openout\endcsname\pgfutil@auxout\jobname.pgf
+}
+
+% XColor-like support for ConTeXt
+
+\def\pgfutil@definecolor#1#2#3{\csname pgfutil@emu@#2\endcsname{#1}#3\@nil}
+
+\def\pgfutil@emu@rgb#1#2,#3,#4\@nil{\expandafter\def\csname\string\color@#1\endcsname{\xcolor@{}{}{rgb}{#2,#3,#4}}}
+\def\pgfutil@emu@gray#1#2\@nil{\expandafter\def\csname\string\color@#1\endcsname{\xcolor@{}{}{rgb}{#2,#2,#2}}}
+
+\pgfutil@definecolor{white}{gray}{1}
+\pgfutil@definecolor{black}{gray}{0}
+\pgfutil@definecolor{gray}{gray}{0.5}
+\pgfutil@definecolor{red}{rgb}{1,0,0}
+\pgfutil@definecolor{green}{rgb}{0,1,0}
+\pgfutil@definecolor{blue}{rgb}{0,0,1}
+\pgfutil@definecolor{cyan}{rgb}{0,1,1}
+\pgfutil@definecolor{magenta}{rgb}{1,0,1}
+\pgfutil@definecolor{yellow}{rgb}{1,1,0}
+\pgfutil@definecolor{orange}{rgb}{1,0.5,0}
+\pgfutil@definecolor{violet}{rgb}{0.5,0,0.5}
+\pgfutil@definecolor{purple}{rgb}{0.75,0,0.25}
+\pgfutil@definecolor{brown}{rgb}{0.75,0.5,0.25}
+
+\def\pgfutil@color#1{%
+  \pgfutil@colorlet{.}{#1}%
+  \pgfsysprotocol@getcurrentprotocol\pgfutil@emu@temp%
+  {%
+    \pgfsysprotocol@setcurrentprotocol\pgfutil@empty%
+    \pgfsysprotocol@bufferedtrue%
+    \pgfsetcolor{.}%
+    \expandafter\pgfsys@outerinvoke\expandafter{\pgfsysprotocol@currentprotocol}%
+  }%
+  \pgfsysprotocol@setcurrentprotocol\pgfutil@emu@temp%
+  \aftergroup\pgfutil@reset@color%                
+}
+
+\def\pgfutil@extractcolorspec#1#2{%
+  \def#2{{#1}}%
+}
+
+\def\pgfutil@convertcolorspec#1#2#3{%
+  \edef#3{\expandafter\expandafter\expandafter\pgfutil@emu@select\csname\string\color@#1\endcsname}%
+}
+
+
+\def\pgfutil@doifcolorelse#1#2#3{%
+  \expandafter\ifx\csname\string\color@#1\endcsname\relax%
+    \doifcolorelse{#1}{\let\pgf@next=\pgfutil@firstoftwo}{\let\pgf@next=\pgfutil@secondoftwo}%
+  \else
+    \let\pgf@next=\pgfutil@firstoftwo%
+  \fi%
+  \pgf@next{#2}{#3}%  
+}
+
+
+\def\pgfutil@reset@color{%
+  \pgfsysprotocol@getcurrentprotocol\pgfutil@emu@temp%
+  {%
+    \pgfsysprotocol@setcurrentprotocol\pgfutil@empty%
+    \pgfsysprotocol@bufferedtrue%
+    \pgfsetcolor{.}%
+    \expandafter\pgfsys@outerinvoke\expandafter{\pgfsysprotocol@currentprotocol}%
+  }%
+  \pgfsysprotocol@setcurrentprotocol\pgfutil@emu@temp%
+}
+\expandafter\def\csname\string\color@.\endcsname{\xcolor@{}{}{rgb}{0,0,0}}
+
+\def\pgfutil@colorlet#1#2{%
+  \edef\pgf@marshal{#2}%
+  \expandafter\pgfutil@in@\expandafter!\expandafter{\pgf@marshal}%
+  \ifpgfutil@in@%
+    % compute mixture
+    {%
+      \expandafter\pgfutil@emu@mix\pgf@marshal!white!\@nil%
+      \xdef\pgf@marshal{\noexpand\def\expandafter\noexpand\csname\string\color@#1\endcsname{%
+          \noexpand\xcolor@{}{}{rgb}{\pgf@sys@tonumber\pgf@xa,\pgf@sys@tonumber\pgf@xb,\pgf@sys@tonumber\pgf@xc}}}%
+    }%
+    \pgf@marshal%
+  \else%
+    \expandafter\ifx\csname\string\color@#2\endcsname\relax%
+      \pgfutil@registercolor{#2}%
+    \fi%
+    \edef\pgf@marshal{\noexpand\let\expandafter\noexpand\csname\string\color@#1\endcsname=%
+                      \expandafter\noexpand\csname\string\color@#2\endcsname}%
+    \pgf@marshal%
+  \fi%  
+}
+\def\pgfutil@emu@mix#1!#2!#3!#4\@nil{%
+  \expandafter\ifx\csname\string\color@#1\endcsname\relax%
+    \pgfutil@registercolor{#1}%
+  \fi%
+  \expandafter\ifx\csname\string\color@#3\endcsname\relax%
+    \pgfutil@registercolor{#3}%
+  \fi%
+  \expandafter\expandafter\expandafter\pgfutil@emu@unpack\csname\string\color@#1\endcsname%
+  \pgf@ya=\pgf@xa%
+  \pgf@yb=\pgf@xb%
+  \pgf@yc=\pgf@xc%
+  \expandafter\expandafter\expandafter\pgfutil@emu@unpack\csname\string\color@#3\endcsname%
+  \c@pgf@counta=#2\relax%
+  \c@pgf@countb=100\relax%
+  \advance\c@pgf@countb by-\c@pgf@counta\relax%
+  \pgf@xa=\c@pgf@countb\pgf@xa%
+  \advance\pgf@xa by\c@pgf@counta\pgf@ya%
+  \divide\pgf@xa by 100\relax%
+  \pgf@xb=\c@pgf@countb\pgf@xb%
+  \advance\pgf@xb by\c@pgf@counta\pgf@yb%
+  \divide\pgf@xb by 100\relax%
+  \pgf@xc=\c@pgf@countb\pgf@xc%
+  \advance\pgf@xc by\c@pgf@counta\pgf@yc%
+  \divide\pgf@xc by 100\relax%
+}
+\def\pgfutil@emu@unpack#1#2#3#4#5{%
+  \pgfutil@emu@@unpack#5\@nil%
+}
+\def\pgfutil@emu@@unpack#1,#2,#3\@nil{%
+  \pgf@xa=#1pt%
+  \pgf@xb=#2pt%
+  \pgf@xc=#3pt%
+}
+
+\def\pgfutil@emu@select#1#2#3#4#5{#5}
+
+
+\def\pgfutil@registercolor#1{%
+  \edef\pgf@temp{\PDFcolor{#1}}%
+  \edef\pgf@marshal{\noexpand\pgfutil@in@{ g}{\pgf@temp}}%
+  \pgf@marshal%
+  \ifpgfutil@in@%
+    \expandafter\pgfutil@context@parse@gray\pgf@temp\pgf@stop{#1}%
+  \else%
+    \edef\pgf@marshal{\noexpand\pgfutil@in@{ rg}{\pgf@temp}}%
+    \pgf@marshal%
+    \ifpgfutil@in@%
+      \expandafter\pgfutil@context@parse@rgb\pgf@temp\pgf@stop{#1}%
+    \else%
+      \PackageError{pgf}{Color #1 has an unsupported color model.}{}%
+      \pgfutil@definecolor{#1}{gray}{0}
+    \fi%
+  \fi%
+}
+
+\def\pgfutil@context@parse@gray#1 g#2\pgf@stop#3{%
+  \pgfutil@definecolor{#3}{gray}{#1}
+}
+
+\def\pgfutil@context@parse@rgb#1 #2 #3 rg#4\pgf@stop#5{%
+  \pgfutil@definecolor{#5}{rgb}{#1,#2,#3}
+}
+
+% Make this command available in general:
+\let\colorlet=\pgfutil@colorlet
+
+
+% pgfutil@minipage
+
+\def\pgfutil@minipage[#1]#2{%
+  \hbox to#2\bgroup%
+    \hsize=#2\relax%
+    \vbox\bgroup\leavevmode%
+}
+\def\pgfutil@endminipage{\egroup\egroup}
+
+
+
+% Driver detector (how should we do this in ConTeXt?) :
+
+\ifx\pdfoutput\@undefined\newcount\pdfoutput\fi
+\ifx\pdfoutput\relax\newcount\pdfoutput\fi
+
+\def\pgfutil@guessdriver{
+  \ifx\XeTeXversion\@undefined
+    \ifx\preloadedspecials\@undefined%
+      \ifcase\pdfoutput%
+        \def\pgfsysdriver{pgfsys-dvips.def}%
+      \else%
+        \def\pgfsysdriver{pgfsys-pdftex.def}% pdfTeX & LuaTeX
+      \fi%
+    \else%
+      \pgfutil@driver@if@in{postscript}{pgfsys-dvips.def}
+      \pgfutil@driver@if@in{tpd}{pgfsys-pdftex.def}
+      \pgfutil@driver@if@in{dpm}{pgfsys-dvipdfm.def}
+      \pgfutil@driver@if@in{dpx}{pgfsys-dvipdfmx.def}
+      \pgfutil@driver@if@in{xetex}{pgfsys-xetex.def}
+      \ifx\pgfsysdriver\relax%
+        \PackageWarning{pgf}{I was not able to discern the driver, the
+          preloaded specials were \preloadedspecials. I am going to use
+          pgfsys-dvips.def}%
+        \def\pgfsysdriver{pgfsys-dvips.def}
+      \fi%
+    \fi
+  \else
+    \def\pgfsysdriver{pgfsys-xetex.def}% should be right
+  \fi
+}
+\def\pgfutil@driver@if@in#1#2{%
+  \edef\pgf@marshal{\noexpand\pgfutil@in@{#1}{\preloadedspecials}}
+  \pgf@marshal
+  \ifpgfutil@in@%
+    \def\pgfsysdriver{#2}%
+  \fi%
+}
+
+
+% Global colors
+
+\let\pgfutil@globalcolorsfalse=\relax
+\let\pgfutil@globalcolorstrue=\relax
+
+
+
+% Font stuff
+
+\def\pgfutil@font@tiny{\tfxx}
+\def\pgfutil@font@scriptsize{\tfxx}
+\def\pgfutil@font@footnotesize{\tfx}
+\def\pgfutil@font@small{\tfx}
+\def\pgfutil@font@normalsize{\tf}
+\def\pgfutil@font@large{\tfa}
+\def\pgfutil@font@Large{\tfb}
+\def\pgfutil@font@huge{\tfc}
+\def\pgfutil@font@Huge{\tfc}
+
+\def\pgfutil@font@itshape{\it}
+\def\pgfutil@font@bfseries{\bf}
+
+\let\pgfutil@font@normalfont=\tf
+
+\let\pgfutil@selectfont=\tf
+
+
+% Extra counters, registers, boxes
+
+\newcount\pgfutil@tempcnta
+\newcount\pgfutil@tempcntb
+
+\newbox\pgfutil@tempboxa
+
+\newdimen\pgfutil@tempdima
+\newdimen\pgfutil@tempdimb
+
+\newbox  \pgfutil@voidb@x
+\newtoks \pgfutil@toks@
+
+
+% Module stuff
+
+\long\def\pgfutil@usemodule#1{%
+  % seems as if \usemodule resets \catcodes... handle that here:
+  \long\edef\pgf@temp##1{%
+    \noexpand\usemodule[##1]\noexpand\relax%
+    \noexpand\catcode`\noexpand\@=\the\catcode`\@\relax
+    \noexpand\catcode`\noexpand\|=\the\catcode`\|\relax
+  }%
+  \pgf@temp{#1}%
+}
+
+
+
+% Adding something at the begin of the current page:
+
+\let\pgfutil@insertatbegincurrentpagefrombox=\flushatshipout
+\let\pgfutil@insertatbegincurrentpage=\flushatshipout
+\def\pgfutil@insertatbegineverypage#1{\appendtoks #1 \to \everyshipout}
+
+% Adding something to the pdf-resources:
+
+\def\pgfutil@addpdfresource@extgs#1{\appendtoPDFdocumentextgstates{#1}}
+\def\pgfutil@addpdfresource@colorspaces#1{\appendtoPDFdocumentcolorspaces{#1}}
+\def\pgfutil@addpdfresource@patterns#1{\appendtoPDFdocumentpatterns{#1}}
+\def\pgfutil@setuppdfresources{}
+
+\ifx\appendtoPDFdocumentpatterns\undefined
+  \let\docuPDFpatterns\empty
+  \def\checkPDFpatterns
+    {\ifx\docuPDFpatterns\empty \else
+       \ifnum\realpageno=\lastpage\relax
+         \doPDFdictionaryobject{FDF}{docupatterns}{\docuPDFpatterns}%
+       \fi
+       \doPDFgetobjectreference{FDF}{docupatterns}\PDFobjectreference
+       \doPDFpageresource{/Pattern \PDFobjectreference}%
+     \fi}
+  \appendtoksonce \checkPDFpatterns \to \everyshipout
+  \def\appendtoPDFdocumentpatterns#1{\xdef\docuPDFpatterns{\docuPDFpatterns\space#1}}
+\fi
+
+% Collect resources (don't know how to do this otherwise)
+
+\def\pgf@sys@pdf@check@resources{%
+  \global\let\pgf@sys@pdf@possible@resources\pgfutil@empty%
+  \doifobjectreferencefoundelse{FDF}{docushades}
+  {\doPDFgetobjectreference{FDF}{docushades}\PDFobjectreference
+    \xdef\pgf@sys@pdf@possible@resources{\pgf@sys@pdf@possible@resources/Shading \PDFobjectreference}}\donothing
+  \doifobjectreferencefoundelse{FDF}{docuextgstates}
+  {\doPDFgetobjectreference{FDF}{docuextgstates}\PDFobjectreference
+    \xdef\pgf@sys@pdf@possible@resources{\pgf@sys@pdf@possible@resources/ExtGState  \PDFobjectreference}}\donothing
+  \doifobjectreferencefoundelse{FDF}{colorspaces}
+  {\doPDFgetobjectreference{FDF}{colorspaces}\PDFobjectreference
+    \xdef\pgf@sys@pdf@possible@resources{\pgf@sys@pdf@possible@resources/ColorSpace \PDFobjectreference}}\donothing
+}
+
+
+% Do something at the end of a job
+
+\appendtoks \the\pgfutil@everybye \to \everybye
+
+
+
+
+% The following is still messy and needs to be cleanup up (everything
+% prefixed by pgfutil@): 
+
+\def\PackageInfo#1#2{}
+\def\PackageWarning#1#2{\immediate\write17{Package #1: Warning! #2.}}%
+\def\PackageError#1#2#3{\immediate\write17{Package #1: Error! #2.}}%
+\long\def\AtBeginDocument#1{#1}%
+
+\endinput
+% vi: ft=tex ts=2 sw=2 expandtab
