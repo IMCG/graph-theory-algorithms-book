@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{maze-graph}
+
+\begin{document}
+
+\begin{figure}
 %% a maze
 \subfigure[]{
 \begin{tikzpicture}
@@ -101,3 +111,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
