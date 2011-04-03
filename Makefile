@@ -45,6 +45,7 @@ clean:
 	rm -rfv tex/*.bak
 	rm -rfv *.bbl
 	rm -rfv *.blg
+	rm -rfv *.dep
 	rm -rfv *.dpth
 	rm -rfv *.dvi
 	rm -rfv *.gnuplot
