@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{filesystem-hierarchy}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [-,thick]
 \footnotesize
@@ -41,3 +51,6 @@
   }
   child {node {$\dots$}};
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
