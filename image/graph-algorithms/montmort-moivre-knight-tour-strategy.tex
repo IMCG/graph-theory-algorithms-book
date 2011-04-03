@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{skak}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{montmort-moivre-knight-tour-strategy}
+
+\begin{document}
+
+\begin{figure}
 %% An 8 x 8 chessboard of dimension 5.609 x 5.609. Thus each square
 %% has dimension 0.701125 x 0.701125.
 %%
@@ -16,7 +27,7 @@
 \subfigure[A $4 \times 4$ inner square.]{
 \label{fig:graph_algorithms:montmort-moivre-strategy:inner_square}
 \begin{tikzpicture}
-[borderdecorate/.style={-,very thick}]
+[borderDecorate/.style={-,very thick}]
 %% chessboard with a black knight
 \node at (0,4.9) {\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare};
 \node at (0,4.2) {\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare};
@@ -27,10 +38,10 @@
 \node at (0,0.7) {\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare};
 \node at (0,0.0) {\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare};
 %% the boarders of the chessboard
-\draw[borderdecorate]
+\draw[borderDecorate]
 (-2.8,-0.352) -- (-2.8,5.257) -- (2.809,5.257) -- (2.809,-0.352) -- cycle;
 %% the 4 x 4 inner square
-\draw[borderdecorate]
+\draw[borderDecorate]
 (-1.39775,1.05025) -- (-1.39775,3.85475) -- (1.40675,3.85475)
 -- (1.40675,1.05025) -- cycle;
 \end{tikzpicture}
@@ -41,7 +52,7 @@
 \subfigure[Initial position in the outer shell.]{
 \label{fig:graph_algorithms:montmort-moivre-strategy:initial_position}
 \begin{tikzpicture}
-[borderdecorate/.style={-,very thick},%
+[borderDecorate/.style={-,very thick},%
   linedecorate/.style={-,thick},%
   nodedecorate/.style={shape=circle,fill=black,inner sep=2pt,draw,thick}]
 %% empty chessboard
@@ -54,7 +65,10 @@
 \node at (0,0.7) {\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare};
 \node at (0,0.0) {\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare};
 %% boarders of the chessboard
-\draw[borderdecorate]
+\draw[borderDecorate]
 (-2.8,-0.352) -- (-2.8,5.257) -- (2.809,5.257) -- (2.809,-0.352) -- cycle;
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
