@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{expression-tree-perfect-square}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [-,thick]
 \node {$+$}
@@ -30,3 +40,6 @@
     child {node {$b$}}
   };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
