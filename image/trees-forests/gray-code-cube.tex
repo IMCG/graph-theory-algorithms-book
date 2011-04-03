@@ -9,6 +9,15 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{gray-code-cube}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
   darkline/.style={-,ultra thick},
@@ -42,3 +51,6 @@
 (3) edge[darkline] node {} (7)
 (4) edge[darkline] node {} (8);
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
