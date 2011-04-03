@@ -2400,7 +2400,23 @@ all edges incident on that vertex are deleted as well.
 \begin{figure}[!htbp]
 \centering
 \index{vertex!deletion}
-\input{image/introduction/vertex-deletion-subgraphs.tex}
+\subfigure[$G$]{
+  \includegraphics{image/introduction/vertex-deletion-subgraphs_G}
+}
+\quad
+\subfigure[$G - \{b\}$]{
+  \includegraphics{image/introduction/vertex-deletion-subgraphs_Gb}
+}
+\subfigure[$G - \{a, b\}$]{
+  \includegraphics{image/introduction/vertex-deletion-subgraphs_Gab}
+}
+\qquad
+\subfigure[$G - \{a, b, e\}$]{
+  \includegraphics{image/introduction/vertex-deletion-subgraphs_Gabe}
+}
+\subfigure[$G - \{a, b, c, d, e\}$]{
+  \includegraphics{image/introduction/vertex-deletion-subgraphs_Gabcde}
+}
 \caption{Obtaining subgraphs via repeated vertex deletion.}
 \label{fig:introduction:vertex_deletion_subgraphs}
 \end{figure}
