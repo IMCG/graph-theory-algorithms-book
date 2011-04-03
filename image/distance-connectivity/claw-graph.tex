@@ -9,6 +9,15 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{claw-graph}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   lineDecorate/.style={-,thick},%
@@ -25,3 +34,6 @@
   (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
