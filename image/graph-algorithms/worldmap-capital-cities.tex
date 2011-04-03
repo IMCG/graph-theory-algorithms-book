@@ -22,6 +22,15 @@
 %% Using the output PGF file, I (mvngu) added some major capital
 %% cities of the world.
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{worldmap-capital-cities}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [linedecorate/.style={-,thick},%
   nodedecorate/.style={shape=circle,fill=black,inner sep=1pt,draw,thick},%
@@ -61707,3 +61716,6 @@
   (\startnode) edge[linedecorate] node {} (\endnode)
 };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
