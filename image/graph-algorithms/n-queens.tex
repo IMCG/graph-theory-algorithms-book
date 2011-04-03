@@ -9,19 +9,30 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{skak}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{n-queens}
+
+\begin{document}
+
+\begin{figure}
 %% Chessboards where each square has dimensions 0.701125 x 0.701125.
 %%
 %% Solution for 4-queens.
 \subfigure[$n = 4$]{
 \begin{tikzpicture}
-[borderdecorate/.style={-,very thick}]
+[borderDecorate/.style={-,very thick}]
 %% chessboard with 4 queens
 \node at (0,2.1) {\WhiteEmptySquare\WhiteQueenOnBlack\WhiteEmptySquare\BlackEmptySquare};
 \node at (0,1.4) {\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteQueenOnWhite};
 \node at (0,0.7) {\WhiteQueenOnWhite\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare};
 \node at (0,0.0) {\BlackEmptySquare\WhiteEmptySquare\WhiteQueenOnBlack\WhiteEmptySquare};
 %% the boarders of the chessboard
-\draw[borderdecorate]
+\draw[borderDecorate]
 (-1.405,-0.352) -- (-1.405,2.4525) -- (1.3995,2.4525) -- (1.3995,-0.352) -- cycle;
 \end{tikzpicture}
 }
@@ -30,7 +41,7 @@
 %% Solution for 8-queens.
 \subfigure[$n = 8$]{
 \begin{tikzpicture}
-[borderdecorate/.style={-,very thick}]
+[borderDecorate/.style={-,very thick}]
 %% chessboard with 8 queens
 \node at (0,4.9) {\WhiteEmptySquare\BlackEmptySquare\WhiteQueenOnWhite\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare};
 \node at (0,4.2) {\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteQueenOnWhite};
@@ -41,7 +52,10 @@
 \node at (0,0.7) {\WhiteEmptySquare\WhiteQueenOnBlack\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare};
 \node at (0,0.0) {\BlackEmptySquare\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare\WhiteQueenOnBlack\WhiteEmptySquare\BlackEmptySquare\WhiteEmptySquare};
 %% the boarders of the chessboard
-\draw[borderdecorate]
+\draw[borderDecorate]
 (-2.8,-0.352) -- (-2.8,5.257) -- (2.809,5.257) -- (2.809,-0.352) -- cycle;
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
