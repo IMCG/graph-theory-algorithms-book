@@ -9,6 +9,15 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{social-network}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=rectangle,inner sep=4pt,draw,thick}]
@@ -24,3 +33,6 @@
   (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
