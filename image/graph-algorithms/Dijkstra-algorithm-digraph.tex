@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usepackage{tkz-berge}  %% for drawing combinatorial graphs
+\usetikzlibrary{external}
+\tikzexternalize{Dijkstra-algorithm-digraph}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Original digraph.]{
 \label{fig:Dijkstra_digraph:original_digraph}
 \begin{tikzpicture}
@@ -197,3 +208,6 @@
 }
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}

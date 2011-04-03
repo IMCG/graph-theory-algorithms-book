@@ -1433,7 +1433,29 @@ algorithm returns the lists $D$ and $P$.
 \begin{figure}[!htbp]
 \centering
 \index{Dijkstra!algorithm}
-\input{image/graph-algorithms/Dijkstra-algorithm-digraph.tex}
+\subfigure[Original digraph.]{
+  \label{fig:Dijkstra_digraph:original_digraph}
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_original}
+}
+\qquad
+\subfigure[First iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_first}
+}
+\subfigure[Second iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_second}
+}
+\qquad
+\subfigure[Third iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_third}
+}
+\subfigure[Fourth iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_fourth}
+}
+\qquad
+\subfigure[Final shortest paths graph.]{
+  \label{fig:Dijkstra_digraph:final_shortest_paths_digraph}
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_final}
+}
 \caption{Searching a weighted digraph using Dijkstra's algorithm.}
 \label{fig:graph_algorithms:Dijkstra_algorithm_digraph}
 \end{figure}
