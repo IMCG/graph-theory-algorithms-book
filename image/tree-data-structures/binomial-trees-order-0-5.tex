@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{binomial-trees-order-0-5}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[$B_0$]{
 \begin{tikzpicture}
 [nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
@@ -164,3 +175,6 @@
   child {node {}};
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
