@@ -9,6 +9,18 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{shapes}
+\usetikzlibrary{trees}
+\tikzexternalize{AVL-trinode-restructure}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Left rotation of $y$ over $z$.]{
 \label{fig:tree_data_structures:AVL_trinode_restructure:single_left_rotate}
 \begin{tikzpicture}
@@ -325,3 +337,6 @@ scale=0.5]
 (z) edge[lineDecorate] node {} (1.5,-4.3);
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}

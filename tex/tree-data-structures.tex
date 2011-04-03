@@ -1798,7 +1798,32 @@ first violated.
 
 \begin{figure}[!htbp]
 \centering
-\input{image/tree-data-structures/AVL-trinode-restructure.tex}
+\subfigure[Left rotation of $y$ over $z$.]{
+  \label{fig:tree_data_structures:AVL_trinode_restructure:single_left_rotate}
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_aleft}
+  \qquad\qquad
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_aright}
+}
+\subfigure[Right rotation of $y$ over $z$.]{
+  \label{fig:tree_data_structures:AVL_trinode_restructure:single_right_rotate}
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_bleft}
+  \qquad\qquad
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_bright}
+}
+\subfigure[Double rotation: right rotation of $x$ over $y$, then left
+rotation over $z$.]{
+  \label{fig:tree_data_structures:AVL_trinode_restructure:right_left_rotate}
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_cleft}
+  \qquad\qquad
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_cright}
+}
+\subfigure[Double rotation: left rotation of $x$ over $y$, then right
+rotation over $z$.]{
+  \label{fig:tree_data_structures:AVL_trinode_restructure:left_right_rotate}
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_dleft}
+  \qquad\qquad
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_dright}
+}
 \caption{Rotations in the trinode restructuring process.}
 \label{fig:tree_data_structures:AVL_trinode_restructure}
 \end{figure}
