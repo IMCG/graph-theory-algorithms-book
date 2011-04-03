@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{example-binary-trees}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[]{
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
@@ -86,3 +96,6 @@
 }
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
