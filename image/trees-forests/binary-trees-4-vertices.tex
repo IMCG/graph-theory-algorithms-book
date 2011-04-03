@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{binary-trees-4-vertices}
+
+\begin{document}
+
+\begin{figure}
 %% top row
 %%
 \subfigure[]{
@@ -260,3 +271,6 @@
   child {node {}};
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
