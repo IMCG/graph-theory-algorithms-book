@@ -1329,7 +1329,20 @@ sage: prim(G).edges()
 \centering
 \index{Prim!algorithm}
 \index{spanning tree!minimum}
-\input{image/trees-forests/Prim-algorithm-digraph.tex}
+\subfigure[Original digraph.]{
+  \includegraphics{image/trees-forests/Prim-algorithm-digraph_original}
+}
+\qquad
+\subfigure[1st iteration of while loop.]{
+  \includegraphics{image/trees-forests/Prim-algorithm-digraph_first}
+}
+\subfigure[2nd iteration of while loop.]{
+  \includegraphics{image/trees-forests/Prim-algorithm-digraph_second}
+}
+\qquad
+\subfigure[Final MST.]{
+  \includegraphics{image/trees-forests/Prim-algorithm-digraph_final}
+}
 \caption{Running Prim's algorithm over a digraph.}
 \label{fig:tree_forests:Prim_algorithm_digraph}
 \end{figure}
