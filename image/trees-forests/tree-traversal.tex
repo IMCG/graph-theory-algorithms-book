@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{tree-traversal}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [-,thick,%
   every node/.style={shape=circle,inner sep=1.5pt,draw,thick}]
@@ -36,3 +46,6 @@
     child {node {$7$}}
   };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
