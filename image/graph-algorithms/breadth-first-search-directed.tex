@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{breadth-first-search-directed}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Original digraph.]{
 \begin{tikzpicture}
 [arrowDecorate/.style={->,>=stealth,thick},%
@@ -196,3 +206,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
