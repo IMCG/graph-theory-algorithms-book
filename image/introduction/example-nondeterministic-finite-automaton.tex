@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{automata}
+\usetikzlibrary{external}
+\usetikzlibrary{positioning}
+\tikzexternalize{example-nondeterministic-finite-automaton}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [node distance=2.5cm,on grid,>=stealth,thick,initial text=,%
   every state/.style={draw,thick}]
@@ -22,3 +33,6 @@
 (1) edge node[below] {$a$} (2)
 (2) edge[loop above] node {$\Sigma$} (2);
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
