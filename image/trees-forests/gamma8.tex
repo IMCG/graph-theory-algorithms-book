@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{gamma8}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [every mark/.append style={scale=0.3},%
  scale=1]
@@ -16,3 +26,6 @@
 \addplot+[only marks] file {data/trees-forests/gamma8.dat};
 \end{axis}
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
