@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{arbitrarily-large-center}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[$|C(G)| = 1$]{
 \begin{tikzpicture}
 [nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
@@ -80,3 +90,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
