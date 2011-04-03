@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{grid-graph-spanning-trees}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[]{
 \begin{tikzpicture}
 [darkline/.style={line width=2.5pt},%
@@ -44,3 +54,6 @@
 \draw[darkline] (3,1.5) -- (3,3);
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
