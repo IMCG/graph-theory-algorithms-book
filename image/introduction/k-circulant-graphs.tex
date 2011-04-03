@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{k-circulant-graphs}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[$k = 4$]{
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
@@ -159,3 +169,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
