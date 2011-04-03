@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{automata}
+\usetikzlibrary{external}
+\usetikzlibrary{positioning}
+\tikzexternalize{another-DFA-accepting-same-language-as-NFA}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [node distance=3cm,on grid,>=stealth,thick,initial text=,%
   every state/.style={draw,thick}]
@@ -28,3 +39,6 @@
 (2) edge[loop above] node {$b$} (2)
 (2) edge node[below right] {$c$} (3);
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
