@@ -9,6 +9,15 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{tree-representation-B-2}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
@@ -30,3 +39,6 @@
   (\startnode) edge[lineDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
