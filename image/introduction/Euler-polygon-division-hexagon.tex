@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{matrix}
+\tikzexternalize{Euler-polygon-division-hexagon}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [linedecorate/.style={-,thick},%
   nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
@@ -55,3 +65,6 @@
   \slice{B/D,D/F,F/B} \\
 };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
