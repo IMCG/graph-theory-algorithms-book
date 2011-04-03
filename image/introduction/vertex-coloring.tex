@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{vertex-coloring}
+
+\begin{document}
+
+\begin{figure}
 %% coloring the wheel graph W_4 using two colors
 \subfigure[]{
 \label{fig:vertex_coloring:wheel_graph_W_4}
@@ -60,3 +70,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
