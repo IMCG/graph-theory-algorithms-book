@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{AVL-unbalanced-after-insertion}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Insert a vertex.]{
 \begin{tikzpicture}
 [-,thick,%
@@ -131,3 +142,6 @@
 \node[right] at (4.east) {$z$};
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
