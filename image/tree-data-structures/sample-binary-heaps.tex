@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{sample-binary-heaps}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[]{
 \begin{tikzpicture}
 [-,thick,%
@@ -149,3 +160,6 @@
   };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
