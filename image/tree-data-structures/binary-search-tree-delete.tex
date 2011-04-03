@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{binary-search-tree-delete}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Target vertex $9$ is a leaf.]{
 \begin{tikzpicture}
 [-,thick,%
@@ -301,3 +312,6 @@
   };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
