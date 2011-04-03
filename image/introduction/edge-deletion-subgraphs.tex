@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{edge-deletion-subgraphs}
+
+\begin{document}
+
+\begin{figure}
 %% graph G
 \subfigure[$G$]{
 \begin{tikzpicture}
@@ -91,3 +101,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}

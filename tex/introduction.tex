@@ -2456,7 +2456,18 @@ intact.
 \begin{figure}[!htbp]
 \centering
 \index{edge!deletion}
-\input{image/introduction/edge-deletion-subgraphs.tex}
+\subfigure[$G$]{
+  \includegraphics{image/introduction/edge-deletion-subgraphs_triangle}
+}
+\qquad
+\subfigure[$G - \{ac\}$]{
+  \includegraphics{image/introduction/edge-deletion-subgraphs_arrow-tip}
+}
+\qquad
+\subfigure[$G - \{ab, ac, bc\}$]{
+  \label{fig:introduction:skeleton_subgraph_via_edge_deletion}
+  \includegraphics{image/introduction/edge-deletion-subgraphs_star}
+}
 \caption{Obtaining subgraphs via repeated edge deletion.}
 \label{fig:introduction:edge_deletion_subgraphs}
 \end{figure}
