@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{search-Petersen-graph}
+
+\begin{document}
+
+\begin{figure}
 %% breadth-first searching the Petersen graph
 \subfigure[Breadth-first search.]{
 \begin{tikzpicture}
@@ -64,3 +74,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
