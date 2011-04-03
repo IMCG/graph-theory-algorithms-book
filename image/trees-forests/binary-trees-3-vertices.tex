@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{binary-trees-3-vertices}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[]{
 \begin{tikzpicture}
 [-,thick,%
@@ -79,3 +90,6 @@
   child[white] {};
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
