@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{hypercube-graphs}
+
+\begin{document}
+
+\begin{figure}
 %% hypercube graph Q_1
 \subfigure[$Q_1$]{
 \begin{tikzpicture}
@@ -89,3 +99,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
