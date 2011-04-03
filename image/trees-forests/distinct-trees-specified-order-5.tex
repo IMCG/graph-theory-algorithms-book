@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{distinct-trees-specified-order-5}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[]{
 \begin{tikzpicture}
 [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
@@ -64,3 +74,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
