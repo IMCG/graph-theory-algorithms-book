@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usepackage{tkz-berge}  %% for drawing combinatorial graphs
+\usetikzlibrary{external}
+\tikzexternalize{Prim-algorithm-undirected-graph}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Original undirected graph.]{
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
@@ -179,3 +190,6 @@
 }
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
