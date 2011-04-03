@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usepackage{tkz-berge}  %% for drawing combinatorial graphs
+\usetikzlibrary{external}
+\tikzexternalize{weighted-Chvatal-graph}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
@@ -43,3 +53,6 @@
   \Edge[label=$\weight$,style=\bend](\startnode)(\endnode)
 }
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
