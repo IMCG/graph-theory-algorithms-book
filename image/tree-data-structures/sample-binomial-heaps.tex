@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{sample-binomial-heaps}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Binomial heap as a forest.]{
 \begin{tikzpicture}
 [-,thick,%
@@ -75,3 +86,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
