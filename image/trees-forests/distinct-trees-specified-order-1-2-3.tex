@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{distinct-trees-specified-order-1-2-3}
+
+\begin{document}
+
+\begin{figure}
 %% all trees of order 1
 \subfigure[$n = 1$]{
 \begin{tikzpicture}
@@ -60,3 +70,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
