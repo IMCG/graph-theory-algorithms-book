@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{distance-matrix-directed-undirected}
+
+\begin{document}
+
+\begin{figure}
 %% digraph
 \subfigure[]{
 \begin{tikzpicture}
@@ -94,3 +105,6 @@ $
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
