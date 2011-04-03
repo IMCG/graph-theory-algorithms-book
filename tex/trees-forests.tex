@@ -1447,7 +1447,22 @@ forest-merging method\index{parallel forest-merging}.
 \index{Bor\r{u}vka!algorithm}
 \index{recursion}
 \index{spanning tree!minimum}
-\input{image/trees-forests/Boruvkas-algorithm.tex}
+\subfigure[Original undirected graph.]{
+  \label{fig:Boruvkas_algorithm:original_undirected_graph}
+  \includegraphics{image/trees-forests/Boruvkas-algorithm_original}
+}
+\qquad
+\subfigure[0th iteration of while loop.]{
+  \includegraphics{image/trees-forests/Boruvkas-algorithm_zeroth}
+}
+\subfigure[1st iteration of while loop.]{
+  \includegraphics{image/trees-forests/Boruvkas-algorithm_first}
+}
+\qquad
+\subfigure[2nd iteration of while loop.]{
+  \label{fig:Boruvkas_algorithm:final_minimum_spanning_tree}
+  \includegraphics{image/trees-forests/Boruvkas-algorithm_second}
+}
 \caption{Recursive construction of MST via Bor\r{u}vka's algorithm.}
 \label{fig:trees_forests:Boruvka_algorithm}
 \end{figure}

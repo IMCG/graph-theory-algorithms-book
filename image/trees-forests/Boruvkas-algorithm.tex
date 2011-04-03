@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usepackage{tkz-berge}  %% for drawing combinatorial graphs
+\usetikzlibrary{external}
+\tikzexternalize{Boruvkas-algorithm}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Original undirected graph.]{
 \label{fig:Boruvkas_algorithm:original_undirected_graph}
 \begin{tikzpicture}
@@ -103,3 +114,6 @@
 }
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
