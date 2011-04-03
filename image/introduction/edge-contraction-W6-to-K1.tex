@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{edge-contraction-W6-to-K1}
+
+\begin{document}
+
+\begin{figure}
 %% wheel graph W_6
 \subfigure[$G_1$]{
 \label{fig:introduction:contracting_wheel_graph_W6}
@@ -148,3 +158,6 @@
 \node (stub2) at (-1,0) [] {};
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
