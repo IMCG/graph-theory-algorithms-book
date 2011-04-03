@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{shapes}
+\tikzexternalize{marriage-ties-Renaissance}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=ellipse,inner sep=2pt,draw,thick}]
@@ -39,3 +49,6 @@
   (\startnode) edge[lineDecorate,\bend=\angle] node {} (\endnode)
 };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
