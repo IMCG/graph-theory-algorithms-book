@@ -965,8 +965,25 @@ in the stack.
 
 \begin{figure}[!htbp]
 \centering
-\index{depth-first search}\index{DFS}
-\input{image/graph-algorithms/depth-first-search-undirected.tex}
+\index{depth-first search}
+\index{DFS}
+\subfigure[Original undirected graph.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_original}
+}
+\qquad
+\subfigure[First iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_first}
+}
+\subfigure[Second iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_second}
+}
+\qquad
+\subfigure[Third iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_third}
+}
+\subfigure[Final DFS tree.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_tree}
+}
 \caption{Depth-first search tree for an undirected graph.}
 \label{fig:graph_algorithms:depth_first_search_undirected}
 \end{figure}
