@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{binary-tree-Huffman-encodings}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[]{
 \label{fig:trees_forests:eg:binary_tree_Huffman_encodings:binary_tree}
 \begin{tikzpicture}
@@ -53,3 +63,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
