@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{Bernoulli-family-tree}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [-,thick,%
   every node/.style={shape=rectangle,inner sep=3pt,draw,thick}]
@@ -30,3 +40,6 @@
     }
   };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
