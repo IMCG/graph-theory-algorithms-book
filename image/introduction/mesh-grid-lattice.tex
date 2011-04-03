@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{mesh-grid-lattice}
+
+\begin{document}
+
+\begin{figure}
 %% mesh M(3,4)
 \subfigure[$M(3, 4)$]{
 \label{fig:introduction:2_mesh_M34}
@@ -69,3 +79,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
