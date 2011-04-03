@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{union-digraphs-Euler-phi-sequences}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [<-,>=stealth,thick]
 \footnotesize
@@ -39,3 +49,6 @@
     }
   };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}

@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{phi-length}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 \begin{axis}[
     xlabel=$n$,%
@@ -17,3 +27,6 @@
 \addplot+[only marks,mark size=0.2pt] file {data/trees-forests/phi-length.dat};
 \end{axis}
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
