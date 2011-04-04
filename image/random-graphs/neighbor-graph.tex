@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{neighbor-graph}
+\newcommand{\cN}{\mathcal{N}}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Graph on $11$ vertices.]{
 \label{fig:neighbor_graph:original_graph}
 \begin{tikzpicture}
@@ -70,3 +81,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
