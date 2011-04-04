@@ -9,6 +9,17 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{Zachary-karate-club}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Zachary karate club network.]{
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
@@ -86,3 +97,6 @@
 \end{loglogaxis}
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
