@@ -9,9 +9,18 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usetikzlibrary{external}
+\tikzexternalize{Milgram-small-world-experiment-results}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
-[every mark/.append style={scale=0.5},%
- scale=1]
+[every mark/.append style={scale=0.5}]
 \begin{axis}[%
   enlargelimits=false,%
   xlabel=\text{number of intermediaries},%
@@ -24,3 +33,6 @@
 };
 \end{axis}
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
