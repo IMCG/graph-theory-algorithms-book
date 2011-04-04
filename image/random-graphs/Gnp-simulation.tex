@@ -12,6 +12,15 @@
 %% See the file gnp.c for a C program that generates the experimental
 %% and expected results used in deriving the results below.
 
+\documentclass{article}
+
+\usepackage{pgfplots}
+\usetikzlibrary{external}
+\tikzexternalize{Gnp-simulation}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [every mark/.append style={scale=1},%
  scale=0.9]
@@ -133,3 +142,6 @@
 \legend{$\alpha$, $\beta$, $\hat{\alpha}$, $\hat{\beta}$}
 \end{axis}
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
