@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{binomial-random-graphs-25-nodes}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[$p = 0$;
   $\alpha = 0$, $|E| = 0$;
   $\beta = 0$, $\#\deg = 0$]{
@@ -354,3 +364,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
