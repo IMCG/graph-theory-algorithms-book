@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{separating-set}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Original graph.]{
 \label{fig:separating_set:original_graph}
 \begin{tikzpicture}
@@ -110,3 +120,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
