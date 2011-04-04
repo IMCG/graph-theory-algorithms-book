@@ -1434,7 +1434,21 @@ Figure~\ref{fig:random_graphs:simulated_scale_free_networks}.
 \begin{figure}[!htbp]
 \centering
 \index{degree distribution}
-\input{image/random-graphs/power-law-degree-distribution-simulation.tex}
+%% See the file image/random-graphs/ba.c for the C program used to
+%% generate the classic Barabasi-Albert networks from which we derive
+%% the corresponding degree distributions.
+\subfigure[$n = 10^5$ vertices]{
+  \includegraphics{image/random-graphs/Barabasi-Albert-model-simulation-10e5}
+}
+\subfigure[$n = 10^6$ vertices]{
+  \includegraphics{image/random-graphs/Barabasi-Albert-model-simulation-10e6}
+}
+\subfigure[$n = 10^7$ vertices]{
+  \includegraphics{image/random-graphs/Barabasi-Albert-model-simulation-10e7}
+}
+\subfigure[$n = 2 \cdot 10^7$ vertices]{
+  \includegraphics{image/random-graphs/Barabasi-Albert-model-simulation-2x10e7}
+}
 \caption{Degree distributions of simulated graphs in the classic
   Barab\'asi-Albert model. The horizontal axis represents degree; the
   vertical axis is the corresponding probability of a vertex having a
