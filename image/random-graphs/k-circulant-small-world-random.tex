@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{k-circulant-small-world-random}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[$p = 0$, $k$-circulant]{
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
@@ -150,3 +160,6 @@
 };
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
