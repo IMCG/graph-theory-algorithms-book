@@ -9,6 +9,15 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{wine-network}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [lineDecorate/.style={-,thick},%
   nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
@@ -53,3 +62,6 @@
 (20) edge[lineDecorate,bend left=20] node {} (32)
 (40) edge[lineDecorate,bend right=15] node {} (48);
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
