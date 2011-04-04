@@ -294,7 +294,24 @@ distance distributions of various real-world networks.
 
 \begin{figure}[!htbp]
 \centering
-\input{image/random-graphs/distance-distribution.tex}
+\subfigure[Zachary karate club network~\cite{Zachary1977}.]
+{
+  \includegraphics{image/random-graphs/distance-distribution_karate-club}
+}
+\quad
+\subfigure[C. elegans neural network~\cite{WattsStrogatz1998,WhiteEtAl1986}.]
+{
+  \includegraphics{image/random-graphs/distance-distribution_C-elegans}
+}
+\subfigure[Power grid network~\cite{WattsStrogatz1998}.]
+{
+  \includegraphics{image/random-graphs/distance-distribution_power-grid}
+}
+\qquad
+\subfigure[Condensed matter coauthorship network~\cite{Newman2001b}.]
+{
+  \includegraphics{image/random-graphs/distance-distribution_condensed-matter}
+}
 \caption{Distance distributions for various real-world networks. The
   horizontal axis represents distance and the vertical axis represents
   the probability that a uniformly chosen pair of distinct vertices

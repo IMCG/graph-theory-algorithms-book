@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usetikzlibrary{external}
+\tikzexternalize{distance-distribution}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Zachary karate club network~\cite{Zachary1977}.]
 {
 \begin{tikzpicture}
@@ -115,3 +125,6 @@
 \end{axis}
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
