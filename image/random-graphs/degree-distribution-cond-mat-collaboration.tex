@@ -9,6 +9,16 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{pgfplots}
+\usepackage{subfigure}
+\usetikzlibrary{external}
+\tikzexternalize{degree-distribution-cond-mat-collaboration}
+
+\begin{document}
+
+\begin{figure}
 \subfigure[Linear scaling.]{
 \begin{tikzpicture}
 [every mark/.append style={scale=0.5},%
@@ -198,3 +208,6 @@
 \end{loglogaxis}
 \end{tikzpicture}
 }
+\end{figure}
+
+\end{document}
