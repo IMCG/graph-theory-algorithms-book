@@ -9,6 +9,15 @@
 %% See the file COPYING for copying conditions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{digraph-flow}
+
+\begin{document}
+
+\begin{figure}
 \begin{tikzpicture}
 [nodeDecorate/.style={shape=circle,inner sep=1.5pt,draw,thick},%
   arrowDecorate/.style={->,>=stealth,thick},%
@@ -26,3 +35,6 @@
   (\startnode) edge[arrowDecorate] node {} (\endnode)
 };
 \end{tikzpicture}
+\end{figure}
+
+\end{document}
