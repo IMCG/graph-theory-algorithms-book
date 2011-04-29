@@ -12,14 +12,12 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+%% input
+\KwIn{A digraph $G = (V, E)$ that has no self-loops. Vertices are
+  numbered from $1$ to $n$, i.e.~$V = \{1, 2, \dots, n\}$.}
 %%
-%% input/output
-\Input{A digraph $G = (V, E)$ that has no self-loops. Vertices are
-  numbered from 1 to $n$, i.e. $V = \{1, 2, \dots, n\}$.}
-\Output{The boolean matrix $T$ such that $T[i,j] = 1$ if and only if
+%% output
+\KwOut{The boolean matrix $T$ such that $T[i,j] = 1$ if and only if
   there is an $i$-$j$ path in $G$, and $T[i,j] = 0$ otherwise.}
 \BlankLine
 %%
