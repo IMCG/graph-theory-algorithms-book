@@ -13,17 +13,17 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyFalse}{False}
 %%
-%% input/output
-\Input{An undirected or directed graph $G = (V, E)$ that is weighted
+%% input
+\KwIn{An undirected or directed graph $G = (V, E)$ that is weighted
   and has no self-loops. Negative edge weights are allowed. The order
   of $G$ is $n > 0$. A vertex $s \in V$ from which to start the
-  search. Vertices are numbered from 1 to $n$, i.e.
-  $V = \{1, 2, \dots, n\}$.}
-\Output{A list $D$ of distances such that $D[v]$ is the distance of a
+  search. Vertices are numbered from 1 to $n$,
+  i.e.~$V = \{1, 2, \dots, n\}$.}
+%%
+%% output
+\KwOut{A list $D$ of distances such that $D[v]$ is the distance of a
   shortest path from $s$ to $v$. A list $P$ of vertex parents such
   that $P[v]$ is the parent of $v$, i.e. $v$ is adjacent from
   $P[v]$. If $G$ has negative-weight cycles, then return
@@ -31,11 +31,11 @@
 \BlankLine
 %%
 %% algorithm body
-$D \assign [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}~\nllabel{alg:Bellman_Ford:init_infinity}\;
+$D \assign [\infty, \infty, \dots, \infty]$\tcc*[f]{$n$ copies of $\infty$}\nllabel{alg:Bellman_Ford:init_infinity}\;
 $D[s] \assign 0$\;
-$P \assign [\,]$~\nllabel{alg:Bellman_Ford:init_parent_list}\;
-\For{$i \assign 1, 2, \dots, n-1$~\nllabel{alg:Bellman_Ford:for_loop:relax}}{
-  \For{\emph{each edge} $uv \in E$}{
+$P \assign [\,]$\nllabel{alg:Bellman_Ford:init_parent_list}\;
+\For{$i \assign 1, 2, \dots, n-1$\nllabel{alg:Bellman_Ford:for_loop:relax}}{
+  \For{\rm each edge $uv \in E$}{
     \If{$D[v] > D[u] + w(uv)$}{
       $D[v] \assign D[u] + w(uv)$\;
       $P[v] \assign u$\;
@@ -43,7 +43,7 @@ $P \assign [\,]$~\nllabel{alg:Bellman_Ford:init_parent_list}\;
   }
   \nllabel{alg:Bellman_Ford:for_loop:end_relax}
 }
-\For{\emph{each edge} $uv \in E$~\nllabel{alg:Bellman_Ford:for_loop:check_negative_weight_cycles}}{
+\For{\rm each edge $uv \in E$\nllabel{alg:Bellman_Ford:for_loop:check_negative_weight_cycles}}{
   \If{$D[v] > D[u] + w(uv)$}{
     \Return \MyFalse\;
   }
