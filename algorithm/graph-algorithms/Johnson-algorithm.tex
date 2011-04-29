@@ -13,14 +13,14 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyFalse}{False}
 %%
-%% input/output
-\Input{A sparse weighted digraph $G = (V, E)$, where the vertex set is
+%% input
+\KwIn{A sparse weighted digraph $G = (V, E)$, where the vertex set is
   $V = \{1, 2, \dots, n\}$.}
-\Output{If $G$ has negative-weight cycles, then return
+%%
+%% output
+\KwOut{If $G$ has negative-weight cycles, then return
   \MyFalse. Otherwise, return an $n \times n$ matrix $D$ of shortest-path
   weights and a list $P$ such that $P[v]$ is a parent list resulting
   from running Dijkstra's algorithm on $G$ with start vertex $v$.}
@@ -35,13 +35,13 @@ $G' \assign$ digraph $(V', E')$ with weight $w(sv) = 0$ for all $v \in V$\;
   \Return \MyFalse\;
 }
 $d \assign$ distance list returned by $\BellmanFord(G', w, s)$\;
-\For{\emph{each edge} $uv \in E'$}{
+\For{\rm each edge $uv \in E'$}{
   $\hat{w}(uv) \assign w(uv) + d[u] - d[v]$\;
 }
-\For{\emph{each vertex} $u \in V$}{
+\For{\rm each $u \in V$}{
   $(\hat{\delta}, \hat{P}) \assign$ distance and parent lists returned by $\Dijkstra(G, \hat{w}, u)$\;
   $P[u] \assign \hat{P}$\;
-  \For{\emph{each vertex} $v \in V$}{
+  \For{\rm each $v \in V$}{
     $D[u,v] \assign \hat{\delta}[v] + d[v] - d[u]$\;
   }
 }
