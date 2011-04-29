@@ -12,22 +12,23 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+%% data
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A Polish stack $P$ containing an arithmetic expression in
+%% input
+\KwIn{A Polish stack $P$ containing an arithmetic expression in
   reverse Polish notation.}
-\Output{An evaluation of the arithmetic expression represented by $P$.}
+%%
+%% output
+\KwOut{An evaluation of the arithmetic expression represented by $P$.}
 \BlankLine
 %%
 %% algorithm body
 $E \assign$ empty stack\;
-$v \assign \texttt{NULL}$\;
+$v \assign \NULL$\;
 \While{\rm $P$ is not empty}{
   $x \assign \pop(P)$\;
-  \eIf{\rm $x$ is an operator}{
+  \If{\rm $x$ is an operator}{
     $b \assign \pop(E)$\;
     $a \assign \pop(E)$\;
     \If{\rm $x$ is addition operator}{
@@ -43,11 +44,11 @@ $v \assign \texttt{NULL}$\;
       $v \assign a / b$\;
     }
     \Else{
-      print(``Unrecognized operator'')\;
-      exit algorithm\;
+      exit algorithm with error\;
     }
     $\push(E, v)$\;
-  }{
+  }
+  \Else{
     $\push(E, x)$\;
   }
 }
