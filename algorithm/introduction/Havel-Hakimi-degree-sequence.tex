@@ -25,17 +25,17 @@
 \BlankLine
 %%
 %% algorithm body
-\If{\emph{$\sum_i d_i$ is odd}~\nllabel{alg:Havel_Hakimi:handshaking_lemma}}{
+\If{\rm $\sum_i d_i$ is odd\nllabel{alg:Havel_Hakimi:handshaking_lemma}}{
   \Return \MyFalse\;
 }
 \While{\MyTrue}{
-  \If{$\min(S) < 0$~\nllabel{alg:Havel_Hakimi:non_negative}}{
+  \If{$\min(S) < 0$\nllabel{alg:Havel_Hakimi:non_negative}}{
     \Return \MyFalse\;
   }
-  \If{$\max(S) = 0$~\nllabel{alg:Havel_Hakimi:all_zeros}}{
+  \If{$\max(S) = 0$\nllabel{alg:Havel_Hakimi:all_zeros}}{
     \Return \MyTrue\;
   }
-  \If{$\max(S) > \length(S) - 1$~\nllabel{alg:Havel_Hakimi:degree_less_than_order}}{
+  \If{$\max(S) > \length(S) - 1$\nllabel{alg:Havel_Hakimi:degree_less_than_order}}{
     \Return \MyFalse\;
   }
   $S
