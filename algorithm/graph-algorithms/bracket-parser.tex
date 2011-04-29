@@ -13,20 +13,20 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{Left}{left}
 %%
-%% input/output
-\Input{A nonempty string $S$ of characters.}
-\Output{A list $L$ of positive integers indicating how the brackets
+%% input
+\KwIn{A nonempty string $S$ of characters.}
+%%
+%% output
+\KwOut{A list $L$ of positive integers indicating how the brackets
   match. If the brackets are not balanced, return the empty string
   $\varepsilon$.}
 \BlankLine
 %%
 %% algorithm body
 $L \assign [\,]$\;
-$T \assign \text{empty stack}$\;
+$T \assign$ empty stack\;
 $c \assign 1$\;
 $n \assign |S|$\;
 \For{$i \assign 0, 1, \dots, n$}{
@@ -40,9 +40,10 @@ $n \assign |S|$\;
       \Return $\varepsilon$\;
     }
     $(\Left,\, d) \assign \pop(T)$\;
-    \eIf{\rm $\Left$ matches $S[i+1]$}{
+    \If{\rm $\Left$ matches $S[i+1]$}{
       $\append(L, d)$\;
-    }{
+    }
+    \Else{
       \Return $\varepsilon$\;
     }
   }
@@ -51,4 +52,3 @@ $n \assign |S|$\;
   \Return $L$\;
 }
 \Return $\varepsilon$\;
-
