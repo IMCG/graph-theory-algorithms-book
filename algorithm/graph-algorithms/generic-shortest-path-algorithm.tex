@@ -12,24 +12,22 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-%%
-%% input/output
-\Input{A weighted graph or digraph $G = (V, E)$, where the vertices
+%% input
+\KwIn{A weighted graph or digraph $G = (V, E)$, where the vertices
   are numbered as $V = \{1, 2, \dots, n\}$. A starting vertex $s$.}
-\Output{A list $D$ of distances from $s$ to all other vertices. A list
+%%
+%% output
+\KwOut{A list $D$ of distances from $s$ to all other vertices. A list
   $P$ of parent vertices such that $P[v]$ is the parent of $v$.}
 \BlankLine
 %%
 %% algorithm body
-$D \assign [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+$D \assign [\infty, \infty, \dots, \infty]$\tcc*[f]{$n$ copies of $\infty$}\;
 $C \assign$ list of candidate vertices to visit\;
 \While{$\length(C) > 0$}{
   select $v \in C$\;
   $C \assign \remove(C, v)$\;
-  \For{\emph{each} $u \in \adj(v)$~\nllabel{alg:generic_shortest_path:neighbors}}{
+  \For{\rm each $u \in \adj(v)$\nllabel{alg:generic_shortest_path:neighbors}}{
     \If{$D[u] > D[v] + w(vu)$}{
       $D[u] \assign D[v] + w(vu)$\;
       $P[u] \assign v$\;
