@@ -13,19 +13,19 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyFalse}{False}
 \SetKwData{MyTrue}{True}
 %%
-%% input/output
-\Input{A nonempty list $L$ of vertices or edges. An object $E$ for
+%% input
+\KwIn{A nonempty list $L$ of vertices or edges. An object $E$ for
   which we want to search in $L$.}
-\Output{\MyTrue if $E$ is in $L$; \MyFalse otherwise.}
+%%
+%% output
+\KwOut{\MyTrue if $E$ is in $L$; \MyFalse otherwise.}
 \BlankLine
 %%
 %% algorithm body
-\For{\rm{each $e \in L$}}{
+\For{\rm each $e \in L$}{
   \If{$E = e$}{
     \Return \MyTrue\;
   }
