@@ -13,32 +13,32 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyFalse}{False}
 \SetKwData{MyTrue}{True}
 \SetKwData{Updated}{updated}
 %%
-%% input/output
-\Input{An undirected or directed graph $G = (V, E)$ that is weighted
+%% input
+\KwIn{An undirected or directed graph $G = (V, E)$ that is weighted
   and has no self-loops. Negative edge weights are allowed. The order
   of $G$ is $n > 0$. A vertex $s \in V$ from which to start the
-  search. Vertices are numbered from 1 to $n$, i.e.
-  $V = \{1, 2, \dots, n\}$.}
-\Output{A list $D$ of distances such that $D[v]$ is the distance of a
+  search. Vertices are numbered from 1 to $n$,
+  i.e.~$V = \{1, 2, \dots, n\}$.}
+%%
+%% output
+\KwOut{A list $D$ of distances such that $D[v]$ is the distance of a
   shortest path from $s$ to $v$. A list $P$ of vertex parents such
-  that $P[v]$ is the parent of $v$, i.e. $v$ is adjacent from
+  that $P[v]$ is the parent of $v$, i.e.~$v$ is adjacent from
   $P[v]$. If $G$ has negative-weight cycles, then return
   \MyFalse. Otherwise, return $D$ and $P$.}
 \BlankLine
 %%
 %% algorithm body
-$D \assign [\infty, \infty, \dots, \infty]$~\tcc*[f]{$n$ copies of $\infty$}\;
+$D \assign [\infty, \infty, \dots, \infty]$\tcc*[f]{$n$ copies of $\infty$}\;
 $D[s] \assign 0$\;
 $P \assign [\,]$\;
 \For{$i \assign 1, 2, \dots, n-1$}{
   $\Updated \assign \MyFalse$\;
-  \For{\emph{each edge} $uv \in E$}{
+  \For{\rm each edge $uv \in E$}{
     \If{$D[v] > D[u] + w(uv)$}{
       $D[v] \assign D[u] + w(uv)$\;
       $P[v] \assign u$\;
@@ -49,7 +49,7 @@ $P \assign [\,]$\;
     exit the loop\;
   }
 }
-\For{\emph{each edge} $uv \in E$}{
+\For{\rm each edge $uv \in E$}{
   \If{$D[v] > D[u] + w(uv)$}{
     \Return \MyFalse\;
   }
