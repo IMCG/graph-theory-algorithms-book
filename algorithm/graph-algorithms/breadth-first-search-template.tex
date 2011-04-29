@@ -12,30 +12,28 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-%%
-%% input/output
-\Input{A directed or undirected graph $G = (V, E)$ of order $n > 0$. A
+%% input
+\KwIn{A directed or undirected graph $G = (V, E)$ of order $n > 0$. A
   vertex $s$ from which to start the search. The vertices are numbered
-  from $1$ to  $n = |V|$, i.e. $V = \{1, 2, \dots, n\}$.}
-\Output{A list $D$ of distances of all vertices from $s$. A tree $T$
+  from $1$ to  $n = |V|$, i.e.~$V = \{1, 2, \dots, n\}$.}
+%%
+%% output
+\KwOut{A list $D$ of distances of all vertices from $s$. A tree $T$
   rooted at $s$.}
 \BlankLine
 %%
 %% algorithm body
-$Q \assign [s]$~\nllabel{alg:BFS:initialize_queue_visit_nodes} \tcc*[f]{queue of nodes to visit}\;
-$D \assign [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
+$Q \assign [s]$\nllabel{alg:BFS:initialize_queue_visit_nodes}\tcc*[f]{queue of nodes to visit}\;
+$D \assign [\infty, \infty, \dots, \infty]$\tcc*[f]{$n$ copies of $\infty$}\;
 $D[s] \assign 0$\;
-$T \assign [\,]$~\nllabel{alg:BFS:initialize_empty_tree}\;
-\While{$\length(Q) > 0$~\nllabel{alg:BFS:while_loop:non_empty_queue}}{
+$T \assign [\,]$\nllabel{alg:BFS:initialize_empty_tree}\;
+\While{$\length(Q) > 0$\nllabel{alg:BFS:while_loop:non_empty_queue}}{
   $v \assign \dequeue(Q)$\;
-  \For{\emph{each} $w \in \adj(v)$~\nllabel{alg:BFS:explore_neighborhood}}{
-    \If{$D[w] = \infty$~\nllabel{alg:BFS:marking_vertex_as_visited}}{
+  \For{\rm each $w \in \adj(v)$\nllabel{alg:BFS:explore_neighborhood}}{
+    \If{$D[w] = \infty$\nllabel{alg:BFS:marking_vertex_as_visited}}{
       $D[w] \assign D[v] + 1$\;
       $\enqueue(Q, w)$\;
-      $\append(T, vw)$~\nllabel{alg:BFS:while_loop:append_to_tree}\;
+      $\append(T, vw)$\nllabel{alg:BFS:while_loop:append_to_tree}\;
     }
   }
 }
