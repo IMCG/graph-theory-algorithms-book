@@ -12,27 +12,25 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-%%
-%% input/output
-\Input{A directed or undirected graph $G = (V, E)$ of order $n > 0$. A
+%% input
+\KwIn{A directed or undirected graph $G = (V, E)$ of order $n > 0$. A
   vertex $s$ from which to start the search. The vertices are numbered
-  from $1$ to  $n = |V|$, i.e. $V = \{1, 2, \dots, n\}$.}
-\Output{A list $D$ of distances of all vertices from $s$. A tree $T$
+  from $1$ to  $n = |V|$, i.e.~$V = \{1, 2, \dots, n\}$.}
+%%
+%% output
+\KwOut{A list $D$ of distances of all vertices from $s$. A tree $T$
   rooted at $s$.}
 \BlankLine
 %%
 %% algorithm body
-$S \assign [s]$ \tcc*[f]{stack of nodes to visit}\;
-$D \assign [\infty, \infty, \dots, \infty]$ \tcc*[f]{$n$ copies of $\infty$}\;
+$S \assign [s]$\tcc*[f]{stack of nodes to visit}\;
+$D \assign [\infty, \infty, \dots, \infty]$\tcc*[f]{$n$ copies of $\infty$}\;
 $D[s] \assign 0$\;
 $T \assign [\,]$\;
-\While{$\length(S) > 0$~\nllabel{alg:DFS:while_loop_tests_non_empty_stack}}{
+\While{$\length(S) > 0$\nllabel{alg:DFS:while_loop_tests_non_empty_stack}}{
   $v \assign \pop(S)$\;
-  \For{\emph{each} $w \in \adj(v)$~\nllabel{alg:DFS:for_loop_visit_neighbors}}{
-    \If{$D[w] = \infty$~\nllabel{alg:DFS:if_test_unvisited_neighbors}}{
+  \For{\rm each $w \in \adj(v)$\nllabel{alg:DFS:for_loop_visit_neighbors}}{
+    \If{$D[w] = \infty$\nllabel{alg:DFS:if_test_unvisited_neighbors}}{
       $D[w] \assign D[v] + 1$\;
       $\push(S, w)$\;
       $\append(T, vw)$\;
