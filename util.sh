@@ -26,7 +26,7 @@ usage() {
     echo "Usage: $0 <options>"
     echo "Optional arguments:"
     echo "--copyright    Manage the copyright headers"
-    echo "--dist [VER]   Wrap up a source distribution with version number VER"
+    echo "--dist [VER]   Wrap up a source distribution with optional version number VER"
 }
 
 # You must provide an argument to this script.
