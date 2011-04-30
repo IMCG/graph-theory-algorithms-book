@@ -13,20 +13,21 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyMin}{min}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A binomial heap $H$ of order $n > 0$.}
-\Output{The minimum vertex of $H$.}
+%% input
+\KwIn{A binomial heap $H$ of order $n > 0$.}
+%%
+%% output
+\KwOut{The minimum vertex of $H$.}
 \BlankLine
 %%
 %% algorithm body
-$u \assign \texttt{NULL}$\;
+$u \assign \NULL$\;
 $v \assign \headElem[H]$\;
 $\MyMin \assign \infty$\;
-\While{\rm $v \neq \texttt{NULL}$}{
+\While{$v \neq \NULL$}{
   \If{$\kappa_v < \MyMin$}{
     $\MyMin \assign \kappa_v$\;
     $u \assign v$\;
