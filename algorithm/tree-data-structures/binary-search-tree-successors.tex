@@ -13,21 +13,22 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A nonempty binary search tree $T$ and a vertex $v$ that is not
+%% input
+\KwIn{A nonempty binary search tree $T$ and a vertex $v$ that is not
   a maximum of $T$.}
-\Output{The successor of $v$.}
+%%
+%% output
+\KwOut{The successor of $v$.}
 \BlankLine
 %%
 %% algorithm body
-\If{\rm $\rightChild[v] \neq \texttt{NULL}$}{
+\If{$\rightChild[v] \neq \NULL$}{
   \Return minimum vertex of $v$'s right subtree as per Algorithm~\ref{alg:tree_data_structures:binary_search_tree_minimum_key}\;
 }
 $u \assign \parent(v)$\;
-\While{\rm $u \neq \texttt{NULL}$ and $v = \rightChild[u]$}{
+\While{\rm $u \neq \NULL$ and $v = \rightChild[u]$}{
   $v \assign u$\;
   $u \assign \parent(u)$\;
 }
