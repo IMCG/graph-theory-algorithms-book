@@ -13,27 +13,28 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyNextV}{nextv}
 \SetKwData{MyPrevV}{prevv}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{Two binomial heaps $H_1$ and $H_2$.}
-\Output{A binomial heap $H$ that results from merging the $H_i$.}
+%% input
+\KwIn{Two binomial heaps $H_1$ and $H_2$.}
+%%
+%% output
+\KwOut{A binomial heap $H$ that results from merging the $H_i$.}
 \BlankLine
 %%
 %% algorithm body
 $H \assign$ empty binomial heap\;
 $\headElem[H] \assign$ merge sort the root lists of $H_1$ and $H_2$\;
-\If{\rm $\headElem[H] = \texttt{NULL}$}{
+\If{\rm $\headElem[H] = \NULL$}{
   \Return $H$\;
 }
-$\MyPrevV \assign \texttt{NULL}$\;
+$\MyPrevV \assign \NULL$\;
 $v \assign \headElem[H]$\;
 $\MyNextV \assign \sibling[v]$\;
-\While{\rm $\MyNextV \neq \texttt{NULL}$}{
-  \If{\rm $\degree[v] \neq \degree[\MyNextV]$ or ($\sibling[\MyNextV] \neq \texttt{NULL}$ and $\degree[\sibling[\MyNextV]] = \degree[v]$)}{
+\While{\rm $\MyNextV \neq \NULL$}{
+  \If{\rm $\degree[v] \neq \degree[\MyNextV]$ or ($\sibling[\MyNextV] \neq \NULL$ and $\degree[\sibling[\MyNextV]] = \degree[v]$)}{
     $\MyPrevV \assign v$\;
     $v \assign \MyNextV$\;
   }
@@ -42,9 +43,10 @@ $\MyNextV \assign \sibling[v]$\;
     link the roots $\MyNextV$ and $v$ as per Algorithm~\ref{alg:tree_data_structures:link_roots}\;
   }
   \Else{
-    \eIf{\rm $\MyPrevV = \texttt{NULL}$}{
+    \If{\rm $\MyPrevV = \NULL$}{
       $\headElem[H] \assign \MyNextV$\;
-    }{
+    }
+    \Else{
       $\sibling[\MyPrevV] \assign \MyNextV$\;
     }
     link the roots $v$ and $\MyNextV$ as per Algorithm~\ref{alg:tree_data_structures:link_roots}\;
