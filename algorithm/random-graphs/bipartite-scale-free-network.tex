@@ -12,18 +12,16 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+%% input
+\KwIn{Positive integer $n > 1$ and minimum degree $d \geq 1$.}
 %%
-%% input/output
-\Input{Positive integer $n > 1$ and minimum degree $d \geq 1$.}
-\Output{Bipartite scale-free multigraph. Each partition has $n$
+%% output
+\KwOut{Bipartite scale-free multigraph. Each partition has $n$
   vertices and each vertex has minimum degree $d$.}
 \BlankLine
 %%
 %% algorithm body
-$G \assign \overline{K_{2n}}$~\tcc*[f]{vertex set is $\{0, 1, \dots, 2n-1\}$}\;
+$G \assign \overline{K_{2n}}$\tcc*[f]{vertex set is $\{0, 1, \dots, 2n-1\}$}\;
 $M_1 \assign$ list of length $2nd$\;
 $M_2 \assign$ list of length $2nd$\;
 \For{$v = 0, 1, \dots, n-1$}{
@@ -31,15 +29,17 @@ $M_2 \assign$ list of length $2nd$\;
     $M_1[2(vd+i)] \assign v$\;
     $M_2[2(vd+i)] \assign n + v$\;
     $r \assign$ draw uniformly at random from $\{0, 1, \dots, 2(vd+i)\}$\;
-    \eIf{\rm $r$ is even}{
+    \If{\rm $r$ is even}{
       $M_1[2(vd+i) + 1] \assign M_2[r]$\;
-    }{
+    }
+    \Else{
       $M_1[2(vd+i) + 1] \assign M_1[r]$\;
     }
     $r \assign$ draw uniformly at random from $\{0, 1, \dots, 2(vd+i)\}$\;
-    \eIf{\rm $r$ is even}{
+    \If{\rm $r$ is even}{
       $M_2[2(vd+i) + 1] \assign M_1[r]$\;
-    }{
+    }
+    \Else{
       $M_2[2(vd+i) + 1] \assign M_2[r]$\;
     }
   }
