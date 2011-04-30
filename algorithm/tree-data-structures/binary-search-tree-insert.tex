@@ -13,32 +13,36 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A binary search tree $T$ and a vertex $x$ to be inserted into $T$.}
-\Output{The same BST $T$ but augmeneted with $x$.}
+%% input
+\KwIn{A binary search tree $T$ and a vertex $x$ to be inserted into $T$.}
+%%
+%% output
+\KwOut{The same BST $T$ but augmeneted with $x$.}
 \BlankLine
 %%
 %% algorithm body
-$u \assign$ \texttt{NULL}\;
+$u \assign \NULL$\;
 $v \assign$ root of $T$\;
-\While{\rm $v \neq \texttt{NULL}$}{
+\While{$v \neq \NULL$}{
   $u \assign v$\;
-  \eIf{$\kappa_x < \kappa_v$}{
+  \If{$\kappa_x < \kappa_v$}{
     $v \assign \leftChild[v]$\;
-  }{
+  }
+  \Else{
     $v \assign \rightChild[v]$\;
   }
 }
 $\parent[x] \assign u$\;
-\eIf{\rm $u = \texttt{NULL}$}{
+\If{$u = \NULL$}{
   $\rootElem[T] \assign x$\;
-}{
-  \eIf{$\kappa_x < \kappa_u$}{
+}
+\Else{
+  \If{$\kappa_x < \kappa_u$}{
     $\leftChild[u] \assign x$\;
-  }{
+  }
+  \Else{
     $\rightChild[u] \assign x$\;
   }
 }
