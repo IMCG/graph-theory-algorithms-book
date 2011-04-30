@@ -13,21 +13,22 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A binary search tree $T$ and a target key $k$.}
-\Output{A vertex in $T$ with key $k$. If no such vertex exists, return
-  \texttt{NULL}.}
+%% input
+\KwIn{A binary search tree $T$ and a target key $k$.}
+%%
+%% output
+\KwOut{A vertex in $T$ with key $k$. If no such vertex exists, return \NULL.}
 \BlankLine
 %%
 %% algorithm body
 $v \assign \rootElem[T]$\;
-\While{\rm $v \neq \texttt{NULL}$ and $k \neq \kappa_v$}{
-  \eIf{$k < \kappa_v$}{
+\While{\rm $v \neq \NULL$ and $k \neq \kappa_v$}{
+  \If{$k < \kappa_v$}{
     $v \assign \leftChild[v]$\;
-  }{
+  }
+  \Else{
     $v \assign \rightChild[v]$\;
   }
 }
