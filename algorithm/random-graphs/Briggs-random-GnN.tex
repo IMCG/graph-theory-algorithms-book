@@ -13,14 +13,14 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyMax}{max}
 \SetKwData{MyTrue}{True}
 %%
-%% input/output
-\Input{Positive integers $n$ and $N$ such that $1 \leq N \leq \binom{n}{2}$.}
-\Output{A random graph from $G(n,N)$.}
+%% input
+\KwIn{Positive integers $n$ and $N$ such that $1 \leq N \leq \binom{n}{2}$.}
+%%
+%% output
+\KwOut{A random graph from $G(n,N)$.}
 \BlankLine
 %%
 %% algorithm body
@@ -31,8 +31,8 @@ $\MyMax \assign \binom{n}{2}$\;
 $G \assign \overline{K_n}$\;
 $u \assign 0$\;
 $v \assign 1$\;
-$t \assign 0$~\tcc*[f]{number of candidates processed so far}\;
-$k \assign 0$~\tcc*[f]{number of edges selected so far}\;
+$t \assign 0$\tcc*[f]{number of candidates processed so far}\;
+$k \assign 0$\tcc*[f]{number of edges selected so far}\;
 \While{$\MyTrue$}{
   $r \assign$ draw uniformly at random from $\{0, 1, \dots, \MyMax - t\}$\;
   \If{$r < N - k$}{
