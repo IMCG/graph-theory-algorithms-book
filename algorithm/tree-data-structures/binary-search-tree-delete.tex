@@ -13,37 +13,42 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A nonempty binary search tree $T$ and a vertex $x \in V(T)$ to
+%% input
+\KwIn{A nonempty binary search tree $T$ and a vertex $x \in V(T)$ to
   be removed from $T$.}
-\Output{The same BST $T$ but without $x$.}
+%%
+%% output
+\KwOut{The same BST $T$ but without $x$.}
 \BlankLine
 %%
 %% algorithm body
-$u \assign \texttt{NULL}$\;
-$v \assign \texttt{NULL}$\;
-\eIf{\rm $\leftChild[x] \neq \texttt{NULL}$ or $\rightChild[x] \neq \texttt{NULL}$}{
+$u \assign \NULL$\;
+$v \assign \NULL$\;
+\If{\rm $\leftChild[x] \neq \NULL$ or $\rightChild[x] \neq \NULL$}{
   $v \assign x$\;
-}{
+}
+\Else{
   $v \assign$ successor of $x$\;
 }
-\eIf{\rm $\leftChild[v] \neq \texttt{NULL}$}{
+\If{$\leftChild[v] \neq \NULL$}{
   $u \assign \leftChild[v]$\;
-}{
+}
+\Else{
   $u \assign \rightChild[v]$\;
 }
-\If{\rm $u \neq \texttt{NULL}$}{
+\If{$u \neq \NULL$}{
   $\parent[u] \assign \parent[v]$\;
 }
-\eIf{\rm $\parent[v] = \texttt{NULL}$}{
+\If{$\parent[v] = \NULL$}{
   $\rootElem[T] \assign u$\;
-}{
-  \eIf{\rm $v = \leftChild[\parent[v]]$}{
+}
+\Else{
+  \If{$v = \leftChild[\parent[v]]$}{
     $\leftChild[\parent[v]] \assign u$\;
-  }{
+  }
+  \Else{
     $\rightChild[\parent[v]] \assign u$\;
   }
 }
