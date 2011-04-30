@@ -13,16 +13,16 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyLeft}{left}
 \SetKwData{MyRight}{right}
 \SetKwData{MyTrue}{True}
 %%
-%% input/output
-\Input{A binary tree $T$, given in sequence representation, having
+%% input
+\KwIn{A binary tree $T$, given in sequence representation, having
   $n > 1$ internal vertices.}
-\Output{The binary tree $T$ heapified so that it satisfies the
+%%
+%% output
+\KwOut{The binary tree $T$ heapified so that it satisfies the
   heap-order property.}
 \BlankLine
 %%
@@ -34,9 +34,10 @@
     $\MyLeft \assign 2i + 1$\;
     $\MyRight \assign 2i + 2$\;
     \If{\rm $\MyLeft < n$ and $\kappa_{T[\MyLeft]} \leq \kappa_v$}{
-      \eIf{\rm $\MyRight < n$ and $\kappa_{T[\MyRight]} \leq \kappa_{T[\MyLeft]}$}{
+      \If{\rm $\MyRight < n$ and $\kappa_{T[\MyRight]} \leq \kappa_{T[\MyLeft]}$}{
         $j \assign \MyRight$\;
-      }{
+      }
+      \Else{
         $j \assign \MyLeft$\;
       }
     }
