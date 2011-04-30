@@ -12,18 +12,15 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-%%
 %% input/output
-\Input{Three vertices $x,y,z$ of an augmented AVL tree $T_v$, where
+\KwIn{Three vertices $x,y,z$ of an augmented AVL tree $T_v$, where
   $z$ is the first height-unbalanced vertex in the path from $v$ up to
   the root of $T_v$. The left subtree of $z$ is $T_3$ and the right
   subtree of $y$ is $T_2$. The left and right subtrees of $x$ are
   $T_0$ and $T_1$, respectively.}
-\Output{A single right rotation to height-balance the subtree rooted at
-  $z$.}
+%%
+%% output
+\KwOut{A single right rotation to height-balance the subtree rooted at $z$.}
 \BlankLine
 %%
 %% algorithm body
