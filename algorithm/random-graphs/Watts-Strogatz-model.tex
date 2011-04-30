@@ -12,32 +12,31 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-%%
-%% input/output
-\Input{Positive integer $n$ denoting the number of vertices. Positive
+%% input
+\KwIn{Positive integer $n$ denoting the number of vertices. Positive
   even integer $k$ for the degree of each vertex, where
   $n \gg k \gg \ln n \gg 1$. In particular, $k$ should satisfy
   $0 < k < n/2$. Rewiring probability $0 < p \leq 1$.}
-\Output{A Watts-Strogatz network on $n$ vertices.}
+%%
+%% output
+\KwOut{A Watts-Strogatz network on $n$ vertices.}
 \BlankLine
 %%
 %% algorithm body
-$M \assign nk$~\tcc*[f]{sum of all vertex degrees = twice number of edges}\;
+$M \assign nk$\tcc*[f]{sum of all vertex degrees = twice number of edges}\;
 $r \assign$ draw uniformly at random from interval $(0,1)$\;
 $v \assign 1 + \lfloor \ln(1 - r) / \ln(1 - p) \rfloor$\;
 $E \assign$ contiguous edge list of $k$-circulant graph on $n$ vertices\;
 \While{$v \leq M$}{
   $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\;
-  \eIf{\rm $v-1$ is even~\nllabel{alg:Watts_Strogatz:even_index}}{
+  \If{\rm $v-1$ is even\nllabel{alg:Watts_Strogatz:even_index}}{
     \While{\rm $E[v] = u$ or $(u, E[v]) \in E$}{
       $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\;
     }
-  }{
+  }
+  \Else{
     \While{\rm $E[v-2] = u$ or $(E[v-2], u) \in E$}{
-      $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$~\nllabel{alg:Watts_Strogatz:choose_vertex_odd_index}\;
+      $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\nllabel{alg:Watts_Strogatz:choose_vertex_odd_index}\;
     }
   }
   $E[v-1] \assign u$\;
