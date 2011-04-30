@@ -12,13 +12,11 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+%% input
+\KwIn{A positive integer $n$.}
 %%
-%% input/output
-\Input{A positive integer $n$.}
-\Output{The friendship graph $F_n$.}
+%% output
+\KwOut{The friendship graph $F_n$.}
 \BlankLine
 %%
 %% algorithm body
@@ -28,9 +26,10 @@
 $G \assign$ null graph\;
 $N \assign 2n + 1$\;
 \For{$i \assign 0, 1, \dots, N-3$}{
-  \eIf{\rm $i$ is odd}{
+  \If{\rm $i$ is odd}{
     add edges $(i,\, i+1)$ and $(i,\, N-1)$ to $G$\;
-  }{
+  }
+  \Else{
     add edge $(i, N-1)$ to $G$\;
   }
 }
