@@ -12,13 +12,11 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+%% input
+\KwIn{An ordered tree $T$ on $n > 0$ vertices.}
 %%
-%% input/output
-\Input{An ordered tree $T$ on $n > 0$ vertices.}
-\Output{A list of the vertices of $T$ in post-order.}
+%% output
+\KwOut{A list of the vertices of $T$ in post-order.}
 \BlankLine
 %%
 %% algorithm body
@@ -27,13 +25,14 @@ $S \assign$ empty stack\;
 $r \assign$ root of $T$\;
 $\push(S, r)$\;
 \While{$\length(S) > 0$}{
-  \eIf{\rm $\Top(S)$ is unmarked}{
+  \If{\rm $\Top(S)$ is unmarked}{
     mark $\Top(S)$\;
     $[u_1, u_2, \dots, u_k] \assign$ ordering of children of $\Top(S)$\;
     \For{$i \assign k, k-1, \dots, 1$}{
       $\push(S, u_i)$\;
     }
-  }{
+  }
+  \Else{
     $v \assign \pop(S)$\;
     $\append(L, v)$\;
   }
