@@ -63,6 +63,35 @@ def is_blacklisted(f):
             return True
     return False
 
+def to_year_range(cline):
+    """
+    Convert a copyright years to use year range, where necessary. The
+    copyright years can be presented as a list of years such as
+
+    2009, 2010, 2011
+
+    The above can be shortened by using a year range as follows:
+
+    2009--2011
+
+    INPUT:
+
+    - cline --- A copyright line containing the copyright year(s).
+
+    OUTPUT:
+
+    Convert the copyright line to use a year range, if necessary.
+    """
+    # substring preceding "Minh Van Nguyen <nguyenminh2"
+    s = cline.split("Minh Van Nguyen <nguyenminh2")[0].strip()
+    # substring following "Copyright (C)", i.e. get the copyright years
+    yearlist = s.split("Copyright (C)")[-1].strip()
+    if "," in yearlist:
+        years = yearlist.split(",")
+        years = map(lambda x: x.strip(), years)
+        return cline.replace(yearlist, "%s--%s" % (years[0], years[-1]))
+    return cline
+
 def update_copyright(f):
     """
     Update copyright information of given file.
@@ -82,17 +111,21 @@ def update_copyright(f):
     for line in infile:
         if "Copyright (C)" in line and "Minh Van Nguyen <nguyenminh2" in line:
             has_copyright = True
+            cline = to_year_range(line.strip())
             # substring preceding "Minh Van Nguyen <nguyenminh2"
-            s = line.split("Minh Van Nguyen <nguyenminh2")[0].strip()
-            latest_year = s.split()[-1].strip()
+            s = cline.split("Minh Van Nguyen <nguyenminh2")[0].strip()
+            latest_year = ""
+            # copyright with multi-years
+            if "--" in s:
+                latest_year = s.split("--")[-1].strip()
+            # copyright with one year
+            else:
+                latest_year = s.split("Copyright (C)")[-1].strip()
             if latest_year == year:
-                output += line
+                output += cline + "\n"
                 continue
-            # substring following s
-            t = line.split(s)[-1].strip()
-            s = s + ", " + year
-            s = s + " " + t
-            output += s + "\n"
+            cline = cline.replace(latest_year, year)
+            output += cline + "\n"
             continue
         output += line
     infile.close()
