@@ -43,16 +43,23 @@ def is_blacklisted(f):
     True if f is blacklisted; False otherwise.
     """
     blacklist = (".hgignore", ".hgtags", ".jpg", ".pdf", ".png",
-                 "bibliography.bst", "bin/copyright.py",
+                 "bibliography.bst", "bin/copyright.py", "changelog.txt",
+                 "data/random-graphs/power-grid/power-grid.gml",
+                 "data/random-graphs/power-grid/power-grid.txt",
+                 "data/random-graphs/celegans-neural/celegansneural.gml",
+                 "data/random-graphs/celegans-neural/celegansneural.txt",
                  "image/graph-algorithms/worldmap-capital-cities.svg",
-                 "LICENSE", "style/tkz-arith.tex", "tex/license-gfdl.tex",
-                 "tex/version.tex", "TODO")
+                 "LICENSE", "style/context", "style/generic", "style/latex",
+                 "style/plain", "style/tex", "style/tkz-arith.tex",
+                 "tex/license-gfdl.tex", "tex/version.tex", "TODO")
     if ".hg/" in f:
         return True
     if f.endswith(".sty") and not f.endswith("mystyle.sty"):
         return True
     for e in blacklist:
         if f.endswith(e):
+            return True
+        if e in f:
             return True
     return False
 
