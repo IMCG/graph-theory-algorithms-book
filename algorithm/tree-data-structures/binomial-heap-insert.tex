@@ -13,19 +13,20 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A binomial heap $H$ and a vertex $v$.}
-\Output{The heap $H$ with $v$ inserted into it.}
+%% input
+\KwIn{A binomial heap $H$ and a vertex $v$.}
+%%
+%% output
+\KwOut{The heap $H$ with $v$ inserted into it.}
 \BlankLine
 %%
 %% algorithm body
 $H_1 \assign$ empty binomial heap\;
 $\headElem[H_1] \assign v$\;
-$\parent[v] \assign \texttt{NULL}$\;
-$\child[v] \assign \texttt{NULL}$\;
-$\sibling[v] \assign \texttt{NULL}$\;
+$\parent[v] \assign \NULL$\;
+$\child[v] \assign \NULL$\;
+$\sibling[v] \assign \NULL$\;
 $\degree[v] \assign 0$\;
 $H \assign$ merge $H$ and $H_1$ as per Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps}\;
