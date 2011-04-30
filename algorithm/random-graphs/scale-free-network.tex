@@ -12,17 +12,15 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+%% input
+\KwIn{Positive integer $n > 1$ and minimum degree $d \geq 1$.}
 %%
-%% input/output
-\Input{Positive integer $n > 1$ and minimum degree $d \geq 1$.}
-\Output{Scale-free network on $n$ vertices.}
+%% output
+\KwOut{Scale-free network on $n$ vertices.}
 \BlankLine
 %%
 %% algorithm body
-$G \assign \overline{K_n}$~\tcc*[f]{vertex set is $V = \{0, 1, \dots, n-1\}$}\;
+$G \assign \overline{K_n}$\tcc*[f]{vertex set is $V = \{0, 1, \dots, n-1\}$}\;
 $M \assign$ list of length $2nd$\;
 \For{$v = 0, 1, \dots, n-1$}{
   \For{$i = 0, 1, \dots, d-1$}{
