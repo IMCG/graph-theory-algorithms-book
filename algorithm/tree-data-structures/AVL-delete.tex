@@ -13,24 +13,25 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{An AVL tree $T$ and a vertex $v \in V(T)$.}
-\Output{The AVL tree $T$ with $v$ removed from it.}
+%% input
+\KwIn{An AVL tree $T$ and a vertex $v \in V(T)$.}
+%%
+%% output
+\KwOut{The AVL tree $T$ with $v$ removed from it.}
 \BlankLine
 %%
 %% algorithm body
 $u \assign \parent[v]$\;
 delete $v$ from $T$ as per Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete}\;
 adjust the height of $u$\tcc*[f]{begin height adjustment}\;
-$x \assign \texttt{NULL}$\;
-$y \assign \texttt{NULL}$\;
-$z \assign \texttt{NULL}$\;
-\While{\rm $\parent[u] \neq \texttt{NULL}$}{
+$x \assign \NULL$\;
+$y \assign \NULL$\;
+$z \assign \NULL$\;
+\While{$\parent[u] \neq \NULL$}{
   $u \assign \parent[u]$\;
-  \If{\rm $\leftChild[u] \neq \texttt{NULL}$ and $\rightChild[u] \neq \texttt{NULL}$}{
+  \If{\rm $\leftChild[u] \neq \NULL$ and $\rightChild[u] \neq \NULL$}{
     $h_\ell \assign \height[\leftChild[u]]$\;
     $h_r \assign \height[\rightChild[u]]$\;
     $\height[u] \assign 1 + \max(h_\ell,\, h_r)$\;
@@ -65,11 +66,11 @@ $z \assign \texttt{NULL}$\;
       }
     }
   }
-  \If{\rm $\leftChild[u] \neq \texttt{NULL}$}{
+  \If{$\leftChild[u] \neq \NULL$}{
     $\height[u] \assign 1 + \height[\leftChild[u]]$\;
     continue with next iteration of loop\;
   }
-  \If{\rm $\rightChild[u] \neq \texttt{NULL}$}{
+  \If{$\rightChild[u] \neq \NULL$}{
     $\height[u] \assign 1 + \height[\rightChild[u]]$\;
     continue with next iteration of loop\;
   }
