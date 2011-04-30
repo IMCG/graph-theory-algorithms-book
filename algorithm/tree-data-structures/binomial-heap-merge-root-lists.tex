@@ -12,16 +12,14 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-%%
-%% input/output
-\Input{Two root lists $L_1$ and $L_2$, each containing the roots of
+%% input
+\KwIn{Two root lists $L_1$ and $L_2$, each containing the roots of
   binomial trees in the binomial heaps $H_1$ and $H_2$,
   respectively. Each root list $L_i$ is sorted in increasing order of
   vertex degree.}
-\Output{A single list $L$ that merges the root lists $L_i$ and sorted
+%%
+%% output
+\KwOut{A single list $L$ that merges the root lists $L_i$ and sorted
   in nondecreasing order of degree.}
 \BlankLine
 %%
@@ -33,10 +31,11 @@ $n \assign |L_1| + |L_2| - 1$\;
 $\append(L_1,\, \infty)$\;
 $\append(L_2,\, \infty)$\;
 \For{$k \assign 0, 1, \dots, n$}{
-  \eIf{$\deg(L_1[i]) \leq \deg(L_2[j])$}{
+  \If{$\deg(L_1[i]) \leq \deg(L_2[j])$}{
     $\append(L,\, L_1[i])$\;
     $i \assign i + 1$\;
-  }{
+  }
+  \Else{
     $\append(L,\, L_2[j])$\;
     $j \assign j + 1$\;
   }
