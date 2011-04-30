@@ -13,13 +13,14 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyTrue}{True}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A binary tree $T$ on $n > 0$ vertices.}
-\Output{A list of the vertices of $T$ in in-order.}
+%% input
+\KwIn{A binary tree $T$ on $n > 0$ vertices.}
+%%
+%% output
+\KwOut{A list of the vertices of $T$ in in-order.}
 \BlankLine
 %%
 %% algorithm body
@@ -27,10 +28,11 @@ $L \assign [\,]$\;
 $S \assign$ empty stack\;
 $v \assign$ root of $T$\;
 \While{$\MyTrue$}{
-  \eIf{\rm $v \neq \texttt{NULL}$}{
+  \If{$v \neq \NULL$}{
     $\push(S, v)$\;
     $v \assign$ left-child of $v$\;
-  }{
+  }
+  \Else{
     \If{$\length(S) = 0$}{
       exit the loop\;
     }
