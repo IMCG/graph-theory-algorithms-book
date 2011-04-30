@@ -13,17 +13,18 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
+\SetKwData{NULL}{\footnotesize{NULL}}
 %%
-%% input/output
-\Input{A nonempty binary search tree $T$.}
-\Output{A vertex of $T$ with minimum key.}
+%% input
+\KwIn{A nonempty binary search tree $T$.}
+%%
+%% output
+\KwOut{A vertex of $T$ with minimum key.}
 \BlankLine
 %%
 %% algorithm body
 $v \assign$ root of $T$\;
-\While{\rm $\leftChild[v] \neq \texttt{NULL}$}{
+\While{$\leftChild[v] \neq \NULL$}{
   $v \assign \leftChild[v]$\;
 }
 \Return $v$\;
