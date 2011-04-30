@@ -13,27 +13,28 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{treeRoot}{root}
 \SetKwData{one}{1}
 \SetKwData{zero}{0}
 %%
-%% input/output
-\Input{A binary tree $T$ representing the Huffman code of an alphabet
+%% input
+\KwIn{A binary tree $T$ representing the Huffman code of an alphabet
   $A$. The root $r$ of $T$.}
-\Output{A list $H$ representing a Huffman code of $A$, where $H[a_i]$
+%%
+%% output
+\KwOut{A list $H$ representing a Huffman code of $A$, where $H[a_i]$
   corresponds to a Huffman encoding of $a_i \in A$.}
 \BlankLine
 %%
 %% algorithm body
-$H \assign [\,]$~\tcc*[f]{list of Huffman encodings}\;
-$Q \assign [r]$~\tcc*[f]{queue of vertices}\;
+$H \assign [\,]$\tcc*[f]{list of Huffman encodings}\;
+$Q \assign [r]$\tcc*[f]{queue of vertices}\;
 \While{$\length(Q) > 0$}{
   $\treeRoot \assign \dequeue(Q)$\;
-  \eIf{\treeRoot \emph{is a leaf}}{
+  \If{\rm \treeRoot is a leaf}{
     $H[\treeRoot] \assign$ label of \treeRoot\;
-  }{
+  }
+  \Else{
     $a \assign$ left child of \treeRoot\;
     $b \assign$ right child of \treeRoot\;
     $\enqueue(Q, a)$\;
