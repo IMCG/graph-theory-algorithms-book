@@ -13,17 +13,17 @@
 \SetAlgoNoLine
 %%
 %% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
 \SetKwData{MyLeft}{left}
 \SetKwData{MyRight}{right}
 \SetKwData{MyRoot}{root}
 \SetKwData{MyTrue}{True}
 %%
-%% input/output
-\Input{A binary heap $T$, given in sequence representation, having
+%% input
+\KwIn{A binary heap $T$, given in sequence representation, having
   $n > 1$ internal vertices.}
-\Output{Extract the minimum vertex of $T$. With one vertex removed,
+%%
+%% output
+\KwOut{Extract the minimum vertex of $T$. With one vertex removed,
   $T$ must satisfy the heap-order property.}
 \BlankLine
 %%
@@ -37,9 +37,10 @@ $j \assign 0$\;
   $\MyLeft \assign 2i + 1$\;
   $\MyRight \assign 2i + 2$\;
   \If{\rm $\MyLeft < n$ and $\kappa_{T[\MyLeft]} \leq \kappa_v$}{
-    \eIf{\rm $\MyRight < n$ and $\kappa_{T[\MyRight]} \leq \kappa_{T[\MyLeft]}$}{
+    \If{\rm $\MyRight < n$ and $\kappa_{T[\MyRight]} \leq \kappa_{T[\MyLeft]}$}{
       $j \assign \MyRight$\;
-    }{
+    }
+    \Else{
       $j \assign \MyLeft$\;
     }
   }
