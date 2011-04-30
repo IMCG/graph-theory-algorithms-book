@@ -12,24 +12,23 @@
 \DontPrintSemicolon
 \SetAlgoNoLine
 %%
-%% data section
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-%%
-%% input/output
-\Input{A nonempty binary heap $T$, in sequence representation, having
+%% input
+\KwIn{A nonempty binary heap $T$, in sequence representation, having
   $n$ internal vertices. An element $v$ that is to be inserted as a
   new internal vertex of $T$.}
-\Output{The binary heap $T$ augmented with the new internal vertex $v$.}
+%%
+%% output
+\KwOut{The binary heap $T$ augmented with the new internal vertex $v$.}
 \BlankLine
 %%
 %% algorithm body
 $i \assign n$\;
 \While{$i > 0$}{
-  $p \assign \lfloor (i - 1) / 2\rfloor$\;
-  \eIf{$\kappa_{T[p]} \leq \kappa_{v}$}{
+  $p \assign \lfloor (i - 1) / 2 \rfloor$\;
+  \If{$\kappa_{T[p]} \leq \kappa_{v}$}{
     exit the loop\;
-  }{
+  }
+  \Else{
     $T[i] \assign T[p]$\;
     $i \assign p$\;
   }
