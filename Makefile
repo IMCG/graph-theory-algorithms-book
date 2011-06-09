@@ -19,6 +19,11 @@
 FILE = book
 TEX_MASTER = $(FILE).tex
 
+# Compile everything. This is usually done by executing the command
+#
+# $ make
+#
+# from your terminal.
 all:
 	make pdf
 	makeindex $(FILE)
