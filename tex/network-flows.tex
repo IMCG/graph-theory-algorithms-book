@@ -29,6 +29,584 @@ Yellen~\cite{GrossYellen1999}.
 \end{itemize}
 
 
+Let $G=(V,E,i,h)$ be an unweighted multidigraph, as in
+Definition \ref{def:introduction:graph-version3}.
+
+If $F$ is a field such as ${\mathbb{R}}$ or $GF(q)$ or a 
+ring such as ${\mathbb{Z}}$, let 
+
+\[
+C^0(G, F)=\{f:V\to F\},\ \ \ \ C^1(G, F)=\{f:E\to F\},
+\]
+be the sets of $F$-valued functions defined on $V$ and
+$E$, respectively. 
+\index{$C^0(G, F)$}
+\index{$C^1(G, F)$}
+If $F$ is a field then these are $F$-inner
+product spaces with inner product
+
+\begin{equation}
+\label{eqn:inner-product}
+(f,g)=\sum_{x\in X} f(x)g(x), \ \ \ \ \ (X=V,\ \ {\rm resp.}\ \ X=E),
+\end{equation}
+and
+
+\[
+\dim C^0(G,F)=|V|,\ \ \ \dim C^1(G,F)=|E|.
+\]
+If you index the sets $V$ and $E$ in some arbitrary but fixed way
+and define, for $1\leq i\leq |V|$ and
+$1\leq j\leq |E|$,
+
+\[
+f_i(v)=
+\left\{
+\begin{array}{ll}
+1,& v = v_i,\\
+0, & {\rm otherwise},
+\end{array}
+\right.
+\ \ \ \ \ 
+g_j(e)=
+\left\{
+\begin{array}{ll}
+1,& e = e_j,\\
+0, & {\rm otherwise},
+\end{array}
+\right.
+\]
+then ${\mathcal F}=\{f_i\}\subset C^0(G,F)$ is a basis
+of $ C^0(G,F)$
+and ${\mathcal G}=\{g_j\}\subset C^1(G,F)$ is a basis of $C^1(G,F)$.
+
+We order the edges
+
+\[
+E = \{e_1,e_2,\dots, e_{|E|}\},
+\]
+in some arbitrary but fixed way.
+A {\it vector representation} (or {\it characteristic vector} or
+{\it incidence vector}) of a subgraph $G'=(V,E')$ of $G=(V,E)$,
+$E'\subset E$, is a binary ${|E|}$-tuple
+
+\[
+{\rm vec}(G')=(a_1,a_2,\dots, a_{|E|}) \in GF(2)^{|E|},
+\]
+where 
+
+\[
+a_i=a_i(E')=
+\left\{
+\begin{array}{ll}
+1,&{\rm if \ }e_i\in E',\\
+0,&{\rm if \ }e_i\notin E'.
+\end{array}
+\right.
+\]
+In particular, this defines a mapping
+
+\[
+{\rm vec}:\{ {\rm subgraphs\ of\ }G=(V,E)\}\to GF(2)^{|E|}.
+\]
+
+
+For any non-trivial partition 
+
+\[
+V = V_1\cup V_2,\ \ \ \ \ V_i\not= \emptyset, \ \ \ V_1\cap V_2= \emptyset, 
+\]
+the set of all edges $e=(v_1,v_2)\in E$, with $v_i\in V_i$ ($i=1,2$),
+is called a {\it cocycle}\footnote{Also called an {\it edge cut subgraph} 
+or {\it disconnecting set} or
+{\it seg} or {\it edge cutset}.} of $G$. 
+A cocycle with a minimal set of edges is a  
+{\it bond} (or {\it cut set}) of $G$.  
+An {\it Euler subgraph} is either a cycle
+or a union of edge-disjoint cycles.
+\index{bond}
+\index{Euler subgraph}
+\index{cocyle}
+\index{edge cut subgraph}
+\index{seg}
+\index{cut set}
+\index{edge cutset}
+
+The set of cycles of $G$ is denoted $Z(G)$ and the set of
+cocycles is denoted $Z^*(G)$.
+
+The $F$-vector space spanned by the vector representations of 
+all the cycles is called the {\it cycle space} of $G$, denoted
+${\mathcal Z}(G)={\mathcal Z}(G,F)$. 
+\index{cycle space}
+This is the kernel of the incidence 
+matrix of $G$ (\S 14.2 in Godsil and Royle \cite{GodsilRoyle2004}).
+Define
+
+\[
+\begin{array}{c}
+D:C^1(G,F)\to C^0(G,F),\\
+(Df)(v) = \sum_{h(e)=v} f(e) - \sum_{t(e)=v} f(e).
+\end{array}
+\]
+With respect to these bases ${\mathcal F}$ and
+${\mathcal G}$, the matrix
+representing the linear transformation $D:C^1(G,F)\to C^0(G,F)$
+is the incidence matrix. An element of the kernel of $D$ is 
+sometimes called a {\it flow} (see Biggs \cite{Biggs1997})
+or {\it circulation} (see below).
+\index{flow}
+\index{circulation}
+Therefore, this is sometimes also referred to as the 
+{\it space of flows} or the {\it circulation space}.
+\index{flow space}
+\index{circulation space}
+
+It may be regarded as a subspace of $C^1(G,F)$ of dimension $n(G)$.
+When $F$ is a finite field, sometimes\footnote{Jungnickel and 
+Vanstone in \cite{JungnickelVanstone1997} call 
+this the {\it even graphical code} of $G$.}
+the cycle space is called the {\it cycle code of $G$}.
+\index{cycle code}
+
+
+Let $F$ be a field such as ${\mathbb{R}}$ or $GF(q)$, for some prime 
+power $q$. Let $G$ be a digraph.
+Some define a {\it circulation} (or {\it flow}) on $G=(V,E)$ 
+\index{circulation}
+to be a function
+
+\[
+f:E\to F,
+\]
+satisfying\footnote{Note: In addition, some authors add the 
+condition $f(e)\geq 0$ - see e.g., Chung \cite{Chung2005}.}
+
+\begin{itemize}
+\item
+$\sum_{u\in V,\ (u,v)\in E} f(u,v) = \sum_{w\in V,\ (v,w)\in E} f(v, w)$.
+\end{itemize}
+(Note: this is simply the condition that $f$ belongs to the
+kernel of $D$.)
+
+Suppose $G$ has a subgraph $H$ and 
+$f$ is a circulation of $G$ such that $f$ is a constant function
+on $H$ and $0$ elsewhere. We call such a circulation a
+{\it characteristic function} of $H$.
+For example, if $G$ has a cycle $C$ and if $f$ is the
+characteristic function on $C$, then $f$ is a circulation.
+
+The {\it circulation space} ${\mathcal C}$ is the $F$-vector space of 
+circulation functions. 
+The cycle space ``clearly'' may be identified with 
+a subspace of the circulation space,
+since the $F$-vector space spanned by the characteristic
+functions of cycles may be identified with the cycle space of $G$. 
+In fact, these spaces are isomorphic.
+Under the inner product (\ref{eqn:inner-product}), i.e., 
+\index{circulation space}
+
+\begin{equation}
+%\label{eqn:inner-product2}
+(f,g)=\sum_{e\in E} f(e)g(e),
+\end{equation}
+this vector space is an inner product space.
+
+\begin{example}
+{\rm
+This example is not needed but is presented for its independent
+interest. Assume $G=(V,E)$ is a strongly connected directed graph.
+Define the {\it transition probability matrix} $P$ for a digraph
+\index{transition probability matrix}
+$G$ by
+
+\[
+P(x,y)=\left\{
+\begin{array}{ll}
+d_x, & {\rm if}\ (x, y) \in E,\\
+0, & {\rm otherwise},
+\end{array}
+\right.
+\]
+where $d_x$ denotes the out-degree.
+The Perron-Frobenius Theorem states that there exists a unique 
+left eigenvector $\phi$ such that (when regarded as a function
+$\phi:V\to {\mathbb{R}}$) $\phi (v) > 0$, for all $v\in V$ and 
+$\phi P  = \rho \phi$, where $\rho$ is the spectral radius of
+$G$. We scale $\phi$ so that $\sum_{v\in V}  \phi(v) = 1$.
+(This vector is sometimes called the {\it Perron vector}.)
+ Let $F_\phi (u, v) = \phi(v)P (u, v)$. 
+{\it Fact:} $F_\phi$ is a circulation.
+For a proof, see F. Chung \cite{Chung2005}.
+}
+\end{example}
+
+ If the edges of $E$ are indexed in some arbitrary but fixed way then
+ a circulation function restricted to a subgraph $H$ of $G$
+ may be identified with a vector representation of $H$,
+ as described above. Thefore, the circulation functions gives a
+ coordinate-free version of the cycle space.
+
+The $F$-vector space spanned by the vector representations of 
+all the segs is called the {\it cocycle space} (or the {\it cut space}) of $G$, 
+denoted ${\mathcal Z}^*(G)={\mathcal Z}^*(G,F)$.
+This is the column space of the transpose of the incidence 
+matrix of $G$ (\S 14.1 in Godsil and Royle \cite{GodsilRoyle2004}). It may be 
+regarded as a subspace of $C^1(G,F)$ of dimension the rank of $G$,
+$r(G)$.
+When $F$ is a finite field, sometimes the cocycle space is called 
+the {\it cocycle code of $G$}.
+\index{cocycle code}
+\index{cocycle space}
+\index{cut space}
+
+\begin{lemma}
+\label{lemma:cycle-cocycle}
+{\rm
+Under the inner product (\ref{eqn:inner-product})
+on $C^1(G,F)$, the cycle space is orthogonal to the cocycle space.
+}
+\end{lemma}
+
+\begin{proof}[Solution]
+One proof follows from Theorem 8.3.1 in Godsil and Royle \cite{GodsilRoyle2004}.
+
+Here is another proof:
+By Theorem 2.3 in Bondy and Murty \cite{BondyMurty2007},
+an edge of $G$ is an edge cut if and only if it
+is contained in no cycle.
+Therefore, the vector representation of any 
+cocycle is supported on a set of indices which is disjoint from the 
+support of the vector representation of any
+cycle. Therefore, there is a basis of the cycle space which is 
+orthogonal to a basis of the cocycle space.
+\end{proof}
+
+\begin{proposition}
+{\rm
+Let $F=GF(2)$.
+The cycle code of a graph $G=(V,E)$ is a linear binary block code of 
+length $|E|$,  dimension equal to the nullity of the graph, $n(G)$,
+and minimum distance equal to the girth of $G$.
+If $C\subset GF(2)^{|E|}$ is the cycle code associated to $G$  
+and $C^*$ is the cocycle code associated to $G$ then
+$C^*$ is the dual code of $C$. In particular,
+the cocycle code of $G$ is a linear binary block code of length
+$|E|$, and dimension $r(G)=|E|-n(G)$.
+}
+\end{proposition}
+
+This follows from Hakimi-Bredeson \cite{HakimiBredeson1968}
+(see also Jungnickel-Vanstone \cite{JungnickelVanstone1997})
+in the binary case\footnote{It is likely true
+in the non-binary case as well, but no
+proof seems to be in the literature.}. 
+
+\begin{proof}[Solution]
+Let $d$ denote the minimum distance of the code $C$.
+Let $\gamma$ denote the girth of $G$,
+i.e., the smallest cardinality of a cycle in $G$.
+If $K$ is a cycle in $G$ then the
+vector ${\rm vec}(K)\in GF(2)^{|E|}$ is an element of the
+cycle code $C\subset GF(2)^{|E|}$. This implies $d\leq \gamma$.
+
+In the other direction, suppose $K_1$ and $K_2$ are
+cycles in $G$ with associated support vectors 
+$v_1={\rm vec}(K_1)$, $v_2={\rm vec}(K_2)$.
+Assume that at least one of these cycles is a cycle
+of minimum length, say $K_1$, so the weight of its corresponding 
+support vector is equal to the girth $\gamma$.
+The only way that 
+${\rm wt}(v_1+v_2)<\min\{{\rm wt}(v_1),{\rm wt}(v_2)\}$ 
+can occur is if $K_1$ and $K_2$ have some
+edges in common. In this case, the vector
+$v_1+v_2$ represents a subgraph 
+which is either a cycle or it is a 
+union of disjoint cycles. In either case, by
+minimality of $K_1$, these new cycles must be at least as
+long. Therefore, $d\geq \gamma$, as desired.
+
+%Lemma \ref{lemma:cycle-cocycle} below.
+\end{proof}
+
+Consider a spanning tree $T$ of a graph $G$
+and its complementary subgraph $\overline{T}$.
+For each edge $e$ of $\overline{T}$ the graph $T\cup e$
+contains a unique cycle. The cycles which arise in this way are called
+the {\it fundamental cycles} of $G$, denoted $cyc(T,e)$.
+\index{fundamental cycles}
+
+%If $G$ is connected, one can construct the generator 
+%matrix of the cycle code $C$ in standard form as follows. 
+%Fix a spanning tree $T$ of $G$ and index the
+%edges of $G$ so that the edges in the complementary subgraph $\overline{T}$ 
+%(namely, $E(\overline{T}) = E(G)-E(T)$) occur before the edges of $T$. 
+%If you define the generator matrix $A$ of $C$ to be that matrix whose
+%rows are the vector representation of the fundamental cycles
+%$cyc(T,e)$, as $e$ runs through the edges in $\overline{T}$
+%in the order above, then you will find that $A$ is in standard form.
+
+
+
+\begin{example}
+\label{example:cycle-space}
+{\rm
+Consider the graph below, with edges labeled as indicated, together
+with a spanning tree, depicted to its right, in 
+Figure \ref{fig:cycle-space1}.
+
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{cc}
+% this was done "manually"
+\unitlength=0.620000pt
+\begin{picture}(250.00,100.00)(-40.00,0.00)
+
+\thinlines
+\put(0.00,0.00){\line(1,0){50.00}} 
+\put(17.00,30.00){$0$} 
+\put(0.00,0.00){\line(1,1){50.00}} 
+\put(25.00,-15.00){$1$} 
+\put(50.00,0.00){\line(0,1){50.00}} 
+\put(55.00,20.00){$2$} 
+\put(50.00,0.00){\line(1,0){50.00}} 
+\put(75.00,-15.00){$3$} 
+
+\put(100.00,0.00){\line(1,0){50.00}} 
+\put(117.00,30.00){$4$} 
+\put(100.00,0.00){\line(1,1){50.00}}
+\put(125.00,-15.00){$5$} 
+
+\put(150.00,50.00){\line(1,0){50.00}} 
+\put(175.00,57.00){$7$} 
+\put(150.00,50.00){\line(0,-1){50.00}}
+\put(155.00,20.00){$6$}  
+\put(200.00,50.00){\line(0,-1){50.00}} 
+\put(187.00,20.00){$8$}  
+\put(225.00,57.00){$9$} 
+\put(200.00,50.00){\line(1,0){50.00}} 
+
+\put(232.00,17.00){$10$}  
+\put(200.00,0.00){\line(1,1){50.00}}
+\end{picture}
+
+&
+% this used jPicEdt
+\unitlength=0.620000pt
+\begin{picture}(550.00,100.00)(-80.0,0.00)
+
+%\linethickness{0.9mm}
+\put(0.00,0.00){\line(1,0){50.00}} 
+
+%\linethickness{1.9mm}
+\put(0.00,0.00){\line(1,1){50.00}} 
+%\put(50.00,0.00){\line(0,1){50.00}} 
+
+%\linethickness{0.9mm}
+\put(50.00,0.00){\line(1,0){50.00}} 
+\put(100.00,0.00){\line(1,0){50.00}} 
+
+%\linethickness{1.9mm}
+\put(100.00,0.00){\line(1,1){50.00}}
+
+%\linethickness{0.9mm}
+\put(150.00,50.00){\line(1,0){50.00}} 
+%\put(150.00,50.00){\line(0,-1){50.00}} 
+\put(200.00,50.00){\line(0,-1){50.00}} 
+\put(200.00,50.00){\line(1,0){50.00}} 
+
+\end{picture}
+\end{tabular}
+\caption{A graph and a spanning tree for it.}
+\end{center}
+\label{fig:cycle-space1}
+\end{figure}
+
+You can see from Figure \ref{fig:cycle-space1} that:
+
+\begin{itemize}
+\item
+by adding edge $2$ to the tree, you get a cycle $0,1,2$ with vector
+representation
+
+\[
+g_1 = (1,1,1,0,0,0,0,0,0,0,0),
+\]
+\item
+by adding edge $6$ to the tree, you get a cycle $4,5,6$ with vector
+representation
+
+\[
+g_2 = (0,0,0,0,1,1,1,0,0,0,0),
+\]
+\item
+by adding edge $10$ to the tree, you get a cycle $8,9,10$ with vector
+representation
+
+\[
+g_3 = (0,0,0,0,0,0,0,0,1,1,1).
+\]
+\end{itemize}
+The vectors $\{g_1,g_2,g_3\}$ form a basis of the cycle space 
+of $G$ over $GF(2)$.
+}
+\end{example}
+
+The {\it cocycle space} of a graph $G$ (also known as 
+the {\it bond space of $G$} or the {\it cut-set space} of $G$)
+is the $F$-vector space spanned by the characteristic
+functions of bonds. 
+
+
+\begin{example}
+\label{example:cocycle-space}
+{\rm
+Consider the graph below, with edges labeled as indicated, together
+with an example of a bond, depicted to its right, in 
+Figure \ref{fig:cocycle-space1}.
+
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{cc}
+% this was done "manually"
+\unitlength=0.620000pt
+\begin{picture}(250.00,100.00)(-40.00,0.00)
+
+\thinlines
+\put(0.00,0.00){\line(1,0){50.00}} 
+\put(17.00,30.00){$0$} 
+\put(0.00,0.00){\line(1,1){50.00}} 
+\put(25.00,-15.00){$1$} 
+\put(50.00,0.00){\line(0,1){50.00}} 
+\put(55.00,20.00){$2$} 
+\put(50.00,0.00){\line(1,0){50.00}} 
+\put(75.00,-15.00){$3$} 
+
+\put(100.00,0.00){\line(1,0){50.00}} 
+\put(117.00,30.00){$4$} 
+\put(100.00,0.00){\line(1,1){50.00}}
+\put(125.00,-15.00){$5$} 
+
+\put(150.00,50.00){\line(1,0){50.00}} 
+\put(175.00,57.00){$7$} 
+\put(150.00,50.00){\line(0,-1){50.00}}
+\put(155.00,20.00){$6$}  
+\put(200.00,50.00){\line(0,-1){50.00}} 
+\put(187.00,20.00){$8$}  
+\put(225.00,57.00){$9$} 
+\put(200.00,50.00){\line(1,0){50.00}} 
+
+\put(232.00,17.00){$10$}  
+\put(200.00,0.00){\line(1,1){50.00}}
+\end{picture}
+
+&
+% this used jPicEdt
+\unitlength=0.620000pt
+\begin{picture}(550.00,100.00)(-80.0,0.00)
+
+%\linethickness{0.9mm}
+\put(0.00,0.00){\line(1,0){50.00}} 
+
+%\linethickness{1.9mm}
+\put(0.00,0.00){\line(1,1){50.00}} 
+%\put(50.00,0.00){\line(0,1){50.00}} 
+
+% moved bond segment to the end
+\put(100.00,0.00){\line(1,0){50.00}} 
+
+%\linethickness{1.9mm}
+\put(100.00,0.00){\line(1,1){50.00}}
+
+%\linethickness{0.9mm}
+\put(150.00,50.00){\line(1,0){50.00}} 
+%\put(150.00,50.00){\line(0,-1){50.00}} 
+\put(200.00,50.00){\line(0,-1){50.00}} 
+\put(200.00,50.00){\line(1,0){50.00}} 
+
+\linethickness{0.9mm}
+\put(50.00,0.00){\line(1,0){50.00}} 
+\end{picture}
+\end{tabular}
+\caption{A graph and a bond of it.}
+\end{center}
+\label{fig:cocycle-space1}
+\end{figure}
+
+You can see from Figure \ref{fig:cocycle-space1} that:
+
+\begin{itemize}
+\item
+by removing edge $3$ from the graph, you get a bond with vector
+representation
+
+\[
+b_1 = (0,0,0,1,0,0,0,0,0,0,0),
+\]
+\item
+by removing edge $7$ from the graph, you get a bond with vector
+representation
+
+\[
+b_2 = (0,0,0,0,0,0,0,1,0,0,0),
+\]
+\item
+by removing edges $0,1$ from the graph, you get a bond with vector
+representation
+
+\[
+b_3 = (1,1,0,0,0,0,0,0,0,0,0),
+\]
+\item
+by removing edges $1,2$ from the graph, you get a bond with vector
+representation
+
+\[
+b_4 = (0,1,1,0,0,0,0,0,0,0,0),
+\]
+\item
+by removing edges $4,5$ from the graph, you get a bond with vector
+representation
+
+\[
+b_5 = (0,0,0,0,1,1,0,0,0,0,0),
+\]
+\item
+by removing edges $4,6$ from the graph, you get a bond with vector
+representation
+
+\[
+b_6 = (0,0,0,0,1,0,1,0,0,0,0),
+\]
+\item
+by removing edges $8,9$ from the graph, you get a bond with vector
+representation
+
+\[
+b_7 = (0,0,0,0,0,0,0,0,1,1,0),
+\]
+\item
+by removing edges $9,10$ from the graph, you get a bond with vector
+representation
+
+\[
+b_8 = (0,0,0,0,0,0,0,0,0,1,1).
+\]
+\end{itemize}
+The vectors $\{b_1,b_2,b_3,b_4,b_5,b_6,b_7,b_8\}$ form a basis of the 
+cocycle space of $G$ over $GF(2)$. 
+
+Note that these vectors are orthogonal to the basis vectors of
+the cycle space in Example \ref{example:cycle-space}. Note also that
+the xor sum of two cuts is not a cut.For example, if you xor the bond
+$4,5$ with the bond $4,6$ then you get the subgraph foormed by the 
+edges $5,6$ and that is not a disconnecting cut of $G$.
+}
+\end{example}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Ford-Fulkerson theorem}

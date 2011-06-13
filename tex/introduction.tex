@@ -352,6 +352,35 @@ vertices. A \emph{multi-undirected graph}\index{multi-undirected graph}
 is a multigraph that is undirected. Similarly, a
 \emph{multidigraph}\index{multidigraph} is a directed multigraph.
 
+\begin{example}
+{\rm
+\sage can compute with and plot multigraphs, or
+multidigraphs, with loops.
+
+%%
+\begin{lstlisting}
+sage: G = Graph({0:{0:'e0',1:'e1',2:'e2',3:'e3'}, 2:{5:'e4'}})
+sage: G.show(vertex_labels=True, edge_labels=True, graph_border=True)
+sage: H = DiGraph({0:{0:"e0"}},Loops=True)
+sage: H.add_edges( [(0,1,'e1'),(0,2,'e2'),(0,2,'e3'),(1,2,'e4'),(1,0,'e5')] )
+sage: H.show(vertex_labels=True, edge_labels=True, graph_border=True)
+\end{lstlisting}
+%%
+These graphs are plotted in Figure \ref{fig:graph-digraph}.
+
+\begin{figure}[h!] 
+\begin{tabular}{cc}
+\includegraphics[height=7cm,width=7cm]{graph-plot1} &
+\includegraphics[height=7cm,width=7cm]{graph-plot3}
+\end{tabular}
+\caption{A graph $G$ and digraph $H$ with a loop and multi-edges.}
+\label{fig:graph-digraph}
+\end{figure}
+
+}
+\end{example}
+
+
 As we indicated above, a graph may have ``weighted''\index{edge!weight}
 edges.
 
@@ -447,11 +476,13 @@ vertex $v \in V$ counts the edges going out of $v$:
 The \emph{unweighted degree}\index{unweighted degree} $\deg(v)$ of a
 vertex $v$ of a weighted multigraph is the sum of the unweighted
 indegree and the unweighted outdegree of $v$:
-\[
+
+\begin{equation}
 \deg(v)
 =
 \deg_+(v) + \deg_-(v).
-\]
+\label{eqn:unweighted-degree}
+\end{equation}
 Loops are counted twice.
 
 Similarly, there is the set of
@@ -469,11 +500,13 @@ and the set of \emph{out-neighbors}\index{multigraph!out-neighbor}
 \]
 Define the \emph{adjacency}\index{multigraph!adjacency} of $v$ to be
 the union of these:
-\[
+
+\begin{equation}
 \adj(v)
 =
 \iadj(v) \cup \oadj(v).
-\]
+\label{eqn:directed-adjacency}
+\end{equation}
 It is clear that $\deg_+(v) = |\iadj(v)|$ and $\deg_-(v) = |\oadj(v)|$.
 
 The \emph{weighted indegree}\index{indegree!unweighted} of a vertex
@@ -492,9 +525,28 @@ $v \in V$ counts the weights of edges going out of $v$:
 \]
 The \emph{weighted degree}\index{degree!weighted} of a vertex of a
 weighted multigraph is the sum of the weighted indegree and the
-weighted outdegree of that vertex. In other words, it is the sum of
+weighted outdegree of that vertex,
+\[
+\wdeg(v)
+=
+\wdeg_+(v) + \wdeg_-(v).
+\]
+In other words, it is the sum of
 the weights of the edges incident to that vertex, regarding the graph
 as an undirected weighted graph.
+
+\begin{definition}
+Let $G=(V,E,h)$ be an unweighted multidigraph. The {\it line graph}
+of $G$, denoted ${|mathcal{L}}(G)$, is the multidigraph
+whose vertices are the edges of $G$ and whose edges are
+$(e,e')$ where $h(e)=t(e')$ (for $e,e'\in E$).
+A similar definition holds if $G$ is undirected.
+\end{definition}
+\index{graph!line}
+\index{line graph}
+\index{${|mathcal{L}}(G)$}
+
+For example, the line graph of the cyclic graph is itself.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -529,7 +581,8 @@ the graph in Figure~\ref{fig:introduction:triangle_digraph}. The
 family $\Sh(n)$ of Shannon\index{Shannon!multigraphs} multigraphs is
 illustrated in Figure~\ref{fig:introduction:Shannon_multigraphs} for
 integers $2 \leq n \leq 7$. These graphs are named after
-Claude\index{Shannon!Claude E.} E. Shannon~(1916--2001). Each Shannon
+Claude\index{Shannon!Claude E.} E. Shannon~(1916--2001) and are 
+sometimes used when studying edge colorings. Each Shannon
 multigraph consists of three vertices, giving rise to a total of three
 distinct unordered pairs. Two of these pairs are connected by
 $\lfloor n/2 \rfloor$ edges and the third pair of vertices is
@@ -585,13 +638,16 @@ connected by $\lfloor (n + 1) / 2 \rfloor$ edges.
 \end{figure}
 
 \paragraph{Notational convention}
+{\it
 Unless stated otherwise, all graphs are simple graphs in the remainder
 of this book.
+}
 
 \begin{definition}
 \rm
 For any vertex $v$ in a graph $G = (V, E)$, the
-cardinality\index{cardinality} of $\adj(v)$ is called the
+cardinality\index{cardinality} of $\adj(v)$ 
+(as in \ref{eqn:directed-adjacency}) is called the
 \emph{degree}\index{degree} of $v$ and written as
 $\deg(v) = |\adj(v)|$\index{$\deg$}. The degree of $v$ counts the
 number of vertices in $G$ that are adjacent to $v$. If $\deg(v) = 0$,
@@ -764,7 +820,7 @@ conditions, $H$ is called a \emph{subgraph}\index{subgraph} of $G$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
+%\newpage
 \subsection{Walks, trails, and paths}
 \label{subsec:introduction:walks_trails_paths}
 
