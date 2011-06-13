@@ -353,10 +353,8 @@ is a multigraph that is undirected. Similarly, a
 \emph{multidigraph}\index{multidigraph} is a directed multigraph.
 
 \begin{example}
-{\rm
-\sage can compute with and plot multigraphs, or
-multidigraphs, with loops.
-
+\rm
+Sage can compute with and plot multigraphs, or multidigraphs, with loops.
 %%
 \begin{lstlisting}
 sage: G = Graph({0:{0:'e0',1:'e1',2:'e2',3:'e3'}, 2:{5:'e4'}})
@@ -366,18 +364,20 @@ sage: H.add_edges( [(0,1,'e1'),(0,2,'e2'),(0,2,'e3'),(1,2,'e4'),(1,0,'e5')] )
 sage: H.show(vertex_labels=True, edge_labels=True, graph_border=True)
 \end{lstlisting}
 %%
-These graphs are plotted in Figure \ref{fig:graph-digraph}.
+These graphs are plotted in Figure~\ref{fig:introduction:graph_digraph}.
 
-\begin{figure}[h!] 
-\begin{tabular}{cc}
-\includegraphics[height=7cm,width=7cm]{graph-plot1} &
-\includegraphics[height=7cm,width=7cm]{graph-plot3}
-\end{tabular}
-\caption{A graph $G$ and digraph $H$ with a loop and multi-edges.}
-\label{fig:graph-digraph}
-\end{figure}
-
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/introduction/graph-digraph_graph}
 }
+\qquad
+\subfigure[]{
+  \includegraphics{image/introduction/graph-digraph_digraph}
+}
+\caption{A graph $G$ and digraph $H$ with a loop and multi-edges.}
+\label{fig:introduction:graph_digraph}
+\end{figure}
 \end{example}
 
 
@@ -581,7 +581,7 @@ the graph in Figure~\ref{fig:introduction:triangle_digraph}. The
 family $\Sh(n)$ of Shannon\index{Shannon!multigraphs} multigraphs is
 illustrated in Figure~\ref{fig:introduction:Shannon_multigraphs} for
 integers $2 \leq n \leq 7$. These graphs are named after
-Claude\index{Shannon!Claude E.} E. Shannon~(1916--2001) and are 
+Claude\index{Shannon!Claude E.} E. Shannon~(1916--2001) and are
 sometimes used when studying edge colorings. Each Shannon
 multigraph consists of three vertices, giving rise to a total of three
 distinct unordered pairs. Two of these pairs are connected by
@@ -646,7 +646,7 @@ of this book.
 \begin{definition}
 \rm
 For any vertex $v$ in a graph $G = (V, E)$, the
-cardinality\index{cardinality} of $\adj(v)$ 
+cardinality\index{cardinality} of $\adj(v)$
 (as in \ref{eqn:directed-adjacency}) is called the
 \emph{degree}\index{degree} of $v$ and written as
 $\deg(v) = |\adj(v)|$\index{$\deg$}. The degree of $v$ counts the
