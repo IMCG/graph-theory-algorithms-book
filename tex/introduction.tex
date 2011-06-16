@@ -1541,18 +1541,19 @@ sage: M = G.weighted_adjacency_matrix(); M
 
 Suppose $G = (V, E)$ is an undirected bipartite graph and
 $V = V_1 \cup V_2$ is the partition of the vertices into $n_1$
-vertices in $V_1$ and $n_2$ vertices in $V_2$, so $|V| = n_1 + n_2$.
-Then the adjacency matrix $A$ of $G$ can be realized as a block
-diagonal matrix
-$A
+vertices in $V_1$ and $n_2$ vertices in $V_2$, so that
+$|V| = n_1 + n_2$. Then the adjacency matrix $A$ of $G$ can be row and
+column permuted in such as way that $A$ can be expressed as a block
+diagonal matrix of the form
+$A'
 =
 \begin{bmatrix}
-A_1 & 0 \\
-0 & A_2
+A_1      & \zeromat \\
+\zeromat & A_2
 \end{bmatrix}$,
-where $A_1$ is an $n_1 \times n_2$ matrix and $A_2$ is an
-$n_2 \times n_1$ matrix. Since $G$ is undirected, $A_2 = A_1^T$.
-The matrix is called a
+where $A_1$ is an $n_1 \times n_2$ matrix, $A_2$ is an
+$n_2 \times n_1$ matrix, and $\zeromat$ is a zero matrix. Since $G$ is
+undirected, then $A_2 = A_1^T$. The matrix is called a
 \emph{reduced adjacency matrix}\index{adjacency matrix!reduced} or a
 \emph{bi-adjacency matrix}\index{matrix!bi-adjacency}~(the literature
 also uses the terms ``transfer matrix'' or the ambiguous term
