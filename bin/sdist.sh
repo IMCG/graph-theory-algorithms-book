@@ -77,11 +77,12 @@ if [ "$1" = "--revision" ]; then
     STABLE=`cat "$BOOK_ROOT"/tex/version.tex`
     echo "$STABLE-r$VERSION" > "$BOOK_ROOT"/tex/version.tex
     build
-    ## # We do not want to save the revision number in the version.tex file. So
-    ## # restore the stable release number in that file. That way, Mercurial
-    ## # would not complain about version.tex being modified. The file
-    ## # version.tex essentially stores the latest stable version number.
-    ## echo "$STABLE" > "$BOOK_ROOT"/tex/version.tex
+    # We do not want to save the revision number in the version.tex file. So
+    # restore the stable release number in that file. That way, Mercurial
+    # would not complain about version.tex being modified. The file
+    # version.tex essentially stores the latest stable version number.
+    hg revert "$BOOK_ROOT"/tex/version.tex
+    rm "$BOOK_ROOT"/tex/version.tex.orig
 else
     echo "Wrap up version release..."
     VERSION="$1"
