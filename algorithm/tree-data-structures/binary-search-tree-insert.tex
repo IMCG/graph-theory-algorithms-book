@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{NULL}{\footnotesize{NULL}}
+%%
+%% input
+\KwIn{A binary search tree $T$ and a vertex $x$ to be inserted into $T$.}
+%%
+%% output
+\KwOut{The same BST $T$ but augmeneted with $x$.}
+\BlankLine
+%%
+%% algorithm body
+$u \assign \NULL$\;
+$v \assign$ root of $T$\;
+\While{$v \neq \NULL$}{
+  $u \assign v$\;
+  \If{$\kappa_x < \kappa_v$}{
+    $v \assign \leftChild[v]$\;
+  }
+  \Else{
+    $v \assign \rightChild[v]$\;
+  }
+}
+$\parent[x] \assign u$\;
+\If{$u = \NULL$}{
+  $\rootElem[T] \assign x$\;
+}
+\Else{
+  \If{$\kappa_x < \kappa_u$}{
+    $\leftChild[u] \assign x$\;
+  }
+  \Else{
+    $\rightChild[u] \assign x$\;
+  }
+}

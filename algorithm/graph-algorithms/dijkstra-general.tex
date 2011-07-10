@@ -1,0 +1,42 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{An undirected or directed graph $G = (V, E)$ that is weighted
+  and has no self-loops. The order of $G$ is $n > 0$. A vertex $s \in V$
+  from which to start the search. Vertices are numbered from 1 to $n$,
+  i.e.~$V = \{1, 2, \dots, n\}$.}
+%%
+%% output
+\KwOut{A list $D$ of distances such that $D[v]$ is the distance of a
+  shortest path from $s$ to $v$. A list $P$ of vertex parents such
+  that $P[v]$ is the parent of $v$, i.e. $v$ is adjacent from $P[v]$.}
+\BlankLine
+%%
+%% algorithm body
+$D \assign [\infty, \infty, \dots, \infty]$\tcc*[f]{$n$ copies of $\infty$}\;
+$D[s] \assign 0$\;
+$P \assign [\,]$\;
+$Q \assign V$\tcc*[f]{list of nodes to visit}\;
+\While{$\length(Q) > 0$\nllabel{alg:dijkstra_general:while_loop}}{
+  find $v \in Q$ such that $D[v]$ is minimal\nllabel{alg:dijkstra_general:find_vertex_minimal_distance}\;
+  $Q \assign \remove(Q, v)$\;
+  \For{\rm each $u \in \adj(v) \cap Q$\nllabel{alg:dijkstra_general:for_loop}}{
+    \If{$D[u] > D[v] + w(vu)$\nllabel{alg:dijkstra_general:if_relaxation}}{
+      $D[u] \assign D[v] + w(vu)$\;
+      $P[u] \assign v$\;
+    }
+  }
+}
+\Return $(D, P)$\;

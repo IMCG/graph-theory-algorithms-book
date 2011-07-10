@@ -1,0 +1,108 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Optimal Graph Traversals}
+\label{chap:optimal_traversals}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Eulerian graphs}
+
+\begin{itemize}
+\item Motivation: tracing out all the edges of a graph without lifting
+  your pencil.
+
+\item multigraphs and simple graphs
+
+\item Eulerian tours
+
+\item Eulerian trails
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Hamiltonian graphs}
+
+\begin{quote}
+\includegraphics[scale=0.7]{image/optimal-traversals/hamiltonian} \\
+\noindent
+--- Randall Munroe\index{Munroe, Randall}, xkcd,
+\url{http://xkcd.com/230/}
+\end{quote}
+
+\begin{itemize}
+\item Motivation: the eager tourist problem: visiting all major sites
+  of a city in the least time/distance.
+
+\item Hamiltonian paths (or cycles)
+
+\item Hamiltonian graphs
+\end{itemize}
+
+\begin{theorem}
+\textbf{Ore 1960.}
+Let $G$ be a simple graph with $n \geq 3$ vertices. If
+$\deg(u) + \deg(v) \geq n$ for each pair of non-adjacent vertices
+$u, v \in V(G)$, then $G$ is Hamiltonian.
+\end{theorem}
+
+\begin{corollary}
+\textbf{Dirac 1952.}
+Let $G$ be a simple graph with $n \geq 3$ vertices. If
+$\deg(v) \geq n / 2$ for all $v \in V(G)$, then $G$ is Hamiltonian.
+\end{corollary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Chinese Postman Problem}
+
+See section~6.2 of Gross and Yellen~\cite{GrossYellen1999}.
+
+\begin{itemize}
+\item de Bruijn sequences
+
+\item de Bruijn digraphs
+
+\item constructing a $(2, n)$-de Bruijn sequence
+
+\item postman tours and optimal postman tours
+
+\item constructing an optimal postman tour
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Traveling Salesman Problem}
+
+\begin{quote}
+\includegraphics[scale=0.5]{image/optimal-traversals/travelling-salesman-problem} \\
+\noindent
+--- Randall Munroe\index{Munroe, Randall}, xkcd,
+\url{http://xkcd.com/399/}
+\end{quote}
+
+\noindent
+See section~6.4 of Gross and Yellen~\cite{GrossYellen1999}, and
+section~35.2 of Cormen~et~al.~\cite{CormenEtAl2001}.
+
+\begin{itemize}
+\item Gray codes and $n$-dimensional hypercubes
+
+\item the Traveling Salesman Problem~(TSP)
+
+\item nearest neighbor heuristic for TSP
+
+\item some other heuristics for solving TSP
+\end{itemize}

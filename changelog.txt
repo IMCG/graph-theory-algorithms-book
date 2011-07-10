@@ -1,0 +1,65 @@
+* 0.7, 2011-02-23 --- Fleshed out chapter "Random Graphs". Here is the
+  content of the chapter in brief:
+
+  1. Network statistics
+  2. Binomial random graph model
+  3. Erdos-Renyi model
+  4. Small-world networks
+  5. Scale-free networks
+
+* 0.6, 2011-01-05 --- New chapter "Tree Data Structures" discussing
+  priority queues and various efficient implementations of priority
+  queues, including binary heaps and binomial heaps. Here is the
+  content of the new chapter in brief:
+
+  1. Priority queues
+  2. Binary heaps
+  3. Binomial heaps
+  4. Binary search trees
+
+* 0.5, 2010-11-30 --- Fleshed out chapter "Trees and Forests". Along
+  the way, numerous problems/exercises were added to the introductory
+  chapter "Introduction to Graph Theory" and the chapter "Graph
+  Algorithms". Needless to say, there are also the multitude of typo
+  fixes throughout the book. We, the authors of the book, gratefully
+  acknowledge contributions from the following people while preparing
+  this release:
+
+  * Caroline Melles
+  * Pravin Paratey
+
+  See the section "Acknowledgments" in the book for full details on
+  their contributions. Here is an outline of topics covered in the newly
+  fleshed out chapter "Trees and Forests":
+
+  * Definitions and examples relating to trees and forests.
+  * Various basic characterizations of trees.
+  * Techniques for constructing minimum spanning trees: a randomized
+  * spanning tree construction algorithm and the usual suspects including
+    Kruskal's algorithm, Prim's algorithm, and Boruvka's algorithm.
+  * Binary trees and an algorithm to construct a random binary
+    tree. Application topics include coding theory, Gray code, and
+    Huffman code.
+  * The usual suspects of tree traversal algorithms: level-order,
+    pre-order, post-order, and in-order.
+
+* 0.3, 2010-03-18 --- Initially, I started writing that book in
+  November 2009 as a way to document the graph theory module of
+  Sage. In the process, I discovered two bugs (cf. #8372 and
+  #8395). In January 2010, David Joyner began contributing to the
+  book, resulting in the release of version 0.2 on 26th January
+  2010. Recently, Nathann Cohen contributed a chapter to the book. And
+  with David's latest patch, a first draft of the chapter on trees and
+  forests is complete. Notable changes in version 0.3 include:
+
+  * A first draft of the chapter "Trees and Forests".
+  * Polishing up the chapter "Introduction to Graph Theory". The majority
+    of the tikz/pgf macros of this chapter have been rewritten to make
+    them more compact.
+  * A first draft of the chapter "Graph Problems and Their LP
+    Formulations".
+  * Fix typos reported by Fidel Barrera-Cruz and Daniel Black.
+
+  A big thank you to Fidel and Daniel.
+
+* 0.1, 2009-12-16 --- Outline the content of the book.

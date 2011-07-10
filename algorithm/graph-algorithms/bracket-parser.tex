@@ -1,0 +1,54 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{Left}{left}
+%%
+%% input
+\KwIn{A nonempty string $S$ of characters.}
+%%
+%% output
+\KwOut{A list $L$ of positive integers indicating how the brackets
+  match. If the brackets are not balanced, return the empty string
+  $\varepsilon$.}
+\BlankLine
+%%
+%% algorithm body
+$L \assign [\,]$\;
+$T \assign$ empty stack\;
+$c \assign 1$\;
+$n \assign |S|$\;
+\For{$i \assign 0, 1, \dots, n$}{
+  \If{\rm $S[i+1]$ is a left bracket}{
+    $\append(L, c)$\;
+    push $(S[i+1],\, c)$ onto $T$\;
+    $c \assign c + 1$\;
+  }
+  \If{\rm $S[i+1]$ is a right bracket}{
+    \If{\rm $T$ is empty}{
+      \Return $\varepsilon$\;
+    }
+    $(\Left,\, d) \assign \pop(T)$\;
+    \If{\rm $\Left$ matches $S[i+1]$}{
+      $\append(L, d)$\;
+    }
+    \Else{
+      \Return $\varepsilon$\;
+    }
+  }
+}
+\If{\rm $T$ is empty}{
+  \Return $L$\;
+}
+\Return $\varepsilon$\;

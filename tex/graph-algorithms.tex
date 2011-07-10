@@ -1,0 +1,3417 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2010 David Joyner <wdjoyner@gmail.com>
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Graph Algorithms}
+\label{chap:graph_algorithms}
+
+\begin{quote}
+\footnotesize
+\index{flow chart}
+\index{FreeBSD}
+\includegraphics[scale=0.5]{image/graph-algorithms/flow-charts} \\
+\noindent
+--- Randall Munroe\index{Munroe, Randall}, xkcd,
+\url{http://xkcd.com/518/}
+\end{quote}
+
+\noindent
+Graph algorithms have many applications. Suppose you are a
+salesman\index{traveling salesman problem} with a product you would
+like to sell in several cities. To determine the cheapest travel route
+from city-to-city, you must effectively search a graph having weighted
+edges for the ``cheapest'' route visiting each city once. Each vertex
+denotes a city you must visit and each edge has a weight indicating
+either the distance\index{distance} from one city to another or the
+cost to travel from one city to another.
+
+Shortest path algorithms\index{path!shortest} are some of the most
+important algorithms in algorithmic graph theory. In this chapter, we
+first examine several common graph traversal algorithms and some basic
+data structures\index{data structure} underlying these algorithms. A
+data structure is a combination of methods for structuring a
+collection of data~(e.g. vertices and edges) and protocols for
+accessing the data. We then consider a number of common shortest path
+algorithms, which rely in one way or another on graph traversal
+techniques and basic data structures for organizing and managing
+vertices and edges.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Representing graphs in a computer}
+
+\begin{quote}
+\footnotesize
+To err is human but to really foul things up requires a computer. \\
+\noindent
+--- Anonymous, \emph{Farmers' Almanac for 1978}, ``Capsules of Wisdom''
+\end{quote}
+
+\noindent
+In section~\ref{sec:introduction:matrix_representation}, we discussed
+how to use matrices for representing graphs and digraphs. If
+$A = [a_{ij}]$ is an $m \times n$ matrix, the adjacency matrix
+representation of a graph would require representing all the $mn$
+entries of $A$. Alternative graph representations exist that are much
+more efficient than representing all entries of a matrix. The graph
+representation used can be influenced by the size of a graph or the
+purpose of the representation.
+Section~\ref{sec:graph_algorithms:adjacency_lists} discusses the
+adjacency list\index{list!adjacency} representation that can result in
+less storage space requirement than the adjacency
+matrix\index{matrix!adjacency} representation. The
+\graphsix\index{\graphsix} format discussed in
+section~\ref{sec:graph_algorithms:graph6_format} provides a compact
+means of storing graphs for archival purposes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Adjacency lists}
+\label{sec:graph_algorithms:adjacency_lists}
+
+A \emph{list}\index{list} is a sequence of objects. Unlike
+sets\index{set}, a list may contain multiple copies of the same
+object. Each object in a list is referred to as an
+\emph{element}\index{list!element} of the list. A list $L$ of
+$n \geq 0$ elements is written as $L = [a_1, a_2, \dots, a_n]$, where
+the $i$-th element $a_i$ can be indexed as $L[i]$. In case $n = 0$,
+the list $L = [\,]$ is referred to as the
+\emph{empty list}\index{list!empty}. Two lists are equivalent if they
+both contain the same elements at exactly the same positions.
+
+Define the adjacency lists\index{list!adjacency} of a graph as
+follows. Let $G$ be a graph with vertex set
+$V = \{v_1, v_2, \dots, v_n\}$. Assign to each vertex $v_i$ a list
+$L_i$ containing all the vertices that are adjacent to $v_i$. The list
+$L_i$ associated with $v_i$ is referred to as the
+\emph{adjacency list}\index{list!adjacency} of $v_i$. Then
+$L_i = [\,]$ if and only if $v_i$ is an isolated
+vertex\index{vertex!isolated}. We say that $L_i$ is \emph{the}
+adjacency list of $v_i$ because any permutation of the elements of
+$L_i$ results in a list that contains the same vertices adjacent to
+$v_i$. We are mainly concerned with the neighbors of $v_i$, but
+disregard the position where each neighbor is located in $L_i$. If
+each adjacency list\index{list!adjacency} $L_i$ contains $s_i$
+elements where $0 \leq s_i \leq n$, we say that $L_i$ has
+\emph{length}\index{list!length} $s_i$. The adjacency list
+representation of the graph $G$ requires that we represent
+$\sum_i s_i = 2 \cdot |E(G)| \leq n^2$ elements in a computer's
+memory, since each edge appears twice in the adjacency list
+representation. An adjacency list\index{list!adjacency} is explicit
+about which vertices are adjacent to a vertex and implicit about
+which vertices are not adjacent to that same vertex. Without knowing
+the graph $G$, given the adjacency lists $L_1, L_2, \dots, L_n$, we
+can reconstruct $G$. For example,
+Figure~\ref{fig:graph_algorithms:graph_adjacency_lists} shows a graph
+and its adjacency list representation.
+
+\begin{figure}[!htbp]
+\centering
+\index{list!adjacency}
+\includegraphics{image/graph-algorithms/graph-adjacency-lists}
+\caption{A graph and its adjacency lists.}
+\label{fig:graph_algorithms:graph_adjacency_lists}
+\end{figure}
+
+\begin{example}
+The Kneser\index{Kneser graph} graph with parameters $(n,k)$, also
+known as the $(n,k)$-Kneser\index{Kneser graph} graph, is the graph
+whose vertices are all the $k$-subsets of $\{1, 2, \dots,
+n\}$. Furthermore, two vertices are adjacent if their corresponding
+sets are disjoint. Draw the $(5,2)$-Kneser\index{Kneser graph} graph
+and find its order and adjacency\index{list!adjacency} lists. In
+general, if $n$ and $k$ are positive, what is the order of the
+$(n,k)$-Kneser\index{Kneser graph} graph?
+\end{example}
+
+\begin{proof}[Solution]
+The $(5,2)$-Kneser\index{Kneser graph} graph is the graph whose
+vertices are the $2$-subsets
+\[
+\{1,2\},\, \{1,3\},\, \{1,4\},\, \{1,5\},\,
+\{2,3\},\, \{2,4\},\, \{2,5\},\,
+\{3,4\},\, \{3,5\},\,
+\{4,5\}
+\]
+of $\{1, 2, 3, 4, 5\}$. That is, each vertex of the
+$(5,2)$-Kneser\index{Kneser graph} graph is a $2$-combination of the
+set $\{1, 2, 3, 4, 5\}$ and therefore the graph itself has order
+$\binom{5}{2} = \frac{5 \times 4}{2!} = 10$. The edges of this graph
+are
+%%
+\begin{align*}
+& (\{1,3\},\, \{2,4\}),\;
+  (\{2,4\},\, \{1,5\}),\;
+  (\{2,4\},\, \{3,5\}),\;
+  (\{1,3\},\, \{4,5\}),\;
+  (\{1,3\},\, \{2,5\}) \\[4pt]
+& (\{3,5\},\, \{1,4\}),\;
+  (\{3,5\},\, \{1,2\}),\;
+  (\{1,4\},\, \{2,3\}),\;
+  (\{1,4\},\, \{2,5\}),\;
+  (\{4,5\},\, \{2,3\}) \\[4pt]
+& (\{4,5\},\, \{1,2\}),\;
+  (\{1,5\},\, \{2,3\}),\;
+  (\{1,5\},\, \{3,4\}),\;
+  (\{3,4\},\, \{1,2\}),\;
+  (\{3,4\},\, \{2,5\})
+\end{align*}
+%%
+from which we obtain the following adjacency lists:
+%%
+\begin{align*}
+L_{\{1,2\}} = [\{3,4\},\, \{3,5\},\, \{4,5\}]
+&,\quad
+L_{\{1,3\}} = [\{2,4\},\, \{2,5\},\, \{4,5\}], \\[4pt]
+%%
+L_{\{1,4\}} = [\{2,3\},\, \{3,5\},\, \{2,5\}]
+&,\quad
+L_{\{1,5\}} = [\{2,4\},\, \{3,4\},\, \{2,3\}], \\[4pt]
+%%
+L_{\{2,3\}} = [\{1,5\},\, \{1,4\},\, \{4,5\}]
+&,\quad
+L_{\{2,4\}} = [\{1,3\},\, \{1,5\},\, \{3,5\}], \\[4pt]
+%%
+L_{\{2,5\}} = [\{1,3\},\, \{3,4\},\, \{1,4\}]
+&,\quad
+L_{\{3,4\}} = [\{1,2\},\, \{1,5\},\, \{2,5\}], \\[4pt]
+%%
+L_{\{3,5\}} = [\{2,4\},\, \{1,2\},\, \{1,4\}]
+&,\quad
+L_{\{4,5\}} = [\{1,3\},\, \{1,2\},\, \{2,3\}].
+\end{align*}
+%%
+The $(5,2)$-Kneser\index{Kneser graph} graph itself is shown in
+Figure~\ref{fig:graph_algorithms:5_2_Kneser_graph}. Using Sage, we
+have
+%%
+\begin{lstlisting}
+sage: K = graphs.KneserGraph(5, 2); K
+Kneser graph with parameters 5,2: Graph on 10 vertices
+sage: for v in K.vertices():
+...       print(v, K.neighbors(v))
+...
+({4, 5}, [{1, 3}, {1, 2}, {2, 3}])
+({1, 3}, [{2, 4}, {2, 5}, {4, 5}])
+({2, 5}, [{1, 3}, {3, 4}, {1, 4}])
+({2, 3}, [{1, 5}, {1, 4}, {4, 5}])
+({3, 4}, [{1, 2}, {1, 5}, {2, 5}])
+({3, 5}, [{2, 4}, {1, 2}, {1, 4}])
+({1, 4}, [{2, 3}, {3, 5}, {2, 5}])
+({1, 5}, [{2, 4}, {3, 4}, {2, 3}])
+({1, 2}, [{3, 4}, {3, 5}, {4, 5}])
+({2, 4}, [{1, 3}, {1, 5}, {3, 5}])
+\end{lstlisting}
+%%
+If $n$ and $k$ are positive integers, then the
+$(n,k)$-Kneser\index{Kneser graph} graph has
+\[
+\binom{n}{k}
+=
+\frac{n (n-1) \cdots (n - k + 1)} {k!}
+\]
+vertices.
+\end{proof}
+
+\begin{figure}[!htbp]
+\centering
+\index{Kneser graph}
+\includegraphics{image/graph-algorithms/5-2-Kneser-graph}
+\caption{The $(5,2)$-Kneser graph.}
+\label{fig:graph_algorithms:5_2_Kneser_graph}
+\end{figure}
+
+We can categorize a graph $G = (V, E)$ as \emph{dense} or
+\emph{sparse} based upon its size. A dense graph\index{graph!dense}
+has size $|E|$ that is close to $|V|^2$, i.e.
+$|E| = \Omega\big(|V|^2\big)$, in which case it is feasible to
+represent $G$ as an adjacency matrix. The size of a sparse
+graph\index{graph!sparse} is much less than $|V|^2$, i.e.
+$|E| = \Omega\big(|V|\big)$, which renders the adjacency
+matrix\index{matrix!adjacency} representation as unsuitable. For a
+sparse graph, an adjacency list\index{list!adjacency} representation
+can require less storage space than an adjacency matrix representation
+of the same graph.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Edge lists}
+\index{list!edge}
+
+Lists can also be used to store the edges of a graph. To create an
+edge list $L$ for a graph $G$, if $uv$ is an edge of $G$ then we let
+$uv$ or the ordered pair $(u,v)$ be an element of $L$. In general, let
+\[
+v_0 v_1,\, v_2 v_3,\, \dots,\, v_k v_{k+1}
+\]
+be all the edges of $G$, where $k$ is even. Then the edge list of $G$
+is given by
+\[
+L
+=
+[v_0 v_1,\, v_2 v_3,\, \dots,\, v_k v_{k+1}].
+\]
+In some cases, it is desirable to have the edges of $G$ be in
+contiguous\index{list!contiguous edge} list representation. If the
+edge list $L$ of $G$ is as given above, the contiguous edge list
+representation of the edges of $G$ is
+\[
+[v_0,\, v_1,\, v_2,\, v_3,\, \dots,\, v_k,\, v_{k+1}].
+\]
+That is, if $0 \leq i \leq k$ is even then $v_i v_{i+1}$ is an edge of
+$G$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The \graphsix format}
+\label{sec:graph_algorithms:graph6_format}
+
+The graph formats \graphsix\index{\graphsix} and
+\sparsesix\index{\sparsesix} were developed by Brendan
+McKay\index{McKay, Brendan D.}~\cite{McKay2010} at The Australian
+National University\index{Australian National University} as a compact
+way to represent graphs. These two formats use bit
+vectors\index{bit vector} and printable characters of the American
+Standard Code for Information Interchange~(ASCII)\index{ASCII}
+encoding scheme. The 64 printable ASCII characters used in
+\graphsix and \sparsesix are those ASCII characters with decimal codes
+from 63 to 126, inclusive, as shown in
+Table~\ref{tab:graph_algorithms:graph6_sparse6_ASCII_printable_characters}.
+This section shall only cover the \graphsix format. For full
+specification on both of the \graphsix and \sparsesix formats, see
+McKay~\cite{McKay2010}.
+
+\begin{table}[!htbp]
+\centering
+\input{data/graph-algorithms/graph6-sparse6-ASCII-printable-characters.tex}
+\caption{ASCII printable characters used by \graphsix and \sparsesix.}
+\label{tab:graph_algorithms:graph6_sparse6_ASCII_printable_characters}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Bit vectors}
+\index{bit vector}
+
+Before discussing how \graphsix\index{\graphsix} and
+\sparsesix\index{\sparsesix} represent graphs using printable
+ASCII\index{ASCII} characters, we first present encoding schemes used
+by these two formats. A \emph{bit vector}\index{bit vector} is, as its
+name suggests, a vector whose elements are 1's and 0's. It can be
+represented as a list of bits\index{bit}, e.g. \verb!E! can be
+represented as the ASCII bit vector
+$[
+  \texttt{1}, \texttt{0}, \texttt{0}, \texttt{0}, \texttt{1},
+  \texttt{0}, \texttt{1}
+]$. For brevity, we write a bit vector in a compact form such as
+\texttt{1000101}. The \emph{length}\index{bit vector!length} of a bit
+vector is its number of bits. The
+\emph{most significant bit}\index{bit!most significant} of a bit
+vector $v$ is the bit position with the largest value among all the
+bit positions in $v$. Similarly, the
+\emph{least significant bit}\index{bit!least significant} is the bit
+position in $v$ having the least value among all the bit positions in
+$v$. The least significant bit of $v$ is usually called the parity
+bit\index{bit!parity} because when $v$ is interpreted as an integer
+the parity bit determines whether the integer is even or odd. Reading
+\texttt{1000101} from left to right, the first bit \texttt{1} is the
+most significant bit, followed by the second bit \texttt{0} which is
+the second most significant bit, and so on all the way down to the
+seventh bit \texttt{1} which is the least significant bit.
+
+The order in which we process the bits of a bit vector
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:bits_of_bit_vector}
+v
+=
+b_{n-1} b_{n-2} \cdots b_0
+\end{equation}
+%%
+is referred to as \emph{endianness}\index{endianness}. Processing $v$
+in \emph{big-endian}\index{big-endian} order means that we first process
+the most significant bit of $v$, followed by the second most
+significant bit, and so on all the way down to the least significant
+bit of $v$. Thus, in big-endian order we read the bits $b_i$ of $v$
+from left to right in increasing order of powers of $2$.
+Table~\ref{tab:graph_algorithms:big_endian_ASCII_binary_E} illustrates
+the big-endian interpretation of the ASCII\index{ASCII} binary
+representation of \texttt{E}.
+\emph{Little-endian}\index{little-endian} order means that we first
+process the least significant bit, followed by the second least
+significant bit, and so on all the way up to the most significant
+bit. In little-endian order, the bits $b_i$ are read from right to
+left in increasing order of powers of $2$.
+Table~\ref{tab:graph_algorithms:little_endian_ASCII_binary_E}
+illustrates the little-endian interpretation of the ASCII\index{ASCII}
+binary representation of \texttt{E}. In his novel
+\emph{Gulliver's Travels}\index{Gulliver's Travels} first published
+in~1726, Jonathan Swift\index{Swift, Jonathan} used the terms
+big-\index{big-endian} and little-endian\index{little-endian} in
+satirizing politicians who squabbled over whether to break an egg at
+the big end or the little end. Danny
+Cohen\index{Cohen, Danny}~\cite{Cohen1980,Cohen1981} first used the
+terms in 1980 as an April fool's joke in the context of computer
+architecture.
+
+Suppose the bit vector~\eqref{eqn:graph_algorithms:bits_of_bit_vector}
+is read in big-endian order. To determine the integer representation
+of $v$, multiply each bit value by its corresponding position value,
+then add up all the results. Thus, if $v$ is read in big-endian order,
+the integer representation of $v$ is obtained by evaluating the
+polynomial
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:big_endian_binary_to_integer}
+p(x)
+=
+\sum_{i=0}^{n-1} x^i b_i
+=
+x^{n-1} b_{n-1} + x^{n-2} b_{n-2} + \cdots + x b_1 + b_0.
+\end{equation}
+%%
+at $x = 2$. See
+problem~\thechapter.\ref{prob:graph_algorithms:Horner_method} for
+discussion of an efficient method to compute the integer
+representation of a bit vector.
+
+\begin{table}[!htbp]
+\centering
+\input{data/graph-algorithms/big-endian-ASCII-binary-E.tex}
+\caption{Big-endian order of the ASCII binary code of \texttt{E}.}
+\label{tab:graph_algorithms:big_endian_ASCII_binary_E}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\input{data/graph-algorithms/little-endian-ASCII-binary-E.tex}
+\caption{Little-endian order of the ASCII binary code of \texttt{E}.}
+\label{tab:graph_algorithms:little_endian_ASCII_binary_E}
+\end{table}
+
+In \graphsix\index{\graphsix} and \sparsesix\index{\sparsesix}
+formats, the length of a bit vector\index{bit vector} must be a
+multiple of 6. Suppose $v$ is a bit vector of length $k$ such that
+$6 \nmid k$. To transform $v$ into a bit vector having length a
+multiple of 6, let $r = k \mod 6$ be the remainder\index{remainder}
+upon dividing $k$ by 6, and pad $6 - r$ zeros\index{zero padding} to
+the right of $v$.
+
+Suppose $v = b_1 b_2 \cdots b_k$ is a bit vector of length $k$, where
+$6 \mid k$. We split $v$ into $k/6$ bit vectors $v_i$, each of length
+6. For $0 \leq i \leq k/6$, the $i$-th bit vector is given by
+\[
+v_i
+=
+b_{6i-5} b_{6i-4} b_{6i-3} b_{6i-2} b_{6i-1} b_{6i}.
+\]
+Consider each $v_i$ as the big-endian\index{big-endian} binary
+representation of a positive
+integer. Use~\eqref{eqn:graph_algorithms:big_endian_binary_to_integer}
+to obtain the integer representation $N_i$ of each $v_i$. Then add 63
+to each $N_i$ to obtain $N_i'$ and store $N_i'$ in one byte of
+memory. That is, each $N_i'$ can be represented as a bit vector of
+length $8$. Thus the required number of bytes to store $v$ is
+$\lceil k/6 \rceil$. Let $B_i$ be the byte representation of $N_i'$ so
+that
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:byte_representation_bit_vector}
+R(v)
+=
+B_1 B_2 \cdots B_{\lceil k/6 \rceil}
+\end{equation}
+%%
+denotes the representation of $v$ as a sequence of $\lceil k/6 \rceil$
+bytes.
+
+We now discuss how to encode an integer $n$ in the range
+$0 \leq n \leq 2^{36} - 1$
+using~\eqref{eqn:graph_algorithms:byte_representation_bit_vector} and
+denote such an encoding of $n$ as $N(n)$. Let $v$ be the
+big-endian\index{big-endian} binary representation of $n$. Then $N(n)$
+is given by
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:graph6_sparse6_graph_orders}
+N(n)
+=
+\begin{cases}
+n + 63, & \text{if $0 \leq n \leq 62$}, \\[4pt]
+126 \, R(v), & \text{if $63 \leq n \leq 258047$}, \\[4pt]
+126 \, 126 \, R(v), & \text{if $258048 \leq n \leq 2^{36}-1$}.
+\end{cases}
+\end{equation}
+%% If $0 \leq n \leq 62$, then
+%% we write $N(n) = n + 63$. If $63 \leq n \leq 258047$, let $v$ be the
+%% big-endian binary representation of $n$ and write
+%% $N(n) = 126 \, R(v)$. Finally, if $258048 \leq n \leq 2^{36} - 1$,
+%% again we let $v$ be the big-endian binary representation of $n$ and
+%% write $N(n) = 126 \, 126 \, R(v)$.
+Note that $n + 63$ requires one byte of storage memory, while
+$126 \, R(v)$ and $126 \, 126 \, R(v)$ require 4 and 8 bytes,
+respectively.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{The \graphsix format}
+\index{\graphsix}
+
+The \graphsix\index{\graphsix} format is used to represent simple,
+undirected graphs of order from $0$ to $2^{36} - 1$, inclusive. Let
+$G$ be a simple, undirected graph of order $0 \leq n \leq 2^{36} - 1$.
+If $n = 0$, then $G$ is represented in \graphsix format as
+``\verb!?!''. Suppose $n > 0$. Let $M = [a_{ij}]$ be the adjacency
+matrix\index{matrix!adjacency} of $G$. Consider the upper
+triangle\index{matrix!upper triangle} of $M$, excluding the main
+diagonal\index{matrix!main diagonal}, and write that upper triangle as
+the bit vector\index{bit vector}
+\[
+v
+=
+\underbrace{a_{0,1}}_{c_1}
+\underbrace{a_{0,2} a_{1,2}}_{c_2}
+\underbrace{a_{0,3} a_{1,3} a_{2,3}}_{c_3} \cdots
+\underbrace{a_{0,i} a_{1,i} \cdots a_{i-1,i}}_{c_i} \cdots
+\underbrace{a_{0,n} a_{1,n} \cdots a_{n-1,n}}_{c_n}
+\]
+where $c_i$ denotes the entries $a_{0,i} a_{1,i} \cdots a_{i-1,i}$ in
+column $i$ of $M$. Then the \graphsix\index{\graphsix} representation
+of $G$ is $N(n) R(v)$, where $R(v)$ and $N(n)$ are as
+in~\eqref{eqn:graph_algorithms:byte_representation_bit_vector}
+and~\eqref{eqn:graph_algorithms:graph6_sparse6_graph_orders},
+respectively. That is, $N(n)$ encodes the order of $G$ and $R(v)$
+encodes the edges of $G$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Graph searching}
+\label{sec:graph_algorithms:graph_searching}
+\index{graph!traversal}
+
+\begin{quote}
+\footnotesize
+Errors, like straws, upon the surface flow; \\
+He who would search for pearls must dive below. \\
+\noindent
+--- John Dryden\index{Dryden, John}, \emph{All for Love}, 1678
+\end{quote}
+
+\noindent
+This section discusses two fundamental algorithms for graph
+traversal\index{graph!traversal}: breadth-first
+search\index{breadth-first search} and depth-first
+search\index{depth-first search}. The word ``search'' used in
+describing these two algorithms is rather misleading. It would be more
+accurate to describe them as algorithms for constructing trees using
+the adjacency information of a given graph. However, the names
+``breadth-first search'' and ``depth-first search'' are entrenched in
+literature on graph theory and computer science. From hereon, we use
+these two names as given above, bearing in mind their intended
+purposes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Breadth-first search}
+\label{subsec:graph_algorithms:breadth_first_search}
+\index{breadth-first search}
+
+Breadth-first search\index{breadth-first search} (BFS)\index{BFS} is a
+strategy for running through the vertices of a graph. It was presented
+by Moore~\cite{Moore1959}\index{Moore, Edward F.} in~1959 within the
+context of traversing mazes\index{maze}.
+Lee~\cite{Lee1961}\index{Lee, C. Y.} independently discovered the same
+algorithm in~1961 in his work on routing wires on circuit
+boards\index{circuit!board}. In the physics literature, BFS is also
+known as a ``burning algorithm'' in view of the analogy of a fire
+burning and spreading through an area, a piece of paper, fabric, etc.
+
+The basic BFS\index{BFS} algorithm can be described as
+follows. Starting from a given vertex $v$ of a graph $G$, we first
+explore the neighborhood of $v$ by visiting all vertices that are
+adjacent to $v$. We then apply the same strategy to each of the
+neighbors of $v$. The strategy of exploring the neighborhood of a
+vertex is applied to all vertices of $G$. The result is a
+tree\index{tree} rooted\index{tree!rooted} at $v$ and this tree is a
+subgraph of $G$.
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
+presents a general template for the BFS\index{BFS} strategy. The tree
+resulting from the BFS\index{BFS} algorithm is called a
+\emph{breadth-first search tree}\index{breadth-first search!tree}.
+
+\begin{algorithm}[!htbp]
+\index{breadth-first search}\index{BFS}
+\input{algorithm/graph-algorithms/breadth-first-search-template.tex}
+\caption{A general breadth-first search template.}
+\label{alg:graph_algorithms:breadth_first_search_template}
+\end{algorithm}
+
+The breadth-first search\index{breadth-first search} algorithm makes
+use of a special type of list called a \emph{queue}\index{queue}. This
+is analogous to a queue of people waiting in line to be served. A
+person may enter the queue by joining the rear of the queue. The
+person who is in the queue the longest amount of time is served first,
+followed by the person who has waited the second longest time, and so
+on. Formally, a queue $Q$ is a list\index{list} of elements. At any
+time, we only have access to the first element of $Q$, known as the
+\emph{front}\index{queue!front} or \emph{start}\index{queue!start} of
+the queue. We insert a new element into $Q$ by appending the new
+element to the \emph{rear}\index{queue!rear} or
+\emph{end}\index{queue!end} of the queue. The operation of removing
+the front of $Q$ is referred to as \emph{dequeue}\index{queue!dequeue},
+while the operation of appending to the rear of $Q$ is called
+\emph{enqueue}\index{queue!enqueue}. That is, a queue implements a first-in
+first-out~(FIFO)\index{first in, first out}\index{FIFO} protocol for
+adding and removing elements. As with lists\index{list}, the
+\emph{length}\index{queue!length} of a queue is its total number of
+elements.
+
+\begin{figure}[!htbp]
+\centering
+\index{breadth-first search}
+\index{BFS}
+\subfigure[Original undirected graph.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-undirected_original}
+}
+\qquad
+\subfigure[First iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-undirected_first}
+}
+\subfigure[Second iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-undirected_second}
+}
+\qquad
+\subfigure[Third iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-undirected_third}
+}
+\subfigure[Fourth iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-undirected_fourth}
+}
+\qquad
+\subfigure[Final BFS tree.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-undirected_tree}
+}
+\caption{Breadth-first search tree for an undirected graph.}
+\label{fig:graph_algorithms:breadth_first_search_undirected}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{breadth-first search}
+\index{BFS}
+\subfigure[Original digraph.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-directed_original}
+}
+\qquad
+\subfigure[First iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-directed_first}
+}
+\subfigure[Second iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-directed_second}
+}
+\qquad
+\subfigure[Third iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-directed_third}
+}
+\subfigure[Fourth iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-directed_fourth}
+}
+\qquad
+\subfigure[Final BFS tree.]{
+  \includegraphics{image/graph-algorithms/breadth-first-search-directed_tree}
+}
+\caption{Breadth-first search tree for a digraph.}
+\label{fig:graph_algorithms:breadth_first_search_directed}
+\end{figure}
+
+Note that the BFS\index{BFS}
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
+works on both undirected and directed graphs. For an undirected graph,
+line~\ref{alg:BFS:explore_neighborhood} means that we explore all
+the neighbors of vertex $v$, i.e. the set $\adj(v)$ of vertices
+adjacent to $v$. In the case of a digraph, we replace
+``$w \in \adj(v)$'' on line~\ref{alg:BFS:explore_neighborhood} with
+``$w \in \oadj(v)$'' because we only want to explore all vertices that
+are out-neighbors\index{out-neighbor} of $v$. The algorithm returns
+two lists $D$ and $T$. The list $T$ contains a subset of edges in
+$E(G)$ that make up a tree rooted at the given start vertex $s$. As
+trees are connected graphs without cycles, we may take the vertices
+comprising the edges of $T$ to be the vertex set of the tree. It is
+clear that $T$ represents a tree by means of a list of edges, which
+allows us to identify the tree under consideration as the edge list
+$T$. The list $D$ has the same number of elements as the order of
+$G = (V, E)$, i.e. $\length(D) = |V|$. The $i$-th element $D[i]$
+counts the number of edges in $T$ between the vertices $s$ and
+$v_i$. In other words, $D[i]$ is the length of the $s$-$v_i$ path in
+$T$. It can be shown that $D[i] = \infty$ if and only if $G$ is
+disconnected. After one application of
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}, it
+may happen that $D[i] = \infty$ for at least one vertex
+$v_i \in V$. To traverse those vertices that are unreachable from $s$,
+again we apply
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
+$G$ with starting vertex $v_i$. Repeat this algorithm as often as
+necessary until all vertices of $G$ are visited. The result may be a
+tree that contains all the vertices of $G$ or a collection of trees,
+each of which contains a subset of $V(G)$.
+Figures~\ref{fig:graph_algorithms:breadth_first_search_undirected}
+and~\ref{fig:graph_algorithms:breadth_first_search_directed}
+present BFS\index{BFS} trees\index{breadth-first search!tree}
+resulting from applying
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} on
+an undirected graph and a digraph, respectively.
+
+\begin{theorem}
+\label{thm:graph_algorithms:BFS:worst_case_time_complexity}
+\index{breadth-first search}
+The worst-case time complexity of
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} is
+$O(|V| + |E|)$.
+\end{theorem}
+
+\begin{proof}
+Without loss of generality, we can assume that $G = (V, E)$ is
+connected. The initialization steps in
+lines~\ref{alg:BFS:initialize_queue_visit_nodes}
+to~\ref{alg:BFS:initialize_empty_tree} take $O(|V|)$ time. After
+initialization, all but one vertex are labelled
+$\infty$. Line~\ref{alg:BFS:marking_vertex_as_visited} ensures that
+each vertex is enqueued\index{queue!enqueue} at most once and hence
+dequeued\index{queue!dequeue} at most once. Each of
+enqueuing\index{queue!enqueue} and dequeuing\index{queue!dequeue}
+takes constant time. The total time devoted to queue operations is
+$O(|V|)$. The adjacency list\index{list!adjacency} of a vertex is
+scanned after dequeuing\index{queue!dequeue} that vertex, so each
+adjacency list\index{list!adjacency} is scanned at most once. Summing
+the lengths of the adjacency lists, we have $\Theta(|E|)$ and
+therefore we require $O(|E|)$ time to scan the adjacency lists. After
+the adjacency list of a vertex is scanned, at most $k$ edges are added
+to the list $T$, where $k$ is the length of the adjacency
+list\index{list!adjacency} under consideration. Like
+queue\index{queue} operations, appending to a list\index{list} takes
+constant time, hence we require $O(|E|)$ time to build the list
+$T$. Therefore, BFS\index{BFS} runs in $O(|V| + |E|)$ time.
+\end{proof}
+
+\begin{theorem}
+\label{thm:graph_algorithms:BFS:list_D_length_shortest_paths}
+For the list $D$ resulting from
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template},
+let $s$ be a starting vertex and let $v$ be a vertex such that
+$D[v] \neq \infty$. Then $D[v]$ is the length of any shortest path
+from $s$ to $v$.
+\end{theorem}
+
+\begin{proof}
+It is clear that $D[v] = \infty$ if and only if there are no paths
+from $s$ to $v$. Let $v$ be a vertex such that $D[v] \neq \infty$. As
+$v$ can be reached from $s$ by a path of length $D[v]$, the length
+$d(s,v)$ of any shortest $s$-$v$ path satisfies $d(s,v) \leq
+D[v]$. Use induction on $d(s,v)$ to show that equality holds. For the
+base case $s = v$, we have $d(s,v) = D[v] = 0$ since the trivial path
+has length zero. Assume for induction that if $d(s,v) = k$, then
+$d(s,v) = D[v]$.
+%% We need to show that if $d(s,u)$ is the length of any
+%% shortest $s$-$u$ path, then $d(s,u) = D[u]$.
+Let $d(s,u) = k + 1$ with the corresponding shortest $s$-$u$ path
+being $(s, v_1, v_2, \dots, v_k, u)$. By our induction hypothesis,
+$(s, v_1, v_2, \dots, v_k)$ is a shortest path from $s$ to $v_k$ of
+length $d(s, v_k) = D[v_k] = k$. In other words, $D[v_k] < D[u]$ and
+the while loop spanning lines~\ref{alg:BFS:while_loop:non_empty_queue}
+to~\ref{alg:BFS:while_loop:append_to_tree} processes $v_k$ before
+processing $u$. The graph under consideration has the edge $v_k
+u$. When examining the adjacency list of $v_k$, BFS reaches $u$~(if
+$u$ is not reached earlier) and so $D[u] \leq k + 1$. Hence,
+$D[u] = k + 1$ and therefore $d(s,u) = D[u] = k + 1$.
+\end{proof}
+
+In the proof of
+Theorem~\ref{thm:graph_algorithms:BFS:list_D_length_shortest_paths},
+we used $d(u,v)$ to denote the length of the shortest path from $u$ to
+$v$. This shortest path length is also known as the
+\emph{distance}\index{distance} from $u$ to $v$, and will be
+discussed in further details in
+section~\ref{sec:graph_algorithms:weights_distances} and
+Chapter~\ref{chap:distance_connectivity}. The
+\emph{diameter}\index{diameter} $\diam(G)$ of a graph $G = (V,E)$ is
+defined as
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:graph_diameter}
+\diam(G)
+=
+\max_{\substack{u,v \in V \\ u \neq v}} d(u,v).
+\end{equation}
+%%
+Using the above definition, to find the diameter\index{diameter} we
+first determine the distance\index{distance} between each pair of
+distinct vertices, then we compute the maximum of all such
+distances. Breadth-first\index{breadth-first search} search is a
+useful technique for finding the diameter\index{diameter}: we simply
+run breadth-first\index{breadth-first search} search from each
+vertex. An interesting application of the diameter\index{diameter}
+appears in the
+\emph{small-world phenomenon}\index{small-world}~\cite{Kleinberg2000,
+  Milgram1967,WattsStrogatz1998}, which contends that a certain
+special class of sparse graphs have low diameter.
+
+%% As an example, here is some Sage code which implements BFS to compute
+%% the list distances from a given vertex.
+%% %
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% def graph_distance(G, v0):
+%%     """
+%%     Breadth first search algorithm to find the
+%%     distance from a fixed vertex $v_0$ to any
+%%     other vertex.
+
+%%     INPUT:
+%%         G - a connected graph
+%%         v0 - a vertex
+
+%%     OUTPUT:
+%%         D - a list of distances to
+%%             every other vertex
+
+%%     EXAMPLES:
+%%         sage: G = Graph({1: [2, 4], 2: [1, 4], 3: [2, 6],
+%%                          4: [1, 3], 5: [4, 2], 6: [3, 1]})
+%%         sage: v0 = 1
+%%         sage: graph_distance(G,v0)
+%%         [[1, 0], [2, 1], [3, 2], [4, 1], [5, 2], [6, 1]]
+%%         sage: G = Graph({"a": ["b", "e"], "b": ["c", "e"], \
+%%          "c": ["d", "e"], "d": ["f"], "e": ["f"], "f": ["g"], "g":["b"]})
+%%         sage: v0 = "a"
+%%         sage: graph_distance(G, v0)
+%%         [['a', 0], ['b', 1], ['c', 2], ['d', 3], ['e', 1],
+%%          ['f', 2], ['g', 2]]
+%%         sage: G = Graph({1: [2,3], 2: [1, 3], 3: [2], 4: [5], 5: [6], 6: [5]})
+%%         sage: v0 = 1
+%%         sage: graph_distance(G, v0) # note G is disconnected
+%%         [[1, 0], [2, 1], [3, 1]]
+%%     """
+%%     V = G.vertices()
+%%     Q = [v0]
+%%     T = []
+%%     D = []
+%%     while Q<>[] and T<>V:
+%%         for v in Q:
+%%             if not(v in T):
+%%                 D.append([v,G.distance(v0,v)])
+%%             if v in Q:
+%%                 Q.remove(v)
+%%             T.append(v)
+%%             T = list(Set(T))
+%%             Q = Q+[x for x in G.neighbors(v) if not(x in T+Q)]
+%%             if T == V:
+%%                 break
+%%     D.sort()
+%%     print Q, T
+%%     return D
+%% \end{lstlisting}
+%% \end{center}
+%% %
+%% \begin{exercise}
+%% Using Sage's \verb!shortest_path! method, can you modify the above
+%% function to return a list of shortest paths from $v_0$ to any other
+%% vertex?
+%% \end{exercise}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Depth-first search}
+\index{depth-first search}
+
+\begin{quote}
+\footnotesize
+\includegraphics[scale=0.5]{image/graph-algorithms/depth-first-search} \\
+\noindent
+--- Randall Munroe\index{Munroe, Randall}, xkcd,
+\url{http://xkcd.com/761/}
+\end{quote}
+
+\noindent
+A depth-first search~(DFS)\index{depth-first search}\index{DFS} is a
+graph traversal strategy similar to breadth-first
+search\index{breadth-first search}. Both BFS\index{BFS} and
+DFS\index{DFS} differ in how they explore each vertex. Whereas
+BFS\index{BFS} explores the neighborhood of a vertex $v$ before moving
+on to explore the neighborhoods of the neighbors, DFS\index{DFS}
+explores as deep as possible a path starting at $v$. One can think of
+BFS\index{BFS} as exploring the immediate surrounding, while
+DFS\index{DFS} prefers to see what is on the other side of the
+hill. In the 19th century,
+Lucas~\cite{Lucas1882.1894}\index{Lucas!M. \'Edouard} and
+Tarry~\cite{Tarry1895}\index{Tarry, Gaston} investigated
+DFS\index{DFS} as a strategy for traversing
+mazes\index{maze}. Fundamental properties of DFS\index{DFS} were
+discovered in the early 1970s by
+Hopcroft\index{Hopcroft, John E.} and
+Tarjan~\cite{HopcroftTarjan1973,Tarjan1972}\index{Tarjan, Robert Endre}.
+
+\begin{figure}[!htbp]
+\centering
+\index{chess!knight's tour}
+\subfigure[The knight's initial position.]{
+  \label{fig:graph_algorithms:one_knight_tour:initial_position}
+  \includegraphics{image/graph-algorithms/one-knight-tour_initial}
+}
+\quad
+\subfigure[A knight's tour.]{
+  \label{fig:graph_algorithms:one_knight_tour:a_tour}
+  \includegraphics{image/graph-algorithms/one-knight-tour_tour}
+}
+\subfigure[Graph representation of tour.]{
+  \label{fig:graph_algorithms:one_knight_tour:graph_representation}
+  \includegraphics{image/graph-algorithms/one-knight-tour_graph}
+}
+\caption{The knight's tour from a given starting position.}
+\label{fig:graph_algorithms:one_knight_tour}
+\end{figure}
+
+To get an intuitive appreciation for DFS\index{DFS}, suppose we have
+an $8 \times 8$ chessboard\index{chess!chessboard} in front of us. We
+place a single knight\index{chess!knight piece} piece on a fixed
+square of the board, as shown in
+Figure~\ref{fig:graph_algorithms:one_knight_tour:initial_position}. Our
+objective is to find a sequence of knight\index{chess!knight piece}
+moves that visits each and every square exactly once, while obeying
+the rules of chess\index{chess} that govern the movement of the knight
+piece\index{chess!knight piece}. Such a sequence of moves, if one
+exists, is called a \emph{knight's tour}\index{chess!knight's tour}. How do
+we find such a tour? We could make one knight\index{chess!knight} move
+after another, recording each move to ensure that we do not step on a
+square that is already visited, until we could not make any more
+moves. Acknowledging defeat when encountering a dead end, it might
+make sense to \emph{backtrack}\index{backtrack} a few moves and try
+again, hoping we would not get stuck. If we fail again, we try
+backtracking\index{backtrack} a few more moves and traverse yet
+another path, hoping to make further progress. Repeat this strategy
+until a tour is found or until we have exhausted all possible
+moves. The above strategy for finding a knight's
+tour\index{chess!knight's tour} is an example of depth-first
+search\index{depth-first search}, sometimes called
+\emph{backtracking}. Figure~\ref{fig:graph_algorithms:one_knight_tour:a_tour}
+shows a knight's tour with the starting position as shown in
+Figure~\ref{fig:graph_algorithms:one_knight_tour:initial_position};
+and
+Figure~\ref{fig:graph_algorithms:one_knight_tour:graph_representation}
+is a graph representation of this tour. The black-filled nodes
+indicate the endpoints of the tour. A more interesting question is:
+What is the number of knight's tours on an $8 \times 8$ chessboard?
+Loebbing\index{Loebbing, Martin} and
+Wegener~\cite{LoebbingWegener1996}\index{Wegener, Ingo} announced in
+1996 that this number is 33,439,123,484,294. The answer was later
+corrected by McKay~\cite{McKay1997}\index{McKay, Brendan D.} to be
+13,267,364,410,532. See~\cite{ElkiesStanley2003}
+for\index{Elkies, Noam D.}\index{Stanley, Richard P.} a discussion of
+the knight's tour and its relationship to mathematics.
+
+\begin{algorithm}[!htbp]
+\index{depth-first search}
+\index{DFS}
+\input{algorithm/graph-algorithms/depth-first-search-template.tex}
+\caption{A general depth-first search template.}
+\label{alg:graph_algorithms:depth_first_search_template}
+\end{algorithm}
+
+Algorithm~\ref{alg:graph_algorithms:depth_first_search_template}
+formalizes the above description of depth-first
+search\index{depth-first search}. The tree resulting from applying
+DFS\index{DFS} on a graph is called a
+\emph{depth-first search tree}\index{depth-first search!tree}. The
+general structure of this algorithm bears close resemblance to
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}. A
+significant difference is that instead of using a queue\index{queue}
+to structure and organize vertices to be visited, DFS\index{DFS} uses
+another special type of list\index{list} called a
+\emph{stack}\index{stack}. To understand how elements of a stack are
+organized, we use the analogy of a stack of cards\index{card}. A new
+card is added to the stack by placing it on top of the stack. Any time
+we want to remove a card, we are only allowed to remove the top-most
+card that is on the top of the stack. A list\index{list}
+$L = [a_1, a_2, \dots, a_k]$ of $k$ elements is a stack when we impose
+the same rules for element insertion and removal. The top and bottom
+of the stack are $L[k]$ and $L[1]$, respectively. The operation of
+removing the top element of the stack is referred to as
+\emph{popping}\index{stack!pop} the element off the stack. Inserting
+an element into the stack is called \emph{pushing}\index{stack!push}
+the element onto the stack. In other words, a stack implements a
+last-in first-out~(LIFO)\index{last in, first out}\index{LIFO}
+protocol for element insertion and removal, in contrast to the
+FIFO\index{FIFO} policy of a queue\index{queue}. We also use the term
+\emph{length}\index{stack!length} to refer to the number of elements
+in the stack.
+
+\begin{figure}[!htbp]
+\centering
+\index{depth-first search}
+\index{DFS}
+\subfigure[Original undirected graph.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_original}
+}
+\qquad
+\subfigure[First iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_first}
+}
+\subfigure[Second iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_second}
+}
+\qquad
+\subfigure[Third iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_third}
+}
+\subfigure[Final DFS tree.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-undirected_tree}
+}
+\caption{Depth-first search tree for an undirected graph.}
+\label{fig:graph_algorithms:depth_first_search_undirected}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{depth-first search}
+\index{DFS}
+\subfigure[Original digraph.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-directed_original}
+}
+\qquad
+\subfigure[First iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-directed_first}
+}
+\subfigure[Second iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-directed_second}
+}
+\qquad
+\subfigure[Third iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-directed_third}
+}
+\subfigure[Fourth iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-directed_fourth}
+}
+\qquad
+\subfigure[Final DFS tree.]{
+  \includegraphics{image/graph-algorithms/depth-first-search-directed_tree}
+}
+\caption{Depth-first search tree for a digraph.}
+\label{fig:graph_algorithms:depth_first_search_directed}
+\end{figure}
+
+The depth-first search\index{depth-first search}
+Algorithm~\ref{alg:graph_algorithms:depth_first_search_template} can
+be analyzed similar to how we analyzed
+Algorithm~\ref{fig:graph_algorithms:breadth_first_search_undirected}. Just
+as BFS\index{BFS} is applicable to both directed and undirected
+graphs, we can also have undirected graphs and digraphs as input to
+DFS\index{DFS}. For the case of an undirected graph,
+line~\ref{alg:DFS:for_loop_visit_neighbors} of
+Algorithm~\ref{alg:graph_algorithms:depth_first_search_template}
+considers all vertices adjacent to the current vertex $v$. In case the
+input graph is directed, we replace ``$w \in \adj(v)$'' on
+line~\ref{alg:DFS:for_loop_visit_neighbors} with ``$w \in \oadj(v)$''
+to signify that we only want to consider the
+out-neighbors\index{out-neighbor} of $v$. If any neighbors
+(respectively, out-neighbors\index{out-neighbor}) of $v$ are labelled
+as $\infty$, we know that we have not explored any paths starting from
+any of those vertices. So we label each of those unexplored vertices
+with a positive integer and push them onto the stack\index{stack} $S$,
+where they will wait for later processing. We also record the paths
+leading from $v$ to each of those unvisited neighbors, i.e. the edges
+$vw$ for each vertex $w \in \adj(v)$ (respectively, $w \in \oadj(v)$)
+are appended to the list $T$. The test on
+line~\ref{alg:DFS:if_test_unvisited_neighbors} ensures that we do not
+push onto $S$ any vertices on the path that lead to $v$. When we
+resume another round of the while loop that starts on
+line~\ref{alg:DFS:while_loop_tests_non_empty_stack}, the previous
+vertex $v$ have been popped\index{stack!pop} off $S$ and the neighbors
+(respectively, out-neighbors\index{out-neighbor}) of $v$ have been
+pushed\index{stack!push} onto $S$. To explore a path starting at $v$,
+we choose any unexplored neighbors of $v$ by popping an element off
+$S$ and repeat the for loop starting on
+line~\ref{alg:DFS:for_loop_visit_neighbors}. Repeat the DFS\index{DFS}
+algorithm as often as required in order to traverse all vertices of
+the input graph. The output of DFS\index{DFS} consists of two lists
+$D$ and $T$: $T$ is a tree rooted\index{tree!rooted} at the starting
+vertex $s$; and each $D[i]$ counts the length of the $s$-$v_i$ path in
+$T$. Figures~\ref{fig:graph_algorithms:depth_first_search_undirected}
+and~\ref{fig:graph_algorithms:depth_first_search_directed} show the
+DFS\index{DFS} trees\index{depth-first search!tree} resulting from
+running Algorithm~\ref{alg:graph_algorithms:depth_first_search_template}
+on an undirected graph and a digraph, respectively. The worst-case
+time complexity of DFS\index{DFS} can be analyzed using an argument
+similar to that in
+Theorem~\ref{thm:graph_algorithms:BFS:worst_case_time_complexity}.
+Arguing along the same lines as in the proof of
+Theorem~\ref{thm:graph_algorithms:BFS:list_D_length_shortest_paths},
+we can also show that the list $D$ returned by DFS\index{DFS} contains
+lengths of any shortest paths from the starting vertex $s$ to any
+other vertex in the tree $T$.
+
+\begin{figure}[!htbp]
+\centering
+\index{Petersen!graph}
+\includegraphics{image/graph-algorithms/Petersen-graph}
+\caption{The Petersen graph.}
+\label{fig:graph_algorithms:Petersen_graph}
+\end{figure}
+
+\begin{example}
+In 1898, Julius Petersen\index{Petersen!Julius}
+published~\cite{Petersen1898} a graph that now bears his name: the
+Petersen graph\index{Petersen!graph} shown in
+Figure~\ref{fig:graph_algorithms:Petersen_graph}. Compare the search
+trees resulting from running breadth-\index{breadth-first search} and
+depth-first searches\index{depth-first search} on the Petersen
+graph\index{Petersen!graph} with starting vertex $0$.
+\end{example}
+
+\begin{proof}[Solution]
+The Petersen graph\index{Petersen!graph} in
+Figure~\ref{fig:graph_algorithms:Petersen_graph}
+can be constructed and searched as follows.
+%%
+\begin{lstlisting}
+sage: g = graphs.PetersenGraph(); g
+Petersen graph: Graph on 10 vertices
+sage: list(g.breadth_first_search(0))
+[0, 1, 4, 5, 2, 6, 3, 9, 7, 8]
+sage: list(g.depth_first_search(0))
+[0, 5, 8, 6, 9, 7, 2, 3, 4, 1]
+\end{lstlisting}
+%%
+From the above Sage session, we see that starting from vertex $0$
+breadth-first search\index{breadth-first search} yields the edge list
+\[
+[01,\, 04,\, 05,\, 12,\, 16,\, 43,\, 49,\, 57,\, 58]
+\]
+and depth-first search\index{depth-first search} produces the
+corresponding edge list
+\[
+[05,\, 58,\, 86,\, 69,\, 97,\, 72,\, 23,\, 34,\, 01].
+\]
+Our results are illustrated in
+Figure~\ref{fig:graph_algorithms:search_Petersen_graph}.
+%%
+\begin{figure}[!htbp]
+\centering
+\index{breadth-first search}
+\index{depth-first search}
+\index{Petersen!graph}
+\subfigure[Breadth-first search.]{
+  \includegraphics{image/graph-algorithms/search-Petersen-graph_breadth-first}
+}
+\qquad
+\subfigure[Depth-first search.]{
+  \includegraphics{image/graph-algorithms/search-Petersen-graph_depth-first}
+}
+\caption{Traversing the Petersen graph starting from vertex $0$.}
+\label{fig:graph_algorithms:search_Petersen_graph}
+\end{figure}
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Connectivity of a graph}
+\index{graph!connected}
+
+Both BFS\index{BFS} and DFS\index{DFS} can be used to determine if an
+undirected graph is connected. Let $G = (V, E)$ be an undirected graph
+of order $n > 0$ and let $s$ be an arbitrary vertex of $G$. We
+initialize a counter $c \assign 1$ to mean that we are starting our
+exploration at $s$, hence we have already visited one vertex,
+i.e. $s$. We apply either BFS\index{BFS} or DFS\index{DFS}, treating
+$G$ and $s$ as input to any of these algorithms. Each time we visit a
+vertex that was previously unvisited, we increment the counter $c$. At
+the end of the algorithm, we compare $c$ with $n$. If $c = n$, we know
+that we have visited all vertices of $G$ and conclude that $G$ is
+connected. Otherwise, we conclude that $G$ is disconnected. This
+procedure is summarized in
+Algorithm~\ref{alg:graph_algorithms:graph_connectivity}.
+
+\begin{algorithm}[!htbp]
+\index{graph!connected}
+\input{algorithm/graph-algorithms/graph-connectivity.tex}
+\caption{Determining whether an undirected graph is connected.}
+\label{alg:graph_algorithms:graph_connectivity}
+\end{algorithm}
+
+Note that Algorithm~\ref{alg:graph_algorithms:graph_connectivity} uses
+the BFS\index{BFS} template of
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template},
+with some minor changes. Instead of initializing the list $D$ with
+$n = |V|$ copies of $\infty$, we use $n$ copies of $0$. Each time we
+have visited a vertex $w$, we make the assignment $D[w] \assign 1$,
+instead of incrementing the value $D[v]$ of $w$'s parent vertex and
+assign that value to $D[w]$. At the end of the while loop, we have the
+equality $c = \sum_{d \in D} d$. The value of this sum could be used
+in the test starting from line~\ref{alg:BFS:connectivity_test}.
+However, the value of the counter $c$ is incremented immediately after
+we have visited an unvisited vertex. An advantage is that we do not
+need to perform a separate summation outside of the while loop. To use
+the DFS\index{DFS} template for determining graph
+connectivity\index{graph!connected}, we simply replace the
+queue\index{queue} implementation in
+Algorithm~\ref{alg:graph_algorithms:graph_connectivity} with a
+stack\index{stack} implementation~(see
+problem~\thechapter.\ref{prob:graph_algorithms:connectivity_with_DFS_BFS}).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Weights and distances}
+\label{sec:graph_algorithms:weights_distances}
+\index{weight}
+\index{distance}
+
+In Chapter~\ref{chap:introduction}, we briefly mentioned some
+applications of weighted graphs, but we did not define the concept of
+weighted graphs. A graph is said to be
+\emph{weighted}\index{graph!weighted} when we assign a numeric label
+or weight to each of its edges. Depending on the application, we can
+let the vertices represent physical locations and interpret the weight
+of an edge as the distance\index{distance} separating two adjacent
+vertices. There might be a cost involved in traveling from a vertex
+to one of its neighbors, in which case the weight assigned to the
+corresponding edge can represent such a cost\index{cost}. The concept
+of \emph{weighted digraphs}\index{digraph!weighted} can be similarly
+defined. When no explicit weights are assigned to the edges of an
+undirected graph or digraph, it is usually convenient to consider each
+edge as having a weight of one or unit weight\index{weight!unit}.
+
+Based on the concept of weighted graphs\index{graph!weighted}, we now
+define what it means for a path to be a shortest
+path\index{path!shortest}. Let $G = (V,E)$ be a (di)graph with
+nonnegative edge weights\index{weight!nonnegative} $w(e) \in \R$ for
+each edge $e \in E$. The \emph{length}\index{path!length} or
+\emph{distance}\index{path!distance} $d(P)$ of a $u$-$v$ path $P$ from
+$u \in V$ to $v \in V$ is the sum of the edge weights for edges in
+$P$. Denote by $d(u,v)$ the smallest value of $d(P)$ for all paths $P$
+from $u$ to $v$. When we regard edge weights as physical
+distances\index{distance}, a $u$-$v$ path that realizes $d(u,v)$ is
+sometimes called a \emph{shortest path}\index{path!shortest} from $u$
+to $v$. The above definitions of distance and shortest path also apply
+to graphs with negative edge weights. Unless otherwise specified,
+where the weight of an edge is not explicitly given, we usually
+consider the edge to have unit weight.
+
+The distance\index{distance!function} function $d$ on a graph with
+nonnegative edge weights\index{weight!nonnegative} is known as a
+\emph{metric function}\index{metric!function}. Intuitively, the
+distance\index{distance} between two physical locations is greater
+than zero. When these two locations coincide, i.e. they are one and
+the same location, the distance separating them is zero. Regardless of
+whether we are measuring the distance from location $a$ to $b$ or from
+$b$ to $a$, we would obtain the same distance. Imagine now a third
+location $c$. The distance from $a$ to $b$ plus the distance from $b$
+to $c$ is greater than or equal to the distance from $a$ to $c$. The
+latter principle is known as the
+\emph{triangle inequality}\index{triangle inequality}. In summary,
+given three vertices $u,v,w$ in a graph $G$, the distance
+function\index{distance!function} $d$ on $G$ satisfies the following
+property.
+
+\begin{lemma}
+\label{lem:graph_algorithms:path_distance_metric_function}
+\textbf{Path distance as metric function.}
+Let $G = (V,E)$ be a graph with weight function\index{weight!function}
+$w: E \to \R$. Define a distance function\index{distance!function}
+$d: V \times V \to \R$ given by
+\[
+d(u,v)
+=
+\begin{cases}
+\infty, & \text{if there are no paths from $u$ to $v$}, \\[4pt]
+\min\{w(W) \;|\; \text{$W$ is a $u$-$v$ walk}\}, & \text{otherwise}.
+\end{cases}
+\]
+Then $d$ is a metric\index{metric} on $V$ if it satisfies the
+following properties:
+%%
+\begin{enumerate}
+\item Nonnegativity: $d(u,v) \geq 0$ with $d(u,v) = 0$ if and only if
+  $u = v$.
+
+\item Symmetry: $d(u,v) = d(v,u)$.
+
+\item Triangle inequality\index{triangle inequality}:
+  $d(u,v) + d(v,w) \geq d(u,w)$.
+\end{enumerate}
+\end{lemma}
+
+The pair $(V, d)$ is called a \emph{metric space}\index{metric space},
+where the word ``metric''\index{metric} refers to the distance
+function\index{distance!function} $d$. Any graphs we consider are
+assumed to have finite sets of vertices. For this reason, $(V,d)$ is
+also known as a \emph{finite metric space}\index{metric space!finite}.
+The distance\index{distance!matrix} matrix $D = [d(v_i, v_j)]$ of a
+connected graph is the distance matrix of its finite metric
+space\index{metric space!finite}. The topic of metric space is covered
+in further details in topology\index{topology} texts such as
+Runde~\cite{Runde2005}\index{Runde, Volker} and
+Shirali\index{Shirali, Satish} and
+Vasudeva~\cite{ShiraliVasudeva2006}\index{Vasudeva, Harkrishan L.}.
+See Buckley and Harary~\cite{BuckleyHarary1990} for an in-depth
+coverage of the distance concept in graph theory.
+
+Many different algorithms exist for computing a shortest
+path\index{path!shortest} in a weighted graph. Some only work if the
+graph has no negative weight cycles. Some assume that there is a
+single start or source vertex. Some compute the shortest paths from
+any vertex to any other and also detect if the graph has a negative
+weight cycle\index{cycle!negative}. No matter what algorithm is used
+for the special case of nonnegative weights\index{weight!nonnegative},
+the length of the shortest path\index{path!length} can neither equal
+nor exceed the order of the graph.
+
+\begin{lemma}
+\label{lem:graph_algorithms:shortest_path_length}
+Fix a vertex $v$ in a connected graph $G = (V,E)$ of order
+$n = |V|$. If there are no negative weight
+cycles\index{cycle!negative} in $G$, then there exists a shortest
+path\index{path!shortest} from $v$ to any other vertex $w \in V$ that
+uses at most $n - 1$ edges.
+\end{lemma}
+
+\begin{proof}
+Suppose that $G$ contains no negative weight cycles. Observe that at
+most $n - 1$ edges are required to construct a path from $v$ to any
+vertex $w$
+(Proposition~\ref{prop:introduction:any_path_has_length_at_most_n_minus_1}).
+Let $P$ denote such a path:
+\[
+P: v_0 = v,\, v_1,\, v_2, \dots, v_k = w.
+\]
+Since $G$ has no negative weight cycles\index{cycle!negative}, the
+weight of $P$ is no less than the weight of $P'$, where $P'$ is the
+same as $P$ except that all cycles have been removed. Thus, we can
+remove all cycles\index{cycle} from $P$ and obtain a $v$-$w$ path $P'$
+of lower weight. Since the final path is acyclic, it must have no more
+than $n - 1$ edges.
+\end{proof}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/generic-shortest-path-algorithm.tex}
+\caption{A template for shortest path algorithms.}
+\label{alg:graph_algorithms:generic_shortest_path_algorithm}
+\end{algorithm}
+
+Having defined weights\index{weight} and distances\index{distance}, we
+are now ready to discuss shortest path\index{path!shortest} algorithms
+for weighted graphs. The breadth-first
+search\index{breadth-first search}
+Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template} can
+be applied where each edge has unit weight\index{weight!unit}. Moving
+on to the general case of graphs with positive edge
+weights\index{weight!positive}, algorithms for determining shortest
+paths\index{path!shortest} in such graphs can be classified as
+\emph{weight-setting}\index{weight!setting} or
+\emph{weight-correcting}~\cite{GalloPallottino1986}\index{weight!correcting}.
+A weight-setting\index{weight!setting} method traverses a graph and
+assigns weights that, once assigned, remain unchanged for the duration
+of the algorithm. Weight-setting\index{weight!setting} algorithms
+cannot deal with negative weights\index{weight!negative}. On the other
+hand, a weight-correcting\index{weight!correcting} method is able to
+change the value of a weight many times while traversing a graph. In
+contrast to a weight-setting\index{weight!setting} algorithm, a
+weight-correcting\index{weight!correcting} algorithm is able to deal
+with negative weights\index{weight!negative}, provided that the weight
+sum of any cycle\index{cycle} is
+nonnegative\index{weight!nonnegative}. The term
+\emph{negative cycle}\index{cycle!negative} refers to the weight sum
+$s$ of a cycle\index{cycle} such that $s < 0$. Some algorithms halt
+upon detecting a negative cycle; examples of such algorithms include
+the Bellman-Ford\index{Bellman-Ford algorithm} and
+Johnson's\index{Johnson!algorithm} algorithms.
+
+Algorithm~\ref{alg:graph_algorithms:generic_shortest_path_algorithm}
+is a general template for many shortest path\index{path!shortest}
+algorithms. With a tweak here and there, one could modify it to suit
+the problem at hand. Note that $w(vu)$ is the weight of the edge
+$vu$. If the input graph is undirected,
+line~\ref{alg:generic_shortest_path:neighbors} considers all the
+neighbors of $v$. For digraphs, we are interested in
+out-neighbors\index{out-neighbor} of $v$ and accordingly we replace
+``$u \in \adj(v)$'' in line~\ref{alg:generic_shortest_path:neighbors}
+with ``$u \in \oadj(v)$''. The general flow of
+Algorithm~\ref{alg:graph_algorithms:generic_shortest_path_algorithm}
+follows the same pattern as depth-first\index{depth-first search} and
+breadth-first searches\index{breadth-first search}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Dijkstra's algorithm}
+\label{sec:graph_algorithms:Dijkstra_algorithm}
+\index{Dijkstra!algorithm}
+
+\begin{quote}
+\footnotesize
+\index{Dijkstra!algorithm}
+\includegraphics[scale=0.7]{image/graph-algorithms/dijkstra} \\
+\noindent
+--- Randall Munroe\index{Munroe, Randall}, xkcd,
+\url{http://xkcd.com/342/}
+\end{quote}
+
+\noindent
+Dijkstra's algorithm~\cite{Dijkstra1959}, discovered by
+E. W.~Dijkstra\index{Dijkstra!E. W.} in 1959, is a graph search
+algorithm that solves the single-source shortest
+path\index{single-source shortest path} problem for a graph with
+nonnegative edge weights\index{weight!nonnegative}. The algorithm is a
+generalization of breadth-first\index{breadth-first search}
+search. Imagine that the vertices of a weighted graph represent cities
+and edge weights represent distances\index{distance} between pairs of
+cities connected by a direct road. Dijkstra's
+algorithm\index{Dijkstra!algorithm} can be used to find a shortest
+route from a fixed city to any other city.
+
+Let $G = (V,E)$ be a (di)graph with nonnegative edge
+weights\index{weight!nonnegative}. Fix a start or source
+vertex\index{vertex!source} $s \in V$. Dijkstra's
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} performs a
+number of steps, basically one step for each vertex in $V$. First, we
+initialize a list $D$ with $n$ copies of $\infty$ and then assign $0$
+to $D[s]$. The purpose of the symbol $\infty$ is to denote the largest
+possible value. The list $D$ is to store the distances\index{distance}
+of all shortest paths\index{path!shortest} from $s$ to any other
+vertices in $G$, where we take the distance of $s$ to itself to be
+zero. The list $P$ of parent vertices is initially empty and the
+queue\index{queue} $Q$ is initialized to all vertices in $G$. We now
+consider each vertex in $Q$, removing any vertex after we have visited
+it. The while loop starting on
+line~\ref{alg:dijkstra_general:while_loop} runs until we have visited
+all vertices.
+Line~\ref{alg:dijkstra_general:find_vertex_minimal_distance} chooses
+which vertex to visit, preferring a vertex $v$ whose distance value
+$D[v]$ from $s$ is minimal\index{distance!minimum}. After we have
+determined such a vertex $v$, we remove it from the queue\index{queue}
+$Q$ to signify that we have visited $v$. The for loop starting on
+line~\ref{alg:dijkstra_general:for_loop} adjusts the distance values
+of each neighbor $u$ of $v$ such that $u$ is also in $Q$. If $G$ is
+directed, we only consider out-neighbors\index{out-neighbor} of $v$
+that are also in $Q$. The conditional starting on
+line~\ref{alg:dijkstra_general:if_relaxation} is where the adjustment
+takes place. The expression $D[v] + w(vu)$ sums the distance from $s$
+to $v$ and the distance from $v$ to $u$. If this total sum is less
+than the distance $D[u]$ from $s$ to $u$, we assign this lesser
+distance to $D[u]$ and let $v$ be the parent vertex of $u$. In this
+way, we are choosing a neighbor vertex that results in minimal
+distance\index{distance!minimum} from $s$. Each pass through the while
+loop decreases the number of elements in $Q$ by one without adding any
+elements to $Q$. Eventually, we would exit the while loop and the
+algorithm returns the lists $D$ and $P$.
+
+\begin{algorithm}[!htbp]
+\index{Dijkstra!algorithm}
+\input{algorithm/graph-algorithms/dijkstra-general.tex}
+\caption{A general template for Dijkstra's algorithm.}
+\label{alg:graph_algorithms:dijkstra_general}
+\end{algorithm}
+
+\begin{figure}[!htbp]
+\centering
+\index{Dijkstra!algorithm}
+\subfigure[Original digraph.]{
+  \label{fig:Dijkstra_digraph:original_digraph}
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_original}
+}
+\qquad
+\subfigure[First iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_first}
+}
+\subfigure[Second iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_second}
+}
+\qquad
+\subfigure[Third iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_third}
+}
+\subfigure[Fourth iteration of while loop.]{
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_fourth}
+}
+\qquad
+\subfigure[Final shortest paths graph.]{
+  \label{fig:Dijkstra_digraph:final_shortest_paths_digraph}
+  \includegraphics{image/graph-algorithms/Dijkstra-algorithm-digraph_final}
+}
+\caption{Searching a weighted digraph using Dijkstra's algorithm.}
+\label{fig:graph_algorithms:Dijkstra_algorithm_digraph}
+\end{figure}
+%% sage: M = matrix([[0,10,3,0,0],[0,0,1,2,0],[0,4,0,8,2],[0,0,0,0,7],[0,0,0,9,0]])
+%% sage: D = DiGraph(M, format="weighted_adjacency_matrix")
+%% sage: D.plot(edge_labels=True, graph_border=True).show()
+%%
+%% sage: G = DiGraph({1: {2:10, 3:3},
+%% ....: 2: {3:1, 4:2},
+%% ....: 3: {2:4, 4:8, 5:2},
+%% ....: 4: {5:7},
+%% ....: 5: {4:9}}, implementation=''c_graph'')
+%% sage: G.shortest_paths(1, by_weight=True)
+%% {1: [1], 2: [1, 3, 2], 3: [1, 3], 4: [1, 3, 2, 4], 5: [1, 3, 5]}
+
+\begin{table}[!htbp]
+\centering
+\index{Dijkstra!algorithm}
+\input{data/graph-algorithms/working-through-Dijkstra-algorithm.tex}
+\caption{Stepping through Dijkstra's algorithm.}
+\label{tab:graph_algorithms:working_through_Dijkstra_algorithm}
+\end{table}
+
+\begin{example}
+Apply Dijkstra's algorithm\index{Dijkstra!algorithm} to the graph in
+Figure~\ref{fig:Dijkstra_digraph:original_digraph}, with starting
+vertex $v_1$.
+\end{example}
+
+\begin{proof}[Solution]
+Dijkstra's Algorithm~\ref{alg:graph_algorithms:dijkstra_general}
+applied to the graph in
+Figure~\ref{fig:Dijkstra_digraph:original_digraph} yields the sequence
+of intermediary graphs shown in
+Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph},
+culminating in the final shortest paths graph of
+Figure~\ref{fig:Dijkstra_digraph:final_shortest_paths_digraph} and
+Table~\ref{tab:graph_algorithms:working_through_Dijkstra_algorithm}. For
+any column $v_i$ in the table, each 2-tuple represents the
+distance\index{distance} and parent vertex of $v_i$. As we move along
+the graph, processing vertices according to Dijkstra's
+algorithm\index{Dijkstra!algorithm}, the distance and parent vertex
+of a column are updated. The underlined 2-tuple represents the final
+distance and parent vertex produced by Dijkstra's algorithm. From
+Table~\ref{tab:graph_algorithms:working_through_Dijkstra_algorithm},
+we have the following shortest paths and distances:
+\[
+\begin{array}{ll}
+v_1\text{-}v_2: v_1, v_3, v_2      &\quad d(v_1, v_2) = 7 \\[4pt]
+v_1\text{-}v_3: v_1, v_3           &\quad d(v_1, v_3) = 3 \\[4pt]
+v_1\text{-}v_4: v_1, v_3, v_2, v_4 &\quad d(v_1, v_4) = 9 \\[4pt]
+v_1\text{-}v_5: v_1, v_3, v_5      &\quad d(v_1, v_5) = 5
+\end{array}
+\]
+Intermediary vertices for a $u$-$v$ path are obtained by starting from
+$v$ and work backward using the parent of $v$, then the parent of the
+parent, and so on.
+\end{proof}
+
+Dijkstra's algorithm\index{Dijkstra!algorithm} is an example of a
+\emph{greedy algorithm}\index{algorithm!greedy}. Whenever it tries to
+find the next vertex, it chooses only that vertex that minimizes the
+total weight\index{weight!minimum} so far. Greedy
+algorithms\index{algorithm!greedy} may not produce the best possible
+result. However, as the following theorem shows, Dijkstra's
+algorithm\index{Dijkstra!algorithm} does indeed produce shortest
+paths\index{path!shortest}.
+
+\begin{theorem}
+\textbf{Correctness of
+  Algorithm~\ref{alg:graph_algorithms:dijkstra_general}.}
+Let $G = (V, E)$ be a weighted (di)graph with a nonnegative
+weight\index{weight!nonnegative} function $w$. When Dijkstra's
+algorithm\index{Dijkstra!algorithm} is applied to $G$ with source
+vertex $s \in V$, the algorithm terminates with $D[u] = d(s,u)$ for
+all $u \in V$. Furthermore, if $D[v] \neq \infty$ and $v \neq s$, then
+$s=u_1, u_2, \dots, u_k = v$ is a shortest $s$-$v$ path such that
+$u_{i-1} = P[u_i]$ for $i = 2,3,\dots,k$.
+\end{theorem}
+
+\begin{proof}
+If $G$ is disconnected, then any $v \in V$ that cannot be reached from
+$s$ has distance $D[v] = \infty$ upon algorithm termination. Hence, it
+suffices to consider the case where $G$ is connected. Let
+$V = \{s=v_1, v_2, \dots, v_n\}$ and use induction on $i$ to show that
+after visiting $v_i$ we have
+%
+\begin{equation}
+\label{eqn:graph_algorithms:Dijkstra:shortest_distance}
+D[v]
+=
+d(s,v)
+\qquad
+\text{for all $v \in V_i = \{v_1, v_2, \dots, v_i\}$}.
+\end{equation}
+%
+For $i = 1$, equality holds. Assume for induction
+that~\eqref{eqn:graph_algorithms:Dijkstra:shortest_distance} holds for
+some $1 \leq i \leq n - 1$, so that now our task is to show
+that~\eqref{eqn:graph_algorithms:Dijkstra:shortest_distance} holds for
+$i + 1$. To verify $D[v_{i+1}] = d(s, v_{i+1})$, note that by our
+inductive hypothesis,
+\[
+D[v_{i+1}]
+=
+\min \left\{
+\left. d(s,v) + w(vu) \;\right|\;
+v \in V_i \text{ and } u \in \adj(v) \cap (Q \backslash V_i)
+\right\}
+\]
+and respectively
+\[
+D[v_{i+1}]
+=
+\min \left\{
+\left. d(s,v) + w(vu) \;\right|\;
+v \in V_i \text{ and } u \in \oadj(v) \cap (Q \backslash V_i)
+\right\}
+\]
+if $G$ is directed. Therefore, $D[v_{i+1}] = d(s, v_{i+1})$.
+
+Let $v \in V$ such that $D[v] \neq \infty$ and $v \neq s$. We now
+construct an $s$-$v$ path. When
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} terminates, we
+have $D[v] = D[v_1] + w(v_1 v)$, where $P[v] = v_1$ and
+$d(s,v) = d(s, v_1) + w(v_1 v)$. This means that $v_1$ is the
+second-to-last vertex in a shortest $s$-$v$ path. Repeated application
+of this process using the parent list $P$, we eventually produce a
+shortest $s$-$v$ path $s=v_m, v_{m-1}, \dots, v_1, v$, where
+$P[v_i] = v_{i+1}$ for $i = 1, 2, \dots, m - 1$.
+\end{proof}
+
+To analyze the worst case time complexity of
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general}, note that
+initializing $D$ takes $O(n + 1)$ and initializing $Q$ takes $O(n)$,
+for a total of $O(n)$ devoted to initialization. Each extraction of a
+vertex $v$ with minimal $D[v]$ requires $O(n)$ since we search through
+the entire list $Q$ to determine the minimum value, for a total of
+$O(n^2)$. Each insertion into $D$ requires constant time and the same
+holds for insertion into $P$. Thus, insertion into $D$ and $P$ takes
+$O(|E| + |E|) = O(|E|)$, which require at most $O(n)$ time. In the
+worst case, Dijkstra's
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} has running time
+$O(n^2 + n) = O(n^2)$.
+
+Can we improve the run time of Dijkstra's
+algorithm\index{Dijkstra!algorithm}? The time complexity of
+Dijkstra's algorithm depends on its implementation. With a simple
+list\index{list} implementation as presented in
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general}, we have a worst
+case time complexity of $O(n^2)$, where $n$ is the order of the graph
+under consideration. Let $m$ be the size of the
+graph. Table~\ref{tab:graph_algorithms:worst_case_time_complexity_Dijkstra}
+presents time complexities of Dijkstra's algorithm for various
+implementations. Out of all the four implementations in this table,
+the heap implementations are much more efficient than the list
+implementation presented in
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general}. A heap is a type
+of tree, a topic which will be covered in
+Chapter~\ref{chap:trees_forests}. Of all the heap implementations in
+Table~\ref{tab:graph_algorithms:worst_case_time_complexity_Dijkstra},
+the Fibonacci\index{heap!Fibonacci} heap
+implementation~\cite{FredmanTarjan1987} yields the best
+runtime. Chapter~\ref{chap:tree_data_structures} discusses how to use
+trees for efficient implementations of priority queues via heaps.
+
+\begin{table}[!htbp]
+\centering
+\index{list}
+\index{heap!binary}
+\index{heap!$k$-ary}
+\index{heap!Fibonacci}
+\input{data/graph-algorithms/worst-case-time-complexity-Dijkstra.tex}
+\caption{Implementation specific worst-case time complexity of
+  Dijkstra's algorithm.}
+\label{tab:graph_algorithms:worst_case_time_complexity_Dijkstra}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Bellman-Ford algorithm}
+\index{Bellman-Ford algorithm}
+
+\begin{quote}
+\footnotesize
+\includegraphics[scale=2.5]{image/graph-algorithms/pillow-talk-bellman-ford} \\
+\noindent
+--- Randall Munroe\index{Munroe, Randall}, xkcd,
+\url{http://xkcd.com/69/}
+\end{quote}
+
+\noindent
+A disadvantage of Dijkstra's\index{Dijkstra!algorithm}
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} is that it
+cannot handle graphs with negative edge
+weights\index{weight!negative}. The
+Bellman-Ford\index{Bellman-Ford algorithm} algorithm computes
+single-source\index{single-source shortest path} shortest paths in a
+weighted graph or digraph, where some of the edge weights may be
+negative\index{weight!negative}. This algorithm is a modification of
+the one published in 1957 by Richard E.
+Bellman~\cite{Bellman1957}\index{Bellman, Richard E.} and that by
+Lester Randolph Ford,
+Jr.~\cite{Ford1956}\index{Ford, Lester Randolph, Jr.} in
+1956. Shimbel~\cite{Shimbel1955}\index{Shimbel, A.} independently
+discovered the same method in~1955, and
+Moore~\cite{Moore1959}\index{Moore, Edward F.} in~1959. In contrast to
+the ``greedy''\index{algorithm!greedy} approach that Dijkstra's
+algorithm\index{Dijkstra!algorithm} takes, i.e. searching for the
+``cheapest'' path, the Bellman-Ford
+algorithm\index{Bellman-Ford algorithm} searches over all edges and
+keeps track of the shortest one found as it searches.
+
+\begin{algorithm}[!htbp]
+\index{Bellman-Ford algorithm}
+\input{algorithm/graph-algorithms/Bellman-Ford.tex}
+\caption{The Bellman-Ford algorithm.}
+\label{alg:graph_algorithms:Bellman_Ford}
+\end{algorithm}
+
+The Bellman-Ford Algorithm~\ref{alg:graph_algorithms:Bellman_Ford}
+runs in time $O(mn)$, where $m$ and $n$ are the size and order of an
+input graph, respectively. To see this, note that the initialization
+on lines~\ref{alg:Bellman_Ford:init_infinity}
+to~\ref{alg:Bellman_Ford:init_parent_list} takes $O(n)$. Each of the
+$n - 1$ rounds of the for loop starting on
+line~\ref{alg:Bellman_Ford:for_loop:relax} takes $O(m)$, for a total
+of $O(mn)$ time. Finally, the for loop starting on
+line~\ref{alg:Bellman_Ford:for_loop:check_negative_weight_cycles}
+takes $O(m)$.
+
+The loop starting on line~\ref{alg:Bellman_Ford:for_loop:relax}
+performs at most $n - 1$ updates of the distance\index{distance}
+$D[v]$ of each head of an edge. Many graphs have sizes that are less
+then $n - 1$, resulting in a number of redundant rounds of updates. To
+avoid such redundancy, we could add an extra check in the outer loop
+spanning lines~\ref{alg:Bellman_Ford:for_loop:relax}
+to~\ref{alg:Bellman_Ford:for_loop:end_relax} to immediately terminate
+that outer loop after any round that did not result in an update of
+any $D[v]$.
+Algorithm~\ref{alg:graph_algorithms:Bellman_Ford:redundant_updates}
+presents a modification of the Bellman-Ford\index{Bellman-Ford algorithm}
+Algorithm~\ref{alg:graph_algorithms:Bellman_Ford} that avoids
+redundant rounds of updates.
+
+\begin{algorithm}[!htbp]
+\index{Bellman-Ford algorithm}
+\input{algorithm/graph-algorithms/Bellman-Ford-redundant-updates.tex}
+\caption{The Bellman-Ford algorithm with checks for redundant updates.}
+\label{alg:graph_algorithms:Bellman_Ford:redundant_updates}
+\end{algorithm}
+
+%% The implementation below takes in a graph or digraph, and creates two
+%% Python dictionaries \verb!dist! and \verb!predecessor!, keyed on the
+%% list of vertices, which store the distance and shortest
+%% paths. However, if a negative weight cycle exists~(in the case of a
+%% digraph), then an error is raised.
+
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% def bellman_ford(Gamma, s):
+%%     """
+%%     Computes the shortest distance from s to all other vertices in Gamma.
+%%     If Gamma has a negative weight cycle, then return an error.
+
+%%     INPUT:
+
+%%     - Gamma -- a graph.
+%%     - s -- the source vertex.
+
+%%     OUTPUT:
+
+%%     - (d,p) -- pair of dictionaries keyed on the list of vertices,
+%%       which store the distance and shortest paths.
+
+%%     REFERENCE:
+
+%%     http://en.wikipedia.org/wiki/Bellman-Ford_algorithm
+%%     """
+%%     P = []
+%%     dist = {}
+%%     predecessor = {}
+%%     V = Gamma.vertices()
+%%     E = Gamma.edges()
+%%     for v in V:
+%%         if v == s:
+%%             dist[v] = 0
+%%         else:
+%%             dist[v] = infinity
+%%         predecessor[v] = 0
+%%     for i in range(1, len(V)):
+%%         for e in E:
+%%             u = e[0]
+%%             v = e[1]
+%%             wt = e[2]
+%%             if dist[u] + wt < dist[v]:
+%%                 dist[v] = dist[u] + wt
+%%                 predecessor[v] = u
+%%     # check for negative-weight cycles
+%%     for e in E:
+%%         u = e[0]
+%%         v = e[1]
+%%         wt = e[2]
+%%         if dist[u] + wt < dist[v]:
+%%             raise ValueError("Graph contains a negative-weight cycle")
+%%     return dist, predecessor
+%% \end{lstlisting}
+%% \end{center}
+
+%% Here are some examples.
+
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% sage: M = matrix([[0,1,4,0], [0,0,1,5], [0,0,0,3], [0,0,0,0]])
+%% sage: G = Graph(M, format="weighted_adjacency_matrix")
+%% sage: bellman_ford(G, G.vertices()[0])
+%%   {0: 0, 1: 1, 2: 2, 3: 5}
+%% \end{lstlisting}
+%% \end{center}
+%% %
+%% The plot of this graph is given in
+%% Figure~\ref{fig:graph_algorithms:Bellman_Ford_example}.
+
+%% \begin{figure}[!htbp]
+%% \centering
+%% \begin{tikzpicture}
+%% [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+%%   linedecorate/.style={-,thick}]
+%% % nodes or vertices
+%% \node (0) at (0,0) [nodedecorate] {};
+%% \node [below] at (0.south) {$0$};
+%% \node (2) at (4,0) [nodedecorate] {};
+%% \node [below] at (2.south) {$2$};
+%% \node (1) at (1,2.5) [nodedecorate] {};
+%% \node [above] at (1.north) {$1$};
+%% \node (3) at (5,2.5) [nodedecorate] {};
+%% \node [above] at (3.north) {$3$};
+%% % edges or lines
+%% \path
+%% (0) edge[linedecorate] node[left]{$1$} (1)
+%% (0) edge[linedecorate] node[below]{$4$} (2)
+%% (1) edge[linedecorate] node[right]{$1$} (2)
+%% (1) edge[linedecorate] node[above]{$5$} (3)
+%% (2) edge[linedecorate] node[right]{$3$} (3);
+%% \end{tikzpicture}
+%% \caption{Shortest paths in a weighted graph using the Bellman-Ford
+%%   algorithm.}
+%% \label{fig:graph_algorithms:Bellman_Ford_example}
+%% \end{figure}
+%% %sage: M = matrix([[0,1,4,0],[0,0,1,5],[0,0,0,3],[0,0,0,0]])
+%% %sage: G = Graph(M, format = "weighted_adjacency_matrix")
+%% %sage: G.plot(graph_border=True, edge_labels=True).show()
+
+%% The following example illustrates the case of a negative-weight cycle.
+
+%% \begin{center}
+%% \fontsize{9pt}{9pt}
+%% \selectfont
+%% \tt
+%% \begin{lstlisting}
+%% sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
+%% sage: G = DiGraph(M, format = "weighted_adjacency_matrix")
+%% sage: bellman_ford(G, G.vertices()[0])
+%% ---------------------------------------------------------------------------
+%% ...
+%% ValueError: Graph contains a negative-weight cycle
+%% \end{lstlisting}
+%% \end{center}
+%% %
+%% The plot of this graph is given in
+%% Figure~\ref{fig:graph_algorithms:Bellman_Ford_negative_weights}.
+
+%% \begin{figure}[!htbp]
+%% \centering
+%% \begin{tikzpicture}
+%% [nodedecorate/.style={shape=circle,inner sep=2pt,draw,thick},%
+%%   arrowdecorate/.style={->,>=stealth,thick}]
+%% % nodes or vertices
+%% \node (0) at (5,0) [nodedecorate] {};
+%% \node [below] at (0.south) {$0$};
+%% \node (1) at (1,0) [nodedecorate] {};
+%% \node [below] at (1.south) {$1$};
+%% \node (2) at (4,3) [nodedecorate] {};
+%% \node [above] at (2.north) {$2$};
+%% \node (3) at (0,3) [nodedecorate] {};
+%% \node [above] at (3.north) {$3$};
+%% % edges or lines
+%% \path
+%% (0) edge[arrowdecorate,bend left=15] node[below]{$1$} (1)
+%% (1) edge[arrowdecorate,bend left=10] node[above]{$1$} (0)
+%% (1) edge[arrowdecorate,bend left=15] node[left]{$-4$} (2)
+%% (1) edge[arrowdecorate] node[left]{$1$} (3)
+%% (2) edge[arrowdecorate] node[right]{$1$} (0)
+%% (2) edge[arrowdecorate,bend left=15] node[right]{$1$} (1)
+%% (3) edge[arrowdecorate] node[above]{$1$} (2);
+%% \end{tikzpicture}
+%% \caption{Searching a digraph with negative weight using the
+%%   Bellman-Ford algorithm.}
+%% \label{fig:graph_algorithms:Bellman_Ford_negative_weights}
+%% \end{figure}
+%% %sage: M = matrix([[0,1,0,0],[1,0,-4,1],[1,1,0,0],[0,0,1,0]])
+%% %sage: G = Graph(M, format = "weighted_adjacency_matrix")
+%% %sage: G.plot(graph_border=True, edge_labels=True).show()
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Floyd-Roy-Warshall algorithm}
+\label{sec:graph_algorithms:Floyd_Roy_Warshall_algorithm}
+\index{Floyd-Roy-Warshall algorithm}
+
+\begin{quote}
+\footnotesize
+The shortest distance between two points is not a very interesting
+journey. \\
+\noindent
+--- R. Goldberg\index{Goldberg, R.}
+\end{quote}
+
+\noindent
+Let $D$ be a weighted digraph of order $n$ and size $m$.
+Dijkstra's\index{Dijkstra!algorithm}
+Algorithm~\ref{alg:graph_algorithms:dijkstra_general} and the
+Bellman-Ford\index{Bellman-Ford algorithm}
+Algorithm~\ref{alg:graph_algorithms:Bellman_Ford} can be used to
+determine shortest paths\index{path!shortest} from a single source
+vertex to all other vertices of $D$. To determine a shortest path
+between each pair of distinct vertices in $D$, we repeatedly apply
+either of these algorithms to each vertex of $D$. Such repeated
+application of Dijkstra's and the Bellman-Ford algorithms results in
+algorithms that run in time $O(n^3)$ and $O(n^2m)$, respectively.
+
+The\index{Floyd-Roy-Warshall algorithm}
+\emph{Floyd-Roy-Warshall algorithm}~(FRW)\index{FRW}, or the
+Floyd-Warshall algorithm, is an algorithm for finding shortest
+paths\index{path!shortest} in a weighted, directed graph. Like the
+Bellman-Ford algorithm\index{Bellman-Ford algorithm}, it allows for
+negative edge weights\index{weight!negative} and detects a negative
+weight cycle\index{cycle!negative} if one exists. Assuming that there
+are no negative weight cycles, a single execution of the
+FRW\index{FRW} algorithm will find the shortest paths between all
+pairs of vertices. It was discovered independently by Bernard
+Roy~\cite{Roy1959}\index{Roy, Bernard} in~1959, Robert
+Floyd~\cite{Floyd1962}\index{Floyd, Robert} in~1962, and by Stephen
+Warshall~\cite{Warshall1962}\index{Warshall, Stephen} in~1962.
+
+In some sense, the FRW\index{FRW} algorithm is an example of
+\emph{dynamic programming}\index{dynamic programming}, which allows
+one to break the computation into simpler steps using some sort of
+recursive\index{recursion} procedure. The rough idea is as
+follows. Temporarily label the vertices of a weighted digraph $G$ as
+$V = \{1,2,\dots,n\}$ with $n = |V(G)|$. Let $W = [w(i,j)]$ be the
+weight matrix of $G$ where
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:Floyd_Roy_Warshall_weight_matrix}
+w(i,j)
+=
+\begin{cases}
+w(ij), & \text{if $ij \in E(G)$}, \\[4pt]
+0, & \text{if $i = j$}, \\[4pt]
+\infty, & \text{otherwise}.
+\end{cases}
+\end{equation}
+%%
+Let $P_k(i,j)$ be a shortest path\index{path!shortest} from $i$ to $j$
+such that its intermediate vertices are in $\{1, 2, \dots, k\}$. Let
+$D_k(i,j)$ be the weight\index{weight} (or distance\index{distance})
+of $P_k(i,j)$. If no shortest $i$-$j$ paths exist, define
+$P_k(i,j) = \infty$ and $D_k(i,j) = \infty$ for all
+$k \in \{1, 2, \dots, n\}$. If $k = 0$, then $P_0(i,j): i, j$ since no
+intermediate vertices are allowed in the path and hence
+$D_0(i,j) = w(i,j)$. In other words, if $i$ and $j$ are adjacent, a
+shortest $i$-$j$ path is the edge $ij$ itself and the weight of this
+path is simply the weight of $ij$. Now consider $P_k(i,j)$ for
+$k > 0$. Either $P_k(i,j)$ passes through $k$ or it does not. If $k$
+is not on the path $P_k(i,j)$, then the intermediate vertices of
+$P_k(i,j)$ are in  $\{1, 2, \dots, k-1\}$, as are the vertices of
+$P_{k-1}(i,j)$. In case $P_k(i,j)$ contains the vertex $k$, then
+$P_k(i,j)$ traverses $k$ exactly once by the definition of path. The
+$i$-$k$ subpath in $P_k(i,j)$ is a shortest $i$-$k$ path whose
+intermediate vertices are drawn from $\{1, 2, \dots, k-1\}$, which is
+also the set of intermediate vertices for the $k$-$j$ subpath in
+$P_k(i,j)$. That is, to obtain $P_k(i,j)$, we take the union of the
+paths $P_{k-1}(i,k)$ and $P_{k-1}(k,j)$. We compute the weight
+$D_k(i,j)$ of $P_k(i,j)$ using the expression
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:Floyd_Roy_Warshall:shortest_path_weights}
+D_k(i,j)
+=
+\begin{cases}
+w(i,j), & \text{if $k = 0$}, \\[4pt]
+\min\{D_{k-1}(i,j),\, D_{k-1}(i,k) + D_{k-1}(k,j)\}, & \text{if $k > 0$}.
+\end{cases}
+\end{equation}
+
+The key to the Floyd-Roy-Warshall
+algorithm\index{Floyd-Roy-Warshall algorithm} lies in exploiting
+expression~\eqref{eqn:graph_algorithms:Floyd_Roy_Warshall:shortest_path_weights}.
+If $n = |V|$, then this is a $O(n^3)$ time algorithm. For
+comparison, the Bellman-Ford algorithm\index{Bellman-Ford algorithm}
+has complexity $O(|V| \cdot |E|)$, which is $O(n^3)$ time for dense
+graphs\index{graph!dense}. However, Bellman-Ford only yields the
+shortest paths emanating from a \emph{single} vertex. To achieve
+comparable output, we would need to iterate Bellman-Ford over
+\emph{all} vertices, which would be an  $O(n^4)$ time algorithm for
+dense graphs\index{graph!dense}. Except possibly for sparse
+graphs\index{graph!sparse},
+Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm} is better than
+an iterated implementation of Bellman-Ford. Note that
+$P_k(i,k) = P_{k-1}(i,k)$ and $P_k(k,i) = P_{k-1}(k,i)$, consequently
+$D_k(i,k) = D_{k-1}(i,k)$ and $D_k(k,i) = D_{k-1}(k,i)$. This
+observation allows us to replace $P_k(i,j)$ with $P(i,j)$ for
+$k = 1, 2, \dots, n$. The final results of $P(i,j)$ and $D(i,k)$ are
+the same as $P_n(i,j)$ and $D_n(i,j)$,
+respectively. Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}
+summarizes the above discussion into an algorithmic presentation.
+
+\begin{algorithm}[!htbp]
+\index{Floyd-Roy-Warshall algorithm}
+\input{algorithm/graph-algorithms/Floy-Roy-Warshall.tex}
+\caption{The Floyd-Roy-Warshall algorithm for all-pairs shortest paths.}
+\label{alg:graph_algorithms:Floy_Roy_Warshall}
+\end{algorithm}
+
+Like the Bellman-Ford algorithm\index{Bellman-Ford algorithm}, the
+Floyd-Roy-Warshall algorithm\index{Floyd-Roy-Warshall algorithm} can
+also detect the presence of negative weight
+cycles\index{cycle!negative}. If $G$ is a weighted digraph without
+self-loops,
+by~\eqref{eqn:graph_algorithms:Floyd_Roy_Warshall_weight_matrix} we
+have $D(i,i) = 0$ for $i = 1, 2, \dots, n$. Any path $p$ starting and
+ending at $i$ could only improve upon the initial weight of $0$ if the
+weight sum of $p$ is less than zero, i.e. a negative weight
+cycle\index{cycle!negative}. Upon termination of
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}, if $D(i,i) <
+0$, we conclude that there is a path starting and ending at $i$ whose
+weight sum is negative.
+
+Here is an implementation in Sage.
+%%
+\begin{lstlisting}
+def floyd_roy_warshall(A):
+    """
+    Shortest paths
+
+    INPUT:
+
+    - A -- weighted adjacency matrix
+
+    OUTPUT:
+
+    - dist -- a matrix of distances of shortest paths.
+    - paths -- a matrix of shortest paths.
+    """
+    G = Graph(A, format="weighted_adjacency_matrix")
+    V = G.vertices()
+    E = [(e[0],e[1]) for e in G.edges()]
+    n = len(V)
+    dist = [[0]*n for i in range(n)]
+    paths = [[-1]*n for i in range(n)]
+    # initialization step
+    for i in range(n):
+        for j in range(n):
+            if (i,j) in E:
+                paths[i][j] = j
+            if i == j:
+                dist[i][j] = 0
+            elif A[i][j]<>0:
+                dist[i][j] = A[i][j]
+            else:
+                dist[i][j] = infinity
+    # iteratively finding the shortest path
+    for j in range(n):
+        for i in range(n):
+            if i <> j:
+                for k in range(n):
+                    if k <> j:
+                        if dist[i][k]>dist[i][j]+dist[j][k]:
+                            paths[i][k] = V[j]
+                        dist[i][k] = min(dist[i][k], dist[i][j] +dist[j][k])
+    for i in range(n):
+        if dist[i][i] < 0:
+            raise ValueError, "A negative edge weight cycle exists."
+    return dist, matrix(paths)
+\end{lstlisting}
+
+Here are some examples.
+
+%
+%\begin{center}
+%\fontsize{9pt}{9pt}
+%\selectfont
+%\tt
+%\begin{lstlisting}
+%
+%        sage: A = matrix([[0,1,2,3],[0,0,2,1],[20,10,0,3],[11,12,13,0]]); A
+%        sage: floyd_roy_warshall(A)
+%        ([[0, 1, 2, 2], [12, 0, 2, 1], [14, 10, 0, 3], [11, 12, 13, 0]],
+%          [-1  1  2  1]
+%          [ 3 -1  2  3]
+%          [ 3 -1 -1  3]
+%          [-1 -1 -1 -1])
+%
+%\end{lstlisting}
+%\end{center}
+%
+
+%
+%\begin{center}
+%\fontsize{9pt}{9pt}
+%\selectfont
+%\tt
+%\begin{lstlisting}
+%
+%        sage: A = matrix([[0,1,2,4],[0,0,2,1],[0,0,0,5],[0,0,0,0]])
+%        sage: floyd_roy_warshall(A)
+%        ([[0, 1, 2, 2], [+Infinity, 0, 2, 1], [+Infinity, +Infinity, 0, 5],
+%          [+Infinity, +Infinity, +Infinity, 0]],
+%          [-1  1  2  1]
+%          [-1 -1  2  3]
+%          [-1 -1 -1  3]
+%          [-1 -1 -1 -1])
+%
+%\end{lstlisting}
+%\end{center}
+%
+
+\begin{lstlisting}
+sage: A = matrix([[0,1,2,3], [0,0,2,1], [-5,0,0,3], [1,0,1,0]]); A
+sage: floyd_roy_warshall(A)
+Traceback (click to the left of this block for traceback)
+...
+ValueError: A negative edge weight cycle exists.
+\end{lstlisting}
+
+The plot of this weighted digraph with four vertices appears in
+Figure~\ref{fig:graph_algorithms:Floyd_Roy_Warshall_demo}.
+
+\begin{figure}[!htbp]
+\centering
+\index{Floyd-Roy-Warshall algorithm}
+\includegraphics{image/graph-algorithms/Floyd-Roy-Warshall-demo}
+\caption{Demonstrating the Floyd-Roy-Warshall algorithm.}
+\label{fig:graph_algorithms:Floyd_Roy_Warshall_demo}
+\end{figure}
+%sage: A = matrix([[0,1,2,3],[0,0,2,1],[-5,0,0,3],[1,0,1,0]])
+%sage: D = DiGraph(A, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
+
+\begin{lstlisting}
+sage: A = matrix([[0,1,2,3], [0,0,2,1], [-1/2,0,0,3], [1,0,1,0]]); A
+sage: floyd_roy_warshall(A)
+([[0, 1, 2, 2], [3/2, 0, 2, 1], [-1/2, 1/2, 0, 3/2], [1/2, 3/2, 1, 0]],
+  [-1  1  2  1]
+  [ 2 -1  2  3]
+  [-1  0 -1  1]
+  [ 2  2 -1 -1])
+\end{lstlisting}
+
+The plot of this weighted digraph with four vertices appears in
+Figure~\ref{fig:graph_algorithms:another_Floyd_Roy_Warshall_demo}.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics{image/graph-algorithms/another-Floyd-Roy-Warshall-demo}
+\caption{Another demonstration of the Floyd-Roy-Warshall algorithm.}
+\label{fig:graph_algorithms:another_Floyd_Roy_Warshall_demo}
+\end{figure}
+%sage: A = matrix([[0,1,2,3],[0,0,2,1],[-1/2,0,0,3],[1,0,1,0]])
+%sage: D = DiGraph(A, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics{image/graph-algorithms/trimethylcyclobutane}
+\caption{Molecular graph of 1,1,3-trimethylcyclobutane.}
+\label{fig:graph_algorithms:trimethylcyclobutane}
+\end{figure}
+
+\begin{example}
+Section~\ref{sec:introduction:common_applications} briefly presented
+the concept of molecular graphs in chemistry. The
+Wiener\index{Wiener!number} number of a
+molecular\index{molecular graph} graph was first published in~1947 by
+Harold Wiener\index{Wiener!Harold}~\cite{Wiener1947} who used it in
+chemistry\index{chemistry} to study properties of alkanes. Other
+applications~\cite{GutmanEtAl1993} of the Wiener number to chemistry
+are now known. If $G = (V,E)$ is a connected graph with vertex set
+$V = \{v_1, v_2, \dots, v_n\}$, then the Wiener number $W$ of $G$ is
+defined by
+%%
+\begin{equation}
+\label{eqn:graph_algorithms:Wiener_number}
+W(G)
+=
+\sum_{i < j} d(v_i, v_j)
+\end{equation}
+%%
+where $d(v_i, v_j)$ is the distance from $v_i$ to $v_j$. What is the
+Wiener number of the molecular graph in
+Figure~\ref{fig:graph_algorithms:trimethylcyclobutane}?
+\end{example}
+
+\begin{proof}[Solution]
+Consider the molecular graph in
+Figure~\ref{fig:graph_algorithms:trimethylcyclobutane} as directed
+with unit weight. To compute the Wiener number of this graph, use the
+Floyd-Roy-Warshall algorithm to obtain a distance matrix
+$D = [d_{i,j}]$, where $d_{i,j}$ is the distance from $v_i$ to $v_j$,
+and apply the
+definition~\eqref{eqn:graph_algorithms:Wiener_number}. The distance
+matrix resulting from the Floyd-Roy-Warshall algorithm is
+\[
+M
+=
+\begin{bmatrix}
+0 & 2 & 1 & 2 & 3 & 2 & 4 \\
+2 & 0 & 1 & 2 & 3 & 2 & 4 \\
+1 & 1 & 0 & 1 & 2 & 1 & 3 \\
+2 & 2 & 1 & 0 & 1 & 2 & 2 \\
+3 & 3 & 2 & 1 & 0 & 1 & 1 \\
+2 & 2 & 1 & 2 & 1 & 0 & 2 \\
+4 & 4 & 3 & 2 & 1 & 2 & 0
+\end{bmatrix}.
+\]
+Sum all entries in the upper (or lower) triangular of $M$ to obtain
+the Wiener number $W = 42$. Using Sage, we have
+%%
+\begin{lstlisting}
+sage: G = Graph({1:[3], 2:[3], 3:[4,6], 4:[5], 6:[5], 5:[7]})
+sage: D = G.shortest_path_all_pairs()[0]
+sage: M = [D[i][j] for i in D for j in D[i]]
+sage: M = matrix(M, nrows=7, ncols=7)
+sage: W = 0
+sage: for i in range(M.nrows() - 1):
+...       for j in range(i+1, M.ncols()):
+...           W += M[i,j]
+sage: W
+42
+\end{lstlisting}
+%%
+which verifies our computation above. See
+Gutman~et~al.~\cite{GutmanEtAl1993} for a survey of some results
+concerning the Wiener number.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Transitive closure}
+\index{transitive closure}
+
+Consider a digraph $G = (V, E)$ of order $n = |V|$. The
+\emph{transitive closure}\index{transitive closure} of $G$ is defined
+as the digraph $G^* = (V, E^*)$ having the same vertex set as
+$G$. However, the edge set $E^*$ of $G^*$ consists of all edges $uv$
+such that there is a $u$-$v$ path in $G$ and $uv \notin E$. The
+transitive closure $G^*$ answers an important question about $G$: If
+$u$ and $v$ are two distinct vertices of $G$, are they connected by a
+path with length $\geq 1$?
+
+To compute the transitive closure of $G$, we let each edge of $G$ be
+of unit weight and apply the
+Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm}
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall} on $G$. By
+Proposition~\ref{prop:introduction:any_path_has_length_at_most_n_minus_1},
+for any $i$-$j$ path in $G$ we have $D[i,j] < n$, and if there are no
+paths from $i$ to $j$ in $G$, we have $D[i,j] = \infty$. This
+procedure for computing transitive closure runs in time $O(n^3)$.
+
+Modifying the Floyd-Roy-Warshall
+algorithm\index{Floyd-Roy-Warshall algorithm} slightly, we obtain an
+algorithm for computing transitive closure\index{transitive closure}
+that, in practice, is more efficient than
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall} in terms of
+time and space. Instead of using the operations $\min$ and $+$ as is
+the case in the Floyd-Roy-Warshall
+algorithm\index{Floyd-Roy-Warshall algorithm}, we replace these
+operations with the logical operations $\vee$~(logical \OR) and
+$\wedge$~(logical \AND), respectively. For $i,j,k = 1, 2, \dots, n$,
+define $T_k(i,j) = 1$ if there is an $i$-$j$ path in $G$ with all
+intermediate vertices belonging to $\{1, 2, \dots, k\}$, and
+$T_k(i,j) = 0$ otherwise. Thus, the edge $ij$ belongs to the
+transitive closure $G^*$ if and only if $T_k(i,j) = 1$. The definition
+of $T_k(i,j)$ can be cast in the form of a recursive definition as
+follows. For $k = 0$, we have
+\[
+T_0(i,j)
+=
+\begin{cases}
+0, & \text{if $i \neq j$ and $ij \notin E$}, \\[4pt]
+1, & \text{if $i = j$ or $ij \in E$}
+\end{cases}
+\]
+and for $k > 0$, we have
+\[
+T_k(i,j)
+=
+T_{k-1}(i,j) \vee \big( T_{k-1}(i,k) \wedge T_{k-1}(k,j) \big).
+\]
+We need not use the subscript $k$ at all and instead let $T$ be a
+boolean matrix such that $T[i,j] = 1$ if and only if there is an
+$i$-$j$ path in $G$, and $T[i,j] = 0$ otherwise. Using the above
+notations, the Floyd-Roy-Warshall
+algorithm\index{Floyd-Roy-Warshall algorithm} is translated to
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall:transitive_closure}
+for obtaining the boolean matrix $T$. We can then use $T$ and the
+definition of transitive closure\index{transitive closure} to obtain
+the edge set $E^*$ in the transitive closure $G^* = (V, E^*)$ of
+$G = (V, E)$.
+
+A more efficient transitive closure algorithm can be found in the PhD
+thesis of Esko Nuutila~\cite{Nuutila1995}\index{Nuutila, Esko}. See
+also the method of four Russians~\cite{AhoEtAl1974,ArlazarovEtAl1970}. The
+transitive closure\index{transitive closure} algorithm as presented in
+Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall:transitive_closure}
+is due to Stephen
+Warshall~\cite{Warshall1962}\index{Warshall, Stephen}. It is a special
+case of a more general algorithm in automata
+theory\index{automata theory} due to Stephen
+Kleene~\cite{Kleene1956}\index{Kleene!Stephen}, called Kleene's
+algorithm\index{Kleene!algorithm}.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/Floy-Roy-Warshall-transitive-closure.tex}
+\caption{Variant of the Floyd-Roy-Warshall algorithm for transitive closure.}
+\label{alg:graph_algorithms:Floy_Roy_Warshall:transitive_closure}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Johnson's algorithm}
+\index{Johnson!algorithm}
+
+\begin{quote}
+\footnotesize
+The shortest distance between two points is under construction. \\
+\noindent
+--- Noelie Altito\index{Altito, Noelie}
+\end{quote}
+
+\noindent
+Let $G = (V,E)$ be a sparse\index{graph!sparse} digraph with edge
+weights but no negative cycles\index{cycle!negative}.
+\emph{Johnson's algorithm}\index{Johnson!algorithm}~\cite{Johnson1977}
+finds a shortest path between each pair of vertices in $G$. First
+published in~1977 by Donald B. Johnson\index{Johnson!Donald B.}, the
+main insight of Johnson's algorithm\index{Johnson!algorithm} is to
+combine the technique of edge reweighting\index{weight!reweight} with the
+Bellman-Ford\index{Bellman-Ford algorithm} and
+Dijkstra's\index{Dijkstra!algorithm} algorithms. The Bellman-Ford
+algorithm is first used to ensure that $G$ has no negative
+cycles\index{cycle!negative}. Next, we reweight\index{weight!reweight} edges
+in such a manner as to preserve shortest
+paths\index{path!shortest}. The final stage makes use of Dijkstra's
+algorithm for computing shortest paths between all vertex
+pairs. Pseudocode for Johnson's algorithm is presented in
+Algorithm~\ref{alg:graph_algorithms:Johnson_algorithm}. With a
+Fibonacci heap\index{heap!Fibonacci} implementation of the
+minimum-priority queue\index{queue!minimum-priority}, the time
+complexity for sparse graphs\index{graph!sparse} is
+$O(|V|^2 \log |V| + |V| \cdot |E|)$, where $n = |V|$ is the number of
+vertices of the original graph $G$.
+
+To prove the correctness of
+Algorithm~\ref{alg:graph_algorithms:Johnson_algorithm}, we need to
+show that the new set of edge weights produced by $\hat{w}$ must
+satisfy two properties:
+%%
+\begin{enumerate}
+\item The reweighted\index{weight!reweight} edges preserve shortest
+  paths. That is, let $p$ be a $u$-$v$ path for $u,v \in V$. Then $p$
+  is a shortest weighted path\index{path!weighted}\index{path!shortest}
+  using weight function $w$ if and only if $p$ is also a shortest
+  weighted path using weight function $\hat{w}$.
+
+\item The reweight function $\hat{w}$ produces nonnegative
+  weights\index{weight!nonnegative}. In other words, if $u,v \in V$
+  then $\hat{w}(uv) \geq 0$.
+\end{enumerate}
+%%
+Both of these properties are proved in
+Lemma~\ref{lem:graph_algorithms:reweighting_preserves_shortest_paths}.
+
+\begin{algorithm}[!htbp]
+\index{Bellman-Ford algorithm}
+\index{Dijkstra!algorithm}
+\index{Johnson!algorithm}
+\index{graph!sparse}
+\input{algorithm/graph-algorithms/Johnson-algorithm.tex}
+\caption{Johnson's algorithm for sparse graphs.}
+\label{alg:graph_algorithms:Johnson_algorithm}
+\end{algorithm}
+
+\begin{lemma}
+\label{lem:graph_algorithms:reweighting_preserves_shortest_paths}
+\textbf{Reweighting preserves shortest paths.}\index{weight!reweight}
+Let $G = (V,E)$ be a weighted digraph having weight function
+$w: E \to \R$ and let $h: V \to \R$ be a mapping of vertices to real
+numbers. Let $\hat{w}$ be another weight function for $G$ such that
+\[
+\hat{w}(uv)
+=
+w(uv) + h(u) - h(v)
+\]
+for all $uv \in E$. Suppose $p: v_0, v_1, \dots, v_k$ is any path in
+$G$. Then we have the following results.
+%%
+\begin{enumerate}
+\item The path $p$ is a shortest $v_0$-$v_k$ path with weight
+  function\index{weight!function} $w$ if and only if it is a shortest
+  $v_0$-$v_k$ path with weight function $\hat{w}$.
+
+\item The graph $G$ has a negative cycle\index{cycle!negative} using
+  weight function $w$ if and only if $G$ has a negative cycle using
+  $\hat{w}$.
+
+\item If $G$ has no negative cycles\index{cycle!negative}, then
+  $\hat{w}(uv) \geq 0$ for all $uv \in E$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Write $\delta$ and $\hat{\delta}$ for the shortest path weights
+derived from $w$ and $\hat{w}$, respectively. To prove part~1, we need
+to show that $w(p) = \delta(v_0, v_k)$ if and only if
+$\hat{w}(p) = \hat{\delta}(v_0, v_k)$. First, note that any
+$v_0$-$v_k$ path $p$ satisfies $\hat{w}(p) = w(p) + h(v_0) - h(v_k)$
+because
+%%
+\begin{align*}
+\hat{w}(p)
+&=
+\sum_{i=1}^k \hat{w}(v_{i-1} v_i) \\
+&=
+\sum_{i=1}^k \big(w(v_{i-1} v_i) + h(v_{i-1}) - h(v_i)\big) \\
+&=
+\sum_{i=1}^k w(v_{i-1} v_i)
++
+\sum_{i=1}^k \big(h(v_{i-1}) - h(v_i)\big) \\
+&=
+\sum_{i=1}^k w(v_{i-1} v_i) + h(v_0) - h(v_k) \\
+&=
+w(p) + h(v_0) - h(v_k).
+\end{align*}
+%%
+Any $v_0$-$v_k$ path shorter than $p$ and using weight function $w$ is
+also shorter using $\hat{w}$. Therefore, $w(p) = \delta(v_0, v_k)$ if
+and only if $\hat{w}(p) = \hat{\delta}(v_0, v_k)$.
+
+To prove part~2, consider any cycle\index{cycle}
+$c: v_0, v_1, \dots, v_k$ where $v_0 = v_k$. Using the proof of
+part~1, we have
+%%
+\begin{align*}
+\hat{w}(c)
+&=
+w(c) + h(v_0) - h(v_k) \\
+&=
+w(c)
+\end{align*}
+%%
+thus showing that $c$ is a negative cycle using $w$ if and only if it
+is a negative cycle using $\hat{w}$.
+
+To prove part~3, we construct a new graph $G' = (V', E')$ as
+follows. Consider a vertex $s \notin V$ and let $V' = V \cup \{s\}$
+and $E' = E \cup \{sv \mid v \in V\}$. Extend the weight function $w$
+to include $w(sv) = 0$ for all $v \in V$. By construction, $s$ has no
+incoming edges and any path in $G'$ that contains $s$ has $s$ as the
+source\index{vertex!source} vertex. Thus $G'$ has no
+negative\index{cycle!negative} cycles if and only if $G$ has no
+negative cycles. Define the function $h: V \to \R$ by
+$v \mapsto \delta(s,v)$ with domain $V'$. By the triangle
+inequality\index{triangle inequality}~(see
+Lemma~\ref{lem:graph_algorithms:path_distance_metric_function}),
+\[
+\delta(s,u) + w(uv) \geq \delta(s,v)
+\quad
+\iff
+\quad
+h(u) + w(uv) \geq h(v)
+\]
+thereby showing that $\hat{w}(uv) = w(uv) + h(u) - h(v) \geq 0$.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problems}
+
+\begin{quote}
+\footnotesize
+I believe that a scientist looking at nonscientific problems is just
+as dumb as the next guy. \\
+\noindent
+--- Richard Feynman
+\end{quote}
+
+\begin{problem}
+\item The Euclidean algorithm is one of the oldest known
+  algorithms. Given two positive integers $a$ and $b$ with $a \geq b$,
+  let $a \bmod b$ be the remainder obtained upon dividing $a$ by $b$.
+  The Euclidean algorithm determines the greatest common divisor
+  $\gcd(a,b)$ of $a$ and $b$. The procedure is summarized in
+  Algorithm~\ref{alg:graph_algorithms:Euclidean_algorithm}. Refer to
+  Chabert~\cite{Chabert1999} for a history of algorithms from ancient
+  to modern times.
+  %%
+  \begin{enumerate}[(a)]
+  \item Implement
+    Algorithm~\ref{alg:graph_algorithms:Euclidean_algorithm} in Sage
+    and use your implementation to compute the greatest common
+    divisors of various pairs of integers. Use the built-in Sage
+    command \verb!gcd! to verify your answer.
+
+  \item Modify
+    Algorithm~\ref{alg:graph_algorithms:Euclidean_algorithm} to
+    compute the greatest common divisor of any pair of integers.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\index{Euclidean algorithm}
+\input{algorithm/graph-algorithms/Euclidean-algorithm.tex}
+\caption{The Euclidean algorithm.}
+\label{alg:graph_algorithms:Euclidean_algorithm}
+\end{algorithm}
+
+\item\label{prob:graph_algorithms:Horner_method} Given a polynomial
+  $p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$ of degree
+  $n$, we can use Horner's\index{Horner!W. G.}
+  method~\cite{Horner1819} to efficiently evaluate $p$ at a specific
+  value $x = x_0$. Horner's method evaluates $p(x)$ by expressing the
+  polynomial as
+  \[
+  p(x)
+  =
+  \sum_{i=0}^n a_i x^i
+  =
+  (\cdots (a_n x + a_{n-1}) x + \cdots)x + a_0
+  \]
+  to obtain Algorithm~\ref{alg:graph_algorithms:Horner_method}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Compare the runtime of polynomial evaluation using
+    equation~\eqref{eqn:graph_algorithms:big_endian_binary_to_integer}
+    and Horner's method.
+
+  \item Let $v$ be a bit vector read using big-endian order. Write a
+    Sage function that uses Horner's method to compute the integer
+    representation of $v$.
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:Horner_method} to
+    evaluate the integer representation of a bit vector $v$ read using
+    little-endian order. Hence, write a Sage function to convert $v$
+    to its integer representation.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\index{Horner!method}
+\index{Horner!W. G.}
+\input{algorithm/graph-algorithms/Horner-method.tex}
+\caption{Polynomial evaluation using Horner's method.}
+\label{alg:graph_algorithms:Horner_method}
+\end{algorithm}
+
+\item Let $G = (V, E)$ be an undirected graph, let $s \in V$, and $D$
+  is the list of distances resulting from running
+  Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}
+  with $G$ and $s$ as input. Show that $G$ is connected if and only if
+  $D[v]$ is defined for each $v \in V$.
+
+\item Show that the worst-case time complexity of depth-first search
+  Algorithm~\ref{alg:graph_algorithms:depth_first_search_template} is
+  $O(|V| + |E|)$.
+
+\item Let $D$ be the list of distances returned by
+  Algorithm~\ref{alg:graph_algorithms:depth_first_search_template},
+  let $s$ be a starting vertex, and let $v$ be a vertex such that
+  $D[v] \neq \infty$. Show that $D[v]$ is the length of any shortest
+  path from $s$ to $v$.
+
+\item Consider the graph in
+  Figure~\ref{fig:graph_algorithms:Dijkstra_algorithm_digraph} as
+  undirected. Run this undirected version through Dijkstra's algorithm
+  with starting vertex $v_1$.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics{image/graph-algorithms/Dijkstra-directed-house-graph}
+\caption{Searching a directed house graph using Dijkstra's algorithm.}
+\label{fig:graph_algorithms:Dijkstra_directed_house_graph}
+\end{figure}
+%sage: M = matrix([[0,1,3,0,6],[0,0,1,3,0],[1,2,0,1,0],[3,0,0,0,2],[0,0,0,1,0]])
+%sage: D = DiGraph(M, format="weighted_adjacency_matrix")
+%sage: D.plot(edge_labels=True, graph_border=True).show()
+
+\item Consider the graph in
+  Figure~\ref{fig:graph_algorithms:Dijkstra_directed_house_graph}. Choose
+  any vertex as a starting vertex and run Dijkstra's algorithm over
+  it. Now consider the undirected version of that digraph and repeat
+  the exercise.
+
+\item For each vertex $v$ of the graph in
+  Figure~\ref{fig:graph_algorithms:Dijkstra_directed_house_graph}, run
+  breadth-first\index{breadth-first search} search over that graph
+  with $v$ as the starting vertex. Repeat the exercise for
+  depth-first search\index{depth-first search}. Compare the graphs
+  resulting from the above exercises.
+
+\item A list data structure can be used to manage vertices and
+  edges. If $L$ is a nonempty list of vertices of a graph, we may want
+  to know whether the graph contains a particular vertex. We could
+  search the list $L$, returning \texttt{True} if $L$ contains the
+  vertex in question and \texttt{False} otherwise. Linear search is a
+  simple searching algorithm. Given an object $E$ for which we want to
+  search, we consider each element $e$ of $L$ in turn and compare $E$
+  to $e$. If at any point during our search we found a match, we halt
+  the algorithm and output an affirmative answer. Otherwise, we have
+  scanned through all elements of $L$ and each of those elements do
+  not match $E$. In this case, linear search reports that $E$ is not
+  in $L$. Our discussion is summarized in
+  Algorithm~\ref{alg:graph_algorithms:linear_search}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Implement Algorithm~\ref{alg:graph_algorithms:linear_search}
+    in Sage and test your implementation using the graphs presented in
+    the figures of this chapter.
+
+  \item What is the maximum number of comparisons during the running
+    of Algorithm~\ref{alg:graph_algorithms:linear_search}? What is the
+    average number of comparisons?
+
+  \item Why must the input list $L$ be nonempty?
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/linear-search.tex}
+\caption{Linear search for lists.}
+\label{alg:graph_algorithms:linear_search}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/binary-search.tex}
+\caption{Binary search for lists of positive integers.}
+\label{alg:graph_algorithms:binary_search}
+\end{algorithm}
+
+\item\label{prob:graph_algorithms:binary_search}
+  Binary\index{binary search} search is a much faster searching
+  algorithm than linear\index{linear search} search. The
+  binary\index{binary search} search algorithm assumes that its input
+  list is ordered in some manner. For simplicity, we assume that the
+  input list $L$ consists of positive integers. The main idea of
+  binary\index{binary search} search is to partition $L$ into two
+  halves: the left half and the right half. Our task now is to
+  determine whether the object $E$ of interest is in the left half or
+  the right half, and apply binary search recursively to the half in
+  which $E$ is located.
+  Algorithm~\ref{alg:graph_algorithms:binary_search} provides
+  pseudocode of our discussion of binary\index{binary search} search.
+  %%
+  \begin{enumerate}[(a)]
+  \item Implement Algorithm~\ref{alg:graph_algorithms:binary_search}
+    in Sage and test your implementation using the graphs presented in
+    the figures of this chapter.
+
+  \item What is the worst case runtime of
+    Algorithm~\ref{alg:graph_algorithms:binary_search}? How does this
+    compare to the worst case runtime of linear search?
+
+  \item Why must the input list $L$ be sorted in nondecreasing order?
+    Would Algorithm~\ref{alg:graph_algorithms:binary_search} work if
+    $L$ is sorted in nonincreasing order? If not, modify
+    Algorithm~\ref{alg:graph_algorithms:binary_search} so that it
+    works with an input list that is sorted in nonincreasing order.
+
+  \item Line~\ref{alg:binary_search:mid_floor} of
+    Algorithm~\ref{alg:graph_algorithms:binary_search} uses the floor
+    function to compute the index of the middle value. Would binary
+    search still work if we use the ceiling function instead of the
+    floor function?
+
+  \item An improvement on the time complexity of
+    binary\index{binary search} search is to not blindly use the
+    middle value of the interval of interest, but to guess more
+    precisely where the target falls within this interval.
+    Interpolation\index{interpolation search} search uses this
+    heuristic to improve on the runtime of binary search. Provide an
+    algorithm for interpolation\index{interpolation search} search,
+    analyze its worst-case runtime, and compare its theoretical
+    runtime efficiency with that of binary\index{binary search}
+    search~(see pages~419--420 in
+    Knuth\index{Knuth!Donald E.}~\cite{Knuth1998c} and pages~201--202
+    in Sedgewick\index{Sedgewick, Robert}~\cite{Sedgewick1990}).
+  \end{enumerate}
+
+\item Let $G$ be a simple undirected graph having distance matrix
+  $D = [d(v_i, v_j)]$, where $d(v_i, v_j) \in \R$ denotes the shortest
+  distance from $v_i \in V(G)$ to $v_j \in V(G)$. If $v_i = v_j$, we
+  set $d(v_i, v_j) = 0$. For each pair of distinct vertices
+  $(v_i, v_j)$, we have $d(v_i, v_j) = d(v_j, v_i)$. The $i$-$j$ entry
+  of $D$ is also written as $d_{i,j}$ and denotes the entry in row $i$
+  and column $j$.
+  %%
+  \begin{enumerate}[(a)]
+  \item The \emph{total distance}\index{distance!total}
+    $\totalDist(u)$\index{$\totalDist$} of a fixed vertex $u \in V(G)$
+    is the sum of distances from $u$ to each vertex in $G$:
+    \[
+    \totalDist(u)
+    =
+    \sum_{v \in V(G)} d(u,v).
+    \]
+    If $G$ is connected, $i$ is the row index of vertex $u$ in the
+    distance matrix $D$, and $j$ is the column index of $u$ in $D$,
+    show that the total distance of $u$ is
+    %%
+    \begin{equation}
+    \label{eqn:graph_algorithms:total_distance_vertex}
+    \totalDist(u)
+    =
+    \sum_k d_{i,k}
+    =
+    \sum_k d_{k,j}.
+    \end{equation}
+
+  \item Let the vertices of $G$ be labeled
+    $V = \{v_1, v_2, \dots, v_n\}$, where $n = |V(G)|$ is the order of
+    $G$. The \emph{total distance}\index{distance!total}
+    $\totalDist(G)$ of $G$ is obtained by summing all the
+    $d(v_i, v_j)$ for $i < j$. If $G$ is connected, show that the
+    total distance of $G$ is equal to the sum of all entries in the
+    upper (or lower) triangular of $D$:
+    %%
+    \begin{equation}
+    \label{eqn:graph_algorithms:total_distance_graph}
+    \totalDist(G)
+    =
+    \sum_{i < j} d_{i,j}
+    =
+    \sum_{i > j} d_{i,j}
+    =
+    \frac{1}{2} \left(\sum_{u \in V} \sum_{v \in V} d(u,v)\right).
+    \end{equation}
+    %%
+    Hence show that the total distance of $G$ is equal to its Wiener
+    number:
+    \[
+    \totalDist(G)
+    =
+    W(G).
+    \]
+
+  \item Would
+    equations~\eqref{eqn:graph_algorithms:total_distance_vertex}
+    and~\eqref{eqn:graph_algorithms:total_distance_graph} hold if $G$
+    is not connected or directed?
+  \end{enumerate}
+
+\item The following result is from Yeh and
+  Gutman~\cite{YehGutman1994}. Let $G_1$ and $G_2$ be graphs with
+  orders $n_i = |V(G_i)|$ and sizes $m_i = |E(G_i)|$, respectively.
+  %%
+  \begin{enumerate}[(a)]
+  \item If each of $G_1$ and $G_2$ is connected, show that the Wiener
+    number of the Cartesian product $G_1 \square G_2$ is
+    \[
+    W(G_1 \square G_2)
+    =
+    n_2^2 \cdot W(G_1) + n_1^2 \cdot W(G_2).
+    \]
+
+  \item If $G_1$ and $G_2$ are arbitrary graphs, show that the Wiener
+    number of the join $G_1 + G_2$ is
+    \[
+    W(G_1 + G_2)
+    =
+    n_1^2 - n_1 + n_2^2 - n_2 + n_1 n_2 - m_1 - m_2.
+    \]
+  \end{enumerate}
+
+\item The following results originally appeared in
+  Entringer~et~al.~\cite{EntringerEtAl1976} and independently
+  rediscovered many times since.
+  %%
+  \begin{enumerate}[(a)]
+  \item If $P_n$ is the path graph on $n \geq 0$ vertices, show that
+    the Wiener number of $P_n$ is $W(P_n) = \frac{1}{6} n(n^2 - 1)$.
+
+  \item If $C_n$ is the cycle graph on $n \geq 0$ vertices, show that
+    the Wiener number of $C_n$ is
+    \[
+    W(C_n)
+    =
+    \begin{cases}
+    \frac{1}{8} n(n^2 - 1), & \text{if $n$ is odd,} \\[4pt]
+    \frac{1}{8} n^3, & \text{if $n$ is even.}
+    \end{cases}
+    \]
+
+  \item If $K_n$ is the complete graph on $n$ vertices, show that its
+    Wiener number is $W(K_n) = \frac{1}{2} n(n - 1)$.
+
+  \item Show that the Wiener number of the complete bipartite graph
+    $K_{m,n}$ is
+    \[
+    W(K_{m,n}) = mn + m(m - 1) + n(n - 1).
+    \]
+  \end{enumerate}
+
+\item Consider the world map of major capital cities in
+  Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Run breadth-\index{breadth-first search} and
+    depth-first\index{depth-first search} searches over the graph in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities} and
+    compare your results.
+
+  \item Convert the graph in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities} to a
+    digraph as follows. Let $0 \leq \alpha \leq 1$ be a fixed
+    threshold\index{threshold!probability} probability and let
+    $V = \{v_1, \dots, v_n\}$ be the vertex set of the graph. For each
+    edge $v_i v_j$, let $0 \leq p \leq 1$ be its
+    orientation\index{orientation!probability} probability and define
+    the directedness\index{directedness} $\dir(v_i, v_j)$\index{$\dir$} by
+    \[
+    \dir(v_i, v_j)
+    =
+    \begin{cases}
+    v_i v_j, & \text{if $p \leq \alpha$,} \\[4pt]
+    v_j v_i, & \text{otherwise.}
+    \end{cases}
+    \]
+    That is, $\dir(v_i, v_j)$ takes the endpoints of an undirected
+    edge $v_i v_j$ and returns a directed version of this edge. The
+    result is either the directed edge $v_i v_j$ or the directed edge
+    $v_j v_i$. Use the above procedure to convert the graph of
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities} to a
+    digraph, and run breadth-\index{breadth-first search} and
+    depth-first\index{depth-first search} searches over the resulting
+    digraph.
+
+  \item Table~\ref{tab:graph_algorithms:capital_cities_distance} lists
+    distances in kilometers between the major capital cities shown in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Let
+    those distances be the weights of the edges shown in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Repeatedly
+    run Dijkstra's\index{Dijkstra!algorithm} algorithm over this
+    undirected, weighted graph with each city as the start vertex. Use
+    the procedure from the previous exercise to obtain a directed
+    version of the graph in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities} and
+    repeat the current exercise with the resulting weighted digraph.
+
+  \item Repeat the previous exercise, but use the
+    Bellman-Ford\index{Bellman-Ford algorithm} algorithm instead of
+    Dijkstra's\index{Dijkstra!algorithm} algorithm. Compare the
+    results you obtain using these two different algorithms.
+
+  \item Consider a weighted digraph version of the graph in
+    Figure~\ref{fig:graph_algorithms:worldmap_capital_cities}. Run the
+    Floyd-Roy-Warshall\index{Floyd-Roy-Warshall algorithm} and
+    Johnson's\index{Johnson!algorithm} algorithms over the weighted
+    digraph. Compare the results output by these two algorithms to the
+    results of the previous exercise.
+  \end{enumerate}
+
+\begin{landscape}
+\begin{figure}[!htbp]
+\centering
+\index{Bangkok}\index{Thailand}
+\index{Beijing}\index{China}
+\index{Berlin}\index{Germany}
+\index{Brasilia}\index{Brazil}
+\index{Buenos Aires}\index{Argentina}
+\index{Lima}\index{Peru}
+\index{London}\index{England}
+\index{Madrid}\index{Spain}
+\index{Moscow}\index{Russia}
+\index{New Delhi}\index{India}
+\index{Ottawa}\index{Canada}
+\index{Pretoria}\index{South Africa}
+\index{Sydney}\index{Australia}
+\index{Tokyo}\index{Japan}
+\index{Washington DC}\index{USA}
+\includegraphics{image/graph-algorithms/worldmap-capital-cities}
+\caption{Major capital cities of the world.}
+\label{fig:graph_algorithms:worldmap_capital_cities}
+\end{figure}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}[!htbp]
+\centering
+\index{Bangkok}\index{Thailand}
+\index{Beijing}\index{China}
+\index{Berlin}\index{Germany}
+\index{Brasilia}\index{Brazil}
+\index{Buenos Aires}\index{Argentina}
+\index{Lima}\index{Peru}
+\index{London}\index{England}
+\index{Madrid}\index{Spain}
+\index{Moscow}\index{Russia}
+\index{New Delhi}\index{India}
+\index{Ottawa}\index{Canada}
+\index{Pretoria}\index{South Africa}
+\index{Sydney}\index{Australia}
+\index{Tokyo}\index{Japan}
+\index{Washington DC}\index{USA}
+{\tiny
+\input{data/graph-algorithms/capital-cities-distance.tex}
+}
+\caption{Distances in kilometers between major world capital cities.}
+\label{tab:graph_algorithms:capital_cities_distance}
+\end{table}
+\end{landscape}
+
+\item Various efficient search techniques exist that cater for special
+  situations. Some of these are covered in chapter~6 in
+  Knuth\index{Knuth!Donald E.}~\cite{Knuth1998c} and chapters~14--18 in
+  Sedgewick\index{Sedgewick, Robert}~\cite{Sedgewick1990}. Investigate
+  an algorithm for and time complexity of trie search. Hashing
+  techniques can result in searches that run in $O(1)$
+  time. Furthermore, hashing has important applications outside of the
+  searching problem, a case in point being cryptology. Investigate how
+  hashing can be used to speed up searches. For further information on
+  hashing and its application to cryptology,
+  see\index{van Oorschot, Paul C.}\index{Vanstone, Scott A.}
+  Menezes~et~al.\index{Menezes, Alfred J.}~\cite{MenezesEtAl1996},
+  Stinson\index{Stinson, Douglas R.}~\cite{Stinson2002}, or
+  Trappe\index{Trappe, Wade} and
+  Washington\index{Washington, Lawrence C.}~\cite{TrappeWashington2006}.
+
+\item In addition to searching, there is the related problem of
+  sorting a list according to an ordering relation. If the given list
+  $L = [e_1, e_2, \dots, e_n]$ consists of real numbers, we want to
+  order elements in nondecreasing order.
+  \emph{Bubble sort}\index{bubble sort} is a basic sorting algorithm
+  that can be used to sort a list of real numbers, indeed any
+  collection of objects that can be ordered according to an ordering
+  relation. During each pass through the list $L$ from left to right,
+  we consider $e_i$ and its right neighbor $e_{i+1}$. If
+  $e_i \leq e_{i+1}$, then we move on to consider $e_{i+1}$ and its
+  right neighbor $e_{i+2}$. If $e_i > e_{i+1}$, then we swap these two
+  values around in the list and then move on to consider $e_{i+1}$ and
+  its right neighbor $e_{i+2}$. Each successive pass pushes to the
+  right end an element that is the next largest in comparison to the
+  previous largest element pushed to the right end. Hence the name
+  bubble\index{bubble sort} sort for the algorithm.
+  Algorithm~\ref{alg:graph_algorithms:bubble_sort} summarizes our
+  discussion.
+  %%
+  \begin{algorithm}[!htbp]
+    \input{algorithm/graph-algorithms/bubble-sort.tex}
+    \caption{Bubble sort.}
+    \label{alg:graph_algorithms:bubble_sort}
+  \end{algorithm}
+  %%
+  \begin{enumerate}[(a)]
+  \item Analyze the worst-case runtime of
+    Algorithm~\ref{alg:graph_algorithms:bubble_sort}.
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:bubble_sort} so
+    that it sorts elements in nonincreasing order.
+
+  \item Line~\ref{alg:bubble_sort:swap_values} of
+    Algorithm~\ref{alg:graph_algorithms:bubble_sort} is where elements
+    are actually sorted. Swapping the values of two elements is such a
+    common task that sometimes we want to perform the swap as
+    efficiently as possible, i.e. using as few operations as
+    possible. A common way to swap the values of two elements $a$ and
+    $b$ is to create a temporary placeholder $t$ and realize the swap
+    as presented in
+    Algorithm~\ref{alg:graph_algorithms:swapping_using_temporary_object}.
+    Some programming languages allow for swapping the values of two
+    elements without creating a temporary placeholder for an
+    intermediary value. Investigate how to realize this swapping
+    method using a programming language of your choice.
+    %%
+    \begin{algorithm}[!htbp]
+      \input{algorithm/graph-algorithms/swapping-with-temporary.tex}
+      \caption{Swapping values using a temporary placeholder.}
+      \label{alg:graph_algorithms:swapping_using_temporary_object}
+    \end{algorithm}
+  \end{enumerate}
+
+\item \emph{Selection sort}\index{selection sort} is another simple
+  sorting algorithm that works as follows. Let
+  $L = [e_1, e_2, \dots, e_n]$ be a list of elements that can be
+  ordered according to the relation ``$\leq$'', e.g. the $e_i$ can all
+  be real numbers or integers. On the first scan of $L$ from left to
+  right, among the elements $L[2], \dots, L[n]$ we find the smallest
+  element and exchange it with $L[1]$. On the second scan, we find the
+  smallest element among $L[3], \dots, L[n]$ and exchange that
+  smallest element with $L[2]$. In general, during the $i$-th scan we
+  find the smallest element among $L[i+1], \dots, L[n]$ and exchange
+  that with $L[i]$. At the end of the $i$-th scan, the element $L[i]$
+  is in its final position and would not be processed again. When the
+  index reaches $i = n$, the list would have been sorted in
+  nondecreasing order. The procedure is summarized in
+  Algorithm~\ref{alg:graph_algorithms:selection_sort}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Analyze the worst-case runtime of
+    Algorithm~\ref{alg:graph_algorithms:selection_sort} and compare
+    your result to the worst-case runtime of the
+    bubble\index{bubble sort} sort
+    Algorithm~\ref{alg:graph_algorithms:bubble_sort}.
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:selection_sort} to
+    sort elements in nonincreasing order.
+
+  \item Line~\ref{alg:selection_sort:swap_values} of
+    Algorithm~\ref{alg:graph_algorithms:selection_sort} assumes that
+    among $L[i+1], L[i+2], \dots, L[n]$ there is a smallest element
+    $L[k]$ such that $L[i] > L[k]$, hence we perform the swap. It is
+    possible that $L[i] < L[k]$, obviating the need to carry out the
+    value swapping. Modify
+    Algorithm~\ref{alg:graph_algorithms:selection_sort} to take
+    account of our discussion.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\index{selection sort}
+\input{algorithm/graph-algorithms/selection-sort.tex}
+\caption{Selection sort.}
+\label{alg:graph_algorithms:selection_sort}
+\end{algorithm}
+
+\item In addition to bubble\index{bubble sort} and
+  selection\index{selection sort} sort, other algorithms exist whose
+  runtime is more efficient than these two basic sorting
+  algorithms. Chapter~5 in
+  Knuth\index{Knuth!Donald E.}~\cite{Knuth1998c} describes various
+  efficient sorting techniques. See also chapters~8--13 in
+  Sedgewick\index{Sedgewick, Robert}~\cite{Sedgewick1990}.
+  %%
+  \begin{enumerate}[(a)]
+  \item Investigate and provide pseudocode for
+    insertion\index{insertion sort} sort and compare its runtime
+    efficiency with that of selection\index{selection sort}
+    sort. Compare the similarities and differences between insertion
+    and selection sort.
+
+  \item Shellsort\index{shellsort} is a variation on
+    insertion\index{insertion sort} sort that can speed up the runtime
+    of insertion sort. Describe and provide pseudocode for
+    shellsort. Compare the time complexity of shellsort with that of
+    insertion sort. In what ways is shellsort different from or
+    similar to insertion sort?
+
+  \item The quicksort\index{quicksort} algorithm due to C.~A.~R.
+    Hoare\index{Hoare, C.~A.~R.}~\cite{Hoare1962}
+    was published in~1962. Describe and provide pseudocode for
+    quicksort and compare its runtime complexity with the other
+    sorting algorithms covered in this chapter.
+  \end{enumerate}
+
+\item\label{prob:graph_algorithms:connectivity_with_DFS_BFS}
+  Algorithm~\ref{alg:graph_algorithms:graph_connectivity} uses
+  breadth-first\index{breadth-first search} search to determine the
+  connectivity of an undirected graph. Modify this algorithm to use
+  depth-first\index{depth-first search} search. How can
+  Algorithm~\ref{alg:graph_algorithms:graph_connectivity} be used or
+  modified to test the connectivity\index{connectivity} of a digraph?
+
+\item The following problem is known as the
+  \emph{river crossing problem}\index{river crossing problem}. A man,
+  a goat, a wolf, and a basket of cabbage are all on one side of a
+  river. They have a boat that could be used to cross to the other
+  side of the river. The boat can only hold at most two passengers,
+  one of whom must be able to row the boat. One of the two passengers
+  must be the man and the other passenger can be either the goat, the
+  wolf, or the basket of cabbage. When crossing the river, if the man
+  leaves the wolf with the goat, the wolf would prey on the goat. If
+  he leaves the goat with the basket of cabbage, the goat would eat
+  the cabbage. The objective is to cross the river in such a way that
+  the wolf has no chance of preying on the goat, nor that the goat eat
+  the cabbage.
+  %%
+  \begin{enumerate}[(a)]
+  \item Let $M$, $G$, $W$, and $C$ denote the man, the goat, the wolf,
+    and the basket of cabbage, respectively. Initially all four are on
+    the left side of the river and none of them are on the right
+    side. Denote this by the ordered pair $(MGWC,\, \_)$, which is
+    called the initial\index{state!initial} state of the problem. When
+    they have all crossed to the right side of the river, the
+    final\index{state!final} state of the problem is $(\_,\, MGWC)$.
+    The underscore ``\_'' means that neither $M$, $G$, $W$, nor $C$
+    are on the corresponding side of the river. List a finite sequence
+    of moves to get from $(MGWC,\, \_)$ to $(\_,\, MGWC)$. Draw your
+    result as a digraph.
+
+  \item In the digraph $\Gamma$ obtained from the previous exercise,
+    let each edge of $\Gamma$ be of unit weight. Find a shortest path
+    from $(MGWC,\, \_)$ to $(\_,\, MGWC)$.
+
+  \item Rowing from one side of the river to the other side is called
+    a crossing. What is the minimum number of crossings needed to get
+    from $(MGWC,\, \_)$ to $(\_,\, MGWC)$?
+  \end{enumerate}
+
+\item Symbolic\index{symbolic computation} computation systems such as
+  Magma, Maple, Mathematica, Maxima, and Sage are able to read in a
+  symbolic expression such as
+  \[
+  \verb!(a + b)^2 - (a - b)^2!
+  \]
+  and determine whether or not the brackets match. A bracket is any of
+  the following characters:
+  \[
+  \verb!(!\quad \verb!)!\quad
+  \verb!{!\quad \verb!}!\quad
+  \verb![!\quad \verb!]!\quad
+  \]
+  A string $S$ of characters is said to be \emph{balanced} if any left
+  bracket in $S$ has a corresponding right bracket that is also in
+  $S$. Furthermore, if there are $k$ occurrences of one type of left
+  bracket, then there must be $k$ occurrences of the corresponding right
+  bracket. The
+  \emph{balanced bracket problem}\index{balanced bracket problem} is
+  concerned with determining whether or not the brackets in $S$ are
+  balanced. Algorithm~\ref{alg:graph_algorithms:bracket_parser}
+  contains a procedure to determine if the brackets in $S$ are
+  balanced, and if so return a list of positive integers to indicate
+  how the brackets match.
+  %%
+  \begin{enumerate}[(a)]
+  \item Implement Algorithm~\ref{alg:graph_algorithms:bracket_parser}
+    in Sage and test your implementation on various strings containing
+    brackets. Test your implementation on nonempty strings without any
+    brackets.
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:bracket_parser} so
+    that it returns \texttt{True} if the brackets of an input string
+    are balanced, and returns \texttt{False} otherwise.
+
+  \item What is the worst-case runtime of
+    Algorithm~\ref{alg:graph_algorithms:bracket_parser}?
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\index{balanced bracket problem}
+\input{algorithm/graph-algorithms/bracket-parser.tex}
+\caption{A brackets parser.}
+\label{alg:graph_algorithms:bracket_parser}
+\end{algorithm}
+
+\item An arithmetic expression written in the form $a + b$ is said to
+  be in \emph{infix notation}\index{infix notation} because the
+  operator is in between the operands. The same expression can also be
+  written in
+  \emph{reverse Polish notation}\index{reverse Polish notation} (or
+  \emph{postfix notation}\index{postfix notation}) as
+  \[
+  a\; b\; +
+  \]
+  with the operator following its two operands. Given an arithmetic
+  expression $A = e_0 e_1 \cdots e_n$ written in reverse Polish
+  notation, we can use the stack data structure to evaluate the
+  expression. Let $P = [e_0, e_1, \dots, e_n]$ be the stack
+  representation of $A$, where traversing $P$ from left to right we
+  are moving from the top of the stack to the bottom of the stack. We
+  call $P$ the Polish stack and the stack $E$ containing intermediate
+  results the evaluation stack. While $P$ is not empty, pop the Polish
+  stack and assign the extracted result to $x$. If $x$ is an operator,
+  we pop the evaluation stack twice: the result of the first pop is
+  assigned to $b$ and the result of the second pop is assigned to
+  $a$. Compute the infix expression $a\; x\; b$ and push the result
+  onto $E$. However, if $x$ is an operand, we push $x$ onto
+  $E$. Iterate the above process until $P$ is empty, at which point
+  the top of $E$ contains the evaluation of $A$. Refer to
+  Algorithm~\ref{alg:graph_algorithms:Polish_evaluation} for
+  pseudocode of the above discussion.
+  %%
+  \begin{enumerate}[(a)]
+  \item Prove the correctness of
+    Algorithm~\ref{alg:graph_algorithms:Polish_evaluation}.
+
+  \item What is the worst-case runtime of
+    Algorithm~\ref{alg:graph_algorithms:Polish_evaluation}?
+
+  \item Modify Algorithm~\ref{alg:graph_algorithms:Polish_evaluation}
+    to support the exponentiation operator.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/graph-algorithms/polish-evaluation.tex}
+\caption{Evaluate arithmetic expressions in reverse Polish notation.}
+\label{alg:graph_algorithms:Polish_evaluation}
+\end{algorithm}
+
+\item Figure~\ref{fig:graph_algorithms:one_knight_tour} provides a
+  knight's tour for the knight piece with initial position as in
+  Figure~\ref{fig:graph_algorithms:one_knight_tour:initial_position}. By
+  rotating the chessboard in
+  Figure~\ref{fig:graph_algorithms:one_knight_tour:a_tour} by
+  $90n$ degrees for positive integer values of $n$, we obtain another
+  knight's tour that, when represented as a graph, is isomorphic to
+  the graph in
+  Figure~\ref{fig:graph_algorithms:one_knight_tour:graph_representation}.
+  %%
+  \begin{enumerate}[(a)]
+  \item At the beginning of the 18th century,
+    de~Montmort\index{de Montmort, Pierre R\'emond} and
+    de~Moivre\index{de~Moivre, Abraham} provided the following
+    strategy~\cite[p.176]{BallCoxeter1987} to solve the knight's tour
+    problem on an $8 \times 8$ chessboard. Divide the board into an
+    inner $4 \times 4$ square and an outer shell of two squares deep,
+    as shown in
+    Figure~\ref{fig:graph_algorithms:montmort-moivre-strategy:inner_square}.
+    Place a knight on a square in the outer shell and move the knight
+    piece around that shell, always in the same direction, so as to
+    visit each square in the outer shell. After that, move into the
+    inner square and solve the knight's tour problem for the
+    $4 \times 4$ case. Apply this strategy to solve the knight's tour
+    problem with the initial position as in
+    Figure~\ref{fig:graph_algorithms:montmort-moivre-strategy:initial_position}.
+
+  \item Use the Montmort-Moivre\index{Montmort-Moivre strategy}
+    strategy to obtain a knight's tour, starting at the position of
+    the black-filled node in the outer shell in
+    Figure~\ref{fig:graph_algorithms:one_knight_tour:a_tour}.
+
+  \item A \emph{re-entrant} or \emph{closed} knight's tour is a
+    knight's tour that starts and ends at the same square. Find
+    re-entrant knight's tours with initial positions as in
+    Figure~\ref{fig:graph_algorithms:reentrant_knight_tour}.
+
+  \item Devise a backtracking algorithm to solve the knight's tour
+    problem on an $n \times n$ chessboard for $n > 3$.
+  \end{enumerate}
+
+\begin{figure}[!htbp]
+\centering
+\index{chess!knight's tour}
+\subfigure[A $4 \times 4$ inner square.]{
+  \label{fig:graph_algorithms:montmort-moivre-strategy:inner_square}
+  \includegraphics{image/graph-algorithms/montmort-moivre-knight-tour-strategy_inner-square}
+}
+\quad
+\subfigure[Initial position in the outer shell.]{
+  \label{fig:graph_algorithms:montmort-moivre-strategy:initial_position}
+  \includegraphics{image/graph-algorithms/montmort-moivre-knight-tour-strategy_knight}
+}
+\caption{De~Montmort and de~Moivre's solution strategy for the
+  $8 \times 8$ knight's tour problem.}
+\label{fig:graph_algorithms:De_Montmort_De_Moivre_knight_tour_strategy}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{chess!knight's tour}
+\subfigure[A $6 \times 6$ chessboard.]{
+  \label{fig:graph_algorithms:reentrant_knight_tour:6_by_6_chessboard}
+  \includegraphics{image/graph-algorithms/reentrant-knight-tour_6x6}
+}
+\quad
+\subfigure[An $8 \times 8$ chessboard.]{
+  \label{fig:graph_algorithms:reentrant_knight_tour:8_by_8_chessboard}
+  \includegraphics{image/graph-algorithms/reentrant-knight-tour_8x8}
+}
+\caption{Initial positions of re-entrant knight's tours.}
+\label{fig:graph_algorithms:reentrant_knight_tour}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{chess!queen}
+\subfigure[$n = 4$]{
+  \includegraphics{image/graph-algorithms/n-queens_n4}
+}
+\quad
+\subfigure[$n = 8$]{
+  \includegraphics{image/graph-algorithms/n-queens_n8}
+}
+\caption{Solutions of the $n$-queens problem for $n = 4, 8$.}
+\label{fig:graph_algorithms:n_queens_solutions}
+\end{figure}
+
+\item The $n$-queens\index{$n$-queens problem}\index{chess!queen}
+  problem is concerned with the placement of $n$ queens on an
+  $n \times n$ chessboard\index{chess} such that no two queens can
+  attack each other. Two queens can attack each other if they are in
+  the same row, column, diagonal, or antidiagonal of the
+  chessboard. The trivial case $n = 1$ is easily solved by placing the
+  one queen in the only given position. There are no solutions for the
+  cases $n = 2, 3$. Solutions for the cases $n = 4, 8$ are shown in
+  Figure~\ref{fig:graph_algorithms:n_queens_solutions}. Devise a
+  backtracking\index{backtrack!algorithm} algorithm to solve the
+  $n$-queens problem for the case where $n > 3$. See
+  Bell\index{Bell, Jordan} and
+  Stevens\index{Stevens, Brett}~\cite{BellStevens2009} for a survey of
+  the $n$-queens problem and its solutions.
+
+\item Hampton\index{Hampton Court Palace} Court Palace in
+  England\index{England} is well-known for its maze\index{maze} of
+  hedges. Figure~\ref{fig:graph_algorithms:maze_associated_graph}
+  shows a maze and its graph representation; the figure is adapted
+  from page~434 in
+  Sedgewick\index{Sedgewick, Robert}~\cite{Sedgewick1990}. To obtain
+  the graph representation, we use a vertex to represent an
+  intersection in the maze\index{maze}. An edge joining two vertices
+  represents a path from one intersection to another.
+  %%
+  \begin{enumerate}[(a)]
+  \item Suppose the entrance to the maze is represented by the
+    lower-left black-filled vertex in
+    Figure~\ref{fig:maze_graph:graph_representation} and the exit is
+    the upper-right black-filled vertex. Solve the maze by providing a
+    path from the entrance to the exit.
+
+  \item Repeat the previous exercise for each pair of distinct
+    vertices, letting one vertex of the pair be the entrance and the
+    other vertex the exit.
+
+  \item What is the diameter of the graph in
+    Figure~\ref{fig:maze_graph:graph_representation}?
+
+  \item Investigate algorithms for generating and solving mazes.
+  \end{enumerate}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/graph-algorithms/maze-graph_maze}
+}
+\qquad
+\subfigure[]{
+  \label{fig:maze_graph:graph_representation}
+  \includegraphics{image/graph-algorithms/maze-graph_graph}
+}
+\caption{A maze and its graph representation.}
+\label{fig:graph_algorithms:maze_associated_graph}
+\end{figure}
+
+\item For each of the algorithms below: (i)~justify whether or not
+  it can be applied to multigraphs or multidigraphs; (ii)~if not,
+  modify the algorithm so that it is applicable to multigraphs or
+  multidigraphs.
+  %%
+  \begin{enumerate}[(a)]
+  \item Breadth-first search
+    Algorithm~\ref{alg:graph_algorithms:breadth_first_search_template}.
+
+  \item Depth-first search
+    Algorithm~\ref{alg:graph_algorithms:depth_first_search_template}.
+
+  \item Graph connectivity test
+    Algorithm~\ref{alg:graph_algorithms:graph_connectivity}.
+
+  \item General shortest path
+    Algorithm~\ref{alg:graph_algorithms:generic_shortest_path_algorithm}.
+
+  \item Dijkstra's
+    Algorithm~\ref{alg:graph_algorithms:dijkstra_general}.
+
+  \item The Bellman-Ford
+    Algorithms~\ref{alg:graph_algorithms:Bellman_Ford}
+    and~\ref{alg:graph_algorithms:Bellman_Ford:redundant_updates}.
+
+  \item The Floyd-Roy-Warshall
+    Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall}.
+
+  \item The transitive closure
+    Algorithm~\ref{alg:graph_algorithms:Floy_Roy_Warshall:transitive_closure}.
+
+  \item Johnson's
+    Algorithm~\ref{alg:graph_algorithms:Johnson_algorithm}.
+  \end{enumerate}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[$2 \times 2$]{
+  \includegraphics{image/graph-algorithms/grid-graphs_2x2}
+}
+\qquad
+\subfigure[$3 \times 3$]{
+  \includegraphics{image/graph-algorithms/grid-graphs_3x3}
+}
+\qquad
+\subfigure[$4 \times 4$]{
+  \includegraphics{image/graph-algorithms/grid-graphs_4x4}
+}
+\caption{Grid graphs for $n = 2, 3, 4$.}
+\label{fig:graph_algorithms:grid_graphs}
+\end{figure}
+
+\item Let $n$ be a positive integer. An $n \times n$
+  \emph{grid graph}\index{grid!graph} is a graph on the
+  Euclidean plane\index{plane}, where each vertex is an ordered pair
+  from $\Z \times \Z$. In particular, the vertices are ordered pairs
+  $(i,j) \in \Z \times \Z$ such that
+  %%
+  \begin{equation}
+  \label{eqn:graph_algorithms:grid_graph_vertex_inequality}
+  0 \leq i,j < n.
+  \end{equation}
+  %%
+  Each vertex $(i,j)$ is adjacent to any of the following vertices
+  provided that
+  expression~\eqref{eqn:graph_algorithms:grid_graph_vertex_inequality}
+  is satisfied: the vertex $(i-1,\, j)$ immediately to its left, the
+  vertex $(i+1,\, j)$ immediately to its right, the vertex
+  $(i,\, j+1)$ immediately above it, or the vertex $(i,\, j-1)$
+  immediately below it. Figure~\ref{fig:graph_algorithms:grid_graphs}
+  illustrates some examples of grid graphs. The $1 \times 1$ grid
+  graph is the trivial graph $K_1$.
+  %%
+  \begin{enumerate}[(a)]
+  \item Fix a positive integer $n > 1$. Describe and provide
+    pseudocode of an algorithm to generate all nonisomorphic
+    $n \times n$ grid graphs. What is the worst-case runtime of your
+    algorithm?
+
+  \item How many $n \times n$ grid graphs are there? How many of those
+    graphs are nonisomorphic to each other?
+
+  \item Describe and provide pseudocode of an algorithm to generate a
+    random\index{algorithm!random} $n \times n$
+    grid\index{grid!graph} graph. Analyze the worst-case runtime of
+    your algorithm.
+
+  \item Extend the grid\index{grid!graph} graph by allowing edges to
+    be diagonals. That is, a vertex $(i,j)$ can also be adjacent to
+    any of the following vertices so long as
+    expression~\eqref{eqn:graph_algorithms:grid_graph_vertex_inequality}
+    holds: $(i-1,\, j-1)$, $(i-1,\, j+1)$, $(i+1,\, j+1)$,
+    $(i+1,\, j-1)$. With this extension, repeat the previous
+    exercises.
+  \end{enumerate}
+
+\item Let $G = (V,E)$ be a digraph with integer weight function
+  $w: E \to \Z \backslash \{0\}$, where either $w(e) > 0$ or
+  $w(e) < 0$ for each $e \in E$. Yamada\index{Yamada, Takeo} and
+  Kinoshita\index{Kinoshita, Harunobu}~\cite{YamadaKinoshita2002}
+  provide a divide-and-conquer\index{divide and conquer} algorithm to
+  enumerate all the negative\index{cycle!negative} cycles in
+  $G$. Investigate the divide and conquer technique for algorithm
+  design. Describe and provide pseudocode of the Yamada-Kinoshita
+  algorithm. Analyze its runtime complexity and prove the correctness
+  of the algorithm.
+\end{problem}

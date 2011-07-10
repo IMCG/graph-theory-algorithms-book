@@ -1,0 +1,237 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2010 David Joyner <wdjoyner@gmail.com>
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%% Copyright (C) 2010 Nathann Cohen <nathann.cohen@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[latin1]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{makeidx}
+\usepackage{moreverb}
+\usepackage{url}\urlstyle{sf}
+\usepackage{xspace}
+
+%% For typesetting algorithms and pseudocode
+\usepackage[algochapter,linesnumbered,noend,ruled]{algorithm2e}
+\IncMargin{1em}
+\DecMargin{1em}
+\SetNlSty{}{}{}  %% don't bold the line numbers
+\SetAlCapFnt{\normalfont}  %% don't bold the text ``Algorithm'' in the caption
+\SetAlCapSkip{5pt}
+
+%% Package for drawing figures
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{automata}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+\usetikzlibrary{trees}
+\usepackage{pgfplots}
+\usepackage{skak}
+\usepackage{subfigure}
+\usepackage{tkz-berge}  %% for drawing combinatorial graphs
+
+%% For typesetting code listings
+\usepackage{listings}
+\lstdefinelanguage{Sage}[]{Python}
+{morekeywords={False,sage,True},sensitive=true}
+\lstset{
+  frame=none,
+  showtabs=False,
+  showspaces=False,
+  showstringspaces=False,
+  commentstyle={\ttfamily\color{dgreencolor}},
+  keywordstyle={\ttfamily\color{dbluecolor}\bfseries},
+  stringstyle={\ttfamily\color{dgraycolor}\bfseries},
+  language=Sage,
+  basicstyle={\fontsize{9pt}{9pt}\ttfamily},
+  aboveskip=0.5em,
+  belowskip=0.5em,
+  numberstyle=\footnotesize
+}
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{0.01,0.02,0.7}
+\definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+\newcommand{\dblack}{\color{dblackcolor}\bf}
+\newcommand{\dblue}{\color{dbluecolor}\bf}
+\newcommand{\dred}{\color{dredcolor}\bf}
+
+%% Customized page geometry
+\textwidth=450pt
+\textheight=700pt
+\topmargin=-30pt
+\oddsidemargin=0.0pt
+\evensidemargin=0.0pt
+
+%% Format date in the ISO format 2007 March 12, for example.
+\usepackage{datetime}
+\newdateformat{isoDateFormat}{%
+  \THEYEAR~\monthname[\THEMONTH]~\twodigit{\THEDAY}
+}
+\isoDateFormat
+
+%% Customized corollary, lemma, theorem, etc. numbering
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+%% Custom commands and shortcuts
+\newcommand{\AND}{\texttt{AND}}  %% logical AND
+\newcommand{\assign}{\leftarrow}  %% assignment operator
+\newcommand{\B}{\mathbb{B}}  %% binary alphabet
+\newcommand{\cdis}{\overline{d}}  %% characteristic distance
+\newcommand{\documentEdition}{\input{tex/version}}
+\newcommand{\E}{\mathbf{E}}  %% expectation
+\newcommand{\graphsix}{\texttt{graph6}\xspace}  %% typewriter font for graph6
+\newcommand{\OR}{\texttt{OR}}  %% logical OR
+\newcommand{\R}{\mathbf{R}}  %% set of real numbers
+\newcommand{\SAGE}{{\sf SAGE}\xspace}
+\newcommand{\sage}{\SAGE}
+\newcommand{\Sage}{\SAGE}
+\newcommand{\sparsesix}{\texttt{sparse6}\xspace}  %% typewriter font for sparse6
+\newcommand{\Z}{\mathbf{Z}}  %% set of integers
+
+%% Calligraphy fonts
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cT}{\mathcal{T}}
+
+%% Math bold fonts
+\newcommand{\zeromat}{\mathbf{0}}
+
+%% Typewriter fonts
+\newcommand{\tta}{\texttt{a}}
+\newcommand{\ttA}{\texttt{A}}
+\newcommand{\ttB}{\texttt{B}}
+\newcommand{\ttC}{\texttt{C}}
+\newcommand{\ttD}{\texttt{D}}
+\newcommand{\tte}{\texttt{e}}
+\newcommand{\ttE}{\texttt{E}}
+\newcommand{\ttF}{\texttt{F}}
+\newcommand{\ttG}{\texttt{G}}
+\newcommand{\ttH}{\texttt{H}}
+\newcommand{\ttI}{\texttt{I}}
+\newcommand{\ttJ}{\texttt{J}}
+\newcommand{\ttK}{\texttt{K}}
+\newcommand{\ttL}{\texttt{L}}
+\newcommand{\ttM}{\texttt{M}}
+\newcommand{\ttN}{\texttt{N}}
+\newcommand{\ttO}{\texttt{O}}
+\newcommand{\ttP}{\texttt{P}}
+\newcommand{\ttQ}{\texttt{Q}}
+\newcommand{\ttR}{\texttt{R}}
+\newcommand{\ttS}{\texttt{S}}
+\newcommand{\ttT}{\texttt{T}}
+\newcommand{\ttU}{\texttt{U}}
+\newcommand{\ttV}{\texttt{V}}
+\newcommand{\ttw}{\texttt{w}}
+\newcommand{\ttW}{\texttt{W}}
+\newcommand{\ttX}{\texttt{X}}
+\newcommand{\ttY}{\texttt{Y}}
+\newcommand{\ttZ}{\texttt{Z}}
+
+%% Customize existing commands
+\renewcommand{\_}{\underline{{\color{white}w}}}  %% a long underscore
+\renewcommand{\MakeUppercase}{}  %% no all-caps in page headers
+\renewcommand{\qed}{\hfill \mbox{\raggedright \rule{0.1in}{0.1in}}}
+\renewcommand{\to}{\longrightarrow}  %% function notation f: A -> B
+
+%% Define new operators
+\DeclareMathOperator*{\adj}{adj}  %% adjacency list of a vertex
+\DeclareMathOperator*{\append}{append} %% append an element to a list
+\DeclareMathOperator*{\BellmanFord}{BellmanFord}  %% Bellman-Ford algorithm
+\DeclareMathOperator*{\child}{child} %% child of a vertex
+\DeclareMathOperator*{\children}{children}  %% children of a vertex
+\DeclareMathOperator*{\cost}{cost}
+\DeclareMathOperator*{\degree}{degree}
+\DeclareMathOperator*{\depth}{depth}  %% depth of a vertex
+\DeclareMathOperator*{\dequeue}{dequeue} %% remove front element of a queue
+\DeclareMathOperator*{\diam}{diam}  %% diameter of graph
+\DeclareMathOperator*{\Dijkstra}{Dijkstra}  %% Dijkstra's algorithm
+\DeclareMathOperator*{\dir}{dir}  %% directedness of an edge uv
+\DeclareMathOperator*{\enqueue}{enqueue} %% append element to end of a queue
+\DeclareMathOperator*{\extractMin}{extractMin}  %% remove minimum element
+\DeclareMathOperator*{\headElem}{head}
+\DeclareMathOperator*{\height}{height}  %% height of a tree
+\DeclareMathOperator*{\iadj}{iadj}  %% set of in-neighbors
+\DeclareMathOperator*{\id}{id}  %% indegree of a vertex
+\DeclareMathOperator*{\insertElem}{insert}
+\DeclareMathOperator*{\leftChild}{leftchild}
+\DeclareMathOperator*{\length}{length}
+\DeclareMathOperator*{\nextElem}{next}
+\DeclareMathOperator*{\od}{od}  %% outdegree of a vertex
+\DeclareMathOperator*{\oadj}{oadj}  %% set of out-neighbors
+\DeclareMathOperator*{\pop}{pop}  %% pop an element from a stack
+\DeclareMathOperator*{\parent}{parent}
+\DeclareMathOperator*{\per}{per}
+\DeclareMathOperator*{\prevElem}{prev}
+\DeclareMathOperator*{\push}{push}  %% push an element onto a stack
+\DeclareMathOperator*{\radius}{rad}
+\DeclareMathOperator*{\remove}{remove}  %% remove an element from a list
+\DeclareMathOperator*{\rightChild}{rightchild}
+\DeclareMathOperator*{\rootElem}{root}
+\DeclareMathOperator*{\Sh}{Sh}  %% Shannon multigraphs
+\DeclareMathOperator*{\sibling}{sibling}
+\DeclareMathOperator*{\totalDist}{td}
+\DeclareMathOperator*{\Top}{top}  %% top of a stack
+\DeclareMathOperator*{\wdeg}{wdeg}  %% weighted degree
+
+%% Custom environments
+%% For listing problem sets. Each problem is numbered according to the
+%% format
+%%
+%% chapterNumber.problemNumber.
+\newcounter{problemcounter}
+\newenvironment{problem}{%
+  \setcounter{problemcounter}{1}
+  \begin{list}
+    {\thechapter.\arabic{problemcounter}.}
+    {\usecounter{problemcounter}}
+    \let\olditem\item}{%
+  \end{list}
+}
+
+\makeindex
+\usepackage{hyperref}
+\hypersetup{
+  pdftitle={Algorithmic Graph Theory},%
+  pdfauthor={David Joyner, Minh Van Nguyen, Nathann Cohen},%
+  pdfsubject={mathematics},%
+  pdfkeywords={algorithm, data structure, graph theory},%
+  colorlinks=true,%
+  linkcolor=black,%
+  citecolor=black,%
+  urlcolor=black
+}

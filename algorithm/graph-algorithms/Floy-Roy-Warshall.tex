@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{A weighted digraph $G = (V, E)$ that has no
+  self-loops. Negative edge weights are allowed. The order of $G$ is
+  $n > 0$. Vertices are numbered from 1 to $n$,
+  i.e.~$V = \{1, 2, \dots, n\}$. The weight matrix $W = [w(i,j)]$ of
+  $G$ as defined
+  in~(\ref{eqn:graph_algorithms:Floyd_Roy_Warshall_weight_matrix}).}
+%%
+%% output
+\KwOut{A matrix $P = [a_{ij}]$ of shortest paths in $G$. A matrix
+  $D = [a_{ij}]$ of distances where $D[i,j]$ is the weight~(or
+  distance) of a shortest $i$-$j$ path in $G$.}
+\BlankLine
+%%
+%% algorithm body
+$n \assign |V|$\;
+$P[a_{ij}] \assign$ an $n \times n$ zero matrix\;
+$D[a_{ij}] \assign W[w(i,j)]$\;
+\For{$k \assign 1, 2, \dots, n$}{
+  \For{$i \assign 1, 2, \dots, n$}{
+    \For{$j \assign 1, 2, \dots, n$}{
+      \If{$D[i,j] > D[i,k] + D[k,j]$}{
+        $P[i,j] \assign k$\;
+        $D[i,j] \assign D[i,k] + D[k,j]$\;
+      }
+    }
+  }
+}
+\Return $(P,D)$\;

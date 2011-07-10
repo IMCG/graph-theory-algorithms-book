@@ -1,0 +1,1005 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Network Flows}
+\label{chap:network_flows}
+
+See Jungnickel~\cite{Jungnickel2008}, and chapter~12 of Gross and
+Yellen~\cite{GrossYellen1999}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Flows and cuts}
+
+\begin{itemize}
+\item single source-single sink networks
+
+\item feasible networks
+
+\item maximum flow and minimum cut
+\end{itemize}
+
+
+Let $G=(V,E,i,h)$ be an unweighted multidigraph, as in
+Definition \ref{def:introduction:graph-version3}.
+
+If $F$ is a field such as ${\mathbb{R}}$ or $GF(q)$ or a 
+ring such as ${\mathbb{Z}}$, let 
+
+\[
+C^0(G, F)=\{f:V\to F\},\ \ \ \ C^1(G, F)=\{f:E\to F\},
+\]
+be the sets of $F$-valued functions defined on $V$ and
+$E$, respectively. 
+\index{$C^0(G, F)$}
+\index{$C^1(G, F)$}
+If $F$ is a field then these are $F$-inner
+product spaces with inner product
+
+\begin{equation}
+\label{eqn:inner-product}
+(f,g)=\sum_{x\in X} f(x)g(x), \ \ \ \ \ (X=V,\ \ {\rm resp.}\ \ X=E),
+\end{equation}
+and
+
+\[
+\dim C^0(G,F)=|V|,\ \ \ \dim C^1(G,F)=|E|.
+\]
+If you index the sets $V$ and $E$ in some arbitrary but fixed way
+and define, for $1\leq i\leq |V|$ and
+$1\leq j\leq |E|$,
+
+\[
+f_i(v)=
+\left\{
+\begin{array}{ll}
+1,& v = v_i,\\
+0, & {\rm otherwise},
+\end{array}
+\right.
+\ \ \ \ \ 
+g_j(e)=
+\left\{
+\begin{array}{ll}
+1,& e = e_j,\\
+0, & {\rm otherwise},
+\end{array}
+\right.
+\]
+then ${\mathcal F}=\{f_i\}\subset C^0(G,F)$ is a basis
+of $ C^0(G,F)$
+and ${\mathcal G}=\{g_j\}\subset C^1(G,F)$ is a basis of $C^1(G,F)$.
+
+We order the edges
+
+\[
+E = \{e_1,e_2,\dots, e_{|E|}\},
+\]
+in some arbitrary but fixed way.
+A {\it vector representation} (or {\it characteristic vector} or
+{\it incidence vector}) of a subgraph $G'=(V,E')$ of $G=(V,E)$,
+$E'\subset E$, is a binary ${|E|}$-tuple
+
+\[
+{\rm vec}(G')=(a_1,a_2,\dots, a_{|E|}) \in GF(2)^{|E|},
+\]
+where 
+
+\[
+a_i=a_i(E')=
+\left\{
+\begin{array}{ll}
+1,&{\rm if \ }e_i\in E',\\
+0,&{\rm if \ }e_i\notin E'.
+\end{array}
+\right.
+\]
+In particular, this defines a mapping
+
+\[
+{\rm vec}:\{ {\rm subgraphs\ of\ }G=(V,E)\}\to GF(2)^{|E|}.
+\]
+
+
+For any non-trivial partition 
+
+\[
+V = V_1\cup V_2,\ \ \ \ \ V_i\not= \emptyset, \ \ \ V_1\cap V_2= \emptyset, 
+\]
+the set of all edges $e=(v_1,v_2)\in E$, with $v_i\in V_i$ ($i=1,2$),
+is called a {\it cocycle}\footnote{Also called an {\it edge cut subgraph} 
+or {\it disconnecting set} or
+{\it seg} or {\it edge cutset}.} of $G$. 
+A cocycle with a minimal set of edges is a  
+{\it bond} (or {\it cut set}) of $G$.  
+An {\it Euler subgraph} is either a cycle
+or a union of edge-disjoint cycles.
+\index{bond}
+\index{Euler subgraph}
+\index{cocyle}
+\index{edge cut subgraph}
+\index{seg}
+\index{cut set}
+\index{edge cutset}
+
+The set of cycles of $G$ is denoted $Z(G)$ and the set of
+cocycles is denoted $Z^*(G)$.
+
+The $F$-vector space spanned by the vector representations of 
+all the cycles is called the {\it cycle space} of $G$, denoted
+${\mathcal Z}(G)={\mathcal Z}(G,F)$. 
+\index{cycle space}
+This is the kernel of the incidence 
+matrix of $G$ (\S 14.2 in Godsil and Royle \cite{GodsilRoyle2004}).
+Define
+
+\[
+\begin{array}{c}
+D:C^1(G,F)\to C^0(G,F),\\
+(Df)(v) = \sum_{h(e)=v} f(e) - \sum_{t(e)=v} f(e).
+\end{array}
+\]
+With respect to these bases ${\mathcal F}$ and
+${\mathcal G}$, the matrix
+representing the linear transformation $D:C^1(G,F)\to C^0(G,F)$
+is the incidence matrix. An element of the kernel of $D$ is 
+sometimes called a {\it flow} (see Biggs \cite{Biggs1997})
+or {\it circulation} (see below).
+\index{flow}
+\index{circulation}
+Therefore, this is sometimes also referred to as the 
+{\it space of flows} or the {\it circulation space}.
+\index{flow space}
+\index{circulation space}
+
+It may be regarded as a subspace of $C^1(G,F)$ of dimension $n(G)$.
+When $F$ is a finite field, sometimes\footnote{Jungnickel and 
+Vanstone in \cite{JungnickelVanstone1997} call 
+this the {\it even graphical code} of $G$.}
+the cycle space is called the {\it cycle code of $G$}.
+\index{cycle code}
+
+
+Let $F$ be a field such as ${\mathbb{R}}$ or $GF(q)$, for some prime 
+power $q$. Let $G$ be a digraph.
+Some define a {\it circulation} (or {\it flow}) on $G=(V,E)$ 
+\index{circulation}
+to be a function
+
+\[
+f:E\to F,
+\]
+satisfying\footnote{Note: In addition, some authors add the 
+condition $f(e)\geq 0$ - see e.g., Chung \cite{Chung2005}.}
+
+\begin{itemize}
+\item
+$\sum_{u\in V,\ (u,v)\in E} f(u,v) = \sum_{w\in V,\ (v,w)\in E} f(v, w)$.
+\end{itemize}
+(Note: this is simply the condition that $f$ belongs to the
+kernel of $D$.)
+
+Suppose $G$ has a subgraph $H$ and 
+$f$ is a circulation of $G$ such that $f$ is a constant function
+on $H$ and $0$ elsewhere. We call such a circulation a
+{\it characteristic function} of $H$.
+For example, if $G$ has a cycle $C$ and if $f$ is the
+characteristic function on $C$, then $f$ is a circulation.
+
+The {\it circulation space} ${\mathcal C}$ is the $F$-vector space of 
+circulation functions. 
+The cycle space ``clearly'' may be identified with 
+a subspace of the circulation space,
+since the $F$-vector space spanned by the characteristic
+functions of cycles may be identified with the cycle space of $G$. 
+In fact, these spaces are isomorphic.
+Under the inner product (\ref{eqn:inner-product}), i.e., 
+\index{circulation space}
+
+\begin{equation}
+%\label{eqn:inner-product2}
+(f,g)=\sum_{e\in E} f(e)g(e),
+\end{equation}
+this vector space is an inner product space.
+
+\begin{example}
+{\rm
+This example is not needed but is presented for its independent
+interest. Assume $G=(V,E)$ is a strongly connected directed graph.
+Define the {\it transition probability matrix} $P$ for a digraph
+\index{transition probability matrix}
+$G$ by
+
+\[
+P(x,y)=\left\{
+\begin{array}{ll}
+d_x, & {\rm if}\ (x, y) \in E,\\
+0, & {\rm otherwise},
+\end{array}
+\right.
+\]
+where $d_x$ denotes the out-degree.
+The Perron-Frobenius Theorem states that there exists a unique 
+left eigenvector $\phi$ such that (when regarded as a function
+$\phi:V\to {\mathbb{R}}$) $\phi (v) > 0$, for all $v\in V$ and 
+$\phi P  = \rho \phi$, where $\rho$ is the spectral radius of
+$G$. We scale $\phi$ so that $\sum_{v\in V}  \phi(v) = 1$.
+(This vector is sometimes called the {\it Perron vector}.)
+ Let $F_\phi (u, v) = \phi(v)P (u, v)$. 
+{\it Fact:} $F_\phi$ is a circulation.
+For a proof, see F. Chung \cite{Chung2005}.
+}
+\end{example}
+
+ If the edges of $E$ are indexed in some arbitrary but fixed way then
+ a circulation function restricted to a subgraph $H$ of $G$
+ may be identified with a vector representation of $H$,
+ as described above. Thefore, the circulation functions gives a
+ coordinate-free version of the cycle space.
+
+The $F$-vector space spanned by the vector representations of 
+all the segs is called the {\it cocycle space} (or the {\it cut space}) of $G$, 
+denoted ${\mathcal Z}^*(G)={\mathcal Z}^*(G,F)$.
+This is the column space of the transpose of the incidence 
+matrix of $G$ (\S 14.1 in Godsil and Royle \cite{GodsilRoyle2004}). It may be 
+regarded as a subspace of $C^1(G,F)$ of dimension the rank of $G$,
+$r(G)$.
+When $F$ is a finite field, sometimes the cocycle space is called 
+the {\it cocycle code of $G$}.
+\index{cocycle code}
+\index{cocycle space}
+\index{cut space}
+
+\begin{lemma}
+\label{lemma:cycle-cocycle}
+{\rm
+Under the inner product (\ref{eqn:inner-product})
+on $C^1(G,F)$, the cycle space is orthogonal to the cocycle space.
+}
+\end{lemma}
+
+\begin{proof}[Solution]
+One proof follows from Theorem 8.3.1 in Godsil and Royle \cite{GodsilRoyle2004}.
+
+Here is another proof.
+By Theorem~2.3 in Bondy and Murty~\cite[p.27]{BondyMurty1976},
+an edge of $G$ is an edge cut if and only if it
+is contained in no cycle.
+Therefore, the vector representation of any 
+cocycle is supported on a set of indices which is disjoint from the 
+support of the vector representation of any
+cycle. Therefore, there is a basis of the cycle space which is 
+orthogonal to a basis of the cocycle space.
+\end{proof}
+
+\begin{proposition}
+{\rm
+Let $F=GF(2)$.
+The cycle code of a graph $G=(V,E)$ is a linear binary block code of 
+length $|E|$,  dimension equal to the nullity of the graph, $n(G)$,
+and minimum distance equal to the girth of $G$.
+If $C\subset GF(2)^{|E|}$ is the cycle code associated to $G$  
+and $C^*$ is the cocycle code associated to $G$ then
+$C^*$ is the dual code of $C$. In particular,
+the cocycle code of $G$ is a linear binary block code of length
+$|E|$, and dimension $r(G)=|E|-n(G)$.
+}
+\end{proposition}
+
+This follows from Hakimi-Bredeson \cite{HakimiBredeson1968}
+(see also Jungnickel-Vanstone \cite{JungnickelVanstone1997})
+in the binary case\footnote{It is likely true
+in the non-binary case as well, but no
+proof seems to be in the literature.}. 
+
+\begin{proof}[Solution]
+Let $d$ denote the minimum distance of the code $C$.
+Let $\gamma$ denote the girth of $G$,
+i.e., the smallest cardinality of a cycle in $G$.
+If $K$ is a cycle in $G$ then the
+vector ${\rm vec}(K)\in GF(2)^{|E|}$ is an element of the
+cycle code $C\subset GF(2)^{|E|}$. This implies $d\leq \gamma$.
+
+In the other direction, suppose $K_1$ and $K_2$ are
+cycles in $G$ with associated support vectors 
+$v_1={\rm vec}(K_1)$, $v_2={\rm vec}(K_2)$.
+Assume that at least one of these cycles is a cycle
+of minimum length, say $K_1$, so the weight of its corresponding 
+support vector is equal to the girth $\gamma$.
+The only way that 
+${\rm wt}(v_1+v_2)<\min\{{\rm wt}(v_1),{\rm wt}(v_2)\}$ 
+can occur is if $K_1$ and $K_2$ have some
+edges in common. In this case, the vector
+$v_1+v_2$ represents a subgraph 
+which is either a cycle or it is a 
+union of disjoint cycles. In either case, by
+minimality of $K_1$, these new cycles must be at least as
+long. Therefore, $d\geq \gamma$, as desired.
+
+%Lemma \ref{lemma:cycle-cocycle} below.
+\end{proof}
+
+Consider a spanning tree $T$ of a graph $G$
+and its complementary subgraph $\overline{T}$.
+For each edge $e$ of $\overline{T}$ the graph $T\cup e$
+contains a unique cycle. The cycles which arise in this way are called
+the {\it fundamental cycles} of $G$, denoted $cyc(T,e)$.
+\index{fundamental cycles}
+
+%If $G$ is connected, one can construct the generator 
+%matrix of the cycle code $C$ in standard form as follows. 
+%Fix a spanning tree $T$ of $G$ and index the
+%edges of $G$ so that the edges in the complementary subgraph $\overline{T}$ 
+%(namely, $E(\overline{T}) = E(G)-E(T)$) occur before the edges of $T$. 
+%If you define the generator matrix $A$ of $C$ to be that matrix whose
+%rows are the vector representation of the fundamental cycles
+%$cyc(T,e)$, as $e$ runs through the edges in $\overline{T}$
+%in the order above, then you will find that $A$ is in standard form.
+
+
+
+\begin{example}
+\label{example:cycle-space}
+{\rm
+Consider the graph below, with edges labeled as indicated, together
+with a spanning tree, depicted to its right, in 
+Figure \ref{fig:cycle-space1}.
+
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{cc}
+% this was done "manually"
+\unitlength=0.620000pt
+\begin{picture}(250.00,100.00)(-40.00,0.00)
+
+\thinlines
+\put(0.00,0.00){\line(1,0){50.00}} 
+\put(17.00,30.00){$0$} 
+\put(0.00,0.00){\line(1,1){50.00}} 
+\put(25.00,-15.00){$1$} 
+\put(50.00,0.00){\line(0,1){50.00}} 
+\put(55.00,20.00){$2$} 
+\put(50.00,0.00){\line(1,0){50.00}} 
+\put(75.00,-15.00){$3$} 
+
+\put(100.00,0.00){\line(1,0){50.00}} 
+\put(117.00,30.00){$4$} 
+\put(100.00,0.00){\line(1,1){50.00}}
+\put(125.00,-15.00){$5$} 
+
+\put(150.00,50.00){\line(1,0){50.00}} 
+\put(175.00,57.00){$7$} 
+\put(150.00,50.00){\line(0,-1){50.00}}
+\put(155.00,20.00){$6$}  
+\put(200.00,50.00){\line(0,-1){50.00}} 
+\put(187.00,20.00){$8$}  
+\put(225.00,57.00){$9$} 
+\put(200.00,50.00){\line(1,0){50.00}} 
+
+\put(232.00,17.00){$10$}  
+\put(200.00,0.00){\line(1,1){50.00}}
+\end{picture}
+
+&
+% this used jPicEdt
+\unitlength=0.620000pt
+\begin{picture}(550.00,100.00)(-80.0,0.00)
+
+%\linethickness{0.9mm}
+\put(0.00,0.00){\line(1,0){50.00}} 
+
+%\linethickness{1.9mm}
+\put(0.00,0.00){\line(1,1){50.00}} 
+%\put(50.00,0.00){\line(0,1){50.00}} 
+
+%\linethickness{0.9mm}
+\put(50.00,0.00){\line(1,0){50.00}} 
+\put(100.00,0.00){\line(1,0){50.00}} 
+
+%\linethickness{1.9mm}
+\put(100.00,0.00){\line(1,1){50.00}}
+
+%\linethickness{0.9mm}
+\put(150.00,50.00){\line(1,0){50.00}} 
+%\put(150.00,50.00){\line(0,-1){50.00}} 
+\put(200.00,50.00){\line(0,-1){50.00}} 
+\put(200.00,50.00){\line(1,0){50.00}} 
+
+\end{picture}
+\end{tabular}
+\caption{A graph and a spanning tree for it.}
+\end{center}
+\label{fig:cycle-space1}
+\end{figure}
+
+You can see from Figure \ref{fig:cycle-space1} that:
+
+\begin{itemize}
+\item
+by adding edge $2$ to the tree, you get a cycle $0,1,2$ with vector
+representation
+
+\[
+g_1 = (1,1,1,0,0,0,0,0,0,0,0),
+\]
+\item
+by adding edge $6$ to the tree, you get a cycle $4,5,6$ with vector
+representation
+
+\[
+g_2 = (0,0,0,0,1,1,1,0,0,0,0),
+\]
+\item
+by adding edge $10$ to the tree, you get a cycle $8,9,10$ with vector
+representation
+
+\[
+g_3 = (0,0,0,0,0,0,0,0,1,1,1).
+\]
+\end{itemize}
+The vectors $\{g_1,g_2,g_3\}$ form a basis of the cycle space 
+of $G$ over $GF(2)$.
+}
+\end{example}
+
+The {\it cocycle space} of a graph $G$ (also known as 
+the {\it bond space of $G$} or the {\it cut-set space} of $G$)
+is the $F$-vector space spanned by the characteristic
+functions of bonds. 
+
+
+\begin{example}
+\label{example:cocycle-space}
+{\rm
+Consider the graph below, with edges labeled as indicated, together
+with an example of a bond, depicted to its right, in 
+Figure \ref{fig:cocycle-space1}.
+
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{cc}
+% this was done "manually"
+\unitlength=0.620000pt
+\begin{picture}(250.00,100.00)(-40.00,0.00)
+
+\thinlines
+\put(0.00,0.00){\line(1,0){50.00}} 
+\put(17.00,30.00){$0$} 
+\put(0.00,0.00){\line(1,1){50.00}} 
+\put(25.00,-15.00){$1$} 
+\put(50.00,0.00){\line(0,1){50.00}} 
+\put(55.00,20.00){$2$} 
+\put(50.00,0.00){\line(1,0){50.00}} 
+\put(75.00,-15.00){$3$} 
+
+\put(100.00,0.00){\line(1,0){50.00}} 
+\put(117.00,30.00){$4$} 
+\put(100.00,0.00){\line(1,1){50.00}}
+\put(125.00,-15.00){$5$} 
+
+\put(150.00,50.00){\line(1,0){50.00}} 
+\put(175.00,57.00){$7$} 
+\put(150.00,50.00){\line(0,-1){50.00}}
+\put(155.00,20.00){$6$}  
+\put(200.00,50.00){\line(0,-1){50.00}} 
+\put(187.00,20.00){$8$}  
+\put(225.00,57.00){$9$} 
+\put(200.00,50.00){\line(1,0){50.00}} 
+
+\put(232.00,17.00){$10$}  
+\put(200.00,0.00){\line(1,1){50.00}}
+\end{picture}
+
+&
+% this used jPicEdt
+\unitlength=0.620000pt
+\begin{picture}(550.00,100.00)(-80.0,0.00)
+
+%\linethickness{0.9mm}
+\put(0.00,0.00){\line(1,0){50.00}} 
+
+%\linethickness{1.9mm}
+\put(0.00,0.00){\line(1,1){50.00}} 
+%\put(50.00,0.00){\line(0,1){50.00}} 
+
+% moved bond segment to the end
+\put(100.00,0.00){\line(1,0){50.00}} 
+
+%\linethickness{1.9mm}
+\put(100.00,0.00){\line(1,1){50.00}}
+
+%\linethickness{0.9mm}
+\put(150.00,50.00){\line(1,0){50.00}} 
+%\put(150.00,50.00){\line(0,-1){50.00}} 
+\put(200.00,50.00){\line(0,-1){50.00}} 
+\put(200.00,50.00){\line(1,0){50.00}} 
+
+\linethickness{0.9mm}
+\put(50.00,0.00){\line(1,0){50.00}} 
+\end{picture}
+\end{tabular}
+\caption{A graph and a bond of it.}
+\end{center}
+\label{fig:cocycle-space1}
+\end{figure}
+
+You can see from Figure \ref{fig:cocycle-space1} that:
+
+\begin{itemize}
+\item
+by removing edge $3$ from the graph, you get a bond with vector
+representation
+
+\[
+b_1 = (0,0,0,1,0,0,0,0,0,0,0),
+\]
+\item
+by removing edge $7$ from the graph, you get a bond with vector
+representation
+
+\[
+b_2 = (0,0,0,0,0,0,0,1,0,0,0),
+\]
+\item
+by removing edges $0,1$ from the graph, you get a bond with vector
+representation
+
+\[
+b_3 = (1,1,0,0,0,0,0,0,0,0,0),
+\]
+\item
+by removing edges $1,2$ from the graph, you get a bond with vector
+representation
+
+\[
+b_4 = (0,1,1,0,0,0,0,0,0,0,0),
+\]
+\item
+by removing edges $4,5$ from the graph, you get a bond with vector
+representation
+
+\[
+b_5 = (0,0,0,0,1,1,0,0,0,0,0),
+\]
+\item
+by removing edges $4,6$ from the graph, you get a bond with vector
+representation
+
+\[
+b_6 = (0,0,0,0,1,0,1,0,0,0,0),
+\]
+\item
+by removing edges $8,9$ from the graph, you get a bond with vector
+representation
+
+\[
+b_7 = (0,0,0,0,0,0,0,0,1,1,0),
+\]
+\item
+by removing edges $9,10$ from the graph, you get a bond with vector
+representation
+
+\[
+b_8 = (0,0,0,0,0,0,0,0,0,1,1).
+\]
+\end{itemize}
+The vectors $\{b_1,b_2,b_3,b_4,b_5,b_6,b_7,b_8\}$ form a basis of the 
+cocycle space of $G$ over $GF(2)$. 
+
+Note that these vectors are orthogonal to the basis vectors of
+the cycle space in Example \ref{example:cycle-space}. Note also that
+the xor sum of two cuts is not a cut.For example, if you xor the bond
+$4,5$ with the bond $4,6$ then you get the subgraph foormed by the 
+edges $5,6$ and that is not a disconnecting cut of $G$.
+}
+\end{example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Ford-Fulkerson theorem}
+
+The Ford-Fulkerson Theorem, or ``Max-flow/Min-cut Theorem,''
+was proven by P. Elias, A. Feinstein, and C.E. Shannon in 1956, and,
+independently, by L.R. Ford, Jr.  and D.R. Fulkerson in the same year.
+So it should be called the
+``Elias-Feinstein-Ford-Fulkerson-Shannon Theorem,''
+to be precise about the authorship.
+
+To explain the meaning of this theorem, we need to introduce some
+notation and  terminology.
+
+Consider an edge-weighted simple
+digraph $G=(V,E,i,h)$ without negative weight
+cycles. Here $E\subset V^{(2)}$,
+$i$ is an incidence function as in~\eqref{eqn:edge-incidence}, which
+we regard as the identity function, and $h$ is an
+orientation function as in~\eqref{eqn:edge-orientation}.
+Let $G$ be a {\it network},
+\index{network}
+with two distinguished vertices, the ``source'' and the ``sink.''
+Let $s$ and $t$ denote the source and the sink of $G$, respectively.
+The {\it capacity} (or {\it edge capacity})
+\index{capacity}
+\index{edge!capacity})
+is a mapping $c: E \to {\mathbf{R}}$, denoted by $c_{uv}$
+or $c(u,v)$, for $(u,v)\in E$ and $h(e)= u$.
+If $(u,v)\in E$ and $h(e)= v$
+then we set, by convention, $c(v,u)=-c(u,v)$.
+Thinking of a graph as a network of pipes (representing the edges)
+transporting water with various junctions (representing vertices),
+the capacity function represents the maximum amount
+of ``flow'' that can pass through an edge.
+
+A {\it flow}
+\index{flow}
+is a mapping $f: E \to {\mathbf{R}}$, denoted by $f_{uv}$ or
+$f(u,v)$, subject to the following two constraints:
+\begin{itemize}
+\item
+$f(u,v)\leq c(u,v)$, for each $(u,v) \in V$ (the ``capacity constraint''),
+\item
+$\sum_{u\in V,\ (u,v)\in E} f(u,v) = \sum_{u\in V,\ (v, u)\in E} f(v, u)$ ,
+for each $v\in V$ (conservation of flows).
+\end{itemize}
+An edge $(u,v) \in E$ is {\it $f$-saturated}
+\index{$f$-saturated}
+\index{saturated edge}
+if $f(u,v)=c(u,v)$.
+An edge $(u,v) \in E$ is {\it $f$-zero} if $f(u,v)=0$.
+\index{$f$-zero}
+A path with available capacity is called an ``augmenting path.''
+More precisely, a directed path form $s$ to $t$ is
+{\it $f$-augmenting}, or
+\index{$f$-augmenting}
+\index{$f$-unsaturated}
+\index{augmenting path}
+$f$-unsaturated, if no forward
+edge is $f$-saturated and no backward edge is $f$-zero.
+
+The {\it value of the flow} is defined by
+
+\[
+| f | = \sum_{v\in V}f(s,v)-\sum_{v\in V}f(v,s),
+\]
+where $s$ is the source.
+It represents the amount of flow passing from the source to the sink.
+\index{flow!value}
+\index{value of flow}
+The {\it maximum flow problem} is to maximize $| f |$, that is, to route as
+much flow as possible from $s$ to $t$.
+\index{maximum flow problem}
+
+\begin{example}
+{\rm
+Consider the digraph having adjacency matrix
+
+\[
+\left(\begin{array}{cccccc}
+0 & 1 & 1 & 0 & 0 & 0 \\
+-1 & 0 & -1 & 1 & 0 & 1 \\
+-1 & 1 & 0 & 0 & 1 & 0 \\
+0 & -1 & 0 & 0 & 0 & 1 \\
+0 & 0 & -1 & 0 & 0 & 1 \\
+0 & -1 & 0 & -1 & -1 & 0
+\end{array}\right),
+\]
+depicted in Figure \ref{fig:network_flows:digraph_flow}.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics{image/network-flows/digraph-flow}
+\caption{A digraph with $6$ vertices.}
+\label{fig:network_flows:digraph_flow}
+\end{figure}
+Suppose that each edge has capacity $1$.
+A maximum flow $f$ is obtained by taking a flow value
+of $1$ along each edge of the path
+
+\[
+p_1:(0,1),(1,5),
+\]
+and a flow value
+of $1$ along each edge of the path
+
+\[
+p_2:(0,2),(2,4),(4,5).
+\]
+The maximum value of the flow in this case is $|f|=2$.
+
+This graph can be created in Sage using the commands
+
+\begin{lstlisting}
+sage: B = matrix([[0,1,1,0,0,0],[0,0,0,1,0,1],[0,1,0,0,1,0],[0,0,0,0,0,1],[0,0,0,0,0,1],[0,0,0,0,0,0]])
+sage: H = DiGraph(B, format = "adjacency_matrix", weighted=True)
+\end{lstlisting}
+
+\noindent
+Type {\tt H.show(edge\_labels=True)} if you want to see the graph with
+the capacities labeling the edges.
+
+
+}
+\end{example}
+
+
+Given a capacitated digraph with capacity $c$ and flow $f$,
+we define the {\it residual digraph} $G_f=(V,E)$ to be the
+digraph with capacity $c_f(u,v) = c(u,v) - f(u,v)$ and no flow.
+In other words, $G_f$ is the same graph but it has a different
+capacity $c_f$ and flow $0$.
+\index{residual digraph}
+This is also called a {\it residual network}.
+\index{residual network}
+
+Define an {\it $s-t$ cut} in our capacitated digraph $G$
+to be a partition $C = (S,T)$ of $V$ such that
+$s \in S$ and $t\in T$.
+Recall the cut-set of $C$ is the set
+
+\[
+\{(u,v)\in E\ |\ u\in S, v\in T\}.
+\]
+
+\begin{lemma}
+\label{lemma:flow=0}
+{\rm
+Let $G = (V, E)$ be a capacitated digraph with
+capacity $c: E \to {\mathbf{R}}$, and let
+$s$ and $t$ denote the source and the sink of $G$, respectively.
+If $C$ is an $s-t$ cut and if
+the edges in the cut-set of $C$ are removed, then $| f | = 0$.
+}
+\end{lemma}
+
+\begin{exercise}
+Prove Lemma \ref{lemma:flow=0}.
+\end{exercise}
+
+The {\it capacity of an $s-t$ cut}
+\index{capacity!cut}
+$C = (S,T)$ is defined by
+
+\[
+c(S,T) = \sum_{(s,t)\in (S,T)} c(u,v).
+\]
+The {\it minimum cut problem}
+\index{minimum cut problem}
+is to minimize the amount of capacity of an $s-t$ cut.
+
+The following theorem is due to P. Elias, A. Feinstein, L.R. Ford,
+Jr.,  D.R. Fulkerson, C.E. Shannon.
+
+\begin{theorem}
+(max-flow min-cut theorem)
+{\rm
+The maximum value of an $s$-$t$ flow is equal to the minimum capacity of
+an $s$-$t$ cut.
+}
+\end{theorem}
+\index{max-flow min-cut theorem}
+
+The intuitive explanation of this result is as follows.
+
+Suppose that $G=(V,E)$ is a graph where each edge has capacity $1$.
+Let $s\in V$ be the source and $t\in V$ be the sink.
+The maximum flow from $s$ to $t$ is the maximum number of
+independent paths from $s$ to $t$.
+Denote this maximum flow by $m$.
+Each $s$-$t$ cut must intersect each $s$-$t$ path at least once.
+In fact, if $S$ is a minimal $s$-$t$ cut then for each
+edge $e$ in $S$ there is an $s$-$t$ path containing
+$e$. Therefore, $|S|\leq e$.
+
+On the other hand, since each edge has unit capacity,
+the maximum flow value can't exceed the number of
+edges separating $s$ from $t$, so $m\leq |S|$.
+
+
+\begin{remark}
+Although the notion of an independent path is important
+for the network-theoretic proof of Menger's theorem
+(which we view as a corollary to the Ford-Fulkerson
+theorem on network flows on networks having
+capacity $1$ on all edges), its significance is less
+important for networks having arbitrary capacities.
+One must use caution in generalizing the above
+intuitive argument to establish a rigorous proof
+of the general version of the MFMC theorem.
+\end{remark}
+
+\begin{remark}
+\label{remark:GMCMF}
+{\rm
+This theorem can be generalized as follows.
+In addition to edge capacity, suppose there is capacity at each {\it vertex},
+that is, a mapping $c: V \to {\mathbf{R}}$, denoted by
+$v \mapsto c(v)$, such that the flow $f$ has to
+satisfy not only the capacity constraint and the conservation of flows,
+but also the vertex capacity constraint
+
+\[
+ \sum_{w\in V} f(w,v) \leq c(v),
+\]
+for each $v \in V-\{s,t\}$.
+Define an {\it $s-t$ cut} to be the set of vertices and edges such
+that for any path from $s$ to $t$, the path contains a member of the cut.
+In this case, the capacity of the cut is the sum the capacity of each
+edge {\it and} vertex in it.
+In this new definition, the {\it generalized max-flow min-cut theorem}
+\index{max-flow min-cut theorem!generalized}
+states that the maximum value of an $s-t$ flow is equal to the minimum
+capacity of an $s-t$ cut..
+}
+\end{remark}
+
+The idea behind the Ford-Fulkerson algorithm is very simple: As long as
+there is a path from the source to the sink, with
+available capacity on all edges in the
+path, we send as much flow as we can alone along each
+of these paths. This is done inductively, one path at a time.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/distance-connectivity/ford-fulkerson.tex}
+\caption{Ford-Fulkerson algorithm.}
+\label{alg:distance-connectivity:ford-fulkerson}
+\end{algorithm}
+
+To prove the max-flow/min-cut theorem we will use the following lemma.
+
+\begin{lemma}
+{\rm
+Let $G=(V,E)$ be a directed graph with edge
+capacity $c: E \to {\mathbf{Z}}$,
+a source $s\in V$, and a sink $t\in V$.
+A flow $f: E \to {\mathbf{Z}}$ is a maximum flow if
+and only if there is no $f$-augmenting path in the graph.
+}
+\end{lemma}
+
+In other words, a flow $f$ in a
+capacitated network is a maximum flow if and only if
+there is no $f$-augmenting path in the network.
+
+\begin{proof}[Solution]
+One direction is easy. Suppose that the flow is a maximum.
+If there is an $f$-augmenting path then the
+current flow can be increased using that path, so the flow would not
+be a maximum. This contradiction proves the ``only if'' direction.
+
+Now, suppose there is no $f$-augmenting path in the network.
+Let $S$ be the set of vertices $v$ such that there is an $f$-unsaturated path from
+the source $s$ to $v$. We know $s\in S$ and (by hypothesis)
+$t\notin S$. Thus there is a cut of the form $(S,T)$ in the network.
+Let $e=(v,w)$ be any edge in this cut, $v\in S$ and $w\in T$. Since
+there is no $f$-unsaturated path from $s$ to $w$,
+$e$ is $f$-saturated. Likewise, any edge in the cut
+$(T,S)$ is $f$-zero. Therefore, the current flow value is equal to the
+capacity of the cut $(S,T)$. Therefore, the current flow is a maximum.
+\end{proof}
+
+We can now prove the max-flow/min-cut theorem.
+
+\begin{proof}[Solution]
+Let $f$ be a maximum flow.
+If
+
+\[
+S = \{v\in V\ |\ {\rm there\ exists\ an\ }f-{\rm saturated\ path\
+  from\ }s\ {\rm to\ }v\},
+\]
+then by the previous lemma, $S\not= V$.
+Since $T=V-S$ is non-empty, there is a cut $C=(S,T)$.
+Each edge of this cut $C$ in the capacitated network $G$ is
+$f$-saturated.
+
+\end{proof}
+
+Here is some Python code\footnote{Please see
+\url{http://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm}.}
+which implements this. The class {\tt FlowNetwork} is basically a Sage
+Graph class with edge weights and an extra data structure representing
+the flow on the graph.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO: Translate this into Sage
+%% easiler said than done, since the flow "record" is missing from
+%% Sage. One way: create new functions "find_path" and "max_flow"
+%% similar to the ones below but with a new argument
+%% "flow" which is a function on the edges of G. Maybe there
+%% is a better way??
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}
+class Edge:
+    def __init__(self,U,V,w):
+        self.source = U
+        self.to = V
+        self.capacity = w
+    def __repr__(self):
+        return str(self.source) + "->" + str(self.to) + " : " + str(self.capacity)
+
+class FlowNetwork(object):
+    """
+    This is a graph structure with edge capacities.
+
+    EXAMPLES:
+        g=FlowNetwork()
+        map(g.add_vertex, ['s','o','p','q','r','t'])
+        g.add_edge('s','o',3)
+        g.add_edge('s','p',3)
+        g.add_edge('o','p',2)
+        g.add_edge('o','q',3)
+        g.add_edge('p','r',2)
+        g.add_edge('r','t',3)
+        g.add_edge('q','r',4)
+        g.add_edge('q','t',2)
+        print g.max_flow('s','t')
+    """
+    def __init__(self):
+        self.adj, self.flow, = {},{}
+
+    def add_vertex(self, vertex):
+        self.adj[vertex] = []
+
+    def get_edges(self, v):
+        return self.adj[v]
+
+    def add_edge(self, u,v,w=0):
+        assert(u != v)
+        edge = Edge(u,v,w)
+        redge = Edge(v,u,0)
+        edge.redge = redge
+        redge.redge = edge
+        self.adj[u].append(edge)
+        self.adj[v].append(redge)
+        self.flow[edge] = self.flow[redge] = 0
+
+    def find_path(self, source, sink, path):
+        if source == sink:
+            return path
+        for edge in self.get_edges(source):
+            residual = edge.capacity - self.flow[edge]
+            if residual > 0 and not (edge,residual) in path:
+                result = self.find_path(edge.to, sink, path + [ (edge,residual) ])
+                if result != None:
+                    return result
+
+    def max_flow(self, source, sink):
+        path = self.find_path(source, sink, [])
+        while path != None:
+            flow = min(res for edge,res in path)
+            for edge,res in path:
+                self.flow[edge] += flow
+                self.flow[edge.redge] -= flow
+            path = self.find_path(source, sink, [])
+        return sum(self.flow[edge] for edge in self.get_edges(source))
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edmonds and Karp's algorithm}
+
+The objective of this section is to prove Edmond and Karp's algorithm
+for the maximum flow-minimum cut problem with polynomial
+complexity.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Goldberg and Tarjan's algorithm}
+
+The objective of this section is to prove Goldberg and Tarjan's
+algorithm for finding maximal flows with polynomial complexity.

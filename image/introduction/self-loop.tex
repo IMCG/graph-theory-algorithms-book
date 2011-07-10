@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{self-loop}
+
+\begin{document}
+
+\begin{figure}
+\begin{tikzpicture}
+[arrowDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  c/-2/0/left/west, b/2/0/right/east, a/0/2/above/north}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+  \node [\direction] at (\nodename.\navigate) {\footnotesize$\nodename$};
+}
+%% edges or lines
+\path
+(a) edge[arrowDecorate,loop below,min distance=10mm,out=310,in=230] node {} (a)
+(b) edge[arrowDecorate] node {} (c);
+\end{tikzpicture}
+\end{figure}
+
+\end{document}

@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{NULL}{\footnotesize{NULL}}
+%%
+%% input
+\KwIn{A binary search tree $T$ and a target key $k$.}
+%%
+%% output
+\KwOut{A vertex in $T$ with key $k$. If no such vertex exists, return \NULL.}
+\BlankLine
+%%
+%% algorithm body
+$v \assign \rootElem[T]$\;
+\While{\rm $v \neq \NULL$ and $k \neq \kappa_v$}{
+  \If{$k < \kappa_v$}{
+    $v \assign \leftChild[v]$\;
+  }
+  \Else{
+    $v \assign \rightChild[v]$\;
+  }
+}
+\Return $v$\;

@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{NULL}{\footnotesize{NULL}}
+%%
+%% input
+\KwIn{A nonempty binary search tree $T$ and a vertex $v$ that is not
+  a maximum of $T$.}
+%%
+%% output
+\KwOut{The successor of $v$.}
+\BlankLine
+%%
+%% algorithm body
+\If{$\rightChild[v] \neq \NULL$}{
+  \Return minimum vertex of $v$'s right subtree as per Algorithm~\ref{alg:tree_data_structures:binary_search_tree_minimum_key}\;
+}
+$u \assign \parent(v)$\;
+\While{\rm $u \neq \NULL$ and $v = \rightChild[u]$}{
+  $v \assign u$\;
+  $u \assign \parent(u)$\;
+}
+\Return $u$\;

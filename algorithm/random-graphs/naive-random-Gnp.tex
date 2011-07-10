@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{Positive integer $n$ and a probability $0 < p < 1$.}
+%%
+%% output
+\KwOut{A random graph from $G(n,p)$.}
+\BlankLine
+%%
+%% algorithm body
+$G \assign \overline{K_n}$\;
+$V \assign \{0, 1, \dots, n - 1\}$\;
+$E \assign$ $\{2$-combinations of $V\}$\;
+\For{\rm each $e \in E$}{
+  $r \assign$ draw uniformly at random from interval $(0,1)$\;
+  \If{$r < p$}{
+    add edge $e$ to $G$\;
+  }
+}
+\Return $G$\;

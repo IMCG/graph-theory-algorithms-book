@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{MyFalse}{False}
+%%
+%% input
+\KwIn{A sparse weighted digraph $G = (V, E)$, where the vertex set is
+  $V = \{1, 2, \dots, n\}$.}
+%%
+%% output
+\KwOut{If $G$ has negative-weight cycles, then return
+  \MyFalse. Otherwise, return an $n \times n$ matrix $D$ of shortest-path
+  weights and a list $P$ such that $P[v]$ is a parent list resulting
+  from running Dijkstra's algorithm on $G$ with start vertex $v$.}
+\BlankLine
+%%
+%% algorithm body
+$s \assign$ vertex not in $V$\;
+$V' \assign V \cup \{s\}$\;
+$E' \assign E \cup \{sv \;|\; v \in V\}$\;
+$G' \assign$ digraph $(V', E')$ with weight $w(sv) = 0$ for all $v \in V$\;
+\If{$\BellmanFord(G', w, s) = \MyFalse$}{
+  \Return \MyFalse\;
+}
+$d \assign$ distance list returned by $\BellmanFord(G', w, s)$\;
+\For{\rm each edge $uv \in E'$}{
+  $\hat{w}(uv) \assign w(uv) + d[u] - d[v]$\;
+}
+\For{\rm each $u \in V$}{
+  $(\hat{\delta}, \hat{P}) \assign$ distance and parent lists returned by $\Dijkstra(G, \hat{w}, u)$\;
+  $P[u] \assign \hat{P}$\;
+  \For{\rm each $v \in V$}{
+    $D[u,v] \assign \hat{\delta}[v] + d[v] - d[u]$\;
+  }
+}
+\Return $(D, P)$\;

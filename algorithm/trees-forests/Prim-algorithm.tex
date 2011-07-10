@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{NULL}{\footnotesize{NULL}}
+%%
+%% input
+\KwIn{A weighted connected graph $G = (V,E)$ with weight function $w$.}
+%%
+%% output
+\KwOut{A minimum spanning tree $T$ of $G$.}
+\BlankLine
+%%
+%% algorithm body
+\For{\rm each $v \in V$\nllabel{alg:prim:for_start:init}}{
+  $\cost[v] \assign \infty$\;
+  $\parent[v] \assign \NULL$\nllabel{alg:prim:for_end:init}\;
+}
+$r \assign$ arbitrary vertex of $V$\nllabel{alg:prim:arbitrary_root}\;
+$\cost[r] \assign 0$\;
+$Q \assign V$\nllabel{alg:prim:init_min_priority_queue}\;
+\While{$Q \neq \emptyset$\nllabel{alg:prim:while_start:build_tree}}{
+  $u \assign \extractMin(Q)$\nllabel{alg:prim:extract_min}\;
+  \For{\rm each $v \in \adj(u)$\nllabel{alg:prim:neighbors_u}}{
+    \If{\rm $v \in Q$ and $w(u,v) < \cost[v]$}{
+      $\parent[v] \assign u$\;
+      $\cost[v] \assign w(u,v)$\nllabel{alg:prim:while_end:build_tree}\;
+    }
+  }
+}
+$T \assign \big\{(v, \parent[v]) \mid v \in V - \{r\}\big\}$\nllabel{alg:prim:MST_edge_set}\;
+\Return $T$\nllabel{alg:prim:return_MST}\;

@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{automata}
+\usetikzlibrary{external}
+\usetikzlibrary{positioning}
+\tikzexternalize{example-deterministic-finite-automaton}
+
+\begin{document}
+
+\begin{figure}
+\begin{tikzpicture}
+[node distance=2.5cm,on grid,>=stealth,thick,initial text=,%
+  every state/.style={draw,thick}]
+\scriptsize
+%% nodes or states
+\node[state,initial] (1) {$1$};
+\node[state,accepting] (2) [right=of 1] {$2$};
+%% transitions or edges
+\path[->,thick]
+(1) edge[loop above] node {$a$} (1)
+(1) edge node[below] {$b$} (2)
+(2) edge[loop above] node {$\Sigma$} (2);
+\end{tikzpicture}
+\end{figure}
+
+\end{document}

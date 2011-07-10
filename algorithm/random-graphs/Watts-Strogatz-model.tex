@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{Positive integer $n$ denoting the number of vertices. Positive
+  even integer $k$ for the degree of each vertex, where
+  $n \gg k \gg \ln n \gg 1$. In particular, $k$ should satisfy
+  $0 < k < n/2$. Rewiring probability $0 < p \leq 1$.}
+%%
+%% output
+\KwOut{A Watts-Strogatz network on $n$ vertices.}
+\BlankLine
+%%
+%% algorithm body
+$M \assign nk$\tcc*[f]{sum of all vertex degrees = twice number of edges}\;
+$r \assign$ draw uniformly at random from interval $(0,1)$\;
+$v \assign 1 + \lfloor \ln(1 - r) / \ln(1 - p) \rfloor$\;
+$E \assign$ contiguous edge list of $k$-circulant graph on $n$ vertices\;
+\While{$v \leq M$}{
+  $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\;
+  \If{\rm $v-1$ is even\nllabel{alg:Watts_Strogatz:even_index}}{
+    \While{\rm $E[v] = u$ or $(u, E[v]) \in E$}{
+      $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\;
+    }
+  }
+  \Else{
+    \While{\rm $E[v-2] = u$ or $(E[v-2], u) \in E$}{
+      $u \assign$ draw uniformly at random from $[0, 1, \dots, n-1]$\nllabel{alg:Watts_Strogatz:choose_vertex_odd_index}\;
+    }
+  }
+  $E[v-1] \assign u$\;
+  $r \assign$ draw uniformly at random from interval $(0,1)$\;
+  $v \assign v + 1 + \lfloor \ln(1 - r) / \ln(1 - p) \rfloor$\;
+}
+$G \assign \overline{K_n}$\;
+add edges in $E$ to $G$\;
+\Return $G$\;

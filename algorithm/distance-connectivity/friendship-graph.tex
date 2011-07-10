@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{A positive integer $n$.}
+%%
+%% output
+\KwOut{The friendship graph $F_n$.}
+\BlankLine
+%%
+%% algorithm body
+\If{$n = 1$}{
+  \Return $C_3$\;
+}
+$G \assign$ null graph\;
+$N \assign 2n + 1$\;
+\For{$i \assign 0, 1, \dots, N-3$}{
+  \If{\rm $i$ is odd}{
+    add edges $(i,\, i+1)$ and $(i,\, N-1)$ to $G$\;
+  }
+  \Else{
+    add edge $(i, N-1)$ to $G$\;
+  }
+}
+add edges $(N-2,\, 0)$ and $(N-2,\, N-1)$ to $G$\;
+\Return $E$\;

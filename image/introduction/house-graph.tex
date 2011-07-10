@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize{house-graph}
+
+\begin{document}
+\begin{figure}
+\begin{tikzpicture}
+[lineDecorate/.style={-,thick},%
+  nodeDecorate/.style={shape=circle,inner sep=2pt,draw,thick}]
+%% nodes or vertices
+\foreach \nodename/\x/\y/\direction/\navigate in {
+  a/0/5/above/north, b/2/3/right/east, e/-2/3/left/west,
+  c/2/0/right/east, d/-2/0/left/west}
+{
+  \node (\nodename) at (\x,\y) [nodeDecorate] {};
+  \node [\direction] at (\nodename.\navigate) {\footnotesize$\nodename$};
+}
+%% edges or lines
+\path
+\foreach \startnode/\endnode in {a/b, b/c, b/e, c/d, d/e, e/a}
+{
+  (\startnode) edge[lineDecorate] node {} (\endnode)
+};
+\end{tikzpicture}
+\end{figure}
+
+\end{document}

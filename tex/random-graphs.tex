@@ -1,0 +1,1875 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%% Copyright (C) 2010 Nathann Cohen <nathann.cohen@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Random Graphs}
+\label{chap:random_graphs}
+
+A random\index{random graph} graph can be thought of as being a member
+from a collection of graphs having some common properties. Recall that
+Algorithm~\ref{alg:trees_forests:random_binary_tree} allows for
+generating a random binary tree having at least one vertex. Fix a
+positive integer $n$ and let $\cT$ be a collection of all binary trees
+on $n$ vertices. It can be infeasible to generate all members of
+$\cT$, so for most purposes we are only interested in randomly
+generating a member of $\cT$. A binary tree of order $n$ generated in
+this manner is said to be a random\index{random graph} graph.
+
+This chapter is a digression into the world of random graphs and
+various models for generating different types of random graphs. Unlike
+other chapters in this book, our approach is rather informal and not
+as rigorous as in other chapters. We will discuss some common models
+of random graphs and a number of their properties without being bogged
+down in details of proofs. Along the way, we will demonstrate that
+random graphs can be used to model diverse real-world networks such as
+social, biological, technological, and information
+networks. Bollob\'as~\cite{Bollobas2001} and Kolchin~\cite{Kolchin1999}
+provide standard references on the theory of random graphs with
+rigorous proofs. For comprehensive surveys of random graphs and
+networks that do not go into too much technical details, see
+Barab\'asi~\cite{Barabasi2002}, Easley and
+Kleinberg~\cite{EasleyKleinberg2010}, and
+Watts~\cite{Watts1999b,Watts2004}. On the other hand, surveys that
+cover diverse applications of random graphs and networks and are
+geared toward the technical aspects of the subject include Albert and
+Barab\'asi~\cite{AlbertBarabasi2002},
+Barrat~et~al.~\cite{BarratEtAl2008},
+Ben-Naim~et~al.~\cite{Ben-NaimEtAl2004},
+Bollob\'as~et~al.~\cite{BollobasEtAl2008}, Bornholdt and
+Schuster~\cite{BornholdtSchuster2003}, Caldarelli and
+Vespignani~\cite{CaldarelliVespignani2007}, Cohen and
+Havlin~\cite{CohenHavlin2010}, Csermely~\cite{Csermely2009}, Dehmer
+and Emmert-Streib~\cite{DehmerEmmert-Streib2009}, Dorogovtsev and
+Mendes~\cite{DorogovtsevMendes2002a,DorogovtsevMendes2002b},
+Ganguly~et~al.~\cite{GangulyEtAl2009}, Gross and
+Sayama~\cite{GrossSayama2009}, Newman~et~al.~\cite{NewmanEtAl2006},
+and Newman~\cite{Newman2003b,Newman2010}.
+
+%% \begin{itemize}
+%% \item See Bollob{\'a}s~\cite{Bollobas2001}.
+%%
+%% \item See Gerke~et~al.~\cite{GerkeEtAl2008} for a random planar graph
+%%   process.
+%%
+%% \item See Fusy~\cite{Fusy2009} for a linear algorithm on uniform
+%%   random sampling of planar graphs.
+%%
+%% \item See Broutin~\cite{Broutin2007} on random trees.
+%% \end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Network statistics}
+
+Numerous real-world networks are large, having from thousands up to
+millions of vertices and edges. Network statistics provide a way to
+describe properties of networks without concerning ourselves with
+individual vertices and edges. A network statistic should describe
+essential properties of the network under consideration, provide a
+means to differentiate between different classes of networks, and be
+useful in network algorithms and
+applications~\cite{BrinkmeierSchank2005}. In this section, we discuss
+various common network statistics that can be used to describe graphs
+underlying large networks.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Degree distribution}
+\label{subsec:random_graphs:degree_distribution}
+\index{degree distribution}
+
+The degree distribution of a graph $G = (V,E)$ quantifies the fraction
+of vertices in $G$ having a specific degree $k$. If $v$ is any vertex
+of $G$, we denote this fraction by
+%%
+\begin{equation}
+\label{eqn:random_graphs:fraction_with_specific_degree}
+p = \Pr[\deg(v) = k].
+\end{equation}
+%%
+As indicated by the notation, we can think
+of~\eqref{eqn:random_graphs:fraction_with_specific_degree} as the
+probability that a vertex $v \in V$ chosen uniformly at random has
+degree $k$. The \emph{degree distribution}\index{degree distribution}
+of $G$ is consequently a histogram of the degrees of vertices in
+$G$. Figure~\ref{fig:random_graphs:Zachary_karate_club} illustrates
+the degree distribution of the
+Zachary\index{network!Zachary karate club}~\cite{Zachary1977} karate
+club network. The degree distributions of many real-world networks
+have the same general curve as depicted in
+Figure~\ref{fig:Zachary_karate_club:degree_distribution}, i.e. a peak
+at low degrees followed by a tail at higher degrees. See for example
+the degree distribution of the neural network in
+Figure~\ref{fig:random_graphs:degree_distribution:neural_network_C_elegans},
+that of a power grid network in
+Figure~\ref{fig:random_graphs:degree_distribution:power_grid}, and the
+degree distribution of a scientific co-authorship network in
+Figure~\ref{fig:random_graphs:degree_distribution:condensed_matter_collaboration}.
+
+\begin{figure}[!htbp]
+\centering
+\index{network!Zachary karate club}
+\index{Zachary, Wayne W.}
+\subfigure[Zachary karate club network.]{
+  \includegraphics{image/random-graphs/Zachary-karate-club_graph}
+}
+\quad
+\subfigure[Linear scaling.]{
+  \label{fig:Zachary_karate_club:degree_distribution}
+  \includegraphics{image/random-graphs/Zachary-karate-club_linear}
+}
+\subfigure[Log-log scaling.]{
+  \includegraphics{image/random-graphs/Zachary-karate-club_log}
+}
+\caption{The friendship network within a $34$-person karate club. This
+  is more commonly known as the Zachary~\cite{Zachary1977} karate club
+  network. The network is an undirected, connected, unweighted graph
+  having $34$ vertices and $78$ edges. The horizontal axis represents
+  degree; the vertical axis represents the probability that a vertex
+  from the network has the corresponding degree.}
+\label{fig:random_graphs:Zachary_karate_club}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{Caenorhabditis elegans}
+\index{degree distribution}
+\index{network!biological}
+\subfigure[Linear scaling.]{
+  \includegraphics{image/random-graphs/degree-distribution-C-elegans_linear}
+}
+\qquad
+\subfigure[Log-log scaling.]{
+  \includegraphics{image/random-graphs/degree-distribution-C-elegans_log}
+}
+\caption{Degree distribution of the neural network of the
+  Caenorhabditis elegans. The network is a directed, not strongly
+  connected, weighted graph with $297$ vertices and 2,359 edges. The
+  horizontal axis represents degree; the vertical axis represents the
+  probability that a vertex from the network has the corresponding
+  degree. The degree distribution is derived from dataset by Watts and
+  Strogatz~\cite{WattsStrogatz1998} and White et
+  al.~\cite{WhiteEtAl1986}.}
+\label{fig:random_graphs:degree_distribution:neural_network_C_elegans}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{power grid}
+\index{degree distribution}
+\index{network!technological}
+\subfigure[Linear scaling.]{
+  \includegraphics{image/random-graphs/degree-distribution-power-grid_linear}
+}
+\qquad
+\subfigure[Log-log scaling.]{
+  \includegraphics{image/random-graphs/degree-distribution-power-grid_log}
+}
+\caption{Degree distribution of the Western States Power Grid of the
+  United States\index{USA}. The network is an undirected, connected,
+  unweighted graph with 4,941 vertices and 6,594 edges. The horizontal
+  axis represents degree; the vertical axis represents the probability
+  that a vertex from the network has the corresponding degree. The
+  degree distribution is derived from dataset by Watts and
+  Strogatz~\cite{WattsStrogatz1998}.}
+\label{fig:random_graphs:degree_distribution:power_grid}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{condensed matter}
+\index{degree distribution}
+\index{network!social}
+\index{scientific collaboration}
+\subfigure[Linear scaling.]{
+  \includegraphics{image/random-graphs/degree-distribution-cond-mat-collaboration_linear}
+}
+\qquad
+\subfigure[Log-log scaling.]{
+  \includegraphics{image/random-graphs/degree-distribution-cond-mat-collaboration_log}
+}
+\caption{Degree distribution of the network of co-authorships between
+  scientists posting preprints on the condensed matter eprint archive
+  at \url{http://arxiv.org/archive/cond-mat}. The network is a
+  weighted, disconnected, undirected graph having 40,421 vertices and
+  175,693 edges. The horizontal axis represents degree; the vertical
+  axis represents the probability that a vertex from the co-authorship
+  network has the corresponding degree. The degree distribution is
+  derived from the 2005 update of the dataset by
+  Newman~\cite{Newman2001b}.}
+\label{fig:random_graphs:degree_distribution:condensed_matter_collaboration}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Distance statistics}
+
+In chapter~\ref{chap:distance_connectivity} we discussed various
+distance metrics such as radius, diameter, and eccentricity. To that
+distance statistics collection we add the average or characteristic
+distance $\cdis$, defined as the arithmetic mean of all
+distances in a graph. Let $G = (V,E)$ be a simple graph with
+$n = |V|$ and $m = |E|$, where $G$ can be either directed or
+undirected. Then $G$ has size at most $n(n - 1)$ because for any
+distinct vertex pair $u,v \in V$ we count the edge from $u$ to $v$ and
+the edge from $v$ to $u$. The
+\emph{characteristic distance}\index{distance!characteristic} of $G$
+is defined by
+\[
+\cdis(G)
+=
+\frac{1}{n(n-1)}
+\sum_{u \neq v \in V} d(u,v)
+\]
+where the distance function $d$ is given by
+\[
+d(u,v)
+=
+\begin{cases}
+\infty, & \text{if there is no path from $u$ to $v$}, \\[4pt]
+0, & \text{if $u = v$}, \\[4pt]
+k, & \text{where $k$ is the length of a shortest $u$-$v$ path}.
+\end{cases}
+\]
+
+If $G$ is strongly connected~(respectively, connected for the
+undirected case) then our distance function is of the form
+$d: V \times V \to \Z_{+} \cup \{0\}$, where the codomain is the set
+of nonnegative integers. The case where $G$ is not strongly
+connected~(respectively, disconnected for the undirected version)
+requires special care. One way is to compute the characteristic
+distance for each component and then find the average of all such
+characteristic distances. Call the resulting characteristic distance
+$\cdis_c$, where $c$ means component. Another way is to assign
+a large number as the distance of non-existing shortest paths. If
+there is no $u$-$v$ path, we let $d(u,v) = n$ because $n = |V|$ is
+larger than the length of any shortest path between connected
+vertices. The resulting characteristic distance is denoted
+$\cdis_b$, where $b$ means big number. Furthermore denote by
+$d_\kappa$ the number of pairs $(u,v)$ such that $v$ is not reachable
+from $u$. For example, the Zachary~\cite{Zachary1977} karate club
+network has $\cdis = 2.4082$ and $d_\kappa = 0$; the C. elegans neural
+network~\cite{WattsStrogatz1998,WhiteEtAl1986} has
+$\cdis_b = 71.544533$, $\cdis_c = 3.991884$, and
+$d_\kappa = 20,268$; the Western States Power Grid
+network~\cite{WattsStrogatz1998} has $\cdis = 18.989185$ and
+$d_\kappa = 0$; and the condensed matter co-authorship
+network~\cite{Newman2001b} has $\cdis_b = 7541.74656$,
+$\cdis_c = 5.499329$, and $d_\kappa = 152,328,281$.
+
+We can also define the concept of distance distribution similar to how
+the degree distribution was defined in
+section~\ref{subsec:random_graphs:degree_distribution}. If $\ell$ is a
+positive integer with $u$ and $v$ being connected vertices in a graph
+$G = (V,E)$, denote by
+%%
+\begin{equation}
+\label{eqn:random_graphs:distance_distribution}
+p
+=
+\Pr[d(u,v) = \ell]
+\end{equation}
+%%
+the fraction of ordered pairs of connected vertices in $V \times V$
+having distance $\ell$ between them. As is evident from the above
+notation, we can think
+of~\eqref{eqn:random_graphs:distance_distribution} as the probability
+that a uniformly chosen connected pair $(u,v)$ of vertices in $G$ has
+distance $\ell$. The
+\emph{distance distribution}\index{distance distribution} of $G$ is
+hence a histogram of the distances between pairs of vertices in
+$G$. Figure~\ref{fig:random_graphs:distance_distribution} illustrates
+distance distributions of various real-world networks.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[Zachary karate club network~\cite{Zachary1977}.]
+{
+  \includegraphics{image/random-graphs/distance-distribution_karate-club}
+}
+\quad
+\subfigure[C. elegans neural network~\cite{WattsStrogatz1998,WhiteEtAl1986}.]
+{
+  \includegraphics{image/random-graphs/distance-distribution_C-elegans}
+}
+\subfigure[Power grid network~\cite{WattsStrogatz1998}.]
+{
+  \includegraphics{image/random-graphs/distance-distribution_power-grid}
+}
+\qquad
+\subfigure[Condensed matter co-authorship network~\cite{Newman2001b}.]
+{
+  \includegraphics{image/random-graphs/distance-distribution_condensed-matter}
+}
+\caption{Distance distributions for various real-world networks. The
+  horizontal axis represents distance and the vertical axis represents
+  the probability that a uniformly chosen pair of distinct vertices
+  from the network has the corresponding distance between them.}
+\label{fig:random_graphs:distance_distribution}
+\end{figure}
+
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/naive-random-Gnp.tex}
+\caption{Generate a random graph in $\cG(n,p)$.}
+\label{alg:random_graphs:generate_random_Gnp}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Binomial random graph model}
+
+Fix a positive integer $n$, a probability $p$, and a vertex set
+$V = \{0, 1, \dots, n - 1\}$. The
+\emph{binomial}\index{random graph!binomial}~(or
+\emph{Bernoulli})\index{random graph!Bernoulli} random graph model,
+denoted $\cG(n,p)$ and introduced by Gilbert~\cite{Gilbert1959}, is
+formally a probability\index{probability!space} space over the set of
+undirected simple graphs on $n$ vertices. If $G$ is any element of the
+probability space $\cG(n,p)$ and $ij$ is any edge for distinct
+$i,j \in V$, then $ij$ occurs as an edge of $G$ independently with
+probability $p$. In symbols, for any distinct pair $i,j \in V$ we have
+\[
+\Pr[ij \in E(G)]
+=
+p
+\]
+where all such events are mutually independent. Equivalently the model
+$\cG(n,p)$ considers the collection of all undirected simple graphs on
+$n$ vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
+actual edges, and an associated probability
+%%
+\begin{equation}
+\label{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
+p^m (1 - p)^{\binom{n}{2} - m}.
+\end{equation}
+%%
+Notice the latter's resemblance to the
+binomial\index{binomial!distribution} distribution. By
+$G \in \cG(n,p)$ we mean that $G$ is a random graph of the space
+$\cG(n,p)$ and having probability
+distribution $\cG(n,p)$.
+
+To generate a random graph in $\cG(n,p)$, start with $G$ being a graph
+on $n$ vertices but no edges. That is, initially $G$ is
+$\overline{K_n}$, the complement of the complete\index{complete graph}
+graph on $n$ vertices. Consider each of the $\binom{n}{2}$ possible
+edges in some order and add it independently to $G$ with probability
+$p$. See Algorithm~\ref{alg:random_graphs:generate_random_Gnp} for
+pseudocode of the procedure. The runtime of
+Algorithm~\ref{alg:random_graphs:generate_random_Gnp} depends on an
+efficient algorithm for generating all $2$-combinations of a set of
+$n$ objects. We could adapt
+Algorithm~\ref{alg:tree_data_structures:generate_all_r_combinations}
+to our needs or search for a more efficient algorithm; see
+problem~\ref{chap:random_graphs}.\ref{prob:random_graphs:quadratic_generate_random_Gnp}
+for discussion of an algorithm to generate a graph in $\cG(n,p)$ in
+quadratic
+time. Figure~\ref{fig:random_graphs:binomial_random_graph_25_nodes}
+illustrates some random graphs from $\cG(25,p)$ with $p = i/6$ for
+$i = 0, 1, \dots, 5$. See
+Figure~\ref{fig:random_graphs:Gnp_expected_and_experimental_values}
+for results for graphs in $\cG(2 \cdot 10^4,\, p)$.
+
+The expected number of edges of any $G \in \cG(n,p)$ is
+\[
+\alpha
+=
+\E[|E|]
+=
+p \cdot \binom{n}{2}
+=
+\frac{pn(n - 1)} {2}
+\]
+and the expected total degree is
+\[
+\beta
+=
+\E[\#\deg]
+=
+2p \cdot \binom{n}{2}
+=
+pn(n - 1).
+\]
+Then the expected degree of each edge is $p(n - 1)$. From
+problem~\ref{chap:introduction}.\ref{prob:introduction:number_simple_graphs}
+we know that the number of undirected simple graphs on $n$ vertices is
+given by
+\[
+2^{n(n-1) / 2}
+\]
+where~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
+is the probability of any of these graphs being the output of the
+above procedure. Let $\kappa(n,m)$ be the number of graphs from
+$\cG(n,p)$ that are connected and have size $m$, and by $\Pr[G_\kappa]$
+is meant the probability that $G \in \cG(n,p)$ is connected. Apply
+expression~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
+to see that
+\[
+\Pr[G_\kappa]
+=
+\sum_{i=n-1}^{\binom{n}{2}}
+\kappa(n,i) \cdot p^i (1 - p)^{\binom{n}{2} - i}
+\]
+where $n - 1$ is the least number of edges of any undirected connected
+graph on $n$ vertices, i.e. the size of any spanning tree of a
+connected graph in $\cG(n,p)$. Similarly define $\Pr[\kappa_{ij}]$ to
+be the probability that two distinct vertices $i,j$ of
+$G \in \cG(n,p)$ are connected. Gilbert~\cite{Gilbert1959} showed that
+as $n \to \infty$, the probabilities $\Pr[G_\kappa]$ and
+$\Pr[\kappa_{ij}]$ approach
+\[
+\Pr[G_\kappa] \to 1 - n(1 - p)^{n-1}
+\]
+and
+\[
+\Pr[\kappa_{ij}] \to 1 - 2(1 - p)^{n-1}.
+\]
+
+\begin{figure}[!htbp]
+\centering
+\index{binomial!random graph}
+\subfigure[$p = 0$;
+  $\alpha = 0$, $|E| = 0$;
+  $\beta = 0$, $\#\deg = 0$]{
+    \includegraphics{image/random-graphs/binomial-random-graphs-25-nodes_a}
+}
+\qquad
+\subfigure[$p = 1/6$;
+  $\alpha = 50$, $|E| = 44$;
+  $\beta = 100$, $\#\deg = 88$]{
+    \includegraphics{image/random-graphs/binomial-random-graphs-25-nodes_b}
+}
+\subfigure[$p = 1/3$;
+  $\alpha = 100$, $|E| = 108$;
+  $\beta = 200$, $\#\deg = 212$]{
+    \includegraphics{image/random-graphs/binomial-random-graphs-25-nodes_c}
+}
+\qquad
+\subfigure[$p = 1/2$;
+  $\alpha = 150$, $|E| = 156$;
+  $\beta = 300$, $\#\deg = 312$]{
+    \includegraphics{image/random-graphs/binomial-random-graphs-25-nodes_d}
+}
+\subfigure[$p = 2/3$;
+  $\alpha = 200$, $|E| = 185$;
+  $\beta = 400$, $\#\deg = 370$]{
+    \includegraphics{image/random-graphs/binomial-random-graphs-25-nodes_e}
+}
+\qquad
+\subfigure[$p = 5/6$;
+  $\alpha = 250$, $|E| = 255$;
+  $\beta = 500$, $\#\deg = 510$]{
+    \includegraphics{image/random-graphs/binomial-random-graphs-25-nodes_f}
+}
+\caption{Binomial random graphs $\cG(25,p)$ for various values of $p$.}
+\label{fig:random_graphs:binomial_random_graph_25_nodes}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics{image/random-graphs/Gnp-simulation}
+\caption{Comparison of expected and experimental values of the number
+  of edges and total degree of random simple undirected graphs in
+  $\cG(n,p)$. The horizontal axis represents probability points; the
+  vertical axis represents the size and total degree~(expected or
+  experimental). Fix $n = 20,000$ and consider $r = 50$ probability
+  points chosen as follows. Let $p_{\rm min} = 0.000001$,
+  $p_{\rm max} = 0.999999$, and
+  $F = (p_{\rm max} / p_{\rm min})^{1 / (r-1)}$. For
+  $i = 1, 2, \dots, r=50$ the $i$-th probability point $p_i$ is defined
+  by $p_i = p_{\rm min} F^{i-1}$. Each experiment consists in
+  generating $M = 500$ random graphs from $\cG(n, p_i)$. For each
+  $G_i \in \cG(n, p_i)$, where $i = 1, 2, \dots, 500$, compute its
+  actual size $\alpha_i$ and actual total degree $\beta_i$. Then take
+  the mean $\hat{\alpha}$ of the $\alpha_i$ and the mean $\hat{\beta}$
+  of the $\beta_i$.}
+\label{fig:random_graphs:Gnp_expected_and_experimental_values}
+\end{figure}
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{oriented graph}
+\index{oriented graph!random}
+\input{algorithm/random-graphs/random-oriented-graph-Gnp.tex}
+\caption{Random oriented graph via $\cG(n,p)$.}
+\label{alg:random_graphs:random_oriented_graph_Gnp}
+\end{algorithm}
+
+\begin{example}
+\label{eg:random_graphs:random_oriented_graph}
+Consider a digraph $D = (V,E)$ without self-loops or multiple
+edges. Then $D$ is said to be \emph{oriented}\index{oriented graph} if
+for any distinct pair $u,v \in V$ at most one of $uv, vu$ is an edge
+of $D$. Provide specific examples of oriented graphs.
+\end{example}
+
+\begin{proof}[Solution]
+If $u,v \in V$ is any pair of distinct vertices of an oriented graph
+$D = (V,E)$, we have various possibilities:
+%%
+\begin{enumerate}
+\item $uv \notin E$ and $vu \notin E$.
+
+\item $uv \in E$ and $vu \notin E$.
+
+\item $uv \notin E$ and $vu \in E$.
+\end{enumerate}
+%%
+Let $n > 0$ be the number of vertices in $D$ and let
+$0 < p < 1$. Generate a random oriented graph as follows. First we
+generate a binomial random graph $G \in \cG(n,p)$ where $G$ is simple
+and undirected. Then we consider the digraph version of $G$ and
+proceed to randomly prune either $uv$ or $vu$ from $G$, for each
+distinct pair of vertices $u,v$. Refer to
+Algorithm~\ref{alg:random_graphs:random_oriented_graph_Gnp} for
+pseudocode of our discussion. A Sage implementation follows:
+%%
+\begin{lstlisting}
+sage: G = graphs.RandomGNP(20, 0.1)
+sage: E = G.edges(labels=False)
+sage: G = G.to_directed()
+sage: cutoff = 0.5
+sage: for u, v in E:
+...       r = random()
+...       if r < cutoff:
+...           G.delete_edge(u, v)
+...       else:
+...           G.delete_edge(v, u)
+\end{lstlisting}
+%%
+which produced the random oriented graph in
+Figure~\ref{fig:random_graphs:random_oriented_graph}.
+\end{proof}
+
+\begin{figure}[!htbp]
+\centering
+\index{oriented graph!random}
+\includegraphics{image/random-graphs/random-oriented-graph}
+\caption{A random oriented graph generated using a graph in
+  $G(20,\, 0.1)$ and cutoff probability $0.5$.}
+\label{fig:random_graphs:random_oriented_graph}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Efficient generation of sparse $G \in \cG(n,p)$}
+
+The techniques discussed so
+far~(Algorithms~\ref{alg:random_graphs:generate_random_Gnp}
+and~\ref{alg:random_graphs:quadratic_generate_random_Gnp}) for
+generating a random graph from $\cG(n,p)$ can be unsuitable when the
+number of vertices $n$ is in the hundreds of thousands or millions. In
+many applications of $\cG(n,p)$ we are only interested in
+sparse\index{sparse graph} random graphs. A linear time algorithm to
+generate a random sparse graph from $\cG(n,p)$ is presented in
+Batagelj\index{Batagelj, Vladimir} and
+Brandes\index{Brandes, Ulrik}~\cite{BatageljBrandes2005}.
+
+The Batagelj-Brandes\index{Batagelj-Brandes algorithm} algorithm for
+generating a random sparse graph $G \in \cG(n,p)$ uses what is known as
+a geometric method to skip over certain edges. Fix a probability
+$0 < p < 1$ that an edge will be in the resulting random sparse graph
+$G$. If $e$ is an edge of $G$, we can consider the events leading up
+to the choice of $e$ as
+\[
+e_1, e_2, \dots, e_k
+\]
+where in the $i$-th trial the event $e_i$ is a failure, for
+$1 \leq i < k$, but the event $e_k$ is the first success after
+$k - 1$ successive failures. In probabilistic terms, we perform a
+series of independent trials each having success probability $p$ and
+stop when the first success occurs. Letting $X$ be the number of
+trials required until the first success occurs, then $X$ is a
+geometric random variable with parameter $p$ and probability mass
+function
+%%
+\begin{equation}
+\label{eqn:random_graphs:probability_mass_function_geometric_distribution}
+\Pr[X = k]
+=
+p (1 - p)^{k - 1}
+\end{equation}
+%%
+for integers $k \geq 1$, where
+\[
+\sum_{k=1}^\infty p (1 - p)^{k - 1}
+=
+1.
+\]
+In other words, waiting times are
+geometrically\index{distribution!geometric} distributed.
+
+Suppose we want to generate a random
+number\index{pseudorandom number} from a
+geometric\index{distribution!geometric} distribution, i.e. we want to
+simulate $X$ such that
+\[
+\Pr[X = k]
+=
+p (1 - p)^{k-1},
+\qquad
+k = 1, 2, 3, \dots
+\]
+Note that
+\[
+\sum_{k=1}^{\ell} \Pr[X=k]
+=
+1 - \Pr[X > \ell - 1]
+=
+1 - (1 - p)^{\ell - 1}.
+\]
+In other words, we can simulate a
+geometric\index{random variable!geometric} random variable by
+generating $r$ uniformly at random from the interval $(0,1)$ and set
+$X$ to that value of $k$ for which
+\[
+1 - (1 - p)^{k-1} < r < 1 - (1 - p)^k
+\]
+or equivalently for which
+\[
+(1 - p)^k < 1 - r < (1 - p)^{k-1}
+\]
+where $1 - r$ and $r$ are both uniformly\index{distribution!uniform}
+distributed. Thus we can define $X$ by
+%%
+\begin{align*}
+X
+&=
+\min\{k \mid (1 - p)^k < 1 - r\} \\[4pt]
+&=
+\min\left\{
+  k \;\left|\; k > \frac{\ln(1 - r)} {\ln(1 - p)} \right.
+\right\} \\[4pt]
+&=
+1 + \left\lfloor \frac{\ln(1 - r)} {\ln(1 - p)} \right\rfloor.
+\end{align*}
+%%
+That is, we can choose $k$ to be
+\[
+k
+=
+1 + \left\lfloor \frac{\ln(1 - r)} {\ln(1 - p)} \right\rfloor
+\]
+which is used as a basis of
+Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp}. In
+the latter algorithm, note that the vertex set is
+$V = \{0, 1, \dots, n-1\}$ and candidate edges are generated in
+lexicographic order. The Batagelj-Brandes
+Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp}
+has worst-case runtime $O(n + m)$, where $n$ and $m$ are the order and
+size, respectively, of the resulting graph.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{Batagelj-Brandes algorithm}
+\index{complete graph}
+\index{simple graph!random}
+\input{algorithm/random-graphs/linear-random-sparse-Gnp.tex}
+\caption{Linear generation of a random sparse graph in $\cG(n,p)$.}
+\label{alg:random_graphs:linear_generate_random_sparse_Gnp}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Degree distribution}
+\index{degree distribution}
+
+Consider a random graph $G \in \cG(n,p)$ and let $v$ be a vertex of
+$G$. With probability $p$, the vertex $v$ is incident with each of the
+remaining $n - 1$ vertices in $G$. Then the probability that $v$ has
+degree $k$ is given by the binomial\index{distribution!binomial}
+distribution
+%%
+\begin{equation}
+\label{eqn:random_graphs:Erdos_Renyi:probability_v_has_degree_k}
+\Pr[\deg(v) = k]
+=
+\binom{n-1}{k} p^k (1 - p)^{n-1-k}
+\end{equation}
+%%
+and the expected degree of $v$ is $\E[\deg(v)] = p(n-1)$. Setting
+$z = p(n-1)$, we can
+express~\eqref{eqn:random_graphs:Erdos_Renyi:probability_v_has_degree_k}
+as
+\[
+\Pr[\deg(v) = k]
+=
+\binom{n-1}{k}
+\left( \frac{z} {n-1-z} \right)^k
+\left( 1 - \frac{z}{n-1} \right)^{n-1}
+\]
+and thus
+\[
+\Pr[\deg(v) = k]
+\to
+\frac{z^k}{k!} \exp(-z)
+\]
+as $n \to \infty$. In the limit of large $n$, the probability that
+vertex $v$ has degree $k$ approaches the
+Poisson\index{distribution!Poisson} distribution. That is, as $n$ gets
+larger and larger any random graph in $\cG(n,p)$ has a Poisson degree
+distribution.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Erd\H{o}s-R\'enyi model}
+\label{sec:random_graphs:Erdos_Renyi_model}
+
+Let $N$ be a fixed nonnegative integer. The
+\emph{Erd\H{o}s-R\'enyi}~\cite{ErdosRenyi1959,ErdosRenyi1960}
+(or\index{random graph!Erd\H{o}s-R\'enyi}
+\emph{uniform})\index{random graph!uniform} random graph model,
+denoted $\cG(n,N)$, is a probability space over the set of undirected
+simple graphs on $n$ vertices and exactly $N$ edges. Hence $\cG(n,N)$
+can be considered as a collection of $\binom{\binom{n}{2}} {N}$
+undirected simple graphs on exactly $N$ edges, each such graph being
+selected with equal probability. A note of caution is in order
+here. Numerous papers on random graphs refer to $\cG(n,p)$ as the
+Erd\H{o}s-R\'enyi random graph model, where in fact this binomial
+random graph model should be called the Gilbert model in honor of
+E.~N.~Gilbert\index{Gilbert, E.~N.} who introduced~\cite{Gilbert1959}
+it in~1959. Whenever a paper makes a reference to the
+Erd\H{o}s-R\'enyi model, one should question whether the paper is
+referring to $\cG(n,p)$ or $\cG(n,N)$.
+
+To generate a graph in $\cG(n,N)$, start with $G$ being a graph on $n$
+vertices but no edges. Then choose $N$ of the possible $\binom{n}{2}$
+edges independently and uniformly at random and let the chosen edges
+be the edge set of $G$. Each graph $G \in \cG(n,N)$ is associated with a
+probability
+\[
+1 \left/ \binom{\binom{n}{2}} {N} \right.
+\]
+of being the graph resulting from the above procedure. Furthermore
+each of the $\binom{n}{2}$ edges has a probability
+\[
+1 \left/ \binom{n}{2} \right.
+\]
+of being chosen.
+Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN} presents
+a straightforward translation of the above procedure into pseudocode.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/linear-random-GnN.tex}
+\caption{Generation of random graph in $\cG(n,N)$.}
+\label{alg:random_graphs:linear_generate_random_GnN}
+\end{algorithm}
+
+The runtime of
+Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN} is
+probabilistic and can be analyzed via the
+geometric\index{distribution!geometric} distribution. If $i$ is the
+number of edges chosen so far, then the probability of choosing a new
+edge in the next step is
+\[
+\frac{\binom{n}{2} - i} {\binom{n}{2}}.
+\]
+We repeatedly choose an edge uniformly at random from the collection
+of all possible edges, until we come across the first edge that is not
+already in the graph. The number of trials required until the first
+new edge is chosen can be modeled using the geometric distribution
+with probability mass
+function~\eqref{eqn:random_graphs:probability_mass_function_geometric_distribution}.
+Given a geometric random variable $X$, we have the expectation
+\[
+\E[X]
+=
+\sum_{n=1}^\infty n \cdot p(1 - p)^{n-1}
+=
+\frac{1}{p}.
+\]
+Therefore the expected number of trials until a new edge be chosen is
+\[
+\frac{\binom{n}{2}} {\binom{n}{2} - i}
+\]
+from which the expected total runtime is
+%%
+\begin{align*}
+\label{eqn:random_graphs:Erdos_Renyi_expected_total_runtime_sum}
+\sum_{i=1}^N \frac{\binom{n}{2}} {\binom{n}{2} - i}
+&\approx
+\int_0^N \frac{\binom{n}{2}} {\binom{n}{2} - x} \; dx \\[4pt]
+&=
+\binom{n}{2} \cdot \ln \frac{\binom{n}{2}} {\binom{n}{2} - N}.
+\end{align*}
+%%
+The denominator in the latter fraction becomes zero when
+$\binom{n}{2} = N$, which can be prevented by adding one to the
+denominator. Then we have the expected total runtime
+\[
+\sum_{i=1}^N \frac{\binom{n}{2}} {\binom{n}{2} - i}
+\in
+\Theta
+\left(
+  \binom{n}{2} \cdot \ln \frac{\binom{n}{2}} {\binom{n}{2} - N + 1}
+\right)
+\]
+which is $O(N)$ when $N \leq \binom{n}{2} / 2$, and $O(N \ln N)$ when
+$N = \binom{n}{2}$. In other words,
+Algorithm~\ref{alg:random_graphs:linear_generate_random_GnN} has
+expected linear runtime when the number $N$ of required edges
+satisfies $N \leq \binom{n}{2} / 2$. But for $N > \binom{n}{2} / 2$,
+we obtain expected linear runtime by generating the
+complete\index{complete graph} graph $K_n$ and randomly delete
+$\binom{n}{2} - N$ edges from the latter graph. Our discussion is
+summarized in
+Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/expected-linear-random-GnN.tex}
+\caption{Generation of random graph in $\cG(n,N)$ in expected linear time.}
+\label{alg:random_graphs:expected_linear_generate_random_GnN}
+\end{algorithm}
+
+
+%% One of the first properties of random graphs which makes them so pleasant to work with is the following
+
+%% \begin{theorem}
+%%   Let $H$ be any graph, and $0<p<1$. Then
+%% $$\lim_{n\to +\infty}P\left[H\text{ is an induced subgraph of }G_{n,p}\right]=1$$
+%% \end{theorem}
+%% \begin{proof}[Sketch]
+%% Instinctively, we would like to find a copy of $H$ in $G_{n,p}$ by iteratively finding an acceptable representant $h(v_i)$ in $G_{n,p}$ of every vertex $v_i$ of $V(H) = \{v_1, \dots, v_k\}$. How could such a strategy work ?
+%% \begin{itemize}
+%% \item Pick for $v_1$ any vertex $h(v_1)\in G_{n,p}$
+%% \item Pick for $v_2$ any vertex $h(v_2)\in G_{n,p}$ such that $h(v_1)h(v_2)\in E(G_{n,p})$ if $v_1v_2\in E(H)$, and such that $h(v_1)h(v_2)\not \in E(G_{n,p})$ otherwise
+%% \item \dots
+%% \item Assuming you have found, for all $i\leq j\leq k$, a representant $h(v_i)$ for each vertex $v_i$, and such that $H[\{v_1,\dots,v_{j-1}\}]$ is isomorphic to $G_{n,p}[\{h(v_1),\dots,h(v_{j-1})\}]$, try to find a new vertex $h(v_j)$ such that $\forall i<j,h(v_i)h(v_j)\in E(G_{n,p})$ if  and only if $v_iv_j\in E(H)$.
+
+%%   When $n$ is growing large, such a vertex will exist with high probability.
+%% \end{itemize}
+%% \end{proof}
+
+%% \begin{proof}
+%%   Formally, let us write $H_i = H[\{v_1,\dots,v_{j-1}\}]$, and denote
+%%   the probability that $H$ is an induced subgraph of $G_{n,p}$ by $P[H
+%%     \mapsto_{ind} G_{n,p}]$. We can roughly bound the probability that $H_i$, but not $H_{i+1}$, is an induced subgraph of $G_{n,p}$ the following way :
+
+%%   \begin{itemize}
+%%   \item We put a copy of $H_i$ at any of the $\binom n i$ different $i$-subsets of $V(G_{n,p})$.
+
+%%     This can be done, each time, in $i!$ different ways as the vertices $\{v_1, \dots, v_i\}$ can be permuted
+
+%%   \item We compute the probability that no other vertex of $G_{n,p}$ can be used to complete our current copy of $H_i$ into a copy of $H_{i+1}$. The probability that such a vertex is acceptable being
+%%     $$p^{d_{H_{i+1}}(v_{i+1})}(1-p)^{i-d_{H_{i+1}}(v_{i+1})}\geq min(p, 1-p)^i$$
+%%     the property that none of the $n-i$ vertices left is acceptable is at most
+%%     $$\left({ 1- min(p, 1-p)^i } \right)^{(n-i)}$$
+%%   \end{itemize}
+
+%%   As $0<p<1$, we can write $0<\epsilon = min(p, 1-p)$ and thus, the probability that $H_i$, but not $H_{i+1}$, is a induced subgraph of $G_{n,p}$ is at most $$i!\binom n i (1-\epsilon^i)^{n-i}\leq i! n^i (1-\epsilon^i)^{n-i} = o(1/n)$$
+%% Which is asymptotically equal to 0 as $n$ grows.
+
+%% Thus
+
+%% \begin{align*}
+%%   P[H \mapsto_{ind} G_{n,p}]&=1 - P[H_2 \mapsto_{ind} G_{n,p}, H_3\not \mapsto_{ind} G_{n,p}]\\
+%%   &-P[H_3 \mapsto_{ind} G_{n,p}, H_4\not \mapsto_{ind} G_{n,p}]\\
+%%   &\dots\\
+%%   &-P[H_{k-1} \mapsto_{ind} G_{n,p}, H_k\not \mapsto_{ind} G_{n,p}]\\
+%%   P[H \mapsto_{ind} G_{n,p}]&\geq 1-\sum_{i\leq k}i!n^i(1-\epsilon^i)^{n-i}\\
+%%   &\geq 1-k\times o(1/n)\\
+%% \end{align*}
+
+%% Which proves the result.
+
+%% \end{proof}
+
+%% This proof also gives us a simple algorithm to find a copy of a graph $H$ into a random graph $G_{n,p}$. While obviously such an algorithm will not always find the copy of $H$ if it exists, the probability of a successful run will tend toward $1$ as proved immediately above.
+
+%% \begin{lstlisting}
+%% def find_induced(H, G):
+
+%%     # f is the function from V(H) to V(G) we
+%%     # are attempting to define
+%%     f = {}
+
+%%     # leftovers is the set of vertices of G which have not yet
+%%     # been used by f
+%%     G_leftovers = G.vertices()
+
+%%     # Set of vertices for which no representant has been found yet
+%%     H_leftovers = H.vertices()
+
+%%     # While the function is not complete
+%%     while H_leftovers:
+
+%%         # We look for the next vertex of H
+%%         v = H_leftovers.pop(0)
+
+%%         # ... and look for its possible image
+%%         candidates = [u for u in G_leftovers if
+%%           all([ H.has_edge(h,v) == G.has_edge(f_h,u)
+%%             for h,f_h in f.iteritems()])]
+
+%%         if not candidates:
+%%             raise ValueError("No copy of H has been found in G")
+
+%%         # We pick the first of them
+%%         f[v] = candidates[0]
+%%         G_leftovers.remove(f[v])
+
+%%     return f
+%% \end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Small-world networks}
+\label{sec:random_graphs:small_world_networks}
+
+Many real-world networks exhibit the
+\emph{small-world effect}\index{small-world!effect}: that most pairs
+of distinct vertices in the network are connected by relatively short
+path lengths. The small-world effect was empirically
+demonstrated~\cite{Milgram1967} in a famous~1960s experiment by
+Stanley Milgram\index{Milgram, Stanley}, who distributed a number
+of letters to a random selection of people. Recipients were instructed
+to deliver the letters to the addressees on the condition that letters
+must be passed to people whom the recipients knew on a first-name
+basis. Milgram found that on average six steps were required for a
+letter to reach its target recipient, a number now immortalized in the
+phrase\index{six degrees of separation} ``six degrees of
+separation''~\cite{Guare1990}.
+Figure~\ref{fig:random_graphs:Milgram_small_world_experiment_results}
+plots results of an experimental study of the small-world problem as
+reported in~\cite{TraversMilgram1969}. The small-world effect has been
+studied and verified for many real-world networks including
+%%
+\begin{itemize}
+\item social\index{network!social}: collaboration network of actors in
+  feature films~\cite{AmaralEtAl2000,WattsStrogatz1998}, scientific
+  publication
+  authorship~\cite{CastroGrossman1999,GrossmanIon1995,Newman2001a,Newman2001b};
+
+\item information\index{network!information}: citation
+  network~\cite{Redner1998}, Roget's\index{Roget's Thesaurus}
+  Thesaurus~\cite{Knuth1993}, word
+  co-occurrence~\cite{DorogovtsevMendes2001,FerrerSole2001};
+
+\item technological\index{network!technological}:
+  internet~\cite{ChenEtAl2002,FaloutsosEtAl1999}, power
+  grid~\cite{WattsStrogatz1998}, train routes~\cite{SenEtAl2003},
+  software~\cite{Newman2003a,ValverdeEtAl2002};
+
+\item biological\index{network!biological}: metabolic
+  network~\cite{JeongEtAl2000}, protein
+  interactions~\cite{JeongEtAl2001}, food
+  web~\cite{HuxhamEtAl1996,Martinez1991}, neural
+  network~\cite{WattsStrogatz1998,WhiteEtAl1986}.
+\end{itemize}
+
+\begin{figure}[!htbp]
+\centering
+\index{frequency distribution}
+\index{small-world!experimental results}
+\includegraphics{image/random-graphs/Milgram-small-world-experiment-results}
+\caption{Frequency distribution of the number of intermediaries
+  required for letters to reach their intended addressees. The
+  distribution has a mean of $5.3$, interpreted as the average number
+  of intermediaries required for a letter to reach its intended
+  destination. The plot is derived from data reported in Travers and
+  Milgram~\cite{TraversMilgram1969}.}
+\label{fig:random_graphs:Milgram_small_world_experiment_results}
+\end{figure}
+
+Watts\index{Watts, Duncan J.} and\index{Strogatz, Steven H.}
+Strogatz~\cite{Watts1999a,Watts1999b,WattsStrogatz1998}
+proposed a network model that produces graphs exhibiting the
+small-world effect. Let $n$ and $k$ be positive integers such that
+$n \gg k \gg \ln n \gg 1$~(in particular, $0 < k < n/2$), $k$ being
+even, and consider a probability $0 < p < 1$. Starting from an
+undirected $k$-circulant\index{regular graph!$k$-circulant} graph
+$G = (V,E)$ on $n$ vertices, the
+Watts-Strogatz\index{Watts-Strogatz model} model proceeds to rewire
+each edge with probability $p$. The rewiring procedure works as
+follows. Let $V$ be uniformly distributed. For each $v \in V$, let
+$e \in E$ be an edge having $v$ as an endpoint. Choose another
+$u \in V$ different from $v$. With probability $p$, delete the edge
+$e$ and add the edge $vu$. The rewiring must produce a
+simple\index{simple graph} graph with the same order and size as
+$G$. As $p \to 1$, the graph $G$ goes from $k$-circulant to exhibiting
+properties of $\cG(n,p)$\index{random graph!binomial}. Small-world
+networks are intermediate between $k$-circulant and binomial random
+graphs~(see
+Figure~\ref{fig:random_graphs:k_circulant_small_world_random}). The
+Watts-Strogatz model is said to provide a procedure for interpolating
+between the latter two types of graphs.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[$p = 0$, $k$-circulant]{
+  \includegraphics{image/random-graphs/k-circulant-small-world-random_a}
+}
+\qquad
+\subfigure[$p = 0.3$, small-world]{
+  \includegraphics{image/random-graphs/k-circulant-small-world-random_b}
+}
+\qquad
+\subfigure[$p = 1$, random]{
+  \includegraphics{image/random-graphs/k-circulant-small-world-random_c}
+}
+\caption{With increasing randomness, $k$-circulant graphs evolve to
+  exhibit properties of random graphs in $\cG(n,p)$. Small-world
+  networks are intermediate between $k$-circulant graphs and random
+  graphs in $\cG(n,p)$.}
+\label{fig:random_graphs:k_circulant_small_world_random}
+\end{figure}
+
+The last paragraph contains an algorithm for rewiring edges of a
+graph. While the algorithm is simple, in practice it potentially skips
+over a number of vertices to be considered for rewiring. If
+$G = (V,E)$ is a $k$-circulant graph on $n$ vertices and $p$ is the
+rewiring probability, the candidate vertices to be rewired follow a
+geometric distribution with parameter $p$. This geometric trick,
+essentially the same speed-up technique used by the Batagelj-Brandes
+Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp},
+can be used to speed up the rewiring algorithm. To elaborate, suppose
+$G$ has vertex set $V = \{0, 1, \dots, n-1\}$. If $r$ is chosen
+uniformly at random from the interval $(0,1)$, the index of the vertex
+to be rewired can be obtained from
+\[
+1 + \left\lfloor \frac{\ln(1 - r)} {\ln(1 - p)} \right\rfloor.
+\]
+The above geometric method is incorporated into
+Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph} to
+generate a Watts-Strogatz network in worst-case runtime
+$O(nk + m)$, where $n$ and $k$ are as per the input of the algorithm
+and $m$ is the size of the $k$-circulant graph on $n$ vertices. Note
+that lines~\ref{alg:Watts_Strogatz:even_index}
+to~\ref{alg:Watts_Strogatz:choose_vertex_odd_index} are where we avoid
+self-loops and multiple edges.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{complete graph}
+\index{list!contiguous edge}
+\index{regular graph!$k$-circulant}
+\index{small-world!algorithm}
+\index{small-world!network}
+\index{Watts-Strogatz model}
+\input{algorithm/random-graphs/Watts-Strogatz-model.tex}
+\caption{Watts-Strogatz network model.}
+\label{alg:random_graphs:generate_Watts_Strogatz_graph}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Characteristic path length}
+
+Watts and Strogatz~\cite{WattsStrogatz1998} analyzed the structure of
+networks generated by
+Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph} via
+two quantities: the
+\emph{characteristic path length}\index{small-world!characteristic path length}
+$\ell$ and the
+\emph{clustering coefficient}\index{small-world!clustering coefficient}
+$C$. The characteristic path length quantifies the average distance
+between any distinct pair of vertices in a Watts-Strogatz network. The
+quantity $\ell(G)$ is thus said to be a global property of $G$. Watts
+and Strogatz characterized as \emph{small-world}\index{small-world}
+those networks that exhibit high clustering coefficients and low
+characteristic path lengths.
+
+Let $G = (V,E)$ be a Watts-Strogatz network as generated by
+Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph}, where
+the vertex set is $V = \{0, 1, \dots, n-1\}$. For each pair of
+vertices $i,j \in V$, let $d_{ij}$ be the distance from $i$ to $j$. If
+there is no path from $i$ to $j$ or $i = j$, set $d_{ij} = 0$. Thus
+\[
+d_{ij}
+=
+\begin{cases}
+0, & \text{if there is no path from $i$ to $j$}, \\[4pt]
+0, & \text{if $i = j$}, \\[4pt]
+k, & \text{where $k$ is the length of a shortest path from $i$ to $j$}.
+\end{cases}
+\]
+Since $G$ is undirected, we have $d_{ij} = d_{ji}$. Consequently when
+computing the distance between each distinct pair of vertices, we
+should avoid double counting by computing $d_{ij}$ for $i < j$. Then
+the characteristic path length of $G$ is defined by
+%%
+\begin{equation}
+\label{eqn:random_graphs:define_characteristic_path_length}
+\begin{aligned}
+\ell(G)
+&=
+\frac{1}{n(n-1)/2} \cdot \frac{1}{2} \sum_{i \neq j} d_{ij} \\[4pt]
+&=
+\frac{1}{n(n-1)} \sum_{i \neq j} d_{ij}
+\end{aligned}
+\end{equation}
+%%
+which is averaged over all possible pairs of distinct vertices,
+i.e. the number of edges in the complete\index{complete graph} graph
+$K_n$.
+
+It is inefficient to compute the characteristic path length via
+equation~\eqref{eqn:random_graphs:define_characteristic_path_length}
+because we would effectively sum $n(n - 1)$ distance values. As $G$ is
+undirected, note that
+\[
+\frac{1}{2} \sum_{i \neq j} d_{ij}
+=
+\sum_{i < j} d_{ij}
+=
+\sum_{i > j} d_{ij}.
+\]
+The latter equation holds for the following reason. Let $D = [d_{ij}]$
+be a matrix of distances for $G$, where $i$ is the row index, $j$ is
+the column index, and $d_{ij}$ is the distance from $i$ to $j$. The
+required sum of distances can be obtained by summing all entries
+above~(or below) the main diagonal of $D$. Therefore the
+characteristic path length can be expressed as
+%%
+\begin{align*}
+\ell(G)
+&=
+\frac{2}{n(n-1)} \sum_{i < j} d_{ij} \\[4pt]
+&=
+\frac{2}{n(n-1)} \sum_{i > j} d_{ij}
+\end{align*}
+%%
+which requires summing $\frac{n(n-1)}{2}$ distance values.
+
+Let $G = (V,E)$ be a Watts-Strogatz network with $n = |V|$. Set
+$k' = k/2$, where $k$ is as per
+Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph}. As
+the rewiring probability $p \to 0$, the average path length tends to
+\[
+\ell
+\to
+\frac{n}{4k'}
+=
+\frac{n}{2k}.
+\]
+In the special case $p = 0$, we have
+\[
+\ell
+=
+\frac{n (n + k - 2)} {2k (n - 1)}.
+\]
+However as $p \to 1$, we have $\ell \to \frac{\ln n} {\ln k}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Clustering coefficient}
+
+The \emph{clustering coefficient}\index{small-world!clustering coefficient} of a
+simple graph $G$ quantifies the ``cliquishness'' of vertices in
+$G = (V,E)$. This quantity is thus said to be a local property of
+$G$. Watts and Strogatz~\cite{WattsStrogatz1998} defined the
+clustering coefficient as follows. Suppose $n = |V| > 0$ and let $n_i$
+count the number of neighbors of vertex $i \in V$, a quantity that is
+equivalent to the degree of $i$, i.e. $\deg(i) = n_i$. The complete
+graph $K_{n_i}$ on the $n_i$ neighbors of $i$ has $n_i(n_i - 1) / 2$
+edges. The \emph{neighbor graph}\index{neighbor graph}\index{$\cN_i$}
+$\cN_i$ of $i$ is a subgraph of $G$, consisting of all
+vertices~($\neq i$) that are adjacent to $i$ and preserving the
+adjacency relation among those vertices as found in the supergraph
+$G$. For example, given the graph in
+Figure~\ref{fig:neighbor_graph:original_graph} the neighbor graph of
+vertex $10$ is shown in
+Figure~\ref{fig:neighbor_graph:neighbor_graph}. The local clustering
+coefficient $C_i$ of $i$ is the ratio
+\[
+C_i
+=
+\frac{N_i} {n_i (n_i - 1) / 2}
+\]
+where $N_i$ counts the number of edges in $\cN_i$. In case $i$ has
+degree $\deg(i) < 2$, we set the local clustering coefficient of $i$
+to be zero. Then the clustering
+coefficient\index{small-world!clustering coefficient} of $G$ is defined by
+\[
+C(G)
+=
+\frac{1}{n} \sum_{i \in V} C_i
+=
+\frac{1}{n} \sum_{i \in V} \frac{N_i} {n_i (n_i - 1) / 2}.
+\]
+
+\begin{figure}[!htbp]
+\centering
+\index{neighbor graph}
+\subfigure[Graph on $11$ vertices.]{
+  \label{fig:neighbor_graph:original_graph}
+  \includegraphics{image/random-graphs/neighbor-graph_a}
+}
+\qquad
+\subfigure[$\cN_{10}$]{
+  \label{fig:neighbor_graph:neighbor_graph}
+  \includegraphics{image/random-graphs/neighbor-graph_b}
+}
+\caption{The neighbor graph of a vertex.}
+\label{fig:random_graphs:neighbor_graph}
+\end{figure}
+
+Consider the case where we have a $k$-circulant graph
+$G = (V,E)$ on $n$ vertices and a rewiring probability $p = 0$. That
+is, we do not rewire any edge of $G$. Each vertex of $G$ has degree
+$k$. Let  $k' = k/2$. Then the $k$ neighbors of each vertex in $G$ has
+$3k' (k' - 1) / 2$ edges between them, i.e. each neighbor graph
+$\cN_i$ has size $3k' (k' - 1) / 2$. Then the clustering coefficient
+of $G$ is
+\[
+\frac{3(k' - 1)} {2(2k' - 1)}.
+\]
+When the rewiring probability is $p > 0$, Barrat and
+Weigt~\cite{BarratWeigt2000} showed that the clustering coefficient of
+any graph $G'$ in the Watts-Strogatz network model~(see
+Algorithm~\ref{alg:random_graphs:generate_Watts_Strogatz_graph}) can
+be approximated by
+\[
+C(G')
+\approx
+\frac{3(k' - 1)} {2(2k' - 1)} (1 - p)^3.
+\]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Degree distribution}
+
+For a Watts-Strogatz network without rewiring, each vertex has the
+same degree $k$. It easily follows that for each vertex $v$, we have
+the degree distribution
+\[
+\Pr[\deg(v) = i]
+=
+\begin{cases}
+1, & \text{if $i = k$}, \\[4pt]
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+A rewiring probability $p > 0$ introduces disorder in the network and
+broadens the degree distribution, while the expected degree is $k$. A
+$k$-circulant graph on $n$ vertices has $nk / 2$ edges. With the
+rewiring probability $p > 0$, a total of $pnk / 2$ edges would be
+rewired. However note that only one endpoint of an edge is rewired,
+thus after the rewiring process the degree of any vertex $v$ is
+$\deg(v) \geq k/2$. Therefore with $ k > 2$, a Watts-Strogatz network
+has no isolated vertices.
+
+For $p > 0$, Barrat and Weigt~\cite{BarratWeigt2000} showed that the
+degree of a vertex $v$ can be written as $\deg(v) = k/2 + n_i$ with
+$n_i \geq 0$, where $n_i$ can be divided into two parts $\alpha$ and
+$\beta$ as follows. First $\alpha \leq k/2$ edges are left intact
+after the rewiring process, the probability of this occurring is
+$1 - p$ for each edge. Second $\beta = n_i - \alpha$ edges have been
+rewired towards $i$, each with probability $1/n$. The probability
+distribution of $\alpha$ is
+\[
+P_1(\alpha)
+=
+\binom{k/2}{\alpha} (1 - p)^\alpha p^{k/2 - \alpha}
+\]
+and the probability distribution of $\beta$ is
+\[
+P_2(\beta)
+=
+\binom{pnk/2}{\beta} \left( \frac{1}{n} \right)^\beta
+\left( 1 - \frac{1}{n} \right)^{pnk/2 - \beta}
+\]
+where
+\[
+P_2(\beta)
+\to
+\frac{(pk/2)^\beta}{\beta!} \exp(-pk/2)
+\]
+for large $n$. Combine the above two factors to obtain the degree
+distribution
+\[
+\Pr[\deg(v) = \kappa]
+=
+\sum_{i=0}^{\min\{\kappa - k/2,\, k/2\}}
+\binom{k/2}{i} (1 - p)^i p^{k/2 - i}
+\frac{(pk/2)^{\kappa - k/2 - i}} {(\kappa - k/2 - i)!}
+\exp(-pk/2)
+\]
+for $\kappa \geq k/2$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Scale-free networks}
+
+%% Dangalchev~\cite{Dangalchev2004},
+%% Newman~\cite{Newman2005}, Albert and
+%% Barab{\'a}si~\cite{AlbertBarabasi2002}.
+
+The networks covered so far---Gilbert $\cG(n,p)$ model,
+Erd\H{o}s-R\'enyi $\cG(n,N)$ model, Watts-Strogatz small-world
+model---are static. Once a network is generated from any of these
+models, the corresponding model does not specify any means for the
+network to evolve over time. Barab\'asi and
+Albert~\cite{BarabasiAlbert1999} proposed a network model based on two
+ingredients:
+%%
+\begin{enumerate}
+\item Growth: at each time step, a new vertex is added to the network
+  and connected to a pre-determined number of existing vertices.
+
+\item Preferential attachment\index{preferential attachment}: the
+  newly added vertex is connected to an existing vertex in proportion
+  to the latter's existing degree.
+\end{enumerate}
+%%
+Preferential attachment\index{preferential attachment} also goes by
+the colloquial name of the
+``rich-get-richer''\index{rich-get-richer effect} effect due to the
+work of Herbert\index{Simon, Herbert} Simon~\cite{Simon1955}. In
+sociology, preferential attachment is known as the
+\emph{Matthew effect}\index{Matthew effect} due to the following verse
+from the Book of Matthew, chapter~25 verse~29, in the Bible: ``For to
+every one that hath shall be given but from him that hath not, that
+also which he seemeth to have shall be taken away.'' Barab\'asi and
+Albert observed that many real-world networks exhibit statistical
+properties of their proposed model. One particularly significant
+property is that of power-law scaling, hence the
+Barab\'asi-Albert\index{Barab\'asi-Albert model} model is also called
+a model of scale-free networks. Note that it is only the degree
+distributions of scale-free networks that are scale-free. In their
+empirical study of the World Wide\index{World Wide Web} Web~(WWW) and
+other real-world networks, Barab\'asi and Albert noted that the
+probability that a web page increases in popularity is directly
+proportional to the page's current popularity. Thinking of a web page
+as a vertex and the degree of a page as the number of other pages that
+the current page links to, the degree distribution of the WWW follows
+a power law function. Power-law scaling has been confirmed for many
+real-world
+networks:
+%%
+\begin{itemize}
+\item actor collaboration network~\cite{BarabasiAlbert1999}
+
+\item citation~\cite{Price1965,Redner1998,Seglen1992} and
+  co-authorship networks~\cite{Newman2001b}
+
+\item human sexual contacts network~\cite{JonesHandcock2003,LiljerosEtAl2001}
+
+\item the\index{Internet}
+  Internet~\cite{ChenEtAl2002,FaloutsosEtAl1999,VazquezEtAl2002} and
+  the WWW~\cite{AlbertEtAl1999,BarabasiEtAl2000,BroderEtAl2000}
+
+\item metabolic\index{metabolic network}
+  networks~\cite{JeongEtAl2001,JeongEtAl2000}
+
+\item telephone call graphs~\cite{AielloEtAl2000,AielloEtAl2002}
+\end{itemize}
+%%
+Figure~\ref{fig:random_graphs:real_world_scale_free_networks}
+illustrates the degree distributions of various real-world networks,
+plotted on log-log scales. Corresponding distributions for various
+simulated Barab\'asi-Albert networks are illustrated in
+Figure~\ref{fig:random_graphs:simulated_scale_free_networks}.
+
+\begin{figure}[!htbp]
+\centering
+\index{network!citation}
+\index{network!collaboration}
+\index{degree distribution}
+\index{Internet!topology}
+\index{network!social}
+\index{USA}
+\subfigure[US patent citation network.]{
+  \includegraphics{image/random-graphs/US-patent-citation-network}
+}
+\subfigure[Google web graph.]{
+  \includegraphics{image/random-graphs/Google-web-graph}
+}
+\subfigure[LiveJournal friendship network.]{
+  \includegraphics{image/random-graphs/livejournal-friendship-network}
+}
+\subfigure[Actor collaboration network.]{
+  \includegraphics{image/random-graphs/actor-collaboration-network}
+}
+\caption{Degree distributions of various real-world networks on
+  log-log scales. The horizontal axis represents degree and the
+  vertical axis is the corresponding probability of a vertex having
+  that degree. The US patent citation network~\cite{LeskovecEtAl2005}
+  is a directed graph on $3,774,768$ vertices and $16,518,948$
+  edges. It covers all citations made by patents granted between 1975
+  and 1999. The Google web graph~\cite{LeskovecEtAl2008} is a digraph
+  having $875,713$ vertices and $5,105,039$ edges. This dataset was
+  released in~2002 by Google as part of the Google Programming
+  Contest. The LiveJournal friendship
+  network~\cite{BackstromEtAl2006,LeskovecEtAl2008} is a directed
+  graph on $4,847,571$ vertices and $68,993,773$ edges. The actor
+  collaboration network~\cite{BarabasiAlbert1999}, based on the
+  Internet Movie Database~(IMDb) at \url{http://www.imdb.com}, is an
+  undirected graph on $383,640$ vertices and $16,557,920$
+  edges. Two actors are connected to each other if they have
+  starred in the same movie. In all of the above degree distributions,
+  self-loops are not taken into account and, where a graph is
+  directed, we only consider the in-degree distribution.}
+\label{fig:random_graphs:real_world_scale_free_networks}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{degree distribution}
+%% See the file image/random-graphs/ba.c for the C program used to
+%% generate the classic Barabasi-Albert networks from which we derive
+%% the corresponding degree distributions.
+\subfigure[$n = 10^5$ vertices]{
+  \includegraphics{image/random-graphs/Barabasi-Albert-model-simulation-10e5}
+}
+\subfigure[$n = 10^6$ vertices]{
+  \includegraphics{image/random-graphs/Barabasi-Albert-model-simulation-10e6}
+}
+\subfigure[$n = 10^7$ vertices]{
+  \includegraphics{image/random-graphs/Barabasi-Albert-model-simulation-10e7}
+}
+\subfigure[$n = 2 \cdot 10^7$ vertices]{
+  \includegraphics{image/random-graphs/Barabasi-Albert-model-simulation-2x10e7}
+}
+\caption{Degree distributions of simulated graphs in the classic
+  Barab\'asi-Albert model. The horizontal axis represents degree; the
+  vertical axis is the corresponding probability of a vertex having a
+  particular degree. Each generated graph is directed and has
+  minimum out-degree $m = 5$. The above degree distributions are only
+  for in-degrees and do not take into account self-loops.}
+\label{fig:random_graphs:simulated_scale_free_networks}
+\end{figure}
+
+But how do we generate a scale-free graph as per the description in
+Barab\'asi and Albert~\cite{BarabasiAlbert1999}? The original
+description of the Barab\'asi-Albert\index{Barab\'asi-Albert model}
+model as contained in~\cite{BarabasiAlbert1999} is rather ambiguous
+with respect to certain details. First, the whole process is supposed
+to begin with a small number of vertices. But as the degree of each of
+these vertices is zero, it is unclear how the network is to grow via
+preferential attachment from the initial pool of vertices. Second,
+Barab\'asi and Albert neglected to clearly specify how to select the
+neighbors for the newly added vertex. The above ambiguities are
+resolved in Bollob\'as~et~al.~\cite{BollobasEtAl2001}, wherein is given
+a precise statement of a random graph process that realizes the
+Barab\'asi-Albert model. Fix a sequence of vertices
+$v_1, v_2, \dots$ and consider the case where each newly added vertex
+is to be connected to $m = 1$ vertex already in a graph. Inductively
+define a random graph process $(G_1^t)_{t \geq 0}$ as follows, where
+$G_1^t$ is a digraph on $\{v_i \mid 1 \leq i \leq t\}$. Start with the
+null\index{null graph} graph $G_1^0$ or the graph $G_1^1$ with one
+vertex and one self-loop. Denote by $\deg_G(v)$ the total~(in and out)
+degree of vertex $v$ in the graph $G$. For $t > 1$ construct $G_1^t$
+from $G_1^{t-1}$ by adding the vertex $v_t$ and a directed edge from
+$v_t$ to $v_i$, where $i$ is randomly chosen with probability
+\[
+\Pr[i = s]
+=
+\begin{cases}
+\deg_{G_1^{t-1}}(v_s) / (2t - 1), & \text{if $1 \leq s \leq t - 1$}, \\[4pt]
+1 / (2t - 1), & \text{if $s = t$}.
+\end{cases}
+\]
+The latter process generates a forest. For $m > 1$ the graph evolves
+as per the case $m = 1$; i.e. we add $m$ edges from $v_t$ one at a
+time. This process can result in self-loops and multiple edges. We
+write $\cG_m^n$ for the collection of all graphs on $n$ vertices and
+minimal degree $m$ in the Barab\'asi-Albert model, where a random
+graph from $\cG_m^n$ is denoted $G_m^n \in \cG_m^n$.
+
+Now consider the problem of translating the above procedure into
+pseudocode. Fix a positive integer $n > 1$ for the number of vertices
+in the scale-free graph to be generated via preferential
+attachment. Let $m \geq 1$ be the number of vertices that each newly
+added vertex is to be connected to; this is equivalent to the minimum
+degree that any new vertex will end up possessing. At any time step,
+let $M$ be the contiguous edge list of all edges created thus far in
+the above random graph process. It is clear that the frequency~(or
+number of occurrences) of a vertex is equivalent to the vertex's
+degree. We can thus use $M$ as a pool to sample in constant time from
+the degree-skewed distribution. Batagelj and
+Brandes~\cite{BatageljBrandes2005} used the latter observation to
+construct an algorithm for generating scale-free networks via
+preferential attachment; pseudocode is presented in
+Algorithm~\ref{alg:random_graphs:scale_free_network_preferential_attachment}.
+Note that the algorithm has linear runtime $O(n + m)$, where $n$ is
+the order and $m$ the size of the graph generated by the algorithm.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{preferential attachment}
+\index{scale-free network}
+\input{algorithm/random-graphs/scale-free-network.tex}
+\caption{Scale-free network via preferential attachment.}
+\label{alg:random_graphs:scale_free_network_preferential_attachment}
+\end{algorithm}
+
+On the evidence of computer simulation and various real-world
+networks, it was suggested~\cite{BarabasiAlbert1999,BarabasiEtAl1999}
+that $\Pr[\deg(v) = k] \sim k^{-\gamma}$ with
+$\gamma = 2.9 \pm 0.1$. Letting $n$ be the number of vertices,
+Bollob\'as~et~al.~\cite{BollobasEtAl2001} obtained
+$\Pr[\deg(v) = k]$ asymptotically for all $k \leq n^{1/15}$ and showed
+as a consequence that $\gamma = 3$. In the process of doing so,
+Bollob\'as~et~al. proved various results concerning the expected
+degree. Denote by $\#_m^n(k)$ the number of vertices of $G_m^n$ with
+in-degree $k$~(and consequently with total degree $m + k$). For the
+case $m = 1$, we have the expectation
+\[
+\E[\deg_{G_1^t}(v_t)]
+=
+1 + \frac{1} {2t - 1}
+\]
+and for $s < t$ we have
+\[
+\E[\deg_{G_1^t}(v_s)]
+=
+\frac{2t} {2t - 1} \E[\deg_{G_1^{t-1}}(v_s)].
+\]
+Taking the above two equations together, for $1 \leq s \leq n$ we have
+\[
+\E[\deg_{G_1^n}(v_s)]
+=
+\prod_{i=s}^n \frac{2i} {2i - 1}
+=
+\frac{4^{n-s+1} n!^2 (2s-2)!} {(2n)! (s-1)!^2}.
+\]
+Furthermore for $0 \leq k \leq n^{1/15}$ we have
+\[
+\E[\#_m^n(k)]
+\sim
+\frac{2m(m+1)n} {(k+m) (k+m+1) (k+m+2)}
+\]
+uniformly in $k$.
+
+As regards the diameter, with $n$ as per
+Algorithm~\ref{alg:random_graphs:scale_free_network_preferential_attachment},
+computer simulation by Barab\'asi, Albert, and
+Jeong~\cite{AlbertEtAl1999,BarabasiEtAl2000} and heuristic arguments
+by Newman~et~al.~\cite{NewmanEtAl2001} suggest that a graph generated
+by the Barab\'asi-Albert model has diameter approximately
+$\ln n$. As noted by Bollob\'as and Riordan~\cite{BollobasRiordan2004},
+the approximation $\diam(G_m^n) \approx \ln n$ holds for the case
+$m = 1$, but for $m \geq 2$ they showed that as $n \to \infty$ then
+$\diam(G_m^n) \to \ln / \ln \ln n$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \section{Evolving networks}
+
+%% See Kirley~\cite{Kirley2004},
+%% Lieberman~et~al.~\cite{LiebermanEtAl2005}, Szabo and
+%% Fath~\cite{SzaboFath2007}, Traulsen~et~al.~\cite{TraulsenEtAl2009}.
+
+%% \begin{figure}[!htbp]
+%% \centering
+%% \index{ARPANET}
+%% \input{image/random-graphs/ARPANET-evolve.tex}
+%% \caption{Evolution of the ARPANET network from~1969 to~1976. The
+%%   graphs are adapted from figures in
+%%   Heart~et~al.~\cite{HeartEtAl1978}. For scanned version of the
+%%   original images from~\cite{HeartEtAl1978}, see
+%%   \url{http://som.csudh.edu/cis/lpress/history/arpamaps/}.}
+%% \label{fig:random_graphs:ARPANET_evolution}
+%% \end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \section{Big friendly giant}
+
+%% \begin{quote}
+%% \footnotesize
+%% All of those man-eating giants is enormous and very fierce! They is
+%% all at least two times my wideness and double my royal highness! \\
+%% \noindent
+%% --- the BFG, in Roald\index{Dahl, Roald} Dahl's \emph{The BFG}, 1982
+%% \end{quote}
+
+%% Discuss the giant component and its emergence. Relevant sources
+%% include Berchenko~et~al.~\cite{BerchenkoEtAl2009},
+%% Bollobas~\cite{Bollobas2001}, Easley and
+%% Kleinberg~\cite{EasleyKleinberg2010},
+%% Janson~et~al.~\cite{JansonEtAl1993}, Janson and
+%% Luczak~\cite{JansonLuczak2009}, Penrose~\cite{Penrose2003},
+%% Spencer~\cite{Spencer2010}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problems}
+
+\begin{quote}
+\footnotesize
+Where should I start? Start from the statement of the problem. What
+can I do? Visualize the problem as a whole as clearly and as vividly
+as you can. \\
+\noindent
+--- G. Polya, from page~33 of~\cite{Polya1957}
+\end{quote}
+
+\begin{problem}
+\item Algorithm~\ref{alg:random_graphs:random_simple_graph} presents a
+  procedure to construct a random graph that is simple and undirected;
+  the procedure is adapted from pages~4--7 of
+  Lau~\cite{Lau2007}. Analyze the time complexity of
+  Algorithm~\ref{alg:random_graphs:random_simple_graph}. Compare and
+  contrast your results with that for
+  Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{simple graph!random}
+\input{algorithm/random-graphs/random-simple-graph.tex}
+\caption{Random simple undirected graph.}
+\label{alg:random_graphs:random_simple_graph}
+\end{algorithm}
+
+\item Modify Algorithm~\ref{alg:random_graphs:random_simple_graph} to
+  generate the following random graphs.
+  %%
+  \begin{enumerate}[(a)]
+  \item Simple weighted, undirected graph.
+
+  \item Simple digraph.
+
+  \item Simple weighted digraph.
+  \end{enumerate}
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{complete graph}
+\index{simple graph!random}
+\input{algorithm/random-graphs/quadratic-random-Gnp.tex}
+\caption{Quadratic generation of a random graph in $\cG(n,p)$.}
+\label{alg:random_graphs:quadratic_generate_random_Gnp}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{complete graph}
+\index{simple graph!random}
+\input{algorithm/random-graphs/Briggs-random-GnN.tex}
+\caption{Briggs' algorithm for random graph in $\cG(n,N)$.}
+\label{alg:random_graphs:Briggs_random_GnN}
+\end{algorithm}
+
+\item\label{prob:random_graphs:quadratic_generate_random_Gnp}
+  Algorithm~\ref{alg:random_graphs:generate_random_Gnp} can be
+  considered as a template for generating random graphs in
+  $\cG(n,p)$. The procedure does not specify how to generate all the
+  $2$-combinations of a set of $n > 1$ objects. Here we discuss how to
+  construct all such $2$-combinations and derive a quadratic time
+  algorithm for generating random graphs in $\cG(n,p)$.
+  %%
+  \begin{enumerate}[(a)]
+  \item Consider a vertex set $V = \{0, 1, \dots, n - 1\}$ with at
+    least two elements and let $E$ be the set of all $2$-combinations
+    of $V$, where each $2$-combination is written $ij$. Show that
+    $ij \in E$ if and only if $i < j$.
+
+  \item From the previous exercise, we know that if $0 \leq i < n - 1$
+    then there are $n - (i + 1)$ pairs $jk$ where either $i = j$ or
+    $i = k$. Show that
+    \[
+    \sum_{i=0}^{n-2} (n - i - 1)
+    =
+    \frac{n^2 - n}{2}
+    \]
+    and conclude that
+    Algorithm~\ref{alg:random_graphs:quadratic_generate_random_Gnp}
+    has worst-case runtime $O((n^2 - n) / 2)$.
+  \end{enumerate}
+
+\item Modify the Batagelj-Brandes
+  Algorithm~\ref{alg:random_graphs:linear_generate_random_sparse_Gnp}
+  to generate the following types of graphs.
+  %%
+  \begin{enumerate}[(a)]
+  \item Directed simple graphs.
+
+  \item Directed acyclic graphs.
+
+  \item Bipartite graphs.
+  \end{enumerate}
+
+\item Repeat the previous problem for
+  Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
+
+\item In~2006, Keith M. Briggs\index{Briggs!Keith M.}
+  provided~\cite{Briggs2011} an algorithm that generates a random
+  graph in $\cG(n,N)$, inspired by Knuth's\index{Knuth!Algorithm~S}
+  Algorithm~S~(Selection sampling technique) as found on page~142 of
+  Knuth\index{Knuth!Donald E.}~\cite{Knuth1998b}. Pseudocode of
+  Briggs' procedure is presented in
+  Algorithm~\ref{alg:random_graphs:Briggs_random_GnN}. Provide runtime
+  analysis of Algorithm~\ref{alg:random_graphs:Briggs_random_GnN} and
+  compare your results with those presented in
+  section~\ref{sec:random_graphs:Erdos_Renyi_model}. Under which
+  conditions would Briggs' algorithm be more efficient than
+  Algorithm~\ref{alg:random_graphs:expected_linear_generate_random_GnN}?
+
+\item Briggs'\index{Briggs!algorithm}
+  Algorithm~\ref{alg:random_graphs:Briggs_random_GnN} follows the
+  general template of an algorithm that samples without replacement
+  $n$ items from a pool of $N$ candidates. Here $0 < n \leq N$ and the
+  size $N$ of the candidate pool is known in advance. However there
+  are situations where the value of $N$ is not known beforehand, and
+  we wish to sample without replacement $n$ items from the candidate
+  pool. What we know is that the candidate pool has enough members to
+  allow us to select $n$ items. Vitter's\index{Vitter!Jeffrey Scott}
+  algorithm~R~\cite{Vitter1985}, called
+  reservoir\index{reservoir sampling} sampling, is suitable for the
+  situation and runs in $O(n (1 + \ln(N/n)))$ expected time. Describe
+  and provide pseudocode of Vitter's\index{Vitter!algorithm} algorithm,
+  prove its correctness, and provide runtime analysis.
+
+\item Repeat Example~\ref{eg:random_graphs:random_oriented_graph} but
+  using each of Algorithms~\ref{alg:random_graphs:generate_random_Gnp}
+  and~\ref{alg:random_graphs:expected_linear_generate_random_GnN}.
+
+\item Diego Garlaschelli\index{Garlaschelli, Diego}
+  introduced~\cite{Garlaschelli2009} in~2009 a weighted version of the
+  $\cG(n,p)$ model, called the weighted\index{random graph!weighted}
+  random graph model. Denote by $\cG_W(n,p)$ the weighted random graph
+  model. Provide a description and pseudocode of a procedure to
+  generate a graph in $\cG_W(n,p)$ and analyze the runtime complexity
+  of the algorithm. Describe various statistical physics properties of
+  $\cG_W(n,p)$.
+
+\item Latora\index{Latora, V.} and
+  Marchiori\index{Marchiori, M.}~\cite{LatoraMarchiori2003} extended
+  the Watts-Strogatz\index{Watts-Strogatz model} model to take into
+  account weighted edges. A crucial idea in the
+  Latora-Marchiori\index{Latora-Marchiori model} model is the concept
+  of network efficiency. Describe the Latora-Marchiori model and
+  provide pseudocode of an algorithm to construct Latora-Marchiori
+  networks. Explain the concepts of local and global efficiencies and
+  how these relate to clustering coefficient and characteristic path
+  length. Compare and contrast the Watts-Strogatz and Latora-Marchiori
+  models.
+
+\item The following model for ``growing'' graphs is known as the
+  CHKNS\index{CHKNS model} model~\cite{CallawayEtAl2001},\footnote{
+    Or the ``chickens'' model, depending on how you pronounce
+    ``CHKNS''.
+  }
+  named for its original proponents. Start with the
+  trivial\index{trivial graph} graph $G$ at time step $t = 1$. For
+  each subsequent time step $t > 1$, add a new vertex to $G$.
+  Furthermore choose two vertices uniformly at random and with
+  probability $\delta$ join them by an undirected edge. The newly
+  added edge does not necessarily have the newly added vertex as an
+  endpoint. Denote by $d_k(t)$ the expected number of vertices with
+  degree $k$ at time $t$. Assuming that no self-loops are allowed,
+  show that
+  \[
+  d_0(t + 1)
+  =
+  d_0(t) + 1 - 2\delta \frac{d_0(t)}{t}
+  \]
+  and
+  \[
+  d_k(t + 1)
+  =
+  d_k(t) + 2\delta \frac{d_{k-1}(t)}{t} - 2\delta \frac{d_k(t)}{t}.
+  \]
+  As $t \to \infty$, show that the probability that a vertex be chosen
+  twice decreases as $t^{-2}$. If $v$ is a vertex chosen uniformly at
+  random, show that
+  \[
+  \Pr[\deg(v) = k]
+  =
+  \frac{(2\delta)^k} {(1 + 2\delta)^{k+1}}
+  \]
+  and conclude that the CHKNS model has an exponential degree
+  distribution. The \emph{size}\index{size!component} of a component
+  counts the number of vertices in the component itself. Let $N_k(t)$
+  be the expected number of components of size $k$ at time $t$. Show
+  that
+  \[
+  N_1(t + 1)
+  =
+  N_1(t) + 1 - 2\delta \frac{N_1(t)}{t}
+  \]
+  and for $k > 1$ show that
+  \[
+  N_k(t + 1)
+  =
+  N_k(t) + \delta
+  \left(
+    \sum_{i=1}^{k-1}
+    \frac{i N_i(t)}{t} \cdot \frac{(k-i) N_{k-i}(t)}{t}
+  \right)
+  - 2\delta \frac{k N_k(t)}{t}.
+  \]
+
+\item
+  Algorithm~\ref{alg:random_graphs:scale_free_network_preferential_attachment}
+  can easily be modified to generate other types of scale-free
+  networks. Based upon the latter algorithm,
+  Batagelj\index{Batagelj, Vladimir} and
+  Brandes\index{Brandes, Ulrik}~\cite{BatageljBrandes2005} presented a
+  procedure for generating bipartite\index{bipartite graph}
+  scale-free\index{scale-free network} networks; see
+  Algorithm~\ref{alg:random_graphs:bipartite_scale_free_network} for
+  pseudocode. Analyze the runtime efficiency of
+  Algorithm~\ref{alg:random_graphs:bipartite_scale_free_network}. Fix
+  positive integer values for $n$ and $d$, say $n = 10,000$ and
+  $d = 4$. Use
+  Algorithm~\ref{alg:random_graphs:bipartite_scale_free_network} to
+  generate a bipartite graph with your chosen values for $n$ and
+  $d$. Plot the degree distribution of the resulting graph using a
+  log-log scale and confirm that the generated graph is scale-free.
+
+\begin{algorithm}[!htbp]
+\index{algorithm!random}
+\index{bipartite graph}
+\index{scale-free network}
+\input{algorithm/random-graphs/bipartite-scale-free-network.tex}
+\caption{Bipartite scale-free network via preferential attachment.}
+\label{alg:random_graphs:bipartite_scale_free_network}
+\end{algorithm}
+
+\item Find the degree and distance distributions, average path
+  lengths, and clustering coefficients of the following network
+  datasets:
+  %%
+  \begin{enumerate}[(a)]
+  \item actor collaboration~\cite{BarabasiAlbert1999}
+
+  \item co-authorship of condensed matter preprints~\cite{Newman2001b}
+
+  \item Google web graph~\cite{LeskovecEtAl2008}
+
+  \item LiveJournal friendship~\cite{BackstromEtAl2006,LeskovecEtAl2008}
+
+  \item neural network of the
+    C. elegans~\cite{WattsStrogatz1998,WhiteEtAl1986}
+
+  \item US patent citation~\cite{LeskovecEtAl2005}
+
+  \item Western States Power Grid of the US~\cite{WattsStrogatz1998}
+
+  \item Zachary karate club~\cite{Zachary1977}
+  \end{enumerate}
+\end{problem}

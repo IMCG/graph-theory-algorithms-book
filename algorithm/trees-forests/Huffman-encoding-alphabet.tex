@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{treeRoot}{root}
+\SetKwData{one}{1}
+\SetKwData{zero}{0}
+%%
+%% input
+\KwIn{A binary tree $T$ representing the Huffman code of an alphabet
+  $A$. The root $r$ of $T$.}
+%%
+%% output
+\KwOut{A list $H$ representing a Huffman code of $A$, where $H[a_i]$
+  corresponds to a Huffman encoding of $a_i \in A$.}
+\BlankLine
+%%
+%% algorithm body
+$H \assign [\,]$\tcc*[f]{list of Huffman encodings}\;
+$Q \assign [r]$\tcc*[f]{queue of vertices}\;
+\While{$\length(Q) > 0$}{
+  $\treeRoot \assign \dequeue(Q)$\;
+  \If{\rm \treeRoot is a leaf}{
+    $H[\treeRoot] \assign$ label of \treeRoot\;
+  }
+  \Else{
+    $a \assign$ left child of \treeRoot\;
+    $b \assign$ right child of \treeRoot\;
+    $\enqueue(Q, a)$\;
+    $\enqueue(Q, b)$\;
+    label of $a \assign$ label of \treeRoot $+$ \zero\;
+    label of $b \assign$ label of \treeRoot $+$ \one\;
+  }
+}
+\Return $H$\;

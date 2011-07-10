@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
+%%
+%% input
+\KwIn{A nonempty list $L$ of vertices or edges. An object $E$ for
+  which we want to search in $L$.}
+%%
+%% output
+\KwOut{\MyTrue if $E$ is in $L$; \MyFalse otherwise.}
+\BlankLine
+%%
+%% algorithm body
+\For{\rm each $e \in L$}{
+  \If{$E = e$}{
+    \Return \MyTrue\;
+  }
+}
+\Return \MyFalse\;

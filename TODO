@@ -1,0 +1,98 @@
+TODO list
+=========
+
+This is a list of possible enhancements to the book.
+
+* Balanced trees: 2-3-4 trees, red-black trees, B-trees
+
+* Fibonaccian search, might require discussion of Fibonacci trees
+
+* Prufer encoding and Cayley's formula
+  Discuss these in the context of generating a random tree.
+  Other algorithms for coding labelled trees can be found in the
+  following:
+
+@phdthesis{Caminiti2007,
+  author  = {Saverio Caminiti},
+  title   = {On Coding Labeled Trees},
+  school  = {Computer Science Department},
+  address = {Sapienza University of Rome, Italy},
+  year    = {2007},
+}
+
+@article{CaminitiEtAl2007,
+  author    = {Saverio Caminiti and Irene Finocchi and Rossella Petreschi},
+  title     = {On coding labeled trees},
+  journal   = {Theoretical Computer Science},
+  year      = {2007},
+  volume    = {382},
+  number    = {2},
+  pages     = {97--108},
+}
+
+* Search techniques in artificial intelligence. Topics for inclusion
+  might be: A* search, alpha-beta pruning, bidirectional
+  search. References for consideration:
+
+@article{HartEtAl1968,
+  author    = {Peter E. Hart and Nils J. Nilsson and Bertram Raphael},
+  title     = {A Formal Basis for the Heuristic Determination of
+               Minimum Cost Paths},
+  journal   = {IEEE Transactions on Systems Science and Cybernetics},
+  year      = {1968},
+  volume    = {4},
+  number    = {2},
+  pages     = {100--107},
+}
+
+@article{KnuthMoore1975,
+  author    = {Donald E. Knuth and Ronald W. Moore},
+  title     = {An Analysis of Alpha-Beta Pruning},
+  journal   = {Artificial Intelligence},
+  year      = {1975},
+  volume    = {6},
+  number    = {4},
+  pages     = {293--326},
+}
+
+* Other references for consideration:
+
+@article{ChartrandEtAl1988,
+  author    = {Gary Chartrand and Paul Erd\H{o}s and Ortrud R. Oellermann},
+  title     = {How to Define an Irregular Graph},
+  journal   = {College Mathematics Journal},
+  year      = {1988},
+  volume    = {19},
+  number    = {1},
+  pages     = {36--42},
+}
+
+@article{FanEtAl1997,
+  author    = {C. Kenneth Fan and Bjorn Poonen and George Poonen},
+  title     = {How to Spread Rumors Fast},
+  journal   = {Mathematics Magazine},
+  year      = {1997},
+  volume    = {70},
+  number    = {1},
+  pages     = {40--42},
+}
+
+@article{Hayes1998,
+  author    = {Brian Hayes},
+  title     = {How to Avoid Yourself},
+  journal   = {American Scientist},
+  year      = {1998},
+  volume    = {86},
+  number    = {4},
+  pages     = {314--319},
+}
+
+@article{KimVu2006,
+  author    = {Jeong Han Kim and Van H. Vu},
+  title     = {Generating random regular graphs},
+  journal   = {Combinatorica},
+  year      = {2006},
+  volume    = {26},
+  number    = {6},
+  pages     = {683--708},
+}

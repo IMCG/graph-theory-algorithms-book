@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{A weighted graph or digraph $G = (V, E)$, where the vertices
+  are numbered as $V = \{1, 2, \dots, n\}$. A starting vertex $s$.}
+%%
+%% output
+\KwOut{A list $D$ of distances from $s$ to all other vertices. A list
+  $P$ of parent vertices such that $P[v]$ is the parent of $v$.}
+\BlankLine
+%%
+%% algorithm body
+$D \assign [\infty, \infty, \dots, \infty]$\tcc*[f]{$n$ copies of $\infty$}\;
+$C \assign$ list of candidate vertices to visit\;
+\While{$\length(C) > 0$}{
+  select $v \in C$\;
+  $C \assign \remove(C, v)$\;
+  \For{\rm each $u \in \adj(v)$\nllabel{alg:generic_shortest_path:neighbors}}{
+    \If{$D[u] > D[v] + w(vu)$}{
+      $D[u] \assign D[v] + w(vu)$\;
+      $P[u] \assign v$\;
+      \If{$u \notin C$}{
+        add $u$ to $C$\;
+      }
+    }
+  }
+}
+\Return $(D,P)$\;

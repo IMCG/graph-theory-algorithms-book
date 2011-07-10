@@ -1,0 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{Graph $G=(V,E)$ with flow capacity $c$, source $s$, and sink $t$.}
+%%
+%% output
+\KwOut{A flow $f$ from $s$ to $t$ which is a maximum for all edges in $E$.}
+\BlankLine
+%%
+%% algorithm body
+$f(u,v) \assign 0$ for each edge $uv \in E$\;
+\While{\rm there is an $s$-$t$ path $p$ in $G_f$ such that $c_f(e) >
+0$ for each edge $e \in E$}{
+  find $c_f(p) = \min\{ c_f(u,v)\ |\ (u,v) \in p\}$\;
+  \For{\rm each edge $uv \in $}{
+     $f(u,v) = f(u,v) + c_f(p)$\;
+     $f(v,u) = f(v,u) - c_f(p)$\;
+  }
+}

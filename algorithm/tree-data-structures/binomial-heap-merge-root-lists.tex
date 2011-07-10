@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{Two root lists $L_1$ and $L_2$, each containing the roots of
+  binomial trees in the binomial heaps $H_1$ and $H_2$,
+  respectively. Each root list $L_i$ is sorted in increasing order of
+  vertex degree.}
+%%
+%% output
+\KwOut{A single list $L$ that merges the root lists $L_i$ and sorted
+  in nondecreasing order of degree.}
+\BlankLine
+%%
+%% algorithm body
+$i \assign 1$\;
+$j \assign 1$\;
+$L \assign [\,]$\;
+$n \assign |L_1| + |L_2| - 1$\;
+$\append(L_1,\, \infty)$\;
+$\append(L_2,\, \infty)$\;
+\For{$k \assign 0, 1, \dots, n$}{
+  \If{$\deg(L_1[i]) \leq \deg(L_2[j])$}{
+    $\append(L,\, L_1[i])$\;
+    $i \assign i + 1$\;
+  }
+  \Else{
+    $\append(L,\, L_2[j])$\;
+    $j \assign j + 1$\;
+  }
+}
+\Return $L$\;

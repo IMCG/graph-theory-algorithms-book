@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{MyLeft}{left}
+\SetKwData{MyRight}{right}
+\SetKwData{MyRoot}{root}
+\SetKwData{MyTrue}{True}
+%%
+%% input
+\KwIn{A binary heap $T$, given in sequence representation, having
+  $n > 1$ internal vertices.}
+%%
+%% output
+\KwOut{Extract the minimum vertex of $T$. With one vertex removed,
+  $T$ must satisfy the heap-order property.}
+\BlankLine
+%%
+%% algorithm body
+$\MyRoot \assign T[0]$\;
+$n \assign n - 1$\;
+$v \assign T[n]$\;
+$i \assign 0$\;
+$j \assign 0$\;
+\While{$\MyTrue$}{
+  $\MyLeft \assign 2i + 1$\;
+  $\MyRight \assign 2i + 2$\;
+  \If{\rm $\MyLeft < n$ and $\kappa_{T[\MyLeft]} \leq \kappa_v$}{
+    \If{\rm $\MyRight < n$ and $\kappa_{T[\MyRight]} \leq \kappa_{T[\MyLeft]}$}{
+      $j \assign \MyRight$\;
+    }
+    \Else{
+      $j \assign \MyLeft$\;
+    }
+  }
+  \ElseIf{\rm $\MyRight < n$ and $\kappa_{T[\MyRight]} \leq \kappa_v$}{
+    $j \assign \MyRight$\;
+  }
+  \Else{
+    $T[i] \assign v$\;
+    exit the loop\;
+  }
+  $T[i] \assign T[j]$\;
+  $i \assign j$\;
+}
+\Return $\MyRoot$\;

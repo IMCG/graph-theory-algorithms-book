@@ -1,0 +1,54 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{An ordered tree $T$ on $n > 0$ vertices.}
+%%
+%% output
+\KwOut{A list of the vertices of $T$ in bottom-up order.}
+\BlankLine
+%%
+%% algorithm body
+$Q \assign$ empty queue\;
+$r \assign$ root of $T$\;
+$C \assign [0, 0, \dots, 0]$\nllabel{alg:bottom_up_traversal:children_count}\tcc*[f]{$n$ copies of $0$}\;
+\For{\rm each edge $(u,v) \in E(T)$}{
+  $C[u] \assign C[u] + 1$\nllabel{alg:bottom_up_traversal:children_count_end}\;
+}
+$R \assign$ empty queue\nllabel{alg:bottom_up_traversal:empty_queue_R}\;
+$\enqueue(R, r)$\;
+\While{$\length(R) > 0$}{
+  $v \assign \dequeue(R)$\;
+  \For{\rm each $w \in \children(v)$}{
+    \If{$C[w] = 0$}{
+      $\enqueue(Q, w)$\;
+    }
+    \Else{
+      $\enqueue(R, w)$\nllabel{alg:bottom_up_traversal:enqueue_R_w}\;
+    }
+  }
+}
+$L \assign [\,]$\nllabel{alg:bottom_up_traversal:empty_list_L}\;
+\While{$\length(Q) > 0$}{
+  $v \assign \dequeue(Q)$\;
+  $\append(L, v)$\;
+  \If{$v \neq r$}{
+    $C[\parent(v)] \assign C[\parent(v)] - 1$\;
+    \If{$C[\parent(v)] = 0$}{
+      $u \assign \parent(v)$\;
+      $\enqueue(Q, u)$\nllabel{alg:bottom_up_traversal:enqueue_Q_u}\;
+    }
+  }
+}
+\Return $L$\;

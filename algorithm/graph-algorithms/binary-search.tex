@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{High}{high}
+\SetKwData{Low}{low}
+\SetKwData{Mid}{mid}
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
+%%
+%% input
+\KwIn{A nonempty list $L$ of positive integers. Elements of $L$ are
+  sorted in nondecreasing order. An integer $i$ for which we want to
+  search in $L$.}
+%%
+%% output
+\KwOut{\MyTrue if $i$ is in $L$; \MyFalse otherwise.}
+\BlankLine
+%%
+%% algorithm body
+$\Low \assign 0$\;
+$\High \assign |L| - 1$\;
+\While{$\Low \leq \High$}{
+  $\Mid \assign \lfloor\frac{\Low\, +\, \High}{2}\rfloor$\nllabel{alg:binary_search:mid_floor}\;
+  \If{$i = L[\Mid]$}{
+    \Return \MyTrue\;
+  }
+  \If{$i < L[\Mid]$}{
+    $\High \assign \Mid - 1$\;
+  }
+  \Else{
+    $\Low \assign \Mid + 1$\;
+  }
+}
+\Return \MyFalse\;

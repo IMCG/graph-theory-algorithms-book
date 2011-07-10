@@ -1,0 +1,62 @@
+% Copyright 2008 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/generic/pgf/licenses/LICENSE for more details.
+
+\ProvidesFileRCS[v\pgfversion] $Header: /cvsroot/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/datavisualization/tikzlibrarydatavisualization.polar.code.tex,v 1.3 2008/11/24 18:31:22 tantau Exp $
+
+\usetikzlibrary{datavisualization}
+\usepgflibrary{datavisualization.polar}
+
+
+\tikzdatavisualizationset{%
+  new polar/.style={
+    new axis=angle axis,
+    angle axis={attribute=angle},
+    new axis=radius axis,
+    radius axis={attribute=radius},
+    radius axis/scaling/default=0 at 0 and 1 at 1cm,
+    new object={
+      store=/tikz/data visualization/polar transformer,
+      class=polar transformer,
+      arg1/.expanded=\pgfkeysvalueof{/tikz/data visualization/angle axis/attribute}/scaled,
+      arg2/.expanded=\pgfkeysvalueof{/tikz/data visualization/radius axis/attribute}/scaled,
+      arg3 from key=/tikz/data visualization/#1/unit vector 0 degrees,
+      arg4 from key=/tikz/data visualization/#1/unit vector 90 degrees
+    },
+    /tikz/data visualization/#1/unit vector 0 degrees/.initial=\pgfqpoint{1pt}{0pt},
+    /tikz/data visualization/#1/unit vector 90 degrees/.initial=\pgfqpoint{0pt}{1pt},
+    /tikz/data visualization/#1/unit vectors/.code 2 args={
+      \def\tikz@dv@polar{/tikz/data visualization/#1}
+      \tikz@scan@one@point\tikz@lib@dv@polar@a##1
+      \tikz@scan@one@point\tikz@lib@dv@polar@b##2
+    }
+  },
+  new polar/.default=polar
+}
+\def\tikz@lib@dv@polar@a#1{
+  \pgfkeyssetvalue{\tikz@dv@polar/unit vector 0 degrees}{#1}
+}
+\def\tikz@lib@dv@polar@b#1{
+  \pgfkeyssetvalue{\tikz@dv@polar/unit vector 90 degrees}{#1}
+}
+
+
+\tikzset{
+  /tikz/data visualization/axis options/.cd,
+  deg/.style={\tikz@dv@axis/scaling=0 at 0 and 360 at 360},
+  rad/.style={\tikz@dv@axis/scaling=0 at 0 and pi at 180},
+  grad/.style={\tikz@dv@axis/scaling=0 at 0 and 400 at 360},
+  percent/.style={\tikz@dv@axis/scaling=0 at 0 and 100 at 360},
+  full circle/.style={\tikz@dv@axis/scaling=min at 0 and max at 360},
+  half circle/.style={\tikz@dv@axis/scaling=min at 0 and max at 180},
+  quarter circle/.style={\tikz@dv@axis/scaling=min at 0 and max at 90}
+}
+
+
+
+\endinput

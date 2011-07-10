@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usetikzlibrary{trees}
+\tikzexternalize{filesystem-hierarchy}
+
+\begin{document}
+
+\begin{figure}
+\begin{tikzpicture}
+[-,thick]
+\footnotesize
+\node {\texttt{/}} [edge from parent fork down]
+  child {node {\texttt{bin}}}
+  child {node {\texttt{etc}}}
+  child {node {\texttt{home}}
+    child {node {\texttt{anne}}}
+    child {node {\texttt{sam}}}
+    child {node {$\dots$}}
+  }
+  child {node {\texttt{lib}}}
+  child {node {\texttt{opt}}}
+  child {node {\texttt{proc}}}
+  child {node {\texttt{tmp}}}
+  child {node {\texttt{usr}}
+    child {node {\texttt{bin}}
+      child {node {\texttt{acyclic}}}
+      child {node {\texttt{diff}}}
+      child {node {\texttt{dot}}}
+      child {node {\texttt{gc}}}
+      child {node {\texttt{neato}}}
+      child {node {$\dots$}}
+    }
+    child {node {\texttt{include}}}
+    child {node {\texttt{local}}}
+    child {node {\texttt{share}}}
+    child {node {\texttt{src}}}
+    child {node {$\dots$}}
+  }
+  child {node {$\dots$}};
+\end{tikzpicture}
+\end{figure}
+
+\end{document}

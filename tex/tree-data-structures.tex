@@ -1,0 +1,2270 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2010 David Joyner <wdjoyner@gmail.com>
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Tree Data Structures}
+\label{chap:tree_data_structures}
+
+\begin{quote}
+\footnotesize
+\includegraphics[scale=0.7]{image/tree-data-structures/tree.png} \\
+\noindent
+--- Randall Munroe\index{Munroe, Randall}, xkcd,
+\url{http://xkcd.com/835/}
+\end{quote}
+
+\noindent
+In Chapters~\ref{chap:graph_algorithms} and~\ref{chap:trees_forests},
+we discussed various algorithms that rely on
+priority\index{priority queue} queues as one of their fundamental data
+structures. Such algorithms include
+Dijkstra's\index{Dijkstra!algorithm} algorithm,
+Prim's\index{Prim!algorithm} algorithm, and the algorithm for
+constructing Huffman\index{Huffman!tree} trees. The runtime of any
+algorithm that uses priority queues crucially depends on an efficient
+implementation of the priority queue data\index{data structure}
+structure. This chapter discusses the general priority queue data
+structure and various efficient implementations based on trees.
+Section~\ref{sec:tree_data_structures:priority_queues} provides some
+theoretical underpinning of priority queues and considers a simple
+implementation of priority queues as sorted lists.
+Section~\ref{sec:tree_data_structures:binary_heaps} discusses how to
+use binary\index{binary tree} trees to realize an efficient
+implementation of priority queues called a binary\index{binary heap}
+heap. Although very useful in practice, binary heaps do not lend
+themselves to being merged in an efficient manner, a setback rectified
+in section~\ref{sec:tree_data_structures:binomial_heaps} by a priority
+queue implementation called binomial\index{binomial heap} heaps. As a
+further application of binary\index{binary tree} trees,
+section~\ref{sec:tree_data_structures:binary_search_trees} discusses
+binary\index{binary search tree} search trees as a general data
+structure for managing data in a sorted order.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Priority queues}
+\label{sec:tree_data_structures:priority_queues}
+
+A \emph{priority queue}\index{priority queue} is essentially a queue
+data structure with various accompanying rules regarding how to access
+and manage elements of the queue. Recall from
+section~\ref{subsec:graph_algorithms:breadth_first_search} that an
+ordinary queue $Q$ has the following basic accompanying functions for
+accessing and managing its elements:
+%%
+\begin{itemize}
+\item $\dequeue(Q)$ --- Remove the front of $Q$.
+
+\item $\enqueue(Q, e)$ --- Append the element $e$ to the end of $Q$.
+\end{itemize}
+
+If $Q$ is now a priority queue, each element is associated with a key
+or priority $p \in X$ from a totally ordered\index{total order} set
+$X$. A binary relation denoted by an infix operator, say ``$\leq$'',
+is defined on all elements of $X$ such that the following properties
+hold for all $a,b,c \in X$:
+%%
+\begin{itemize}
+\item Totality: We have $a \leq b$ or $b \leq a$.
+
+\item Antisymmetry: If $a \leq b$ and $b \leq a$, then $a = b$.
+
+\item Transitivity: If $a \leq b$ and $b \leq c$, then $a \leq c$.
+\end{itemize}
+%%
+If the above three properties hold for the relation ``$\leq$'', then we
+say that ``$\leq$'' is a \emph{total order}\index{total order} on $X$
+and that $X$ is a
+\emph{totally ordered set}\index{set!totally ordered}. In all, if the
+key of each element of $Q$ belongs to the same totally ordered
+set $X$, we use the total order defined on $X$ to compare the keys of
+the queue elements. For example, the set $\Z$ of integers is totally
+ordered by the ``less than or equal to'' relation. If the key of each
+$e \in Q$ is an element of $\Z$, we use the latter relation to compare
+the keys of elements of $Q$. In the case of an ordinary queue, the
+key of each queue element is its position index.
+
+To extract from a priority\index{priority queue} queue $Q$ an element
+of lowest priority, we need to define the notion of smallest
+priority or key. Let $p_i$ be the priority or key assigned to element
+$e_i$ of $Q$. Then $p_{\min}$ is the lowest key if $p_{\min} \leq p$
+for any element key $p$. The element with corresponding key
+$p_{\min}$ is the minimum priority element. Based upon the notion of
+key comparison, we define two operations on a priority queue:
+%%
+\begin{itemize}
+\item $\insertElem(Q, e, p)$ --- Insert into $Q$ the element $e$ with
+  key $p$.
+
+\item $\extractMin(Q)$ --- Extract from $Q$ an element having the
+  smallest priority.
+\end{itemize}
+
+An immediate application of priority queues is sorting a finite
+sequence of items. Suppose $L$ is a finite list of $n > 0$ items on
+which a total order is defined. Let $Q$ be an empty priority queue. In
+the first phase of the priority queue sorting algorithm, we extract
+each element $e \in L$ from $L$ and insert $e$ into $Q$ with key $e$
+itself. In other words, each element $e$ is its own key. This first
+phase of the sorting algorithm requires $n$ element extractions from
+$L$ and $n$ element insertions into $Q$. The second phase of the
+algorithm involves extracting elements from $Q$ via the $\extractMin$
+operation. Queue elements are extracted via $\extractMin$ and inserted
+back into $L$ in the order in which they are extracted from
+$Q$. Algorithm~\ref{alg:tree_data_structures:priority_queue_sort}
+presents pseudocode of our discussion. The runtime of
+Algorithm~\ref{alg:tree_data_structures:priority_queue_sort} depends
+on how the priority queue $Q$ is implemented.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/priority-queue-sort.tex}
+\caption{Sorting a sequence via priority queue.}
+\label{alg:tree_data_structures:priority_queue_sort}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Sequence implementation}
+\label{subsec:tree_data_structures:sequence_implementation}
+
+A simple way to implement a priority queue is to maintain a sorted
+sequence. Let $e_0, e_1, \dots, e_n$ be a sequence of $n + 1$ elements
+with corresponding keys $\kappa_0, \kappa_1, \dots, \kappa_n$ and
+suppose that the $\kappa_i$ all belong to the same totally ordered set
+$X$ having total order $\leq$. Using the total order, we assume that
+the $\kappa_i$ are sorted as
+\[
+\kappa_0 \leq \kappa_1 \leq \cdots \leq \kappa_n
+\]
+and $e_i \leq e_j$ if and only if $\kappa_i \leq \kappa_j$. Then we
+consider the queue $Q = [e_0, e_1, \dots, e_n]$ as a priority queue in
+which the head is always the minimum element and the tail is always
+the maximum element. Extracting the minimum element is simply a
+dequeue operation that can be accomplished in constant time
+$O(1)$. However, inserting a new element into $Q$ takes linear time.
+
+Let $e$ be an element with corresponding key $\kappa \in X$. Inserting
+$e$ into $Q$ requires that we maintain elements of $Q$ sorted
+according to the total order $\leq$. If $Q$ is empty, we simply
+enqueue $e$ into $Q$. Suppose now that $Q$ is a nonempty priority
+queue. If $\kappa \leq \kappa_0$, then $e$ becomes the new head of
+$Q$. If $\kappa_n \leq \kappa$, then $e$ becomes the new tail of
+$Q$. Inserting a new head or tail into $Q$ each requires constant time
+$O(1)$. However, if $\kappa_1 \leq \kappa \leq \kappa_{n-1}$ then we
+need to traverse $Q$ starting from $e_1$, searching for a position at
+which to insert $e$. Let $e_i$ be the queue element at position $i$
+within $Q$. If $\kappa \leq \kappa_i$ then we insert $e$ into $Q$ at
+position $i$, thus moving $e_i$ to position $i + 1$. Otherwise we next
+consider $e_{i+1}$ and repeat the above comparison process. By
+hypothesis, $\kappa_1 \leq \kappa \leq \kappa_{n-1}$ and therefore
+inserting $e$ into $Q$ takes a worst-case runtime of $O(n)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Binary heaps}
+\label{sec:tree_data_structures:binary_heaps}
+\index{binary heap}
+
+A sequence implementation of priority queues has the advantage of
+being simple to understand. Inserting an element into a sequence-based
+priority queue requires linear time, which can quickly become
+infeasible for queues containing hundreds of thousands or even
+millions of elements. Can we do any better? Rather than using a sorted
+sequence, we can use a binary tree to realize an implementation of
+priority queues that is much more efficient than a sequence-based
+implementation. In particular, we use a data structure called a
+\emph{binary heap}\index{binary heap}, which allows for element
+insertion in logarithmic time.
+
+In~\cite{Williams1964}, Williams\index{Williams, J. W. J.} introduced
+the heapsort\index{heapsort} algorithm and described how to implement
+a priority queue using a binary\index{binary heap} heap. A basic idea
+is to consider queue elements as internal vertices in a binary tree
+$T$, with external vertices or leaves being ``place-holders''. The
+tree $T$ satisfies two further properties:
+%%
+\begin{enumerate}
+\item A relational property specifying the relative ordering and
+  placement of queue elements.
+
+\item A structural property that specifies the structure of $T$.
+\end{enumerate}
+%%
+The relational property of $T$ can be expressed as follows:
+
+\begin{definition}
+\textbf{Heap-order property.}\index{binary heap!order property}
+Let $T$ be a binary tree and let $v$ be a vertex of $T$ other than the
+root. If $p$ is the parent of $v$ and these vertices have corresponding
+keys $\kappa_p$ and $\kappa_v$, respectively, then
+$\kappa_p \leq \kappa_v$.
+\end{definition}
+
+The heap-order property\index{binary heap!order property} is defined in terms
+of the total order used to compare the keys of the internal
+vertices. Taking the total order to be the ordinary
+``less than or equal to'' relation, it follows from the heap-order
+property that the root of $T$ is always the vertex with a minimum
+key. Similarly, if the total order is the usual
+``greater than or equal to'' relation, then the root of $T$ is always
+the vertex with a maximum key. In general, if $\leq$ is a total order
+defined on the keys of $T$ and $u$ and $v$ are vertices of $T$, we say
+that $u$ is less than or equal to $v$ if and only if $u \leq v$.
+Furthermore, $u$ is said to be a minimum vertex of $T$ if and only if
+$u \leq v$ for all vertices of $T$. From our discussion above, the
+root is always a minimum vertex of $T$ and is said to be ``at the top
+of the heap'', from which we derive the name ``heap'' for this data
+structure.
+
+Another consequence of the heap-order\index{binary heap!order property}
+property becomes apparent when we trace out a path from the root of
+$T$ to any internal vertex. Let $r$ be the root of $T$ and let $v$ be
+any internal vertex of $T$. If $r, v_0, v_1, \dots, v_n, v$ is an
+$r$-$v$ path with corresponding keys
+\[
+\kappa_r, \kappa_{v_0}, \kappa_{v_1}, \dots, \kappa_{v_n}, \kappa_v
+\]
+then we have
+\[
+\kappa_r \leq \kappa_{v_0} \leq \kappa_{v_1} \leq \cdots \leq
+\kappa_{v_n} \leq \kappa_v.
+\]
+In other words, the keys encountered on the path from $r$ to $v$ are
+arranged in nondecreasing order.
+
+The structural property of $T$ is used to enforce that $T$ be of as
+small a height as possible. Before stating the structural property, we
+first define the level\index{level!binary tree} of a binary
+tree. Recall that the depth of a vertex in $T$ is its distance from
+the root. Level\index{level!binary tree} $i$ of a binary tree $T$
+refers to all vertices of $T$ that have the same depth $i$. We are now
+ready to state the heap-structure property.
+
+\begin{definition}
+\textbf{Heap-structure property.}\index{binary heap!structure property}
+Let $T$ be a binary tree with height $h$. Then $T$ satisfies the
+heap-structure property if $T$ is nearly a
+complete\index{binary tree!nearly complete} binary tree. That is, level
+$0 \leq i \leq h - 1$ has $2^i$ vertices, whereas level $h$ has
+$\leq 2^h$ vertices. The vertices at level $h$ are filled from left to
+right.
+\end{definition}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/sample-binary-heaps_a}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/sample-binary-heaps_b}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/sample-binary-heaps_c}
+}
+\caption{Examples of binary heaps with integer keys.}
+\label{fig:tree_data_structures:binary_heaps_integer_keys}
+\end{figure}
+
+If a binary tree $T$ satisfies both the heap-order and heap-structure
+properties, then $T$ is referred to as a binary heap. By insisting
+that $T$ satisfy the heap-order\index{binary heap!order property} property,
+we are able to determine the minimum vertex of $T$ in constant time
+$O(1)$. Requiring that $T$ also satisfy the
+heap-structure\index{binary heap!structure property} property allows us to
+determine the last vertex of $T$. The last vertex of $T$ is identified
+as the right-most internal vertex of $T$ having the greatest depth.
+Figure~\ref{fig:tree_data_structures:binary_heaps_integer_keys}
+illustrates various examples of binary heaps. The heap-structure
+property together with
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}
+result in the following corollary on the height of a binary heap.
+
+\begin{corollary}
+\label{cor:tree_data_structures:height_binary_heap}
+A binary heap $T$ with $n$ internal vertices has height
+\[
+h
+=
+\big\lceil \lg(n + 1) \big\rceil.\index{$\lg$}
+\]
+\end{corollary}
+
+\begin{proof}
+Level $h - 1$ has at least one internal vertex. Apply
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order} to
+see that $T$ has at least
+\[
+2^{h - 2 + 1} - 1 + 1
+=
+2^{h - 1}
+\]
+internal vertices. On the other hand, level $h - 1$ has at most
+$2^{h-1}$ internal vertices. Another application of
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order} shows
+that $T$ has at most
+\[
+2^{h - 1 + 1} - 1
+=
+2^h - 1
+\]
+internal vertices. Thus $n$ is bounded by
+\[
+2^{h - 1} \leq n \leq 2^h - 1.
+\]
+Taking logarithms of each side in the latter bound results in
+\[
+\lg(n + 1) \leq h \leq \lg n + 1
+\]
+and the corollary follows.
+\end{proof}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/sample-binary-heaps-array_a}
+}
+\qquad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/sample-binary-heaps-array_b}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/sample-binary-heaps-array_c}
+}
+\caption{Sequence representations of various binary heaps.}
+\label{fig:tree_data_structures:sequence_representations_binary_heaps}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Sequence representation}
+
+Any binary heap can be represented as a binary tree. Each vertex in
+the tree must know about its parent and its two children. However, a
+more common approach is to represent a binary heap as a sequence such
+as a list, array, or vector. Let $T$ be a binary heap consisting of
+$n$ internal vertices and let $L$ be a list of $n$ elements. The root
+vertex is represented as the list element $L[0]$. For each index $i$,
+the children of $L[i]$ are $L[2i + 1]$ and $L[2i + 2]$ and the parent
+of $L[i]$ is
+\[
+L\left[ \left\lfloor \frac{i - 1}{2} \right\rfloor \right].
+\]
+With a sequence representation of a binary heap, each vertex needs not
+know about its parent and children. Such information can be obtained
+via simple arithmetic on sequence indices. For example, the binary
+heaps in
+Figure~\ref{fig:tree_data_structures:binary_heaps_integer_keys} can be
+represented as the corresponding lists in
+Figure~\ref{fig:tree_data_structures:sequence_representations_binary_heaps}.
+Note that it is not necessary to store the leaves of $T$ in the
+sequence representation.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Insertion and sift-up}
+\label{subsec:tree_data_structures:insertion_sift_up}
+
+We now consider the problem of inserting a vertex $v$ into a binary
+heap $T$. If $T$ is empty, inserting a vertex simply involves the
+creation of a new internal vertex. We let that new internal vertex be
+$v$ and let its two children be leaves. The resulting binary heap
+augmented with $v$ has exactly one internal vertex and satisfies both
+the heap-order and heap-structure properties, as shown in
+Figure~\ref{fig:tree_data_structures:insert_vertex_into_empty_binary_heap}.
+In other words, any binary heap with one internal vertex trivially
+satisfies the heap-order property.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert-empty_a}
+}
+\qquad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert-empty_b}
+}
+\caption{Inserting a vertex into an empty binary heap.}
+\label{fig:tree_data_structures:insert_vertex_into_empty_binary_heap}
+\end{figure}
+
+Let $T$ now be a nonempty binary heap, i.e. $T$ has at least one
+internal vertex, and suppose we want to insert into $T$ an internal
+vertex $v$. We must identify the correct leaf of $T$ at which to
+insert $v$. If the $n$ internal vertices of $T$ are
+$r = v_0, v_1, \dots, v_{n-1}$, then by the sequence representation of
+$T$ we can identify the last internal vertex $v_{n-1}$ in constant
+time. The correct leaf at which to insert $v$ is the sequence element
+immediately following $v_{n-1}$, i.e. the element at position $n$ in
+the sequence representation of $T$. We replace with $v$ the leaf at
+position $n$ in the sequence so that $v$ now becomes the last vertex
+of $T$.
+
+The binary heap $T$ augmented with the new last vertex $v$ satisfies
+the heap-structure property, but may violate the heap-order
+property. To ensure that $T$ satisfies the heap-order property, we
+perform an operation on $T$ called
+\emph{sift-up}\index{binary heap!sift-up} that involves possibly
+moving $v$ up through various levels of $T$. Let $\kappa_v$ be the key
+of $v$ and let $\kappa_{p(v)}$ be the key of $v$'s parent. If the
+relation $\kappa_{p(v)} \leq \kappa_v$ holds, then $T$ satisfies the
+heap-order property. Otherwise we swap $v$ with its parent,
+effectively moving $v$ up one level to be at the position previously
+occupied by its parent. The parent of $v$ is moved down one level and
+now occupies the position where $v$ was previously. With $v$ in its
+new position, we perform the same key comparison process with $v$'s
+new parent. The key comparison and swapping continue until the
+heap-order property holds for $T$. In the worst case, $v$ would become
+the new root of $T$ after undergoing a number of swaps that is
+proportional to the height of $T$. Therefore, inserting a new internal
+vertex into $T$ can be achieved in time $O(\lg n)$.
+Figure~\ref{fig:tree_data_structures:insert_sift_up_binary_heap}
+illustrates the insertion of a new internal vertex into a nonempty
+binary heap and the resulting sift-up operation to maintain the
+heap-order property.
+Algorithm~\ref{alg:tree_data_structures:binary_heap_insert} presents
+pseudocode of our discussion for inserting a new internal vertex into
+a nonempty binary heap. The pseudocode is adapted from
+Howard~\cite{Howard2010}, which provides a C implementation of binary
+heaps.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert_a}
+}
+\quad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert_b}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert_c}
+}
+\quad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert_d}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert_e}
+}
+\quad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert_f}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert_g}
+}
+\quad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-insert_h}
+}
+\caption{Insert and sift-up in a binary heap.}
+\label{fig:tree_data_structures:insert_sift_up_binary_heap}
+\end{figure}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-heap-insert.tex}
+\caption{Inserting a new internal vertex into a binary heap.}
+\label{alg:tree_data_structures:binary_heap_insert}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Deletion and sift-down}
+\label{subsec:tree_data_structures:deletion_sift_down}
+
+The process for deleting the minimum vertex of a binary heap bears
+some resemblance to that of inserting a new internal vertex into the
+heap. Having removed the minimum vertex, we must then ensure that the
+resulting binary heap satisfies the heap-order property. Let $T$ be a
+binary heap. By the heap-order property, the root of $T$ has a key
+that is minimum among all keys of internal vertices in $T$. If the
+root $r$ of $T$ is the only internal vertex of $T$, i.e. $T$ is the
+trivial binary heap, we simply remove $r$ and $T$ now becomes the
+empty binary heap or the trivial tree, for which the heap-order
+property vacuously holds.
+Figure~\ref{fig:tree_data_structures:deleting_root_trivial_binary_heap}
+illustrates the case of removing the root of a binary heap having one
+internal vertex.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete-empty_a}
+}
+\qquad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete-empty_b}
+}
+\caption{Deleting the root of a trivial binary heap.}
+\label{fig:tree_data_structures:deleting_root_trivial_binary_heap}
+\end{figure}
+
+We now turn to the case where $T$ has $n > 1$ internal vertices. Let
+$r$ be the root of $T$ and let $v$ be the last internal vertex of
+$T$. Deleting $r$ would disconnect $T$. So we instead replace the key
+and information at $r$ with the key and other relevant information
+pertaining to $v$. The root $r$ now has the key of the last internal
+vertex, and $v$ becomes a leaf.
+
+At this point, $T$ satisfies the heap-structure property but may
+violate the heap-order property. To restore the heap-order property,
+we perform an operation on $T$ called
+\emph{sift-down}\index{binary heap!sift-down} that may possibly move
+$r$ down through various levels of $T$. Let $c(r)$ be the child of $r$
+with key that is minimum among all the children of $r$, and let
+$\kappa_r$ and $\kappa_{c(r)}$ be the keys of $r$ and $c(r)$,
+respectively. If $\kappa_r \leq \kappa_{c(r)}$, then the heap-order
+property is satisfied. Otherwise we swap $r$ with $c(r)$, moving $r$
+down one level to the position previously occupied by
+$c(r)$. Furthermore, $c(r)$ is moved up one level to the position
+previously occupied by $r$. With $r$ in its new position, we perform
+the same key comparison process with a child of $r$ that has minimum
+key among all of $r$'s children. The key comparison and swapping
+continue until the heap-order property holds for $T$. In the worst
+case, $r$ would percolate all the way down to the level that is
+immediately above the last level after undergoing a number of swaps
+that is proportional to the height of $T$. Therefore, deleting the
+minimum vertex of $T$ can be achieved in time $O(\lg n)$.
+Figure~\ref{fig:tree_data_structures:delete_sift_down_binary_heap}
+illustrates the deletion of the minimum vertex of a binary heap with
+at least two internal vertices and the resulting sift-down process
+that percolates vertices down through various levels of the heap in
+order to maintain the heap-order property.
+Algorithm~\ref{alg:tree_data_structures:binary_heap_delete} summarizes
+our discussion of the process for extracting the minimum vertex of $T$
+while also ensuring that $T$ satisfies the heap-order property. The
+pseudocode is adapted from the C implementation of binary heaps in
+Howard~\cite{Howard2010}. With some minor changes,
+Algorithm~\ref{alg:tree_data_structures:binary_heap_delete} can be
+used to change the key of the root vertex and maintain the heap-order
+property for the resulting binary tree.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete_a}
+}
+\quad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete_b}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete_c}
+}
+\quad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete_d}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete_e}
+}
+\quad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete_f}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete_g}
+}
+\quad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-heap-delete_h}
+}
+\caption{Delete and sift-down in a binary heap.}
+\label{fig:tree_data_structures:delete_sift_down_binary_heap}
+\end{figure}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-heap-delete.tex}
+\caption{Extract the minimum vertex of a binary heap.}
+\label{alg:tree_data_structures:binary_heap_delete}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Constructing a binary heap}
+
+Given a collection of $n$ vertices $v_0, v_1, \dots, v_{n-1}$ with
+corresponding keys $\kappa_0, \kappa_1, \dots, \kappa_{n-1}$, we want
+to construct a binary heap containing exactly those vertices. A basic
+approach is to start with a trivial tree and build up a binary heap
+via successive insertions. As each insertion requires $O(\lg n)$ time,
+the method of binary heap construction via successive insertion of
+each of the $n$ vertices requires $O(n \cdot \lg n)$ time. It turns
+out we could do a bit better and achieve the same result in linear
+time.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-heap-heapify.tex}
+\caption{Heapify a binary tree.}
+\label{alg:tree_data_structures:heapify_binary_tree}
+\end{algorithm}
+
+A better approach starts by letting $v_0, v_1, \dots, v_{n-1}$ be the
+internal vertices of a binary tree $T$. The tree $T$ need not satisfy
+the heap-order property, but it must satisfy the heap-structure
+property. Suppose $T$ is given in sequence representation so that we
+have the correspondence $v_i = T[i]$ and the last internal vertex of
+$T$ has index $n - 1$. The parent of $T[n-1]$ has index
+\[
+j
+=
+\left\lfloor \frac{n - 1}{2} \right\rfloor.
+\]
+Any vertex of $T$ with sequence index beyond $n - 1$ is a leaf. In
+other words, if an internal vertex has index $> j$, then the children
+of that vertex are leaves and have indices $\geq n$. Thus any internal
+vertex with index $\geq \lfloor n/2 \rfloor$ has leaves for its
+children. Conclude that internal vertices with indices
+%%
+\begin{equation}
+\label{eqn:tree_data_structures:index_internal_vertices_with_leaves}
+\left\lfloor \frac{n}{2} \right\rfloor,\,
+\left\lfloor \frac{n}{2} \right\rfloor + 1,\,
+\left\lfloor \frac{n}{2} \right\rfloor + 2,
+\dots,
+n - 1
+\end{equation}
+%%
+have only leaves for their children.
+
+Our next task is to ensure that the heap-order property holds for
+$T$. If $v$ is an internal vertex with index
+in~\eqref{eqn:tree_data_structures:index_internal_vertices_with_leaves},
+then the subtree rooted at $v$ is trivially a binary heap. Consider
+the indices from $\lfloor n / 2 \rfloor - 1$ all the way down to
+$0$ and let $i$ be such an index, i.e. let
+$0 \leq i \leq \lfloor n / 2 \rfloor - 1$. We heapify the subtree of
+$T$ rooted at $T[i]$, effectively performing a sift-down on this
+subtree. Once we have heapified all subtrees rooted at $T[i]$ for
+$0 \leq i \leq \lfloor n / 2 \rfloor - 1$, the resulting tree $T$ is a
+binary heap. Our discussion is summarized in
+Algorithm~\ref{alg:tree_data_structures:heapify_binary_tree}.
+
+Earlier in this section, we claimed that
+Algorithm~\ref{alg:tree_data_structures:heapify_binary_tree} can be
+used to construct a binary heap in worst-case linear time. To prove
+this, let $T$ be a binary tree satisfying the heap-structure property
+and having $n$ internal vertices. By
+Corollary~\ref{cor:tree_data_structures:height_binary_heap}, $T$ has
+height $h = \lceil \lg(n + 1) \rceil$. We perform a sift-down for at
+most $2^i$ vertices of depth $i$, where each sift-down for a subtree
+rooted at a vertex of depth $i$ takes $O(h - i)$ time. Then the total
+time for Algorithm~\ref{alg:tree_data_structures:heapify_binary_tree}
+is
+%%
+\begin{align*}
+O\left( \sum_{0 \leq i < h} 2^i (h - i) \right)
+&=
+O\left( 2^h \sum_{0 \leq i < h} \frac{2 - i} {2^{h - i}} \right) \\[4pt]
+&=
+O\left( 2^h \sum_{k > 0} \frac{k}{2^k} \right) \\[4pt]
+&=
+O\left( 2^{h + 1} \right) \\[4pt]
+&=
+O(n)
+\end{align*}
+%%
+where we used the closed form $\sum_{k > 0} k / 2^k = 2$ for a
+geometric series and
+Theorem~\ref{thm:trees_forests:complete_binary_tree_exact_order}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Binomial heaps}
+\label{sec:tree_data_structures:binomial_heaps}
+\index{binomial heap}
+
+We are given two binary heaps $T_1$ and $T_2$ and we want to merge
+them into a single heap. We could start by choosing to insert each
+element of $T_2$ into $T_1$, successively extracting the minimum
+element from $T_2$ and insert that minimum element into $T_1$. If
+$T_1$ and $T_2$ have $m$ and $n$ elements, respectively, we would
+perform $n$ extractions from $T_2$ totalling
+\[
+O\left( \sum_{0 < k \leq n} \lg k \right)
+\]
+time and inserting all of the extracted elements from $T_2$ into
+$T_1$ requires a total runtime of
+%%
+\begin{equation}
+\label{eqn:tree_data_structures:total_runtime_inserting_n_extra_elements}
+O\left( \sum_{n \leq k < n + m} \lg k \right).
+\end{equation}
+%%
+We approximate the addition of the two sums by
+\[
+\int_0^{n + m} \lg k \; dk
+=
+\left. \frac{k \ln k - k} {\ln 2} + C \right|_{k=0}^{k=n+m}
+\]
+for some constant $C$. The above method of successive extraction and
+insertion therefore has a total runtime of
+\[
+O\left( \frac{(n + m) \ln(n + m) - n - m} {\ln 2} \right)
+\]
+for merging two binary heaps.
+
+Alternatively, we could slightly improve the latter runtime for
+merging $T_1$ and $T_2$ by successively extracting the last internal
+vertex of $T_2$. The whole process of extracting all elements from
+$T_2$ in this way takes $O(n)$ time and inserting each of the
+extracted elements into $T_1$ still requires the runtime in
+expression~\eqref{eqn:tree_data_structures:total_runtime_inserting_n_extra_elements}.
+We approximate the sum
+in~\eqref{eqn:tree_data_structures:total_runtime_inserting_n_extra_elements}
+by
+\[
+\int_{k=n}^{k=n+m} \lg k \; dk
+=
+\left. \frac{k \ln k - k} {\ln 2} + C \right|_{k=n}^{k=n+m}
+\]
+for some constant $C$. Therefore the improved extraction and
+insertion method requires
+\[
+O\left(
+\frac{(n+m) \ln(n+m) - n \ln n - m} {\ln 2} - n
+\right)
+\]
+time in order to merge $T_1$ and $T_2$.
+
+Can we improve on the latter runtime for merging two binary heaps? It
+turns out we can by using a type of mergeable heap called
+binomial\index{binomial heap} heap that supports merging two heaps in
+logarithmic time.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Binomial trees}
+\index{binomial!tree}
+
+A binomial heap can be considered as a collection of binomial
+trees. The binomial tree of order $k$ is denoted $B_k$ and defined
+recursively as follows:
+%%
+\begin{enumerate}
+\item The binomial tree of order $0$ is the trivial tree.
+
+\item The binomial tree of order $k > 0$ is a rooted tree, where from
+  left to right the children of the root of $B_k$ are roots of
+  $B_{k-1}, B_{k-2}, \dots, B_0$.
+\end{enumerate}
+%%
+Various examples of binomial trees are shown in
+Figure~\ref{fig:tree_data_structures:binomial_trees_k0_4}. The
+binomial tree $B_k$ can also be defined as follows. Let $T_1$ and
+$T_2$ be two copies of $B_{k-1}$ with root vertices $r_1$ and $r_2$,
+respectively. Then $B_k$ is obtained by letting, say, $r_1$ be the
+left-most child of $r_2$.
+Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
+lists various basic properties of binomial trees. Property~(3) of
+Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
+uses the binomial\index{binomial!coefficient} coefficient, from whence
+$B_k$ derives its name.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[$B_0$]{
+  \includegraphics{image/tree-data-structures/binomial-trees-order-0-5_B0}
+}
+\quad
+\subfigure[$B_1$]{
+  \includegraphics{image/tree-data-structures/binomial-trees-order-0-5_B1}
+}
+\quad
+\subfigure[$B_2$]{
+  \includegraphics{image/tree-data-structures/binomial-trees-order-0-5_B2}
+}
+\quad
+\subfigure[$B_3$]{
+  \includegraphics{image/tree-data-structures/binomial-trees-order-0-5_B3}
+}
+\subfigure[$B_4$]{
+  \includegraphics{image/tree-data-structures/binomial-trees-order-0-5_B4}
+}
+\subfigure[$B_5$]{
+  \includegraphics{image/tree-data-structures/binomial-trees-order-0-5_B5}
+}
+\caption{Binomial trees $B_k$ for $k = 0, 1, 2, 3, 4, 5$.}
+\label{fig:tree_data_structures:binomial_trees_k0_4}
+\end{figure}
+
+\begin{lemma}
+\label{lem:tree_data_structures:basic_properties_binomial_trees}
+\textbf{Basic properties of binomial trees.}
+Let $B_k$ be a binomial tree of order $k \geq 0$. Then the following
+properties hold:
+%%
+\begin{enumerate}
+\item The order of $B_k$ is $2^k$.
+
+\item The height of $B_k$ is $k$.
+
+\item For $0 \leq i \leq k$, we have $\binom{k}{i}$ vertices at depth
+  $i$.
+
+\item The root of $B_k$ is the only vertex with maximum degree
+  $\Delta(B_k) = k$. If the children of the root are numbered
+  $k - 1, k - 2, \dots, 0$ from left to right, then child $i$ is the
+  root of the subtree $B_i$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We use induction on $k$. The base case for each of the above
+properties is $B_0$, which trivially holds.
+
+(1)~By our inductive hypothesis, $B_{k-1}$ has order $2^{k-1}$. Since
+$B_k$ is comprised of two copies of $B_{k-1}$, conclude that $B_k$ has
+order
+\[
+2^{k-1} + 2^{k-1}
+=
+2^k.
+\]
+
+(2)~The binomial tree $B_k$ is comprised of two copies of $B_{k-1}$,
+the root of one copy being the left-most child of the root of the
+other copy. Then the height of $B_k$ is one greater than the height of
+$B_{k-1}$. By our inductive hypothesis, $B_{k-1}$ has height $k - 1$
+and therefore $B_k$ has height $(k - 1) + 1 = k$.
+
+(3)~Denote by $D(k,i)$ the number of vertices of depth $i$ in
+$B_k$. As $B_k$ is comprised of two copies of $B_{k-1}$, a vertex at
+depth $i$ in $B_{k-1}$ appears once in $B_k$ at depth $i$ and a second
+time at depth $i + 1$. By our inductive hypothesis,
+%%
+\begin{align*}
+D(k,i)
+&=
+D(k-1, i) + D(k-1, i-1) \\[4pt]
+&=
+\binom{k-1}{i} + \binom{k-1}{i-1} \\[4pt]
+&=
+\binom{k}{i}
+\end{align*}
+%%
+where we used Pascal's\index{Pascal!formula} formula which states that
+\[
+\binom{n+1}{r}
+=
+\binom{n}{r-1} + \binom{n}{r}
+\]
+for any positive integers $n$ and $r$ with $r \leq n$.
+
+(4)~This property follows from the definition of $B_k$.
+\end{proof}
+
+\begin{corollary}
+If a binomial tree has order $n \geq 0$, then the degree of any vertex
+$i$ is bounded by $\deg(i) \leq \lg n$.
+\end{corollary}
+
+\begin{proof}
+Apply properties~(1) and~(4) of
+Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Binomial heaps}
+\index{binomial heap}
+
+In 1978, Jean\index{Vuillemin, Jean} Vuillemin~\cite{Vuillemin1978}
+introduced binomial heaps as a data structure for implementing
+priority queues. Mark~R.~Brown~\cite{Brown1977,Brown1978} subsequently
+extended Vuillemin's work, providing detailed analysis of binomial
+heaps and introducing an efficient implementation.
+
+A binomial\index{binomial heap} heap $H$ can be considered as a
+collection of binomial trees. Each vertex in $H$ has a corresponding
+key and all vertex keys of $H$ belong to a totally ordered set having
+total order $\leq$. The heap also satisfies the following
+\emph{binomial heap properties}\index{binomial heap!properties}:
+%%
+\begin{itemize}
+\item \textbf{Heap-order property.}\index{binomial heap!order property}
+  Let $B_k$ be a binomial tree in $H$. If $v$ is a vertex of $B_k$
+  other than the root and $p$ is the parent of $v$ and having
+  corresponding keys $\kappa_v$ and $\kappa_p$, respectively, then
+  $\kappa_p \leq \kappa_v$.
+
+\item \textbf{Root-degree property.}\index{binomial heap!root-degree property}
+  For any integer $k \geq 0$, $H$ contains at most one binomial tree
+  whose root has degree $k$.
+\end{itemize}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[Binomial heap as a forest.]{
+  \includegraphics{image/tree-data-structures/sample-binomial-heaps_dot}
+  \qquad
+  \includegraphics{image/tree-data-structures/sample-binomial-heaps_line}
+  \qquad
+  \includegraphics{image/tree-data-structures/sample-binomial-heaps_tree}
+}
+\qquad
+\subfigure[Binomial heap as a tree.]{
+  \includegraphics{image/tree-data-structures/sample-binomial-heaps_b}
+}
+\caption{Forest and tree representations of a binomial heap.}
+\label{fig:tree_data_structures:binomial_heap_forest_tree_representations}
+\end{figure}
+
+If $H$ is comprised of the binomial trees
+$B_{k_0}, B_{k_1}, \dots, B_{k_n}$ for nonnegative integers $k_i$, we
+can consider $H$ as a forest made up of the trees $B_{k_i}$. We can
+also represent $H$ as a tree in the following way. List the binomial
+trees of $H$ as $B_{k_0}, B_{k_1}, \dots, B_{k_n}$ in nondecreasing
+order of root degrees, i.e. the root of $B_{k_i}$ has order less than
+or equal to the root of $B_{k_j}$ if and only if $k_i \leq k_j$. The
+root of $H$ is the root of $B_{k_0}$ and the root of each $B_{k_i}$
+has for its child the root of $B_{k_{i+1}}$. Both the forest and tree
+representations are illustrated in
+Figure~\ref{fig:tree_data_structures:binomial_heap_forest_tree_representations}
+for the binomial heap comprised of the binomial trees
+$B_0, B_1, B_3$.
+
+The heap-order\index{binomial heap!order property} property for
+binomial heaps is analogous to the heap-order property for binary
+heaps. In the case of binomial heaps, the heap-order property implies
+that the root of a binomial tree has a key that is minimum among all
+vertices in that tree. However, the similarity more or less ends
+there. In a tree representation of a binomial heap, the root of the
+heap may not necessarily have the minimum key among all vertices of
+the heap.
+
+The root-degree\index{binomial heap!root-degree property} property can
+be used to derive an upper bound on the number of binomial trees in a
+binomial heap. If $H$ is a binomial heap with $n$ vertices, then $H$
+has at most $1 + \lfloor \lg n \rfloor$ binomial trees. To prove this
+result, note that~(see Theorem~2.1 and Corollary~2.1.1
+in~\cite[pp.40--42]{Rosen2000}) $n$ can be uniquely written in binary
+representation as the polynomial
+\[
+n
+=
+a_k 2^k + a_{k-1} 2^{k-1} + \cdots + a_1 2^1 + a_0 2^0.
+\]
+The binary representation of $n$ requires $1 + \lfloor \lg n \rfloor$
+bits, hence $n = \sum_{i=0}^{\lfloor \lg n \rfloor} a_i 2^i$. Apply
+property~(1) of
+Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
+to see that the binomial tree $B_i$ is in $H$ if and only if the
+$i$-th bit is $b_i = 1$. Conclude that $H$ has at most
+$1 + \lfloor \lg n \rfloor$ binomial trees.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Construction and management}
+
+Let $H$ be a binomial heap comprised of the binomial trees
+$B_{k_0}, B_{k_1}, \dots, B_{k_n}$ where the root of $B_{k_i}$ has
+order less than or equal to the root of $B_{k_j}$ if and only if
+$k_i \leq k_j$. Denote by $r_{k_i}$ the root of the binomial tree
+$B_{k_i}$. If $v$ is a vertex of $H$, denote by $\child[v]$ the
+left-most child of $v$ and by $\sibling[v]$ we mean the sibling
+immediately to the right of $v$. Furthermore, let $\parent[v]$ be the
+parent of $v$ and let $\degree[v]$ denote the degree of $v$. If $v$
+has no children, we set $\child[v] = \texttt{NULL}$. If $v$ is one of
+the roots $r_{k_i}$, we set $\parent[v] = \texttt{NULL}$. And if $v$
+is the right-most child of its parent, then we set
+$\sibling[v] = \texttt{NULL}$.
+
+The roots $r_{k_0}, r_{k_1}, \dots, r_{k_n}$ can be organized as a
+linked list, called a \emph{root list}\index{root list}, with two
+functions for accessing the next root and the previous root. The root
+immediately following $r_{k_i}$ is denoted
+$\nextElem[r_{k_i}] = \sibling[v] = r_{k_{i+1}}$ and the root
+immediately before $r_{k_i}$ is written
+$\prevElem[r_{k_i}] = r_{k_{i-1}}$. For $r_{k_0}$ and $r_{k_n}$, we
+set $\nextElem[r_{k_n}] = \sibling[v] = \texttt{NULL}$ and
+$\prevElem[r_{k_0}] = \texttt{NULL}$. We also define the function
+$\headElem[H]$ that simply returns $r_{k_0}$ whenever $H$ has at least
+one element, and $\headElem[H] = \texttt{NULL}$ otherwise.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Minimum vertex}
+
+To find the minimum vertex, we find the minimum among
+$r_{k_0}, r_{k_1}, \dots, r_{k_m}$ because by definition the root
+$r_{k_i}$ is the minimum vertex of the binomial tree $B_{k_i}$. If $H$
+has $n$ vertices, we need to check at most $1 + \lfloor \lg n \rfloor$
+vertices to find the minimum vertex of $H$. Therefore determining the
+minimum vertex of $H$ takes $O(\lg n)$ time.
+Algorithm~\ref{alg:tree_data_structures:binomial_heap_minimum_vertex}
+summarizes our discussion.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-minimum.tex}
+\caption{Determine the minimum vertex of a binomial heap.}
+\label{alg:tree_data_structures:binomial_heap_minimum_vertex}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Merging heaps}
+
+Recall that $B_k$ is constructed by linking the root of one copy of
+$B_{k-1}$ with the root of another copy of $B_{k-1}$. When merging two
+binomial heaps whose roots have the same degree, we need to repeatedly
+link the respective roots. The root linking procedure runs in constant
+time $O(1)$ and is rather straightforward, as presented in
+Algorithm~\ref{alg:tree_data_structures:link_roots}.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-link-roots.tex}
+\caption{Linking the roots of binomial heaps.}
+\label{alg:tree_data_structures:link_roots}
+\end{algorithm}
+
+Besides linking the roots of two copies of $B_{k-1}$, we also need to
+merge the root lists of two binomial heaps $H_1$ and $H_2$. The
+resulting merged list is sorted in nondecreasing order of degree. Let
+$L_1$ be the root list of $H_1$ and let $L_2$ be the root list of
+$H_2$. First we create an empty list $L$. As the lists $L_i$ are
+already sorted in nondecreasing order of vertex degree, we use
+merge\index{merge sort} sort to merge the $L_i$ into a single sorted
+list. The whole procedure for merging the $L_i$ takes linear time
+$O(n)$, where $n = |L_1| + |L_2| - 1$. Refer to
+Algorithm~\ref{alg:tree_data_structures:merge_root_lists} for
+pseudocode of the procedure just described.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-merge-root-lists.tex}
+\caption{Merging two root lists.}
+\label{alg:tree_data_structures:merge_root_lists}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-merge.tex}
+\caption{Merging two binomial heaps.}
+\label{alg:tree_data_structures:merge_binomial_heaps}
+\end{algorithm}
+
+Having clarified the root linking and root lists merging procedures,
+we are now ready to describe a procedure for merging two nonempty
+binomial heaps $H_1$ and $H_2$ into a single binomial heap
+$H$. Initially there are at most two copies of $B_0$, one from each of
+the $H_i$. If two copies of $B_0$ are present, we let the root of one
+be the parent of the other as per
+Algorithm~\ref{alg:tree_data_structures:link_roots}, producing $B_1$
+as a result. From thereon, we generally have at most three copies of
+$B_k$ for some integer $k > 0$: one from $H_1$, one from $H_2$, and
+the third from a previous merge of two copies of $B_{k-1}$. In the
+presence of two or more copies of $B_k$, we merge two copies as per
+Algorithm~\ref{alg:tree_data_structures:link_roots} to produce
+$B_{k+1}$. If $H_i$ has $n_i$ vertices, then $H_i$ has at most
+$1 + \lfloor \lg n_i \rfloor$ binomial trees, from which it is clear
+that merging $H_1$ and $H_2$ requires
+\[
+\max(1 + \lfloor \lg n_1 \rfloor,\, 1 + \lfloor \lg n_2 \rfloor)
+\]
+steps. Letting $N = \max(n_1,\, n_2)$, we see that merging $H_1$ and
+$H_2$ takes logarithmic time $O(\lg N)$. The operation of merging two
+binomial heaps is presented in pseudocode as
+Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps}, which
+is adapted from Cormen~et~al.~\cite[p.463]{CormenEtAl2001} and the C
+implementation of binomial queues in~\cite{Howard2010}. A word of
+warning is order here.
+Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps} is
+destructive in the sense that it modifies the input heaps $H_i$
+in-place without making copies of those heaps.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Vertex insertion}
+
+Let $v$ be a vertex with corresponding key $\kappa_v$ and let $H_1$ be
+a binomial heap of $n$ vertices. The single vertex $v$ can be
+considered as a binomial heap $H_2$ comprised of exactly the binomial
+tree $B_0$. Then inserting $v$ into $H_1$ is equivalent to merging the
+heaps $H_i$ and can be accomplished in $O(\lg n)$ time. Refer to
+Algorithm~\ref{alg:tree_data_structures:binomial_heap_insert} for
+pseudocode of this straightforward procedure.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-insert.tex}
+\caption{Insert a vertex into a binomial heap.}
+\label{alg:tree_data_structures:binomial_heap_insert}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Delete minimum vertex}
+
+Extracting the minimum vertex from a binomial heap $H$ consists of
+several phases. Let $H$ be comprised of the binomial trees
+$B_{k_0}, B_{k_1}, \dots, B_{k_m}$ with corresponding roots
+$r_{k_0}, r_{k_1}, \dots, r_{k_m}$ and let $n$ be the number of
+vertices in $H$. In the first phase, from among the $r_{k_i}$ we
+identify the root $v$ with minimum key and remove $v$ from $H$, an
+operation that runs in $O(\lg n)$ time because we need to process at
+most $1 + \lfloor \lg n \rfloor$ roots. With the binomial tree $B_k$
+rooted at $v$ thus severed from $H$, we now have a forest consisting
+of the heap without $B_k$~(denote this heap by $H_1$) and the binomial
+tree $B_k$. By construction, $v$ is the root of $B_k$ and the children
+of $v$ from left to right can be considered as roots of binomial trees
+as well, say $B_{\ell_s}, B_{\ell_{s-1}}, \dots, B_{\ell_0}$ where
+$\ell_s > \ell_{s-1} > \dots > \ell_0$. Now sever the root $v$ from
+its children. The $B_{\ell_j}$ together can be viewed as a binomial
+heap $H_2$ with, from left to right, binomial trees
+$B_{\ell_0}, B_{\ell_1}, \dots, B_{\ell_s}$. Finally the binomial heap
+resulting from removing $v$ can be obtained by merging $H_1$ and $H_2$
+in $O(\lg n)$ time as per
+Algorithm~\ref{alg:tree_data_structures:merge_binomial_heaps}. In
+total we can extract the minimum vertex of $H$ in $O(\lg n)$ time. Our
+discussion is summarized in
+Algorithm~\ref{alg:tree_data_structures:binomial_heap_extract} and an
+illustration of the extraction process is presented in
+Figure~\ref{fig:tree_data_structures:binomial_heap_extract}.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binomial-heap-extract.tex}
+\caption{Extract the minimum vertex from a binomial heap.}
+\label{alg:tree_data_structures:binomial_heap_extract}
+\end{algorithm}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binomial-heap-extract_a}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binomial-heap-extract_b}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binomial-heap-extract_c}
+}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binomial-heap-extract_d}
+}
+\caption{Extracting the minimum vertex from a binomial heap.}
+\label{fig:tree_data_structures:binomial_heap_extract}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Binary search trees}
+\label{sec:tree_data_structures:binary_search_trees}
+
+A \emph{binary search tree}\index{binary search tree}~(BST)\index{BST}
+is a rooted binary tree $T = (V,E)$ having vertex weight function
+$\kappa: V \to \R$. The weight of each vertex $v$ is referred to as
+its key, denoted $\kappa_v$. Each vertex $v$ of $T$ satisfies the
+following properties:
+%%
+\begin{itemize}
+\item \textbf{Left subtree property.}\index{binary search tree!left subtree property}
+  The left subtree of $v$ contains only vertices whose keys are at
+  most $\kappa_v$. That is, if $u$ is a vertex in the left subtree of
+  $v$, then $\kappa_u \leq \kappa_v$.
+
+\item \textbf{Right subtree property.}\index{binary search tree!right subtree property}
+  The right subtree of $v$ contains only vertices whose keys are at
+  least $\kappa_v$. In other words, any vertex $u$ in the right
+  subtree of $v$ satisfies $\kappa_v \leq \kappa_u$.
+
+\item \textbf{Recursion property.}\index{binary search tree!recursion property}
+  Both the left and right subtrees of $v$ must also be binary search
+  trees.
+\end{itemize}
+%%
+The above are collectively called the
+\emph{binary search tree property}\index{binary search tree!property}.
+See Figure~\ref{fig:tree_data_structures:binary_search_tree} for an
+example of a binary search tree. Based on the binary search tree
+property, we can use in-order\index{traversal!in-order} traversal~(see
+Algorithm~\ref{alg:trees_forests:in_order_traversal}) to obtain a
+listing of the vertices of a binary search tree sorted in
+nondecreasing order of keys.
+
+\begin{figure}[!htbp]
+\centering
+\index{binary search tree}
+\includegraphics{image/tree-data-structures/binary-search-tree-examples}
+\caption{A binary search tree.}
+\label{fig:tree_data_structures:binary_search_tree}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Searching}
+
+Given a BST $T$ and a key $k$, we want to locate a vertex~(if one
+exists) in $T$ whose key is $k$. The search procedure for a BST is
+reminiscent of the binary\index{binary search} search algorithm
+discussed in
+problem~\ref{chap:graph_algorithms}.\ref{prob:graph_algorithms:binary_search}.
+We begin by examining the root $v_0$ of $T$. If $\kappa_{v_0} = k$,
+the search is successful. However, if $\kappa_{v_0} \neq k$ then we
+have two cases to consider. In the first case, if $k < \kappa_{v_0}$
+then we search the left subtree of $v_0$. The second case occurs when
+$k > \kappa_{v_0}$, in which case we search the right subtree of
+$v_0$. Repeat the process until a vertex $v$ in $T$ is found for which
+$k = \kappa_v$ or the indicated subtree is empty. Whenever the target
+key is different from the key of the vertex we are currently
+considering, we move down one level of $T$. Thus if $h$ is the height
+of $T$, it follows that searching $T$ takes a worst-case runtime of
+$O(h)$. The above procedure is presented in pseudocode as
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate}. Note
+that if a vertex $v$ does not have a left subtree, the operation of
+locating the root of $v$'s left subtree should return \texttt{NULL}. A
+similar comment applies when $v$ does not have a right
+subtree. Furthermore, from the structure of
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate}, if
+the input BST is empty then \texttt{NULL} is returned. See
+Figure~\ref{fig:tree_data_structures:binary_search_tree_search} for an
+illustration of locating vertices with given keys in a BST.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-locate.tex}
+\caption{Locate a key in a binary search tree.}
+\label{alg:tree_data_structures:binary_search_tree_locate}
+\end{algorithm}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[Vertex with key $6$: search fail.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-search-examples_fail}
+}
+\qquad
+\subfigure[Vertex with key $22$: search success.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-search-examples_success}
+}
+\caption{Finding vertices with given keys in a BST.}
+\label{fig:tree_data_structures:binary_search_tree_search}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[Minimum vertex.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-minimum-maximum_minimum}
+}
+\qquad
+\subfigure[Maximum vertex.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-minimum-maximum_maximum}
+}
+\caption{Locating minimum and maximum vertices in a BST.}
+\label{fig:tree_data_structures:binary_search_tree_minimum_maximum}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[Successor of $9$.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-successor-predecessor_successor}
+}
+\qquad
+\subfigure[Predecessor of $11$.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-successor-predecessor_predecessor}
+}
+
+\caption{Searching for successor and predecessor.}
+\label{fig:tree_data_structures:binary_search_tree_successor_predecessor}
+\end{figure}
+
+From the binary search tree property, deduce that a vertex of a BST
+$T$ with minimum key can be found by starting from the root of $T$ and
+repeatedly traversing left subtrees. When we have reached the
+left-most vertex $v$ of $T$, querying for the left subtree of $v$
+should return \texttt{NULL}. At this point, we conclude that $v$ is a
+vertex with minimum key. Each query for the left subtree moves us one
+level down $T$, resulting in a worst-case runtime of $O(h)$ with $h$
+being the height of $T$. See
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_minimum_key}
+for pseudocode of the procedure.
+
+The procedure for finding a vertex with maximum key is analogous to
+that for finding one with minimum key. Starting from the root of $T$,
+we repeatedly traverse right subtrees until we encounter the
+right-most vertex, which by the binary search tree property has
+maximum key. This procedure has the same worst-case runtime of $O(h)$.
+Figure~\ref{fig:tree_data_structures:binary_search_tree_minimum_maximum}
+illustrates the process of locating the minimum and maximum vertices
+of a BST.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-minimum.tex}
+\caption{Finding a vertex with minimum key in a BST.}
+\label{alg:tree_data_structures:binary_search_tree_minimum_key}
+\end{algorithm}
+
+Corresponding to the notions of left- and right-children, we can also
+define successors and predecessors as follows. Suppose $v$ is not a
+maximum vertex of a nonempty BST $T$. The \emph{successor} of $v$ is a
+vertex in $T$ distinct from $v$ with the smallest key greater than or
+equal to $\kappa_v$. Similarly, for a vertex $v$ that is not a minimum
+vertex of $T$, the \emph{predecessor} of $v$ is a vertex in $T$
+distinct from $v$ with the greatest key less than or equal to
+$\kappa_v$. The notions of successors and predecessors are concerned
+with relative key order, not a vertex's position within the
+hierarchical structure of a BST. For instance, from
+Figure~\ref{fig:tree_data_structures:binary_search_tree} we see that
+the successor of the vertex $u$ with key $8$ is the vertex $v$ with
+key $10$, i.e. the root, even though $v$ is an ancestor of $u$. The
+predecessor of the vertex $a$ with key $4$ is the vertex $b$ with key
+$3$, i.e. the minimum vertex, even though $b$ is a descendant of $a$.
+
+We now describe a method to systematically locate the successor of a
+given vertex. Let $T$ be a nonempty BST and $v \in V(T)$ not a maximum
+vertex of $T$. If $v$ has a right subtree, then we find a minimum
+vertex of $v$'s right subtree. In case $v$ does not have a right
+subtree, we backtrack up one level to $v$'s parent
+$u = \parent(v)$. If $v$ is the root of the right subtree of $u$, we
+backtrack up one level again to $u$'s parent, making the assignments
+$v \assign u$ and $u \assign \parent(u)$. Otherwise we return $v$'s
+parent. Repeat the above backtracking procedure until the required
+successor is found. Our discussion is summarized in
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_successors}.
+Each time we backtrack to a vertex's parent, we move up one
+level, hence the worst-case runtime of
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_successors}
+is $O(h)$ with $h$ being the height of $T$. The procedure for finding
+predecessors is similar. Refer to
+Figure~\ref{fig:tree_data_structures:binary_search_tree_successor_predecessor}
+for an illustration of locating successors and predecessors.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-successors.tex}
+\caption{Finding successors in a binary search tree.}
+\label{alg:tree_data_structures:binary_search_tree_successors}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Insertion}
+
+Inserting a vertex $v$ into a BST $T$ is rather straightforward. If
+$T$ is empty, we let $v$ be the root of $T$. Otherwise $T$ has at
+least one vertex. In that case, we need to locate a vertex in $T$ that
+can act as a parent and ``adopt'' $v$ as a child. To find a candidate
+parent, let $u$ be the root of $T$. If $\kappa_v < \kappa_u$ then we
+assign the root of the left subtree of $u$ to $u$ itself. Otherwise we
+assign the root of the right subtree of $u$ to $u$. We then carry on
+the above key comparison process until the operation of locating the
+root of a left or right subtree returns \texttt{NULL}. At this point,
+a candidate parent for $v$ is the last non-\texttt{NULL} value of
+$u$. If $\kappa_v < \kappa_u$ then we let $v$ be $u$'s
+left-child. Otherwise $v$ is the right-child of $u$. After each key
+comparison, we move down at most one level so that in the worst-case
+inserting a vertex into $T$ takes $O(h)$ time, where $h$ is the height
+of $T$.
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_insert}
+presents pseudocode of our discussion and
+Figure~\ref{fig:tree_data_structures:binary_search_tree_insert}
+illustrates how to insert a vertex into a BST.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-insert.tex}
+\caption{Inserting a vertex into a binary search tree.}
+\label{alg:tree_data_structures:binary_search_tree_insert}
+\end{algorithm}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-insert_a}
+}
+\qquad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-insert_b}
+}
+\caption{Inserting into a binary search tree.}
+\label{fig:tree_data_structures:binary_search_tree_insert}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Deletion}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/binary-search-tree-delete.tex}
+\caption{Deleting a vertex from a binary search tree.}
+\label{alg:tree_data_structures:binary_search_tree_delete}
+\end{algorithm}
+
+\noindent
+Whereas insertion into a BST is straightforward, removing a vertex
+requires much more work. Let $T$ be a nonempty binary search tree and
+suppose we want to remove $v \in V(T)$ from $T$. Having located the
+position that $v$ occupies within $T$, we need to consider three
+separate cases: (1)~$v$ is a leaf; (2)~$v$ has one child; (3)~$v$ has
+two children.
+%%
+\begin{enumerate}
+\item If $v$ is a leaf, we simply remove $v$ from $T$ and the
+  procedure is complete. The resulting tree without $v$ satisfies the
+  binary search tree property.
+
+\item Suppose $v$ has the single child $u$. Removing $v$ would
+  disconnect $T$, a situation that can be prevented by splicing out
+  $u$ and letting $u$ occupy the position previously held by $v$. The
+  resulting tree with $v$ removed as described satisfies the binary
+  search tree property.
+
+\item Finally suppose $v$ has two children and let $s$ and $p$ be the
+  successor and predecessor of $v$, respectively. It can be shown that
+  $s$ has no left-child and $p$ has no right-child. We can choose to
+  either splice out $s$ or $p$. Say we choose to splice out $s$. Then
+  we remove $v$ and let $s$ hold the position previously occupied by
+  $v$. The resulting tree with $v$ thus removed satisfies the binary
+  search tree property.
+\end{enumerate}
+%%
+The above procedure is summarized in
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete},
+which is adapted from~\cite[p.262]{CormenEtAl2001}.
+Figure~\ref{fig:tree_data_structures:binary_search_tree_delete}
+illustrates the various cases to be considered when removing a vertex
+from a BST. Note that in
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete},
+the process of finding the successor dominates the runtime of the
+entire algorithm. Other operations in the algorithm take at most
+constant time. Therefore deleting a vertex from a binary search tree
+can be accomplished in worst-case $O(h)$ time, where $h$ is the height
+of the BST under consideration.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[Target vertex $9$ is a leaf.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-delete_a}
+}
+\qquad
+\subfigure[Leaf deleted.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-delete_b}
+}
+\subfigure[Target vertex $13$ has one child.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-delete_c}
+}
+\qquad
+\subfigure[Vertex deleted.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-delete_d}
+}
+\subfigure[Target vertex $15$ has two children.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-delete_e}
+}
+\qquad
+\subfigure[Vertex deleted.]{
+  \includegraphics{image/tree-data-structures/binary-search-tree-delete_f}
+}
+\caption{Deleting a vertex from a binary search tree.}
+\label{fig:tree_data_structures:binary_search_tree_delete}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{binary search tree}
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/BST-various-structural-representations_a}
+}
+\qquad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/BST-various-structural-representations_b}
+}
+\qquad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/BST-various-structural-representations_c}
+}
+\qquad
+\subfigure[]{
+  \includegraphics{image/tree-data-structures/BST-various-structural-representations_d}
+}
+\caption{Different structural representations of a BST.}
+\label{fig:tree_data_structures:BST_different_structural_representations}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{AVL trees}
+\index{AVL tree}
+
+To motivate the need for AVL\index{AVL tree} trees, note the lack of a
+structural property for binary\index{binary search tree} search trees
+similar to the structural\index{binary heap!heap-structure property}
+property for binary\index{binary heap} heaps. Unlike binary heaps, a
+BST is not required to have as small a height as possible. As a
+consequence, any given nonempty collection
+$C = \{v_0, v_1, \dots, v_k\}$ of weighted vertices can be represented
+by various BSTs with different heights; see
+Figure~\ref{fig:tree_data_structures:BST_different_structural_representations}.
+Some BST representations of $C$ have heights smaller than other BST
+representations of $C$. Those BST representations with smaller heights
+can result in reduced time for basic operations such as search,
+insertion, and deletion and out-perform BST representations having
+larger heights. To achieve logarithmic or near-logarithmic time
+complexity for basic operations, it is desirable to maintain a BST
+with as small a height as possible.
+
+Adelson-Velski\u{\i}\index{Adelson-Velski\u{\i}, G. M.} and
+Landis\index{Landis, E. M.}~\cite{AdelsonVelskiiLandis1962}
+introduced in~1962 a criterion for constructing and maintaining binary
+search trees having logarithmic heights. Recall that the height of a
+tree is the maximum depth of the tree. Then the
+Adelson-Velski\u{\i}-Landis criterion can be expressed as follows.
+
+\begin{definition}
+\textbf{Height-balance property.}\index{AVL tree!height-balance property}
+Let $T$ be a binary tree and suppose $v$ is an internal vertex of
+$T$. Let $h_\ell$ be the height of the left subtree of $v$ and let
+$h_r$ be the height of $v$'s right subtree. Then $v$ is said to be
+\emph{height-balanced} if $|h_\ell - h_r| \leq 1$. For each internal
+vertex $u$ of $T$, if $u$ is height-balanced then the whole tree $T$
+is height-balanced.
+\end{definition}
+
+Binary trees having the height-balance property are called
+AVL\index{AVL tree} trees. The structure of such trees is such that
+given any internal vertex $v$ of an AVL tree, the heights of the left
+and right subtrees of $v$ differ by at most $1$.
+Complete\index{binary tree!complete} binary trees are trivial examples
+of AVL trees, as are nearly\index{binary tree!nearly complete}
+complete binary trees. A less trivial example of AVL trees are what is
+known as \emph{Fibonacci trees}\index{Fibonacci!tree}, so named
+because the construction of Fibonacci trees bears some resemblance to
+how Fibonacci numbers\index{Fibonacci!number} are produced. Fibonacci
+trees can be constructed recursively in the following manner. The
+Fibonacci tree $\cF_0$ of height $0$ is the trivial tree. The
+Fibonacci tree $\cF_1$ of height $1$ is a binary tree whose left and
+right subtrees are both $\cF_0$. For $n > 1$, the Fibonacci tree
+$\cF_n$ of height $n$ is a binary tree whose left and right subtrees
+are $\cF_{n-2}$ and $\cF_{n-1}$, respectively. Refer to
+Figure~\ref{fig:tree_data_structures:Fibonacci_trees_1_to_5} for
+examples of Fibonacci trees;
+Figure~\ref{fig:tree_data_structures:Fibonacci_tree_F6_subtree_heights}
+shows $\cF_6$ together with subtree heights for vertex labels.
+
+\begin{figure}[!htbp]
+\centering
+\index{Fibonacci!tree}
+\subfigure[$\cF_0$]{
+  \includegraphics{image/tree-data-structures/Fibonacci-trees_F0}
+}
+\qquad
+\subfigure[$\cF_1$]{
+  \includegraphics{image/tree-data-structures/Fibonacci-trees_F1}
+}
+\qquad
+\subfigure[$\cF_2$]{
+  \includegraphics{image/tree-data-structures/Fibonacci-trees_F2}
+}
+\qquad
+\subfigure[$\cF_3$]{
+  \includegraphics{image/tree-data-structures/Fibonacci-trees_F3}
+}
+\qquad
+\subfigure[$\cF_4$]{
+  \includegraphics{image/tree-data-structures/Fibonacci-trees_F4}
+}
+\qquad
+\subfigure[$\cF_5$]{
+  \includegraphics{image/tree-data-structures/Fibonacci-trees_F5}
+}
+\caption{Fibonacci trees of heights $n = 0, 1, 2, 3, 4, 5$.}
+\label{fig:tree_data_structures:Fibonacci_trees_1_to_5}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\index{Fibonacci!tree}
+\includegraphics{image/tree-data-structures/Fibonacci-tree-height}
+\caption{Fibonacci tree $\cF_6$ with subtree heights for vertex labels.}
+\label{fig:tree_data_structures:Fibonacci_tree_F6_subtree_heights}
+\end{figure}
+
+\begin{theorem}
+\label{thm:tree_data_structures:AVL_tree_logarithmic_height}
+\textbf{Logarithmic height.}
+The height $h$ of an AVL tree with $n$ internal vertices is bounded by
+\[
+\lg(n + 1) \leq h < 2 \cdot \lg n + 1.
+\]
+\end{theorem}
+
+\begin{proof}
+Any binary tree of height $h$ has at most $2^i$ leaves. From the proof
+of Corollary~\ref{cor:tree_data_structures:height_binary_heap}, we see
+that $n$ is bounded by $2^{h - 1} \leq n \leq 2^h - 1$ and in
+particular $n + 1 \leq 2^h$. Take the logarithm of both sides to get
+$h \geq \lg(n + 1)$.
+
+Now instead of deriving an upper bound for $h$, we find the minimum
+order of an AVL tree and from there derive the required upper bound
+for $h$. Let $T$ be an AVL tree of minimum order. One subtree of $T$
+has height $h - 1$. The other subtree has height $h - 1$ or
+$h - 2$. Our objective is to construct $T$ to have as small a number
+of vertices as possible. Without loss of generality, let the left and
+right subtrees of $T$ have heights $h - 2$ and $h - 1$,
+respectively. The Fibonacci tree $\cF_h$ of height $h$ fits the above
+requirements for $T$. If $N(h)$ denote the number of internal vertices
+of $\cF_h$, then $N(h) = 1 + N(h - 1) + N(h - 2)$ is strictly
+increasing so
+%%
+\begin{equation}
+\label{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes}
+N(h)
+>
+N(h - 2) + N(h - 2)
+=
+2 \cdot N(h - 2).
+\end{equation}
+%%
+Repeated application
+of~\eqref{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes}
+shows that
+%%
+\begin{equation}
+\label{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes_general}
+N(h)
+>
+2^i \cdot N(h - 2i)
+\end{equation}
+%%
+for any integer $i$ such that $h - 2i \geq 1$. Choose $i$ so that
+$h - 2i = 1$ or $h - 2i = 2$, say the former. Substitute
+$i = (h - 1) / 2$
+into~\eqref{eqn:tree_data_structures:lower_bound_on_minimum_n_nodes_general}
+yields $N(h) > 2^{(h - 1) / 2}$. That is, $n > 2^{(h - 1) / 2}$ and
+taking logarithm of both sides yields $h < 2 \cdot \lg n + 1$.
+\end{proof}
+
+An immediate consequence of
+Theorem~\ref{thm:tree_data_structures:AVL_tree_logarithmic_height} is
+that any binary\index{binary search tree} search tree implemented as
+an AVL tree should have at most logarithmic height. Contrast this with
+a general BST of order $N_1$, whose height can be as low as
+logarithmic in $N_1$ or as high as linear in $N_1$. Translating to
+search time, we see that searching a general BST using
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate} is
+in the worst case $O(N_1)$, which is no better than searching a sorted
+list. However, if $N_2$ is the order of an AVL tree endowed with the
+binary\index{binary search tree!property} search tree property, then
+searching the AVL tree using
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_locate} has
+worst-case $O(\lg N_2)$ runtime. While the worst-case runtime of
+searching a general BST can vary between $O(\lg N_1)$ and $O(N_1)$,
+that for an AVL tree with the binary search tree property is at most
+$O(\lg N_2)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Insertion}
+
+The algorithm for insertion into a BST can be modified and extended to
+support insertion into an AVL tree. Let $T$ be an AVL tree having the
+binary\index{binary search tree!property} search tree property, and
+$v$ a vertex to be inserted into $T$. In the trivial case, $T$ is the
+null tree so inserting $v$ into $T$ is equivalent to letting $T$ be
+the trivial tree rooted at $v$. Consider now the case where $T$ has at
+least one vertex. Apply
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_insert} to
+insert $v$ into $T$ and call the resulting augmented tree $T_v$. But
+our problem is not yet over; $T_v$ may violate the height-balance
+property. To complete the insertion procedure, we require a technique
+to restore, if necessary, the height-balance property to $T_v$.
+
+To see why the augmented tree $T_v$ may not necessarily be
+height-balanced, let $u$ be the parent of $v$ in $T_v$, where
+previously $u$ was a vertex $T$~(and possibly a leaf). In the original
+AVL tree $T$, let $P_u: r = u_0, u_1, \dots, u_k = u$ be the path from
+the root $r$ of $T$ to $u$ with corresponding subtree heights $H(u_i)
+= h_i$ for $i = 0, 1, \dots, k$. An effect of the insertion is to
+extend the path $P_u$ to the longer path
+$P_v: r = u_0, u_1, \dots, u_k = u, v$ and possibly increase subtree
+heights by one. One of two cases can occur with respect to $T_v$.
+%%
+\begin{enumerate}
+\item\label{item:tree_data_structures:height_balanced}
+  Height-balanced: $T_v$ is height-balanced so no need to do anything
+  further. A simple way to detect this is to consider the subtree $S$
+  rooted at $u$, the parent of $v$. If $S$ has two children, then no
+  height adjustment need to take place for vertices in $P_u$, hence
+  $T_v$ is an AVL tree~(see
+  Figure~\ref{fig:tree_data_structures:augmented_tree_balanced_after_insertion}).
+  Otherwise we perform any necessary height adjustment for vertices in
+  $P_u$, starting from $u_k = u$ and working our way up to the root
+  $r = u_0$. After adjusting the height of $u_i$, we test to see
+  whether $u_i$~(with its new height) is height-balanced. If each of
+  the $u_i$ with their new heights are height-balanced, then $T_v$ is
+  height-balanced.
+
+\item\label{item:tree_data_structures:height_unbalanced}
+  Height-unbalanced: During the height adjustment phase, it may happen
+  that some $u_j$ with its new height is not height-balanced. Among
+  all such height-unbalanced vertices, let $u_\ell$ be the first
+  height-unbalanced vertex detected during the process of height
+  adjustment starting from $u_k = u$ and going up towards
+  $r = u_0$. We need to rebalance the subtree rooted at $u_\ell$. Then
+  we continue on adjusting heights of the remaining vertices in
+  $P_u$, also performing height-rebalancing where necessary.
+\end{enumerate}
+%%
+Case~\ref{item:tree_data_structures:height_balanced} is relatively
+straightforward, but it is
+case~\ref{item:tree_data_structures:height_unbalanced} that involves
+much intricate work.
+
+\begin{figure}[!htbp]
+\centering
+\index{Fibonacci!tree}
+\subfigure[Insert a vertex.]{
+  \includegraphics{image/tree-data-structures/AVL-tree-balanced-after-insertion_a}
+}
+\qquad
+\subfigure[Vertex inserted.]{
+  \includegraphics{image/tree-data-structures/AVL-tree-balanced-after-insertion_b}
+}
+\qquad
+\subfigure[Vertex inserted.]{
+  \includegraphics{image/tree-data-structures/AVL-tree-balanced-after-insertion_c}
+}
+\caption{Augmented tree is balanced after insertion; vertex labels are
+  heights.}
+\label{fig:tree_data_structures:augmented_tree_balanced_after_insertion}
+\end{figure}
+
+We now turn to the case where inserting a vertex $v$ into a nonempty
+AVL tree $T$ results in an augmented tree $T_v$ that is not
+height-balanced. A general idea for rebalancing~(and hence restoring
+the height-balance property to) $T_v$ is to determine where in $T_v$
+the height-balance property is first violated~(the search phase), and
+then to locally rebalance subtrees at and around the point of
+violation~(the repair phase). A description of the search phase
+follows. Let
+\[
+P_v: r = u_0, u_1, \dots, u_k = u, v
+\]
+be the path from the root $r$ of $T_v$~(and hence of $T$) to
+$v$. Traversing upward from $v$ to $r$, let $z$ be the first
+height-unbalanced vertex. Among the children of $z$, let $y$ be the
+child of higher height and hence an ancestor of $v$. Similarly, among
+the children of $y$ let $x$ be the child of higher height. In case a
+tie occurs, let $x$ be the child of $y$ that is also an ancestor of
+$v$. As each vertex is an ancestor of itself, it is possible that
+$x = v$. Furthermore, $x$ is a grandchild of $z$ because $x$ is a
+child of $y$, which in turn is a child of $z$. The vertex $z$ is not
+height-balanced due to inserting $v$ into the subtree rooted at $y$,
+hence the height of $y$ is $2$ greater than its sibling~(see
+Figure~\ref{fig:tree_data_structures:augmented_tree_unbalanced}, where
+height-unbalanced vertices are colored red). We
+have determined the location at which the height-balance property is
+first violated.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[Insert a vertex.]{
+  \includegraphics{image/tree-data-structures/AVL-unbalanced-after-insertion_a}
+}
+\qquad
+\subfigure[Vertex inserted.]{
+  \includegraphics{image/tree-data-structures/AVL-unbalanced-after-insertion_b}
+}
+\qquad
+\subfigure[Vertex inserted.]{
+  \includegraphics{image/tree-data-structures/AVL-unbalanced-after-insertion_c}
+}
+\caption{Augmented tree is unbalanced after insertion; vertex labels
+  are heights.}
+\label{fig:tree_data_structures:augmented_tree_unbalanced}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[Left rotation of $y$ over $z$.]{
+  \label{fig:tree_data_structures:AVL_trinode_restructure:single_left_rotate}
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_aleft}
+  \qquad\qquad
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_aright}
+}
+\subfigure[Right rotation of $y$ over $z$.]{
+  \label{fig:tree_data_structures:AVL_trinode_restructure:single_right_rotate}
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_bleft}
+  \qquad\qquad
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_bright}
+}
+\subfigure[Double rotation: right rotation of $x$ over $y$, then left
+rotation over $z$.]{
+  \label{fig:tree_data_structures:AVL_trinode_restructure:right_left_rotate}
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_cleft}
+  \qquad\qquad
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_cright}
+}
+\subfigure[Double rotation: left rotation of $x$ over $y$, then right
+rotation over $z$.]{
+  \label{fig:tree_data_structures:AVL_trinode_restructure:left_right_rotate}
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_dleft}
+  \qquad\qquad
+  \includegraphics{image/tree-data-structures/AVL-trinode-restructure_dright}
+}
+\caption{Rotations in the trinode restructuring process.}
+\label{fig:tree_data_structures:AVL_trinode_restructure}
+\end{figure}
+
+We now turn to the repair phase. The central question is: How are we
+to restore the height-balance property to the subtree rooted at $z$?
+By \emph{trinode restructuring} is meant the process whereby the
+height-balance property is restored; the prefix ``tri'' refers to the
+three vertices $x,y,z$ that are central to this process. A common name
+for the trinode restructuring is \emph{rotation} in view of the
+geometric interpretation of the process.
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure}
+distinguishes four rotation possibilities, two of which are
+symmetrical to the other two. The single left rotation in
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:single_left_rotate}
+occurs when $\height(x) = \height(\rootElem(T_0)) + 1$ and detailed in
+Algorithm~\ref{alg:tree_data_structures:single_left_rotation}. The
+single right rotation in
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:single_right_rotate}
+occurs when $\height(x) = \height(\rootElem(T_3)) + 1$; see
+Algorithm~\ref{alg:tree_data_structures:single_right_rotation} for
+pseudocode.
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:right_left_rotate}
+illustrates the case of a right-left double rotation and occurs when
+$\height(\rootElem(T_3)) = \height(\rootElem(T_0))$; see
+Algorithm~\ref{alg:tree_data_structures:right_left_rotation} for
+pseudocode to handle the rotation. The fourth case is illustrated in
+Figure~\ref{fig:tree_data_structures:AVL_trinode_restructure:left_right_rotate}
+and occurs when $\height(\rootElem(T_0)) = \height(\rootElem(T_3))$;
+refer to Algorithm~\ref{alg:tree_data_structures:left_right_rotation}
+for pseudocode to handle this left-right double rotation. Each of the
+four algorithms mentioned above run in constant time $O(1)$ and
+preserves the in-order traversal ordering of all vertices in
+$T_v$. In all, the insertion procedure is summarized in
+Algorithm~\ref{alg:tree_data_structures:AVL-insert}. If $h$ is the
+height $T$, locating and inserting the vertex $v$ takes worst-case
+$O(h)$ time, which is also the worst-case runtime for the
+search-and-repair phase. Thus letting $n$ be the number of vertices in
+$T$, insertion takes worst-case $O(\lg n)$ time.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-single-left-rotation.tex}
+\caption{Single left rotation in the trinode restructure process.}
+\label{alg:tree_data_structures:single_left_rotation}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-single-right-rotation.tex}
+\caption{Single right rotation in the trinode restructure process.}
+\label{alg:tree_data_structures:single_right_rotation}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-right-left-rotation.tex}
+\caption{Double rotation: right rotation followed by left rotation.}
+\label{alg:tree_data_structures:right_left_rotation}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-left-right-rotation.tex}
+\caption{Double rotation: left rotation followed by right rotation.}
+\label{alg:tree_data_structures:left_right_rotation}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-insert.tex}
+\caption{Insert a vertex into an AVL tree.}
+\label{alg:tree_data_structures:AVL-insert}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Deletion}
+
+The process of removing a vertex from an AVL tree is similar to the
+insertion procedure. However, instead of using the insertion algorithm
+for BST, we use the deletion
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete} for
+BST to remove the target vertex from an AVL tree. The resulting tree
+may violate the height-balance property, which can be restored using
+trinode restructuring.
+
+Let $T$ be an AVL tree having vertex $v$ and suppose we want to remove
+$v$ from $T$. In the trivial case, $T$ is the trivial tree whose sole
+vertex is $v$. Deleting $v$ is simply removing it from $T$ so that $T$
+becomes the null tree. On the other hand, suppose $T$ has at least
+$n > 1$ vertices. Apply
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete} to
+remove $v$ from $T$ and call the resulting tree with $v$ removed
+$T_v$. It is possible that $T_v$ does not satisfy the height-balance
+property. To restore the height-balance property to $T_v$, let $u$ be
+the parent of $v$ in $T$ prior to deleting $v$ from $T$. Having
+deleted $v$ from $T$, let $P: r = u_0, u_1, \dots, u_k = u$ be the
+path from the root $r$ of $T_v$ to $u$. Adjust the height of $u$ and,
+traversing from $u$ up to $r$, perform height adjustment to each
+vertex in $P$ and where necessary carry out trinode restructuring. The
+resulting algorithm is very similar to
+Algorithm~\ref{alg:tree_data_structures:AVL-insert}; see
+Algorithm~\ref{alg:tree_data_structures:AVL-delete} for
+pseudocode. The deletion procedure via
+Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete}
+requires worst-case runtime $O(\lg n)$, where $n$ is the number of
+vertices in $T$, and the height-adjustment process runs in worst-case
+$O(\lg n)$ time as well. Thus
+Algorithm~\ref{alg:tree_data_structures:AVL-delete} has worst-case
+runtime of $O(\lg n)$.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/AVL-delete.tex}
+\caption{Delete a vertex from an AVL tree.}
+\label{alg:tree_data_structures:AVL-delete}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problems}
+
+\begin{quote}
+\footnotesize
+No problem is so formidable that you can't walk away from it. \\
+\noindent
+--- Charles M. Schulz\index{Schulz, Charles M.}
+\end{quote}
+
+\begin{problem}
+\item Let $Q$ be a priority queue of $n > 1$ elements, given in
+  sequence representation. From
+  section~\ref{subsec:tree_data_structures:sequence_implementation},
+  we know that inserting an element into $Q$ takes $O(n)$ time and
+  deleting an element from $Q$ takes $O(1)$ time.
+  %%
+  \begin{enumerate}[(a)]
+  \item Suppose $Q$ is an empty priority queue and let
+    $e_0, e_1, \dots, e_n$ be $n + 1$ elements we want to insert into
+    $Q$. What is the total runtime required to insert all the $e_i$
+    into $Q$ while also ensuring that the resulting queue is a
+    priority queue?
+
+  \item Let $Q = [e_0, e_1, \dots, e_n]$ be a priority queue of
+    $n + 1$ elements. What is the total time required to remove all
+    the elements of $Q$?
+  \end{enumerate}
+
+\item Prove the correctness of
+  Algorithms~\ref{alg:tree_data_structures:binary_heap_insert}
+  and~\ref{alg:tree_data_structures:binary_heap_delete}.
+
+\item Describe a variant of
+  Algorithm~\ref{alg:tree_data_structures:binary_heap_delete} for
+  modifying the key of the root of a binary heap, without extracting
+  any vertex from the heap.
+
+\item Section~\ref{subsec:tree_data_structures:insertion_sift_up}
+  describes how to insert an element into a binary heap $T$. The
+  general strategy is to choose the first leaf following the last
+  internal vertex of $T$, replace that leaf with the new element so
+  that it becomes an internal vertex, and perform a sift-up operation
+  from there. If instead we choose any leaf of $T$ and replace that
+  leaf with the new element, explain why we cannot do any better than
+  Algorithm~\ref{alg:tree_data_structures:binary_heap_insert}.
+
+\item Section~\ref{subsec:tree_data_structures:deletion_sift_down}
+  shows how to extract the minimum vertex from a binary heap
+  $T$. Instead of replacing the root with the last internal vertex of
+  $T$, we could replace the root with any other vertex of $T$ that is
+  not a leaf and then proceed to maintain the heap-structure and
+  heap-order properties. Explain why the latter strategy is not better
+  than Algorithm~\ref{alg:tree_data_structures:binary_heap_delete}.
+
+\item Let $S$ be a sequence of $n > 1$ real numbers. How can we use
+  algorithms described in
+  section~\ref{sec:tree_data_structures:binary_heaps} to sort $S$?
+
+\item The binary heaps discussed in
+  section~\ref{sec:tree_data_structures:binary_heaps} are properly
+  called minimum\index{binary heap!minimum} binary heaps because the
+  root of the heap is always the minimum vertex. A corresponding
+  notion is that of maximum\index{binary heap!maximum} binary heaps,
+  where the root is always the maximum element. Describe algorithms
+  analogous to those in
+  section~\ref{sec:tree_data_structures:binary_heaps} for managing
+  maximum binary heaps.
+
+\item What is the total time required to extract all elements from a
+  binary heap?
+
+\item Numbers of the form $\binom{n}{r}$ are called
+  binomial\index{binomial!coefficient} coefficients. They also count
+  the number of $r$-combinations from a set of $n$ objects.
+  Algorithm~\ref{alg:tree_data_structures:generate_all_r_combinations}
+  presents pseudocode to generate all the $r$-combinations of a set of
+  $n$ distinct objects. What is the worst-case runtime of
+  Algorithm~\ref{alg:tree_data_structures:generate_all_r_combinations}?
+  Prove the correctness of
+  Algorithm~\ref{alg:tree_data_structures:generate_all_r_combinations}.
+
+\item In contrast to enumerating all the $r$-combinations of a set of
+  $n$ objects, we may only want to generate a random
+  $r$-combination. Describe and present pseudocode of a procedure to
+  generate a random $r$-combination of $\{1, 2, \dots, n\}$.
+
+\item A problem related to the $r$-combinations of the set
+  $S = \{1, 2, \dots, n\}$ is that of generating the permutations of
+  $S$. Algorithm~\ref{alg:tree_data_structures:generate_all_permutations}
+  presents pseudocode to generate all the permutations of $S$ in
+  increasing lexicographic order. Find the worst-case runtime of this
+  algorithm and prove its correctness.
+
+\item Provide a description and pseudocode of an algorithm to generate
+  a random permutation of $\{1, 2, \dots, n\}$.
+
+\item Takaoka\index{Takaoka, Tadao}~\cite{Takaoka1999b} presents a
+  general method for combinatorial\index{combinatorial generation}
+  generation that runs in $O(1)$ time. How can Takaoka's method be
+  applied to generating combinations and permutations?
+
+\item The proof of
+  Lemma~\ref{lem:tree_data_structures:basic_properties_binomial_trees}
+  relies on Pascal's\index{Pascal!formula} formula, which states that
+  for any positive integers $n$ and $r$ such that $r \leq n$, the
+  following identity holds:
+  \[
+  \binom{n+1}{r}
+  =
+  \binom{n}{r-1} + \binom{n}{r}.
+  \]
+  Prove Pascal's formula.
+
+\item Let $m,n,r$ be nonnegative integers such that $r \leq n$. Prove
+  the Vandermonde\index{Vandermonde!convolution} convolution
+  \[
+  \binom{m + n}{r}
+  =
+  \sum_{k=0}^r \binom{m}{k} \binom{n}{r-k}.
+  \]
+  The latter equation, also known as Vandermonde's identity, was
+  already known as early as 1303 in China by Chu\index{Chu Shi-Chieh}
+  Shi-Chieh. Alexandre-Th\'eophile
+  Vandermonde\index{Vandermonde!Alexandre-Th\'eophile} independently
+  discovered it and his result was published in 1772.
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/generate-all-r-combinations.tex}
+\caption{Generating all the $r$-combinations of $\{1, 2, \dots, n\}$.}
+\label{alg:tree_data_structures:generate_all_r_combinations}
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\input{algorithm/tree-data-structures/generate-all-permutations.tex}
+\caption{Generating all the permutations of $\{1, 2, \dots, n\}$.}
+\label{alg:tree_data_structures:generate_all_permutations}
+\end{algorithm}
+
+\item If $m$ and $n$ are nonnegative integers, prove that
+  \[
+  \binom{m + n + 1}{n}
+  =
+  \sum_{k=0}^n \binom{m + k}{k}.
+  \]
+
+\item Let $n$ be a positive integer. How many distinct
+  binomial\index{binomial heap} heaps having $n$ vertices are there?
+
+\item The algorithms described in
+  section~\ref{sec:tree_data_structures:binomial_heaps} are formally
+  for minimum\index{binomial heap!minimum} binomial heaps because the
+  vertex at the top of the heap is always the minimum vertex. Describe
+  analogous algorithms for maximum\index{binomial heap!maximum}
+  binomial heaps.
+
+\item If $H$ is a binomial\index{binomial heap} heap, what is the
+  total time required to extract all elements from $H$?
+
+\item Frederickson\index{Frederickson, Greg N.}~\cite{Frederickson1993}
+  describes an $O(k)$ time algorithm for finding the $k$-th smallest
+  element in a binary heap. Provide a description and pseudocode of
+  Frederickson's algorithm and prove its correctness.
+
+\item Fibonacci heaps~\cite{FredmanTarjan1984} allow for amortized
+  $O(1)$ time with respect to finding the minimum element,
+  inserting an element, and merging two Fibonacci heaps. Deleting the
+  minimum element takes amortized time $O(\lg n)$, where $n$ is the
+  number of vertices in the heap. Describe and provide pseudocode of
+  the above Fibonacci heap operations and prove the correctness of the
+  procedures.
+
+\item Takaoka\index{Takaoka, Tadao}~\cite{Takaoka1999a} introduces
+  another type of heap called a $2$-$3$ heap. Deleting the minimum
+  element takes amortized $O(\lg n)$ time with $n$ being the number of
+  vertices in the $2$-$3$ heap. Inserting an element into the heap
+  takes amortized $O(1)$ time. Describe and provide pseudocode of the
+  above $2$-$3$ heap operations. Under which conditions would $2$-$3$
+  heaps be more efficient than Fibonacci heaps?
+
+\item In 2000, Chazelle\index{Chazelle, Bernard}~\cite{Chazelle2000a}
+  introduced the soft heap, which can perform common heap operations
+  in amortized $O(1)$ time. He then applied~\cite{Chazelle2000b} the
+  soft heap to realize a very efficient implementation of an algorithm
+  for finding minimum spanning trees. In 2009,
+  Kaplan\index{Kaplan, Haim} and
+  Zwick\index{Zwick, Uri}~\cite{KaplanZwick2009} provided a simple
+  implementation and analysis of Chazelle's soft heap. Describe soft
+  heaps and provide pseudocode of common heap operations. Prove the
+  correctness of the algorithms and provide runtime analyses. Describe
+  how to use soft heap to realize an efficient implementation of an
+  algorithm to produce minimum spanning trees.
+
+\item Explain any differences between the binary
+  heap-order\index{binary heap!order property} property, the
+  binomial heap-order\index{binomial heap!order property}
+  property, and the binary
+  search\index{binary search tree!property} tree property. Can
+  in-order traversal be used to list the vertices of a binary heap in
+  sorted order? Explain why or why not.
+
+\item Present pseudocode of an algorithm to find a vertex with maximum
+  key in a binary search tree.
+
+\item Compare and contrast algorithms for locating minimum and maximum
+  elements in a list with their counterparts for a binary search tree.
+
+\item Let $T$ be a nonempty BST and suppose $v \in V(T)$ is not a
+  minimum vertex of $T$. If $h$ is the height of $T$, describe and
+  present pseudocode of an algorithm to find the predecessor of $v$ in
+  worst-case time $O(h)$.
+
+\item Let $L = [v_0, v_1, \dots, v_n]$ be the in-order listing of a
+  BST $T$. Present an algorithm to find the successor of
+  $v \in V(T)$ in constant time $O(1)$. How can we find the
+  predecessor of $v$ in constant time as well?
+
+\item Modify
+  Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete}
+  to extract a minimum vertex of a binary search tree. Now do the same
+  to extract a maximum vertex. How can
+  Algorithm~\ref{alg:tree_data_structures:binary_search_tree_delete}
+  be modified to extract a vertex from a binary search tree?
+
+\item Let $v$ be a vertex of a BST and suppose $v$ has two
+  children. If $s$ and $p$ are the successor and predecessor of $v$,
+  respectively, show that $s$ has no left-child and $p$ has no
+  right-child.
+
+\item Let $L = [e_0, e_1, \dots, e_n]$ be a list of $n + 1$ elements
+  from a totally ordered set $X$ with total order $\leq$. How can
+  binary search trees be used to sort $L$?
+
+\item Describe and present pseudocode of a recursive algorithm for
+  each of the following operations on a BST.
+  %%
+  \begin{enumerate}[(a)]
+  \item Find a vertex with a given key.
+
+  \item Locate a minimum vertex.
+
+  \item Locate a maximum vertex.
+
+  \item Insert a vertex.
+  \end{enumerate}
+
+\item Are the algorithms presented in
+  section~\ref{sec:tree_data_structures:binary_search_trees} able to
+  handle a BST having duplicate keys? If not, modify the relevant
+  algorithm(s) to account for the case where two vertices in a BST
+  have the same key.
+
+\item The notion of vertex level for binary trees can be extended to
+  general rooted trees as follows. Let $T$ be a rooted tree with
+  $n > 0$ vertices and height $h$. Then level\index{level!tree}
+  $0 \leq i \leq h$ of $T$ consists of all those vertices in $T$ that
+  have the same depth $i$. If each vertex at level $i$ has $i + m$
+  children for some fixed integer $m > 0$, what is the number of
+  vertices at each level of $T$?
+
+\item Compare the search, insertion, and deletion times of AVL trees
+  and random binary search trees. Provide empirical results of your
+  comparative study.
+
+\item Describe and present pseudocode of an algorithm to construct a
+  Fibonacci\index{Fibonacci!tree} tree of height $n$ for some integer
+  $n \geq 0$. Analyze the worst-case runtime of your algorithm.
+
+\item The upper bound in
+  Theorem~\ref{thm:tree_data_structures:AVL_tree_logarithmic_height}
+  can be improved as follows. From the proof of the theorem, we have
+  the recurrence\index{recurrence relation} relation
+  $N(h) > N(h - 1) + N(h - 2)$.
+  %%
+  \begin{enumerate}[(a)]
+  \item If $h \leq 2$, show that there exists some $c > 0$ such that
+    $N(h) \geq c^h$.
+
+  \item Assume for induction that
+    \[
+    N(h)
+    >
+    N(h - 1) + N(h - 2)
+    \geq
+    c^{h-1} + c^{h-2}
+    \]
+    for some $h > 2$. If $c > 0$, show that $c^2 - c - 1 = 0$ is a
+    solution to the recurrence\index{recurrence relation} relation
+    $c^{h-1} + c^{h-2}$ and that
+    \[
+    N(h)
+    >
+    \left( \frac{1 + \sqrt{5}} {2} \right)^h.
+    \]
+
+  \item Use the previous two parts to show that
+    \[
+    h
+    <
+    \frac{1}{\lg \varphi} \cdot \lg n
+    \]
+    where $\varphi = (1 + \sqrt{5}) / 2$ is the
+    golden\index{golden ratio} ratio and $n$ counts the number of
+    internal vertices of an AVL\index{AVL tree} tree of height
+    $h$.
+  \end{enumerate}
+
+\item The Fibonacci\index{Fibonacci!sequence} sequence $F_n$ is
+  defined as follows. We have initial values $F_0 = 0$ and
+  $F_1 = 1$. For $n > 1$, the $n$-th term in the sequence can be
+  obtained via the recurrence\index{recurrence relation} relation
+  $F_n = F_{n-1} + F_{n-2}$. Show that
+  %%
+  \begin{equation}
+  \label{eqn:tree_data_structures:closed_form_Fibonacci}
+  F_n
+  =
+  \frac{\varphi^n - (-1 / \varphi)^n} {\sqrt{5}}
+  \end{equation}
+  %%
+  where $\varphi$ is the golden\index{golden ratio} ratio. The closed
+  form solution~\eqref{eqn:tree_data_structures:closed_form_Fibonacci}
+  to the Fibonacci sequence is known as Binet's\index{Binet!formula}
+  formula, named after Jacques Philippe Marie
+  Binet\index{Binet!Jacques Philippe Marie}, even through Abraham de
+  Moivre\index{de Moivre, Abraham} knew about this formula long before
+  Binet did.
+\end{problem}

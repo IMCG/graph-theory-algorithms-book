@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
+%%
+%% input
+\KwIn{Two undirected simple graphs $G_1$ and $G_2$, each having $n$
+  vertices.}
+%%
+%% output
+\KwOut{\MyTrue if $G_1 \cong G_2$; \MyFalse otherwise.}
+\BlankLine
+%%
+%% algorithm body
+\For{$i \assign 1, 2$}{
+  $A_i \assign$ adjacency matrix of $G_i$\;
+  $p_i \assign$ permutation equivalence class of $A_i$\;
+  $A_i' \assign$ lexicographically maximal element of $p_i$\;
+}
+\If{$A_1' = A_2'$}{
+  \Return \MyTrue\;
+}
+\Return \MyFalse\;

@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input/output
+\KwIn{Three vertices $x,y,z$ of an augmented AVL tree $T_v$, where
+  $z$ is the first height-unbalanced vertex in the path from $v$ up to
+  the root of $T_v$. The left subtree of $z$ is $T_3$ and the right
+  subtree of $y$ is $T_2$. The left and right subtrees of $x$ are
+  $T_0$ and $T_1$, respectively.}
+%%
+%% output
+\KwOut{A single right rotation to height-balance the subtree rooted at $z$.}
+\BlankLine
+%%
+%% algorithm body
+$\leftChild[\parent[z]] \assign y$\;
+$\parent[y] \assign \parent[z]$\;
+$\parent[z] \assign y$\;
+$\rightChild[y] \assign z$\;
+$\parent[\rootElem[T_2]] \assign z$\;
+$\leftChild[z] \assign \rootElem[T_2]$\;
+$\height[x] \assign 1 + \max(\height[\rootElem[T_0]],\, \height[\rootElem[T_1]])$\;
+$\height[z] \assign 1 + \max(\height[\rootElem[T_2]],\, \height[\rootElem[T_3]])$\;
+$\height[y] \assign 1 + \max(\height[x],\, \height[z])$\;

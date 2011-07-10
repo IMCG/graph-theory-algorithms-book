@@ -1,0 +1,58 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{NULL}{\footnotesize{NULL}}
+%%
+%% input
+\KwIn{A nonempty binary search tree $T$ and a vertex $x \in V(T)$ to
+  be removed from $T$.}
+%%
+%% output
+\KwOut{The same BST $T$ but without $x$.}
+\BlankLine
+%%
+%% algorithm body
+$u \assign \NULL$\;
+$v \assign \NULL$\;
+\If{\rm $\leftChild[x] \neq \NULL$ or $\rightChild[x] \neq \NULL$}{
+  $v \assign x$\;
+}
+\Else{
+  $v \assign$ successor of $x$\;
+}
+\If{$\leftChild[v] \neq \NULL$}{
+  $u \assign \leftChild[v]$\;
+}
+\Else{
+  $u \assign \rightChild[v]$\;
+}
+\If{$u \neq \NULL$}{
+  $\parent[u] \assign \parent[v]$\;
+}
+\If{$\parent[v] = \NULL$}{
+  $\rootElem[T] \assign u$\;
+}
+\Else{
+  \If{$v = \leftChild[\parent[v]]$}{
+    $\leftChild[\parent[v]] \assign u$\;
+  }
+  \Else{
+    $\rightChild[\parent[v]] \assign u$\;
+  }
+}
+\If{$v \neq x$}{
+  $\kappa_x \assign \kappa_v$\;
+  copy $v$'s auxilary data into $x$\;
+}

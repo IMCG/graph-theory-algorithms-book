@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% data section
+\SetKwData{MyFalse}{False}
+\SetKwData{MyTrue}{True}
+%%
+%% input
+\KwIn{A nonincreasing sequence $S = (d_1, d_2, \dots, d_n)$
+  of nonnegative integers, where $n \geq 2$.}
+%%
+%% output
+\KwOut{\MyTrue if $S$ is realizable by a simple graph; \MyFalse otherwise.}
+\BlankLine
+%%
+%% algorithm body
+\If{\rm $\sum_i d_i$ is odd\nllabel{alg:Havel_Hakimi:handshaking_lemma}}{
+  \Return \MyFalse\;
+}
+\While{\MyTrue}{
+  \If{$\min(S) < 0$\nllabel{alg:Havel_Hakimi:non_negative}}{
+    \Return \MyFalse\;
+  }
+  \If{$\max(S) = 0$\nllabel{alg:Havel_Hakimi:all_zeros}}{
+    \Return \MyTrue\;
+  }
+  \If{$\max(S) > \length(S) - 1$\nllabel{alg:Havel_Hakimi:degree_less_than_order}}{
+    \Return \MyFalse\;
+  }
+  $S
+  \assign
+  (d_2-1,\, d_3-1, \dots, d_{d_1+1}-1,\, d_{d_1+2}, \dots, d_{\length(S)})$
+  \nllabel{alg:Havel_Hakimi:reduce_S_to_S_prime}\;
+  sort $S$ in nonincreasing order\;
+}

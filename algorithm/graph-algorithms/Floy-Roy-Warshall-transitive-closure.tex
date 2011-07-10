@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file is part of the book
+%%
+%% Algorithmic Graph Theory
+%% http://code.google.com/p/graph-theory-algorithms-book/
+%%
+%% Copyright (C) 2009--2011 Minh Van Nguyen <nguyenminh2@gmail.com>
+%%
+%% See the file COPYING for copying conditions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DontPrintSemicolon
+\SetAlgoNoLine
+%%
+%% input
+\KwIn{A digraph $G = (V, E)$ that has no self-loops. Vertices are
+  numbered from $1$ to $n$, i.e.~$V = \{1, 2, \dots, n\}$.}
+%%
+%% output
+\KwOut{The boolean matrix $T$ such that $T[i,j] = 1$ if and only if
+  there is an $i$-$j$ path in $G$, and $T[i,j] = 0$ otherwise.}
+\BlankLine
+%%
+%% algorithm body
+$n \assign |V|$\;
+$T \assign$ adjacency matrix of $G$\;
+%% \For{$i \assign 1, 2, \dots, n$}{
+%%   \For{$j \assign 1, 2, \dots, n$}{
+%%     \eIf{$i = j$ \emph{or} $ij \in E$}{
+%%       $T[i,j] \assign 1$\;
+%%     }{
+%%       $T[i,j] \assign 0$\;
+%%     }
+%%   }
+%% }
+\For{$k \assign 1, 2, \dots, n$}{
+  \For{$i \assign 1, 2, \dots, n$}{
+    \For{$j \assign 1, 2, \dots, n$}{
+      $T[i,j] \assign T[i,j] \vee \big( T[i,k] \wedge T[k,j] \big)$\;
+    }
+  }
+}
+\Return $T$\;
