@@ -333,36 +333,43 @@ distance distributions of various real-world networks.
 
 \section{Binomial random graph model}
 
-Fix a positive integer $n$, a probability $p$, and a vertex set
-$V = \{0, 1, \dots, n - 1\}$. The
+In~1959, Gilbert~\cite{Gilbert1959} introduced a random graph model
+that now bears the name
 \emph{binomial}\index{random graph!binomial}~(or
-\emph{Bernoulli})\index{random graph!Bernoulli} random graph model,
-denoted $\cG(n,p)$ and introduced by Gilbert~\cite{Gilbert1959}, is
-formally a probability\index{probability!space} space over the set of
-undirected simple graphs on $n$ vertices. If $G$ is any element of the
+\emph{Bernoulli})\index{random graph!Bernoulli} random graph model.
+First, we fix a positive integer $n$, a probability $p$, and a vertex
+set $V = \{0, 1, \dots, n - 1\}$.  By $\cG(n,p)$ we mean a
+probability\index{probability!space} space over the set of undirected
+simple graphs on $n$ vertices.  If $G$ is any element of the
 probability space $\cG(n,p)$ and $ij$ is any edge for distinct
 $i,j \in V$, then $ij$ occurs as an edge of $G$ independently with
-probability $p$. In symbols, for any distinct pair $i,j \in V$ we have
+probability $p$.  In symbols, for any distinct pair $i,j \in V$ we
+have
 \[
 \Pr[ij \in E(G)]
 =
 p
 \]
-where all such events are mutually independent. Equivalently the model
-$\cG(n,p)$ considers the collection of all undirected simple graphs on
-$n$ vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
-actual edges, and an associated probability
+where all such events are mutually independent.
+%% Notice that here we consider the collection $\cG(n,p)$ as a
+%% probability space whose elements are undirected simple graphs.
+Any graph $G$ drawn uniformly at random from $\cG(n,p)$ is a subgraph
+of the complete graph $K_n$ and it follows
+from~\eqref{eqn:introduction:size_of_K_n} that $G$ has at most
+$\binom{n}{2}$ edges.  Then the probability that $G$ has $m$ edges is
+given by
 %%
 \begin{equation}
 \label{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
 p^m (1 - p)^{\binom{n}{2} - m}.
 \end{equation}
 %%
-Notice the latter's resemblance to the
-binomial\index{binomial!distribution} distribution. By
+Notice the resemblance
+of~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
+to the binomial\index{binomial!distribution} distribution.  By
 $G \in \cG(n,p)$ we mean that $G$ is a random graph of the space
-$\cG(n,p)$ and having probability
-distribution $\cG(n,p)$.
+$\cG(n,p)$ and having size distributed
+as~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}.
 
 To generate a random graph in $\cG(n,p)$, start with $G$ being a graph
 on $n$ vertices but no edges. That is, initially $G$ is
