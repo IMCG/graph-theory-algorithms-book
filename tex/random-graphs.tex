@@ -952,7 +952,7 @@ path lengths. The small-world effect was empirically
 demonstrated~\cite{Milgram1967} in a famous~1960s experiment by
 Stanley Milgram\index{Milgram, Stanley}, who distributed a number
 of letters to a random selection of people. Recipients were instructed
-to deliver the letters to the addressees on the condition that letters
+to deliver the letters to the addressees on condition that letters
 must be passed to people whom the recipients knew on a first-name
 basis. Milgram found that on average six steps were required for a
 letter to reach its target recipient, a number now immortalized in the
@@ -995,30 +995,31 @@ studied and verified for many real-world networks including
   required for letters to reach their intended addressees. The
   distribution has a mean of $5.3$, interpreted as the average number
   of intermediaries required for a letter to reach its intended
-  destination. The plot is derived from data reported in Travers and
-  Milgram~\cite{TraversMilgram1969}.}
+  destination. The plot is derived from data reported
+  in~\cite{TraversMilgram1969}.}
 \label{fig:random_graphs:Milgram_small_world_experiment_results}
 \end{figure}
 
 Watts\index{Watts, Duncan J.} and\index{Strogatz, Steven H.}
 Strogatz~\cite{Watts1999a,Watts1999b,WattsStrogatz1998}
 proposed a network model that produces graphs exhibiting the
-small-world effect. Let $n$ and $k$ be positive integers such that
-$n \gg k \gg \ln n \gg 1$~(in particular, $0 < k < n/2$), $k$ being
-even, and consider a probability $0 < p < 1$. Starting from an
+small-world effect. We will use the notation ``$\gg$''\index{$gg$} to
+mean ``much greater than''. Let $n$ and $k$ be positive integers such
+that $n \gg k \gg \ln n \gg 1$~(in particular, $0 < k < n/2$) with $k$
+being even. Consider a probability $0 < p < 1$. Starting from an
 undirected $k$-circulant\index{regular graph!$k$-circulant} graph
 $G = (V,E)$ on $n$ vertices, the
 Watts-Strogatz\index{Watts-Strogatz model} model proceeds to rewire
-each edge with probability $p$. The rewiring procedure works as
-follows. Let $V$ be uniformly distributed. For each $v \in V$, let
-$e \in E$ be an edge having $v$ as an endpoint. Choose another
-$u \in V$ different from $v$. With probability $p$, delete the edge
-$e$ and add the edge $vu$. The rewiring must produce a
+each edge with probability $p$. The rewiring procedure, also called
+edge swapping, works as follows. Let $V$ be uniformly distributed. For
+each $v \in V$, let $e \in E$ be an edge having $v$ as an endpoint.
+Choose another $u \in V$ different from $v$. With probability $p$,
+delete the edge $e$ and add the edge $vu$. The rewiring must produce a
 simple\index{simple graph} graph with the same order and size as
 $G$. As $p \to 1$, the graph $G$ goes from $k$-circulant to exhibiting
-properties of $\cG(n,p)$\index{random graph!binomial}. Small-world
-networks are intermediate between $k$-circulant and binomial random
-graphs~(see
+properties of graphs drawn uniformly from
+$\cG(n,p)$\index{random graph!binomial}. Small-world networks are
+intermediate between $k$-circulant and binomial random graphs~(see
 Figure~\ref{fig:random_graphs:k_circulant_small_world_random}). The
 Watts-Strogatz model is said to provide a procedure for interpolating
 between the latter two types of graphs.
