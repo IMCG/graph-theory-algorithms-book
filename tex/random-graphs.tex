@@ -333,36 +333,43 @@ distance distributions of various real-world networks.
 
 \section{Binomial random graph model}
 
-Fix a positive integer $n$, a probability $p$, and a vertex set
-$V = \{0, 1, \dots, n - 1\}$. The
+In~1959, Gilbert~\cite{Gilbert1959} introduced a random graph model
+that now bears the name
 \emph{binomial}\index{random graph!binomial}~(or
-\emph{Bernoulli})\index{random graph!Bernoulli} random graph model,
-denoted $\cG(n,p)$ and introduced by Gilbert~\cite{Gilbert1959}, is
-formally a probability\index{probability!space} space over the set of
-undirected simple graphs on $n$ vertices. If $G$ is any element of the
+\emph{Bernoulli})\index{random graph!Bernoulli} random graph model.
+First, we fix a positive integer $n$, a probability $p$, and a vertex
+set $V = \{0, 1, \dots, n - 1\}$.  By $\cG(n,p)$ we mean a
+probability\index{probability!space} space over the set of undirected
+simple graphs on $n$ vertices.  If $G$ is any element of the
 probability space $\cG(n,p)$ and $ij$ is any edge for distinct
 $i,j \in V$, then $ij$ occurs as an edge of $G$ independently with
-probability $p$. In symbols, for any distinct pair $i,j \in V$ we have
+probability $p$.  In symbols, for any distinct pair $i,j \in V$ we
+have
 \[
 \Pr[ij \in E(G)]
 =
 p
 \]
-where all such events are mutually independent. Equivalently the model
-$\cG(n,p)$ considers the collection of all undirected simple graphs on
-$n$ vertices, each such graph having at most $\binom{n}{2}$ edges, $m$
-actual edges, and an associated probability
+where all such events are mutually independent.
+%% Notice that here we consider the collection $\cG(n,p)$ as a
+%% probability space whose elements are undirected simple graphs.
+Any graph $G$ drawn uniformly at random from $\cG(n,p)$ is a subgraph
+of the complete graph $K_n$ and it follows
+from~\eqref{eqn:introduction:size_of_K_n} that $G$ has at most
+$\binom{n}{2}$ edges.  Then the probability that $G$ has $m$ edges is
+given by
 %%
 \begin{equation}
 \label{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
 p^m (1 - p)^{\binom{n}{2} - m}.
 \end{equation}
 %%
-Notice the latter's resemblance to the
-binomial\index{binomial!distribution} distribution. By
+Notice the resemblance
+of~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}
+to the binomial\index{binomial!distribution} distribution.  By
 $G \in \cG(n,p)$ we mean that $G$ is a random graph of the space
-$\cG(n,p)$ and having probability
-distribution $\cG(n,p)$.
+$\cG(n,p)$ and having size distributed
+as~\eqref{eqn:random_graphs:probability_of_chosen_graph_binomial_model}.
 
 To generate a random graph in $\cG(n,p)$, start with $G$ being a graph
 on $n$ vertices but no edges. That is, initially $G$ is
@@ -426,18 +433,17 @@ to see that
 \kappa(n,i) \cdot p^i (1 - p)^{\binom{n}{2} - i}
 \]
 where $n - 1$ is the least number of edges of any undirected connected
-graph on $n$ vertices, i.e. the size of any spanning tree of a
+graph on $n$ vertices, i.e.~the size of any spanning tree of a
 connected graph in $\cG(n,p)$. Similarly define $\Pr[\kappa_{ij}]$ to
 be the probability that two distinct vertices $i,j$ of
 $G \in \cG(n,p)$ are connected. Gilbert~\cite{Gilbert1959} showed that
-as $n \to \infty$, the probabilities $\Pr[G_\kappa]$ and
-$\Pr[\kappa_{ij}]$ approach
+as $n \to \infty$, then we have
 \[
-\Pr[G_\kappa] \to 1 - n(1 - p)^{n-1}
+\Pr[G_\kappa] \sim 1 - n(1 - p)^{n-1}
 \]
 and
 \[
-\Pr[\kappa_{ij}] \to 1 - 2(1 - p)^{n-1}.
+\Pr[\kappa_{ij}] \sim 1 - 2(1 - p)^{n-1}.
 \]
 
 \begin{figure}[!htbp]
@@ -946,7 +952,7 @@ path lengths. The small-world effect was empirically
 demonstrated~\cite{Milgram1967} in a famous~1960s experiment by
 Stanley Milgram\index{Milgram, Stanley}, who distributed a number
 of letters to a random selection of people. Recipients were instructed
-to deliver the letters to the addressees on the condition that letters
+to deliver the letters to the addressees on condition that letters
 must be passed to people whom the recipients knew on a first-name
 basis. Milgram found that on average six steps were required for a
 letter to reach its target recipient, a number now immortalized in the
@@ -989,30 +995,31 @@ studied and verified for many real-world networks including
   required for letters to reach their intended addressees. The
   distribution has a mean of $5.3$, interpreted as the average number
   of intermediaries required for a letter to reach its intended
-  destination. The plot is derived from data reported in Travers and
-  Milgram~\cite{TraversMilgram1969}.}
+  destination. The plot is derived from data reported
+  in~\cite{TraversMilgram1969}.}
 \label{fig:random_graphs:Milgram_small_world_experiment_results}
 \end{figure}
 
 Watts\index{Watts, Duncan J.} and\index{Strogatz, Steven H.}
 Strogatz~\cite{Watts1999a,Watts1999b,WattsStrogatz1998}
 proposed a network model that produces graphs exhibiting the
-small-world effect. Let $n$ and $k$ be positive integers such that
-$n \gg k \gg \ln n \gg 1$~(in particular, $0 < k < n/2$), $k$ being
-even, and consider a probability $0 < p < 1$. Starting from an
+small-world effect. We will use the notation ``$\gg$''\index{$\gg$} to
+mean ``much greater than''. Let $n$ and $k$ be positive integers such
+that $n \gg k \gg \ln n \gg 1$~(in particular, $0 < k < n/2$) with $k$
+being even. Consider a probability $0 < p < 1$. Starting from an
 undirected $k$-circulant\index{regular graph!$k$-circulant} graph
 $G = (V,E)$ on $n$ vertices, the
 Watts-Strogatz\index{Watts-Strogatz model} model proceeds to rewire
-each edge with probability $p$. The rewiring procedure works as
-follows. Let $V$ be uniformly distributed. For each $v \in V$, let
-$e \in E$ be an edge having $v$ as an endpoint. Choose another
-$u \in V$ different from $v$. With probability $p$, delete the edge
-$e$ and add the edge $vu$. The rewiring must produce a
+each edge with probability $p$. The rewiring procedure, also called
+edge swapping, works as follows. Let $V$ be uniformly distributed. For
+each $v \in V$, let $e \in E$ be an edge having $v$ as an endpoint.
+Choose another $u \in V$ different from $v$. With probability $p$,
+delete the edge $e$ and add the edge $vu$. The rewiring must produce a
 simple\index{simple graph} graph with the same order and size as
 $G$. As $p \to 1$, the graph $G$ goes from $k$-circulant to exhibiting
-properties of $\cG(n,p)$\index{random graph!binomial}. Small-world
-networks are intermediate between $k$-circulant and binomial random
-graphs~(see
+properties of graphs drawn uniformly from
+$\cG(n,p)$\index{random graph!binomial}. Small-world networks are
+intermediate between $k$-circulant and binomial random graphs~(see
 Figure~\ref{fig:random_graphs:k_circulant_small_world_random}). The
 Watts-Strogatz model is said to provide a procedure for interpolating
 between the latter two types of graphs.
