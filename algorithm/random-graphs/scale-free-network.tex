@@ -22,12 +22,12 @@
 %% algorithm body
 $G \assign \overline{K_n}$\tcc*[f]{vertex set is $V = \{0, 1, \dots, n-1\}$}\;
 $M \assign$ list of length $2nd$\;
-\For{$v = 0, 1, \dots, n-1$}{
-  \For{$i = 0, 1, \dots, d-1$}{
+\For{$v \assign 0, 1, \dots, n-1$}{
+  \For{$i \assign 0, 1, \dots, d-1$}{
     $M[2(vd + i)] \assign v$\;
     $r \assign$ draw uniformly at random from $\{0, 1, \dots, 2(vd + i)\}$\;
     $M[2(vd + i) + 1] \assign M[r]$\;
   }
 }
-add edge $(M[2i],\, M[2i+1])$ to $G$ for $i = 0, 1, \dots, nd-1$\;
+add edge $(M[2i],\, M[2i+1])$ to $G$ for $i \assign 0, 1, \dots, nd-1$\;
 \Return $G$\;
