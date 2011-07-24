@@ -1466,13 +1466,13 @@ these vertices is zero, it is unclear how the network is to grow via
 preferential attachment from the initial pool of vertices. Second,
 Barab\'asi and Albert neglected to clearly specify how to select the
 neighbors for the newly added vertex. The above ambiguities are
-resolved in Bollob\'as~et~al.~\cite{BollobasEtAl2001}, wherein is given
-a precise statement of a random graph process that realizes the
-Barab\'asi-Albert model. Fix a sequence of vertices
-$v_1, v_2, \dots$ and consider the case where each newly added vertex
-is to be connected to $m = 1$ vertex already in a graph. Inductively
-define a random graph process $(G_1^t)_{t \geq 0}$ as follows, where
-$G_1^t$ is a digraph on $\{v_i \mid 1 \leq i \leq t\}$. Start with the
+resolved by Bollob\'as~et~al.~\cite{BollobasEtAl2001}, who gave a
+precise statement of a random graph process that realizes the
+Barab\'asi-Albert model. Fix a sequence of vertices $v_1, v_2, \dots$
+and consider the case where each newly added vertex is to be connected
+to $m = 1$ vertex already in a graph. Inductively define a random
+graph process $(G_1^t)_{t \geq 0}$ as follows, where $G_1^t$ is a
+digraph on $\{v_i \mid 1 \leq i \leq t\}$. Start with the
 null\index{null graph} graph $G_1^0$ or the graph $G_1^1$ with one
 vertex and one self-loop. Denote by $\deg_G(v)$ the total~(in and out)
 degree of vertex $v$ in the graph $G$. For $t > 1$ construct $G_1^t$
