@@ -807,12 +807,12 @@ from which the expected total runtime is
 &\approx
 \int_0^N \frac{\binom{n}{2}} {\binom{n}{2} - x} \; dx \\[4pt]
 &=
-\binom{n}{2} \cdot \ln \frac{\binom{n}{2}} {\binom{n}{2} - N}.
+\binom{n}{2} \cdot \ln \frac{\binom{n}{2}} {\binom{n}{2} - N} + C
 \end{align*}
 %%
-The denominator in the latter fraction becomes zero when
-$\binom{n}{2} = N$, which can be prevented by adding one to the
-denominator. Then we have the expected total runtime
+for some constant $C$.  The denominator in the latter fraction becomes
+zero when $\binom{n}{2} = N$, which can be prevented by adding one to
+the denominator. Then we have the expected total runtime
 \[
 \sum_{i=1}^N \frac{\binom{n}{2}} {\binom{n}{2} - i}
 \in
