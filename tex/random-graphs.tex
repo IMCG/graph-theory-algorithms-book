@@ -1873,9 +1873,9 @@ as you can. \\
 \label{alg:random_graphs:bipartite_scale_free_network}
 \end{algorithm}
 
-\item Find the degree and distance distributions, average path
-  lengths, and clustering coefficients of the following network
-  datasets:
+\item\label{prob:some_real_world_datasets}
+  Find the degree and distance distributions, average path lengths,
+  and clustering coefficients of the following network datasets:
   %%
   \begin{enumerate}[(a)]
   \item actor collaboration~\cite{BarabasiAlbert1999}
@@ -1895,4 +1895,20 @@ as you can. \\
 
   \item Zachary karate club~\cite{Zachary1977}
   \end{enumerate}
+
+\item Consider the plots of degree distributions in
+  Figures~\ref{fig:random_graphs:real_world_scale_free_networks}
+  and~\ref{fig:random_graphs:simulated_scale_free_networks}.  Note
+  the noise in the tail of each plot.  To smooth the tail, we can use
+  the cumulative degree distribution
+  \[
+  P^c(k)
+  =
+  \sum_{i=k}^{\infty} \Pr[\deg(v) = i].
+  \]
+  Given a graph with scale-free degree distribution
+  $P(k) \sim k^{-\alpha}$ and $\alpha > 1$, the cumulative degree
+  distribution follows $P^c(k) \sim k^{1 - \alpha}$.  Plot the
+  cumulative degree distribution of each network dataset in
+  Problem~\ref{chap:random_graphs}.\ref{prob:some_real_world_datasets}.
 \end{problem}
