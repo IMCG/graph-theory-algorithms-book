@@ -2839,6 +2839,45 @@ as dumb as the next guy. \\
     results of the previous exercise.
   \end{enumerate}
 
+\item Consider a finite square lattice $\Lambda$ where points on
+  $\Lambda$ can connect to other points in their von~Neumann or Moore
+  neighborhoods, or other points in the lattice.  See
+  Figures~\ref{fig:von_Neumann_neighborhood}
+  and~\ref{fig:Moore_neighborhood} for illustrations of the
+  von~Neumann and Moore neighborhoods of a central node,
+  respectively.  We treat each point as a node and forbid each node
+  from connecting to itself.  The whole lattice can be considered as a
+  simple undirected graph $\Gamma$.  Let $n$ be the maximum number of
+  nodes in any connected components.  For each
+  $i \in \{1, 2, \dots, n\}$, how many connected components have
+  exactly $n$ nodes?  In other words, what is the density of connected
+  components in $\Gamma$?  For example, consider the lattice in
+  Figure~\ref{fig:component_density}.  Denote by $\kappa(i)$ the
+  number of connected components with $i$ nodes.  Then the maximum
+  number of nodes of any connected components is $n = 6$, with
+  $\kappa(1) = 2$, $\kappa(2) = 2$, $\kappa(3) = 2$, $\kappa(4) = 1$,
+  $\kappa(5) = 0$, and $\kappa(6) = 1$.
+  %%
+  \begin{figure}[!htbp]
+  \centering
+  \subfigure[Von Neumann neighborhood.]{
+    \label{fig:von_Neumann_neighborhood}
+    \includegraphics{image/graph-algorithms/von-Neumann-neighborhood}
+  }
+  \quad
+  \subfigure[Moore neighborhood.]{
+    \label{fig:Moore_neighborhood}
+    \includegraphics{image/graph-algorithms/Moore-neighborhood}
+  }
+  \quad
+  \subfigure[Square lattice with components.]{
+    \label{fig:component_density}
+    \includegraphics[scale=0.8]{image/graph-algorithms/component-density-lattice}
+  }
+  \caption{Component density in a square lattice.}
+  \label{fig:component_density_lattice}
+  \end{figure}
+
 \begin{landscape}
 \begin{figure}[!htbp]
 \centering
