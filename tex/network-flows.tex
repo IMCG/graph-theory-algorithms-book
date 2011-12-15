@@ -609,6 +609,668 @@ edges $5,6$ and that is not a disconnecting cut of $G$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\section{Chip firing games}
+
+Chip firing games on graphs (which are just
+pure fun) relate to ``abelian sandpile models'' from physics to 
+``rotor-routing models'' from theoretical computer scientists
+(designing efficient computer multiprocessor circuits) to ``self-organized
+criticality'' (a subdiscipline of dynamical systems) to 
+``algebraic potential theory'' on a graph \cite{Biggs1997} to cryptography
+(via the Biggs cryptosystem). Moreover, it relates the concepts of the 
+Laplacian of the graph to the tree number to the circulation space
+of the graph to the incidence matrix, as well as many other
+ideas. Some good references are \cite{Durgin2009}, \cite{PerkinsonEtAl2009},
+\cite{Perlman2009}, \cite{HolroydEtAl2008} and \cite{Biggs1999}.
+\index{chip-firing games}
+\index{rotor-routing model}
+
+\subsubsection{Basic set-up}
+
+A {\it chip firing game} always starts with a directed
+multigraph $G$ having no loops. A {\it configuration} is a 
+vertex-weighting, i.e., a function
+$s:V\to {\mathbb{R}}$. The players are represented by the
+vertices of $G$ and the vertex-weights represent the number of
+chips each player (represented by that vertex) has.
+The initial vertex-weighting is called the {\it starting configuration} of $G$.
+Let vertex $v$ have outgoing degree $d_+(v)$. If the weight of 
+vertex $v$ is $\geq d_+(v)$ (so that player can afford to give away
+all their chips) then that vertex is called {\it active}.
+\index{active vertex}
+\index{configuration}
+\index{configuration!starting}
+\index{chip firing game}
+
+Here is some \sage/{\tt Python} code for determining the active vertices.
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
+
+def active_vertices(G, s):
+    """
+    Returns the list of active vertices.
+
+    INPUT:
+     G - a graph
+     s - a configuration (implemented as a list 
+                          or a dictionary keyed on
+                          the vertices of the graph)
+
+    EXAMPLES:
+        sage: A = matrix([[0,1,1,0,0],[1,0,1,0,0],[1,1,0,1,0],[0,0,0,0,1],[0,0,0,0,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: s = {0: 3, 1: 1, 2: 0, 3: 1, 4: 1}
+        sage: active_vertices(G, s)
+        [0, 4]
+
+    """
+    V = G.vertices()
+    degs = [G.degree(v) for v in V]
+    active = [v for v in V if degs[V.index(v)]<=s[v]]
+    return active
+
+\end{Verbatim}
+If $v$ is active then when you fire $v$ you must also change the
+configuration. The new configuration $s'$ will satisfy
+$s'(v) = s(v)-d_+(v)$ and $s'(v')=s(v')+1$ for each 
+neighbor $v'$ of $v$. In other words, $v$ will give away one chip to
+each of its $d_+(v)$ neighbors. If $x:V\to \{0,1\}^{|V|}\subset {\mathbb{R}}^{|V|}$ is
+the representation vector (``characteristic function'') of a vertex
+then this change can be expressed more compactly as
+\index{chip-firing game}
+
+\begin{equation}
+\label{eqn:fire}
+s'= s-L\circ x,
+\end{equation}
+where $L$ is the vertex Laplacian. It turns out that the column sums
+of $L$ are all $0$, so this operation does not change the total
+number of chips. We use the notation
+
+\[ 
+s\overset{v}{\to} s',
+\] 
+to indicate that the configuration $s'$ is the
+result of firing vertex $v$ in configuration $s$.
+
+\begin{example}
+{\rm
+Consider the graph
+
+\vskip .2in
+\begin{figure}[h!]
+
+% this was done "manually"
+\unitlength=0.620000pt
+\begin{picture}(250.00,100.00)(-250.00,0.00)
+
+\thinlines
+\put(0.00,50.00){\line(1,0){100.00}} 
+\put(-1.00,47.00){$\bullet$} 
+\put(-13.00,50.00){$0$} 
+\put(0.00,50.00){\line(1,1){50.00}} 
+\put(50.00,112.00){$1$} 
+\put(45.00,97.00){$\bullet$} 
+\put(100.00,50.00){\line(-1,1){50.00}} 
+\put(105.00,50.00){$2$} 
+\put(95.00,47.00){$\bullet$} 
+\put(100.00,50.00){\line(0,-1){50.00}} 
+\put(105.00,0.00){$3$} 
+\put(95.00,-3.00){$\bullet$} 
+
+\put(0.00,0.00){\line(1,0){100.00}} 
+\put(-13.00,0.00){$4$} 
+\put(-1.00,-3.00){$\bullet$} 
+
+\end{picture}
+\caption{A graph with $5$ vertices.}
+\label{fig:chip-game}
+\end{figure}
+This graph has incidence matrix
+
+\[
+D = 
+\left(
+\begin{array}{ccccc}
+-1 & -1 & 0 & 0 & 0 \\
+0 & -1 & -1 & 0 & 0 \\
+1 & 0 & -1 & -1 & 0 \\
+0 & 0 & 0 & -1 & -1 \\
+0 & 0 & 0 &  0  &  1  \\
+\end{array}
+\right),
+\]
+and Laplacian
+
+\[
+L = D\cdot \, ^tD = 
+\left(
+\begin{array}{ccccc}
+2 & -1 & 0-1 & 0 & 0 \\
+-1 & 2 & -1 & 0 & 0 \\
+-1 & -1 & 3 & -1 & 0 \\
+0 & 0 & -1 & 2 & -1 \\
+0 & 0 & 0 &  -1  &  1  \\
+\end{array}
+\right).
+\]
+Suppose the initial configuration is 
+$s = (3,1,0,1,1)$, i.e., 
+
+\begin{itemize}
+\item
+player $0$ has $3$ dollars,
+\item
+player $1$ has $1$ dollar,
+\item
+player $2$ has nothing,
+\item
+player $3$ has $1$ dollar,
+\item
+player $4$ has $1$ dollar.
+\end{itemize}
+Notice player $0$ is active. If we fire $0$ then we get the new
+configuration $s'=(1,2,1,1,1)$. Indeed, if 
+we compute $s'=s-Lx(0)$, we get:
+
+\[
+s'=
+\left(
+\begin{array}{c}
+3 \\
+1 \\
+0 \\
+1 \\
+1  \\
+\end{array}
+\right)
+-
+\left(
+\begin{array}{ccccc}
+2 & -1 & -1 & 0 & 0 \\
+-1 & 2 & -1 & 0 & 0 \\
+-1 & -1 & 3 & -1 & 0 \\
+0 & 0 & -1 & 2 & -1 \\
+0 & 0 & 0 &  -1  &  1  \\
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+1 \\
+0 \\
+0 \\
+0 \\
+0  \\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{c}
+3 \\
+1 \\
+0 \\
+1 \\
+1  \\
+\end{array}
+\right)
+-
+\left(
+\begin{array}{c}
+2 \\
+-1 \\
+-1 \\
+0 \\
+0  \\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{c}
+1 \\
+2 \\
+1 \\
+1 \\
+1  \\
+\end{array}
+\right).
+\]
+This can be written more concisely as
+
+\[
+(3,1,0,1,1)\overset{0}{\to} (1,2,1,1,1).
+\]
+We have the cycle
+
+\[
+\begin{array}{c}
+(1,2,1,1,1)
+\overset{1}{\to} (2,0,2,1,1)
+\overset{0}{\to} (0,1,3,1,1)
+\overset{2}{\to} (1,2,0,2,1)\\
+\overset{3}{\to} (1,2,1,0,2)
+\overset{4}{\to} (1,2,1,1,1).
+\end{array}
+\]
+
+
+
+}
+\end{example}
+
+
+\subsubsection{Chip-firing game variants}
+
+For simplicity, let $G=(V,E)$ be an undirected graph
+with an indexed set of vertices $V=\{v_1,\dots, v_m\}$
+and an indexed set of vertices $E=\{e_1,\dots, e_n\}$.
+
+One variant (the ``sandpile model'') has a special vertex,
+called ``the sink,'' which has special firing properties.
+In the sandpile variant, the sink is never fired.
+Another variant (the ``dollar game'') has a special vertex,
+called ``the source,'' which has special firing properties.
+In the dollar game variant, the source is only fired when
+not other vertex is active.
+We shall consider the dollar game variant here, following
+Biggs \cite{Biggs2007}. 
+\index{sandpile model}
+\index{dollar game}
+
+We select a distinguished vertex $q\in V$, called the
+``source\footnote{Biggs humorously calls $q$ ``the government.''},''
+which has a special property to be described below.
+For the dollar game, a {\it configuration} is a 
+function $s:V\to {\mathbb{R}}$ for which 
+
+\[
+\sum_{v\in V} s(v) = 0,\ \ \ \
+\]
+and $s(v)\geq 0$ for all $v\in V$ with $v\not= q$.
+A vertex $v\not= q$ can be fired if and only if 
+$\deg (v)\leq s(v)$ (i.e., it ``has enough chips'').
+The equation (\ref{eqn:fire}) describes the 
+new configuration after firing a vertex.
+\index{configuration}
+
+Here is some \sage/{\tt Python} code for determining the
+configuration after firing an active vertex.
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
+
+def fire(G, s, v0):
+    """
+    Returns the configuration after firing the active vertex v.
+
+    INPUT:
+     G - a graph
+     s - a configuration (implemented as a list 
+                          or a dictionary keyed on
+                          the vertices of the graph)
+     v - a vertex of the graph
+
+    EXAMPLES:
+        sage: A = matrix([[0,1,1,0,0],[1,0,1,0,0],[1,1,0,1,0],[0,0,0,0,1],[0,0,0,0,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: s = {0: 3, 1: 1, 2: 0, 3: 1, 4: 1}
+        sage: fire(G, s, 0)
+        {0: 1, 1: 2, 2: 1, 3: 1, 4: 1}
+
+    """
+    V = G.vertices()
+    j = V.index(v0)
+    s1 = copy(s)
+    if not(v0 in V):
+        raise ValueError, "the last argument must be a vertex of the graph."
+    if not(v0 in active_vertices(G, s)):
+        raise ValueError, "the last argument must be an active vertex of the graph."
+    degs = [G.degree(w) for w in V]
+    for w in V:
+         if w == v0:
+             s1[v0] = s[v0] - degs[j]
+         if w in G.neighbors(v0):
+             s1[w] = s[w]+1
+    return s1
+
+\end{Verbatim}
+We say $s:V\to {\mathbb{R}}$ is a {\it stable} configuration
+if $0\leq s(v)<\deg(v)$, for all $v\not= q$.
+The source vertex $q$ can only be fired when
+no other vertex can be fired, that is only in the case when 
+a stable configuration has been reached.
+\index{configuration!stable}
+
+Here is some \sage/{\tt Python} code for determining the stable vertices.
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
+
+def stable_vertices(G, s, source = None):
+    """
+    Returns the list of stable vertices.
+
+    INPUT:
+     G - a graph
+     s - a configuration (implemented as a list 
+                          or a dictionary keyed on
+                          the vertices of the graph)
+
+    EXAMPLES:
+        sage: A = matrix([[0,1,1,0,0],[1,0,1,0,0],[1,1,0,1,0],[0,0,0,0,1],[0,0,0,0,0]])
+        sage: G = Graph(A, format = "adjacency_matrix", weighted = True)
+        sage: s = {0: 3, 1: 1, 2: 0, 3: 1, 4: 1}
+        sage: stable_vertices(G, s)
+
+    """
+    V = G.vertices()
+    degs = [G.degree(v) for v in V]
+    if source==None:
+        stable = [v for v in V if degs[V.index(v)]>s[v]]
+    else:
+        stable = [v for v in V if degs[V.index(v)]>s[v] and v!=source]
+    return stable
+
+\end{Verbatim}
+
+Suppose we are in a configuration $s_1$.
+We say a sequence vertices $S=(w_1, w_2,\dots, w_k)$,
+$w_i\in V$ not necessarily distinct, is
+{\it legal} if, 
+\index{legal firing sequence}
+\begin{itemize}
+\item
+$w_1$ is active in configuration $s_1$,
+\item
+for each $i$ with $1\leq i<k$, $s_{i+1}$ is obtained
+from $s_i$ by firing $w_i$ in configuration 
+$s_i$, 
+\item
+for each $i$ with $1\leq i<k$, $w_{i+1}$ is active
+in the configuration $s_{i+1}$ defined in the 
+previous step,
+\item
+the source vertex $q$ occurs in $S$ only if
+it immediately follows a stable configuration.
+\end{itemize}
+We call $s_1$ or $w_1$ the {\it start}
+of $S$. A configuration $s$ is {\it recurrent}
+\index{configuration!recurrent}
+if there is a legal sequence starting at $s$ which leads back to $s$.
+A configuration is {\it critical}
+\index{configuration!critical}
+if it recurrent and stable. 
+
+Here is some \sage/{\tt Python} code for determining a stable
+vertex resulting from a legal sequence of firings
+of a given configuration $s$. I think it returns the
+unique critical configuration associated to $s$ but have not
+proven this.
+
+\begin{Verbatim}[fontsize=\scriptsize,fontfamily=courier,fontshape=tt,frame=single,label=\sage]
+
+def stabilize(G, s, source, legal_sequence = False):
+    """
+    Returns the stable configuration of the graph originating from
+    the given configuration s. If legal_sequence = True then the
+    sequence of firings is also returned. By van den Heuvel [1],
+    the number of firings needed to compute a critical configuration 
+    is < 3(S+2|E|)|V|^2, where S is the sum of the positive 
+    weights in the configuration.
+
+    EXAMPLES:
+        sage: A = matrix([[0,1,1,0,0],[1,0,1,0,0],[1,1,0,1,0],[0,0,1,0,1],[0,0,0,1,0]])
+        sage: G = Graph(A, format="weighted_adjacency_matrix")
+        sage: s = {0: 3, 1: 1, 2: 0, 3: 1, 4: -5}
+        sage: stabilize(G, s, 4)
+        {0: 0, 1: 1, 2: 2, 3: 1, 4: -4}
+
+    REFERENCES:
+        [1] J. van den Heuvel, "Algorithmic aspects of a chip-firing
+            game," preprint.
+    """
+    V = G.vertices()
+    E = G.edges()
+    fire_number = 3*len(V)^2*(sum([s[v] for v in V if s[v]>0])+2*len(E))+len(V)
+    if legal_sequence:
+        seq = []
+    stab = []
+    ac = active_vertices(G,s)
+    for i in range(fire_number):
+        if len(ac)>0:
+            s = fire(G,s,ac[0])
+            if legal_sequence:
+                seq.append(ac[0])
+        else:
+            stab.append(s)
+            break
+        ac = active_vertices(G,s)
+    if len(stab)==0:
+        raise ValueError, "No stable configuration found."
+    if legal_sequence:
+        return stab[0], seq
+    else:
+        return stab[0]
+
+\end{Verbatim}
+
+The
+incidence matrix $D$ and its transpose $^tD$ can be regarded as
+homomorphisms
+
+\[
+D : C^1(G,{\mathbb{Z}})\to C^0(G,{\mathbb{Z}}) \ \ \ \ {\rm and}\ \ \ \ \ 
+^tD : C^0(G,{\mathbb{Z}})\to C^1(G,{\mathbb{Z}}).
+\]
+We can also regard the Laplacian $L = D\cdot \, ^tD$ as a homomorphism 
+\index{Laplacian}
+$C^0(G,{\mathbb{Z}})\to C^0(G,{\mathbb{Z}})$. Denote by
+$\sigma : C^0(G,{\mathbb{Z}})\to {\mathbb{Z}}$ the homomorphism defined by 
+
+\[
+\sigma(f) = \sum_{v\in V} f(v).
+\]
+Denote by $K(G)$ the set of {\it critical configurations} 
+on a graph $G$.
+\index{critical configurations} 
+
+\begin{lemma} (Biggs \cite{Biggs2007})
+{\rm
+The set $K(G)$ of critical configurations on a connected graph $G$ is in
+bijective correspondence with the abelian group 
+${\rm Ker} (\sigma)/{\rm Im}( Q)$.
+}
+\end{lemma}
+\index{critical group}
+
+If you accept this lemma (which we do not prove here) then
+you must believe that there is a bijection
+$f:K(G)\to {\rm Ker} (\sigma)/{\rm Im}( Q)$. Now, a group
+operation $\bullet $ on $K(G)$ an be defined by
+
+\[
+a\bullet b = f^{-1}(f(a)+f(b)),
+\]
+for all $a,b\in {\rm Ker} (\sigma)/{\rm Im}( Q)$.
+
+\begin{example}
+{\rm
+Consider again the graph
+
+\vskip .2in
+\begin{figure}[h!]
+
+% this was done "manually"
+\unitlength=0.620000pt
+\begin{picture}(250.00,100.00)(-250.00,0.00)
+
+\thinlines
+\put(0.00,50.00){\line(1,0){100.00}} 
+\put(-1.00,47.00){$\bullet$} 
+\put(-13.00,50.00){$0$} 
+\put(0.00,50.00){\line(1,1){50.00}} 
+\put(50.00,112.00){$1$} 
+\put(45.00,97.00){$\bullet$} 
+\put(100.00,50.00){\line(-1,1){50.00}} 
+\put(105.00,50.00){$2$} 
+\put(95.00,47.00){$\bullet$} 
+\put(100.00,50.00){\line(0,-1){50.00}} 
+\put(105.00,0.00){$3$} 
+\put(95.00,-3.00){$\bullet$} 
+
+\put(0.00,0.00){\line(1,0){100.00}} 
+\put(-15.00,0.00){$4$} 
+\put(-4.00,-4.00){$\circ$} 
+
+\end{picture}
+\caption{A graph with $5$ vertices.}
+\label{fig:chip-game2}
+\end{figure}
+This graph has incidence matrix
+
+\[
+D = 
+\left(
+\begin{array}{ccccc}
+-1 & -1 & 0 & 0 & 0 \\
+0 & -1 & -1 & 0 & 0 \\
+1 & 0 & -1 & -1 & 0 \\
+0 & 0 & 0 & -1 & -1 \\
+0 & 0 & 0 &  0  &  1  \\
+\end{array}
+\right),
+\]
+and Laplacian
+
+\[
+L = D\cdot \, ^tD = 
+\left(
+\begin{array}{ccccc}
+2 & -1 & 0-1 & 0 & 0 \\
+-1 & 2 & -1 & 0 & 0 \\
+-1 & -1 & 3 & -1 & 0 \\
+0 & 0 & -1 & 2 & -1 \\
+0 & 0 & 0 &  -1  &  1  \\
+\end{array}
+\right).
+\]
+Suppose the initial configuration is 
+$s = (3,1,0,1,-5)$, i.e., 
+
+\begin{itemize}
+\item
+player $0$ has $3$ dollars,
+\item
+player $1$ has $1$ dollar,
+\item
+player $2$ has nothing,
+\item
+player $3$ has $1$ dollar,
+\item
+player $4$ is the source vertex $q$.
+\end{itemize}
+The legal sequence $(0,1,0,2,1,0,3,2,1,0)$ leads to
+the stable configuration $(0,1,2,1,-4)$. If $q$ is fired
+then the configuration $(0,1,2,2,-5)$ is achieved.
+This is recurrent since it is contained in the 
+cyclic legal sequence
+
+\[
+\begin{array}{c}
+(0,1,2,2,-5)
+\overset{3}{\to} (0,1,3,0,-4)
+\overset{2}{\to} (1,2,0,1,-4)\\
+\overset{1}{\to} (2,0,1,1,-4)
+\overset{0}{\to} (0,1,2,1,-4)
+\overset{q}{\to} (0,1,2,2,-5).
+\end{array}
+\]
+In particular, the configuration $(0,1,2,1,-4)$ is 
+also recurrent. Since it is both stable and recurrent, it
+is critical.
+}
+\end{example}
+
+The following result is of basic importance but
+I'm not sure who proved it first. It is quoted in many of the papers
+on this topic in one form or another.
+
+\begin{theorem} (Biggs \cite{Biggs1999}, Theorem 3.8)
+{\rm
+If $s$ is an configuration and $G$ is connected
+then there is a unique critical configuration $s'$
+which can be obtained by a sequence of legal firings 
+for starting at $s$.
+}
+\end{theorem}
+
+The map defined by the above theorem is
+denoted
+
+\[
+\gamma :C^0(G,{\mathbb{R}})\to K(G).
+\]
+Another way to define multiplication $\bullet$ on
+on $K(G)$ is 
+
+\[
+\gamma(s_1)\bullet \gamma(s_2)
+=\gamma(s_1+s_2),
+\]
+where $s_1+s_2$ is computed using addition on
+$C^0(G,{\mathbb{R}})$. According to Perkinson \cite{PerkinsonEtAl2009},
+\index{critical group}
+Theorem 2.16, the critical group satisfies the
+following isomorphism:
+
+\[
+K(G)\cong {\mathbb{Z}}^{m-1}/{\mathcal{L}},
+\]
+where ${\mathcal{L}}$ is the integer lattice 
+generated by the columns of the reduced
+Laplacian matrix\footnote{The {\it reduced Laplacian} matrix
+is obtained from the Laplacian matrix by removing 
+the row and column associated to the source 
+vertex.}.
+\index{reduced Laplacian}
+\index{Laplacian!reduced}
+
+If $s$ is a configuration then we define
+
+\[
+{\rm wt}(s) = \sum_{v\in V, v\not= q} s(q)
+\]
+to be the {\it weight} of the configuration.
+\index{configuration!weight}
+The {\it level} of the configuration is defined by
+\index{configuration!level}
+
+\[
+{\rm level}(s) = {\rm wt}(s)-|E|+\deg(q).
+\]
+
+\begin{lemma}
+(Merino \cite{Morino1999})
+{\rm
+If $s$ is a critical configuration then
+
+\[
+0\leq {\rm level}(s)\leq |E|-|V|+1.
+\]
+}
+\end{lemma}
+
+This is proven in Theorem 3.4.5 in \cite{Morino1999}.
+What is also proven in \cite{Morino1999} is a statement
+whcih computes the number of critical
+configurations of a given level in terms of the
+Tutte polynomial of the associated graph.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \section{Ford-Fulkerson theorem}
 
 The Ford-Fulkerson Theorem, or ``Max-flow/Min-cut Theorem,''
